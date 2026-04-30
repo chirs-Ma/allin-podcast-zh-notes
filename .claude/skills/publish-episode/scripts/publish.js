@@ -60,6 +60,7 @@ if (h1Match) {
   const raw = stripTags(titleMatch[1]);
   title = raw.replace(/\s*-\s*中文播客可视化笔记\s*$/, '');
 }
+title = title.replace(/^标题[:：]\s*/, '');
 if (!title) title = 'Untitled Episode';
 
 // Date from .meta span
