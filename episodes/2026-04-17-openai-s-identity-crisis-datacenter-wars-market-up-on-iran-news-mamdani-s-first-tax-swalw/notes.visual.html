@@ -1,0 +1,518 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>标题：OpenAI的信仰危机、数据中心战争、市场因伊朗消息而上涨，以及“投机税”与“政治丑闻” - 中文播客可视化笔记</title>
+  <style>
+    :root {
+      --bg: oklch(0.965 0.012 86);
+      --paper: oklch(0.986 0.006 86);
+      --paper-soft: oklch(0.94 0.014 86);
+      --ink: oklch(0.24 0.024 255);
+      --muted: oklch(0.48 0.026 255);
+      --line: oklch(0.84 0.016 86);
+      --line-strong: oklch(0.73 0.026 86);
+      --accent: oklch(0.54 0.13 35);
+      --accent-soft: oklch(0.91 0.045 45);
+      --blue: oklch(0.43 0.08 255);
+      --teal: oklch(0.47 0.075 188);
+      --quote: oklch(0.93 0.034 80);
+      --shadow: 0 18px 46px color-mix(in oklch, var(--ink) 12%, transparent);
+      --radius: 10px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--bg);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      line-height: 1.74;
+    }
+    a { color: var(--blue); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+    .progress {
+      position: fixed;
+      z-index: 20;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 3px;
+      background: var(--accent);
+    }
+    .page {
+      width: min(1240px, calc(100% - 34px));
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 220px minmax(0, 1fr);
+      gap: 38px;
+    }
+    .sidebar {
+      position: sticky;
+      top: 22px;
+      align-self: start;
+      padding-top: 44px;
+    }
+    .toc {
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper-soft);
+    }
+    .toc-title {
+      margin: 0 0 10px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .nav-links { display: grid; gap: 5px; }
+    .nav-links a {
+      padding: 8px 10px;
+      border-radius: 8px;
+      color: var(--ink);
+      font-size: 14px;
+      text-decoration: none;
+    }
+    .nav-links a:hover, .nav-links a:focus {
+      outline: none;
+      background: var(--accent-soft);
+      color: var(--accent);
+    }
+    .search { display: block; margin-top: 14px; }
+    .search input {
+      width: 100%;
+      min-height: 38px;
+      padding: 8px 10px;
+      border: 1px solid var(--line-strong);
+      border-radius: 8px;
+      background: var(--paper);
+      color: var(--ink);
+      font-size: 14px;
+      outline: none;
+    }
+    .search input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px color-mix(in oklch, var(--accent) 16%, transparent);
+    }
+    .article { min-width: 0; max-width: 900px; }
+    header { padding: 52px 0 24px; }
+    h1 {
+      margin: 0 0 18px;
+      font-size: 44px;
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 18px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .meta-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 24px 0 18px;
+    }
+    .meta-pill {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 6px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--paper-soft);
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .meta-pill b { color: var(--ink); font-size: 15px; }
+    .summary, .timeline-card, .speaker-card, .panel {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper);
+      box-shadow: var(--shadow);
+    }
+    .summary {
+      padding: 20px 22px;
+      background: var(--accent-soft);
+      font-size: 18px;
+    }
+    .summary p { margin: 0; }
+    section { margin: 44px 0; }
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 16px;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 10px;
+    }
+    .section-head h2 { margin: 0; font-size: 26px; line-height: 1.2; }
+    .section-head p { margin: 0; color: var(--muted); font-size: 14px; }
+    .takeaway-list { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
+    .takeaway {
+      display: grid;
+      grid-template-columns: 42px 1fr;
+      gap: 14px;
+      padding: 13px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .takeaway:last-child { border-bottom: 0; }
+    .takeaway span {
+      display: grid;
+      width: 34px;
+      height: 34px;
+      place-items: center;
+      border: 1px solid var(--line-strong);
+      border-radius: 8px;
+      background: var(--paper-soft);
+      color: var(--accent);
+      font-weight: 800;
+    }
+    .takeaway p, .speaker-card p, .panel p { margin-top: 0; }
+    .timeline { display: grid; gap: 18px; }
+    .timeline-card {
+      position: relative;
+      padding: 22px;
+    }
+    .timeline-heading { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+    .timeline-index {
+      display: grid;
+      width: 36px;
+      height: 36px;
+      place-items: center;
+      border-radius: 8px;
+      background: var(--ink);
+      color: var(--paper);
+      font-weight: 800;
+      font-size: 13px;
+    }
+    .timeline-meta { color: var(--teal); font-size: 13px; font-weight: 800; }
+    .timeline-card h3 { margin: 6px 0 14px; font-size: 24px; line-height: 1.28; }
+    .section-content p { max-width: 72ch; }
+    .section-content h4 {
+      margin: 18px 0 8px;
+      color: var(--accent);
+      font-size: 15px;
+    }
+    .section-content ul, .panel ul, .speaker-card ul { padding-left: 1.2em; }
+    .section-content li, .panel li, .speaker-card li { margin: 5px 0; }
+    .speaker-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .speaker-card { padding: 18px; box-shadow: none; }
+    .speaker-card h3 { margin: 0 0 10px; color: var(--blue); }
+    .panel { padding: 20px 22px; box-shadow: none; }
+    blockquote {
+      margin: 14px 0;
+      padding: 12px 16px;
+      border: 1px solid var(--line-strong);
+      border-radius: 8px;
+      background: var(--quote);
+    }
+    code {
+      padding: 2px 5px;
+      border-radius: 5px;
+      background: color-mix(in oklch, var(--blue) 12%, var(--paper));
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: .92em;
+    }
+    .empty, .muted { color: var(--muted); }
+    @media (max-width: 780px) {
+      .page { width: min(100% - 22px, 1180px); display: block; }
+      .sidebar { position: static; padding-top: 16px; }
+      header { padding-top: 34px; }
+      h1 { font-size: 32px; }
+      .speaker-grid { grid-template-columns: 1fr; }
+      .timeline-card { padding: 18px; }
+    }
+    @media print {
+      body { background: var(--paper); }
+      .sidebar, .progress { display: none; }
+      .page { display: block; width: auto; }
+      .summary, .timeline-card, .speaker-card, .panel { box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="progress" data-progress></div>
+  <div class="page">
+    <aside class="sidebar">
+      <nav class="toc" aria-label="页面导航">
+        <p class="toc-title">阅读导航</p>
+        <div class="nav-links">
+          <a href="#takeaways">核心要点</a>
+          <a href="#timeline">分段整理</a>
+          <a href="#speakers">人物观点</a>
+          <a href="#quotes">双语引语</a>
+        </div>
+        <label class="search">
+          <input data-search-box type="search" placeholder="搜索时间线">
+        </label>
+      </nav>
+    </aside>
+
+    <main class="article">
+      <header>
+        <h1>标题：OpenAI的信仰危机、数据中心战争、市场因伊朗消息而上涨，以及“投机税”与“政治丑闻”</h1>
+        <div class="meta">
+          <span>生成时间：2026-04-29 23:44</span>
+          <span>来源：<a href="https://www.youtube.com/watch?v=SFdqX7IY7RY" target="_blank" rel="noopener">YouTube</a></span>
+        </div>
+        <div class="meta-strip"><span class="meta-pill"><b>13 分钟</b>阅读时长</span>
+<span class="meta-pill"><b>10</b>核心要点</span>
+<span class="meta-pill"><b>4</b>时间线</span>
+<span class="meta-pill"><b>4</b>人物</span></div>
+        <div class="summary"><p>本期主持人通过分析 OpenAI 与 Anthropic 之间的激烈竞争、围绕 AI 数据中心的日益高涨的民粹主义阻力、纽约市针对超级富豪的“临时住所税”提案以及加州政坛的丑闻，深刻揭示了科技、政治与宏观经济交织下的混乱与机遇。</p></div>
+      </header>
+
+      <section id="takeaways">
+        <div class="section-head">
+          <h2>核心要点</h2>
+          <p>快速扫读本集主线</p>
+        </div>
+        <ol class="takeaway-list"><li class="takeaway"><span>01</span><p>OpenAI 面临身份危机：公司内部对战略方向存在分歧，是专注消费者市场（ChatGPT）还是全力进攻企业级应用（Codex），引发了投资者和员工的焦虑。</p></li>
+<li class="takeaway"><span>02</span><p>Anthropic 增速惊人：Anthropic 的营收增速是 OpenAI 的数倍，其对企业端（特别是编程）的专注让其拥有了更可持续的商业模式。</p></li>
+<li class="takeaway"><span>03</span><p>AI 竞争的关键是计算资源：OpenAI 和 Anthropic 的高速增长正撞上全球“算力墙”，未来能否自建数据中心、摆脱对云厂商的依赖，决定生死。</p></li>
+<li class="takeaway"><span>04</span><p>“数据中心”成为众矢之的：由于民粹主义抬头、对AI潜在风险的担忧以及部分组织（如“有效利他主义”团体）的推动，美国多地开始抵制新建数据中心。</p></li>
+<li class="takeaway"><span>05</span><p>纽约“临时住所税”是杀鸡取卵：一项针对价值超500万美元第二套住房的年度新税，被嘉宾们批评为会摧毁纽约高端房产市场，并吓跑全球资本。</p></li>
+<li class="takeaway"><span>06</span><p>市场无视地缘政治风险：尽管美国与伊朗冲突升级，美股市场依然强劲，表明投资者正在“定价”冲突将很快结束，并将特朗普的决策与股市表现挂钩。</p></li>
+<li class="takeaway"><span>07</span><p>AI 的变革尚未体现在大公司利润表上：Chamath 质疑 AI 巨头未能在大型企业中证明其能带来可观的利润增长，而 Jason 和 Sacks 则认为效率提升已在小公司和初创团队中显现。</p></li>
+<li class="takeaway"><span>08</span><p>“后 LLR 时代”泡沫企业遭调侃：主持人通过“The Price is Wrong”游戏环节，回顾了 OpenSea、Clubhouse、Juicero 和 Theranos 等前一周期估值虚高的明星公司。</p></li>
+<li class="takeaway"><span>09</span><p>加州民主党内部“清洗”丑闻：前国会众议员 Eric Swalwell 被爆出性丑闻，被迫退出州长竞选。Friedberg 透露知情人早在数月前就已掌握信息，但被集团性地“雪藏”到关键时刻才引爆。</p></li>
+<li class="takeaway"><span>10</span><p>政客和官员的“内部交易”优势：嘉宾们再次将矛头指向 Nancy Pelosi 和 Ro Khanna 等国会议员出色的股票交易记录，认为这证明了他们能利用职务之便获取内幕信息。</p></li></ol>
+      </section>
+
+      <section id="timeline">
+        <div class="section-head">
+          <h2>分段详细整理</h2>
+          <p>按时间线阅读上下文</p>
+        </div>
+        <div class="timeline"><article class="timeline-card" data-timeline-card data-search="00:00–00:11 纽约“临时住所税”：对超级富豪的杀鸡取卵？ 本段核心判断： 纽约市提出的“临时住所税”将严重打击高端住宅市场，并导致全球资本逃离。 该政策无法解决住房可负担性问题，反而会扼杀城市经济活力，且会激起对富豪的民粹主义报复。 该政策将导致开发项目无法“算账”，从而减少供应，最终伤害所有纽约人。 背景解释与关键术语： pied-à-terre tax (临时住所税)：指对非主要住所（第二、三甚至更多房产）征收的附加税。纽约市长提议对价值超过 500 万美元的第二套房产每年征收 3.9% 的税。 弹性市场 (elastic part of the market)：在经济学中指对价格变化非常敏感的市场。这里指富豪的“第二套房产”购买行为，因为他们可以轻易地将财富转移到全球其他城市，因此对税收极其敏感。 doxxing (人肉搜索/起底)：指未经同意公开个人的私密信息（如家庭住址、电话等）。主持人指出，纽约市长的视频指着一栋特定豪宅，是在“起底”该房产的亿万富翁主人。 stamp tax (印花税)：英国对房产交易征收的税种，曾导致伦敦高端房产市场崩溃，被用来说明类似税收的破坏性。 nimby (邻避效应)：“not in my backyard”的缩写，指当地居民反对在自家附近建造某种设施（如数据中心、保障房等）的现象。 详细中文整理： 主持人 j-cu 首先指出，纽约市长亚当斯的“临时住所税”提案，是对任何在曼哈顿 15 英里内、价值超过 500 万美元的第二套房产征收的每年 3.9% 的税。chamath 认为这荒谬至极，因为曼哈顿几乎没有低于 500 万美元的房子。 chamath 进一步分析，这项税精准打击了市场中最具弹性的部分——那些可以随时将资本转移到世界任何一个城市的超级富豪。一旦开征，需求将急剧下降，最终导致整个高端市场崩盘。sacks 补充，这就像伦敦引入“印花税”后，高端市场立刻坍塌一样。 值得注意的是，嘉宾对此出现了分歧。 david friedberg 提出一个反直觉的观点：这或许能提升纽约的住房可负担性。j-cu 立刻反驳，认为这会破坏开发商建房的动机，因为不再有“鲸鱼”买家来补贴整个项目的财务模型。travis 也补充，像 ken griffin 这样的亿万富翁每年默默支付数百万美元房产税，却几乎不使用城市服务，这对城市来说完全是“净利润”。现在这些“价格不敏感”的买家被赶走，开发项目会因此无法落地，城市将失去持续建设的动力。 jason 则警惕地指出，这种行为是在“起底”富人，会助长民粹主义暴力。他提到 sam altman 的家最近被燃烧弹袭击的新闻，认为在这种时刻公开“点名”富豪的家非常危险。但 sacks 认为 jason “越界”了，因为 ken griffin 的公寓信息早已公开，属于公开记录。 “这个税已经成功扼杀了需求。如果你是一个正在考虑在纽约买临时住所的人，你现在绝不会这么做，因为你不知道税率会涨到多少。”——chamath palihapitiya “它就是给房东们的一根‘狗哨’。总会有些疯子看到。”——jason calacanis 可用于改写的角度： 公众号：一个城市的税收政策，如何“精准”地赶走最有钱的居民？用伦敦、旧金山的教训来复盘纽约的新税方案。 知识星球：纽约“临时住所税”对纽约高端地产市场的影响将是毁灭性的。投资纽约房产的团队应立刻关注这一政策，重新评估风险。 朋友圈：纽约要收富人税？伦敦和旧金山已经用“印花税”和“豪宅税”证明了，这只会把全球资本吓跑到迪拜和新加坡。 ---">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">01</span>
+                    <span class="timeline-meta">00:00–00:11</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>纽约“临时住所税”：对超级富豪的杀鸡取卵？</h3>
+                    <div class="section-content"><h4>本段核心判断</h4>
+<ul>
+<li>纽约市提出的“临时住所税”将严重打击高端住宅市场，并导致全球资本逃离。</li>
+<li>该政策无法解决住房可负担性问题，反而会扼杀城市经济活力，且会激起对富豪的民粹主义报复。</li>
+<li>该政策将导致开发项目无法“算账”，从而减少供应，最终伤害所有纽约人。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li><strong>Pied-à-terre Tax (临时住所税)</strong>：指对非主要住所（第二、三甚至更多房产）征收的附加税。纽约市长提议对价值超过 500 万美元的第二套房产每年征收 3.9% 的税。</li>
+<li><strong>弹性市场 (Elastic part of the market)</strong>：在经济学中指对价格变化非常敏感的市场。这里指富豪的“第二套房产”购买行为，因为他们可以轻易地将财富转移到全球其他城市，因此对税收极其敏感。</li>
+<li><strong>Doxxing (人肉搜索/起底)</strong>：指未经同意公开个人的私密信息（如家庭住址、电话等）。主持人指出，纽约市长的视频指着一栋特定豪宅，是在“起底”该房产的亿万富翁主人。</li>
+<li><strong>Stamp Tax (印花税)</strong>：英国对房产交易征收的税种，曾导致伦敦高端房产市场崩溃，被用来说明类似税收的破坏性。</li>
+<li><strong>NIMBY (邻避效应)</strong>：“Not In My Backyard”的缩写，指当地居民反对在自家附近建造某种设施（如数据中心、保障房等）的现象。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p>主持人 J-Cu 首先指出，纽约市长亚当斯的“临时住所税”提案，是对任何在曼哈顿 15 英里内、价值超过 500 万美元的第二套房产征收的每年 3.9% 的税。Chamath 认为这荒谬至极，因为曼哈顿几乎没有低于 500 万美元的房子。</p>
+<p>Chamath 进一步分析，这项税精准打击了市场中最具弹性的部分——那些可以随时将资本转移到世界任何一个城市的超级富豪。一旦开征，需求将急剧下降，最终导致整个高端市场崩盘。Sacks 补充，这就像伦敦引入“印花税”后，高端市场立刻坍塌一样。</p>
+<p><strong>值得注意的是，嘉宾对此出现了分歧。</strong> David Friedberg 提出一个反直觉的观点：这或许能提升纽约的住房可负担性。J-Cu 立刻反驳，认为这会破坏开发商建房的动机，因为不再有“鲸鱼”买家来补贴整个项目的财务模型。Travis 也补充，像 Ken Griffin 这样的亿万富翁每年默默支付数百万美元房产税，却几乎不使用城市服务，这对城市来说完全是“净利润”。现在这些“价格不敏感”的买家被赶走，开发项目会因此无法落地，城市将失去持续建设的动力。</p>
+<p>Jason 则警惕地指出，这种行为是在“起底”富人，会助长民粹主义暴力。他提到 Sam Altman 的家最近被燃烧弹袭击的新闻，认为在这种时刻公开“点名”富豪的家非常危险。但 Sacks 认为 Jason “越界”了，因为 Ken Griffin 的公寓信息早已公开，属于公开记录。</p>
+<p>“这个税已经成功扼杀了需求。如果你是一个正在考虑在纽约买临时住所的人，你现在绝不会这么做，因为你不知道税率会涨到多少。”——Chamath Palihapitiya</p>
+<p>“它就是给房东们的一根‘狗哨’。总会有些疯子看到。”——Jason Calacanis</p>
+<h4>可用于改写的角度</h4>
+<ul>
+<li><strong>公众号</strong>：一个城市的税收政策，如何“精准”地赶走最有钱的居民？用伦敦、旧金山的教训来复盘纽约的新税方案。</li>
+<li><strong>知识星球</strong>：纽约“临时住所税”对纽约高端地产市场的影响将是毁灭性的。投资纽约房产的团队应立刻关注这一政策，重新评估风险。</li>
+<li><strong>朋友圈</strong>：纽约要收富人税？伦敦和旧金山已经用“印花税”和“豪宅税”证明了，这只会把全球资本吓跑到迪拜和新加坡。</li>
+</ul>
+<hr></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="00:12–00:32 openai vs. anthropic：信仰、计算与增长的终极对决 本段核心判断： openai 内部战略混乱，高增长背后是市场份额流失；而 anthropic 通过专注企业端（编程）获得了更快的指数级增长。 两位巨头的生死战已从模型能力转变为对“计算资源”的掌控。谁能在物理世界打通“算力墙”，谁就能笑到最后。 openai 如果不能在1-2年内追上 anthropic 的增速，领先地位将变得不可撼动，甚至被反超。 背景解释与关键术语： codex vs. claude：openai 的 codex 模型专注于编程任务；anthropic 的 claude 系列模型则以安全、长上下文和编程能力著称。 arr (年化经常性收入)：一个衡量订阅制收入的重要指标，通常将当月收入 x12。 hyperscalers (超大规模云服务商)：指拥有巨大云计算基础设施的公司，如 aws (amazon)、gcp (google)、azure (microsoft)。它们为 ai 公司提供计算资源，但也成为一种依赖和潜在瓶颈。 agent platform layer (智能体平台层)：ai 发展的下一阶段，ai 不仅能回答问题，还能自主执行多步骤任务（如订机票、写代码、做研究）。 doomer nimbyism (末日论邻避效应)：将两者结合，特指一类人：他们不仅想阻止自己家门口建数据中心，还认为像 anthropic 这样的公司宣扬 ai 末日论，本身就是一种限制竞争的计谋。 详细中文整理： 主持人 j-cu 指出，openai 的首席营收官在一份外泄的备忘录中明确批评 anthropic 的财务状况，并宣布公司将“猛攻企业业务和智能体平台层”。与此同时，一份匿名投资者爆料称 openai“极度不专注”，chatgpt 的用户数在涨但市场份额却在被 gemini 和 claude 蚕食。 关键分歧在于 openai 是否应该“不务正业”。 chamath 认为 openai 的策略是聪明的：一方面在消费者端（chatgpt）建立巨大“动词”优势（价值3-4万亿），另一方面用 codex 抢占企业端（价值2-3万亿），最终描绘出一个7-9万亿美金的蓝图。关键是要把这两个团队完全独立运作，避免“上下文切换”造成的效率损失。 但更致命的挑战来自增长速度。 travis 从他在 uber 的经验出发，强调“增长就是一切”。如果 anthropic 的增速远超 openai，网络效应就会形成：更多的数据 -&gt; 更好的模型 -&gt; 更多的客户 -&gt; 更多的收入 -&gt; 更多的计算资源（compute）-&gt; 更好的模型。这就形成了一个让 openai 望尘莫及的“飞轮”。friedberg 也附和，他观察到自己团队在过去半年，从使用 cursor 和 gemini 几乎完全转为使用 anthropic，因为其创新速度“是所有大厂里无可匹敌的”。 sacks 用数据量化了这场“速度战争”：openai 的增长速度大约是每年 3-4 倍，而 anthropic 是 10 倍！anthropic 一年前 arr 为 10 亿美金，今年 q1 结束时已达到 30 亿美金。sacks 强调，消费级市场（chatgpt）只有 3-4% 的免费用户愿意付费20美元/月，规模扩张有限；而企业级市场（编程）是按需付费（metered billing），就像用电一样，一旦企业用起来，收入会随着使用量线性甚至指数级增长。 然而，所有嘉宾都意识到，疯狂的增长遇到了一个共同的物理天花板：计算资源。 chamath 尖锐地指出，当 openai 和 anthropic 都大到一定程度，依赖云厂商租用算力就“太蠢了”。因为云厂商（如 amazon、google）自己也在搞 ai，它们有动机“卡脖子”——像 friendster 一样，因为网站太慢而输给 myspace。sacks 则拆穿了 anthropic 的“末日论”本质，他认为 anthropic 之前不自己建数据中心，是“烧毁敌人的土地”来限制 openai，但现在他们自己已无算力可用，需要为下一阶段（opus 4.7）腾出空间，这才解释了为何他们要释放“因道德原因而没有发布超级模型”之类的烟雾弹。 “如果 anthropic 比 openai 快得多的速度在增长，那么即使 openai 也在增长，我会非常担心。”——travis kalanick “如果对比一下，anthropic 是 1 年实现 10 倍增长，而 openai 需要 2 年，那很明显谁会赢。”——david sacks 可用于改写的角度： 公众号：openai 和 anthropic 的战争已经不是模型之战。真正的胜负手在于：谁能更快地建起自己的数据中心，拿到自己的“电”和“芯片”？ 知识星球：关注类似 coreweave 这种新型算力提供商，以及像 bloom energy 这种能绕过电网审批、提供“即插即用”能源的公司的投资机会。算力是 ai 赛道的底层稀缺资源。 朋友圈：openai 增长放缓，anthropic 10倍增速碾压。这感觉就像当年的 uber vs. lyft，但在ai赛道，这直接关乎生死。 ---">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">02</span>
+                    <span class="timeline-meta">00:12–00:32</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>OpenAI vs. Anthropic：信仰、计算与增长的终极对决</h3>
+                    <div class="section-content"><h4>本段核心判断</h4>
+<ul>
+<li>OpenAI 内部战略混乱，高增长背后是市场份额流失；而 Anthropic 通过专注企业端（编程）获得了更快的指数级增长。</li>
+<li>两位巨头的生死战已从模型能力转变为对“计算资源”的掌控。谁能在物理世界打通“算力墙”，谁就能笑到最后。</li>
+<li>OpenAI 如果不能在1-2年内追上 Anthropic 的增速，领先地位将变得不可撼动，甚至被反超。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li><strong>Codex vs. Claude</strong>：OpenAI 的 Codex 模型专注于编程任务；Anthropic 的 Claude 系列模型则以安全、长上下文和编程能力著称。</li>
+<li><strong>ARR (年化经常性收入)</strong>：一个衡量订阅制收入的重要指标，通常将当月收入 x12。</li>
+<li><strong>Hyperscalers (超大规模云服务商)</strong>：指拥有巨大云计算基础设施的公司，如 AWS (Amazon)、GCP (Google)、Azure (Microsoft)。它们为 AI 公司提供计算资源，但也成为一种依赖和潜在瓶颈。</li>
+<li><strong>Agent Platform Layer (智能体平台层)</strong>：AI 发展的下一阶段，AI 不仅能回答问题，还能自主执行多步骤任务（如订机票、写代码、做研究）。</li>
+<li><strong>Doomer NIMBYism (末日论邻避效应)</strong>：将两者结合，特指一类人：他们不仅想阻止自己家门口建数据中心，还认为像 Anthropic 这样的公司宣扬 AI 末日论，本身就是一种限制竞争的计谋。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p>主持人 J-Cu 指出，OpenAI 的首席营收官在一份外泄的备忘录中明确批评 Anthropic 的财务状况，并宣布公司将“猛攻企业业务和智能体平台层”。与此同时，一份匿名投资者爆料称 OpenAI“极度不专注”，ChatGPT 的用户数在涨但市场份额却在被 Gemini 和 Claude 蚕食。</p>
+<p><strong>关键分歧在于 OpenAI 是否应该“不务正业”。</strong> Chamath 认为 OpenAI 的策略是聪明的：一方面在消费者端（ChatGPT）建立巨大“动词”优势（价值3-4万亿），另一方面用 Codex 抢占企业端（价值2-3万亿），最终描绘出一个7-9万亿美金的蓝图。关键是要把这两个团队完全独立运作，避免“上下文切换”造成的效率损失。</p>
+<p><strong>但更致命的挑战来自增长速度。</strong> Travis 从他在 Uber 的经验出发，强调“增长就是一切”。如果 Anthropic 的增速远超 OpenAI，网络效应就会形成：更多的数据 -&gt; 更好的模型 -&gt; 更多的客户 -&gt; 更多的收入 -&gt; 更多的计算资源（Compute）-&gt; 更好的模型。这就形成了一个让 OpenAI 望尘莫及的“飞轮”。Friedberg 也附和，他观察到自己团队在过去半年，从使用 Cursor 和 Gemini 几乎完全转为使用 Anthropic，因为其创新速度“是所有大厂里无可匹敌的”。</p>
+<p><strong>Sacks 用数据量化了这场“速度战争”</strong>：OpenAI 的增长速度大约是每年 3-4 倍，而 Anthropic 是 10 倍！Anthropic 一年前 ARR 为 10 亿美金，今年 Q1 结束时已达到 30 亿美金。Sacks 强调，消费级市场（ChatGPT）只有 3-4% 的免费用户愿意付费20美元/月，规模扩张有限；而企业级市场（编程）是按需付费（metered billing），就像用电一样，一旦企业用起来，收入会随着使用量线性甚至指数级增长。</p>
+<p><strong>然而，所有嘉宾都意识到，疯狂的增长遇到了一个共同的物理天花板：计算资源。</strong> Chamath 尖锐地指出，当 OpenAI 和 Anthropic 都大到一定程度，依赖云厂商租用算力就“太蠢了”。因为云厂商（如 Amazon、Google）自己也在搞 AI，它们有动机“卡脖子”——像 Friendster 一样，因为网站太慢而输给 MySpace。Sacks 则拆穿了 Anthropic 的“末日论”本质，他认为 Anthropic 之前不自己建数据中心，是“烧毁敌人的土地”来限制 OpenAI，但现在他们自己已无算力可用，需要为下一阶段（Opus 4.7）腾出空间，这才解释了为何他们要释放“因道德原因而没有发布超级模型”之类的烟雾弹。</p>
+<p>“如果 Anthropic 比 OpenAI 快得多的速度在增长，那么即使 OpenAI 也在增长，我会非常担心。”——Travis Kalanick</p>
+<p>“如果对比一下，Anthropic 是 1 年实现 10 倍增长，而 OpenAI 需要 2 年，那很明显谁会赢。”——David Sacks</p>
+<h4>可用于改写的角度</h4>
+<ul>
+<li><strong>公众号</strong>：OpenAI 和 Anthropic 的战争已经不是模型之战。真正的胜负手在于：谁能更快地建起自己的数据中心，拿到自己的“电”和“芯片”？</li>
+<li><strong>知识星球</strong>：关注类似 CoreWeave 这种新型算力提供商，以及像 Bloom Energy 这种能绕过电网审批、提供“即插即用”能源的公司的投资机会。算力是 AI 赛道的底层稀缺资源。</li>
+<li><strong>朋友圈</strong>：OpenAI 增长放缓，Anthropic 10倍增速碾压。这感觉就像当年的 Uber vs. Lyft，但在AI赛道，这直接关乎生死。</li>
+</ul>
+<hr></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="00:34–01:00 泡沫游戏的终结：从 allbirds 到 clubhouse 的“价格猜错了” 本段核心判断： 像 allbirds 这种“后疫情 zirp 时代”的明星公司转型 ai 并暴涨，是市场进入非理性泡沫的终极信号。 许多曾经估值惊人的独角兽（opensea, clubhouse, juicero, theranos）要么已消失，要么成为笑谈。 过去十年过分奖励了“物理世界”的公司，而忽略了它们与软件业务在毛利率上的根本区别。 背景解释与关键术语： zirp (零利率政策)：指极低的利率环境，使得大量资金涌入风险资产，抬高了估值。 slop (代码垃圾)：组合了“slop”（无价值的内容输出）和 ai 代码（尤其是依靠“vibe coding”产出），指那些看似能工作但质量低下、不可维护的 ai 代码。 the price is wrong (价格猜错了)：本集的一个游戏环节。主持人描述一家曾估值极高但最终失败的创业公司，其他嘉宾猜名字。 详细中文整理： 故事以 allbirds（以丑著称的羊毛鞋公司）宣布转型 ai 后股价暴涨 450% 开启。sacks 直接讽刺这是“1990 年代末期，只要公司名字改成 .com，股价就能暴涨”的翻版。chamath 补充一个物理世界的公司（allbirds）在硅谷被当作“下一个 nike”并融了 3.5 亿美元 ipo，是因为 zirp 环境下，大家只认“飞速增长”，完全忽略了它们的“物理世界属性”（如低毛利、高库存成本、难以规模化）。 travis 从自己的经历补充，正是 uber 和 airbnb 这种成功范例，让硅谷开始把“物理世界公司”（如 bird 滑板车、allbirds）也当成软件公司来估值。但他认为，问题出在 zirp 大背景，而非他本人。 随后进入游戏环节：“the price is wrong”。嘉宾们需要猜出曾经估值数十亿（$13b, $4b, $0.27b）但最终崩溃或消失的公司：opensea（卖猴子 jpg 的 nft 平台）、clubhouse（音频聊天室）、juicero（榨汁机）以及 theranos（血液检测）都被一一猜中，揭示了上一轮周期的巨大泡沫。 可用于改写的角度： 公众号：从 allbirds 到 juicero，那些在“零利率”时代被吹上天的公司，现在都怎么样了？这说明了一个典型的泡沫周期：先是狂热，然后是清算。 知识星球：千万警惕“转型 ai”就能让股价翻倍的妖股现象，这往往是市场见顶信号。真正的 ai 赢家是那些能持续产生企业级收入的公司。 ---">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">03</span>
+                    <span class="timeline-meta">00:34–01:00</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>泡沫游戏的终结：从 Allbirds 到 Clubhouse 的“价格猜错了”</h3>
+                    <div class="section-content"><h4>本段核心判断</h4>
+<ul>
+<li>像 Allbirds 这种“后疫情 ZIRP 时代”的明星公司转型 AI 并暴涨，是市场进入非理性泡沫的终极信号。</li>
+<li>许多曾经估值惊人的独角兽（OpenSea, Clubhouse, Juicero, Theranos）要么已消失，要么成为笑谈。</li>
+<li>过去十年过分奖励了“物理世界”的公司，而忽略了它们与软件业务在毛利率上的根本区别。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li><strong>ZIRP (零利率政策)</strong>：指极低的利率环境，使得大量资金涌入风险资产，抬高了估值。</li>
+<li><strong>SLOp (代码垃圾)</strong>：组合了“Slop”（无价值的内容输出）和 AI 代码（尤其是依靠“vibe coding”产出），指那些看似能工作但质量低下、不可维护的 AI 代码。</li>
+<li><strong>The Price is Wrong (价格猜错了)</strong>：本集的一个游戏环节。主持人描述一家曾估值极高但最终失败的创业公司，其他嘉宾猜名字。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p>故事以 Allbirds（以丑著称的羊毛鞋公司）宣布转型 AI 后股价暴涨 450% 开启。Sacks 直接讽刺这是“1990 年代末期，只要公司名字改成 .com，股价就能暴涨”的翻版。Chamath 补充一个物理世界的公司（Allbirds）在硅谷被当作“下一个 Nike”并融了 3.5 亿美元 IPO，是因为 ZIRP 环境下，大家只认“飞速增长”，完全忽略了它们的“物理世界属性”（如低毛利、高库存成本、难以规模化）。</p>
+<p>Travis 从自己的经历补充，正是 Uber 和 Airbnb 这种成功范例，让硅谷开始把“物理世界公司”（如 Bird 滑板车、Allbirds）也当成软件公司来估值。但他认为，问题出在 ZIRP 大背景，而非他本人。</p>
+<p>随后进入游戏环节：“The Price is Wrong”。嘉宾们需要猜出曾经估值数十亿（$13B, $4B, $0.27B）但最终崩溃或消失的公司：OpenSea（卖猴子 JPG 的 NFT 平台）、Clubhouse（音频聊天室）、Juicero（榨汁机）以及 Theranos（血液检测）都被一一猜中，揭示了上一轮周期的巨大泡沫。</p>
+<h4>可用于改写的角度</h4>
+<ul>
+<li><strong>公众号</strong>：从 Allbirds 到 Juicero，那些在“零利率”时代被吹上天的公司，现在都怎么样了？这说明了一个典型的泡沫周期：先是狂热，然后是清算。</li>
+<li><strong>知识星球</strong>：千万警惕“转型 AI”就能让股价翻倍的妖股现象，这往往是市场见顶信号。真正的 AI 赢家是那些能持续产生企业级收入的公司。</li>
+</ul>
+<hr></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="00:59–01:10 政治丑闻：nancy pelosi与加州民主党内部的“权力游戏” 本段核心判断： eric swalwell 的性丑闻在加州政圈早有耳闻，但被“知情者”长期隐藏，直到他宣布竞选州长时才被集体引爆。这不是独立的丑闻，而是政治清算。 nancy pelosi 被推测是这起事件和去年拜登退选事件的幕后操作者。 加州特殊的“丛林初选”制度让民主党内部急于清场，避免两名共和党人进入决选。 背景解释与关键术语： eric swalwell：前民主党国会议员，曾宣布竞选加州州长，后因被爆出对下属发送不当照片等丑闻而迅速退出政治舞台。 jungle primary (丛林初选)：加州的选举制度，所有候选人（不分党派）参加同一场初选，得票最高的两位候选人进入最终决选。这打破了党派的界限，让同党候选人之间互相厮杀。 nancy pelosi：美国史上首位女议长，加州民主党元老。在节目中，她被认为是在加州操控党内政治的唯一“女王”。 ro khanna：另一位加州民主党众议员，被节目披露其股票交易量巨大，有“内幕交易”之嫌。 详细中文整理： friedberg 首先爆料，他早在几个月前就从多个独立信源获悉 swalwell 的负面信息，但一直以为是政治对手的“抹黑传闻”。直到本周一切证据集中曝光，他意识到这是一次“非常有组织的、协调一致的”行动。他推测，nancy pelosi 是伊州的“大脑”。 sacks 给出了政治分析：加州的“丛林初选”制度是关键。由于民主党候选人太多，民调显示前两位是两名共和党人。为了让民主党最终获胜，党内“大老板”们必须尽快减少候选人数量。swalwell 是最弱的，也是问题最多的，因此处理他是“清除障碍”的最优解。sacks 将这比作去年拜登退选的场景——也是 pelosi 找拜登谈话“你可以体面走人，也可以让我们用另一种方式”。 “这些人（知情者）几个月前就知道了这些信息，但选择不公开，直到这一刻才一起引爆。这就是精心策划的政治清算。”——david friedberg “加州的丛林初选让民主党内部出了大问题，他们必须尽快清场。swalwell 就像一个麻烦的、有问题的玩具，必须被扔掉。”——david sacks 可用于改写的角度： 公众号：nancy pelosi 的野望：从逼迫拜登退选到操控加州州长选举，她如何用“内幕信息”和“政治手腕”操控整个民主党的权力走向？ 知识星球：这种信息控制能力（“先捂盘，后爆仓”）揭示了一个残酷的现实：在政治圈，信息和时机才是真正的权力。投资/创业者在经营人脉时也需留意信息的“真实性”和“时效性”。 ---">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">04</span>
+                    <span class="timeline-meta">00:59–01:10</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>政治丑闻：Nancy Pelosi与加州民主党内部的“权力游戏”</h3>
+                    <div class="section-content"><h4>本段核心判断</h4>
+<ul>
+<li>Eric Swalwell 的性丑闻在加州政圈早有耳闻，但被“知情者”长期隐藏，直到他宣布竞选州长时才被集体引爆。这不是独立的丑闻，而是政治清算。</li>
+<li>Nancy Pelosi 被推测是这起事件和去年拜登退选事件的幕后操作者。</li>
+<li>加州特殊的“丛林初选”制度让民主党内部急于清场，避免两名共和党人进入决选。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li><strong>Eric Swalwell</strong>：前民主党国会议员，曾宣布竞选加州州长，后因被爆出对下属发送不当照片等丑闻而迅速退出政治舞台。</li>
+<li><strong>Jungle Primary (丛林初选)</strong>：加州的选举制度，所有候选人（不分党派）参加同一场初选，得票最高的两位候选人进入最终决选。这打破了党派的界限，让同党候选人之间互相厮杀。</li>
+<li><strong>Nancy Pelosi</strong>：美国史上首位女议长，加州民主党元老。在节目中，她被认为是在加州操控党内政治的唯一“女王”。</li>
+<li><strong>Ro Khanna</strong>：另一位加州民主党众议员，被节目披露其股票交易量巨大，有“内幕交易”之嫌。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p>Friedberg 首先爆料，他早在几个月前就从多个独立信源获悉 Swalwell 的负面信息，但一直以为是政治对手的“抹黑传闻”。直到本周一切证据集中曝光，他意识到这是一次“非常有组织的、协调一致的”行动。他推测，Nancy Pelosi 是伊州的“大脑”。</p>
+<p>Sacks 给出了政治分析：加州的“丛林初选”制度是关键。由于民主党候选人太多，民调显示前两位是两名共和党人。为了让民主党最终获胜，党内“大老板”们必须尽快减少候选人数量。Swalwell 是最弱的，也是问题最多的，因此处理他是“清除障碍”的最优解。Sacks 将这比作去年拜登退选的场景——也是 Pelosi 找拜登谈话“你可以体面走人，也可以让我们用另一种方式”。</p>
+<p>“这些人（知情者）几个月前就知道了这些信息，但选择不公开，直到这一刻才一起引爆。这就是精心策划的政治清算。”——David Friedberg</p>
+<p>“加州的丛林初选让民主党内部出了大问题，他们必须尽快清场。Swalwell 就像一个麻烦的、有问题的玩具，必须被扔掉。”——David Sacks</p>
+<h4>可用于改写的角度</h4>
+<ul>
+<li><strong>公众号</strong>：Nancy Pelosi 的野望：从逼迫拜登退选到操控加州州长选举，她如何用“内幕信息”和“政治手腕”操控整个民主党的权力走向？</li>
+<li><strong>知识星球</strong>：这种信息控制能力（“先捂盘，后爆仓”）揭示了一个残酷的现实：在政治圈，信息和时机才是真正的权力。投资/创业者在经营人脉时也需留意信息的“真实性”和“时效性”。</li>
+</ul>
+<hr></div>
+                  </div>
+                </article></div>
+      </section>
+
+      <section id="speakers">
+        <div class="section-head">
+          <h2>人物观点对照</h2>
+          <p>比较嘉宾立场</p>
+        </div>
+        <div class="speaker-grid"><article class="speaker-card">
+              <h3>Jason Calacanis</h3>
+              <div><p>Jason 是创业世界的坚定看多者。他认为 AI 的变革在小公司、初创团队中已经彻底生效，效率提升是真实且可观的。他相信 AI 的价值最终会体现在大公司的利润表上，只是需要时间。他对民粹主义、政府干预和大公司“官僚主义”深恶痛绝，在税务、数据中心和政治丑闻中，他都是那个旗帜鲜明的“自由市场”信奉者。他热衷于“价格猜错”这种游戏，具有很强的传播意识。</p></div>
+            </article>
+<article class="speaker-card">
+              <h3>Chamath Palihapitiya</h3>
+              <div><p>Chamath 是本期的“熊派”和“系统思考者”。他认为市场估值过高，建议避险。他不相信 AI（尤其是大公司）已经完成了“转型”，他要求看到“实打实的利润”。他强烈抨击政府对富人征税、抵制数据中心等行为，认为这违背了“法治”和“鼓励创新”的原则。他逻辑缜密，用“算力墙”、“Friendster 效应”等比喻串联起 OpenAI vs. Anthropic 和反对数据中心的民粹运动，认为所有问题的交汇点都在于物理世界对 AI 发展的限制。</p></div>
+            </article>
+<article class="speaker-card">
+              <h3>David Sacks</h3>
+              <div><p>Sacks 在本期扮演了“政策分析师”和“历史对比者”的角色。他能敏锐地将政治事件（Swalwell 退选、拜登退选）与权力博弈联系起来，并给出清晰的背景解释。他支持企业 AI（编程）发展，为 AI 数据中心辩护，认为其能创造大量就业。他同时对大公司（如 Elon 的 xAI 和传统企业）的效率提升持谨慎乐观态度。他也能在“价格猜错”环节中展现他的幽默和行业知识。</p></div>
+            </article>
+<article class="speaker-card">
+              <h3>David Friedberg</h3>
+              <div><p>Friedberg 是一个冷静的观察者和客观的信息提供者。他通过投资经验（Codex vs. Claude）来验证产品好坏。他分享了宝贵的内部信源信息（Swalwell 丑闻），并提出了“知情者为何选择沉默”这一更深刻的问题。他认同 Chamath 关于“算力”危机的观点，但更侧重于市场数据（Bloom Energy 暴涨、土地审批难等）。</p></div>
+            </article></div>
+      </section>
+
+      <section id="quotes">
+        <div class="section-head">
+          <h2>值得引用的原话</h2>
+          <p>保留关键表达</p>
+        </div>
+        <div class="panel"><ol>
+<li><strong>原句</strong>：“This is not a rich person tax. This is within 15 miles of Midtown Manhattan, you&#x27;re paying an extra tax.”</li>
+<p><strong>翻译</strong>：“这不是一个富人头税。它意味着在曼哈顿中城 15 英里的范围内，你就要缴纳一笔额外税款。” <strong>说明</strong>：一针见血地讽刺了对“第二套房”征税的荒谬性。</p>
+</ol>
+<ol>
+<li><strong>原句</strong>：“Growth is king right now in this world, in this segment. Growth is the whole damn thing.”</li>
+<p><strong>翻译</strong>：“在这一行，增长就是王道。增长就是所有一切。” <strong>说明</strong>：Travis 总结了当前 AI 竞争的残酷法则。</p>
+</ol>
+<ol>
+<li><strong>原句</strong>：“The average person doesn&#x27;t see the value in AI today yet. ... For a consumer&#x27;s life to actually be altered in a meaningfully positive way, most people don&#x27;t feel that yet.”</li>
+<p><strong>翻译</strong>：“普通人今天还看不到 AI 的价值。... 对于消费者生活要发生有意义的积极改变，大多数人还没感受到。” <strong>说明</strong>：解释了为何“数据中心”成为民粹主义攻击的目标，而不是被视作基础设施。</p>
+</ol>
+<ol>
+<li><strong>原句</strong>：“If I were them, it is a 5-alarm fire for them. They more than anybody else needs to get their hands on compute.”</li>
+<p><strong>翻译</strong>：“如果我是他们（OpenAI / Anthropic），这简直是五级火警。他们比任何公司都需要拿到算力。” <strong>说明</strong>：Chamath 将“算力”问题提高到公司生死存亡的紧急程度。</p>
+</ol>
+<ol>
+<li><strong>原句</strong>：“The whole thing was extremely weird, but he, you know, was clearly muscled out of it... ‘They&#x27;re not getting me out of here.’ And then a few days later, he&#x27;s resigning by tweet.”</li>
+<p><strong>翻译</strong>：“整件事非常诡异，但他显然是被强迫退出的...‘他们绝不能把我弄出去。’然后几天后，他就发推辞职了。” <strong>说明</strong>：Sacks 生动描绘了拜登被迫退选的政治现实。</p>
+</ol>
+<ol>
+<li><strong>原句</strong>：“Statistically, like, even if you had insider information, making that much money is like very hard.”</li>
+<p><strong>翻译</strong>：“从统计上看，就算你有内幕消息，赚到那么多钱也是非常难的。” <strong>说明</strong>：Chamath 讽刺 Nancy Pelosi 等人的“投资神话”，暗示其远超内幕交易。</p>
+</ol></div>
+      </section>
+    </main>
+  </div>
+  <script>
+    const progress = document.querySelector("[data-progress]");
+    const searchBox = document.querySelector("[data-search-box]");
+    const cards = Array.from(document.querySelectorAll("[data-timeline-card]"));
+
+    function updateProgress() {
+      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      const ratio = scrollable > 0 ? window.scrollY / scrollable : 0;
+      progress.style.width = `${Math.max(0, Math.min(1, ratio)) * 100}%`;
+    }
+
+    function applySearch() {
+      const query = searchBox.value.trim().toLowerCase();
+      cards.forEach((card) => {
+        const text = card.getAttribute("data-search") || "";
+        card.style.display = !query || text.includes(query) ? "" : "none";
+      });
+    }
+
+    window.addEventListener("scroll", updateProgress, { passive: true });
+    window.addEventListener("resize", updateProgress);
+    searchBox.addEventListener("input", applySearch);
+    updateProgress();
+  </script>
+</body>
+</html>
