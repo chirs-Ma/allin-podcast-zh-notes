@@ -1,66 +1,75 @@
 ---
 name: publish-episode
 description: |
-  Trigger when the user provides a path to a newly generated podcast detail page (notes.visual.html)
-  and wants to publish it to the site. This skill handles copying the episode into the project,
-  updating the homepage index.html with a new card, and pushing to GitHub.
-  Use whenever the user says things like "publish this episode", "add this to the site",
-  "I have a new episode", "put this detail page on the site", or provides a file path to
-  a notes.visual.html file.
+  Publish newly generated podcast detail pages (notes.visual.html) to the site.
+  This skill auto-discovers episodes from the fixed source directory, copies them
+  into the project, updates index.html, and pushes to GitHub.
+  Trigger when the user says things like "publish", "发布", "发布最新一期",
+  "publish new episode", "push to site", or any mention of publishing episodes.
+  Also trigger when the user mentions adding episodes to the homepage or GitHub.
 ---
 
 # Publish Episode
 
-Automated workflow: take a generated detail page, integrate it into the site, and push to GitHub.
+Automated workflow: discover, copy, integrate, and push — no manual path needed.
+
+## How it works
+
+The source directory is fixed at:
+```
+/Users/maxuexian/Desktop/allin-podcast/happyscribe_episodes/
+```
+
+Each subdirectory follows the pattern `YYYY-MM-DD-topic-slug/` and contains a
+`notes.visual.html` file.
+
+### Discovery logic
+
+The script scans the source directory and compares against already-published
+episodes in `episodes/`. It knows which ones are new without user input.
+
+### Usage modes
+
+| Command | Behavior |
+|---------|----------|
+| `node publish.js` | Publish the **latest** unpublished episode |
+| `node publish.js all` | Publish **all** unpublished episodes (oldest first) |
+| `node publish.js <slug>` | Publish a **specific** episode by slug |
 
 ## Workflow
 
-### 1. Receive the episode path
+### 1. Auto-discover episodes
 
-The user provides a path to a `notes.visual.html` file (or the directory containing it).
+Run the script. It automatically:
 
-```
-/path/to/allin-podcast/happyscribe_episodes/2026-04-24-topic-slug/notes.visual.html
-```
+1. **Scans** the source directory for all `*/notes.visual.html` files
+2. **Compares** against `episodes/` — skips already published
+3. **Selects** the target episode(s) based on the mode
 
-If the user gives a directory path, append `/notes.visual.html`.
+### 2. Publish each episode
 
-### 2. Run the publish script
+For each selected episode:
 
-Execute the bundled script with the resolved absolute path:
-
-```bash
-node .claude/skills/publish-episode/scripts/publish.js <absolute-path-to-notes.visual.html>
-```
-
-The script performs these steps automatically:
-
-1. **Validate** — checks the source file exists
-2. **Parse metadata** — extracts from the HTML:
-   - Title (`<h1>` or `<title>`)
+1. **Parse metadata** from the HTML:
+   - Title (`<h1>` or `<title>`, with "标题：" prefix stripped)
    - Date (from `.meta` "生成时间")
    - Summary (from `.summary p`)
-   - Stats (reading time, takeaway count, timeline count, speaker count from `.meta-pill`)
-3. **Copy** — copies the episode into `episodes/<slug>/notes.visual.html`
-4. **Update index.html** — inserts a new card at the top of the list:
-   - Removes the old "最新" badge from previous episodes
-   - Adds "最新" badge to the new episode
-   - Sets the correct relative link (`./episodes/<slug>/notes.visual.html`)
-   - Builds `data-search` keywords for client-side filtering
-5. **Git push** — `git add .`, `git commit`, `git push`
+   - Stats (reading time, takeaways, timeline segments, speakers from `.meta-pill`)
+2. **Copy** into `episodes/<slug>/notes.visual.html`
+3. **Update index.html** — inserts a new card at the top of the list:
+   - "最新" badge lands on the newest episode only
+   - Previous episodes lose the "最新" badge
+   - `data-search` keywords built for client-side filtering
 
-### 3. Report results
+### 3. Git push
 
-After the script runs, report to the user:
-- Episode title and date
-- Where it was copied to
-- Whether GitHub push succeeded
-
-If the script fails, show the error output and help the user fix the issue (e.g., git auth, missing file).
+Runs `git add .`, `git commit`, `git push` with an appropriate message.
 
 ## Edge cases
 
-- **Multiple new episodes**: Run the script once per episode, oldest first (so the final "最新" badge lands on the truly newest).
-- **Path is relative**: Resolve to absolute path before passing to the script.
-- **Git push fails**: Check if there are uncommitted changes, if remote is configured, and if the user needs to authenticate.
-- **index.html structure changed**: If the script cannot find `<main class="episode-list">`, it will error. In that case, manually inspect index.html and update the script regex.
+- **All episodes already published**: Script exits gracefully with "Nothing to do."
+- **Specific slug not found**: Lists all available slugs and exits.
+- **Specific slug already published**: Exits gracefully.
+- **Git push fails**: Check remote auth and uncommitted changes.
+- **index.html structure changed**: If `<main class="episode-list">` is not found,
+  the script errors — inspect and update the regex in the script.
