@@ -1,0 +1,6 @@
+# Only publish HTML files to GitHub Pages
+# Everything else is local tooling/config
+
+.claude/
+PRODUCT.md
+DESIGN.md
