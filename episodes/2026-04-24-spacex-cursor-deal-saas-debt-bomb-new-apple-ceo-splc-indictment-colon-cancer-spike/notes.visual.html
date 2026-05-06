@@ -40,6 +40,43 @@
       height: 3px;
       background: var(--accent);
     }
+    .quick-actions {
+      position: fixed;
+      left: max(18px, calc((100vw - 1240px) / 2));
+      bottom: 22px;
+      z-index: 30;
+      display: grid;
+      gap: 8px;
+    }
+    .quick-action {
+      display: inline-grid;
+      grid-template-columns: 18px auto;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      min-width: 76px;
+      min-height: 40px;
+      padding: 8px 12px;
+      border: 1px solid var(--line-strong);
+      border-radius: 8px;
+      background: var(--paper);
+      color: var(--ink);
+      font: inherit;
+      font-size: 14px;
+      font-weight: 750;
+      line-height: 1.2;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background-color .16s ease, border-color .16s ease, color .16s ease, transform .16s ease;
+    }
+    .quick-action:hover, .quick-action:focus-visible {
+      outline: none;
+      border-color: var(--accent);
+      background: var(--accent-soft);
+      color: var(--accent);
+      transform: translateY(-1px);
+    }
+    .quick-action:active { transform: translateY(0); }
     .page {
       width: min(1240px, calc(100% - 34px));
       margin: 0 auto;
@@ -225,23 +262,50 @@
     }
     .empty, .muted { color: var(--muted); }
     @media (max-width: 780px) {
-      .page { width: min(100% - 22px, 1180px); display: block; }
+      .page { width: min(100% - 22px, 1180px); display: block; padding-bottom: 66px; }
       .sidebar { position: static; padding-top: 16px; }
+      .quick-actions {
+        left: auto;
+        right: 11px;
+        bottom: 12px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 6px;
+      }
+      .quick-action {
+        min-width: 68px;
+        min-height: 38px;
+        padding: 7px 9px;
+        font-size: 13px;
+      }
       header { padding-top: 34px; }
       h1 { font-size: 32px; }
       .speaker-grid { grid-template-columns: 1fr; }
       .timeline-card { padding: 18px; }
     }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .quick-action { transition: none; }
+    }
     @media print {
       body { background: var(--paper); }
-      .sidebar, .progress { display: none; }
-      .page { display: block; width: auto; }
+      .sidebar, .progress, .quick-actions { display: none; }
+      .page { display: block; width: auto; padding-bottom: 0; }
       .summary, .timeline-card, .speaker-card, .panel { box-shadow: none; }
     }
   </style>
 </head>
 <body>
   <div class="progress" data-progress></div>
+  <div class="quick-actions" aria-label="快捷操作">
+    <a class="quick-action" href="../../index.html" aria-label="返回首页">
+      <span aria-hidden="true">←</span>
+      <span>首页</span>
+    </a>
+    <button class="quick-action" type="button" data-scroll-top aria-label="回到顶部">
+      <span aria-hidden="true">↑</span>
+      <span>顶部</span>
+    </button>
+  </div>
   <div class="page">
     <aside class="sidebar">
       <nav class="toc" aria-label="页面导航">
@@ -602,7 +666,9 @@
   <script>
     const progress = document.querySelector("[data-progress]");
     const searchBox = document.querySelector("[data-search-box]");
+    const topButton = document.querySelector("[data-scroll-top]");
     const cards = Array.from(document.querySelectorAll("[data-timeline-card]"));
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
     function updateProgress() {
       const scrollable = document.documentElement.scrollHeight - window.innerHeight;
@@ -621,6 +687,12 @@
     window.addEventListener("scroll", updateProgress, { passive: true });
     window.addEventListener("resize", updateProgress);
     searchBox.addEventListener("input", applySearch);
+    topButton.addEventListener("click", () => {
+      window.scrollTo({
+        top: 0,
+        behavior: prefersReducedMotion.matches ? "auto" : "smooth"
+      });
+    });
     updateProgress();
   </script>
 </body>
