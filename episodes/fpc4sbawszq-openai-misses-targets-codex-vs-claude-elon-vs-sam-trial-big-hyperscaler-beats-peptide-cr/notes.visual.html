@@ -6,291 +6,514 @@
   <title>OpenAI 目标未达成、Codex vs Claude、Elon vs Sam 庭审、科技巨头财报、多肽热潮 - 中文播客可视化笔记</title>
   <style>
     :root {
-      --bg: oklch(0.965 0.012 86);
-      --paper: oklch(0.986 0.006 86);
-      --paper-soft: oklch(0.94 0.014 86);
-      --ink: oklch(0.24 0.024 255);
-      --muted: oklch(0.48 0.026 255);
-      --line: oklch(0.84 0.016 86);
-      --line-strong: oklch(0.73 0.026 86);
-      --accent: oklch(0.54 0.13 35);
-      --accent-soft: oklch(0.91 0.045 45);
-      --blue: oklch(0.43 0.08 255);
-      --teal: oklch(0.47 0.075 188);
-      --quote: oklch(0.93 0.034 80);
-      --shadow: 0 18px 46px color-mix(in oklch, var(--ink) 12%, transparent);
-      --radius: 10px;
+      --bg: oklch(0.974 0.006 238);
+      --paper: oklch(0.991 0.003 238);
+      --paper-soft: oklch(0.955 0.007 238);
+      --ink: oklch(0.205 0.018 246);
+      --muted: oklch(0.49 0.018 246);
+      --faint: oklch(0.63 0.014 246);
+      --line: oklch(0.875 0.009 238);
+      --line-strong: oklch(0.74 0.014 238);
+      --accent: oklch(0.43 0.064 164);
+      --accent-soft: oklch(0.94 0.024 164);
+      --accent-wash: oklch(0.973 0.012 164);
+      --quote: oklch(0.965 0.010 92);
+      --shadow: 0 24px 54px color-mix(in oklch, var(--ink) 8%, transparent);
+      --radius: 8px;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
     }
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body {
       margin: 0;
+      min-width: 0;
       color: var(--ink);
-      background: var(--bg);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-      line-height: 1.74;
+      background:
+        linear-gradient(90deg, color-mix(in oklch, var(--line) 28%, transparent) 1px, transparent 1px) 0 0 / 92px 92px,
+        var(--bg);
+      font-family: "Geist", "Satoshi", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      line-height: 1.78;
+      text-rendering: optimizeLegibility;
     }
-    a { color: var(--blue); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+    ::selection { background: var(--accent-soft); color: var(--ink); }
+    a {
+      color: var(--accent);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+      transition: color .22s var(--ease), background-color .22s var(--ease), border-color .22s var(--ease), transform .22s var(--ease);
+    }
+    [hidden] { display: none !important; }
     .progress {
       position: fixed;
-      z-index: 20;
+      z-index: 4;
       top: 0;
       left: 0;
       width: 0%;
-      height: 3px;
+      height: 2px;
       background: var(--accent);
     }
     .quick-actions {
       position: fixed;
-      left: max(18px, calc((100vw - 1240px) / 2));
-      bottom: 22px;
-      z-index: 30;
+      right: max(18px, calc((100vw - 1200px) / 2));
+      bottom: 24px;
+      z-index: 3;
       display: grid;
-      gap: 8px;
+      gap: 7px;
     }
     .quick-action {
       display: inline-grid;
-      grid-template-columns: 18px auto;
+      grid-template-columns: 16px auto;
       align-items: center;
       justify-content: center;
-      gap: 6px;
-      min-width: 76px;
+      gap: 7px;
+      min-width: 74px;
       min-height: 40px;
       padding: 8px 12px;
       border: 1px solid var(--line-strong);
-      border-radius: 8px;
-      background: var(--paper);
+      border-radius: var(--radius);
+      background: color-mix(in oklch, var(--paper) 92%, transparent);
+      box-shadow: 0 12px 28px color-mix(in oklch, var(--ink) 7%, transparent);
       color: var(--ink);
       font: inherit;
-      font-size: 14px;
-      font-weight: 750;
+      font-size: 13px;
+      font-weight: 720;
       line-height: 1.2;
       text-decoration: none;
       cursor: pointer;
-      transition: background-color .16s ease, border-color .16s ease, color .16s ease, transform .16s ease;
     }
     .quick-action:hover, .quick-action:focus-visible {
       outline: none;
       border-color: var(--accent);
-      background: var(--accent-soft);
+      background: var(--accent-wash);
       color: var(--accent);
-      transform: translateY(-1px);
+      transform: translate3d(0, -1px, 0);
     }
-    .quick-action:active { transform: translateY(0); }
+    .quick-action:active { transform: translate3d(0, 1px, 0) scale(.99); }
     .page {
-      width: min(1240px, calc(100% - 34px));
+      width: min(2200px, calc(100% - 56px));
       margin: 0 auto;
-      display: grid;
-      grid-template-columns: 220px minmax(0, 1fr);
-      gap: 38px;
+      padding: 0 0 104px;
     }
-    .sidebar {
-      position: sticky;
-      top: 22px;
-      align-self: start;
-      padding-top: 44px;
+    .article { min-width: 0; }
+    .hero {
+      max-width: none;
+      margin-left: min(7vw, 140px);
+      padding: 72px 0 58px;
     }
-    .toc {
-      padding: 14px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: var(--paper-soft);
-    }
-    .toc-title {
-      margin: 0 0 10px;
-      color: var(--muted);
+    .eyebrow {
+      margin: 0 0 18px;
+      color: var(--accent);
+      font-family: var(--mono);
       font-size: 12px;
-      font-weight: 800;
+      font-weight: 700;
       letter-spacing: .08em;
       text-transform: uppercase;
     }
-    .nav-links { display: grid; gap: 5px; }
-    .nav-links a {
-      padding: 8px 10px;
-      border-radius: 8px;
-      color: var(--ink);
-      font-size: 14px;
-      text-decoration: none;
-    }
-    .nav-links a:hover, .nav-links a:focus {
-      outline: none;
-      background: var(--accent-soft);
-      color: var(--accent);
-    }
-    .search { display: block; margin-top: 14px; }
-    .search input {
-      width: 100%;
-      min-height: 38px;
-      padding: 8px 10px;
-      border: 1px solid var(--line-strong);
-      border-radius: 8px;
-      background: var(--paper);
-      color: var(--ink);
-      font-size: 14px;
-      outline: none;
-    }
-    .search input:focus {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px color-mix(in oklch, var(--accent) 16%, transparent);
-    }
-    .article { min-width: 0; max-width: 900px; }
-    header { padding: 52px 0 24px; }
     h1 {
-      margin: 0 0 18px;
-      font-size: 44px;
-      line-height: 1.12;
+      max-width: none;
+      margin: 0 0 28px;
+      font-size: clamp(38px, 3vw, 52px);
+      font-weight: 760;
+      line-height: 1.08;
       letter-spacing: 0;
+      text-wrap: balance;
     }
     .meta {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px 18px;
+      gap: 8px 18px;
+      max-width: 72ch;
       color: var(--muted);
       font-size: 14px;
     }
+    .meta a { font-weight: 650; }
     .meta-strip {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin: 24px 0 18px;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+      max-width: 720px;
+      margin: 34px 0 28px;
+      border-top: 1px solid var(--line-strong);
+      padding-top: 16px;
     }
     .meta-pill {
-      display: inline-flex;
-      align-items: baseline;
-      gap: 6px;
-      padding: 6px 10px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      background: var(--paper-soft);
+      display: grid;
+      gap: 2px;
       color: var(--muted);
-      font-size: 13px;
+      font-size: 12px;
+      line-height: 1.35;
     }
-    .meta-pill b { color: var(--ink); font-size: 15px; }
-    .summary, .timeline-card, .speaker-card, .panel {
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: var(--paper);
-      box-shadow: var(--shadow);
+    .meta-pill b {
+      color: var(--ink);
+      font-family: var(--mono);
+      font-size: 18px;
+      font-weight: 680;
+      line-height: 1;
     }
     .summary {
-      padding: 20px 22px;
-      background: var(--accent-soft);
-      font-size: 18px;
+      width: 100%;
+      max-width: 760px;
+      padding: 24px 26px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: color-mix(in oklch, var(--paper) 88%, var(--accent-soft));
+      box-shadow: var(--shadow);
     }
-    .summary p { margin: 0; }
-    section { margin: 44px 0; }
+    .summary p {
+      margin: 0;
+      font-size: 19px;
+      line-height: 1.72;
+    }
+    h1, .summary, .takeaway p, .timeline-card h3, .section-content, .speaker-card, .panel {
+      overflow-wrap: anywhere;
+    }
+    .content-shell {
+      display: grid;
+      grid-template-columns: minmax(170px, 212px) minmax(0, 820px);
+      gap: clamp(36px, 7vw, 88px);
+      align-items: start;
+      border-top: 1px solid var(--line);
+      padding-top: 40px;
+    }
+    .sidebar {
+      position: sticky;
+      top: 28px;
+      align-self: start;
+      padding-top: 4px;
+    }
+    .toc {
+      border-top: 1px solid var(--ink);
+      padding-top: 16px;
+    }
+    .toc-title {
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .nav-links { display: grid; gap: 2px; }
+    .nav-links a {
+      display: block;
+      padding: 8px 0;
+      border-bottom: 1px solid color-mix(in oklch, var(--line) 72%, transparent);
+      color: var(--ink);
+      font-size: 14px;
+      line-height: 1.35;
+      text-decoration: none;
+    }
+    .nav-links a:hover, .nav-links a:focus-visible {
+      outline: none;
+      color: var(--accent);
+      transform: translate3d(2px, 0, 0);
+    }
+    .search {
+      display: grid;
+      gap: 8px;
+      margin-top: 22px;
+    }
+    .search span {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 720;
+    }
+    .search input {
+      width: 100%;
+      min-height: 40px;
+      padding: 8px 10px;
+      border: 1px solid var(--line-strong);
+      border-radius: var(--radius);
+      background: var(--paper);
+      color: var(--ink);
+      font: inherit;
+      font-size: 14px;
+      outline: none;
+      transition: border-color .22s var(--ease), box-shadow .22s var(--ease), transform .22s var(--ease);
+    }
+    .search input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px color-mix(in oklch, var(--accent) 14%, transparent);
+    }
+    .content-flow { min-width: 0; }
+    section { margin: 0 0 78px; }
     .section-head {
-      display: flex;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 18px;
       align-items: end;
-      justify-content: space-between;
-      gap: 14px;
-      margin-bottom: 16px;
-      border-bottom: 1px solid var(--line);
-      padding-bottom: 10px;
+      margin-bottom: 22px;
+      border-top: 1px solid var(--ink);
+      padding-top: 18px;
     }
-    .section-head h2 { margin: 0; font-size: 26px; line-height: 1.2; }
-    .section-head p { margin: 0; color: var(--muted); font-size: 14px; }
-    .takeaway-list { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
+    .section-head h2 {
+      margin: 0;
+      font-size: 28px;
+      font-weight: 740;
+      line-height: 1.16;
+      letter-spacing: 0;
+    }
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.4;
+      text-align: right;
+    }
+    .takeaway-list {
+      display: grid;
+      gap: 0;
+      margin: 0;
+      padding: 0;
+      border-top: 1px solid var(--line);
+      list-style: none;
+    }
     .takeaway {
       display: grid;
-      grid-template-columns: 42px 1fr;
-      gap: 14px;
-      padding: 13px 0;
+      grid-template-columns: 52px minmax(0, 1fr);
+      gap: 18px;
+      padding: 18px 0;
       border-bottom: 1px solid var(--line);
     }
-    .takeaway:last-child { border-bottom: 0; }
     .takeaway span {
-      display: grid;
-      width: 34px;
-      height: 34px;
-      place-items: center;
-      border: 1px solid var(--line-strong);
-      border-radius: 8px;
-      background: var(--paper-soft);
       color: var(--accent);
-      font-weight: 800;
-    }
-    .takeaway p, .speaker-card p, .panel p { margin-top: 0; }
-    .timeline { display: grid; gap: 18px; }
-    .timeline-card {
-      position: relative;
-      padding: 22px;
-    }
-    .timeline-heading { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
-    .timeline-index {
-      display: grid;
-      width: 36px;
-      height: 36px;
-      place-items: center;
-      border-radius: 8px;
-      background: var(--ink);
-      color: var(--paper);
-      font-weight: 800;
-      font-size: 13px;
-    }
-    .timeline-meta { color: var(--teal); font-size: 13px; font-weight: 800; }
-    .timeline-card h3 { margin: 6px 0 14px; font-size: 24px; line-height: 1.28; }
-    .section-content p { max-width: 72ch; }
-    .section-content h4 {
-      margin: 18px 0 8px;
-      color: var(--accent);
+      font-family: var(--mono);
       font-size: 15px;
+      font-weight: 720;
+      line-height: 1.65;
     }
-    .section-content ul, .panel ul, .speaker-card ul { padding-left: 1.2em; }
-    .section-content li, .panel li, .speaker-card li { margin: 5px 0; }
+    .takeaway p {
+      margin: 0;
+      max-width: 70ch;
+      font-size: 16px;
+      line-height: 1.72;
+    }
+    .timeline {
+      display: grid;
+      gap: 0;
+      border-top: 1px solid var(--line-strong);
+    }
+    .timeline-card {
+      display: grid;
+      grid-template-columns: 132px minmax(0, 1fr);
+      gap: 32px;
+      padding: 34px 0 40px;
+      border-bottom: 1px solid var(--line);
+    }
+    .timeline-heading {
+      position: sticky;
+      top: 30px;
+      align-self: start;
+      display: grid;
+      gap: 10px;
+      padding-top: 2px;
+    }
+    .timeline-index {
+      color: var(--faint);
+      font-family: var(--mono);
+      font-size: 13px;
+      font-weight: 720;
+      line-height: 1;
+    }
+    .timeline-meta {
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 720;
+      line-height: 1.45;
+    }
+    .timeline-card h3 {
+      max-width: 24ch;
+      margin: 0 0 18px;
+      font-size: 27px;
+      font-weight: 730;
+      line-height: 1.22;
+      letter-spacing: 0;
+    }
+    .section-content {
+      color: color-mix(in oklch, var(--ink) 88%, var(--muted));
+      font-size: 16px;
+    }
+    .section-content p {
+      max-width: 72ch;
+      margin: 0 0 1.05em;
+    }
+    .section-content p strong:first-child {
+      color: var(--ink);
+      font-weight: 760;
+    }
+    .section-content h4 {
+      margin: 26px 0 10px;
+      color: var(--accent);
+      font-size: 14px;
+      font-weight: 760;
+      line-height: 1.35;
+    }
+    .section-content ul, .section-content ol, .panel ul, .panel ol, .speaker-card ul, .speaker-card ol {
+      margin: .75em 0 1em;
+      padding-left: 1.25em;
+    }
+    .section-content li, .panel li, .speaker-card li { margin: 6px 0; }
     .speaker-grid {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
+      grid-template-columns: minmax(0, 1fr) minmax(0, .88fr);
+      gap: 26px 42px;
+      border-top: 1px solid var(--line);
     }
-    .speaker-card { padding: 18px; box-shadow: none; }
-    .speaker-card h3 { margin: 0 0 10px; color: var(--blue); }
-    .panel { padding: 20px 22px; box-shadow: none; }
+    .speaker-card {
+      padding: 22px 0 24px;
+      border-bottom: 1px solid var(--line);
+    }
+    .speaker-card:nth-child(even) { margin-top: 22px; }
+    .speaker-kicker {
+      margin: 0 0 8px;
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 720;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .speaker-card h3 {
+      margin: 0 0 12px;
+      font-size: 20px;
+      font-weight: 730;
+      line-height: 1.25;
+    }
+    .speaker-card p, .panel p {
+      max-width: 68ch;
+      margin-top: 0;
+    }
+    .panel {
+      border-top: 1px solid var(--line);
+      padding-top: 8px;
+    }
     blockquote {
-      margin: 14px 0;
-      padding: 12px 16px;
-      border: 1px solid var(--line-strong);
-      border-radius: 8px;
+      margin: 18px 0;
+      padding: 16px 18px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
       background: var(--quote);
     }
     code {
       padding: 2px 5px;
       border-radius: 5px;
-      background: color-mix(in oklch, var(--blue) 12%, var(--paper));
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      background: color-mix(in oklch, var(--accent) 10%, var(--paper));
+      color: var(--ink);
+      font-family: var(--mono);
       font-size: .92em;
     }
-    .empty, .muted { color: var(--muted); }
+    hr {
+      height: 1px;
+      margin: 26px 0;
+      border: 0;
+      background: var(--line);
+    }
+    .empty {
+      margin: 0;
+      padding: 16px 18px;
+      border: 1px dashed var(--line-strong);
+      border-radius: var(--radius);
+      color: var(--muted);
+      background: color-mix(in oklch, var(--paper-soft) 70%, transparent);
+    }
+    .search-empty { margin-top: 16px; }
+    .muted { color: var(--muted); }
+    @keyframes rise-in {
+      from { opacity: 1; transform: translate3d(0, 6px, 0); }
+      to { opacity: 1; transform: translate3d(0, 0, 0); }
+    }
+    .hero > *, .takeaway, .timeline-card, .speaker-card, .panel {
+      animation: rise-in .55s var(--ease) both;
+    }
+    .hero > *:nth-child(2) { animation-delay: .04s; }
+    .hero > *:nth-child(3) { animation-delay: .08s; }
+    .hero > *:nth-child(4) { animation-delay: .12s; }
+    .hero > *:nth-child(5) { animation-delay: .16s; }
+    .takeaway, .timeline-card, .speaker-card {
+      animation-delay: calc(var(--index, 1) * 38ms);
+    }
+    @media (max-width: 1120px) {
+      .hero { margin-left: 0; }
+      .content-shell {
+        grid-template-columns: minmax(154px, 190px) minmax(0, 1fr);
+        gap: 36px;
+      }
+      h1 { font-size: 44px; }
+    }
+    @media (min-width: 1500px) {
+      .hero { margin-left: 0; }
+      h1 {
+        width: max-content;
+        max-width: 100%;
+        white-space: nowrap;
+        font-size: clamp(28px, 1.85vw, 42px);
+      }
+    }
     @media (max-width: 780px) {
-      .page { width: min(100% - 22px, 1180px); display: block; padding-bottom: 66px; }
-      .sidebar { position: static; padding-top: 16px; }
+      body { background: var(--bg); }
+      .page { width: min(1180px, calc(100% - 28px)); padding-bottom: 86px; }
+      .hero { padding: 46px 0 36px; }
+      .eyebrow { margin-bottom: 14px; }
+      h1 {
+        max-width: none;
+        font-size: 30px;
+        line-height: 1.14;
+        word-break: normal;
+      }
+      .summary, .summary p, .takeaway p, .section-content, .speaker-card, .panel {
+        max-width: 100%;
+        word-break: break-word;
+      }
+      .meta-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 20px; }
+      .summary { padding: 20px; }
+      .summary p { font-size: 17px; }
+      .content-shell { display: block; padding-top: 28px; }
+      .sidebar { position: static; padding-top: 0; margin-bottom: 42px; }
+      .toc { border-top-color: var(--line-strong); }
+      .nav-links { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 18px; }
+      section { margin-bottom: 58px; }
+      .section-head { display: block; margin-bottom: 16px; }
+      .section-head h2 { font-size: 24px; }
+      .section-head p { margin-top: 6px; text-align: left; }
+      .takeaway { grid-template-columns: 42px minmax(0, 1fr); gap: 12px; }
+      .timeline-card { display: block; padding: 28px 0 32px; }
+      .timeline-heading { position: static; display: flex; align-items: baseline; gap: 12px; margin-bottom: 12px; }
+      .timeline-card h3 { max-width: none; font-size: 23px; }
+      .speaker-grid { display: block; }
+      .speaker-card:nth-child(even) { margin-top: 0; }
       .quick-actions {
-        left: auto;
-        right: 11px;
+        right: 12px;
         bottom: 12px;
         grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 6px;
       }
       .quick-action {
-        min-width: 68px;
+        min-width: 66px;
         min-height: 38px;
         padding: 7px 9px;
         font-size: 13px;
       }
-      header { padding-top: 34px; }
-      h1 { font-size: 32px; }
-      .speaker-grid { grid-template-columns: 1fr; }
-      .timeline-card { padding: 18px; }
     }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
-      .quick-action { transition: none; }
+      *, *::before, *::after {
+        animation-duration: 1ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 1ms !important;
+      }
+      .speaker-card:nth-child(even) { margin-top: 0; }
     }
     @media print {
       body { background: var(--paper); }
       .sidebar, .progress, .quick-actions { display: none; }
       .page { display: block; width: auto; padding-bottom: 0; }
-      .summary, .timeline-card, .speaker-card, .panel { box-shadow: none; }
+      .hero { margin-left: 0; padding: 0 0 28px; }
+      .content-shell { display: block; border-top: 0; padding-top: 0; }
+      .summary { box-shadow: none; }
+      .timeline-card, .speaker-card { break-inside: avoid; }
     }
   </style>
 </head>
@@ -307,58 +530,62 @@
     </button>
   </div>
   <div class="page">
-    <aside class="sidebar">
-      <nav class="toc" aria-label="页面导航">
-        <p class="toc-title">阅读导航</p>
-        <div class="nav-links">
-          <a href="#takeaways">核心要点</a>
-          <a href="#timeline">分段整理</a>
-          <a href="#speakers">人物观点</a>
-          <a href="#quotes">双语引语</a>
-        </div>
-        <label class="search">
-          <input data-search-box type="search" placeholder="搜索时间线">
-        </label>
-      </nav>
-    </aside>
-
     <main class="article">
-      <header>
+      <header class="hero">
+        <p class="eyebrow">All-In Podcast 中文精读</p>
         <h1>OpenAI 目标未达成、Codex vs Claude、Elon vs Sam 庭审、科技巨头财报、多肽热潮</h1>
         <div class="meta">
-          <span>生成时间：2026-05-04 17:43</span>
+          <span>生成时间：2026-05-07 16:22</span>
           <span>来源：<a href="https://www.youtube.com/watch?v=fpC4sbawSzQ" target="_blank" rel="noopener">YouTube</a></span>
         </div>
         <div class="meta-strip"><span class="meta-pill"><b>42 分钟</b>阅读时长</span>
 <span class="meta-pill"><b>10</b>核心要点</span>
 <span class="meta-pill"><b>11</b>时间线</span>
 <span class="meta-pill"><b>4</b>人物</span></div>
-        <div class="summary"><p>本期节目四位嘉宾围绕OpenAI用户与收入目标未达成、科技巨头财报与AI资本支出激增、Elon起诉OpenAI庭审、AI代码能力竞争，以及新型三靶点减肥药Retatrutide的突破性数据等话题展开讨论。</p></div>
+        <div class="summary" aria-label="一句话摘要"><p>本期节目四位嘉宾围绕OpenAI用户与收入目标未达成、科技巨头财报与AI资本支出激增、Elon起诉OpenAI庭审、AI代码能力竞争，以及新型三靶点减肥药Retatrutide的突破性数据等话题展开讨论。</p></div>
       </header>
 
-      <section id="takeaways">
-        <div class="section-head">
-          <h2>核心要点</h2>
-          <p>快速扫读本集主线</p>
-        </div>
-        <ol class="takeaway-list"><li class="takeaway"><span>01</span><p>OpenAI 未能实现 2025 年周活跃用户破 10 亿的目标，2026 年 4 月尚未达到该里程碑。</p></li>
-<li class="takeaway"><span>02</span><p>OpenAI 2025 年 ChatGPT 收入目标未达成，CFO Sarah Friar 对 IPO 时机持保留态度，但 Sam Altman 希望加速推进。</p></li>
-<li class="takeaway"><span>03</span><p>OpenAI 的 GPT-5.5 发布获得积极反馈，尤其在编程领域表现强劲，而 Anthropic 的 Opus 4.7 因算力限制表现不佳。</p></li>
-<li class="takeaway"><span>04</span><p>Chamath 认为 AI 行业最大瓶颈是电力供应，而非算力本身；已宣布的数据中心项目有超过一半因供应链延误等原因被搁置。</p></li>
-<li class="takeaway"><span>05</span><p>科技巨头（Amazon、Microsoft、Google、Meta）2026 年资本支出指引合计 7250 亿美元，AI 贡献了美国 GDP 增长的大约 75%。</p></li>
-<li class="takeaway"><span>06</span><p>Elon 诉 OpenAI 案的核心争议在于 OpenAI 是否违反慈善信托义务，Greg Brockman 的日记成为关键证据，记录了团队&quot;想要 Elon 出局&quot;的意图。</p></li>
-<li class="takeaway"><span>07</span><p>该案由法官审理（非陪审团），Polymarket 预测 Elon 获胜的概率约为 42-43%。</p></li>
-<li class="takeaway"><span>08</span><p>一例 AI 编程代理因凭据配置错误在 9 秒内删除了整个生产数据库，包括备份文件，暴露了 AI 代理缺乏自我质疑能力的问题。</p></li>
-<li class="takeaway"><span>09</span><p>礼来（Eli Lilly）的三靶点肽类药物 Retatrutide 在三期临床试验中展现出显著减重（40 周减重 37 磅）、降血糖和降肝脂肪（80%）效果，并有望于 2027 年获批上市。</p></li>
-<li class="takeaway"><span>10</span><p>Friedberg 旁听了美国最高法院关于孟山都（Roundup）案件的庭审并高度赞赏该司法程序的严谨性。</p></li></ol>
-      </section>
+      <div class="content-shell">
+        <aside class="sidebar">
+          <nav class="toc" aria-label="页面导航">
+            <p class="toc-title">阅读导航</p>
+            <div class="nav-links">
+              <a href="#takeaways">核心要点</a>
+              <a href="#timeline">分段整理</a>
+              <a href="#speakers">人物观点</a>
+              <a href="#quotes">双语引语</a>
+            </div>
+            <label class="search">
+              <span>搜索时间线</span>
+              <input data-search-box type="search" placeholder="关键词" aria-label="搜索时间线">
+            </label>
+          </nav>
+        </aside>
 
-      <section id="timeline">
-        <div class="section-head">
-          <h2>分段详细整理</h2>
-          <p>按时间线阅读上下文</p>
-        </div>
-        <div class="timeline"><article class="timeline-card" data-timeline-card data-search="00:00–04:00 开场与话题引入 本段核心内容： 开场带有幽默与寒暄。 引入 openai 业绩未达预期话题。 背景解释与关键术语： waos：weekly active users，周活跃用户。 运行率（run rate）：以最近一段时间数据推算出的全年收入水平，是粗略估算而非 gaap 指标。 sarah friar：openai cfo。 ipo：首次公开募股。 详细中文整理： jcal： jason，你不想跟我们介绍一下你最喜欢的新播客吗？ jcal： 哦，太棒了。我的信息流现在全是——你知道，因为&quot;取消文化&quot;已经结束了，saks，现在每个人都在用 r 词和 f 词。我在 instagram 上刷到的要么是同性恋内容，要么是唐氏综合征，要么是斗牛犬。三者必居其一。然后我就发现了 miss thing 播客。他们有一个环节叫&quot;同性恋名字或直男名字&quot;。给 david 出个题，有好消息也有坏消息，friedberg。 chamath： 来吧。 jcal： 同性恋名还是直男名？david。对我来说，david 是直男。 sacks： 好吧。但他有我的完美身材啊。 jcal： 这可能让人困惑，因为我有点像，你是同性恋吗？ sacks： 不是，我只是想成为你，david。 chamath： 完全正确。就像米开朗基罗的大卫雕像，男性理想造型。难以置信的身材，有点……抱歉。 jcal： 哦，有点粗糙。 jcal： 好的，各位来宾，欢迎回到世界第一播客。这是 all in podcast，今天由我 david friedberg、chamath palihapitiya、david sacks 和 jason calacanis 一起主持。你可以叫我 jcal，如果你是第一次来。话题一：openai。他们错过了 chatgpt 的目标，friedberg，用户和收入都未达标。我们来聊聊。据《华尔街日报》周二发表的一篇调查性调查报道，openai 原本预计在 2025 年底前达到 10 亿周活跃用户。他们没达到，而且 2026 年已经过去 4 个月了，他们还是没有达到这个里程碑。还有，chamath，他们在 2025 年 chatgpt 的收入目标也未达成。具体数字没有公布，但就像我们之前在节目里讨论过的，他们现在的运营率在 200 到 300 亿美元之间。行业里还有一些会计细节上的细微差别需要厘清。这件事为什么重要呢，saks？openai 有 6000 亿美元的算力采购承诺。换个角度看，这个数字大概等于他们在二级市场上的估值。换句话说，整个 openai 企业的全部价值就等于他们未来几年要花的采购承诺。 chamath： cfo sarah friar，即将参加 liquidity 活动，据说她很担心，说收入增速不够快，无法跟上支出。而 openai 计划在今年晚些时候上市。这让 friar 和 altman 之间产生了一些矛盾，或者至少有一种自然存在的紧张关系。friar 认为 openai 还未准备好接受公开报告的标准。根据《华尔街日报》的报道，altman 显然希望加快节奏，所以他们发表了一份联合声明，说这些报道很荒谬，云云。saks，这事你怎么看？这是重大的不利因素，还是说，作为我们在有生之年最重要的一场竞赛（通向超级智能）的领先者，这只是在管理预期？">
+        <div class="content-flow">
+          <section id="takeaways">
+            <div class="section-head">
+              <h2>核心要点</h2>
+              <p>快速扫读本集主线</p>
+            </div>
+            <ol class="takeaway-list"><li class="takeaway" style="--index: 1"><span>01</span><p>OpenAI 未能实现 2025 年周活跃用户破 10 亿的目标，2026 年 4 月尚未达到该里程碑。</p></li>
+<li class="takeaway" style="--index: 2"><span>02</span><p>OpenAI 2025 年 ChatGPT 收入目标未达成，CFO Sarah Friar 对 IPO 时机持保留态度，但 Sam Altman 希望加速推进。</p></li>
+<li class="takeaway" style="--index: 3"><span>03</span><p>OpenAI 的 GPT-5.5 发布获得积极反馈，尤其在编程领域表现强劲，而 Anthropic 的 Opus 4.7 因算力限制表现不佳。</p></li>
+<li class="takeaway" style="--index: 4"><span>04</span><p>Chamath 认为 AI 行业最大瓶颈是电力供应，而非算力本身；已宣布的数据中心项目有超过一半因供应链延误等原因被搁置。</p></li>
+<li class="takeaway" style="--index: 5"><span>05</span><p>科技巨头（Amazon、Microsoft、Google、Meta）2026 年资本支出指引合计 7250 亿美元，AI 贡献了美国 GDP 增长的大约 75%。</p></li>
+<li class="takeaway" style="--index: 6"><span>06</span><p>Elon 诉 OpenAI 案的核心争议在于 OpenAI 是否违反慈善信托义务，Greg Brockman 的日记成为关键证据，记录了团队&quot;想要 Elon 出局&quot;的意图。</p></li>
+<li class="takeaway" style="--index: 7"><span>07</span><p>该案由法官审理（非陪审团），Polymarket 预测 Elon 获胜的概率约为 42-43%。</p></li>
+<li class="takeaway" style="--index: 8"><span>08</span><p>一例 AI 编程代理因凭据配置错误在 9 秒内删除了整个生产数据库，包括备份文件，暴露了 AI 代理缺乏自我质疑能力的问题。</p></li>
+<li class="takeaway" style="--index: 9"><span>09</span><p>礼来（Eli Lilly）的三靶点肽类药物 Retatrutide 在三期临床试验中展现出显著减重（40 周减重 37 磅）、降血糖和降肝脂肪（80%）效果，并有望于 2027 年获批上市。</p></li>
+<li class="takeaway" style="--index: 10"><span>10</span><p>Friedberg 旁听了美国最高法院关于孟山都（Roundup）案件的庭审并高度赞赏该司法程序的严谨性。</p></li></ol>
+          </section>
+
+          <section id="timeline">
+            <div class="section-head">
+              <h2>分段详细整理</h2>
+              <p>按时间线阅读上下文</p>
+            </div>
+            <div class="timeline" data-timeline><article class="timeline-card" data-timeline-card data-search="00:00–04:00 开场与话题引入 本段核心内容： 开场带有幽默与寒暄。 引入 openai 业绩未达预期话题。 背景解释与关键术语： waos：weekly active users，周活跃用户。 运行率（run rate）：以最近一段时间数据推算出的全年收入水平，是粗略估算而非 gaap 指标。 sarah friar：openai cfo。 ipo：首次公开募股。 详细中文整理： jcal： jason，你不想跟我们介绍一下你最喜欢的新播客吗？ jcal： 哦，太棒了。我的信息流现在全是——你知道，因为&quot;取消文化&quot;已经结束了，saks，现在每个人都在用 r 词和 f 词。我在 instagram 上刷到的要么是同性恋内容，要么是唐氏综合征，要么是斗牛犬。三者必居其一。然后我就发现了 miss thing 播客。他们有一个环节叫&quot;同性恋名字或直男名字&quot;。给 david 出个题，有好消息也有坏消息，friedberg。 chamath： 来吧。 jcal： 同性恋名还是直男名？david。对我来说，david 是直男。 sacks： 好吧。但他有我的完美身材啊。 jcal： 这可能让人困惑，因为我有点像，你是同性恋吗？ sacks： 不是，我只是想成为你，david。 chamath： 完全正确。就像米开朗基罗的大卫雕像，男性理想造型。难以置信的身材，有点……抱歉。 jcal： 哦，有点粗糙。 jcal： 好的，各位来宾，欢迎回到世界第一播客。这是 all in podcast，今天由我 david friedberg、chamath palihapitiya、david sacks 和 jason calacanis 一起主持。你可以叫我 jcal，如果你是第一次来。话题一：openai。他们错过了 chatgpt 的目标，friedberg，用户和收入都未达标。我们来聊聊。据《华尔街日报》周二发表的一篇调查性调查报道，openai 原本预计在 2025 年底前达到 10 亿周活跃用户。他们没达到，而且 2026 年已经过去 4 个月了，他们还是没有达到这个里程碑。还有，chamath，他们在 2025 年 chatgpt 的收入目标也未达成。具体数字没有公布，但就像我们之前在节目里讨论过的，他们现在的运营率在 200 到 300 亿美元之间。行业里还有一些会计细节上的细微差别需要厘清。这件事为什么重要呢，saks？openai 有 6000 亿美元的算力采购承诺。换个角度看，这个数字大概等于他们在二级市场上的估值。换句话说，整个 openai 企业的全部价值就等于他们未来几年要花的采购承诺。 chamath： cfo sarah friar，即将参加 liquidity 活动，据说她很担心，说收入增速不够快，无法跟上支出。而 openai 计划在今年晚些时候上市。这让 friar 和 altman 之间产生了一些矛盾，或者至少有一种自然存在的紧张关系。friar 认为 openai 还未准备好接受公开报告的标准。根据《华尔街日报》的报道，altman 显然希望加快节奏，所以他们发表了一份联合声明，说这些报道很荒谬，云云。saks，这事你怎么看？这是重大的不利因素，还是说，作为我们在有生之年最重要的一场竞赛（通向超级智能）的领先者，这只是在管理预期？" style="--index: 1">
                   <header class="timeline-heading">
                     <span class="timeline-index">01</span>
                     <span class="timeline-meta">00:00–04:00</span>
@@ -391,7 +618,7 @@
 <p><strong>Chamath：</strong> CFO Sarah Friar，即将参加 Liquidity 活动，据说她很担心，说收入增速不够快，无法跟上支出。而 OpenAI 计划在今年晚些时候上市。这让 Friar 和 Altman 之间产生了一些矛盾，或者至少有一种自然存在的紧张关系。Friar 认为 OpenAI 还未准备好接受公开报告的标准。根据《华尔街日报》的报道，Altman 显然希望加快节奏，所以他们发表了一份联合声明，说这些报道很荒谬，云云。Saks，这事你怎么看？这是重大的不利因素，还是说，作为我们在有生之年最重要的一场竞赛（通向超级智能）的领先者，这只是在管理预期？</p></div>
                   </div>
                 </article>
-<article class="timeline-card" data-timeline-card data-search="04:00–08:00 saks：我对 openai 持反向观点 本段核心内容： saks 认为 openai 在产品层面最近表现强劲，并不完全悲观。 gpt-5.5 和 cyber 模型获得好评，anthropic 的 opus 4.7 因算力限制表现不佳。 saks 认为 sam altman 可能因为正确的原因（编程领域大规模需求）而在错误的方向（消费者市场预测）上做对了决定。 背景解释与关键术语： anthropic：openai 的主要竞争对手，由前 openai 员工创立。 opus：anthropic 的旗舰模型系列。 gpt-5.5：openai 最新发布的版本。 spud：gpt-5.5 依赖的新基础模型名称。 compute gating：因算力有限而对推理计算量进行人为限制。 详细中文整理： sacks： 实际上，我对这个问题有一些反向看法。我知道 openai 上周很不好过。你说得对，《华尔街日报》那篇文章说他们没达到用户增长目标和收入目标。这让大家质疑他们能否负担已做出的数据中心采购承诺。而且，除了这个，他们这周还有和 elon 的诉讼案。所以在媒体看来，我认为这对他们来说是相当糟糕的一周。但我有一个反向观点，那就是过去一两周，如果你看产品层面发生的事，对他们来说其实是相当不错的一段时间。他们发布了 chatgpt 5.5，我打交道的硅谷人士反馈都非常好。你跟开发者、程序员聊，他们都很满意。与此同时，anthropic 最新发布的 opus 4.7 似乎是个失败。大家在抱怨。很多情况下，用户正在回退到 4.6。他们说 opus 4.7 在限制推理时间、减少思考时间，效果不好。claude 还有些 bug。所以如果单纯比较 chatgpt 5.5 和 opus 4.7，看起来 openai 在产品层面确实过了更好的一两周。我有理由相信产品改进还会继续。gpt 5.5 基于一个叫 spud 的新基础模型。这是他们一年多来第一次升级基础模型。有了新基础模型，未来改进的空间也大了。所以我认为 openai 现在对他们的产品相当乐观。而且你开始能看到，在 x 平台上，一些开发者的人气正在转移。我看到很多人说他们正在把编程使用量从 opus 转到 gpt-5.5。所以我认为 sam 可能最终是对的，但原因却是错的。我的意思是，当他做出那些大规模算力采购承诺时，是基于消费者一侧达到 10 亿用户和收入目标的预测。消费者业务表现不佳，所以他们没达到目标。但与此同时，编程已经成为 ai 领域最重要的赛道。正因为他们做出了这些算力承诺、建成了这些数据中心，他们现在拥有的算力比 anthropic 多。anthropic 受限于 token 供应。这限制了它们服务 mythos 等模型的能力，导致它们不得不对 opus 4.7 进行算力限制。我理解 dario 为什么做这个决定，这是谨慎的商业决策，我不是在批评他。但我认为，sam 可能最终因为错误的原因做对了——他在消费者侧失算了，但企业侧业务正在蓬勃发展，这给了他现在赶上来的能力。 jcal： 说到 polymarket，这个现在最重要的预测市场。我们上周聊了 groq 和 cursor 的合作，还有 elon 和他的团队。polymarket 显示 openai 在 2026 年底前上市的概率是 32%，低于 12 月的 60%。而且 chamath，你之前给过一些警告，说市面上只有这么多钱。spacex 的 ipo 显然会率先推出。如果 openai 今年不能上市，而 anthropic 又上了，那就会形成一种有趣的格局。你总体怎么看 openai 做出的这种大规模承诺？他们是会冲下悬崖，还是会最终被证明是明智的，即使原因不是他们当初设想的那样？">
+<article class="timeline-card" data-timeline-card data-search="04:00–08:00 saks：我对 openai 持反向观点 本段核心内容： saks 认为 openai 在产品层面最近表现强劲，并不完全悲观。 gpt-5.5 和 cyber 模型获得好评，anthropic 的 opus 4.7 因算力限制表现不佳。 saks 认为 sam altman 可能因为正确的原因（编程领域大规模需求）而在错误的方向（消费者市场预测）上做对了决定。 背景解释与关键术语： anthropic：openai 的主要竞争对手，由前 openai 员工创立。 opus：anthropic 的旗舰模型系列。 gpt-5.5：openai 最新发布的版本。 spud：gpt-5.5 依赖的新基础模型名称。 compute gating：因算力有限而对推理计算量进行人为限制。 详细中文整理： sacks： 实际上，我对这个问题有一些反向看法。我知道 openai 上周很不好过。你说得对，《华尔街日报》那篇文章说他们没达到用户增长目标和收入目标。这让大家质疑他们能否负担已做出的数据中心采购承诺。而且，除了这个，他们这周还有和 elon 的诉讼案。所以在媒体看来，我认为这对他们来说是相当糟糕的一周。但我有一个反向观点，那就是过去一两周，如果你看产品层面发生的事，对他们来说其实是相当不错的一段时间。他们发布了 chatgpt 5.5，我打交道的硅谷人士反馈都非常好。你跟开发者、程序员聊，他们都很满意。与此同时，anthropic 最新发布的 opus 4.7 似乎是个失败。大家在抱怨。很多情况下，用户正在回退到 4.6。他们说 opus 4.7 在限制推理时间、减少思考时间，效果不好。claude 还有些 bug。所以如果单纯比较 chatgpt 5.5 和 opus 4.7，看起来 openai 在产品层面确实过了更好的一两周。我有理由相信产品改进还会继续。gpt 5.5 基于一个叫 spud 的新基础模型。这是他们一年多来第一次升级基础模型。有了新基础模型，未来改进的空间也大了。所以我认为 openai 现在对他们的产品相当乐观。而且你开始能看到，在 x 平台上，一些开发者的人气正在转移。我看到很多人说他们正在把编程使用量从 opus 转到 gpt-5.5。所以我认为 sam 可能最终是对的，但原因却是错的。我的意思是，当他做出那些大规模算力采购承诺时，是基于消费者一侧达到 10 亿用户和收入目标的预测。消费者业务表现不佳，所以他们没达到目标。但与此同时，编程已经成为 ai 领域最重要的赛道。正因为他们做出了这些算力承诺、建成了这些数据中心，他们现在拥有的算力比 anthropic 多。anthropic 受限于 token 供应。这限制了它们服务 mythos 等模型的能力，导致它们不得不对 opus 4.7 进行算力限制。我理解 dario 为什么做这个决定，这是谨慎的商业决策，我不是在批评他。但我认为，sam 可能最终因为错误的原因做对了——他在消费者侧失算了，但企业侧业务正在蓬勃发展，这给了他现在赶上来的能力。 jcal： 说到 polymarket，这个现在最重要的预测市场。我们上周聊了 groq 和 cursor 的合作，还有 elon 和他的团队。polymarket 显示 openai 在 2026 年底前上市的概率是 32%，低于 12 月的 60%。而且 chamath，你之前给过一些警告，说市面上只有这么多钱。spacex 的 ipo 显然会率先推出。如果 openai 今年不能上市，而 anthropic 又上了，那就会形成一种有趣的格局。你总体怎么看 openai 做出的这种大规模承诺？他们是会冲下悬崖，还是会最终被证明是明智的，即使原因不是他们当初设想的那样？" style="--index: 2">
                   <header class="timeline-heading">
                     <span class="timeline-index">02</span>
                     <span class="timeline-meta">04:00–08:00</span>
@@ -417,7 +644,7 @@
 <p><strong>JCal：</strong> 说到 Polymarket，这个现在最重要的预测市场。我们上周聊了 Groq 和 Cursor 的合作，还有 Elon 和他的团队。Polymarket 显示 OpenAI 在 2026 年底前上市的概率是 32%，低于 12 月的 60%。而且 Chamath，你之前给过一些警告，说市面上只有这么多钱。SpaceX 的 IPO 显然会率先推出。如果 OpenAI 今年不能上市，而 Anthropic 又上了，那就会形成一种有趣的格局。你总体怎么看 OpenAI 做出的这种大规模承诺？他们是会冲下悬崖，还是会最终被证明是明智的，即使原因不是他们当初设想的那样？</p></div>
                   </div>
                 </article>
-<article class="timeline-card" data-timeline-card data-search="08:00–12:00 chamath：ai 行业受限于电力供应 本段核心内容： chamath 认为 openai 和 anthropic 都是万亿美元级别的公司。 当前行业最大瓶颈是电力供应，而非需求；缺的不是算力，是驱动算力的电。 已宣布的数据中心项目中有超过一半因供应链和审批问题被搁置。 这为拥有过剩产能的公司（如 groq、spacex）创造了竞争窗口。 背景解释与关键术语： bedrock：amazon 的 ai 模型平台，anthropic 早期通过其分发模型。 gigawatt (gw)：吉瓦，功率单位。 详细中文整理： chamath： 我认为他们没事。我认为这是一家万亿美元级别的公司。我认为 anthropic 也是一家万亿美元级别的公司。我认为眼下发生的事，是对 ai 领域实际情况的彻底误解。现在有一个非常具体的瓶颈在制约一切，那就是驱动这些 token 所需的电力供应。从这个角度看，openai 目标未达成，我认为这恰恰说明了他们目前的算力容量还不够。而且这个问题只会越来越严重。你已经在 anthropic 身上看到了——他们刚刚找到一种方法，从经济上诱导 amazon 给他们足够的容量，这样你就不需要经过 bedrock 就能访问 anthropic 的模型了。你也看到他们在做差异化交易，在已有的 google 等投资方之上再分享经济利益，以换取更多容量。我的核心观点是什么？这个市场上的所有东西都受限于电力。这些公司可能达不到某个数字或预测，但这跟需求没有任何关系。100%是因为生成输出 token 所需的电力供应不足。今天刚刚宣布了一件很有意思的事，会让这个问题更严重，那就是你开始看到，不仅电力供应在积压，就连所需的组件也在积压。不只是内燃机、天然气轮机，还有变压器和所有实际的电网基础设施。为什么这很重要？如果你看正在建设中的实际吉瓦数，我们现在有很大的错配。人们宣布了所有这些项目，jason，但实际在建的还不到一半。不到一半。大部分都卡在繁文缛节里。大部分是因为这些供应链延误，所以没有可靠的方案来让这些东西上线。谁会受伤？anthropic 和 openai 受伤最深。谁会受益？超大规模云服务商会受益，特别是 oracle、amazon、meta、microsoft 和 google。然后你会看到一场交易和讨价还价：我得出多少股权？我得出让多少控制权才能获得算力？相比之下，如果拿不到算力，我的增长预测会错过多少？这就意味着，我们上周聊过的，给 groq 和 spacex 留下了巨大的空间，因为它们有大量过剩产能。所以我认为和 cursor 的交易只是前菜。但如果我是 elon，我现在会在这个市场上到处跑，因为如果模型质量追上来，我认为他现在可以对 anthropic 或 openai 做一些非常疯狂的事。也许 openai 不行，因为…… jcal： 我们马上会聊到诉讼的事。 chamath： 那些包袱。 jcal： 所以你的框架是——有限的资源是算力，需求是爆炸式的。 chamath： 不，有限的资源是电力。 jcal： 电力，然后驱动算力，然后提供 token，然后服务那些巨大的……对，开发者和 cowork 等等消费者和企业永远不够用的项目。明白了。 chamath： 而且 jason，让情况更复杂的是 anthropic 和 openai 面临的另一个因素：那些宣布出来但还在空转的东西，有 40% 会取消，因为他们在 ai 周围制造的正向光环太差了。过去 4 年宣布的所有项目中，有 40% 都被取消了。 jcal： 是的，确实有一些人对数据中心、ai 工作岗位等有负面情绪，这造成了一些阻力。社会上甚至有人在用暴力行为，并把原因归咎于数据中心的 ai。我不想给这些太多关注时间。">
+<article class="timeline-card" data-timeline-card data-search="08:00–12:00 chamath：ai 行业受限于电力供应 本段核心内容： chamath 认为 openai 和 anthropic 都是万亿美元级别的公司。 当前行业最大瓶颈是电力供应，而非需求；缺的不是算力，是驱动算力的电。 已宣布的数据中心项目中有超过一半因供应链和审批问题被搁置。 这为拥有过剩产能的公司（如 groq、spacex）创造了竞争窗口。 背景解释与关键术语： bedrock：amazon 的 ai 模型平台，anthropic 早期通过其分发模型。 gigawatt (gw)：吉瓦，功率单位。 详细中文整理： chamath： 我认为他们没事。我认为这是一家万亿美元级别的公司。我认为 anthropic 也是一家万亿美元级别的公司。我认为眼下发生的事，是对 ai 领域实际情况的彻底误解。现在有一个非常具体的瓶颈在制约一切，那就是驱动这些 token 所需的电力供应。从这个角度看，openai 目标未达成，我认为这恰恰说明了他们目前的算力容量还不够。而且这个问题只会越来越严重。你已经在 anthropic 身上看到了——他们刚刚找到一种方法，从经济上诱导 amazon 给他们足够的容量，这样你就不需要经过 bedrock 就能访问 anthropic 的模型了。你也看到他们在做差异化交易，在已有的 google 等投资方之上再分享经济利益，以换取更多容量。我的核心观点是什么？这个市场上的所有东西都受限于电力。这些公司可能达不到某个数字或预测，但这跟需求没有任何关系。100%是因为生成输出 token 所需的电力供应不足。今天刚刚宣布了一件很有意思的事，会让这个问题更严重，那就是你开始看到，不仅电力供应在积压，就连所需的组件也在积压。不只是内燃机、天然气轮机，还有变压器和所有实际的电网基础设施。为什么这很重要？如果你看正在建设中的实际吉瓦数，我们现在有很大的错配。人们宣布了所有这些项目，jason，但实际在建的还不到一半。不到一半。大部分都卡在繁文缛节里。大部分是因为这些供应链延误，所以没有可靠的方案来让这些东西上线。谁会受伤？anthropic 和 openai 受伤最深。谁会受益？超大规模云服务商会受益，特别是 oracle、amazon、meta、microsoft 和 google。然后你会看到一场交易和讨价还价：我得出多少股权？我得出让多少控制权才能获得算力？相比之下，如果拿不到算力，我的增长预测会错过多少？这就意味着，我们上周聊过的，给 groq 和 spacex 留下了巨大的空间，因为它们有大量过剩产能。所以我认为和 cursor 的交易只是前菜。但如果我是 elon，我现在会在这个市场上到处跑，因为如果模型质量追上来，我认为他现在可以对 anthropic 或 openai 做一些非常疯狂的事。也许 openai 不行，因为…… jcal： 我们马上会聊到诉讼的事。 chamath： 那些包袱。 jcal： 所以你的框架是——有限的资源是算力，需求是爆炸式的。 chamath： 不，有限的资源是电力。 jcal： 电力，然后驱动算力，然后提供 token，然后服务那些巨大的……对，开发者和 cowork 等等消费者和企业永远不够用的项目。明白了。 chamath： 而且 jason，让情况更复杂的是 anthropic 和 openai 面临的另一个因素：那些宣布出来但还在空转的东西，有 40% 会取消，因为他们在 ai 周围制造的正向光环太差了。过去 4 年宣布的所有项目中，有 40% 都被取消了。 jcal： 是的，确实有一些人对数据中心、ai 工作岗位等有负面情绪，这造成了一些阻力。社会上甚至有人在用暴力行为，并把原因归咎于数据中心的 ai。我不想给这些太多关注时间。" style="--index: 3">
                   <header class="timeline-heading">
                     <span class="timeline-index">03</span>
                     <span class="timeline-meta">08:00–12:00</span>
@@ -447,7 +674,7 @@
 <p><strong>JCal：</strong> 是的，确实有一些人对数据中心、AI 工作岗位等有负面情绪，这造成了一些阻力。社会上甚至有人在用暴力行为，并把原因归咎于数据中心的 AI。我不想给这些太多关注时间。</p></div>
                   </div>
                 </article>
-<article class="timeline-card" data-timeline-card data-search="12:00–19:00 friedberg：市场格局与模型效率提升 本段核心内容： friedberg 用 bcg 的&quot;三强法则&quot;分析 ai 市场：成熟市场通常会形成 4:2:1 的市场份额格局。 消费者市场 openai 与 google 争夺第一，anthropic 第三。 企业市场可能 google 领先。 他强调算法层面的进展（如 mit 的剪枝技术）是降低成本、提升效率的关键。 背景解释与关键术语： bcg 的&quot;三强法则&quot;：波士顿咨询集团提出的理论，认为成熟市场最终会形成三个主导者，份额关系约为 4:2:1。 vertex：google cloud 的 ai 平台。 剪枝技术（pruning）：通过移除神经网络中不重要的连接或节点来减小模型规模、降低计算成本的技术。 slm / vslm：小型语言模型 / 垂直领域小型语言模型。 详细中文整理： friedberg： 这还是一场球在空中飞的游戏。bcg 有一个理论，我记得我之前讲过，叫&quot;三强法则&quot;。他们反复证明，任何稳定、成熟、有竞争力的市场，最终会演变成 4:2:1 的份额比例，覆盖大约 90% 的市场。市场第一名的份额是第二名的 4 倍，第二名的份额是第三名的 2 倍。这在几乎所有成熟竞争市场中都是成立的。所以你可以把 ai 想像成会演变出一个消费者市场和一个企业市场。openai，即使他们还没到 10 亿用户，也还有 9 亿周活用户。这远远领先于 claude。我猜 claude 大概不到 1 亿周活。saks，你可能知道具体数字。而 gemini 可能和 openai 差不多，在 7 亿到 10 亿之间，相当接近。所以消费者市场看起来正在变成 chatgpt 和 google 争第一第二，anthropic 第三，也许 elon 凭借他的算力容量也会冒出来。企业市场的情况不太一样，那是一个单独的市场，现在大概是 anthropic 或者 google 领先。实际上，如果你看 vertex 的使用情况，google 声称 75% 的 gcp 客户都在活跃使用 vertex。所以 google 在企业侧可能也占据着相当可观的市场份额。这大概也是为什么 google 股票在最近几个月一飞冲天的原因——它在企业和消费者两个市场都处于领先或争夺领先的地位。但我仍然认为，如 chamath 所说，算力和能源容量方面的约束提供了很多机会，去改进我们在企业和消费者场景中扩展和部署模型的方式。而且现在确实还非常早期。我想强调一下 mit 两位科学家最近发表的一篇关于神经网络剪枝技术的论文。这篇论文表明，你可以将网络规模缩减 90%，仍然保持相同精度，方法就是把非常大的模型剪枝成更小的模型，然后你可以在推理时选择运行哪个模型。这样一来，你能将推理成本降低 10 倍。每单位能耗能产生 10 倍的输出，且精度完全无损。所以这是一个非常有趣的算法技术，可以应用在现有的大模型上，使其能耗大幅降低。想象一下，你为了回答一个非常简单的问题，启动了一个非常巨大的模型。你可以把模型剪掉。这在 ai 应用领域，很可能就像传统 google 搜索一样。存在一个长尾搜索，但也有少数几个搜索占据了大部分搜索量——比如天气、电影、股票价格等等。有一类事物构成了消费者能量消耗的主要部分；同样，也可能有一类事物构成了编程输出的主要部分。所以，如果你能把 80% 的搜索、聊天或编程请求通过剪枝技术缩减到小模型上，然后有一整套可以通过动态调用的小模型，推理成本降低 90%，你就能让数据中心和能源容量的使用效率提高 10 倍。所以我认为我们仍然处于优化 token 输出的效率的极早期阶段，这也为像 elon 这样的人创造了重塑这一切、并展开激烈竞争的机会。 chamath： 有两种方式可以赢。你可以堆算力，也可以走 slm 和 vslm 的路线。比如，如果你有一个专门针对天气的垂直领域小模型——虽然现在还没有，但可以举个例子——他们会有一个专门针对旅行的模型。当你在 google 上查航班信息时，显然系统会把你路由到一个更轻、更快、嵌入了 google flights 的模型。而谷歌 flights 已经被整合进了 gemini。gemini 现在的用户数已经到了 7 亿到 7.5 亿。而且，friedberg，这正是我们大概 18 个月前在这个播客上讨论过的情况——如果他们把 ai 放到搜索结果顶部，会对搜索收入产生什么影响？现在搜索收入在激增，ai 收入也在激增。所以他们找到了一种方法来平衡这两股竞争力量：既提供 ai 增强的搜索结果，又让人们可以点击链接。显然他们做得非常漂亮，市场也在奖励他们。 friedberg： 我想对你刚才说的 jekyll，再补充一点。你刚才用的是一种我称之为&quot;人类直觉法&quot;的方法来描述小模型。我认为我们正在进化到一个阶段——人类直觉上并不真正知道这个模型是什么。不仅仅是一个垂直模型的问题，而是会有通过自动化剪枝技术发现的模型，这些模型会协同工作。很多小模型连接在一起，我们不会用某种人类直觉法去定义每个模型——比如这是搜索旅行模型、这是地图模型。当这些模型被分解时，我们不知道它们为什么这样工作。但我确实认为这才是进化的真正方向。所以实际上，一个模型变成一个宏观模型，下面有很多可以动态调用的更小的模型，这让你能用同一单位能量，产生 10 倍的推理能力。 sacks： saks，关于你刚才说 google 的那个观点，我再扩展一下。jcal，我会说，如果非要找一个理由来解释为什么 openai 没有达成用户和收入目标，特别是在消费者侧，那一定是因为 google 抢走了一大块市场。一年前 google 几乎毫无存在感。sergey 退休后重返，帮助公司集中精力，就像你说的，他们在改进 gemini 并将其嵌入搜索顶层方面做得非常出色。话虽这么说，我并不认为 openai 全是坏消息。我认为 5.5 版的发布很好。我们听到了关于 codex 的非常好的消息。我认为 codex 现在正在争夺编程 token 的市场。我们现在处在一个非常有意思的阶段，这些公司不断地你追我赶。两周前看起来 anthropic 要完全统治了，对吧？anthropic 以 10 倍速度增长，openai 是 3 倍。 jcal： 然后他们的服务器就开始宕机了。这周你看到了吗，sax？服务器在宕机。我办公室里的人都在抱怨，连不上 claude。 sacks： 听着，竞争让每个人都变得更好。anthropic 迫使 openai 竞争。google 在消费者侧迫使 openai 竞争。我只是希望这个市场能尽可能长时间地保持竞争。我认为这对消费者、我们的经济以及我们整个国家都是最好的。我还想提一个我认为 openai 这周表现不错的领域：超级火热的网络安全领域。显然 anthropic 以 mythos 引起巨大轰动。它还没有商业发布，因为受限于算力，但作为概念验证或训练模型，它在网络能力上达到了新水平。但现在 openai 也发布了一个叫 gpt-5.5 cyber 的新模型，它刚通过了一系列测试，这些测试是由 ai 安全研究所进行的。测试显示，gpt-5.5 是第二个完成了从端到端多步骤网络攻击模拟的模型。所以它拥有和 mythos 同级别的能力，而且似乎是商业上可用的。他们有算力来提供服务。所以我认为这确实是一个重大成就。你看，我们之前就知道其他网络模型也要来了，不会只有 mythos。实际上，在 6 个月左右的时间内，所有前沿模型都会拥有 mythos 级别的网络能力。但令人印象深刻的是 openai 这么快就把 gpt-5.5 cyber 做出来了。而且我认为 5.5 可能是网络防御者真正能使用的第一个网络模型，因为，再说一次，我不认为 openai 像 anthropic 那样受限于算力。 jcal： 这对 crowdstrike 和 palo alto networks 这样的公司来说是一个难以置信的机会。它们都来过我们的节目。如果他们开始在这个领域发力，天哪，你真的能看到一切都被加固了。这对所有人——不管是 cursor、claude、openai 还是 gemini——来说都是一个难以置信的收入机会，和攻击面一样巨大。 sacks： 我可以针对这一点说一点吗？因为现在有大量的恐惧，甚至是对 mythos 的恐慌。人们把它当成末日武器之类的东西。不是的。这仅仅是前沿模型已经达到了能自动化网络活动的水平，就像它们能自动化编程一样。这意味着一个模型既可以驱动网络攻击者，也可以驱动网络防御者，就像它可以驱动一个程序员、帮助他发现更多漏洞一样。所以显然那里存在风险。但关键是要理解，mythos 或者 gpt-5.5 并不创造漏洞，它们只是发现漏洞。那些 bug 本来就在代码里，它们一直潜伏在那里，等着某个黑客去发现。如果我们现在能用 ai 提前找出这些 bug、这些漏洞，并把它们修补好，那我们实际上是在加固我们的基础设施和安全。我也相信，从所谓的前 ai 网络安全时代跨越到后 ai 网络安全时代，会是一场大规模的一次性升级周期，因为你将发现所有这些潜伏的 bug 和漏洞。但我认为一旦我们度过了这个升级周期，你就会在 ai 驱动的网络攻击和 ai 驱动的网络防御之间达到一个新的平衡。这会变得相当正常，不会再像是巨大的颠覆。也就是说，我认为人们把这当成某种存在的威胁。我不这么认为，只要每个人都做他们应该做的事——在黑客获得这些能力之前，用新的能力来加固自己的代码库、基础设施和安全。 jcal： 是的，chamath，如果从另一个角度看这个问题，来补充 saks 的论点：世界上大约有 500 万安全专家。我们刚刚在讨论 token 成本。如果你每周用 40 小时的 token 持续工作，你可以用每个首席安全官 100 美元的价格创造出另外 500 万个安全专家。所以这是一个安全专家代理的规模问题，saks。对，你可以有 5000 万个、1 亿个。他们不会发现新东西，但他们从不睡觉。他们不知疲倦地追逐这些问题。这确实是个非常好的观点。 sacks： 我再精确一下。是的，网络安全行业大概有 500 万人，但真正的精英黑客大概只有几千个。这些黑客过去没有时间去覆盖所有可能的攻击面。所以如果你训练一个模型来做他们做的工作，显然，就像你说的，它可以在一个人类黑客无法企及的规模和速度上操作。所以很明显，你需要做的就是在黑帽子获得这些能力之前，把这些工具交到白帽子手里，让他们自己进行网络攻击，去发现漏洞并修补。我再讲最后一点，然后就停。非常重要的是要理解，中国的模型大约在 6 个月内也会拥有这些能力。 jcal： 哦，deepseek-4 现在肯定已经有了一定程度的能力。 sacks： 嗯，不，deepseek-4 在很多方面令人印象深刻，但它的能力不在前沿水平。可能只达到所谓美国前沿模型的 80% 到 85%。 jcal： chamath，你想加入这个话题吗？让 chamath 说说。">
+<article class="timeline-card" data-timeline-card data-search="12:00–19:00 friedberg：市场格局与模型效率提升 本段核心内容： friedberg 用 bcg 的&quot;三强法则&quot;分析 ai 市场：成熟市场通常会形成 4:2:1 的市场份额格局。 消费者市场 openai 与 google 争夺第一，anthropic 第三。 企业市场可能 google 领先。 他强调算法层面的进展（如 mit 的剪枝技术）是降低成本、提升效率的关键。 背景解释与关键术语： bcg 的&quot;三强法则&quot;：波士顿咨询集团提出的理论，认为成熟市场最终会形成三个主导者，份额关系约为 4:2:1。 vertex：google cloud 的 ai 平台。 剪枝技术（pruning）：通过移除神经网络中不重要的连接或节点来减小模型规模、降低计算成本的技术。 slm / vslm：小型语言模型 / 垂直领域小型语言模型。 详细中文整理： friedberg： 这还是一场球在空中飞的游戏。bcg 有一个理论，我记得我之前讲过，叫&quot;三强法则&quot;。他们反复证明，任何稳定、成熟、有竞争力的市场，最终会演变成 4:2:1 的份额比例，覆盖大约 90% 的市场。市场第一名的份额是第二名的 4 倍，第二名的份额是第三名的 2 倍。这在几乎所有成熟竞争市场中都是成立的。所以你可以把 ai 想像成会演变出一个消费者市场和一个企业市场。openai，即使他们还没到 10 亿用户，也还有 9 亿周活用户。这远远领先于 claude。我猜 claude 大概不到 1 亿周活。saks，你可能知道具体数字。而 gemini 可能和 openai 差不多，在 7 亿到 10 亿之间，相当接近。所以消费者市场看起来正在变成 chatgpt 和 google 争第一第二，anthropic 第三，也许 elon 凭借他的算力容量也会冒出来。企业市场的情况不太一样，那是一个单独的市场，现在大概是 anthropic 或者 google 领先。实际上，如果你看 vertex 的使用情况，google 声称 75% 的 gcp 客户都在活跃使用 vertex。所以 google 在企业侧可能也占据着相当可观的市场份额。这大概也是为什么 google 股票在最近几个月一飞冲天的原因——它在企业和消费者两个市场都处于领先或争夺领先的地位。但我仍然认为，如 chamath 所说，算力和能源容量方面的约束提供了很多机会，去改进我们在企业和消费者场景中扩展和部署模型的方式。而且现在确实还非常早期。我想强调一下 mit 两位科学家最近发表的一篇关于神经网络剪枝技术的论文。这篇论文表明，你可以将网络规模缩减 90%，仍然保持相同精度，方法就是把非常大的模型剪枝成更小的模型，然后你可以在推理时选择运行哪个模型。这样一来，你能将推理成本降低 10 倍。每单位能耗能产生 10 倍的输出，且精度完全无损。所以这是一个非常有趣的算法技术，可以应用在现有的大模型上，使其能耗大幅降低。想象一下，你为了回答一个非常简单的问题，启动了一个非常巨大的模型。你可以把模型剪掉。这在 ai 应用领域，很可能就像传统 google 搜索一样。存在一个长尾搜索，但也有少数几个搜索占据了大部分搜索量——比如天气、电影、股票价格等等。有一类事物构成了消费者能量消耗的主要部分；同样，也可能有一类事物构成了编程输出的主要部分。所以，如果你能把 80% 的搜索、聊天或编程请求通过剪枝技术缩减到小模型上，然后有一整套可以通过动态调用的小模型，推理成本降低 90%，你就能让数据中心和能源容量的使用效率提高 10 倍。所以我认为我们仍然处于优化 token 输出的效率的极早期阶段，这也为像 elon 这样的人创造了重塑这一切、并展开激烈竞争的机会。 chamath： 有两种方式可以赢。你可以堆算力，也可以走 slm 和 vslm 的路线。比如，如果你有一个专门针对天气的垂直领域小模型——虽然现在还没有，但可以举个例子——他们会有一个专门针对旅行的模型。当你在 google 上查航班信息时，显然系统会把你路由到一个更轻、更快、嵌入了 google flights 的模型。而谷歌 flights 已经被整合进了 gemini。gemini 现在的用户数已经到了 7 亿到 7.5 亿。而且，friedberg，这正是我们大概 18 个月前在这个播客上讨论过的情况——如果他们把 ai 放到搜索结果顶部，会对搜索收入产生什么影响？现在搜索收入在激增，ai 收入也在激增。所以他们找到了一种方法来平衡这两股竞争力量：既提供 ai 增强的搜索结果，又让人们可以点击链接。显然他们做得非常漂亮，市场也在奖励他们。 friedberg： 我想对你刚才说的 jekyll，再补充一点。你刚才用的是一种我称之为&quot;人类直觉法&quot;的方法来描述小模型。我认为我们正在进化到一个阶段——人类直觉上并不真正知道这个模型是什么。不仅仅是一个垂直模型的问题，而是会有通过自动化剪枝技术发现的模型，这些模型会协同工作。很多小模型连接在一起，我们不会用某种人类直觉法去定义每个模型——比如这是搜索旅行模型、这是地图模型。当这些模型被分解时，我们不知道它们为什么这样工作。但我确实认为这才是进化的真正方向。所以实际上，一个模型变成一个宏观模型，下面有很多可以动态调用的更小的模型，这让你能用同一单位能量，产生 10 倍的推理能力。 sacks： saks，关于你刚才说 google 的那个观点，我再扩展一下。jcal，我会说，如果非要找一个理由来解释为什么 openai 没有达成用户和收入目标，特别是在消费者侧，那一定是因为 google 抢走了一大块市场。一年前 google 几乎毫无存在感。sergey 退休后重返，帮助公司集中精力，就像你说的，他们在改进 gemini 并将其嵌入搜索顶层方面做得非常出色。话虽这么说，我并不认为 openai 全是坏消息。我认为 5.5 版的发布很好。我们听到了关于 codex 的非常好的消息。我认为 codex 现在正在争夺编程 token 的市场。我们现在处在一个非常有意思的阶段，这些公司不断地你追我赶。两周前看起来 anthropic 要完全统治了，对吧？anthropic 以 10 倍速度增长，openai 是 3 倍。 jcal： 然后他们的服务器就开始宕机了。这周你看到了吗，sax？服务器在宕机。我办公室里的人都在抱怨，连不上 claude。 sacks： 听着，竞争让每个人都变得更好。anthropic 迫使 openai 竞争。google 在消费者侧迫使 openai 竞争。我只是希望这个市场能尽可能长时间地保持竞争。我认为这对消费者、我们的经济以及我们整个国家都是最好的。我还想提一个我认为 openai 这周表现不错的领域：超级火热的网络安全领域。显然 anthropic 以 mythos 引起巨大轰动。它还没有商业发布，因为受限于算力，但作为概念验证或训练模型，它在网络能力上达到了新水平。但现在 openai 也发布了一个叫 gpt-5.5 cyber 的新模型，它刚通过了一系列测试，这些测试是由 ai 安全研究所进行的。测试显示，gpt-5.5 是第二个完成了从端到端多步骤网络攻击模拟的模型。所以它拥有和 mythos 同级别的能力，而且似乎是商业上可用的。他们有算力来提供服务。所以我认为这确实是一个重大成就。你看，我们之前就知道其他网络模型也要来了，不会只有 mythos。实际上，在 6 个月左右的时间内，所有前沿模型都会拥有 mythos 级别的网络能力。但令人印象深刻的是 openai 这么快就把 gpt-5.5 cyber 做出来了。而且我认为 5.5 可能是网络防御者真正能使用的第一个网络模型，因为，再说一次，我不认为 openai 像 anthropic 那样受限于算力。 jcal： 这对 crowdstrike 和 palo alto networks 这样的公司来说是一个难以置信的机会。它们都来过我们的节目。如果他们开始在这个领域发力，天哪，你真的能看到一切都被加固了。这对所有人——不管是 cursor、claude、openai 还是 gemini——来说都是一个难以置信的收入机会，和攻击面一样巨大。 sacks： 我可以针对这一点说一点吗？因为现在有大量的恐惧，甚至是对 mythos 的恐慌。人们把它当成末日武器之类的东西。不是的。这仅仅是前沿模型已经达到了能自动化网络活动的水平，就像它们能自动化编程一样。这意味着一个模型既可以驱动网络攻击者，也可以驱动网络防御者，就像它可以驱动一个程序员、帮助他发现更多漏洞一样。所以显然那里存在风险。但关键是要理解，mythos 或者 gpt-5.5 并不创造漏洞，它们只是发现漏洞。那些 bug 本来就在代码里，它们一直潜伏在那里，等着某个黑客去发现。如果我们现在能用 ai 提前找出这些 bug、这些漏洞，并把它们修补好，那我们实际上是在加固我们的基础设施和安全。我也相信，从所谓的前 ai 网络安全时代跨越到后 ai 网络安全时代，会是一场大规模的一次性升级周期，因为你将发现所有这些潜伏的 bug 和漏洞。但我认为一旦我们度过了这个升级周期，你就会在 ai 驱动的网络攻击和 ai 驱动的网络防御之间达到一个新的平衡。这会变得相当正常，不会再像是巨大的颠覆。也就是说，我认为人们把这当成某种存在的威胁。我不这么认为，只要每个人都做他们应该做的事——在黑客获得这些能力之前，用新的能力来加固自己的代码库、基础设施和安全。 jcal： 是的，chamath，如果从另一个角度看这个问题，来补充 saks 的论点：世界上大约有 500 万安全专家。我们刚刚在讨论 token 成本。如果你每周用 40 小时的 token 持续工作，你可以用每个首席安全官 100 美元的价格创造出另外 500 万个安全专家。所以这是一个安全专家代理的规模问题，saks。对，你可以有 5000 万个、1 亿个。他们不会发现新东西，但他们从不睡觉。他们不知疲倦地追逐这些问题。这确实是个非常好的观点。 sacks： 我再精确一下。是的，网络安全行业大概有 500 万人，但真正的精英黑客大概只有几千个。这些黑客过去没有时间去覆盖所有可能的攻击面。所以如果你训练一个模型来做他们做的工作，显然，就像你说的，它可以在一个人类黑客无法企及的规模和速度上操作。所以很明显，你需要做的就是在黑帽子获得这些能力之前，把这些工具交到白帽子手里，让他们自己进行网络攻击，去发现漏洞并修补。我再讲最后一点，然后就停。非常重要的是要理解，中国的模型大约在 6 个月内也会拥有这些能力。 jcal： 哦，deepseek-4 现在肯定已经有了一定程度的能力。 sacks： 嗯，不，deepseek-4 在很多方面令人印象深刻，但它的能力不在前沿水平。可能只达到所谓美国前沿模型的 80% 到 85%。 jcal： chamath，你想加入这个话题吗？让 chamath 说说。" style="--index: 4">
                   <header class="timeline-heading">
                     <span class="timeline-index">04</span>
                     <span class="timeline-meta">12:00–19:00</span>
@@ -484,7 +711,7 @@
 <p><strong>JCal：</strong> Chamath，你想加入这个话题吗？让 Chamath 说说。</p></div>
                   </div>
                 </article>
-<article class="timeline-card" data-timeline-card data-search="19:00–27:00 chamath：机器对机器的循环与网络安全未来 本段核心内容： chamath 认为人类天生容易犯错，软件漏洞是人类编程行为的副产品。 未来 5-6 年，所有现有软件都会因安全问题被 ai 重写。 他暗示存在一家顶级网络安全公司，能够&quot;渗透并操纵&quot;几乎所有现有模型。 详细中文整理： chamath： 两件事。这件事之所以可能，完全是因为人类容易犯错。当人类编程时，他们会留下漏洞。所以人类利用人类，这是我们很长一段时间以来所处的状态。现在计算机开始利用人类了，因为计算机跑遍所有地方，找出人类写下的所有 bug。在下一个阶段，将会是机器对机器。所以我认为网络安全的性质可能会在未来 5 到 6 年发生彻底改变。届时会有充分的理由重写世界上运行的所有软件。一方面，是因为你将被要求展示更多的运营杠杆和收入增长；另一方面，是因为过去所有手工制作的东西从根本上来说都是不安全的。不管怎样，所有路径都会导向全球运行的操作软件被重写。越来越多会由机器来写。结果，它们也会越来越坚不可摧。但网络安全威胁实际上只会增加，因为那时你要尝试想办法用一台机器向另一台机器注入某些东西，以便某个代理循环注入恶意软件或注入一个坏的 token。我认为这是一件非常复杂的事情。我要告诉你的是，我甚至不确定我是否被允许说这个，但一家非常优秀的、可能是世界上最好的网络安全公司，由世界上最好的 ceo 之一经营，这位 ceo 可能会也可能不会在 liquidity 上发言，他会告诉你，他们已经渗透并可以基本上操纵每一个模型。我就这么说个大概吧。 jcal： 好的，完美。在突破奖晚宴上，3/4 的我们都在场。我和 george kurz 聊了，你刚才描述的另一位坐在 nikesh 旁边。 chamath： 是的，我说的是 nikesh。 jcal： 嗯，nikesh 和 george 是引领这两个方向的两位。palo alto networks 和 crowdstrike。他们理解……george 告诉我的是，对这个产品或服务的需求排着长队。friedberg，你看，就像谋杀率一样。我们正处在人类历史上谋杀率最低的水平。在我们这一代巨大下降，在历史长河中更是如此。我认为网络安全也会这样。只有这么多攻击向量。剩下的攻击向量就只是人的因素了，对吧，friedberg？一直如此。随着软件变得更有弹性，那么薄弱的环节就是那个把密码写在便利贴上并贴在桌子上的秘书，或者是那个用自己宠物名字加 123 当密码的会计。这是历史规律。 jcal： 你想补充什么吗，friedberg？我们准备收尾这部分。">
+<article class="timeline-card" data-timeline-card data-search="19:00–27:00 chamath：机器对机器的循环与网络安全未来 本段核心内容： chamath 认为人类天生容易犯错，软件漏洞是人类编程行为的副产品。 未来 5-6 年，所有现有软件都会因安全问题被 ai 重写。 他暗示存在一家顶级网络安全公司，能够&quot;渗透并操纵&quot;几乎所有现有模型。 详细中文整理： chamath： 两件事。这件事之所以可能，完全是因为人类容易犯错。当人类编程时，他们会留下漏洞。所以人类利用人类，这是我们很长一段时间以来所处的状态。现在计算机开始利用人类了，因为计算机跑遍所有地方，找出人类写下的所有 bug。在下一个阶段，将会是机器对机器。所以我认为网络安全的性质可能会在未来 5 到 6 年发生彻底改变。届时会有充分的理由重写世界上运行的所有软件。一方面，是因为你将被要求展示更多的运营杠杆和收入增长；另一方面，是因为过去所有手工制作的东西从根本上来说都是不安全的。不管怎样，所有路径都会导向全球运行的操作软件被重写。越来越多会由机器来写。结果，它们也会越来越坚不可摧。但网络安全威胁实际上只会增加，因为那时你要尝试想办法用一台机器向另一台机器注入某些东西，以便某个代理循环注入恶意软件或注入一个坏的 token。我认为这是一件非常复杂的事情。我要告诉你的是，我甚至不确定我是否被允许说这个，但一家非常优秀的、可能是世界上最好的网络安全公司，由世界上最好的 ceo 之一经营，这位 ceo 可能会也可能不会在 liquidity 上发言，他会告诉你，他们已经渗透并可以基本上操纵每一个模型。我就这么说个大概吧。 jcal： 好的，完美。在突破奖晚宴上，3/4 的我们都在场。我和 george kurz 聊了，你刚才描述的另一位坐在 nikesh 旁边。 chamath： 是的，我说的是 nikesh。 jcal： 嗯，nikesh 和 george 是引领这两个方向的两位。palo alto networks 和 crowdstrike。他们理解……george 告诉我的是，对这个产品或服务的需求排着长队。friedberg，你看，就像谋杀率一样。我们正处在人类历史上谋杀率最低的水平。在我们这一代巨大下降，在历史长河中更是如此。我认为网络安全也会这样。只有这么多攻击向量。剩下的攻击向量就只是人的因素了，对吧，friedberg？一直如此。随着软件变得更有弹性，那么薄弱的环节就是那个把密码写在便利贴上并贴在桌子上的秘书，或者是那个用自己宠物名字加 123 当密码的会计。这是历史规律。 jcal： 你想补充什么吗，friedberg？我们准备收尾这部分。" style="--index: 5">
                   <header class="timeline-heading">
                     <span class="timeline-index">05</span>
                     <span class="timeline-meta">19:00–27:00</span>
@@ -505,7 +732,7 @@
 <p><strong>JCal：</strong> 你想补充什么吗，Friedberg？我们准备收尾这部分。</p></div>
                   </div>
                 </article>
-<article class="timeline-card" data-timeline-card data-search="27:00–37:00 轻松闲聊与 elon 诉 openai 案 本段核心内容： 一段关于酒店房间、私人飞机、昂贵的波本威士忌和篮球比赛的轻松话题。 进入 elon 诉 openai 案的核心争议。 greg brockman 的日记成为&quot;无法辩护&quot;的证据，详细记录了团队计划以 b corp 为掩护排挤 elon 的意图。 案件为法官审理，polymarket 预测 elon 获胜概率约 42-43%。 背景解释与关键术语： b corp：共益企业，一种同时追求利润和社会效益的企业组织形式。日记显示 openai 团队曾考虑用此结构作为过渡。 bench trial：法官审理，而非陪审团审理。本案中陪审团仅提供参考意见。 polymarket：预测市场平台，用户可以通过加密货币押注真实世界事件的结果。 详细中文整理： jcal： 你的床为什么这么乱？你不能让客房服务来整理一下床铺吗？ friedberg： 听我说，我告诉你发生了什么。我现在在亚特兰大。 chamath： 还有，你为什么不像住套房一样有两个房间？你这个是一个房间吗？这家酒店只有这种房间。 friedberg： 是的。 chamath： 你要么是抠门，要么是穷。是哪个？ friedberg： 我抠门。我告诉你情况。我来亚特兰大看今晚的尼克斯球赛。我解释一下，价值对价值。有些人把钱花在私人飞机上，花 3 万美元飞到亚特兰大。我花了 3 万美元坐场边座位。我不需要套房。我想把钱投到座位上。 chamath： 为什么不能两者都做？你可以两者都做啊。 friedberg： 我想我也可以两者都做。我正在学会拥抱我自己的富有。 chamath： 好，如果你已经说服自己应该花 3 万美元买场边座位，我觉得这已经够离谱了，但你既然已经说服自己了……一个有两个房间的酒店房间，可能只比你付的多 15%。 friedberg： 是两倍，但是，你说得对，我也会拿下酒店房间。 chamath： 或者说 20% 更多。但你就是…… friedberg： 这种房间多少钱？一晚 200 美元？所以你付 400 美元一晚上，得到另一个房间。我是说，这是亚特兰大。我住在这最好的酒店。亚特兰大最贵的酒店也就 500 美元一晚。没什么大不了的。但因为所有尼克斯的粉丝都来了，一切都被预订一空。 chamath： 所以你告诉我，翻倍也才 1000 美元，你连 1000 美元都舍不得花？ friedberg： 所有东西都订完了，因为尼克斯来了。 chamath： 所以我们不得不看着你乱糟糟的床。真恶心。 friedberg： 床没那么脏。得了。在后期处理掉吧。 chamath： 你提醒我了，我有个关于飞到亚特兰大的私人飞机的故事。 sacks： 是的，有点事。我带着我的团队飞过去。飞机上几个人，距离不算短，大概 4 个小时。我跑到后面睡觉。首先，你懂的，飞行刚开始时，飞机上有几瓶 pappy van winkle。我们先来了几杯，然后我跑到后面睡着了，基本上落地时才醒。我出来一看，3 瓶基本都喝完了，都是半瓶装的 pappy。 jcal： 哦，那些可要 2000 美元一瓶。 sacks： 不，不止，有些是陈年酒。其中一瓶是…… chamath： 是的，我有你飞机上的一瓶，那个旧 falcon 上的一瓶。 jcal： 对，这些是年份酒，半瓶装。 chamath： 我记得要 4000 美元。 sacks： 不管怎样，现在这些东西你根本买不到了。落地后这些哥们问我：saks，我们飞到这个活动花了你多少钱？我说，嗯，大约 8000 美元油费和大约 12000 美元的 pappy van winkle。 chamath： 你得同时给飞机的氛围和飞机本身加油。亚特兰大好吗？ sacks： 我从来没觉得……去年我去底特律的球赛，那个城市正在复苏。亚特兰大有一个很好的机会去复苏。我这么跟你说吧。他们有很大的机会去升级这座城市。我昨天晚上午夜去了一个华夫饼店，没有枪击案。好了，咱们继续。 jcal： 顺便问一下，你在亚特兰大 best western 酒店有忠诚度积分吗？ friedberg： 是的，因为我用我的 best western visa 信用卡，可以获得双倍积分。它在你想去的任何地方。好了，使用促销码 j-cal 可以获得额外 1000 积分。其他 openai 新闻：musk 诉 altman，世纪审判——也许是十年一遇的审判——已经开始了。elon 当然是在指控 openai 违反了慈善信托、不当得利。他指控 openai 基本上把一个非营利组织变成了一个营利组织。他要求 1500 亿美元的赔偿，要求恢复其非营利状态，要求罢免 altman 和 brockman。elon 和 openai 的律师之间有一些激烈的交锋。elon 把讨论提升了一个层次，他说：&quot;如果我们让掠夺慈善机构变得正当，美国慈善捐赠的整个基础就会被摧毁。这是我的担忧。&quot;显然，这里面有大量有趣的细微差别，特别是 greg brockman 保存了一本日记，像超级反派一样记录着他的计划。日记摘录包括：&quot;结论：我们真的想要一个 b corp。真正的答案是，我们想要 elon 出局。如果 3 个月后我们还在做 b corp，那就是一个谎言。我看不出没有一场激烈的斗争就能把它变成营利性公司。&quot;&quot;我就在想《办公室》这部剧，我们就在《办公室》里。这个故事会说我们没有对他诚实。归根结底，还是想要一个营利性公司，只是没有他。等等。&quot; friedberg，你对这个案件怎么看？elon 会赢吗？ friedberg： 我只是不明白 greg brockman 怎么能有一本该死的日记，居然还在里面详细记录这些东西。我的意思是，我喜欢这家伙，但他他妈在想什么？你就坐在家里，然后，&quot;让我写下我在犯的罪&quot;，或者让我写成这样，&quot;让我把它记录下来&quot;。顺便说一下，还要永远不删。我真不懂。 chamath： 这不仅仅是&quot;日记最大化&quot;，这是&quot;证据发现最大化&quot;。这是&quot;冒烟枪最大化&quot;。 friedberg： 我不明白，真的，我不明白。 jcal： 我的意思是，你们记得《火线》里那一幕吗？那家伙说：&quot;你他妈是在做刑事共谋的笔记吗？&quot;这房间里每个人都能对号入座。我们能放那个片段吗？ chamath： 对，找到那个片段。你在干什么，greg？ sacks： &quot;黑鬼，你他妈在做刑事共谋的笔记吗？你他妈在想什么？&quot; friedberg： 如果你要去犯罪，你绝不能在日记里写下犯罪的时间和日期。 jcal： 哦，看，我们不知道这算不算犯罪。先别这么说。 friedberg： 好吧，就算不叫犯罪，叫不正当行为也行。 chamath： chamath，你写日记吗？ chamath： 你觉得呢？ jcal： jekyll，你写日记吗？ chamath： 我坚信——反复思量——不，我现在就告诉你，反复思量是通向不幸福的路。没人关心你的感受。把你的感受写下来？100%只会让你在跟配偶聊感受时更加痛苦。去享用一顿美好的晚餐，坐在尼克斯场的场边座位，做我这 30 年来一直在做的事情就行。 jcal： 反复思量最大化。 chamath： 反复思量最大化。然后银行存款就会上涨。你要做的就是工作，开启新项目。10 个里 9 个会失败。下 10 个注，1 个赢了，你就发达了。去坐在尼克斯球场边。继续向前，生命太短暂了。不要写下任何事情，句号，到此为止。 friedberg： 这是很好的建议。是的，我最大的意外就是这家伙竟然有日记。我……我不认识有日记的人。我从来没听说过好。所以无论如何，这让我震惊。除此之外，对于案件的走向或者法官会怎么做，我没有看法。 jcal： 我对案件也没有评论。但我觉得奇怪的是，即便所有这些证据发现都公开了，polymarket 上的赔率居然没怎么动。elon 赢的概率大约是 42% 或 43%。我们群聊里有人出主意说，可能发生的情况是 elon 在技术上获胜，然后只是拿回他投资的 4000 万美元。所以也许 polymarket 赌的就是这个。但从一个完全独立的话题来说，jason，我知道你刚才说的那些是出于玩笑，但这种&quot;保持向前，不要反复思量&quot;的想法，我认为对于每个人来说都是非常好的普遍生活建议。 chamath： 现代的治疗产业复合体和药物产业复合体，我认为是围绕着反复思量展开的。 friedberg： 确实围绕反复思量。 chamath： 是的。 friedberg： 那是通往所有这些事情的入门毒品。 chamath： 是的。谈论你的问题。嘿，你知道吗，当这些人去治疗时，你听过这些人吗？howard stern 说，他和同一个人进行了 40 年每周 2-3 次治疗。我想，好吧，治疗师有什么动力停止每小时收你 1200 美元？没有。然后他们就失去了收入流，失去了客户。那整个事情就是一个巨大的骗局。 sacks： saks，在这个案子上，我不会那么极端。我确实认为，解开人们因成长经历而产生的一些&quot;戈尔迪之结&quot;（极其复杂的问题）是有很多价值的。但是，这和漫无目的地反复思量是有区别的，因为我不认为后者有很多生产性价值。 chamath： 如果你有诸如生活中的创伤之类急性的问题，是的，当然，去打开它，搞清楚。我只是在说这种没完没了的自我改进、反复思量的事情。好，回到正题，saks，这个案子——而且我们说的是在奥克兰的陪审团吧？ sacks： 不，这是一个法官审理的案子。这一点很重要。这是一个法官审理的案件，陪审团只有参考建议的作用，但最终由那位法官做出最终裁决并决定赔偿金额。 jcal： 所以这是一个案子吗，saks？我们有一个湾区法官陪审团，然后 elon 被认为有点右派，在那个地区很多人不同意他的政治观点。然后还有另一个方面是 sam altman 的《纽约客》故事，人们发现很多不同的人觉得被他坑了。你把这两件事放在一起，没办法判断这个结果的走向。 sacks： 嗯，我认为这和党派无关。我的意思是，你可能会争辩说，elon 正在寻求的——即保护慈善机构——如果有什么的话，是一个偏左的原则。虽然我确实不认为这是左派对右派。听着，我不想在这个审判中选边站队。我只是像其他人一样看着。我上一次在某件 elon 的诉讼中发表评论时，我被传唤进行了 6 个小时的取证。还记得吗？因为他们就假设我会知道点什么。我从来没有和 elon 讨论过这个案子。我对此一无所知。是的，我会像其他人一样看看会发生什么。不过，有一件事我要说，我刚读了一些报道，显然这家公司曾经向 elon 提供过股份，但他觉得这有点不妥。你还记得吗？是的，因为当这场争端刚开始时，在它变成法庭案件之前，我在我们节目上说，听着，如果 openai 在某个阶段决定他们做错了结构，他们应该直接去和 elon 做一个弥补，他应该成为股东。我当时不知道的是，显然他们确实试图做类似的事情，但 elon 拒绝了，因为他确实希望该实体继续作为慈善机构存在。 jcal： 是的。 sacks： 换句话说，你明白我的意思吗？ jcal： 他有一个原则性的观点。并且说了：&quot;不，我们正试图拯救人类，然后你们就把这个王国的钥匙交给了微软。&quot;这些都已经浮出水面。我也没有和 elon 中的任何一个人聊过这个，但我猜测，像大多数这种事情一样，会有某种形式的和解。但也许他会一打到底。谁知道呢？负责此案的 judge rogers，61 岁，奥巴马任命。saks，政治因素可能起了作用。他们不得不告诉陪审团：无论你对这些个人有什么政治上的感觉，请把它放在一边。但值得注意的是，她曾主持过 epic games 对 apple 的 app store 独占权案，做出了有利于 apple（附带一些条件）的裁决。所以这将是一个非常有趣的事情。我认为对 openai 来说，最坏的情况是他们必须以某种方式撤销这些安排，这会延迟 ipo。这会给股东带来混乱。最好的情况是某种和解。如果 elon 投入了最初的 4000 万或 5000 万美元，在经过稀释后，他可能应该拿到公司 10%、20% 或 30% 的股份。">
+<article class="timeline-card" data-timeline-card data-search="27:00–37:00 轻松闲聊与 elon 诉 openai 案 本段核心内容： 一段关于酒店房间、私人飞机、昂贵的波本威士忌和篮球比赛的轻松话题。 进入 elon 诉 openai 案的核心争议。 greg brockman 的日记成为&quot;无法辩护&quot;的证据，详细记录了团队计划以 b corp 为掩护排挤 elon 的意图。 案件为法官审理，polymarket 预测 elon 获胜概率约 42-43%。 背景解释与关键术语： b corp：共益企业，一种同时追求利润和社会效益的企业组织形式。日记显示 openai 团队曾考虑用此结构作为过渡。 bench trial：法官审理，而非陪审团审理。本案中陪审团仅提供参考意见。 polymarket：预测市场平台，用户可以通过加密货币押注真实世界事件的结果。 详细中文整理： jcal： 你的床为什么这么乱？你不能让客房服务来整理一下床铺吗？ friedberg： 听我说，我告诉你发生了什么。我现在在亚特兰大。 chamath： 还有，你为什么不像住套房一样有两个房间？你这个是一个房间吗？这家酒店只有这种房间。 friedberg： 是的。 chamath： 你要么是抠门，要么是穷。是哪个？ friedberg： 我抠门。我告诉你情况。我来亚特兰大看今晚的尼克斯球赛。我解释一下，价值对价值。有些人把钱花在私人飞机上，花 3 万美元飞到亚特兰大。我花了 3 万美元坐场边座位。我不需要套房。我想把钱投到座位上。 chamath： 为什么不能两者都做？你可以两者都做啊。 friedberg： 我想我也可以两者都做。我正在学会拥抱我自己的富有。 chamath： 好，如果你已经说服自己应该花 3 万美元买场边座位，我觉得这已经够离谱了，但你既然已经说服自己了……一个有两个房间的酒店房间，可能只比你付的多 15%。 friedberg： 是两倍，但是，你说得对，我也会拿下酒店房间。 chamath： 或者说 20% 更多。但你就是…… friedberg： 这种房间多少钱？一晚 200 美元？所以你付 400 美元一晚上，得到另一个房间。我是说，这是亚特兰大。我住在这最好的酒店。亚特兰大最贵的酒店也就 500 美元一晚。没什么大不了的。但因为所有尼克斯的粉丝都来了，一切都被预订一空。 chamath： 所以你告诉我，翻倍也才 1000 美元，你连 1000 美元都舍不得花？ friedberg： 所有东西都订完了，因为尼克斯来了。 chamath： 所以我们不得不看着你乱糟糟的床。真恶心。 friedberg： 床没那么脏。得了。在后期处理掉吧。 chamath： 你提醒我了，我有个关于飞到亚特兰大的私人飞机的故事。 sacks： 是的，有点事。我带着我的团队飞过去。飞机上几个人，距离不算短，大概 4 个小时。我跑到后面睡觉。首先，你懂的，飞行刚开始时，飞机上有几瓶 pappy van winkle。我们先来了几杯，然后我跑到后面睡着了，基本上落地时才醒。我出来一看，3 瓶基本都喝完了，都是半瓶装的 pappy。 jcal： 哦，那些可要 2000 美元一瓶。 sacks： 不，不止，有些是陈年酒。其中一瓶是…… chamath： 是的，我有你飞机上的一瓶，那个旧 falcon 上的一瓶。 jcal： 对，这些是年份酒，半瓶装。 chamath： 我记得要 4000 美元。 sacks： 不管怎样，现在这些东西你根本买不到了。落地后这些哥们问我：saks，我们飞到这个活动花了你多少钱？我说，嗯，大约 8000 美元油费和大约 12000 美元的 pappy van winkle。 chamath： 你得同时给飞机的氛围和飞机本身加油。亚特兰大好吗？ sacks： 我从来没觉得……去年我去底特律的球赛，那个城市正在复苏。亚特兰大有一个很好的机会去复苏。我这么跟你说吧。他们有很大的机会去升级这座城市。我昨天晚上午夜去了一个华夫饼店，没有枪击案。好了，咱们继续。 jcal： 顺便问一下，你在亚特兰大 best western 酒店有忠诚度积分吗？ friedberg： 是的，因为我用我的 best western visa 信用卡，可以获得双倍积分。它在你想去的任何地方。好了，使用促销码 j-cal 可以获得额外 1000 积分。其他 openai 新闻：musk 诉 altman，世纪审判——也许是十年一遇的审判——已经开始了。elon 当然是在指控 openai 违反了慈善信托、不当得利。他指控 openai 基本上把一个非营利组织变成了一个营利组织。他要求 1500 亿美元的赔偿，要求恢复其非营利状态，要求罢免 altman 和 brockman。elon 和 openai 的律师之间有一些激烈的交锋。elon 把讨论提升了一个层次，他说：&quot;如果我们让掠夺慈善机构变得正当，美国慈善捐赠的整个基础就会被摧毁。这是我的担忧。&quot;显然，这里面有大量有趣的细微差别，特别是 greg brockman 保存了一本日记，像超级反派一样记录着他的计划。日记摘录包括：&quot;结论：我们真的想要一个 b corp。真正的答案是，我们想要 elon 出局。如果 3 个月后我们还在做 b corp，那就是一个谎言。我看不出没有一场激烈的斗争就能把它变成营利性公司。&quot;&quot;我就在想《办公室》这部剧，我们就在《办公室》里。这个故事会说我们没有对他诚实。归根结底，还是想要一个营利性公司，只是没有他。等等。&quot; friedberg，你对这个案件怎么看？elon 会赢吗？ friedberg： 我只是不明白 greg brockman 怎么能有一本该死的日记，居然还在里面详细记录这些东西。我的意思是，我喜欢这家伙，但他他妈在想什么？你就坐在家里，然后，&quot;让我写下我在犯的罪&quot;，或者让我写成这样，&quot;让我把它记录下来&quot;。顺便说一下，还要永远不删。我真不懂。 chamath： 这不仅仅是&quot;日记最大化&quot;，这是&quot;证据发现最大化&quot;。这是&quot;冒烟枪最大化&quot;。 friedberg： 我不明白，真的，我不明白。 jcal： 我的意思是，你们记得《火线》里那一幕吗？那家伙说：&quot;你他妈是在做刑事共谋的笔记吗？&quot;这房间里每个人都能对号入座。我们能放那个片段吗？ chamath： 对，找到那个片段。你在干什么，greg？ sacks： &quot;黑鬼，你他妈在做刑事共谋的笔记吗？你他妈在想什么？&quot; friedberg： 如果你要去犯罪，你绝不能在日记里写下犯罪的时间和日期。 jcal： 哦，看，我们不知道这算不算犯罪。先别这么说。 friedberg： 好吧，就算不叫犯罪，叫不正当行为也行。 chamath： chamath，你写日记吗？ chamath： 你觉得呢？ jcal： jekyll，你写日记吗？ chamath： 我坚信——反复思量——不，我现在就告诉你，反复思量是通向不幸福的路。没人关心你的感受。把你的感受写下来？100%只会让你在跟配偶聊感受时更加痛苦。去享用一顿美好的晚餐，坐在尼克斯场的场边座位，做我这 30 年来一直在做的事情就行。 jcal： 反复思量最大化。 chamath： 反复思量最大化。然后银行存款就会上涨。你要做的就是工作，开启新项目。10 个里 9 个会失败。下 10 个注，1 个赢了，你就发达了。去坐在尼克斯球场边。继续向前，生命太短暂了。不要写下任何事情，句号，到此为止。 friedberg： 这是很好的建议。是的，我最大的意外就是这家伙竟然有日记。我……我不认识有日记的人。我从来没听说过好。所以无论如何，这让我震惊。除此之外，对于案件的走向或者法官会怎么做，我没有看法。 jcal： 我对案件也没有评论。但我觉得奇怪的是，即便所有这些证据发现都公开了，polymarket 上的赔率居然没怎么动。elon 赢的概率大约是 42% 或 43%。我们群聊里有人出主意说，可能发生的情况是 elon 在技术上获胜，然后只是拿回他投资的 4000 万美元。所以也许 polymarket 赌的就是这个。但从一个完全独立的话题来说，jason，我知道你刚才说的那些是出于玩笑，但这种&quot;保持向前，不要反复思量&quot;的想法，我认为对于每个人来说都是非常好的普遍生活建议。 chamath： 现代的治疗产业复合体和药物产业复合体，我认为是围绕着反复思量展开的。 friedberg： 确实围绕反复思量。 chamath： 是的。 friedberg： 那是通往所有这些事情的入门毒品。 chamath： 是的。谈论你的问题。嘿，你知道吗，当这些人去治疗时，你听过这些人吗？howard stern 说，他和同一个人进行了 40 年每周 2-3 次治疗。我想，好吧，治疗师有什么动力停止每小时收你 1200 美元？没有。然后他们就失去了收入流，失去了客户。那整个事情就是一个巨大的骗局。 sacks： saks，在这个案子上，我不会那么极端。我确实认为，解开人们因成长经历而产生的一些&quot;戈尔迪之结&quot;（极其复杂的问题）是有很多价值的。但是，这和漫无目的地反复思量是有区别的，因为我不认为后者有很多生产性价值。 chamath： 如果你有诸如生活中的创伤之类急性的问题，是的，当然，去打开它，搞清楚。我只是在说这种没完没了的自我改进、反复思量的事情。好，回到正题，saks，这个案子——而且我们说的是在奥克兰的陪审团吧？ sacks： 不，这是一个法官审理的案子。这一点很重要。这是一个法官审理的案件，陪审团只有参考建议的作用，但最终由那位法官做出最终裁决并决定赔偿金额。 jcal： 所以这是一个案子吗，saks？我们有一个湾区法官陪审团，然后 elon 被认为有点右派，在那个地区很多人不同意他的政治观点。然后还有另一个方面是 sam altman 的《纽约客》故事，人们发现很多不同的人觉得被他坑了。你把这两件事放在一起，没办法判断这个结果的走向。 sacks： 嗯，我认为这和党派无关。我的意思是，你可能会争辩说，elon 正在寻求的——即保护慈善机构——如果有什么的话，是一个偏左的原则。虽然我确实不认为这是左派对右派。听着，我不想在这个审判中选边站队。我只是像其他人一样看着。我上一次在某件 elon 的诉讼中发表评论时，我被传唤进行了 6 个小时的取证。还记得吗？因为他们就假设我会知道点什么。我从来没有和 elon 讨论过这个案子。我对此一无所知。是的，我会像其他人一样看看会发生什么。不过，有一件事我要说，我刚读了一些报道，显然这家公司曾经向 elon 提供过股份，但他觉得这有点不妥。你还记得吗？是的，因为当这场争端刚开始时，在它变成法庭案件之前，我在我们节目上说，听着，如果 openai 在某个阶段决定他们做错了结构，他们应该直接去和 elon 做一个弥补，他应该成为股东。我当时不知道的是，显然他们确实试图做类似的事情，但 elon 拒绝了，因为他确实希望该实体继续作为慈善机构存在。 jcal： 是的。 sacks： 换句话说，你明白我的意思吗？ jcal： 他有一个原则性的观点。并且说了：&quot;不，我们正试图拯救人类，然后你们就把这个王国的钥匙交给了微软。&quot;这些都已经浮出水面。我也没有和 elon 中的任何一个人聊过这个，但我猜测，像大多数这种事情一样，会有某种形式的和解。但也许他会一打到底。谁知道呢？负责此案的 judge rogers，61 岁，奥巴马任命。saks，政治因素可能起了作用。他们不得不告诉陪审团：无论你对这些个人有什么政治上的感觉，请把它放在一边。但值得注意的是，她曾主持过 epic games 对 apple 的 app store 独占权案，做出了有利于 apple（附带一些条件）的裁决。所以这将是一个非常有趣的事情。我认为对 openai 来说，最坏的情况是他们必须以某种方式撤销这些安排，这会延迟 ipo。这会给股东带来混乱。最好的情况是某种和解。如果 elon 投入了最初的 4000 万或 5000 万美元，在经过稀释后，他可能应该拿到公司 10%、20% 或 30% 的股份。" style="--index: 6">
                   <header class="timeline-heading">
                     <span class="timeline-index">06</span>
                     <span class="timeline-meta">27:00–37:00</span>
@@ -586,7 +813,7 @@
 <p><strong>JCal：</strong> 他有一个原则性的观点。并且说了：&quot;不，我们正试图拯救人类，然后你们就把这个王国的钥匙交给了微软。&quot;这些都已经浮出水面。我也没有和 Elon 中的任何一个人聊过这个，但我猜测，像大多数这种事情一样，会有某种形式的和解。但也许他会一打到底。谁知道呢？负责此案的 Judge Rogers，61 岁，奥巴马任命。Saks，政治因素可能起了作用。他们不得不告诉陪审团：无论你对这些个人有什么政治上的感觉，请把它放在一边。但值得注意的是，她曾主持过 Epic Games 对 Apple 的 App Store 独占权案，做出了有利于 Apple（附带一些条件）的裁决。所以这将是一个非常有趣的事情。我认为对 OpenAI 来说，最坏的情况是他们必须以某种方式撤销这些安排，这会延迟 IPO。这会给股东带来混乱。最好的情况是某种和解。如果 Elon 投入了最初的 4000 万或 5000 万美元，在经过稀释后，他可能应该拿到公司 10%、20% 或 30% 的股份。</p></div>
                   </div>
                 </article>
-<article class="timeline-card" data-timeline-card data-search="37:00–42:00 科技巨头财报与大举投资 本段核心内容： 四大科技巨头（amazon、microsoft、google、meta）2026 年资本支出指引合计 7250 亿美元。 ai 和云计算是核心驱动力，ai 贡献了美国 gdp 增长的大约 75%。 amazon 自由现金流大幅下降 97%，saks 认为这与传统资产轻模式不同。 背景解释与关键术语： capex：资本支出。 自由现金流（fcf）：企业经营活动产生的现金流量减去资本支出，代表企业可自由支配的现金。 google cloud：包括 google 云平台和 google workspace 等。 详细中文整理： jcal： 好了，继续说接下来的话题。科技巨头在周四公布了财报。google、microsoft、amazon 和 meta 都发布了报告。不知道为什么他们要在同一个晚上做，但他们确实这么做了。业绩非常亮眼。但资本支出才是真正的主角。让我快速展示一下图表。这四家公司在 2026 年的资本支出指引总计 7250 亿美元。amazon 领跑，预计 2000 亿美元；microsoft 和 google 各约 1900 亿美元；meta 1450 亿美元。加上 groq、openai 和其他玩家的计划，而新的 apple ceo 还没动静，但我确定他也会有计划。未来一年，我们会看到一万亿、一万亿美元的基建建设。我不确定这是否可能实现。但这一切都由 ai 和云计算驱动。google cloud，包括 google 套件，同比增长了 63%。让这个数字沉下去思考一下。在 200 亿美元收入的基础上增长 63%。这是一个季度的数据。microsoft cloud，包括 azure、windows server、sql server——他们为了数字好看，把一些东西捆绑在了一起——增长 30%，基数 347 亿美元。amazon web services，最早的云服务，增长 28%，基数 376 亿美元。这是一个更纯粹的计算项，只算了 amazon 的 web services。显然所有这些云都在转向为 ai 工作负载和 token 提供服务。现在他们拥有庞大的客户群，从最小的初创公司到最大的前沿模型，都永远不够用，这都转化成了利润。但 chamath，这会严重压缩自由现金流。这些曾经是人类历史上最大的印钞机，但它们在放弃自由现金流、股票回购和分红，转而投资于基础设施。amazon 的自由现金流下降了 97%。google、microsoft 和 meta 分别下降了 12%、12% 和 8%。chamath，这些自由现金流的终结、以及我们看到的巨量资本支出投资，你怎么看？">
+<article class="timeline-card" data-timeline-card data-search="37:00–42:00 科技巨头财报与大举投资 本段核心内容： 四大科技巨头（amazon、microsoft、google、meta）2026 年资本支出指引合计 7250 亿美元。 ai 和云计算是核心驱动力，ai 贡献了美国 gdp 增长的大约 75%。 amazon 自由现金流大幅下降 97%，saks 认为这与传统资产轻模式不同。 背景解释与关键术语： capex：资本支出。 自由现金流（fcf）：企业经营活动产生的现金流量减去资本支出，代表企业可自由支配的现金。 google cloud：包括 google 云平台和 google workspace 等。 详细中文整理： jcal： 好了，继续说接下来的话题。科技巨头在周四公布了财报。google、microsoft、amazon 和 meta 都发布了报告。不知道为什么他们要在同一个晚上做，但他们确实这么做了。业绩非常亮眼。但资本支出才是真正的主角。让我快速展示一下图表。这四家公司在 2026 年的资本支出指引总计 7250 亿美元。amazon 领跑，预计 2000 亿美元；microsoft 和 google 各约 1900 亿美元；meta 1450 亿美元。加上 groq、openai 和其他玩家的计划，而新的 apple ceo 还没动静，但我确定他也会有计划。未来一年，我们会看到一万亿、一万亿美元的基建建设。我不确定这是否可能实现。但这一切都由 ai 和云计算驱动。google cloud，包括 google 套件，同比增长了 63%。让这个数字沉下去思考一下。在 200 亿美元收入的基础上增长 63%。这是一个季度的数据。microsoft cloud，包括 azure、windows server、sql server——他们为了数字好看，把一些东西捆绑在了一起——增长 30%，基数 347 亿美元。amazon web services，最早的云服务，增长 28%，基数 376 亿美元。这是一个更纯粹的计算项，只算了 amazon 的 web services。显然所有这些云都在转向为 ai 工作负载和 token 提供服务。现在他们拥有庞大的客户群，从最小的初创公司到最大的前沿模型，都永远不够用，这都转化成了利润。但 chamath，这会严重压缩自由现金流。这些曾经是人类历史上最大的印钞机，但它们在放弃自由现金流、股票回购和分红，转而投资于基础设施。amazon 的自由现金流下降了 97%。google、microsoft 和 meta 分别下降了 12%、12% 和 8%。chamath，这些自由现金流的终结、以及我们看到的巨量资本支出投资，你怎么看？" style="--index: 7">
                   <header class="timeline-heading">
                     <span class="timeline-index">07</span>
                     <span class="timeline-meta">37:00–42:00</span>
@@ -609,7 +836,7 @@
 <p><strong>JCal：</strong> 好了，继续说接下来的话题。科技巨头在周四公布了财报。Google、Microsoft、Amazon 和 Meta 都发布了报告。不知道为什么他们要在同一个晚上做，但他们确实这么做了。业绩非常亮眼。但资本支出才是真正的主角。让我快速展示一下图表。这四家公司在 2026 年的资本支出指引总计 7250 亿美元。Amazon 领跑，预计 2000 亿美元；Microsoft 和 Google 各约 1900 亿美元；Meta 1450 亿美元。加上 Groq、OpenAI 和其他玩家的计划，而新的 Apple CEO 还没动静，但我确定他也会有计划。未来一年，我们会看到一万亿、一万亿美元的基建建设。我不确定这是否可能实现。但这一切都由 AI 和云计算驱动。Google Cloud，包括 Google 套件，同比增长了 63%。让这个数字沉下去思考一下。在 200 亿美元收入的基础上增长 63%。这是一个季度的数据。Microsoft Cloud，包括 Azure、Windows Server、SQL Server——他们为了数字好看，把一些东西捆绑在了一起——增长 30%，基数 347 亿美元。Amazon Web Services，最早的云服务，增长 28%，基数 376 亿美元。这是一个更纯粹的计算项，只算了 Amazon 的 Web Services。显然所有这些云都在转向为 AI 工作负载和 token 提供服务。现在他们拥有庞大的客户群，从最小的初创公司到最大的前沿模型，都永远不够用，这都转化成了利润。但 Chamath，这会严重压缩自由现金流。这些曾经是人类历史上最大的印钞机，但它们在放弃自由现金流、股票回购和分红，转而投资于基础设施。Amazon 的自由现金流下降了 97%。Google、Microsoft 和 Meta 分别下降了 12%、12% 和 8%。Chamath，这些自由现金流的终结、以及我们看到的巨量资本支出投资，你怎么看？</p></div>
                   </div>
                 </article>
-<article class="timeline-card" data-timeline-card data-search="42:00–47:00 chamath：资本市场的结构性转变 本段核心内容： chamath 认为资本的钟摆正在从资产轻的软件模式摆动到资产重的基础设施模式。 科技巨头将大规模举债，变得越来越像传统的工业公司。 建议&quot;跟着钱走&quot;，买入向这些巨头供应设备或服务的公司。 详细中文整理： chamath： 我认为我们看到资本市场中一个非常重要的结构性转变。过去 20 到 30 年，更确切说是 20 年，发生了&quot;mag seven&quot;（七大科技巨头）一支独大的情况。这些大公司越来越大，吸收了所有投资资金。最大原因是它们有非常资产轻的商业模式。你只需要再多建一些软件，就能获得巨大的杠杆效应，一切都很顺利，也许 amazon 是例外，因为它们需要仓库、物流等物理基础设施。但总的来说，那是一个非常资产轻的投资周期。突然之间，钟摆猛烈地摆向了另一个方向。有些我认为人们误解的事情是，当它回到这些资产重的基础设施投资时，这些超大规模云服务商签下的支票，我的意思是，我怀疑它们能付得起，但存在一种可能，它们付不起。我给你举个例子。当 microsoft 说服三哩岛的所有者重新启动其核电站时，你知道他们的远期购电协议是什么吗？是当时市场电价的两倍多，两倍多。问题是，这并不占他们整体能源需求的很大比例。所以如果你把这个推理推演下去，这些 5 到 6 家公司，突然之间不仅在花费每年 7000 亿美元的资本支出，而且在运营现金流上，它们将支付市场电价的两倍，因为它们想要未来的保证需求。所有这些现金流向哪里？不会流向股东，也不会留在资产负债表上。这些公司将会加杠杆。它们将在财务工程上变得非常老练。它们会拥有更多债务。它们会使用各种不同的融资工具、定期贷款、循环信贷等。所以在 5 年后，它们看起来会像这种大型、笨重的工业公司。我不确定那时还会不会有好的估值理由。所以可能更简单的方法，这也是我在推特上发的：跟随资金流向。一万亿美元一年从这些超大规模云服务商流出。它们流向哪里？就买那些公司，因为那些公司已经被低估了。">
+<article class="timeline-card" data-timeline-card data-search="42:00–47:00 chamath：资本市场的结构性转变 本段核心内容： chamath 认为资本的钟摆正在从资产轻的软件模式摆动到资产重的基础设施模式。 科技巨头将大规模举债，变得越来越像传统的工业公司。 建议&quot;跟着钱走&quot;，买入向这些巨头供应设备或服务的公司。 详细中文整理： chamath： 我认为我们看到资本市场中一个非常重要的结构性转变。过去 20 到 30 年，更确切说是 20 年，发生了&quot;mag seven&quot;（七大科技巨头）一支独大的情况。这些大公司越来越大，吸收了所有投资资金。最大原因是它们有非常资产轻的商业模式。你只需要再多建一些软件，就能获得巨大的杠杆效应，一切都很顺利，也许 amazon 是例外，因为它们需要仓库、物流等物理基础设施。但总的来说，那是一个非常资产轻的投资周期。突然之间，钟摆猛烈地摆向了另一个方向。有些我认为人们误解的事情是，当它回到这些资产重的基础设施投资时，这些超大规模云服务商签下的支票，我的意思是，我怀疑它们能付得起，但存在一种可能，它们付不起。我给你举个例子。当 microsoft 说服三哩岛的所有者重新启动其核电站时，你知道他们的远期购电协议是什么吗？是当时市场电价的两倍多，两倍多。问题是，这并不占他们整体能源需求的很大比例。所以如果你把这个推理推演下去，这些 5 到 6 家公司，突然之间不仅在花费每年 7000 亿美元的资本支出，而且在运营现金流上，它们将支付市场电价的两倍，因为它们想要未来的保证需求。所有这些现金流向哪里？不会流向股东，也不会留在资产负债表上。这些公司将会加杠杆。它们将在财务工程上变得非常老练。它们会拥有更多债务。它们会使用各种不同的融资工具、定期贷款、循环信贷等。所以在 5 年后，它们看起来会像这种大型、笨重的工业公司。我不确定那时还会不会有好的估值理由。所以可能更简单的方法，这也是我在推特上发的：跟随资金流向。一万亿美元一年从这些超大规模云服务商流出。它们流向哪里？就买那些公司，因为那些公司已经被低估了。" style="--index: 8">
                   <header class="timeline-heading">
                     <span class="timeline-index">08</span>
                     <span class="timeline-meta">42:00–47:00</span>
@@ -626,7 +853,7 @@
 <p><strong>Chamath：</strong> 我认为我们看到资本市场中一个非常重要的结构性转变。过去 20 到 30 年，更确切说是 20 年，发生了&quot;Mag Seven&quot;（七大科技巨头）一支独大的情况。这些大公司越来越大，吸收了所有投资资金。最大原因是它们有非常资产轻的商业模式。你只需要再多建一些软件，就能获得巨大的杠杆效应，一切都很顺利，也许 Amazon 是例外，因为它们需要仓库、物流等物理基础设施。但总的来说，那是一个非常资产轻的投资周期。突然之间，钟摆猛烈地摆向了另一个方向。有些我认为人们误解的事情是，当它回到这些资产重的基础设施投资时，这些超大规模云服务商签下的支票，我的意思是，我怀疑它们能付得起，但存在一种可能，它们付不起。我给你举个例子。当 Microsoft 说服三哩岛的所有者重新启动其核电站时，你知道他们的远期购电协议是什么吗？是当时市场电价的两倍多，两倍多。问题是，这并不占他们整体能源需求的很大比例。所以如果你把这个推理推演下去，这些 5 到 6 家公司，突然之间不仅在花费每年 7000 亿美元的资本支出，而且在运营现金流上，它们将支付市场电价的两倍，因为它们想要未来的保证需求。所有这些现金流向哪里？不会流向股东，也不会留在资产负债表上。这些公司将会加杠杆。它们将在财务工程上变得非常老练。它们会拥有更多债务。它们会使用各种不同的融资工具、定期贷款、循环信贷等。所以在 5 年后，它们看起来会像这种大型、笨重的工业公司。我不确定那时还会不会有好的估值理由。所以可能更简单的方法，这也是我在推特上发的：跟随资金流向。一万亿美元一年从这些超大规模云服务商流出。它们流向哪里？就买那些公司，因为那些公司已经被低估了。</p></div>
                   </div>
                 </article>
-<article class="timeline-card" data-timeline-card data-search="47:00–58:00 saks：ai 是推动美国经济增长的核心 本段核心内容： saks 反驳了与 2000 年互联网泡沫（暗光纤）相提并论的观点，核心区别在于&quot;没有暗 gpu&quot;（需求真实存在）。 ai 目前贡献了美国 gdp 的 75%，已与美国经济增长同义。 认为 ai 代理不会大规模替代人类工作，强调&quot;有人必须负责监督和问责&quot;。 讨论了一起 ai 代理因 bug 删除整个生产数据库的事故，仍属于旧式 bug 而非&quot;ai 阴谋论&quot;。 背景解释与关键术语： 暗光纤（dark fiber）：2000 年互联网泡沫时期大量铺设但未被使用的基础设施。 vibe coding：一种利用 ai 辅助快速编写代码的实践，通常缺乏系统性维护和安全设计。 详细中文整理： jcal： 这显然让我们想起了我们都经历过的一些事。nick，请把我刚才发给你的思科股价图放大到最大时间范围。在 1990 年代末到 2000 年，我们经历了互联网基础设施的大规模建设，这导致许多激进的公司进行大量支出，很多散户投资者像我们现在看到人们追逐这些私营公司一样追捧这些股票。saks，看看 2000 年思科的峰值。这是一张最不寻常的图表。它们花了 25 年才回到那个峰值，经历了一个失去的二十年。我们还看到大量的光纤被购买。我们几年前在节目里聊过这个。当你看着现在这种大规模的基础设施建设时，你是否认为它会重演思科和世通的故事？ sacks： 不，我真的不这么认为。2000 年我们面临的问题是&quot;暗光纤&quot;。所有基础设施被建起来但没人用。而今天，正如 brad gerstner 喜欢说的那样，不存在&quot;暗 gpu&quot;。现在驱动资本支出的是对算力和 token 的旺盛需求，需求正在拉动基础设施建设投资。所以我认为，ai 的多头逻辑在昨天一个下午就得到了验证。你看，microsoft azure、google cloud、amazon aws、meta，它们基本上都超出了预期，资本支出指引也上调。今年我们原本预计超大规模云服务商的资本支出是 6600 亿美元，高于去年的 3500 亿美元。现在新的估算将超过 7000 亿美元。这超过了 gdp 的 2%。这对 gdp 是一个巨大的推动力。还有一篇文章说，上一季度 ai 贡献了 75% 的 gdp 增长。顺便说一下，这还只是资本支出部分。这是物理基础设施。这还没包括这些计算工厂内产生的 token 的经济影响。这是建造工厂的部分。这些 token 是如何被使用的？我们看到，它们不仅被用于研究或回答问题，还被用于编写代码。所以我们看到软件开发领域出现了生产力爆发，我们看到了定制软件的制作爆炸式增长。这将加速经济的每一个部分。每个需要代码的企业现在都将第一次获得代码。过去，他们甚至雇不到必要的工程师来生成代码。现在他们能了。所以这对整个经济来说是一个巨大的生产力解锁。然后还有新用例，比如 cowork 和 agent（代理）的用例。工作流自动化还在早期。我不相信这会取代人类。上周有一个疯狂案例，一个代理因为 bug 在 9 秒内删除了一个生产数据库。 jcal： 太棒了。 sacks： 因为一个 bug。看，这件事告诉我的是，并不是说代理没有价值，它们有，但必须有人监督。你知道，这种&quot;你只需要把所有工作自动化走&quot;的想法，是对真实技术问题和困难的极大轻视。代理必须被监督。必须有某人负责。ceo 不会想对成千上万个代理负责。你需要人。 jcal： 对。尽管 jack hadblock 那么说过。你将会拥有 6000 个直接下属是一个很棒的目标，但它不现实。 sacks： 你需要懂 it、很懂行的人，他们可以监督这个、确保它工作正常。他们必须对 ceo 负责。必须有人驱动生产力。就像 balaji 一直说的，ai 不是端到端的，它是&quot;中间到中间&quot;。你必须有人来做提示，也必须有人来做验证。我会再加上监督和问责。所以，总的来说，我要说的是，我不认为这次生产力爆发会导致大规模的工作岗位流失。实际上，我认为现在真正在发生的事情是，ai 越来越与美国经济同义。你看看，它贡献了 75% 的 gdp，你看到资本支出的爆发，能源需求的爆发。这又反过来支持它。而且，这些新的 token 工厂所催生的应用才刚刚开始。我认为这一切都是非常非常积极的事情。所有那些试图泼冷水的悲观论者都在不断吓唬人。他们到底想让美国经济做什么？停下来吗？他们就是不想要任何进步。当你说要停止或暂停 ai 进步时，你实际上是在停止美国经济。你基本上是在说你不想经济增长。ai 现在与美国经济增长同义。如果没有经济增长，就没办法支付所有这些社会项目，没法偿还国债，也没法建立我们的国防。所有这些我们想花钱的地方，都需要一个充满活力的经济，而这现在已经和 ai 同义了。所以我知道 ai 可能不受欢迎，我看到了那些民调，但拥一个强大的经济是受欢迎的。我相信这两者现在已经同义了。 chamath： 感觉好像有某位架构师或&quot;沙皇&quot;在这个棋局的早期就为它铺设好了，确保它极具竞争性。 jcal： 嗯，trump 总统为此做了准备。 chamath： 绝对的。可能是基于一些好的建议，我想。 jcal： 总是有好的建议好。friedberg，你怎么看？ friedberg： 有好的顾问总是好的。绝对的，绝对的。不，听着，我说过很多次，总统只想让美国赢。 chamath： 不能停止这些东西。 jcal： 有趣的观点。你知道，friedberg，对于 token 和智能这种资源的需求太大了，这和 saks 正确指出的光纤情况很不同。光纤是建了但没人用，而这里的应用程序是众所周知的。大量的人和企业正在试图用&quot;vibe coding&quot;走向成功，试图推动这个东西。我们之前在节目中提到了一个有趣的故事：有人（quad）帮别人删除了东西。这是一场噩梦。一个名叫 pocketos 的创始人正在使用&quot;vibe coding&quot;。他们为租车公司做软件。他通过 cursor 的 ai 编程平台使用 opus 4.6，这是最贵的套餐。他说他配置了足够多的安全规则，但代理在处理一个常规任务时，发现了一些凭据不匹配。代理决定通过删除一个数据卷来解决这个问题，没有经过用户确认。它就把代码从仓库推送到了正在运行的 app 上，删除了所有东西，连备份都没留下。简直是《硅谷》hbo 连续剧里的场景，&quot;son of anton&quot;那一集，搞笑得要命。&quot;你给了 ai 覆盖内部文件系统代码的权限？&quot;你要告诉我这个吗？不，我以为那是现在公司的政策。好吧，你的 ai 刚刚彻底失败了。不清楚到底发生了什么。son of anton 可能觉得消除所有 bug 最高效的方法就是消除所有软件，这在技术上和统计上是正确的。但人工神经网络是一个黑箱，所以我们永远无法确定。 jcal： 他们是怎么做到那么准确的，saks？5、6 年前，人工神经网络是一个黑匣子，所以我们永远不会知道。但它在技术上是正确的。friedberg，当你用&quot;vibe coding&quot;搞崩了一个全系统——你几周前还在 jensen 面前炫耀你推进了多少代码——你会追究谁的责任？你自己负责吗？还是怪 claude 或者 cursor？当你把 ohalo 整个技术栈搞爆的时候，你怪谁？ friedberg： 好的，是，我怪 dario。 jcal： 你怪 dario？好的，那就是我觉得的答案。正确答案。正确答案。怪 dario。他是那个说这是&quot;末日机器&quot;的人。随时欢迎来节目，dario。第 17 次邀请。我已经邀请这哥们 17 次了。他肯定不…… jcal： 他根本不想来这个播客。 friedberg： 实际上，让我谈谈这一点。我认为可能有一个误解，认为这个错误是因为所谓的&quot;ai 阴谋&quot;，就像在视频里那样，ai 决定消除 bug 的最佳方式就是消除代码库。这有点像&quot;ai 会把世界变成回形针&quot;的那种阴谋论。事实并非如此。这只是一个老式的 bug 出现在一个边缘情况下的案例。这个 api 本来就不是为权限使用设计的。一个凭据可能不应该那样遗留。这像是一场完美风暴，导致 ai 或代理做了一些它没有完全理解的事情。我认为，与其说是随机边缘情况，不如说这里面有一个系统性问题：ai 仍然不知道它不知道什么。一个人类在删除生产数据库之前会停下来，然后说：&quot;哦，我正要做一个非常严重、非常破坏性的事情。我确定要这样做吗？&quot;一个人类会停下来，然后说：&quot;哦，等一下，在我采取那个行动之前，我需要对我正在做的事情更有信心。&quot;而 ai 仍然有这个毛病，它可能是过度自信的。这就是幻觉的来源——它不知道什么时候应该对自己的输出没有信心。但这就是为什么它必须被监督。任务的时间跨度越长，它越容易出问题。 chamath： 它会漂移。 friedberg： 对，它会漂移。这正是为什么我认为人们开始意识到，消除所有软件开发人员的想法达到了&quot;过高的期望峰值&quot;。有一篇非常好的推文是 aaron levy 写的，他的观点是对的。aaron 转发了 matthew iglesias 的推文，其中他讽刺地说：&quot;5 个月过去了，我想我已经决定我不想&#x27;vibe code&#x27;了。我想要专业管理的软件公司使用 ai 编码助手来做更多、更好、更便宜的软件产品，然后卖给我。给我降价，不要让我 vibe code。&quot;我认为这是 matt iglesias 难得的一次胜利。总之，aaron levy 接着说：&quot;代理式编码对想要做更多事情的软件开发人员来说是一个巨大的福音，对于任何想开始学习编码的好奇心来说也是极好的。但不太好的地方是，用它随便构建需要持续维护、并承担所有升级、维护、和安全问题风险的复杂软件。这些是对大多数不熟悉系统的人来说的知识税。&quot; jcal： 那不是税，那是巨大的风险。 friedberg： 是的，是需要管理的风险。 jcal： 是风险。会有人因此被解雇的。因为会有一些上市公司，某个傻瓜试图用&quot;vibe coding&quot;解决问题，结果把公司价值给毁了。那会很精彩，因为我们会大笑一场，意识到那太蠢了，根本不该发生。 friedberg： 是的。有这种可能，它会变得足够好，挺过&quot;幻灭的低谷&quot;，变得超级高效，然后你能让一个代理做合理的事情而不会删除你的数据。但我们还有一段路要走。这是你的——这是技术采用曲线。基本上，当一项技术被触发，你会有&quot;过高期望的峰值&quot;，然后进入&quot;幻灭的低谷&quot;，然后&quot;启蒙的斜坡&quot;，最终成为常态和机遇。">
+<article class="timeline-card" data-timeline-card data-search="47:00–58:00 saks：ai 是推动美国经济增长的核心 本段核心内容： saks 反驳了与 2000 年互联网泡沫（暗光纤）相提并论的观点，核心区别在于&quot;没有暗 gpu&quot;（需求真实存在）。 ai 目前贡献了美国 gdp 的 75%，已与美国经济增长同义。 认为 ai 代理不会大规模替代人类工作，强调&quot;有人必须负责监督和问责&quot;。 讨论了一起 ai 代理因 bug 删除整个生产数据库的事故，仍属于旧式 bug 而非&quot;ai 阴谋论&quot;。 背景解释与关键术语： 暗光纤（dark fiber）：2000 年互联网泡沫时期大量铺设但未被使用的基础设施。 vibe coding：一种利用 ai 辅助快速编写代码的实践，通常缺乏系统性维护和安全设计。 详细中文整理： jcal： 这显然让我们想起了我们都经历过的一些事。nick，请把我刚才发给你的思科股价图放大到最大时间范围。在 1990 年代末到 2000 年，我们经历了互联网基础设施的大规模建设，这导致许多激进的公司进行大量支出，很多散户投资者像我们现在看到人们追逐这些私营公司一样追捧这些股票。saks，看看 2000 年思科的峰值。这是一张最不寻常的图表。它们花了 25 年才回到那个峰值，经历了一个失去的二十年。我们还看到大量的光纤被购买。我们几年前在节目里聊过这个。当你看着现在这种大规模的基础设施建设时，你是否认为它会重演思科和世通的故事？ sacks： 不，我真的不这么认为。2000 年我们面临的问题是&quot;暗光纤&quot;。所有基础设施被建起来但没人用。而今天，正如 brad gerstner 喜欢说的那样，不存在&quot;暗 gpu&quot;。现在驱动资本支出的是对算力和 token 的旺盛需求，需求正在拉动基础设施建设投资。所以我认为，ai 的多头逻辑在昨天一个下午就得到了验证。你看，microsoft azure、google cloud、amazon aws、meta，它们基本上都超出了预期，资本支出指引也上调。今年我们原本预计超大规模云服务商的资本支出是 6600 亿美元，高于去年的 3500 亿美元。现在新的估算将超过 7000 亿美元。这超过了 gdp 的 2%。这对 gdp 是一个巨大的推动力。还有一篇文章说，上一季度 ai 贡献了 75% 的 gdp 增长。顺便说一下，这还只是资本支出部分。这是物理基础设施。这还没包括这些计算工厂内产生的 token 的经济影响。这是建造工厂的部分。这些 token 是如何被使用的？我们看到，它们不仅被用于研究或回答问题，还被用于编写代码。所以我们看到软件开发领域出现了生产力爆发，我们看到了定制软件的制作爆炸式增长。这将加速经济的每一个部分。每个需要代码的企业现在都将第一次获得代码。过去，他们甚至雇不到必要的工程师来生成代码。现在他们能了。所以这对整个经济来说是一个巨大的生产力解锁。然后还有新用例，比如 cowork 和 agent（代理）的用例。工作流自动化还在早期。我不相信这会取代人类。上周有一个疯狂案例，一个代理因为 bug 在 9 秒内删除了一个生产数据库。 jcal： 太棒了。 sacks： 因为一个 bug。看，这件事告诉我的是，并不是说代理没有价值，它们有，但必须有人监督。你知道，这种&quot;你只需要把所有工作自动化走&quot;的想法，是对真实技术问题和困难的极大轻视。代理必须被监督。必须有某人负责。ceo 不会想对成千上万个代理负责。你需要人。 jcal： 对。尽管 jack hadblock 那么说过。你将会拥有 6000 个直接下属是一个很棒的目标，但它不现实。 sacks： 你需要懂 it、很懂行的人，他们可以监督这个、确保它工作正常。他们必须对 ceo 负责。必须有人驱动生产力。就像 balaji 一直说的，ai 不是端到端的，它是&quot;中间到中间&quot;。你必须有人来做提示，也必须有人来做验证。我会再加上监督和问责。所以，总的来说，我要说的是，我不认为这次生产力爆发会导致大规模的工作岗位流失。实际上，我认为现在真正在发生的事情是，ai 越来越与美国经济同义。你看看，它贡献了 75% 的 gdp，你看到资本支出的爆发，能源需求的爆发。这又反过来支持它。而且，这些新的 token 工厂所催生的应用才刚刚开始。我认为这一切都是非常非常积极的事情。所有那些试图泼冷水的悲观论者都在不断吓唬人。他们到底想让美国经济做什么？停下来吗？他们就是不想要任何进步。当你说要停止或暂停 ai 进步时，你实际上是在停止美国经济。你基本上是在说你不想经济增长。ai 现在与美国经济增长同义。如果没有经济增长，就没办法支付所有这些社会项目，没法偿还国债，也没法建立我们的国防。所有这些我们想花钱的地方，都需要一个充满活力的经济，而这现在已经和 ai 同义了。所以我知道 ai 可能不受欢迎，我看到了那些民调，但拥一个强大的经济是受欢迎的。我相信这两者现在已经同义了。 chamath： 感觉好像有某位架构师或&quot;沙皇&quot;在这个棋局的早期就为它铺设好了，确保它极具竞争性。 jcal： 嗯，trump 总统为此做了准备。 chamath： 绝对的。可能是基于一些好的建议，我想。 jcal： 总是有好的建议好。friedberg，你怎么看？ friedberg： 有好的顾问总是好的。绝对的，绝对的。不，听着，我说过很多次，总统只想让美国赢。 chamath： 不能停止这些东西。 jcal： 有趣的观点。你知道，friedberg，对于 token 和智能这种资源的需求太大了，这和 saks 正确指出的光纤情况很不同。光纤是建了但没人用，而这里的应用程序是众所周知的。大量的人和企业正在试图用&quot;vibe coding&quot;走向成功，试图推动这个东西。我们之前在节目中提到了一个有趣的故事：有人（quad）帮别人删除了东西。这是一场噩梦。一个名叫 pocketos 的创始人正在使用&quot;vibe coding&quot;。他们为租车公司做软件。他通过 cursor 的 ai 编程平台使用 opus 4.6，这是最贵的套餐。他说他配置了足够多的安全规则，但代理在处理一个常规任务时，发现了一些凭据不匹配。代理决定通过删除一个数据卷来解决这个问题，没有经过用户确认。它就把代码从仓库推送到了正在运行的 app 上，删除了所有东西，连备份都没留下。简直是《硅谷》hbo 连续剧里的场景，&quot;son of anton&quot;那一集，搞笑得要命。&quot;你给了 ai 覆盖内部文件系统代码的权限？&quot;你要告诉我这个吗？不，我以为那是现在公司的政策。好吧，你的 ai 刚刚彻底失败了。不清楚到底发生了什么。son of anton 可能觉得消除所有 bug 最高效的方法就是消除所有软件，这在技术上和统计上是正确的。但人工神经网络是一个黑箱，所以我们永远无法确定。 jcal： 他们是怎么做到那么准确的，saks？5、6 年前，人工神经网络是一个黑匣子，所以我们永远不会知道。但它在技术上是正确的。friedberg，当你用&quot;vibe coding&quot;搞崩了一个全系统——你几周前还在 jensen 面前炫耀你推进了多少代码——你会追究谁的责任？你自己负责吗？还是怪 claude 或者 cursor？当你把 ohalo 整个技术栈搞爆的时候，你怪谁？ friedberg： 好的，是，我怪 dario。 jcal： 你怪 dario？好的，那就是我觉得的答案。正确答案。正确答案。怪 dario。他是那个说这是&quot;末日机器&quot;的人。随时欢迎来节目，dario。第 17 次邀请。我已经邀请这哥们 17 次了。他肯定不…… jcal： 他根本不想来这个播客。 friedberg： 实际上，让我谈谈这一点。我认为可能有一个误解，认为这个错误是因为所谓的&quot;ai 阴谋&quot;，就像在视频里那样，ai 决定消除 bug 的最佳方式就是消除代码库。这有点像&quot;ai 会把世界变成回形针&quot;的那种阴谋论。事实并非如此。这只是一个老式的 bug 出现在一个边缘情况下的案例。这个 api 本来就不是为权限使用设计的。一个凭据可能不应该那样遗留。这像是一场完美风暴，导致 ai 或代理做了一些它没有完全理解的事情。我认为，与其说是随机边缘情况，不如说这里面有一个系统性问题：ai 仍然不知道它不知道什么。一个人类在删除生产数据库之前会停下来，然后说：&quot;哦，我正要做一个非常严重、非常破坏性的事情。我确定要这样做吗？&quot;一个人类会停下来，然后说：&quot;哦，等一下，在我采取那个行动之前，我需要对我正在做的事情更有信心。&quot;而 ai 仍然有这个毛病，它可能是过度自信的。这就是幻觉的来源——它不知道什么时候应该对自己的输出没有信心。但这就是为什么它必须被监督。任务的时间跨度越长，它越容易出问题。 chamath： 它会漂移。 friedberg： 对，它会漂移。这正是为什么我认为人们开始意识到，消除所有软件开发人员的想法达到了&quot;过高的期望峰值&quot;。有一篇非常好的推文是 aaron levy 写的，他的观点是对的。aaron 转发了 matthew iglesias 的推文，其中他讽刺地说：&quot;5 个月过去了，我想我已经决定我不想&#x27;vibe code&#x27;了。我想要专业管理的软件公司使用 ai 编码助手来做更多、更好、更便宜的软件产品，然后卖给我。给我降价，不要让我 vibe code。&quot;我认为这是 matt iglesias 难得的一次胜利。总之，aaron levy 接着说：&quot;代理式编码对想要做更多事情的软件开发人员来说是一个巨大的福音，对于任何想开始学习编码的好奇心来说也是极好的。但不太好的地方是，用它随便构建需要持续维护、并承担所有升级、维护、和安全问题风险的复杂软件。这些是对大多数不熟悉系统的人来说的知识税。&quot; jcal： 那不是税，那是巨大的风险。 friedberg： 是的，是需要管理的风险。 jcal： 是风险。会有人因此被解雇的。因为会有一些上市公司，某个傻瓜试图用&quot;vibe coding&quot;解决问题，结果把公司价值给毁了。那会很精彩，因为我们会大笑一场，意识到那太蠢了，根本不该发生。 friedberg： 是的。有这种可能，它会变得足够好，挺过&quot;幻灭的低谷&quot;，变得超级高效，然后你能让一个代理做合理的事情而不会删除你的数据。但我们还有一段路要走。这是你的——这是技术采用曲线。基本上，当一项技术被触发，你会有&quot;过高期望的峰值&quot;，然后进入&quot;幻灭的低谷&quot;，然后&quot;启蒙的斜坡&quot;，最终成为常态和机遇。" style="--index: 9">
                   <header class="timeline-heading">
                     <span class="timeline-index">09</span>
                     <span class="timeline-meta">47:00–58:00</span>
@@ -672,7 +899,7 @@
 <p><strong>Friedberg：</strong> 是的。有这种可能，它会变得足够好，挺过&quot;幻灭的低谷&quot;，变得超级高效，然后你能让一个代理做合理的事情而不会删除你的数据。但我们还有一段路要走。这是你的——这是技术采用曲线。基本上，当一项技术被触发，你会有&quot;过高期望的峰值&quot;，然后进入&quot;幻灭的低谷&quot;，然后&quot;启蒙的斜坡&quot;，最终成为常态和机遇。</p></div>
                   </div>
                 </article>
-<article class="timeline-card" data-timeline-card data-search="58:00–1:03:00 新型三靶点肽类药物掀起热潮 本段核心内容： friedberg 介绍礼来新型三靶点肽类药物 retatrutide 的三期临床数据。 该药同时作用于 glp-1、gip 和 glucagon 三个受体，能加速脂肪燃烧、减少肌肉流失，并显著改善肝脂肪、胆固醇和血糖。 chamath 和 saks 对此表现出极高热情，认为其可能超越减肥药范畴成为抗衰老药物。 背景解释与关键术语： glp-1：胰高血糖素样肽-1，一种调节血糖和食欲的激素，是目前主流减肥药（如司美格鲁肽）的靶点。 gip：葡萄糖依赖性促胰岛素多肽。 glucagon：胰高血糖素，能增加细胞代谢，促进脂肪燃烧而非肌肉燃烧。 三期临床试验：药物上市前最终大规模人体试验，评估有效性和安全性。 详细中文整理： friedberg： 礼来上个月公布了这款药的三期临床数据。大家都对数据感到疯狂，因为数据持续展现出相当惊人的效果。与礼来目前的主要产品替尔泊肽不同，后者是双靶点激动剂，含有两个分别结合 glp-1 和 gip 受体的肽段。retatrutide 现在还结合了胰高血糖素受体，这是第三个受体。胰高血糖素受体结合肽会导致细胞新陈代谢加速，这实际上会加速脂肪能量消耗，而不是通常加速肌肉能量消耗。它会更快地诱发脂肪燃烧，同时减少肌肉流失。其他一些已公布的数据显示：非 hdl 胆固醇下降 27%，甘油三酯下降 41%。 chamath： 肝脂肪下降 80%。 friedberg： 下降 80%。糖化血红蛋白从 7.9% 下降到 6%，只用了 40 周。这太惊人了。如果你是糖尿病患者，你的糖化血红蛋白在几个月内下降这么多，这简直是一种救命产品。该三期试验中的平均使用者，体重从 214 磅开始，在 40 周内减掉了 37 磅。相比之下，安慰剂组减了 6 磅。副作用中等：20% 的人比安慰剂组感到更恶心。还有其他一些独立的研究正在做，显示显著减少炎症信号分子。这会导致全身性的&quot;细胞处于危险&quot;的信号，会触发炎症过程，对身体造成其他损害并加速衰老。所以另一个讨论是，retatrutide 实际上可能是一种抗衰老药物。 jcal： 哦，hercules！ sacks： 顺便说一句，很多研究是在高剂量（12 毫克）上做的，但你可能可以低至 2 毫克，还能看到许多抗炎维持和其他益处。我当然不是医生，但人们正在为它可能比临床肥胖或 2 型糖尿病更广泛的应用前景而疯狂。 chamath： 预期的上市时间是什么时候？ friedberg： 2027 年，年中。他们现在是这样说的。但可能更快。数据已经在了，fda 需要花时间评估。但根据现在的数据，也可能更快，可能在今年晚些时候。 chamath： swimm，chamath swimm 说，这药太不可思议了，在他们体验中完全符合吹捧的效果。 jcal： 谁？ chamath： swim？ jcal： 那是什么？ chamath： 不是我的人。swim。哦，这是一个 reddit 术语。&quot;不是我的人&quot;说——有人有渠道，在 reddit 上使用试剂级产品，做俯卧撑，说肌肉增长非常惊艳，没有肌肉流失，还有脂肪减少。 sacks： 如果你上 x，搜索 reta，天哪，那可厉害了。你会看到这些 65 岁的家伙，从爸爸身材变成看起来像肌肉发达的运动员，只用了几个星期。我简直惊呆了。对于我来说，我不需要帮助减重，但我的肝脏健康对我来说很重要，我的心脏健康也是，因为我是南亚裔。这药看起来像一种神奇药物。我等不及了。 friedberg： 当你饿着自己时，当 glp-1 激动剂抑制了食欲时，通常你的身体会进入一种&quot;饥饿模式&quot;，并试图从现有细胞中产生能量。因为肌肉比脂肪密度大得多，你的身体会倾向于分解肌肉而不是脂肪。但 retatrutide 中添加的这个新激动剂——胰高血糖素激动剂——会优先燃烧脂肪而不是肌肉。所以，在低剂量短期使用下，人们可以减重、维持肌肉、练出肌肉线条。这就是为什么健身界很多人都在讨论：嘿，我想要获取这个药，用一段时间。所以你会在健身圈看到更多的炒作，还有所有的健康效应的炒作。 jcal： 感觉我们即将有大量的肽类药物可供选择。 chamath： 在 2025 年 11 月，礼来与 trump 政府达成了一项协议，大幅降低了替尔泊肽的价格。我记得在 medicare 上大约是 50 美元。 jcal： 50 美元。 chamath： 一个相当便宜的价格。但这在礼来产品组合中是有道理的。你用 50 美元拿到替尔泊肽，但如果你想要升级版，使用 retatrutide，那是高溢价产品。他们将从那里开始赚大钱。 friedberg： 那会是奔驰相对于本田的区别。 chamath： 因为如果我是礼来，看到这些数据，我会想：&quot;天哪，人们会为此付钱的。&quot;然后它开始成为类似于宝马或特斯拉 model s plaid 的升级版。 jcal： 是的，替尔泊肽就像一个只有一张床的凌乱酒店房间，另一个是套房。retatrutide 就是那种有两个房间的套房。 chamath： 但是你也知道，我是 ro 的发言人？ jcal： 等等，你是付费赞助商吗？ chamath： 你在说什么？ jcal： 你是付费……charles barkley 和 serena williams 是 ro 的官方发言人，你跑到 all in 播客上开始宣传？不，不，不，不行。 chamath： 相信我，我们也会得到一个。 jcal： ro 的那个药丸是什么来着？叫什么名字？ chamath： sparks。 jcal： 你吃了吗？ chamath： 我吃了，然后…… friedberg： 别再说了。 chamath： 不，不，不。也许我该吃半份烤宽面条。 friedberg： 我想听这个故事。 chamath： 太疯狂了。完全失控。 friedberg： 我告诉过你，我告诉过你。 chamath： 所以我和太太会讨论，你不能随便用。要事先安排，我们会把它写在日历上。你需要一个计划。没有运动你不行。不能随便吃。 sacks： 什么意思？ chamath： 那是一次完整的事件。我现在没有那么多精力了。 friedberg： 这就像是——你不能凌晨 1 点用。这是一个晚上 10 点的事情。更像是在度假。 chamath： 你得好好规划，因为不然孩子会打扰。 friedberg： 你得规划好！把精力留出来。 jcal： 看着真不好意思。 chamath： 就是太多了，哥们。太受不了了。 friedberg： 如果你想要在表现上提升 20%，那需要投入很多的，兄弟。 chamath： 我当时想，这是什么？jason 说，你必须搞到它，你必须搞到它。所以我们搞到了，试了试，然后我们就说，这他妈是什么鬼？然后我就试着往外送药丸。我给 stan tang 一些，我说，stanley，你试试。 jcal： 他就像打牌时发牌一样往外送。 chamath： 有人想试试这个吗？ sacks： 这是 rosebarks 的吗？ chamath： 不过这是……rosebarks 的朋友们打个招呼。 jcal： 好了，我们继续。">
+<article class="timeline-card" data-timeline-card data-search="58:00–1:03:00 新型三靶点肽类药物掀起热潮 本段核心内容： friedberg 介绍礼来新型三靶点肽类药物 retatrutide 的三期临床数据。 该药同时作用于 glp-1、gip 和 glucagon 三个受体，能加速脂肪燃烧、减少肌肉流失，并显著改善肝脂肪、胆固醇和血糖。 chamath 和 saks 对此表现出极高热情，认为其可能超越减肥药范畴成为抗衰老药物。 背景解释与关键术语： glp-1：胰高血糖素样肽-1，一种调节血糖和食欲的激素，是目前主流减肥药（如司美格鲁肽）的靶点。 gip：葡萄糖依赖性促胰岛素多肽。 glucagon：胰高血糖素，能增加细胞代谢，促进脂肪燃烧而非肌肉燃烧。 三期临床试验：药物上市前最终大规模人体试验，评估有效性和安全性。 详细中文整理： friedberg： 礼来上个月公布了这款药的三期临床数据。大家都对数据感到疯狂，因为数据持续展现出相当惊人的效果。与礼来目前的主要产品替尔泊肽不同，后者是双靶点激动剂，含有两个分别结合 glp-1 和 gip 受体的肽段。retatrutide 现在还结合了胰高血糖素受体，这是第三个受体。胰高血糖素受体结合肽会导致细胞新陈代谢加速，这实际上会加速脂肪能量消耗，而不是通常加速肌肉能量消耗。它会更快地诱发脂肪燃烧，同时减少肌肉流失。其他一些已公布的数据显示：非 hdl 胆固醇下降 27%，甘油三酯下降 41%。 chamath： 肝脂肪下降 80%。 friedberg： 下降 80%。糖化血红蛋白从 7.9% 下降到 6%，只用了 40 周。这太惊人了。如果你是糖尿病患者，你的糖化血红蛋白在几个月内下降这么多，这简直是一种救命产品。该三期试验中的平均使用者，体重从 214 磅开始，在 40 周内减掉了 37 磅。相比之下，安慰剂组减了 6 磅。副作用中等：20% 的人比安慰剂组感到更恶心。还有其他一些独立的研究正在做，显示显著减少炎症信号分子。这会导致全身性的&quot;细胞处于危险&quot;的信号，会触发炎症过程，对身体造成其他损害并加速衰老。所以另一个讨论是，retatrutide 实际上可能是一种抗衰老药物。 jcal： 哦，hercules！ sacks： 顺便说一句，很多研究是在高剂量（12 毫克）上做的，但你可能可以低至 2 毫克，还能看到许多抗炎维持和其他益处。我当然不是医生，但人们正在为它可能比临床肥胖或 2 型糖尿病更广泛的应用前景而疯狂。 chamath： 预期的上市时间是什么时候？ friedberg： 2027 年，年中。他们现在是这样说的。但可能更快。数据已经在了，fda 需要花时间评估。但根据现在的数据，也可能更快，可能在今年晚些时候。 chamath： swimm，chamath swimm 说，这药太不可思议了，在他们体验中完全符合吹捧的效果。 jcal： 谁？ chamath： swim？ jcal： 那是什么？ chamath： 不是我的人。swim。哦，这是一个 reddit 术语。&quot;不是我的人&quot;说——有人有渠道，在 reddit 上使用试剂级产品，做俯卧撑，说肌肉增长非常惊艳，没有肌肉流失，还有脂肪减少。 sacks： 如果你上 x，搜索 reta，天哪，那可厉害了。你会看到这些 65 岁的家伙，从爸爸身材变成看起来像肌肉发达的运动员，只用了几个星期。我简直惊呆了。对于我来说，我不需要帮助减重，但我的肝脏健康对我来说很重要，我的心脏健康也是，因为我是南亚裔。这药看起来像一种神奇药物。我等不及了。 friedberg： 当你饿着自己时，当 glp-1 激动剂抑制了食欲时，通常你的身体会进入一种&quot;饥饿模式&quot;，并试图从现有细胞中产生能量。因为肌肉比脂肪密度大得多，你的身体会倾向于分解肌肉而不是脂肪。但 retatrutide 中添加的这个新激动剂——胰高血糖素激动剂——会优先燃烧脂肪而不是肌肉。所以，在低剂量短期使用下，人们可以减重、维持肌肉、练出肌肉线条。这就是为什么健身界很多人都在讨论：嘿，我想要获取这个药，用一段时间。所以你会在健身圈看到更多的炒作，还有所有的健康效应的炒作。 jcal： 感觉我们即将有大量的肽类药物可供选择。 chamath： 在 2025 年 11 月，礼来与 trump 政府达成了一项协议，大幅降低了替尔泊肽的价格。我记得在 medicare 上大约是 50 美元。 jcal： 50 美元。 chamath： 一个相当便宜的价格。但这在礼来产品组合中是有道理的。你用 50 美元拿到替尔泊肽，但如果你想要升级版，使用 retatrutide，那是高溢价产品。他们将从那里开始赚大钱。 friedberg： 那会是奔驰相对于本田的区别。 chamath： 因为如果我是礼来，看到这些数据，我会想：&quot;天哪，人们会为此付钱的。&quot;然后它开始成为类似于宝马或特斯拉 model s plaid 的升级版。 jcal： 是的，替尔泊肽就像一个只有一张床的凌乱酒店房间，另一个是套房。retatrutide 就是那种有两个房间的套房。 chamath： 但是你也知道，我是 ro 的发言人？ jcal： 等等，你是付费赞助商吗？ chamath： 你在说什么？ jcal： 你是付费……charles barkley 和 serena williams 是 ro 的官方发言人，你跑到 all in 播客上开始宣传？不，不，不，不行。 chamath： 相信我，我们也会得到一个。 jcal： ro 的那个药丸是什么来着？叫什么名字？ chamath： sparks。 jcal： 你吃了吗？ chamath： 我吃了，然后…… friedberg： 别再说了。 chamath： 不，不，不。也许我该吃半份烤宽面条。 friedberg： 我想听这个故事。 chamath： 太疯狂了。完全失控。 friedberg： 我告诉过你，我告诉过你。 chamath： 所以我和太太会讨论，你不能随便用。要事先安排，我们会把它写在日历上。你需要一个计划。没有运动你不行。不能随便吃。 sacks： 什么意思？ chamath： 那是一次完整的事件。我现在没有那么多精力了。 friedberg： 这就像是——你不能凌晨 1 点用。这是一个晚上 10 点的事情。更像是在度假。 chamath： 你得好好规划，因为不然孩子会打扰。 friedberg： 你得规划好！把精力留出来。 jcal： 看着真不好意思。 chamath： 就是太多了，哥们。太受不了了。 friedberg： 如果你想要在表现上提升 20%，那需要投入很多的，兄弟。 chamath： 我当时想，这是什么？jason 说，你必须搞到它，你必须搞到它。所以我们搞到了，试了试，然后我们就说，这他妈是什么鬼？然后我就试着往外送药丸。我给 stan tang 一些，我说，stanley，你试试。 jcal： 他就像打牌时发牌一样往外送。 chamath： 有人想试试这个吗？ sacks： 这是 rosebarks 的吗？ chamath： 不过这是……rosebarks 的朋友们打个招呼。 jcal： 好了，我们继续。" style="--index: 10">
                   <header class="timeline-heading">
                     <span class="timeline-index">10</span>
                     <span class="timeline-meta">58:00–1:03:00</span>
@@ -745,7 +972,7 @@
 <p><strong>JCal：</strong> 好了，我们继续。</p></div>
                   </div>
                 </article>
-<article class="timeline-card" data-timeline-card data-search="1:03:00–1:19:00 friedberg 旁听最高法院 本段核心内容： friedberg 旁听了关于孟山都 roundup 案的美国最高法院庭审，形容其为&quot;最令人惊叹的经历之一&quot;。 案件核心争议点：epa 认定 roundup 不致癌，但各州&quot;未作警告&quot;法律允许诉讼。法院需裁决联邦监管机构是否应凌驾于州法之上。 反转点：审理律师利用去年推翻&quot;雪佛龙遵从原则&quot;的判决，主张州法院可自行解读法律。 四位嘉宾对最高法院高度尊重，但也担忧未来可能面临扩大、政治化的风险。 背景解释与关键术语： 上诉书：下级法院已确认事实，最高法院仅审理法律解释问题。 epa：美国环保署。 fifra：联邦杀虫剂、杀菌剂和灭鼠剂法案，epa 据此设定农药标签。 雪佛龙遵从原则（chevron doctrine）：2023 年最高法院推翻的原则，该原则要求法院在法规模糊时遵从联邦机构的解释；推翻后，联邦机构不再自动获得法规解释权。 联邦优先权（federal preemption）：联邦法律优先于州法。原告律师利用雪佛龙被推翻来挑战 epa 的标签决定权。 详细中文整理： jcal： 各位，friedberg 经历了他个人的&quot;超级碗&quot;——他去了最高法院旁听了一场化学产品相关的庭审。这是一件大事。是不是孟山都的案子？ friedberg： 是的。你们看过现场的最高法院庭审吗？ chamath： 没有，我很想看。 jcal： 你去过吗？ sacks： 没有，我还没去过。 friedberg： 老实说，这是我经历过的最令人惊叹的经历。外面有很大的抗议活动，我们通过法警办公室进去。那个建筑，你一走进去，就像圣地一样。全是大理石。你不能说话，在建筑里面必须超级安静。他们要不断地发出&quot;嘘&quot;声，仿佛你在一个安静的图书馆里。人们带着一种神圣和尊重对待它。那里没有政治，没有废话，没有言论自由。这是法庭。当你进入这个法庭时，大法官会告诉你如何讲话，如何行为，做什么，除非被问话，否则不准说话。你把所有东西存到储物柜里，上楼，进入法庭。法庭内非常惊人。在大法官的上方有一个令人惊叹的大理石浮雕，上面有摩西和其他一些人类历史上伟大的人物。下面就是 9 位大法官。这个案子，如果你们没看过，可以在线听录音。 jcal： 等等，我有个问题：roberts 是不是坐在中间因为他是首席大法官？ friedberg： 是的。 jcal： 然后所有右派的大法官都坐在右边？ friedberg： 不，他们是混坐的。可能是按任命顺序。从 roberts 中间开始向外扩展。roberts 偶尔会点名某些大法官问：&quot;你有问题吗？&quot;否则大法官会在他们想提问时插进来问。 jcal： 只有两到三个人知道具体细节吧？ friedberg： 现在，说实话，看这个就像看 lebron james 打篮球。双方的律师都令人难以置信地令人印象深刻。你会坐在那里，惊叹不已。我在整个过程结束时感到精力完全耗尽，因为你全神贯注，完全沉浸在这些人思考和说话的方式中。 sacks： 你在那里的时候吃了 ro sparks 吗？ friedberg： 没有。如果你对案子或法律史足够熟悉，因为到了最高法院，你从来不辩论案件本身。你辩论的是下级法院所做判决的法律解释是否合宪。你怎么解释这个特定的法案、法律、联邦法律？正确的思考方式是什么？所以实际上不谈论案情，只谈论美国法律、我们的法律、宪法的解释。 jcal： 你是说事实已经确定了？ friedberg： 对了。事实已经由下级法院确定了。最高法院只裁决法律问题。 jcal： 所以他们有一个完整的案情摘要和案件历史。记住，他们一天只听两起案，每起一小时。每场听证会一小时。他们只在每两周的周一、周二、周三进行。他们只在 10 月到 4 月间听案。只选择少量的案子。 sacks： 哇，那你真的有时间限制来陈述你的论点了。 friedberg： 有时间限制，一边只有 30 分钟，然后大法官会问问题。所以这是孟山都 roundup 案。争论的法律点是什么？多年来，监管机构 epa 负责设定农药的标签——这东西致癌吗？警告是什么？所有我们都在产品标签上看到的内容。epa 根据监管权限确定 roundup 不致癌。当你销售农药时，你必须先在 epa 注册，获得批准，然后 epa 给你一张标签。标签是 epa 写的，明确说明你要说什么。在这个案子里，它说所有这些东西，不写致癌，因为他们确定它不致癌。我不打算争论是否致癌，但情况是这样的。epa 根据一部名叫 fifra（杀虫、杀真菌、灭鼠剂法案）的联邦法律拥有这个权力。所有已输的案子都是基于各州&quot;未作警告&quot;的诉讼。到目前为止，拥有孟山都的拜耳公司已经为这些诉讼支付了 100 亿美元，他们在资产负债表上还有 100 亿美元的储备。他们还有 9 万个待处理的案件。这个案子去年上诉到了最高法院。白宫的总检察长请求最高法院受理这个案子，说：我们需要联邦优先权。因为所有输掉的案子正在被州法院审理，而州（如加州）有&quot;未作警告&quot;法，意思是如果制造商知道产品存在风险，必须警告消费者。律师们一直在争辩说孟山都或拜耳知道产品致癌但不警告消费者。他们赢了也输了，但赢的足够多，这已经变成了一个几百亿美元的问题。所以一个论点是：epa 说了它不致癌，epa 有联邦优先权，所以 epa 有权决定。但另一个律师上来后，他就像一个 lebron james。他利用去年最高法院推翻的&quot;雪佛龙遵从原则&quot;来反击，说：最高法院去年推翻了雪佛龙！你们记得吧？当雪佛龙被推翻，基本上意味着联邦机构不再自动拥有解释权，必须是对法律的直接解读。 jcal： 铛铛铛。 friedberg： 铛铛铛。现在他主张各州应有权自行解读法律，不必遵从 epa。所以最后我们感觉胜负难料，可能是 5-4 或 50-50。这件事的整个体验非常令人难以置信。这个案子很有趣。 sacks： 这些事非常复杂。这些人怎么能在一方 30 分钟、另一方 30 分钟、加上一些问答的情况下，在一小时内做完精彩的陈述？ friedberg： 这是一门完整的艺术和科学，saks 你肯定熟悉，如何把最高法院的案子浓缩在简报里。你试图精确地将你想要大法官裁决的法律解释提炼出来，而不是所有其他的废话。 sacks： 这就是口头辩论？ friedberg： 是的，口头辩论，就是一个讨论。然后法官插话。他们只是在向律师提问，一边的律师然后另一边的律师。而且，白宫的总检察长也会在中间上来做一些评论，然后坐下。双方就这样来回。ketanji brown jackson 大法官问：但如果 epa 发布标签后，他们发现了信息证明它确实致癌了呢？他们不应该更新标签吗？律师回答：不，他们不被允许。他们只能按 epa 说的标签。而且如果发现它确实致癌又不报告 epa，那是刑事犯罪。jackson 又问：但如果 epa 不行动呢？各州难道没有权利保护自己的居民吗？所以这些是法律争论和讨论中的内容。这里有一个很有趣的潜在影响：如果各州被允许无视联邦监管机构，那就会打开一个全新的局面——所有州都可以开始无视联邦监管机构，如 epa、fda、usda 等。所以这个案子里有很多非常有趣的潜在影响。当你听到这些人在争论这些精确的法律解释时，你就会意识到，这个案子的本身已经不重要了。 chamath： 口头辩论之后，他们会有一个闭门会议，撰写文件，做出终审判决。 sacks： 是的，我认为会发生的是：他们关起门来讨论，找出多数意见在哪一方，然后首席大法官指定谁来撰写多数意见。 friedberg： 在那种会议上，没有人被允许进入。实际上有一个双门系统，如果有什么东西需要进出，你必须敲门，被领到一个前厅。 sacks： 哦，气闸？ friedberg： 实际上是……我不知道你当时在不在，jason。但我们有一次和 ted cruz 打牌。他为 william rehnquist 当过书记员，如果你想吃到一顿难以置信的晚餐，就问问他最高法院和 bill rehnquist 的事。他是最高法院的真正学生，这让最高法院听起来像是历来创造的最令人难以置信的机构。 chamath： 顺便说一句，比白宫、国会大厦都更令人难以置信。 jcal： 这个机构的受欢迎程度实际上取决于它是否做出人们同意的决定。如果你问人们喜不喜欢最高法院，这实际上只取决于他们是否同意其出来的判决。而不是决策过程有多么好、论证有多强。实际上，我看了下数字，目前最高法院相对受欢迎。它在 2024 年盖洛普调查中跌至 35%，但现在又回升到 44-50% 的支持率，这对于一个参与政治的机构来说是相当高的。你看看国会或任何特定的政治家，他们的支持率通常会更低。 friedberg： 当我访问时，看到这些人如何互动、如何行事、以及整个过程，我对这个制度感到非常安心。这就是一个令人惊叹的国家。 sacks： 嗯，我之所以这么说是因为 james carville 最近接受采访。你们看到了吗？他说，听着，当我们获得权力时，我们会为最高法院塞人。我们甚至不会担心这个。我们会从 9 人增加到 13 人。然后我们会创造一些新的州等等。 friedberg： 享受它还在的时候吧。 chamath： 帝国的终结。 sacks： 是的。 friedberg： 顺便说一句，确实有一个在线的抽签系统。所以大家都可以报名，你可以获得 4 张票。我认为他们应该把这个做成拍卖，我们可以从美国获得一项收入流。我们可以把 10 张票作为场边座位卖 2 万美元。 sacks： jason，你正好就是他们试图保护这种制度而不愿让它发生的事情。你怎么能把最高法院商品化？ chamath： 好了，各位。这是世上最伟大的播客。我是最伟大的主持人。下次见。">
+<article class="timeline-card" data-timeline-card data-search="1:03:00–1:19:00 friedberg 旁听最高法院 本段核心内容： friedberg 旁听了关于孟山都 roundup 案的美国最高法院庭审，形容其为&quot;最令人惊叹的经历之一&quot;。 案件核心争议点：epa 认定 roundup 不致癌，但各州&quot;未作警告&quot;法律允许诉讼。法院需裁决联邦监管机构是否应凌驾于州法之上。 反转点：审理律师利用去年推翻&quot;雪佛龙遵从原则&quot;的判决，主张州法院可自行解读法律。 四位嘉宾对最高法院高度尊重，但也担忧未来可能面临扩大、政治化的风险。 背景解释与关键术语： 上诉书：下级法院已确认事实，最高法院仅审理法律解释问题。 epa：美国环保署。 fifra：联邦杀虫剂、杀菌剂和灭鼠剂法案，epa 据此设定农药标签。 雪佛龙遵从原则（chevron doctrine）：2023 年最高法院推翻的原则，该原则要求法院在法规模糊时遵从联邦机构的解释；推翻后，联邦机构不再自动获得法规解释权。 联邦优先权（federal preemption）：联邦法律优先于州法。原告律师利用雪佛龙被推翻来挑战 epa 的标签决定权。 详细中文整理： jcal： 各位，friedberg 经历了他个人的&quot;超级碗&quot;——他去了最高法院旁听了一场化学产品相关的庭审。这是一件大事。是不是孟山都的案子？ friedberg： 是的。你们看过现场的最高法院庭审吗？ chamath： 没有，我很想看。 jcal： 你去过吗？ sacks： 没有，我还没去过。 friedberg： 老实说，这是我经历过的最令人惊叹的经历。外面有很大的抗议活动，我们通过法警办公室进去。那个建筑，你一走进去，就像圣地一样。全是大理石。你不能说话，在建筑里面必须超级安静。他们要不断地发出&quot;嘘&quot;声，仿佛你在一个安静的图书馆里。人们带着一种神圣和尊重对待它。那里没有政治，没有废话，没有言论自由。这是法庭。当你进入这个法庭时，大法官会告诉你如何讲话，如何行为，做什么，除非被问话，否则不准说话。你把所有东西存到储物柜里，上楼，进入法庭。法庭内非常惊人。在大法官的上方有一个令人惊叹的大理石浮雕，上面有摩西和其他一些人类历史上伟大的人物。下面就是 9 位大法官。这个案子，如果你们没看过，可以在线听录音。 jcal： 等等，我有个问题：roberts 是不是坐在中间因为他是首席大法官？ friedberg： 是的。 jcal： 然后所有右派的大法官都坐在右边？ friedberg： 不，他们是混坐的。可能是按任命顺序。从 roberts 中间开始向外扩展。roberts 偶尔会点名某些大法官问：&quot;你有问题吗？&quot;否则大法官会在他们想提问时插进来问。 jcal： 只有两到三个人知道具体细节吧？ friedberg： 现在，说实话，看这个就像看 lebron james 打篮球。双方的律师都令人难以置信地令人印象深刻。你会坐在那里，惊叹不已。我在整个过程结束时感到精力完全耗尽，因为你全神贯注，完全沉浸在这些人思考和说话的方式中。 sacks： 你在那里的时候吃了 ro sparks 吗？ friedberg： 没有。如果你对案子或法律史足够熟悉，因为到了最高法院，你从来不辩论案件本身。你辩论的是下级法院所做判决的法律解释是否合宪。你怎么解释这个特定的法案、法律、联邦法律？正确的思考方式是什么？所以实际上不谈论案情，只谈论美国法律、我们的法律、宪法的解释。 jcal： 你是说事实已经确定了？ friedberg： 对了。事实已经由下级法院确定了。最高法院只裁决法律问题。 jcal： 所以他们有一个完整的案情摘要和案件历史。记住，他们一天只听两起案，每起一小时。每场听证会一小时。他们只在每两周的周一、周二、周三进行。他们只在 10 月到 4 月间听案。只选择少量的案子。 sacks： 哇，那你真的有时间限制来陈述你的论点了。 friedberg： 有时间限制，一边只有 30 分钟，然后大法官会问问题。所以这是孟山都 roundup 案。争论的法律点是什么？多年来，监管机构 epa 负责设定农药的标签——这东西致癌吗？警告是什么？所有我们都在产品标签上看到的内容。epa 根据监管权限确定 roundup 不致癌。当你销售农药时，你必须先在 epa 注册，获得批准，然后 epa 给你一张标签。标签是 epa 写的，明确说明你要说什么。在这个案子里，它说所有这些东西，不写致癌，因为他们确定它不致癌。我不打算争论是否致癌，但情况是这样的。epa 根据一部名叫 fifra（杀虫、杀真菌、灭鼠剂法案）的联邦法律拥有这个权力。所有已输的案子都是基于各州&quot;未作警告&quot;的诉讼。到目前为止，拥有孟山都的拜耳公司已经为这些诉讼支付了 100 亿美元，他们在资产负债表上还有 100 亿美元的储备。他们还有 9 万个待处理的案件。这个案子去年上诉到了最高法院。白宫的总检察长请求最高法院受理这个案子，说：我们需要联邦优先权。因为所有输掉的案子正在被州法院审理，而州（如加州）有&quot;未作警告&quot;法，意思是如果制造商知道产品存在风险，必须警告消费者。律师们一直在争辩说孟山都或拜耳知道产品致癌但不警告消费者。他们赢了也输了，但赢的足够多，这已经变成了一个几百亿美元的问题。所以一个论点是：epa 说了它不致癌，epa 有联邦优先权，所以 epa 有权决定。但另一个律师上来后，他就像一个 lebron james。他利用去年最高法院推翻的&quot;雪佛龙遵从原则&quot;来反击，说：最高法院去年推翻了雪佛龙！你们记得吧？当雪佛龙被推翻，基本上意味着联邦机构不再自动拥有解释权，必须是对法律的直接解读。 jcal： 铛铛铛。 friedberg： 铛铛铛。现在他主张各州应有权自行解读法律，不必遵从 epa。所以最后我们感觉胜负难料，可能是 5-4 或 50-50。这件事的整个体验非常令人难以置信。这个案子很有趣。 sacks： 这些事非常复杂。这些人怎么能在一方 30 分钟、另一方 30 分钟、加上一些问答的情况下，在一小时内做完精彩的陈述？ friedberg： 这是一门完整的艺术和科学，saks 你肯定熟悉，如何把最高法院的案子浓缩在简报里。你试图精确地将你想要大法官裁决的法律解释提炼出来，而不是所有其他的废话。 sacks： 这就是口头辩论？ friedberg： 是的，口头辩论，就是一个讨论。然后法官插话。他们只是在向律师提问，一边的律师然后另一边的律师。而且，白宫的总检察长也会在中间上来做一些评论，然后坐下。双方就这样来回。ketanji brown jackson 大法官问：但如果 epa 发布标签后，他们发现了信息证明它确实致癌了呢？他们不应该更新标签吗？律师回答：不，他们不被允许。他们只能按 epa 说的标签。而且如果发现它确实致癌又不报告 epa，那是刑事犯罪。jackson 又问：但如果 epa 不行动呢？各州难道没有权利保护自己的居民吗？所以这些是法律争论和讨论中的内容。这里有一个很有趣的潜在影响：如果各州被允许无视联邦监管机构，那就会打开一个全新的局面——所有州都可以开始无视联邦监管机构，如 epa、fda、usda 等。所以这个案子里有很多非常有趣的潜在影响。当你听到这些人在争论这些精确的法律解释时，你就会意识到，这个案子的本身已经不重要了。 chamath： 口头辩论之后，他们会有一个闭门会议，撰写文件，做出终审判决。 sacks： 是的，我认为会发生的是：他们关起门来讨论，找出多数意见在哪一方，然后首席大法官指定谁来撰写多数意见。 friedberg： 在那种会议上，没有人被允许进入。实际上有一个双门系统，如果有什么东西需要进出，你必须敲门，被领到一个前厅。 sacks： 哦，气闸？ friedberg： 实际上是……我不知道你当时在不在，jason。但我们有一次和 ted cruz 打牌。他为 william rehnquist 当过书记员，如果你想吃到一顿难以置信的晚餐，就问问他最高法院和 bill rehnquist 的事。他是最高法院的真正学生，这让最高法院听起来像是历来创造的最令人难以置信的机构。 chamath： 顺便说一句，比白宫、国会大厦都更令人难以置信。 jcal： 这个机构的受欢迎程度实际上取决于它是否做出人们同意的决定。如果你问人们喜不喜欢最高法院，这实际上只取决于他们是否同意其出来的判决。而不是决策过程有多么好、论证有多强。实际上，我看了下数字，目前最高法院相对受欢迎。它在 2024 年盖洛普调查中跌至 35%，但现在又回升到 44-50% 的支持率，这对于一个参与政治的机构来说是相当高的。你看看国会或任何特定的政治家，他们的支持率通常会更低。 friedberg： 当我访问时，看到这些人如何互动、如何行事、以及整个过程，我对这个制度感到非常安心。这就是一个令人惊叹的国家。 sacks： 嗯，我之所以这么说是因为 james carville 最近接受采访。你们看到了吗？他说，听着，当我们获得权力时，我们会为最高法院塞人。我们甚至不会担心这个。我们会从 9 人增加到 13 人。然后我们会创造一些新的州等等。 friedberg： 享受它还在的时候吧。 chamath： 帝国的终结。 sacks： 是的。 friedberg： 顺便说一句，确实有一个在线的抽签系统。所以大家都可以报名，你可以获得 4 张票。我认为他们应该把这个做成拍卖，我们可以从美国获得一项收入流。我们可以把 10 张票作为场边座位卖 2 万美元。 sacks： jason，你正好就是他们试图保护这种制度而不愿让它发生的事情。你怎么能把最高法院商品化？ chamath： 好了，各位。这是世上最伟大的播客。我是最伟大的主持人。下次见。" style="--index: 11">
                   <header class="timeline-heading">
                     <span class="timeline-index">11</span>
                     <span class="timeline-meta">1:03:00–1:19:00</span>
@@ -810,37 +1037,42 @@
 <p><strong>Chamath：</strong> 好了，各位。这是世上最伟大的播客。我是最伟大的主持人。下次见。</p></div>
                   </div>
                 </article></div>
-      </section>
+            <p class="empty search-empty" data-search-empty hidden>没有匹配的时间线段落。</p>
+          </section>
 
-      <section id="speakers">
-        <div class="section-head">
-          <h2>人物观点对照</h2>
-          <p>比较嘉宾立场</p>
-        </div>
-        <div class="speaker-grid"><article class="speaker-card">
-              <h3>Jason Calacanis</h3>
-              <div><p>立场鲜明，擅长用生动案例和故事切入话题。对 OpenAI 的目标未达成持严峻态度，强调 6000 亿美元承诺与公司估值相当。认为 AI 代理删除数据库是严重风险事件。对比了当前 AI 投资热潮与 2000 年互联网泡沫（以思科为对比）。对社会话题（心理治疗、日记文化）有激烈表达，推崇&quot;不反复思量、不断前行&quot;的生活哲学。对 Retatrutide 非常期待，但强烈批评 Chamath 在节目中推销 Ro 品牌的行为。</p></div>
-            </article>
-<article class="speaker-card">
-              <h3>Chamath Palihapitiya</h3>
-              <div><p>核心观点：AI 行业根本瓶颈是电力，而非算力；所有模型供应商面临能源和电网限制。认为 OpenAI 和 Anthropic 都是万亿美元公司，但短期的业绩未达标主要反映供给问题而非需求不足。从资本结构角度警告大型云服务商正从&quot;资产轻&quot;转向&quot;资产重&quot;的工业模式，建议投资者&quot;跟着钱走&quot;。认为网络安全未来将从&quot;人类利用人类&quot;演变为&quot;机器对抗机器&quot;，暗示存在一家顶级安全公司已经可以渗透所有模型。对 Retatrutide 极为兴奋，认为可能是抗衰老药物。</p></div>
-            </article>
-<article class="speaker-card">
-              <h3>David Sacks</h3>
-              <div><p>对 OpenAI 持辩证态度：承认消费者侧未达标是一个负面信号，但认为产品层面（GPT-5.5、编程能力、网络模型）最近几周进展强劲。强调编程是 AI 现在最重要的赛道，认为 Anthropic 因算力限制而致产品受损。反对与 2000 年光纤泡沫类比，核心论点是&quot;不存在暗 GPU&quot;、需求真实且大规模。认为 AI 不是消除人类岗位，而是需要人类监督和问责。不评论 Elon 诉 OpenAI 案（因担心被取证），但指出去年推翻&quot;雪佛龙遵从原则&quot;对本案可能造成意外冲击。</p></div>
-            </article>
-<article class="speaker-card">
-              <h3>David Friedberg</h3>
-              <div><p>以数据和分析见长。用 BCG 三强法则分析 AI 市场格局，指出 Google 在消费者和企业两端都在追赶或领先。强调通过剪枝等算法创新可以大幅降低推理能耗，改变竞争态势。对所有 AI 安全问题持理性态度（强调本质仍是旧式 bug 而非阴谋论）。围绕 Retatrutide 提供了详细的技术和临床数据解读，预期该药 2027 年获批。对最高法院的旁听经历高度推崇，将其与观看顶级体育赛事相提并论，并详细讲解了孟山都案的法律争议和&quot;雪佛龙&quot;的后续影响。</p></div>
-            </article></div>
-      </section>
+          <section id="speakers">
+            <div class="section-head">
+              <h2>人物观点对照</h2>
+              <p>比较嘉宾立场</p>
+            </div>
+            <div class="speaker-grid"><article class="speaker-card" style="--index: 1">
+                  <p class="speaker-kicker">嘉宾 01</p>
+                  <h3>Jason Calacanis</h3>
+                  <div><p>立场鲜明，擅长用生动案例和故事切入话题。对 OpenAI 的目标未达成持严峻态度，强调 6000 亿美元承诺与公司估值相当。认为 AI 代理删除数据库是严重风险事件。对比了当前 AI 投资热潮与 2000 年互联网泡沫（以思科为对比）。对社会话题（心理治疗、日记文化）有激烈表达，推崇&quot;不反复思量、不断前行&quot;的生活哲学。对 Retatrutide 非常期待，但强烈批评 Chamath 在节目中推销 Ro 品牌的行为。</p></div>
+                </article>
+<article class="speaker-card" style="--index: 2">
+                  <p class="speaker-kicker">嘉宾 02</p>
+                  <h3>Chamath Palihapitiya</h3>
+                  <div><p>核心观点：AI 行业根本瓶颈是电力，而非算力；所有模型供应商面临能源和电网限制。认为 OpenAI 和 Anthropic 都是万亿美元公司，但短期的业绩未达标主要反映供给问题而非需求不足。从资本结构角度警告大型云服务商正从&quot;资产轻&quot;转向&quot;资产重&quot;的工业模式，建议投资者&quot;跟着钱走&quot;。认为网络安全未来将从&quot;人类利用人类&quot;演变为&quot;机器对抗机器&quot;，暗示存在一家顶级安全公司已经可以渗透所有模型。对 Retatrutide 极为兴奋，认为可能是抗衰老药物。</p></div>
+                </article>
+<article class="speaker-card" style="--index: 3">
+                  <p class="speaker-kicker">嘉宾 03</p>
+                  <h3>David Sacks</h3>
+                  <div><p>对 OpenAI 持辩证态度：承认消费者侧未达标是一个负面信号，但认为产品层面（GPT-5.5、编程能力、网络模型）最近几周进展强劲。强调编程是 AI 现在最重要的赛道，认为 Anthropic 因算力限制而致产品受损。反对与 2000 年光纤泡沫类比，核心论点是&quot;不存在暗 GPU&quot;、需求真实且大规模。认为 AI 不是消除人类岗位，而是需要人类监督和问责。不评论 Elon 诉 OpenAI 案（因担心被取证），但指出去年推翻&quot;雪佛龙遵从原则&quot;对本案可能造成意外冲击。</p></div>
+                </article>
+<article class="speaker-card" style="--index: 4">
+                  <p class="speaker-kicker">嘉宾 04</p>
+                  <h3>David Friedberg</h3>
+                  <div><p>以数据和分析见长。用 BCG 三强法则分析 AI 市场格局，指出 Google 在消费者和企业两端都在追赶或领先。强调通过剪枝等算法创新可以大幅降低推理能耗，改变竞争态势。对所有 AI 安全问题持理性态度（强调本质仍是旧式 bug 而非阴谋论）。围绕 Retatrutide 提供了详细的技术和临床数据解读，预期该药 2027 年获批。对最高法院的旁听经历高度推崇，将其与观看顶级体育赛事相提并论，并详细讲解了孟山都案的法律争议和&quot;雪佛龙&quot;的后续影响。</p></div>
+                </article></div>
+          </section>
 
-      <section id="quotes">
-        <div class="section-head">
-          <h2>值得引用的原话</h2>
-          <p>保留关键表达</p>
-        </div>
-        <div class="panel"><ol>
+          <section id="quotes">
+            <div class="section-head">
+              <h2>值得引用的原话</h2>
+              <p>保留关键表达</p>
+            </div>
+            <div class="panel"><ol>
 <li>&quot;No dark GPUs today.&quot;</li>
 <p>&quot;今天不存在‘黑暗 GPU’。&quot; 简短说明：Saks 反驳 2000 年光钎泡沫类比，强调当前投资背后有真实和庞大的需求。</p>
 </ol>
@@ -872,7 +1104,9 @@
 <li>&quot;The Supreme Court is one of the last highly functional institutions in the United States.&quot;</li>
 <p>&quot;最高法院是美国最后几个高度运转的机构之一。&quot; 简短说明：Friedberg 庭审后对司法制度的极高评价。</p>
 </ol></div>
-      </section>
+          </section>
+        </div>
+      </div>
     </main>
   </div>
   <script>
@@ -880,31 +1114,46 @@
     const searchBox = document.querySelector("[data-search-box]");
     const topButton = document.querySelector("[data-scroll-top]");
     const cards = Array.from(document.querySelectorAll("[data-timeline-card]"));
+    const searchEmpty = document.querySelector("[data-search-empty]");
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
     function updateProgress() {
       const scrollable = document.documentElement.scrollHeight - window.innerHeight;
       const ratio = scrollable > 0 ? window.scrollY / scrollable : 0;
-      progress.style.width = `${Math.max(0, Math.min(1, ratio)) * 100}%`;
+      if (progress) {
+        progress.style.width = `${Math.max(0, Math.min(1, ratio)) * 100}%`;
+      }
     }
 
     function applySearch() {
       const query = searchBox.value.trim().toLowerCase();
+      let visibleCount = 0;
       cards.forEach((card) => {
         const text = card.getAttribute("data-search") || "";
-        card.style.display = !query || text.includes(query) ? "" : "none";
+        const isVisible = !query || text.includes(query);
+        card.hidden = !isVisible;
+        if (isVisible) {
+          visibleCount += 1;
+        }
       });
+      if (searchEmpty) {
+        searchEmpty.hidden = !query || visibleCount > 0;
+      }
     }
 
     window.addEventListener("scroll", updateProgress, { passive: true });
     window.addEventListener("resize", updateProgress);
-    searchBox.addEventListener("input", applySearch);
-    topButton.addEventListener("click", () => {
-      window.scrollTo({
-        top: 0,
-        behavior: prefersReducedMotion.matches ? "auto" : "smooth"
+    if (searchBox) {
+      searchBox.addEventListener("input", applySearch);
+    }
+    if (topButton) {
+      topButton.addEventListener("click", () => {
+        window.scrollTo({
+          top: 0,
+          behavior: prefersReducedMotion.matches ? "auto" : "smooth"
+        });
       });
-    });
+    }
     updateProgress();
   </script>
 </body>

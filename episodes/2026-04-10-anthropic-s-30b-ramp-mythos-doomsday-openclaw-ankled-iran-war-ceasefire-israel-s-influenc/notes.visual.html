@@ -6,291 +6,524 @@
   <title>AI安全与地缘政治：Anthropic的300亿美元狂奔、末日论争议、OpenClaw被“断粮”、伊朗停火与以色列影响力 - 中文播客可视化笔记</title>
   <style>
     :root {
-      --bg: oklch(0.965 0.012 86);
-      --paper: oklch(0.986 0.006 86);
-      --paper-soft: oklch(0.94 0.014 86);
-      --ink: oklch(0.24 0.024 255);
-      --muted: oklch(0.48 0.026 255);
-      --line: oklch(0.84 0.016 86);
-      --line-strong: oklch(0.73 0.026 86);
-      --accent: oklch(0.54 0.13 35);
-      --accent-soft: oklch(0.91 0.045 45);
-      --blue: oklch(0.43 0.08 255);
-      --teal: oklch(0.47 0.075 188);
-      --quote: oklch(0.93 0.034 80);
-      --shadow: 0 18px 46px color-mix(in oklch, var(--ink) 12%, transparent);
-      --radius: 10px;
+      --bg: oklch(0.974 0.006 238);
+      --paper: oklch(0.991 0.003 238);
+      --paper-soft: oklch(0.955 0.007 238);
+      --ink: oklch(0.205 0.018 246);
+      --muted: oklch(0.49 0.018 246);
+      --faint: oklch(0.63 0.014 246);
+      --line: oklch(0.875 0.009 238);
+      --line-strong: oklch(0.74 0.014 238);
+      --accent: oklch(0.43 0.064 164);
+      --accent-soft: oklch(0.94 0.024 164);
+      --accent-wash: oklch(0.973 0.012 164);
+      --quote: oklch(0.965 0.010 92);
+      --shadow: 0 24px 54px color-mix(in oklch, var(--ink) 8%, transparent);
+      --radius: 8px;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
     }
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body {
       margin: 0;
+      min-width: 0;
       color: var(--ink);
-      background: var(--bg);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-      line-height: 1.74;
+      background:
+        linear-gradient(90deg, color-mix(in oklch, var(--line) 28%, transparent) 1px, transparent 1px) 0 0 / 92px 92px,
+        var(--bg);
+      font-family: "Geist", "Satoshi", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      line-height: 1.78;
+      text-rendering: optimizeLegibility;
+      overflow-x: clip;
     }
-    a { color: var(--blue); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+    ::selection { background: var(--accent-soft); color: var(--ink); }
+    a {
+      color: var(--accent);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+      transition: color .22s var(--ease), background-color .22s var(--ease), border-color .22s var(--ease), transform .22s var(--ease);
+    }
+    [hidden] { display: none !important; }
     .progress {
       position: fixed;
-      z-index: 20;
+      z-index: 4;
       top: 0;
       left: 0;
       width: 0%;
-      height: 3px;
+      height: 2px;
       background: var(--accent);
     }
     .quick-actions {
       position: fixed;
-      left: max(18px, calc((100vw - 1240px) / 2));
-      bottom: 22px;
-      z-index: 30;
+      right: max(18px, calc((100vw - 1200px) / 2));
+      bottom: 24px;
+      z-index: 3;
       display: grid;
-      gap: 8px;
+      gap: 7px;
     }
     .quick-action {
       display: inline-grid;
-      grid-template-columns: 18px auto;
+      grid-template-columns: 16px auto;
       align-items: center;
       justify-content: center;
-      gap: 6px;
-      min-width: 76px;
+      gap: 7px;
+      min-width: 74px;
       min-height: 40px;
       padding: 8px 12px;
       border: 1px solid var(--line-strong);
-      border-radius: 8px;
-      background: var(--paper);
+      border-radius: var(--radius);
+      background: color-mix(in oklch, var(--paper) 92%, transparent);
+      box-shadow: 0 12px 28px color-mix(in oklch, var(--ink) 7%, transparent);
       color: var(--ink);
       font: inherit;
-      font-size: 14px;
-      font-weight: 750;
+      font-size: 13px;
+      font-weight: 720;
       line-height: 1.2;
       text-decoration: none;
       cursor: pointer;
-      transition: background-color .16s ease, border-color .16s ease, color .16s ease, transform .16s ease;
     }
     .quick-action:hover, .quick-action:focus-visible {
       outline: none;
       border-color: var(--accent);
-      background: var(--accent-soft);
+      background: var(--accent-wash);
       color: var(--accent);
-      transform: translateY(-1px);
+      transform: translate3d(0, -1px, 0);
     }
-    .quick-action:active { transform: translateY(0); }
+    .quick-action:active { transform: translate3d(0, 1px, 0) scale(.99); }
     .page {
-      width: min(1240px, calc(100% - 34px));
+      width: min(2200px, calc(100% - 56px));
       margin: 0 auto;
-      display: grid;
-      grid-template-columns: 220px minmax(0, 1fr);
-      gap: 38px;
+      padding: 0 0 104px;
     }
-    .sidebar {
-      position: sticky;
-      top: 22px;
-      align-self: start;
-      padding-top: 44px;
+    .article { min-width: 0; }
+    .hero {
+      max-width: none;
+      margin-left: min(7vw, 140px);
+      padding: 72px 0 58px;
     }
-    .toc {
-      padding: 14px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: var(--paper-soft);
-    }
-    .toc-title {
-      margin: 0 0 10px;
-      color: var(--muted);
+    .eyebrow {
+      margin: 0 0 18px;
+      color: var(--accent);
+      font-family: var(--mono);
       font-size: 12px;
-      font-weight: 800;
+      font-weight: 700;
       letter-spacing: .08em;
       text-transform: uppercase;
     }
-    .nav-links { display: grid; gap: 5px; }
-    .nav-links a {
-      padding: 8px 10px;
-      border-radius: 8px;
-      color: var(--ink);
-      font-size: 14px;
-      text-decoration: none;
-    }
-    .nav-links a:hover, .nav-links a:focus {
-      outline: none;
-      background: var(--accent-soft);
-      color: var(--accent);
-    }
-    .search { display: block; margin-top: 14px; }
-    .search input {
-      width: 100%;
-      min-height: 38px;
-      padding: 8px 10px;
-      border: 1px solid var(--line-strong);
-      border-radius: 8px;
-      background: var(--paper);
-      color: var(--ink);
-      font-size: 14px;
-      outline: none;
-    }
-    .search input:focus {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px color-mix(in oklch, var(--accent) 16%, transparent);
-    }
-    .article { min-width: 0; max-width: 900px; }
-    header { padding: 52px 0 24px; }
     h1 {
-      margin: 0 0 18px;
-      font-size: 44px;
-      line-height: 1.12;
+      max-width: none;
+      margin: 0 0 28px;
+      font-size: clamp(38px, 3vw, 52px);
+      font-weight: 760;
+      line-height: 1.08;
       letter-spacing: 0;
+      text-wrap: balance;
     }
     .meta {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px 18px;
+      gap: 8px 18px;
+      max-width: 72ch;
       color: var(--muted);
       font-size: 14px;
     }
+    .meta a { font-weight: 650; }
     .meta-strip {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin: 24px 0 18px;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+      max-width: 720px;
+      margin: 34px 0 28px;
+      border-top: 1px solid var(--line-strong);
+      padding-top: 16px;
     }
     .meta-pill {
-      display: inline-flex;
-      align-items: baseline;
-      gap: 6px;
-      padding: 6px 10px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      background: var(--paper-soft);
+      display: grid;
+      gap: 2px;
       color: var(--muted);
-      font-size: 13px;
+      font-size: 12px;
+      line-height: 1.35;
     }
-    .meta-pill b { color: var(--ink); font-size: 15px; }
-    .summary, .timeline-card, .speaker-card, .panel {
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: var(--paper);
-      box-shadow: var(--shadow);
+    .meta-pill b {
+      color: var(--ink);
+      font-family: var(--mono);
+      font-size: 18px;
+      font-weight: 680;
+      line-height: 1;
     }
     .summary {
-      padding: 20px 22px;
-      background: var(--accent-soft);
-      font-size: 18px;
+      width: 100%;
+      max-width: 760px;
+      padding: 24px 26px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: color-mix(in oklch, var(--paper) 88%, var(--accent-soft));
+      box-shadow: var(--shadow);
     }
-    .summary p { margin: 0; }
-    section { margin: 44px 0; }
+    .summary p {
+      margin: 0;
+      font-size: 19px;
+      line-height: 1.72;
+    }
+    h1, .summary, .takeaway p, .timeline-card h3, .section-content, .speaker-card, .panel {
+      overflow-wrap: anywhere;
+    }
+    .content-shell {
+      display: grid;
+      grid-template-columns: minmax(170px, 212px) minmax(0, 820px);
+      gap: clamp(36px, 7vw, 88px);
+      align-items: start;
+      border-top: 1px solid var(--line);
+      padding-top: 40px;
+    }
+    .sidebar {
+      position: sticky;
+      top: 28px;
+      align-self: start;
+      padding-top: 4px;
+    }
+    .toc {
+      border-top: 1px solid var(--ink);
+      padding-top: 16px;
+    }
+    .toc-title {
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .nav-links { display: grid; gap: 2px; }
+    .nav-links a {
+      display: block;
+      padding: 8px 0;
+      border-bottom: 1px solid color-mix(in oklch, var(--line) 72%, transparent);
+      color: var(--ink);
+      font-size: 14px;
+      line-height: 1.35;
+      text-decoration: none;
+    }
+    .nav-links a:hover, .nav-links a:focus-visible {
+      outline: none;
+      color: var(--accent);
+      transform: translate3d(2px, 0, 0);
+    }
+    .search {
+      display: grid;
+      gap: 8px;
+      margin-top: 22px;
+    }
+    .search span {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 720;
+    }
+    .search input {
+      width: 100%;
+      min-height: 40px;
+      padding: 8px 10px;
+      border: 1px solid var(--line-strong);
+      border-radius: var(--radius);
+      background: var(--paper);
+      color: var(--ink);
+      font: inherit;
+      font-size: 14px;
+      outline: none;
+      transition: border-color .22s var(--ease), box-shadow .22s var(--ease), transform .22s var(--ease);
+    }
+    .search input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px color-mix(in oklch, var(--accent) 14%, transparent);
+    }
+    .content-flow { min-width: 0; }
+    section { margin: 0 0 78px; }
     .section-head {
-      display: flex;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 18px;
       align-items: end;
-      justify-content: space-between;
-      gap: 14px;
-      margin-bottom: 16px;
-      border-bottom: 1px solid var(--line);
-      padding-bottom: 10px;
+      margin-bottom: 22px;
+      border-top: 1px solid var(--ink);
+      padding-top: 18px;
     }
-    .section-head h2 { margin: 0; font-size: 26px; line-height: 1.2; }
-    .section-head p { margin: 0; color: var(--muted); font-size: 14px; }
-    .takeaway-list { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
+    .section-head h2 {
+      margin: 0;
+      font-size: 28px;
+      font-weight: 740;
+      line-height: 1.16;
+      letter-spacing: 0;
+    }
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.4;
+      text-align: right;
+    }
+    .takeaway-list {
+      display: grid;
+      gap: 0;
+      margin: 0;
+      padding: 0;
+      border-top: 1px solid var(--line);
+      list-style: none;
+    }
     .takeaway {
       display: grid;
-      grid-template-columns: 42px 1fr;
-      gap: 14px;
-      padding: 13px 0;
+      grid-template-columns: 52px minmax(0, 1fr);
+      gap: 18px;
+      padding: 18px 0;
       border-bottom: 1px solid var(--line);
     }
-    .takeaway:last-child { border-bottom: 0; }
     .takeaway span {
-      display: grid;
-      width: 34px;
-      height: 34px;
-      place-items: center;
-      border: 1px solid var(--line-strong);
-      border-radius: 8px;
-      background: var(--paper-soft);
       color: var(--accent);
-      font-weight: 800;
-    }
-    .takeaway p, .speaker-card p, .panel p { margin-top: 0; }
-    .timeline { display: grid; gap: 18px; }
-    .timeline-card {
-      position: relative;
-      padding: 22px;
-    }
-    .timeline-heading { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
-    .timeline-index {
-      display: grid;
-      width: 36px;
-      height: 36px;
-      place-items: center;
-      border-radius: 8px;
-      background: var(--ink);
-      color: var(--paper);
-      font-weight: 800;
-      font-size: 13px;
-    }
-    .timeline-meta { color: var(--teal); font-size: 13px; font-weight: 800; }
-    .timeline-card h3 { margin: 6px 0 14px; font-size: 24px; line-height: 1.28; }
-    .section-content p { max-width: 72ch; }
-    .section-content h4 {
-      margin: 18px 0 8px;
-      color: var(--accent);
+      font-family: var(--mono);
       font-size: 15px;
+      font-weight: 720;
+      line-height: 1.65;
     }
-    .section-content ul, .panel ul, .speaker-card ul { padding-left: 1.2em; }
-    .section-content li, .panel li, .speaker-card li { margin: 5px 0; }
+    .takeaway p {
+      margin: 0;
+      max-width: 70ch;
+      font-size: 16px;
+      line-height: 1.72;
+    }
+    .timeline {
+      display: grid;
+      gap: 0;
+      border-top: 1px solid var(--line-strong);
+    }
+    .timeline-card {
+      display: grid;
+      grid-template-columns: 132px minmax(0, 1fr);
+      gap: 32px;
+      padding: 34px 0 40px;
+      border-bottom: 1px solid var(--line);
+    }
+    .timeline-heading {
+      position: sticky;
+      top: 30px;
+      align-self: start;
+      display: grid;
+      gap: 10px;
+      padding-top: 2px;
+    }
+    .timeline-index {
+      color: var(--faint);
+      font-family: var(--mono);
+      font-size: 13px;
+      font-weight: 720;
+      line-height: 1;
+    }
+    .timeline-meta {
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 720;
+      line-height: 1.45;
+    }
+    .timeline-card h3 {
+      max-width: 24ch;
+      margin: 0 0 18px;
+      font-size: 27px;
+      font-weight: 730;
+      line-height: 1.22;
+      letter-spacing: 0;
+    }
+    .section-content {
+      color: color-mix(in oklch, var(--ink) 88%, var(--muted));
+      font-size: 16px;
+    }
+    .section-content p {
+      max-width: 72ch;
+      margin: 0 0 1.05em;
+    }
+    .section-content p strong:first-child {
+      color: var(--ink);
+      font-weight: 760;
+    }
+    .section-content h4 {
+      margin: 26px 0 10px;
+      color: var(--accent);
+      font-size: 14px;
+      font-weight: 760;
+      line-height: 1.35;
+    }
+    .section-content ul, .section-content ol, .panel ul, .panel ol, .speaker-card ul, .speaker-card ol {
+      margin: .75em 0 1em;
+      padding-left: 1.25em;
+    }
+    .section-content li, .panel li, .speaker-card li { margin: 6px 0; }
     .speaker-grid {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
+      grid-template-columns: minmax(0, 1fr) minmax(0, .88fr);
+      gap: 26px 42px;
+      border-top: 1px solid var(--line);
     }
-    .speaker-card { padding: 18px; box-shadow: none; }
-    .speaker-card h3 { margin: 0 0 10px; color: var(--blue); }
-    .panel { padding: 20px 22px; box-shadow: none; }
+    .speaker-card {
+      padding: 22px 0 24px;
+      border-bottom: 1px solid var(--line);
+    }
+    .speaker-card:nth-child(even) { margin-top: 22px; }
+    .speaker-kicker {
+      margin: 0 0 8px;
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 720;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .speaker-card h3 {
+      margin: 0 0 12px;
+      font-size: 20px;
+      font-weight: 730;
+      line-height: 1.25;
+    }
+    .speaker-card p, .panel p {
+      max-width: 68ch;
+      margin-top: 0;
+    }
+    .panel {
+      border-top: 1px solid var(--line);
+      padding-top: 8px;
+    }
     blockquote {
-      margin: 14px 0;
-      padding: 12px 16px;
-      border: 1px solid var(--line-strong);
-      border-radius: 8px;
+      margin: 18px 0;
+      padding: 16px 18px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
       background: var(--quote);
     }
     code {
       padding: 2px 5px;
       border-radius: 5px;
-      background: color-mix(in oklch, var(--blue) 12%, var(--paper));
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      background: color-mix(in oklch, var(--accent) 10%, var(--paper));
+      color: var(--ink);
+      font-family: var(--mono);
       font-size: .92em;
     }
-    .empty, .muted { color: var(--muted); }
+    hr {
+      height: 1px;
+      margin: 26px 0;
+      border: 0;
+      background: var(--line);
+    }
+    .empty {
+      margin: 0;
+      padding: 16px 18px;
+      border: 1px dashed var(--line-strong);
+      border-radius: var(--radius);
+      color: var(--muted);
+      background: color-mix(in oklch, var(--paper-soft) 70%, transparent);
+    }
+    .search-empty { margin-top: 16px; }
+    .muted { color: var(--muted); }
+    @keyframes rise-in {
+      from { opacity: 1; transform: translate3d(0, 6px, 0); }
+      to { opacity: 1; transform: translate3d(0, 0, 0); }
+    }
+    .hero > *, .takeaway, .timeline-card, .speaker-card, .panel {
+      animation: rise-in .55s var(--ease) both;
+    }
+    .hero > *:nth-child(2) { animation-delay: .04s; }
+    .hero > *:nth-child(3) { animation-delay: .08s; }
+    .hero > *:nth-child(4) { animation-delay: .12s; }
+    .hero > *:nth-child(5) { animation-delay: .16s; }
+    .takeaway, .timeline-card, .speaker-card {
+      animation-delay: calc(var(--index, 1) * 38ms);
+    }
+    @media (max-width: 1120px) {
+      .hero { margin-left: 0; }
+      .content-shell {
+        grid-template-columns: minmax(154px, 190px) minmax(0, 1fr);
+        gap: 36px;
+      }
+      h1 { font-size: 44px; }
+    }
+    @media (min-width: 1500px) {
+      .hero { margin-left: 0; }
+      h1 {
+        width: max-content;
+        max-width: 100%;
+        white-space: nowrap;
+        font-size: clamp(28px, 1.85vw, 42px);
+      }
+    }
     @media (max-width: 780px) {
-      .page { width: min(100% - 22px, 1180px); display: block; padding-bottom: 66px; }
-      .sidebar { position: static; padding-top: 16px; }
+      body { background: var(--bg); }
+      .page {
+        width: 100%;
+        padding: 0 14px 86px;
+        overflow-x: clip;
+      }
+      .hero { padding: 46px 0 36px; }
+      .eyebrow { margin-bottom: 14px; }
+      h1 {
+        max-width: none;
+        font-size: 22px;
+        line-height: 1.16;
+        overflow-wrap: anywhere;
+        word-break: break-word;
+      }
+      .summary, .summary p, .takeaway p, .section-content, .speaker-card, .panel {
+        max-width: 100%;
+        overflow-wrap: anywhere;
+        word-break: break-word;
+      }
+      .meta-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 20px; }
+      .summary { padding: 20px; }
+      .summary p { font-size: 17px; }
+      .content-shell { display: block; padding-top: 28px; }
+      .sidebar { position: static; padding-top: 0; margin-bottom: 42px; }
+      .toc { border-top-color: var(--line-strong); }
+      .nav-links { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 18px; }
+      section { margin-bottom: 58px; }
+      .section-head { display: block; margin-bottom: 16px; }
+      .section-head h2 { font-size: 24px; }
+      .section-head p { margin-top: 6px; text-align: left; }
+      .takeaway { grid-template-columns: 42px minmax(0, 1fr); gap: 12px; }
+      .timeline-card { display: block; padding: 28px 0 32px; }
+      .timeline-heading { position: static; display: flex; align-items: baseline; gap: 12px; margin-bottom: 12px; }
+      .timeline-card h3 { max-width: none; font-size: 23px; }
+      .speaker-grid { display: block; }
+      .speaker-card:nth-child(even) { margin-top: 0; }
       .quick-actions {
-        left: auto;
-        right: 11px;
+        right: 12px;
         bottom: 12px;
+        left: auto;
+        width: min(210px, calc(100vw - 24px));
         grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 6px;
       }
       .quick-action {
-        min-width: 68px;
+        width: 100%;
+        min-width: 0;
         min-height: 38px;
         padding: 7px 9px;
         font-size: 13px;
       }
-      header { padding-top: 34px; }
-      h1 { font-size: 32px; }
-      .speaker-grid { grid-template-columns: 1fr; }
-      .timeline-card { padding: 18px; }
     }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
-      .quick-action { transition: none; }
+      *, *::before, *::after {
+        animation-duration: 1ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 1ms !important;
+      }
+      .speaker-card:nth-child(even) { margin-top: 0; }
     }
     @media print {
       body { background: var(--paper); }
       .sidebar, .progress, .quick-actions { display: none; }
       .page { display: block; width: auto; padding-bottom: 0; }
-      .summary, .timeline-card, .speaker-card, .panel { box-shadow: none; }
+      .hero { margin-left: 0; padding: 0 0 28px; }
+      .content-shell { display: block; border-top: 0; padding-top: 0; }
+      .summary { box-shadow: none; }
+      .timeline-card, .speaker-card { break-inside: avoid; }
     }
   </style>
 </head>
@@ -307,23 +540,9 @@
     </button>
   </div>
   <div class="page">
-    <aside class="sidebar">
-      <nav class="toc" aria-label="页面导航">
-        <p class="toc-title">阅读导航</p>
-        <div class="nav-links">
-          <a href="#takeaways">核心要点</a>
-          <a href="#timeline">分段整理</a>
-          <a href="#speakers">人物观点</a>
-          <a href="#quotes">双语引语</a>
-        </div>
-        <label class="search">
-          <input data-search-box type="search" placeholder="搜索时间线">
-        </label>
-      </nav>
-    </aside>
-
     <main class="article">
-      <header>
+      <header class="hero">
+        <p class="eyebrow">All-In Podcast 中文精读</p>
         <h1>AI安全与地缘政治：Anthropic的300亿美元狂奔、末日论争议、OpenClaw被“断粮”、伊朗停火与以色列影响力</h1>
         <div class="meta">
           <span>生成时间：2026-04-30 15:59</span>
@@ -333,39 +552,58 @@
 <span class="meta-pill"><b>10</b>核心要点</span>
 <span class="meta-pill"><b>7</b>时间线</span>
 <span class="meta-pill"><b>4</b>人物</span></div>
-        <div class="summary"><p>本期节目首先围绕Anthropic因其新模型Mythos过于危险而拒绝公开发布的事件展开激烈辩论，同时讨论了Anthropic对开源项目OpenClaw的限制行为、该公司惊人的300亿美元营收狂奔，以及伊朗战争的最新进展和以色列对美国外交政策的影响。</p></div>
+        <div class="summary" aria-label="一句话摘要"><p>本期节目首先围绕Anthropic因其新模型Mythos过于危险而拒绝公开发布的事件展开激烈辩论，同时讨论了Anthropic对开源项目OpenClaw的限制行为、该公司惊人的300亿美元营收狂奔，以及伊朗战争的最新进展和以色列对美国外交政策的影响。</p></div>
       </header>
 
-      <section id="takeaways">
-        <div class="section-head">
-          <h2>核心要点</h2>
-          <p>快速扫读本集主线</p>
-        </div>
-        <ol class="takeaway-list"><li class="takeaway"><span>01</span><p>Anthropic宣布其新模型Mythos能够自主发现数千个安全漏洞，包括在主要操作系统和浏览器中沉睡了数十年的bug，因此拒绝公开发布，引发关于是真实风险还是营销手段的辩论。</p></li>
-<li class="takeaway"><span>02</span><p>Sacks指出Anthropic有一个使用恐惧营销的“模式”，之前的勒索信研究可能是反向工程的结果，但这次的网络安全威胁可能确实是真实的。</p></li>
-<li class="takeaway"><span>03</span><p>Chamath认为整个事件主要是“剧场表演”，并指出如果模型真如描述中那么强大，那么需要关闭互联网数年才能修补所有漏洞。</p></li>
-<li class="takeaway"><span>04</span><p>开源项目OpenClaw因用户使用Anthropic订阅服务的费用远高于平均用户而被限制使用$200的无限计划，必须改用按量付费的API，这被解读为扼杀开源竞争对手。</p></li>
-<li class="takeaway"><span>05</span><p>JCal警告不要让Anthropic或OpenAI掌握用户的全部生活和业务数据，认为开源代理层至关重要。</p></li>
-<li class="takeaway"><span>06</span><p>Anthropic的年化营收飙升至300亿美元，成为科技史上增长最快的收入曲线之一，投资机构Altimeter的Brad Gerstner预计年底可达800-1000亿美元。</p></li>
-<li class="takeaway"><span>07</span><p>Brad认为AI的TAM（总可寻址市场）几乎是无限的，“智能的TAM与以往任何东西都显著不同”。</p></li>
-<li class="takeaway"><span>08</span><p>关于AI公司能否盈利，嘉宾们意见分歧，但Brad认为由于计算成本下降和员工人数极少，毛利率正在快速改善。</p></li>
-<li class="takeaway"><span>09</span><p>伊朗战争进入停火阶段，特朗普总统推动在伊斯兰堡进行和平谈判，同时以色列与黎巴嫩开始直接政府对话。</p></li>
-<li class="takeaway"><span>10</span><p>关于以色列对美国外交政策的影响，Sacks引用以色列前总理贝内特的推文指出以色列在美国的受欢迎度正在下降，嘉宾们普遍认为以色列需要支持停火以修复关系。</p></li></ol>
-      </section>
+      <div class="content-shell">
+        <aside class="sidebar">
+          <nav class="toc" aria-label="页面导航">
+            <p class="toc-title">阅读导航</p>
+            <div class="nav-links">
+              <a href="#takeaways">核心要点</a>
+              <a href="#timeline">分段整理</a>
+              <a href="#speakers">人物观点</a>
+              <a href="#quotes">双语引语</a>
+            </div>
+            <label class="search">
+              <span>搜索时间线</span>
+              <input data-search-box type="search" placeholder="关键词" aria-label="搜索时间线">
+            </label>
+          </nav>
+        </aside>
 
-      <section id="timeline">
-        <div class="section-head">
-          <h2>分段详细整理</h2>
-          <p>按时间线阅读上下文</p>
-        </div>
-        <div class="timeline"><article class="timeline-card" data-timeline-card data-search="00:00–00:23 开场及介绍新嘉宾 本段核心内容： 本集由代班主持人david friedberg缺席，brian gerstner（brad）加入。 开场调侃chamath的浏览器历史和“暴走”状态 背景解释与关键术语： 暂无 详细中文整理： jcal： 首先调侃关于浏览器历史可能会泄露的话题，chamath马上变得很在意。 chamath： 我认为浏览器历史是个敏感话题。 某位嘉宾： 那“小丁丁”照片呢？ jcal： 别忘了，我们还有rain man david sacks在场。 jcal（开场白）： 欢迎回来，这是世界排名第一的播客。david friedberg本周缺席，但代班的是我们的第五位好友，brian gerstner。 brad： 你都不再给我送namaste和发红包了。你以前可是最好的主持人，现在变得很奇怪。 jcal： 这些人把我打惨了，把主持的乐趣都打没了。 chamath： 那是因为你现在成了ro khanna的辩护者。 jcal： 好吧，我们进入正题。让我们开始做节目。 jcal（回到节目）： 很高兴你在这里。当然，david sacks也回来了。所有人都想听david sacks说话。我们上周想死你了。 sacks： 我们不是要打掉你的乐趣，只是要打掉你那些废话。 某位嘉宾： 是的，我们直接去掉废话，只放thesyndicate.com的促销。 jcal： chamath，你这一周的“原始摆烂”进行得如何？是不是整整一个周末都在抽雪茄、不去想过去20年你造成了多少混乱？ chamath： 我想我总体来说还是做了好事多于坏事。 jcal： 哦，你是做了，但中间也发生过一些混乱时刻。别去想它了，chamath。 chamath： 兄弟，人生有起有落。你是想来安抚所有人当个失败者，还是当一个赢家？你是在竞技场上。但你是不是意识到需要停止治疗了？ jcal： 你为什么突然对“原始摆烂”这么感兴趣？你是“原始摆烂”的代言人吗？ 某位嘉宾： 不，是世界终于跟上了我的节奏。我一直都在原始摆烂，他们只是之前没给它起名字而已。 chamath： 我看了eli的视频，这周又看了两个。 jcal： 跟我们说说，不胡思乱想、抽根雪茄、过生活的魅力在哪里？ chamath： 因为他的话在社会的各个阶层和各种你想达成的目标上都有用。即使你想往上爬，你很快就会发现，你越想要某样东西，就越难得到它。这就是他真正的信息：放手，好好生活，试着做点什么或者干脆不做什么。这种超脱对人们是有益的。我非常喜欢。 某位嘉宾： 谁说的？我不知道这人。 chamath： elijah long，大家叫他eli。他太棒了。 jcal： marc andreessen发现了他，说：“这人是新时代的哲学家。”他给了你一个如何生活的路线图。 某位嘉宾： 说到做事，anthropic扣留了它们最新的模型mythos，说它太危险了，不能让大家使用。这个模型能自主发现数千个漏洞，包括所有主要操作系统和浏览器中的bug。他们做了个研究，包括一些已经被安全审计遗漏了20年的bug。举例来说，他们发现了一个有27年历史的openbsd漏洞（openbsd：用于防火墙和关键基础设施的操作系统），一个16年历史的ffmpeg bug（ffmpeg：多媒体处理工具）——自动工具扫描500万次都没发现。linux内核等很多bug。他们发布了一个宣传视频，解释为什么不发布这个模型。请看dario的视频。 视频中的dario amodei（anthropic ceo）： 作为擅长写代码的副作用，这个模型也擅长网络安全。我们正在实验的模型在识别漏洞方面大致相当于一个专业人类。这对我们有好处，因为我们可以更快地发现更多漏洞并修复它们。它能够把多个漏洞串联起来。这意味着你可以找到两个独立的漏洞，每个都不太有用，但模型能将3、4个甚至5个漏洞组合起来，创造出非常复杂的最终攻击手段。 ---">
-                  <header class="timeline-heading">
-                    <span class="timeline-index">01</span>
-                    <span class="timeline-meta">00:00–00:23</span>
-                  </header>
-                  <div class="timeline-body">
-                    <h3>开场及介绍新嘉宾</h3>
-                    <div class="section-content"><h4>本段核心内容</h4>
+        <div class="content-flow">
+          <section id="takeaways">
+            <div class="section-head">
+              <h2>核心要点</h2>
+              <p>快速扫读本集主线</p>
+            </div>
+            <ol class="takeaway-list"><li class="takeaway" style="--index: 1"><span>01</span><p>Anthropic宣布其新模型Mythos能够自主发现数千个安全漏洞，包括在主要操作系统和浏览器中沉睡了数十年的bug，因此拒绝公开发布，引发关于是真实风险还是营销手段的辩论。</p></li>
+<li class="takeaway" style="--index: 2"><span>02</span><p>Sacks指出Anthropic有一个使用恐惧营销的“模式”，之前的勒索信研究可能是反向工程的结果，但这次的网络安全威胁可能确实是真实的。</p></li>
+<li class="takeaway" style="--index: 3"><span>03</span><p>Chamath认为整个事件主要是“剧场表演”，并指出如果模型真如描述中那么强大，那么需要关闭互联网数年才能修补所有漏洞。</p></li>
+<li class="takeaway" style="--index: 4"><span>04</span><p>开源项目OpenClaw因用户使用Anthropic订阅服务的费用远高于平均用户而被限制使用$200的无限计划，必须改用按量付费的API，这被解读为扼杀开源竞争对手。</p></li>
+<li class="takeaway" style="--index: 5"><span>05</span><p>JCal警告不要让Anthropic或OpenAI掌握用户的全部生活和业务数据，认为开源代理层至关重要。</p></li>
+<li class="takeaway" style="--index: 6"><span>06</span><p>Anthropic的年化营收飙升至300亿美元，成为科技史上增长最快的收入曲线之一，投资机构Altimeter的Brad Gerstner预计年底可达800-1000亿美元。</p></li>
+<li class="takeaway" style="--index: 7"><span>07</span><p>Brad认为AI的TAM（总可寻址市场）几乎是无限的，“智能的TAM与以往任何东西都显著不同”。</p></li>
+<li class="takeaway" style="--index: 8"><span>08</span><p>关于AI公司能否盈利，嘉宾们意见分歧，但Brad认为由于计算成本下降和员工人数极少，毛利率正在快速改善。</p></li>
+<li class="takeaway" style="--index: 9"><span>09</span><p>伊朗战争进入停火阶段，特朗普总统推动在伊斯兰堡进行和平谈判，同时以色列与黎巴嫩开始直接政府对话。</p></li>
+<li class="takeaway" style="--index: 10"><span>10</span><p>关于以色列对美国外交政策的影响，Sacks引用以色列前总理贝内特的推文指出以色列在美国的受欢迎度正在下降，嘉宾们普遍认为以色列需要支持停火以修复关系。</p></li></ol>
+          </section>
+
+
+          <section id="timeline">
+            <div class="section-head">
+              <h2>分段详细整理</h2>
+              <p>按时间线阅读上下文</p>
+            </div>
+            <div class="timeline" data-timeline><article class="timeline-card" data-timeline-card data-search="00:00–00:23 开场及介绍新嘉宾 本段核心内容： 本集由代班主持人david friedberg缺席，brian gerstner（brad）加入。 开场调侃chamath的浏览器历史和“暴走”状态 背景解释与关键术语： 暂无 详细中文整理： jcal： 首先调侃关于浏览器历史可能会泄露的话题，chamath马上变得很在意。 chamath： 我认为浏览器历史是个敏感话题。 某位嘉宾： 那“小丁丁”照片呢？ jcal： 别忘了，我们还有rain man david sacks在场。 jcal（开场白）： 欢迎回来，这是世界排名第一的播客。david friedberg本周缺席，但代班的是我们的第五位好友，brian gerstner。 brad： 你都不再给我送namaste和发红包了。你以前可是最好的主持人，现在变得很奇怪。 jcal： 这些人把我打惨了，把主持的乐趣都打没了。 chamath： 那是因为你现在成了ro khanna的辩护者。 jcal： 好吧，我们进入正题。让我们开始做节目。 jcal（回到节目）： 很高兴你在这里。当然，david sacks也回来了。所有人都想听david sacks说话。我们上周想死你了。 sacks： 我们不是要打掉你的乐趣，只是要打掉你那些废话。 某位嘉宾： 是的，我们直接去掉废话，只放thesyndicate.com的促销。 jcal： chamath，你这一周的“原始摆烂”进行得如何？是不是整整一个周末都在抽雪茄、不去想过去20年你造成了多少混乱？ chamath： 我想我总体来说还是做了好事多于坏事。 jcal： 哦，你是做了，但中间也发生过一些混乱时刻。别去想它了，chamath。 chamath： 兄弟，人生有起有落。你是想来安抚所有人当个失败者，还是当一个赢家？你是在竞技场上。但你是不是意识到需要停止治疗了？ jcal： 你为什么突然对“原始摆烂”这么感兴趣？你是“原始摆烂”的代言人吗？ 某位嘉宾： 不，是世界终于跟上了我的节奏。我一直都在原始摆烂，他们只是之前没给它起名字而已。 chamath： 我看了eli的视频，这周又看了两个。 jcal： 跟我们说说，不胡思乱想、抽根雪茄、过生活的魅力在哪里？ chamath： 因为他的话在社会的各个阶层和各种你想达成的目标上都有用。即使你想往上爬，你很快就会发现，你越想要某样东西，就越难得到它。这就是他真正的信息：放手，好好生活，试着做点什么或者干脆不做什么。这种超脱对人们是有益的。我非常喜欢。 某位嘉宾： 谁说的？我不知道这人。 chamath： elijah long，大家叫他eli。他太棒了。 jcal： marc andreessen发现了他，说：“这人是新时代的哲学家。”他给了你一个如何生活的路线图。 某位嘉宾： 说到做事，anthropic扣留了它们最新的模型mythos，说它太危险了，不能让大家使用。这个模型能自主发现数千个漏洞，包括所有主要操作系统和浏览器中的bug。他们做了个研究，包括一些已经被安全审计遗漏了20年的bug。举例来说，他们发现了一个有27年历史的openbsd漏洞（openbsd：用于防火墙和关键基础设施的操作系统），一个16年历史的ffmpeg bug（ffmpeg：多媒体处理工具）——自动工具扫描500万次都没发现。linux内核等很多bug。他们发布了一个宣传视频，解释为什么不发布这个模型。请看dario的视频。 视频中的dario amodei（anthropic ceo）： 作为擅长写代码的副作用，这个模型也擅长网络安全。我们正在实验的模型在识别漏洞方面大致相当于一个专业人类。这对我们有好处，因为我们可以更快地发现更多漏洞并修复它们。它能够把多个漏洞串联起来。这意味着你可以找到两个独立的漏洞，每个都不太有用，但模型能将3、4个甚至5个漏洞组合起来，创造出非常复杂的最终攻击手段。 ---" style="--index: 1">
+                      <header class="timeline-heading">
+                        <span class="timeline-index">01</span>
+                        <span class="timeline-meta">00:00–00:23</span>
+                      </header>
+                      <div class="timeline-body">
+                        <h3>开场及介绍新嘉宾</h3>
+                        <div class="section-content"><h4>本段核心内容</h4>
 <ul>
 <li>本集由代班主持人David Friedberg缺席，Brian Gerstner（Brad）加入。</li>
 <li>开场调侃Chamath的浏览器历史和“暴走”状态</li>
@@ -400,16 +638,16 @@
 <p><strong>某位嘉宾：</strong> 说到做事，Anthropic扣留了它们最新的模型Mythos，说它太危险了，不能让大家使用。这个模型能自主发现数千个漏洞，包括所有主要操作系统和浏览器中的bug。他们做了个研究，包括一些已经被安全审计遗漏了20年的bug。举例来说，他们发现了一个有27年历史的OpenBSD漏洞（OpenBSD：用于防火墙和关键基础设施的操作系统），一个16年历史的FFmpeg bug（FFmpeg：多媒体处理工具）——自动工具扫描500万次都没发现。Linux内核等很多bug。他们发布了一个宣传视频，解释为什么不发布这个模型。请看Dario的视频。</p>
 <p><strong>视频中的Dario Amodei（Anthropic CEO）：</strong> 作为擅长写代码的副作用，这个模型也擅长网络安全。我们正在实验的模型在识别漏洞方面大致相当于一个专业人类。这对我们有好处，因为我们可以更快地发现更多漏洞并修复它们。它能够把多个漏洞串联起来。这意味着你可以找到两个独立的漏洞，每个都不太有用，但模型能将3、4个甚至5个漏洞组合起来，创造出非常复杂的最终攻击手段。</p>
 <hr></div>
-                  </div>
-                </article>
-<article class="timeline-card" data-timeline-card data-search="00:05:50–00:22:33 mythos模型的真实风险：实用安全还是营销恐惧？ 本段核心内容： anthropic宣布扣留mythos模型，因为它太擅长发现安全漏洞。 sacks指出anthropic有利用恐惧进行营销的一贯模式，但这次承认威胁可能是真实的。 chamath认为这是“剧场表演”，并质疑100天内能完成多少实际工作。 嘉宾对mythos是否真会引发末日场景、openai是否会做同样的事以及100天安全加固期是否可行有不同看法。 背景解释与关键术语： mythos：anthropic研发的新ai模型，据称在代码生成和自主发现安全漏洞方面有了质的飞跃。 project glasswing：anthropic发起的一项ai驱动的网络安全联盟，包括苹果、微软、谷歌、亚马逊、摩根大通等40家核心公司，计划在100天内使用高级ai寻找和修复软件漏洞。 100天加固期：嘉宾们讨论的关键问题——100天是否足以修补核心互联网的基础设施漏洞。chamath认为完全不够，brad认为100天能完成大量修复工作。 勒索信研究（blackmail study）：2024年anthropic发布的一项研究声称其模型能够被诱导发出勒索信，sacks认为该研究被反向工程且夸大了风险。 详细中文整理： jcal： brad，你是这家公司的投资者。这是“道德信号”还是现实？他们不发布模型、把它交给少数人、先找bug再公开，这是正确的做法吗？ brad： 我认为他们非常值得称赞，让我解释一下为什么。他们本可以直接发布mythos，破坏互联网核心功能。在硅谷，我们常说“快速行动，打破常规”。在这种情况下，直接发布模型就是为了抢占先机。但这次公司意识到这会带来灾难。他们自己进行了漏洞测试，发现它会导致攻击性黑客行为，暴露浏览器历史、信用卡信息等。我喜欢的是，他们不需要政府来手把手指导。我们有太多政府监管，但企业自己知道什么是最符合公司和行业长期利益的。所以他们建立了project glasswing，一个ai驱动的网络安全联盟，包括苹果、微软、谷歌、亚马逊、摩根大通等40家最重要的公司。目标很简单：用100天的时间，使用高级ai来发现、修复和加固这些软件漏洞，在黑客利用之前完成。jason，我认为这代表了我们正在跨越一个门槛。mythos和openai即将发布的spud（首个在blackwell上训练的模型）代表了我所谓的agi模型的开端。这些模型在智能上有巨大的阶梯式飞跃，它们太聪明了，不能立即发布。顺便说一句，没有任何规定说你每次完成一个模型就必须立刻公开发布。所以他们建立了沙盒、防御联盟，以远离那个旧模式。这证明了——我和sacks也经常聊到这个——你可以信任行业和市场力量与政府的协调。他们与政府进行了沟通，但并不依赖自上而下的监管。他们制定了一个非常务实的蓝图：现在我们到了这个门槛，我们将把这些东西放进沙盒中。我认为openai和谷歌最终也会做同样的事。在推进ai竞赛并保持竞争压力的同时，做出安全方面的权衡，我认为这是一个非常积极的举措。 jcal： sacks，我们几周前请来了emil michael，进行了非常深入的讨论。如果政府拥有这些工具，而anthropic想要扣留它们，那么正确的政府-企业关系应该是怎样的？用博弈论来想，他们一定已经告诉政府：“这个东西太强大了，可以组合2-3个漏洞，创造全新的攻击向量，非常危险。如果中国有了它怎么办？”如果这个东西真如dario所说的那么强大，那对我们来说也是一个进攻性武器，可以用来摧毁朝鲜的弹道导弹项目。这被描述为堪比曼哈顿计划。所以我有一个两部分的问题：sacks，你觉得中国是不是已经有了它并且正在使用？dario自我监管的做法对吗？ sacks： 我认为anthropic证明了自己擅长两件事：一是产品发布，二是吓唬人。我们在他们之前的发布中看到了一种模式：在推出新模型的同时，他们也会发布一项研究，展示这项技术可能带来的最糟糕结果。大约一年前，他们发布了“勒索信研究”，声称新模型可以进行勒索。我甚至用grok查了一下，请它列出anthropic使用恐吓策略的例子。这是一种模式，好吗？我不说他们不真诚，但他们在用恐惧来营销产品方面有明确的模式。我最爱的例子就是那个勒索信研究：他们对模型进行了200多次提示，才得到他们想要的结果。那个结果显然是反向工程出来的，却给他们带来了所有标题党。证据就是，一年后，许多开源模型已经拥有与那个anthropic模型相同的能力。但你在现实中见过任何勒索案例吗？我没有。如果那个研究真的意味着这种模型会大概率导致勒索行为，你应该会看到真实世界中这种行为的发生。但过去一年里，我们一个都没看到。现在谈谈这个网络攻击的例子。我实际上认为这次更站得住脚。我之所以提这个，是因为每当anthropic吓唬人时，你都得问：这是策略吗？这是他们的“杞人忧天”节目的一部分，还是真的？他们在“狼来了”吗？但这次我会给他们一些认可，我认为这更偏向真实的一面。逻辑上是说得通的：随着编码模型变得越来越有能力，它们更擅长发现bug，也更擅长发现安全漏洞。正如他们的一个工程师所说，它们更擅长把多个漏洞串起来，创建一个利用方案。我认为在未来6个月内，我们将经历一个一次性的追赶期，ai驱动的网络安全能够发现过去20年间可能一直隐藏在各种系统中的大量bug。所以这里确实有真正的风险。因此，我认为有一个发布前的阶段是非常合理的：将这种能力提供给所有拥有现有代码库的软件公司，让他们用这个工具自行检测漏洞，以便在能力广泛可用之前修补好。顺便说一句，让这些能力可用的不只是anthropic。中国的开源模型如gemma、k2大概落后6个月。所以我们在发布前还有大约6个月的窗口期。我认为每个管理代码库的公司、it部门或ciso都应该认真对待，利用接下来的几个月来检测隐藏的bug和漏洞，并推出补丁。如果每个人都做好自己的工作并做出正确反应，那么我不认为会发生anthropic所描绘的那种末日场景。但恐惧可能有助于驱动正确的行为。所以我认为最终会顺利解决，但每个人都必须重视起来、使用这些能力、修复bug。然后我们就会进入一个ai用于网络进攻和ai用于网络防御之间的重大军备竞赛阶段，但那会是一个更正常的时期。 jcal： chamath，dario和这些参与者非常认真。他们正在做一个重大声明。sacks给出了非常细致的看法。你的看法是什么？如果这真的是一场灾难性的事件——天哪，它们会黑掉一切——那么如果中国已经拥有了这些能力，这岂不是意味着需要更多的政府协调、监管，或者cia、fbi与这些公司之间的某种关系？因为中国也有可能拥有同等能力——我们假设他们落后，但谁知道他们在关起门来做什么呢？所以你的看法是：是狼来了，还是动真格的？ chamath： 我认为这主要是剧场表演。2019年2月，当dario还在openai时，他们对gpt-2做了同样的事。那是一个15亿参数的模型，放在2026年听上去就像放了个屁。但当时，这个15亿参数的模型被认为是世界末日，会释放出一股垃圾邮件和错误信息的洪流。结果呢？他们用了6到9个月逐步发布，先发布小参数的模型，然后逐步升级到15亿参数的模型。最终，这完全是一件“大事化小”的事。如果你们真的认为mythos能做到它声称的那些事，那么有两个事实会成立：第一，一个非常老练的黑客今天可能用opus就能做到这些事；第二，如果这些漏洞这么容易被发现，无论是用opus还是mythos，实际上你要关闭互联网5年才能把它们全部修补好。当你看到一家大型的、数万亿美元规模的系统重要性银行时，就会发现这有点做戏的成分。为什么我这么说？你认为在2个月或6个月甚至9个月里，他们真的能完成那么多修复吗？但现实是，资本主义要向前发展，融资需求要向前发展，这些公司扩大采用的需求也要向前发展，这些会凌驾于安全之上。所以我认为sacks说得对：他们找到了一种非常聪明的市场推广方式和市场推广动作，能够引发超高的关注度和使用率。我非常佩服他们，我会重申我之前的观点：anthropic现在火力全开。这就像斯蒂芬·库里在球场上从各个位置疯狂得分。他们是在投超远三分。我们已经见过这种玩法了——当这些人还是openai的主要架构师时，他们就用了同样的剧本。我认为回顾历史时，我们会说两件事：第一，如果真的要修补所有这些安全漏洞，我们需要关闭互联网数年；第二，一个高级黑客今天如果真想，可能用opus就能做到这些。 jcal： brad，我给你最后一句话。我倾向于认为：也许他们之前喊过“狼来了”，但根据我对模型进步的实际观察和使用——我用了不少中国的开源模型——我认为这已经达到了“红色代码”的级别。我认为这些公司必须与cia协调。这既是防御性的，也是进攻性的机会。你认为这是不是在对ai进行国有化？ brad： 前沿模型论坛（frontier model forum）在2023年成立，他们正在就对抗性蒸馏等问题进行合作。他们不希望让对手太容易得手。google、openai和anthropic正在这事上协调。有时候，我也曾反对anthropic，认为他们在搞监管捕获之类的事。但这次不同。dario本可以站出来说：“天哪，我们跨过了门槛，需要政府实施暂停令。”记得，连我们朋友elon在2023年都因文明风险而呼吁暂停6个月。但dario没有那样做。相反，他说：“好吧，我们该怎么办？我来联合40家领先的公司，花100天时间沙盒测试、加固系统，然后继续推进。” chamath： 你真的认为100天内能完成什么？你认为在100天内，能向核心互联网结构推送多少个pr（pull request/代码更改）？我预测一个数字——你觉得是零还是更多？ brad： 我的答案是1万个，但这是好事。 brad（继续）： 但如果能防止你的浏览器历史发布到全世界，chamath，你可能就愿意让100天过去。 某位嘉宾： 你说到浏览器历史，终于抓住了chamath的注意力。 chamath： 那“小丁丁”照片怎么办？ 某位嘉宾： chamath会自己发布。他说：“嘿，中国黑客，这是我的照片，请你们发布吧。” jcal： 我们必须赞扬他们做正确的事情，并且依靠市场而不是跑去向保姆政府要求“多做点这个”。这对我来说就是一个平衡的好例子。 sacks： 这就是为什么我试图保持更细致的看法——因为无论这是否全是剧场表演或恐慌贩卖，我们别无选择，只能认真对待。他们确实有一个围绕这件事的模式。但我们不能冒险。逻辑上也是说得通的：随着这些模型在编程上越来越强，它们也会在网络安全上越来越强。会有一个“前ai到后ai”的一次性过渡期，需要修补很多问题。我的猜测是，在接下来的几个月里我们会看到大量补丁，这应该能解决问题。这次我愿意给他们信任。我过去批评过他们——我觉得那个勒索信研究尴尬到了做假的程度。但这次我给他们认可，我认为它是真的。 jcal： 所以这不是anthropic的骗局？这次可能是真的？我们别无选择。 某位嘉宾： 当然。 jcal： 即使两件事可能同时成立。sacks，他们以前可能用过这种手段，这次也可能是表演性质的——那个视频配着戏剧化的音乐，确实有点夸张。但在逻辑上，那个在编程上下最大赌注的公司最可能最先发现这个问题。100天相对于黑客来说是一个相当大的优势。但让我再提出一点，chamath，人们没谈到的重要事情是，如今因为这些工具，大多数组织中的代码量增加了10倍、100倍。所以我们需要将这种安全性实时嵌入到这些新编程工具中。这才是机会所在。 chamath： 如果这是真的，他们选错了合作公司。那些控制核反应堆的能源公司、运营着成千上万乘客的飞机的航空公司（那些飞机本质上是高速飞行的喷气燃料导弹）——这些公司都不在这个合作名单中。所以如果你真的认为这是世界末日，我们至少可以同意，应该把圈子扩大一点。 jcal： 也许那些公司正是他们在名单上公司的客户。无论如何，这是一个非常重要的故事。dario，欢迎随时上节目。brad，你能帮我请dario上节目吗？我邀请了他三次，他都不理我。 brad： 我会告诉你，dario和dwarkesh的播客非常棒。我听了三四次，每次都做笔记。那真是非常卓越的作品。 jcal： 好吧，我们继续往下走。 ---">
-                  <header class="timeline-heading">
-                    <span class="timeline-index">02</span>
-                    <span class="timeline-meta">00:05:50–00:22:33</span>
-                  </header>
-                  <div class="timeline-body">
-                    <h3>Mythos模型的真实风险：实用安全还是营销恐惧？</h3>
-                    <div class="section-content"><h4>本段核心内容</h4>
+                      </div>
+                    </article>
+<article class="timeline-card" data-timeline-card data-search="00:05:50–00:22:33 mythos模型的真实风险：实用安全还是营销恐惧？ 本段核心内容： anthropic宣布扣留mythos模型，因为它太擅长发现安全漏洞。 sacks指出anthropic有利用恐惧进行营销的一贯模式，但这次承认威胁可能是真实的。 chamath认为这是“剧场表演”，并质疑100天内能完成多少实际工作。 嘉宾对mythos是否真会引发末日场景、openai是否会做同样的事以及100天安全加固期是否可行有不同看法。 背景解释与关键术语： mythos：anthropic研发的新ai模型，据称在代码生成和自主发现安全漏洞方面有了质的飞跃。 project glasswing：anthropic发起的一项ai驱动的网络安全联盟，包括苹果、微软、谷歌、亚马逊、摩根大通等40家核心公司，计划在100天内使用高级ai寻找和修复软件漏洞。 100天加固期：嘉宾们讨论的关键问题——100天是否足以修补核心互联网的基础设施漏洞。chamath认为完全不够，brad认为100天能完成大量修复工作。 勒索信研究（blackmail study）：2024年anthropic发布的一项研究声称其模型能够被诱导发出勒索信，sacks认为该研究被反向工程且夸大了风险。 详细中文整理： jcal： brad，你是这家公司的投资者。这是“道德信号”还是现实？他们不发布模型、把它交给少数人、先找bug再公开，这是正确的做法吗？ brad： 我认为他们非常值得称赞，让我解释一下为什么。他们本可以直接发布mythos，破坏互联网核心功能。在硅谷，我们常说“快速行动，打破常规”。在这种情况下，直接发布模型就是为了抢占先机。但这次公司意识到这会带来灾难。他们自己进行了漏洞测试，发现它会导致攻击性黑客行为，暴露浏览器历史、信用卡信息等。我喜欢的是，他们不需要政府来手把手指导。我们有太多政府监管，但企业自己知道什么是最符合公司和行业长期利益的。所以他们建立了project glasswing，一个ai驱动的网络安全联盟，包括苹果、微软、谷歌、亚马逊、摩根大通等40家最重要的公司。目标很简单：用100天的时间，使用高级ai来发现、修复和加固这些软件漏洞，在黑客利用之前完成。jason，我认为这代表了我们正在跨越一个门槛。mythos和openai即将发布的spud（首个在blackwell上训练的模型）代表了我所谓的agi模型的开端。这些模型在智能上有巨大的阶梯式飞跃，它们太聪明了，不能立即发布。顺便说一句，没有任何规定说你每次完成一个模型就必须立刻公开发布。所以他们建立了沙盒、防御联盟，以远离那个旧模式。这证明了——我和sacks也经常聊到这个——你可以信任行业和市场力量与政府的协调。他们与政府进行了沟通，但并不依赖自上而下的监管。他们制定了一个非常务实的蓝图：现在我们到了这个门槛，我们将把这些东西放进沙盒中。我认为openai和谷歌最终也会做同样的事。在推进ai竞赛并保持竞争压力的同时，做出安全方面的权衡，我认为这是一个非常积极的举措。 jcal： sacks，我们几周前请来了emil michael，进行了非常深入的讨论。如果政府拥有这些工具，而anthropic想要扣留它们，那么正确的政府-企业关系应该是怎样的？用博弈论来想，他们一定已经告诉政府：“这个东西太强大了，可以组合2-3个漏洞，创造全新的攻击向量，非常危险。如果中国有了它怎么办？”如果这个东西真如dario所说的那么强大，那对我们来说也是一个进攻性武器，可以用来摧毁朝鲜的弹道导弹项目。这被描述为堪比曼哈顿计划。所以我有一个两部分的问题：sacks，你觉得中国是不是已经有了它并且正在使用？dario自我监管的做法对吗？ sacks： 我认为anthropic证明了自己擅长两件事：一是产品发布，二是吓唬人。我们在他们之前的发布中看到了一种模式：在推出新模型的同时，他们也会发布一项研究，展示这项技术可能带来的最糟糕结果。大约一年前，他们发布了“勒索信研究”，声称新模型可以进行勒索。我甚至用grok查了一下，请它列出anthropic使用恐吓策略的例子。这是一种模式，好吗？我不说他们不真诚，但他们在用恐惧来营销产品方面有明确的模式。我最爱的例子就是那个勒索信研究：他们对模型进行了200多次提示，才得到他们想要的结果。那个结果显然是反向工程出来的，却给他们带来了所有标题党。证据就是，一年后，许多开源模型已经拥有与那个anthropic模型相同的能力。但你在现实中见过任何勒索案例吗？我没有。如果那个研究真的意味着这种模型会大概率导致勒索行为，你应该会看到真实世界中这种行为的发生。但过去一年里，我们一个都没看到。现在谈谈这个网络攻击的例子。我实际上认为这次更站得住脚。我之所以提这个，是因为每当anthropic吓唬人时，你都得问：这是策略吗？这是他们的“杞人忧天”节目的一部分，还是真的？他们在“狼来了”吗？但这次我会给他们一些认可，我认为这更偏向真实的一面。逻辑上是说得通的：随着编码模型变得越来越有能力，它们更擅长发现bug，也更擅长发现安全漏洞。正如他们的一个工程师所说，它们更擅长把多个漏洞串起来，创建一个利用方案。我认为在未来6个月内，我们将经历一个一次性的追赶期，ai驱动的网络安全能够发现过去20年间可能一直隐藏在各种系统中的大量bug。所以这里确实有真正的风险。因此，我认为有一个发布前的阶段是非常合理的：将这种能力提供给所有拥有现有代码库的软件公司，让他们用这个工具自行检测漏洞，以便在能力广泛可用之前修补好。顺便说一句，让这些能力可用的不只是anthropic。中国的开源模型如gemma、k2大概落后6个月。所以我们在发布前还有大约6个月的窗口期。我认为每个管理代码库的公司、it部门或ciso都应该认真对待，利用接下来的几个月来检测隐藏的bug和漏洞，并推出补丁。如果每个人都做好自己的工作并做出正确反应，那么我不认为会发生anthropic所描绘的那种末日场景。但恐惧可能有助于驱动正确的行为。所以我认为最终会顺利解决，但每个人都必须重视起来、使用这些能力、修复bug。然后我们就会进入一个ai用于网络进攻和ai用于网络防御之间的重大军备竞赛阶段，但那会是一个更正常的时期。 jcal： chamath，dario和这些参与者非常认真。他们正在做一个重大声明。sacks给出了非常细致的看法。你的看法是什么？如果这真的是一场灾难性的事件——天哪，它们会黑掉一切——那么如果中国已经拥有了这些能力，这岂不是意味着需要更多的政府协调、监管，或者cia、fbi与这些公司之间的某种关系？因为中国也有可能拥有同等能力——我们假设他们落后，但谁知道他们在关起门来做什么呢？所以你的看法是：是狼来了，还是动真格的？ chamath： 我认为这主要是剧场表演。2019年2月，当dario还在openai时，他们对gpt-2做了同样的事。那是一个15亿参数的模型，放在2026年听上去就像放了个屁。但当时，这个15亿参数的模型被认为是世界末日，会释放出一股垃圾邮件和错误信息的洪流。结果呢？他们用了6到9个月逐步发布，先发布小参数的模型，然后逐步升级到15亿参数的模型。最终，这完全是一件“大事化小”的事。如果你们真的认为mythos能做到它声称的那些事，那么有两个事实会成立：第一，一个非常老练的黑客今天可能用opus就能做到这些事；第二，如果这些漏洞这么容易被发现，无论是用opus还是mythos，实际上你要关闭互联网5年才能把它们全部修补好。当你看到一家大型的、数万亿美元规模的系统重要性银行时，就会发现这有点做戏的成分。为什么我这么说？你认为在2个月或6个月甚至9个月里，他们真的能完成那么多修复吗？但现实是，资本主义要向前发展，融资需求要向前发展，这些公司扩大采用的需求也要向前发展，这些会凌驾于安全之上。所以我认为sacks说得对：他们找到了一种非常聪明的市场推广方式和市场推广动作，能够引发超高的关注度和使用率。我非常佩服他们，我会重申我之前的观点：anthropic现在火力全开。这就像斯蒂芬·库里在球场上从各个位置疯狂得分。他们是在投超远三分。我们已经见过这种玩法了——当这些人还是openai的主要架构师时，他们就用了同样的剧本。我认为回顾历史时，我们会说两件事：第一，如果真的要修补所有这些安全漏洞，我们需要关闭互联网数年；第二，一个高级黑客今天如果真想，可能用opus就能做到这些。 jcal： brad，我给你最后一句话。我倾向于认为：也许他们之前喊过“狼来了”，但根据我对模型进步的实际观察和使用——我用了不少中国的开源模型——我认为这已经达到了“红色代码”的级别。我认为这些公司必须与cia协调。这既是防御性的，也是进攻性的机会。你认为这是不是在对ai进行国有化？ brad： 前沿模型论坛（frontier model forum）在2023年成立，他们正在就对抗性蒸馏等问题进行合作。他们不希望让对手太容易得手。google、openai和anthropic正在这事上协调。有时候，我也曾反对anthropic，认为他们在搞监管捕获之类的事。但这次不同。dario本可以站出来说：“天哪，我们跨过了门槛，需要政府实施暂停令。”记得，连我们朋友elon在2023年都因文明风险而呼吁暂停6个月。但dario没有那样做。相反，他说：“好吧，我们该怎么办？我来联合40家领先的公司，花100天时间沙盒测试、加固系统，然后继续推进。” chamath： 你真的认为100天内能完成什么？你认为在100天内，能向核心互联网结构推送多少个pr（pull request/代码更改）？我预测一个数字——你觉得是零还是更多？ brad： 我的答案是1万个，但这是好事。 brad（继续）： 但如果能防止你的浏览器历史发布到全世界，chamath，你可能就愿意让100天过去。 某位嘉宾： 你说到浏览器历史，终于抓住了chamath的注意力。 chamath： 那“小丁丁”照片怎么办？ 某位嘉宾： chamath会自己发布。他说：“嘿，中国黑客，这是我的照片，请你们发布吧。” jcal： 我们必须赞扬他们做正确的事情，并且依靠市场而不是跑去向保姆政府要求“多做点这个”。这对我来说就是一个平衡的好例子。 sacks： 这就是为什么我试图保持更细致的看法——因为无论这是否全是剧场表演或恐慌贩卖，我们别无选择，只能认真对待。他们确实有一个围绕这件事的模式。但我们不能冒险。逻辑上也是说得通的：随着这些模型在编程上越来越强，它们也会在网络安全上越来越强。会有一个“前ai到后ai”的一次性过渡期，需要修补很多问题。我的猜测是，在接下来的几个月里我们会看到大量补丁，这应该能解决问题。这次我愿意给他们信任。我过去批评过他们——我觉得那个勒索信研究尴尬到了做假的程度。但这次我给他们认可，我认为它是真的。 jcal： 所以这不是anthropic的骗局？这次可能是真的？我们别无选择。 某位嘉宾： 当然。 jcal： 即使两件事可能同时成立。sacks，他们以前可能用过这种手段，这次也可能是表演性质的——那个视频配着戏剧化的音乐，确实有点夸张。但在逻辑上，那个在编程上下最大赌注的公司最可能最先发现这个问题。100天相对于黑客来说是一个相当大的优势。但让我再提出一点，chamath，人们没谈到的重要事情是，如今因为这些工具，大多数组织中的代码量增加了10倍、100倍。所以我们需要将这种安全性实时嵌入到这些新编程工具中。这才是机会所在。 chamath： 如果这是真的，他们选错了合作公司。那些控制核反应堆的能源公司、运营着成千上万乘客的飞机的航空公司（那些飞机本质上是高速飞行的喷气燃料导弹）——这些公司都不在这个合作名单中。所以如果你真的认为这是世界末日，我们至少可以同意，应该把圈子扩大一点。 jcal： 也许那些公司正是他们在名单上公司的客户。无论如何，这是一个非常重要的故事。dario，欢迎随时上节目。brad，你能帮我请dario上节目吗？我邀请了他三次，他都不理我。 brad： 我会告诉你，dario和dwarkesh的播客非常棒。我听了三四次，每次都做笔记。那真是非常卓越的作品。 jcal： 好吧，我们继续往下走。 ---" style="--index: 2">
+                      <header class="timeline-heading">
+                        <span class="timeline-index">02</span>
+                        <span class="timeline-meta">00:05:50–00:22:33</span>
+                      </header>
+                      <div class="timeline-body">
+                        <h3>Mythos模型的真实风险：实用安全还是营销恐惧？</h3>
+                        <div class="section-content"><h4>本段核心内容</h4>
 <ul>
 <li>Anthropic宣布扣留Mythos模型，因为它太擅长发现安全漏洞。</li>
 <li>Sacks指出Anthropic有利用恐惧进行营销的一贯模式，但这次承认威胁可能是真实的。</li>
@@ -448,16 +686,16 @@
 <p><strong>Brad：</strong> 我会告诉你，Dario和Dwarkesh的播客非常棒。我听了三四次，每次都做笔记。那真是非常卓越的作品。</p>
 <p><strong>JCal：</strong> 好吧，我们继续往下走。</p>
 <hr></div>
-                  </div>
-                </article>
-<article class="timeline-card" data-timeline-card data-search="00:23:50–00:42:15 openclaw被anthropic限制与ai代理的竞争格局 本段核心内容： openclaw——一个基于claude的开源代理项目——被anthropic切断了$200订阅计划的访问。 openclaw用户由于使用量远超平均水平，被强制转向按量付费的api，这被认为是对开源对手的竞争压制。 anthropic在切断openclaw后不久推出了自己的代理产品。 嘉宾围绕anthropic是否滥用市场主导地位以及开源能否赢得最终胜利展开争论。 背景解释与关键术语： openclaw：一个基于anthropic的claude模型的著名开源代理项目，由peter steinberger创建，在github上极受欢迎。它能让用户执行高级自动化任务。 $200订阅计划（pro或enterprise plan）：anthropic为claude提供的月度订阅服务，宣称在一定限制下“无限制”使用。 api定价（metered usage）：直接按实际使用的token数量计费的模式。 价格倾销（price dumping）/捆绑（bundling）：jcal提到的两种潜在反竞争行为——先低价倾销排除竞争，再高价收费；或者将自家产品捆绑优惠，打压第三方。 代理（agent/ai agent）：能够独立完成多步骤任务的ai系统，不仅仅是回答问题，还能实际行动。 详细中文整理： jcal： 我想问brad一个问题，也是在anthropic这个主题下。有个很有意思的推文来自openclaw的创始人peter steinberger。他说anthropic切断了openclaw的访问权限——实际上是切断了订阅的api访问。情况是这样的：所有使用openclaw的人都买了anthropic的$200月费订阅，但这些用户的token使用量是平均用户的100倍。所以anthropic说：你不能再用$200的计划了，你必须使用api，按实际使用量付费。然后不到10天，anthropic就宣布推出了自己的新代理技术，据他们说，这是一个更安全、更好的openclaw替代品。所以，商业竞争就是公平的，但他们已经在openclaw门口放了一记重炮。 某位嘉宾： 你能解释一下这个过程吗？你刚才说得很对：他们逐功能地复制了openclaw，将其整合进claude，然后致命一击是切断了openclaw的氧气供应。 jcal： 好的，非常简单：当人们订阅这些服务时，你的使用量被平均在所有用户中。openclaw成为github历史上最受欢迎的开源项目后，那些买了$200订阅的用户实际使用量是$2000、$20000。所以anthropic说：你不能再把专业或企业订阅接入openclaw了。你必须使用api，按量付费。 某位嘉宾： 但如果有人使用anthropic自己的代理框架呢？算在捆绑的固定费用里吗？ jcal： 你可以认为他们会这样做。从反垄断角度看，这可能是“价格倾销”或“捆绑销售”。如果你在反垄断法中将产品定价低于市场价，那就是价格倾销。如果捆绑销售，那就是捆绑问题。 brad： 非常重要的一点是，你仍然可以通过claude api使用openclaw。每家公司都有权为其产品定价。他们只是说，在现有模式下，他们通过openclaw以10美分的价格卖了价值1美元的东西。现在他们只能理性定价，但你完全可以使用api。 jcal： 但是brad，如果有人使用anthropic自己的openclaw竞争对手工具，他们会补贴这个工具吗？还是免费？ brad： 我们还不知道，因为还在内测阶段。 jcal： 也就是说，如果他们对自己的工具按api收费，那就是一视同仁。但如果他们对自己工具按捆绑的固定费率收，而对第三方工具按计量费率收，你就可以提出一个捆绑的反竞争主张。 brad： 是的，前提是anthropic在编程领域拥有主导市场份额。但我认为大多数人都会同意他们现在确实有主导地位。 brad（补充）： 而且如果这是相同的产品。大多数企业可能使用anthropic的代理产品，因为它符合你所有安全参数。altimeter在我们的基础设施上运行了很多anthropic的服务，已经集成在我们的数据仓库中了。让openclaw随意访问altimeter的数据集并不明智。这是两种不同的产品。 jcal： 我理解。anthropic把openclaw克隆并整合到claude中，他们有很大的优势。他们无需通过价格歧视来获得优势，因为纯粹的整合特性已经足够有吸引力了。但我问的具体问题是：他们是否在给自己价格优势？ sacks： 你在做最慷慨的解读。我站更悲观的一边。 jcal： sacks，我跟你在一起，我100%站在悲观的一边。openclaw太强大、势头太猛了。anthropic不仅想扼杀它，我相信当sam altman“收购”它时（虽然没买openclaw本身，但雇用了peter），目的是为了从开源项目中获取peter的下一个天才想法，不让这些想法落入对手手中。我知道人们会说我是阴谋论者，但这是目前最重要的话题。我列了一个名单：谁在试图杀掉openclaw或与它竞争？显然有anthropic，还有perplexity computer（已经推出了，很棒的）。anthropic推出了claude管理的代理。然后还有ermes agent（也是开源的，很好）。阿里巴巴正在推出基于它们的qwen模型的代理。然后还有elon说groq computer要出来了。amazon和apple也在准备新版alexa和siri。而微软那边还没有消息。所以，我相信前沿模型领域的核心目标就是杀死这个开源产品。我认为最终开源会赢下大语言模型市场，占90%的token使用量。前沿模型可能会被开源压低价格。代理人层面的技术——这基本上是你整个生活和业务的核心——你不能把它交给anthropic或openai。对你brad来说，把你这辈子积累的所有知识都交给anthropic是非常不明智的，除非你只是为了给你在这些公司的投资做广告。 sacks： jcal，让我问你一个问题。感谢你那慷慨激昂的演讲。我想问每个人一个简单的是/否问题：你们是否认为anthropic在编程领域拥有主导市场份额？是/否。 jcal： 不。 chamath： 在编程领域？可以说他们领先，但不主导。 brad： 这是一个万亿级的市场，这些公司目前只占不到10%。 某位嘉宾： 他们认为的市占率是多少？高于50%。 brad： 不，我不知道这一点。 某位嘉宾： 如果你们告诉我anthropic今天提供了超过一半的编程token（编程token：指用于代码生成/辅助的token使用量），那显然他们在编程市场处于主导地位。但这是一个早期市场，情况会变。 jcal： 如果我是他们的代表，我会说：9个月前所有人都说我们出局了，被openai压着打。3个月后，人们就说我们有主导地位。这是世界上变化最快、竞争最激烈的市场。很难走进任何一个地方法院，说他们已经形成了对亚马逊、谷歌、微软、openai等的垄断。 sacks： 我不是说这是永久的垄断，我只是在问市场份额。你们似乎都同意他们有市场份额。 chamath： 他们可能有50-60%的份额，因为我认为codex（openai的编程模型）使用也很广。但这掩盖了一个更重要的事实：ai辅助编程可能只占整个市场总编程量的5%。所以这有点像“大事化小”。是的，他们是领先，但在一个还不大的市场里领先。为什么说它不大？因为大部分代码还是从头开始写的。丑陋的真相是，无论你用哪个模型，让它持续写出企业级的软件，目前还是“垃圾”。这是实际经验。当我与我们的客户（市值5000亿美元的银行、1000亿美元的保险公司）沟通时，没有人说“哇，它开箱即用”。它并不工作。所以大部分工作还是手动调整。直到我们能带着合适的防护栏指向模型，我们还没到那一步。 chamath（继续）： 世界上有50年积累的技术债务。我估计有数万亿行平庸甚至糟糕的代码。此外还有大量遗留语言：我们有一个客户，需要让60多岁的退休老员工回办公室来理解cobol代码。这是一家年营收1000亿美元的公司，这就是他们解决问题的方式，不是opus就能搞定的。我想提醒大家，世界上99%的技术债务，这些模型仍然很难处理。我们正在解开一个“戈耳狄俄斯之结”，这需要几十年的时间。所有那些气急败坏的言论，我认为都不是真正的机会所在，不是大头。你可以告诉我“这是未来”，但我告诉那家1000亿美元营收、5000万账单关系的企业“你马上就能用openclaw搞定一切”，这是bullshit。这不是说不能有一个很好的数字助手或知识库，我也喜欢那些东西。但你每天真正依赖的核心系统，是一堆会慢慢被替换的技术债务。这就是现实。 jcal： 有一些极具破坏性的竞争者。我们聊过bittensor tau项目。有个叫bridges ai的项目，是子网62。它不仅是开源的，而且任何人都可以贡献。他们花了大约100万美元的tao奖励，45天内就达到了claude 4水平的80%。他们通过给匿名贡献者发放奖励来改进编码产品。这个飞轮正在以类似于比特币的方式飞速运转。 sacks： 有一件事你说得对。我几乎可以肯定，任何有价值的、重要的公司，都不会将他们的生产代码外包给一个开源项目，这种事发生的概率为零。但未来，当一个100万亿参数的模型在blackwell上训练、或者一个15-20万亿参数的模型在vera rubin上训练时，你（jcal）的说法可能是对的。 chamath： 除了bittensor，还有另一个项目venice。开源训练和编排是一个具有巨大破坏性的想法。这是对“必须募集几百亿才能训练模型”这种思维的完全正交的攻击。如果资本市场再也没有人开出100亿、200亿美元支票，唯一的解决方案就是完全去中心化。我同意你的观点，未来某个时刻会出现一个非常成功的预训练开源项目。但绝对不会有任何真正意义上的公司说“来吧，把我的代码库做成开源项目让别人重新开发”。永远不会。 jcal： brad，我认为编程工具会成功。看看开源历史：linux、kubernetes、apache、postgres、terraform。这些开源项目深植于企业之中。如果我们在15或20年前坐在这里，也会有人提出同样的反对意见：“没人会在企业里用这些。”很多人的确用了oracle之类，但开源也扎根了。这个29美元的订阅工具能做到$200订阅的事情，并且已经在初创公司中流行起来。这是我寻找“投矛尖”的地方。初创公司喜欢用开源产品。这可能就是下一个大事。但我投资的多数有90%的概率归零，所以自行研究。 sacks： 最后让我说几点。第一，关于编程token市场，今天也许ai生成的代码只占5%，我认为它会到95%。只是时间问题，可能在未来几年。第二，作为早期领导者，如果你拥有最多开发者的使用，你就有最多代码库的访问权限，因此可能获得最多的训练token。所以存在一个潜在的飞轮，早期市场领导者可以巩固其领先地位。因此我认为编程token市场有可能被垄断。第三，anthropic的营收增速是我见过史上增长最快的。然后，未来的方向是代理（agents），编程在这方面提供了巨大的优势。如果编程成为被一家或两家公司主导的大市场，再通往代理这个大市场，我的意思是，所有公司都需要行为干净。 jcal： 最终，我认为政府会以事后回顾的方式审视这个市场，每个人都应该“保持干净，严丝合缝”。 ---">
-                  <header class="timeline-heading">
-                    <span class="timeline-index">03</span>
-                    <span class="timeline-meta">00:23:50–00:42:15</span>
-                  </header>
-                  <div class="timeline-body">
-                    <h3>OpenClaw被Anthropic限制与AI代理的竞争格局</h3>
-                    <div class="section-content"><h4>本段核心内容</h4>
+                      </div>
+                    </article>
+<article class="timeline-card" data-timeline-card data-search="00:23:50–00:42:15 openclaw被anthropic限制与ai代理的竞争格局 本段核心内容： openclaw——一个基于claude的开源代理项目——被anthropic切断了$200订阅计划的访问。 openclaw用户由于使用量远超平均水平，被强制转向按量付费的api，这被认为是对开源对手的竞争压制。 anthropic在切断openclaw后不久推出了自己的代理产品。 嘉宾围绕anthropic是否滥用市场主导地位以及开源能否赢得最终胜利展开争论。 背景解释与关键术语： openclaw：一个基于anthropic的claude模型的著名开源代理项目，由peter steinberger创建，在github上极受欢迎。它能让用户执行高级自动化任务。 $200订阅计划（pro或enterprise plan）：anthropic为claude提供的月度订阅服务，宣称在一定限制下“无限制”使用。 api定价（metered usage）：直接按实际使用的token数量计费的模式。 价格倾销（price dumping）/捆绑（bundling）：jcal提到的两种潜在反竞争行为——先低价倾销排除竞争，再高价收费；或者将自家产品捆绑优惠，打压第三方。 代理（agent/ai agent）：能够独立完成多步骤任务的ai系统，不仅仅是回答问题，还能实际行动。 详细中文整理： jcal： 我想问brad一个问题，也是在anthropic这个主题下。有个很有意思的推文来自openclaw的创始人peter steinberger。他说anthropic切断了openclaw的访问权限——实际上是切断了订阅的api访问。情况是这样的：所有使用openclaw的人都买了anthropic的$200月费订阅，但这些用户的token使用量是平均用户的100倍。所以anthropic说：你不能再用$200的计划了，你必须使用api，按实际使用量付费。然后不到10天，anthropic就宣布推出了自己的新代理技术，据他们说，这是一个更安全、更好的openclaw替代品。所以，商业竞争就是公平的，但他们已经在openclaw门口放了一记重炮。 某位嘉宾： 你能解释一下这个过程吗？你刚才说得很对：他们逐功能地复制了openclaw，将其整合进claude，然后致命一击是切断了openclaw的氧气供应。 jcal： 好的，非常简单：当人们订阅这些服务时，你的使用量被平均在所有用户中。openclaw成为github历史上最受欢迎的开源项目后，那些买了$200订阅的用户实际使用量是$2000、$20000。所以anthropic说：你不能再把专业或企业订阅接入openclaw了。你必须使用api，按量付费。 某位嘉宾： 但如果有人使用anthropic自己的代理框架呢？算在捆绑的固定费用里吗？ jcal： 你可以认为他们会这样做。从反垄断角度看，这可能是“价格倾销”或“捆绑销售”。如果你在反垄断法中将产品定价低于市场价，那就是价格倾销。如果捆绑销售，那就是捆绑问题。 brad： 非常重要的一点是，你仍然可以通过claude api使用openclaw。每家公司都有权为其产品定价。他们只是说，在现有模式下，他们通过openclaw以10美分的价格卖了价值1美元的东西。现在他们只能理性定价，但你完全可以使用api。 jcal： 但是brad，如果有人使用anthropic自己的openclaw竞争对手工具，他们会补贴这个工具吗？还是免费？ brad： 我们还不知道，因为还在内测阶段。 jcal： 也就是说，如果他们对自己的工具按api收费，那就是一视同仁。但如果他们对自己工具按捆绑的固定费率收，而对第三方工具按计量费率收，你就可以提出一个捆绑的反竞争主张。 brad： 是的，前提是anthropic在编程领域拥有主导市场份额。但我认为大多数人都会同意他们现在确实有主导地位。 brad（补充）： 而且如果这是相同的产品。大多数企业可能使用anthropic的代理产品，因为它符合你所有安全参数。altimeter在我们的基础设施上运行了很多anthropic的服务，已经集成在我们的数据仓库中了。让openclaw随意访问altimeter的数据集并不明智。这是两种不同的产品。 jcal： 我理解。anthropic把openclaw克隆并整合到claude中，他们有很大的优势。他们无需通过价格歧视来获得优势，因为纯粹的整合特性已经足够有吸引力了。但我问的具体问题是：他们是否在给自己价格优势？ sacks： 你在做最慷慨的解读。我站更悲观的一边。 jcal： sacks，我跟你在一起，我100%站在悲观的一边。openclaw太强大、势头太猛了。anthropic不仅想扼杀它，我相信当sam altman“收购”它时（虽然没买openclaw本身，但雇用了peter），目的是为了从开源项目中获取peter的下一个天才想法，不让这些想法落入对手手中。我知道人们会说我是阴谋论者，但这是目前最重要的话题。我列了一个名单：谁在试图杀掉openclaw或与它竞争？显然有anthropic，还有perplexity computer（已经推出了，很棒的）。anthropic推出了claude管理的代理。然后还有ermes agent（也是开源的，很好）。阿里巴巴正在推出基于它们的qwen模型的代理。然后还有elon说groq computer要出来了。amazon和apple也在准备新版alexa和siri。而微软那边还没有消息。所以，我相信前沿模型领域的核心目标就是杀死这个开源产品。我认为最终开源会赢下大语言模型市场，占90%的token使用量。前沿模型可能会被开源压低价格。代理人层面的技术——这基本上是你整个生活和业务的核心——你不能把它交给anthropic或openai。对你brad来说，把你这辈子积累的所有知识都交给anthropic是非常不明智的，除非你只是为了给你在这些公司的投资做广告。 sacks： jcal，让我问你一个问题。感谢你那慷慨激昂的演讲。我想问每个人一个简单的是/否问题：你们是否认为anthropic在编程领域拥有主导市场份额？是/否。 jcal： 不。 chamath： 在编程领域？可以说他们领先，但不主导。 brad： 这是一个万亿级的市场，这些公司目前只占不到10%。 某位嘉宾： 他们认为的市占率是多少？高于50%。 brad： 不，我不知道这一点。 某位嘉宾： 如果你们告诉我anthropic今天提供了超过一半的编程token（编程token：指用于代码生成/辅助的token使用量），那显然他们在编程市场处于主导地位。但这是一个早期市场，情况会变。 jcal： 如果我是他们的代表，我会说：9个月前所有人都说我们出局了，被openai压着打。3个月后，人们就说我们有主导地位。这是世界上变化最快、竞争最激烈的市场。很难走进任何一个地方法院，说他们已经形成了对亚马逊、谷歌、微软、openai等的垄断。 sacks： 我不是说这是永久的垄断，我只是在问市场份额。你们似乎都同意他们有市场份额。 chamath： 他们可能有50-60%的份额，因为我认为codex（openai的编程模型）使用也很广。但这掩盖了一个更重要的事实：ai辅助编程可能只占整个市场总编程量的5%。所以这有点像“大事化小”。是的，他们是领先，但在一个还不大的市场里领先。为什么说它不大？因为大部分代码还是从头开始写的。丑陋的真相是，无论你用哪个模型，让它持续写出企业级的软件，目前还是“垃圾”。这是实际经验。当我与我们的客户（市值5000亿美元的银行、1000亿美元的保险公司）沟通时，没有人说“哇，它开箱即用”。它并不工作。所以大部分工作还是手动调整。直到我们能带着合适的防护栏指向模型，我们还没到那一步。 chamath（继续）： 世界上有50年积累的技术债务。我估计有数万亿行平庸甚至糟糕的代码。此外还有大量遗留语言：我们有一个客户，需要让60多岁的退休老员工回办公室来理解cobol代码。这是一家年营收1000亿美元的公司，这就是他们解决问题的方式，不是opus就能搞定的。我想提醒大家，世界上99%的技术债务，这些模型仍然很难处理。我们正在解开一个“戈耳狄俄斯之结”，这需要几十年的时间。所有那些气急败坏的言论，我认为都不是真正的机会所在，不是大头。你可以告诉我“这是未来”，但我告诉那家1000亿美元营收、5000万账单关系的企业“你马上就能用openclaw搞定一切”，这是bullshit。这不是说不能有一个很好的数字助手或知识库，我也喜欢那些东西。但你每天真正依赖的核心系统，是一堆会慢慢被替换的技术债务。这就是现实。 jcal： 有一些极具破坏性的竞争者。我们聊过bittensor tau项目。有个叫bridges ai的项目，是子网62。它不仅是开源的，而且任何人都可以贡献。他们花了大约100万美元的tao奖励，45天内就达到了claude 4水平的80%。他们通过给匿名贡献者发放奖励来改进编码产品。这个飞轮正在以类似于比特币的方式飞速运转。 sacks： 有一件事你说得对。我几乎可以肯定，任何有价值的、重要的公司，都不会将他们的生产代码外包给一个开源项目，这种事发生的概率为零。但未来，当一个100万亿参数的模型在blackwell上训练、或者一个15-20万亿参数的模型在vera rubin上训练时，你（jcal）的说法可能是对的。 chamath： 除了bittensor，还有另一个项目venice。开源训练和编排是一个具有巨大破坏性的想法。这是对“必须募集几百亿才能训练模型”这种思维的完全正交的攻击。如果资本市场再也没有人开出100亿、200亿美元支票，唯一的解决方案就是完全去中心化。我同意你的观点，未来某个时刻会出现一个非常成功的预训练开源项目。但绝对不会有任何真正意义上的公司说“来吧，把我的代码库做成开源项目让别人重新开发”。永远不会。 jcal： brad，我认为编程工具会成功。看看开源历史：linux、kubernetes、apache、postgres、terraform。这些开源项目深植于企业之中。如果我们在15或20年前坐在这里，也会有人提出同样的反对意见：“没人会在企业里用这些。”很多人的确用了oracle之类，但开源也扎根了。这个29美元的订阅工具能做到$200订阅的事情，并且已经在初创公司中流行起来。这是我寻找“投矛尖”的地方。初创公司喜欢用开源产品。这可能就是下一个大事。但我投资的多数有90%的概率归零，所以自行研究。 sacks： 最后让我说几点。第一，关于编程token市场，今天也许ai生成的代码只占5%，我认为它会到95%。只是时间问题，可能在未来几年。第二，作为早期领导者，如果你拥有最多开发者的使用，你就有最多代码库的访问权限，因此可能获得最多的训练token。所以存在一个潜在的飞轮，早期市场领导者可以巩固其领先地位。因此我认为编程token市场有可能被垄断。第三，anthropic的营收增速是我见过史上增长最快的。然后，未来的方向是代理（agents），编程在这方面提供了巨大的优势。如果编程成为被一家或两家公司主导的大市场，再通往代理这个大市场，我的意思是，所有公司都需要行为干净。 jcal： 最终，我认为政府会以事后回顾的方式审视这个市场，每个人都应该“保持干净，严丝合缝”。 ---" style="--index: 3">
+                      <header class="timeline-heading">
+                        <span class="timeline-index">03</span>
+                        <span class="timeline-meta">00:23:50–00:42:15</span>
+                      </header>
+                      <div class="timeline-body">
+                        <h3>OpenClaw被Anthropic限制与AI代理的竞争格局</h3>
+                        <div class="section-content"><h4>本段核心内容</h4>
 <ul>
 <li>OpenClaw——一个基于Claude的开源代理项目——被Anthropic切断了$200订阅计划的访问。</li>
 <li>OpenClaw用户由于使用量远超平均水平，被强制转向按量付费的API，这被认为是对开源对手的竞争压制。</li>
@@ -505,16 +743,16 @@
 <p><strong>Sacks：</strong> 最后让我说几点。第一，关于编程token市场，今天也许AI生成的代码只占5%，我认为它会到95%。只是时间问题，可能在未来几年。第二，作为早期领导者，如果你拥有最多开发者的使用，你就有最多代码库的访问权限，因此可能获得最多的训练token。所以存在一个潜在的飞轮，早期市场领导者可以巩固其领先地位。因此我认为编程token市场有可能被垄断。第三，Anthropic的营收增速是我见过史上增长最快的。然后，未来的方向是代理（agents），编程在这方面提供了巨大的优势。如果编程成为被一家或两家公司主导的大市场，再通往代理这个大市场，我的意思是，所有公司都需要行为干净。</p>
 <p><strong>JCal：</strong> 最终，我认为政府会以事后回顾的方式审视这个市场，每个人都应该“保持干净，严丝合缝”。</p>
 <hr></div>
-                  </div>
-                </article>
-<article class="timeline-card" data-timeline-card data-search="00:42:15–00:55:27 anthropic的营收爆炸与盈利前景 本段核心内容： anthropic的营收年化运行率飙升到300亿美元，成为科技史上最快的增长曲线。 brad认为“智能的tam（总可寻址市场）是无限的”，企业客户需求强劲，不仅限于边远端。 关于盈利前景，chamath怀疑毛利率是否真正健康，brad则认为毛利率正在迅速改善，企业甚至可能“意外盈利”。 嘉宾辩论“虽然营收增长惊人，但能否像google、facebook那样在早期就实现盈利”的问题。 背景解释与关键术语： 营收年化运行率（annualized revenue run rate）：基于最近一个月的收入推算出的全年收入，用于衡量短期增长势头。anthropic从2023年初开始收费，到2024年底达到10亿美元年化，2025年2月发布claude code后飙升，4月达300亿美元。 gross vs net revenue：chamath质疑anthropic公布的营收可能是毛收入（包含合作伙伴的抽成），实际净收入可能更低。brad反驳说，合作伙伴抽成只是很小部分。 tam vs token：tam（total addressable market）指总可寻址市场。brad认为，ai模式下“智能的tam”规模与以往任何市场都不同，这解释了高增长。 详细中文整理： sacks： 第三点，anthropic的营收年化运行率，根据我的了解，是有史以来增长最快的。我们可以仔细谈谈。 jcal： 正好接上。anthropic的营收年化运行率已经超过了300亿美元。2023年初才开始收费。2024年底是10亿美元年化。2025年2月，他们发布了claude code，那是发令枪。2025年中，40亿美元年化。2025年底，90亿美元。而仅仅几个月后的现在，4月，300亿美元年化——对，翻了3倍。他们的做法是：企业客户是消费主力。dario几个月前宣布，有超过1000家企业客户每年支付超过100万美元。这在企业软件历史上是闻所未闻的。brad，你是投资者。sam altman在bg2播客上邀请你卖掉你的openai股票，你拒绝了，你两家公司都投资了。看到一只从后面赶上来的股票，有多震撼？chatgpt有9亿用户，是那个“动词”——就像“uber、xerox、polaroid”之于各自领域，但他们没有去抢企业客户。dario却做了。根据本周《纽约客》报道，dario因为与sam altman共事的厌恶而离开。你的看法？ brad： 在深入openai之前，我们先看清楚情况。你展示了图表。他们在1月增加了40亿美元年化，2月70亿，3月110亿。这相当于databricks加palantir在单月内合并的增量。年初所有人——包括bill gurley等——都在焦虑这是否是大泡沫，ai收入能否证明投资的合理性。砰，我们看到科技史上最大的营收爆炸。公司计划到年底达到300亿美元年化运行率，他们3月就达到了。我怀疑4月还在继续。这说明了什么？第一，模型和产品能力刚刚跨过了我们之前讨论的门槛——接近agi，或者随便你怎么称呼。第二，altimeter等公司说：“该死，这太好了，我必须拥有它。”这不再关乎it预算，而是关乎劳动增强和劳动力替代。顺便说一句，cowork（另一个产品）在相同发展阶段的增长甚至比claude code还要快。这证明了我们有一个近乎无限的tam。“智能的tam”与以往任何规模的tam都显著不同。最好的证据就是：数百万自利的消费者和企业客户，从$1000到超过100万美元的贡献。这不是anthropic突然找到了什么神奇的市场推广方式——而是企业自己在要求产品，他们在被限流。为什么？因为产品太好了，能让他们经营得更好。我们都是自利的参与者。当数百万人同时做出相同的决定时，这是一个巨大的信号。这个信号就是：tam就像dario和sam说的那样大。我们一直知道智能会呈指数级扩展。问题是营收能否呈指数级扩展？我们现在正在见证。而且你要注意，他们完成这一切时只用了1.5-2吉瓦的计算能力。他们严重受限于计算资源。今年他们每家公司都要增加3吉瓦的计算能力。如果不受限，他们会增长得更快。此外，65-70%的大企业token消费来自开源模型。所以这些营收增长是在开源已经占据大头的背景下发生的。这不是前沿模型独占，而是前沿加开源。我们将在年内看到token的大规模优化。但根据杰文斯悖论（jevons paradox），单位智能的成本正在暴跌——不是token成本，而是智能的单元成本在暴跌，因为模型的能力好得多。我昨天和一家大公司聊过，他们正在以1亿美元year run rate消费token，占其50亿美元运营开支的2%。他们认为公司正在接近“雇员峰值”，但智能消费会大幅增加。我们只处于早期阶段：全球2000强企业的渗透率还很低，用例渗透率还很低，内在用例的深度渗透也还很低，而模型只会越来越好。所以我不会对年底看到anthropic做到800-1000亿美元营收感到惊讶。openai也在这波浪潮上，他们会发布一个出色的模型，营收也将迎来拐点。 jcal： chamath，第一个问题得到解答了：“这个东西到底有没有用？”从问号变成感叹号。第二个问题是营收增长从问号变感叹号。最后一个你多次提到的问题是：这能盈利吗？这些公司烧掉大量现金。它们什么时候能走出j曲线？我们大概3期前聊过，我估计至少需要4000-5000亿美元投入数据中心，然后才能爬出深坑实现盈利。你对它们变成盈利公司怎么看？ chamath： 你还记得那个投资者列出的清单吗——当你不准谈利润时，你谈自由现金流；当不准谈自由现金流时，你谈ebitda；当不准谈ebitda时，你谈毛利率；当不准谈毛利率时，你谈营收；不能谈营收时，你谈毛收入。由此你可以判断我们处于周期的哪个阶段。目前我们处于毛收入和净收入之间。今天the information有篇文章试图区分：anthropic是按毛收入报的，openai是按净收入报的。它们不同，我们不知道加成率是多少。所以至少存在混淆：有人连“已确认收入”和“年化营收”都分不清楚，更别提如何计算了。我们绝对还在那个阶段。我们可以争论细节，但离“稳态自由现金流毛利率”这样的阶段还差很远。真正需要理解的是：这些营收增长在多大程度上是“负毛利率”的？这点我们不知道。 brad： 让我解释一下。他们的最大投入是计算成本。我刚才说了他们只有1.5吉瓦计算能力，无论营收是10亿还是800亿美元，计算成本不变。所以你可以预期这些公司的毛利率正在以我见过的科技公司中最快的速度上升。这绝不是什么负毛利率。你甚至可能会看到我所谓的“意外盈利”：他们可能来不及花掉这些营收，因为计算设施扩张不够快。而且他们只有2500人。当google跨过这个营收门槛时，他们拥有12万人。这些公司只有2500人。所以唯一能花钱的地方就是计算能力，但计算能力又搭建不上去。 chamath： 但这与我的逻辑对不上。如果毛利率真的接近90%以上…… brad： 我不是说它已经90%以上了，但它从18个月前的显著负数提升到了现在非常可观的正数。我看到传闻说可能达到50-60%。 chamath： 趋势是存在的。我要说的是，如果你是现有公司——比如meta、google和spacex——你会希望计算成本下降，因为这意味着你有更多优势。meta的模型评价是还不错，但性能极好，这反映了meta巨大的计算基础设施优势。所以如果你不是openai和anthropic，你希望把它变成一个资本问题，这样你就能赢。我们现在非常早期，大家还在随便谈毛利率和营收，离盈利还很远。facebook和谷歌在达到一定规模时，早就盈利了。 brad： 建设ai的成本当然比当年google建设搜索引擎的成本高得多。但有很多关于负毛利率的fud（恐惧、不确定、怀疑）。jason，你开场说这些公司烧大量现金。我预测它们的烧钱率会比人们想象的低得多。 jcal： anthropic还是openai？ brad： 对，两者都是。如果它们今年做到500亿美元营收，看看它们有多少人。人均营收很低。而推理成本每年下降90%。最后，就chamath引用的毛与净收入推特：anthropic通过超大规模云商分发的那部分营收占比例很小，而且就像snowflake或databricks的惯例，它们支付佣金。这在总营收中是个位数百分比。所以毛与净的不同不是什么大问题。如果你想保守点，把anthropic的营收下调5-10%就行。不管你怎么算，我认为这都是一种分散注意力的行为。 ---">
-                  <header class="timeline-heading">
-                    <span class="timeline-index">04</span>
-                    <span class="timeline-meta">00:42:15–00:55:27</span>
-                  </header>
-                  <div class="timeline-body">
-                    <h3>Anthropic的营收爆炸与盈利前景</h3>
-                    <div class="section-content"><h4>本段核心内容</h4>
+                      </div>
+                    </article>
+<article class="timeline-card" data-timeline-card data-search="00:42:15–00:55:27 anthropic的营收爆炸与盈利前景 本段核心内容： anthropic的营收年化运行率飙升到300亿美元，成为科技史上最快的增长曲线。 brad认为“智能的tam（总可寻址市场）是无限的”，企业客户需求强劲，不仅限于边远端。 关于盈利前景，chamath怀疑毛利率是否真正健康，brad则认为毛利率正在迅速改善，企业甚至可能“意外盈利”。 嘉宾辩论“虽然营收增长惊人，但能否像google、facebook那样在早期就实现盈利”的问题。 背景解释与关键术语： 营收年化运行率（annualized revenue run rate）：基于最近一个月的收入推算出的全年收入，用于衡量短期增长势头。anthropic从2023年初开始收费，到2024年底达到10亿美元年化，2025年2月发布claude code后飙升，4月达300亿美元。 gross vs net revenue：chamath质疑anthropic公布的营收可能是毛收入（包含合作伙伴的抽成），实际净收入可能更低。brad反驳说，合作伙伴抽成只是很小部分。 tam vs token：tam（total addressable market）指总可寻址市场。brad认为，ai模式下“智能的tam”规模与以往任何市场都不同，这解释了高增长。 详细中文整理： sacks： 第三点，anthropic的营收年化运行率，根据我的了解，是有史以来增长最快的。我们可以仔细谈谈。 jcal： 正好接上。anthropic的营收年化运行率已经超过了300亿美元。2023年初才开始收费。2024年底是10亿美元年化。2025年2月，他们发布了claude code，那是发令枪。2025年中，40亿美元年化。2025年底，90亿美元。而仅仅几个月后的现在，4月，300亿美元年化——对，翻了3倍。他们的做法是：企业客户是消费主力。dario几个月前宣布，有超过1000家企业客户每年支付超过100万美元。这在企业软件历史上是闻所未闻的。brad，你是投资者。sam altman在bg2播客上邀请你卖掉你的openai股票，你拒绝了，你两家公司都投资了。看到一只从后面赶上来的股票，有多震撼？chatgpt有9亿用户，是那个“动词”——就像“uber、xerox、polaroid”之于各自领域，但他们没有去抢企业客户。dario却做了。根据本周《纽约客》报道，dario因为与sam altman共事的厌恶而离开。你的看法？ brad： 在深入openai之前，我们先看清楚情况。你展示了图表。他们在1月增加了40亿美元年化，2月70亿，3月110亿。这相当于databricks加palantir在单月内合并的增量。年初所有人——包括bill gurley等——都在焦虑这是否是大泡沫，ai收入能否证明投资的合理性。砰，我们看到科技史上最大的营收爆炸。公司计划到年底达到300亿美元年化运行率，他们3月就达到了。我怀疑4月还在继续。这说明了什么？第一，模型和产品能力刚刚跨过了我们之前讨论的门槛——接近agi，或者随便你怎么称呼。第二，altimeter等公司说：“该死，这太好了，我必须拥有它。”这不再关乎it预算，而是关乎劳动增强和劳动力替代。顺便说一句，cowork（另一个产品）在相同发展阶段的增长甚至比claude code还要快。这证明了我们有一个近乎无限的tam。“智能的tam”与以往任何规模的tam都显著不同。最好的证据就是：数百万自利的消费者和企业客户，从$1000到超过100万美元的贡献。这不是anthropic突然找到了什么神奇的市场推广方式——而是企业自己在要求产品，他们在被限流。为什么？因为产品太好了，能让他们经营得更好。我们都是自利的参与者。当数百万人同时做出相同的决定时，这是一个巨大的信号。这个信号就是：tam就像dario和sam说的那样大。我们一直知道智能会呈指数级扩展。问题是营收能否呈指数级扩展？我们现在正在见证。而且你要注意，他们完成这一切时只用了1.5-2吉瓦的计算能力。他们严重受限于计算资源。今年他们每家公司都要增加3吉瓦的计算能力。如果不受限，他们会增长得更快。此外，65-70%的大企业token消费来自开源模型。所以这些营收增长是在开源已经占据大头的背景下发生的。这不是前沿模型独占，而是前沿加开源。我们将在年内看到token的大规模优化。但根据杰文斯悖论（jevons paradox），单位智能的成本正在暴跌——不是token成本，而是智能的单元成本在暴跌，因为模型的能力好得多。我昨天和一家大公司聊过，他们正在以1亿美元year run rate消费token，占其50亿美元运营开支的2%。他们认为公司正在接近“雇员峰值”，但智能消费会大幅增加。我们只处于早期阶段：全球2000强企业的渗透率还很低，用例渗透率还很低，内在用例的深度渗透也还很低，而模型只会越来越好。所以我不会对年底看到anthropic做到800-1000亿美元营收感到惊讶。openai也在这波浪潮上，他们会发布一个出色的模型，营收也将迎来拐点。 jcal： chamath，第一个问题得到解答了：“这个东西到底有没有用？”从问号变成感叹号。第二个问题是营收增长从问号变感叹号。最后一个你多次提到的问题是：这能盈利吗？这些公司烧掉大量现金。它们什么时候能走出j曲线？我们大概3期前聊过，我估计至少需要4000-5000亿美元投入数据中心，然后才能爬出深坑实现盈利。你对它们变成盈利公司怎么看？ chamath： 你还记得那个投资者列出的清单吗——当你不准谈利润时，你谈自由现金流；当不准谈自由现金流时，你谈ebitda；当不准谈ebitda时，你谈毛利率；当不准谈毛利率时，你谈营收；不能谈营收时，你谈毛收入。由此你可以判断我们处于周期的哪个阶段。目前我们处于毛收入和净收入之间。今天the information有篇文章试图区分：anthropic是按毛收入报的，openai是按净收入报的。它们不同，我们不知道加成率是多少。所以至少存在混淆：有人连“已确认收入”和“年化营收”都分不清楚，更别提如何计算了。我们绝对还在那个阶段。我们可以争论细节，但离“稳态自由现金流毛利率”这样的阶段还差很远。真正需要理解的是：这些营收增长在多大程度上是“负毛利率”的？这点我们不知道。 brad： 让我解释一下。他们的最大投入是计算成本。我刚才说了他们只有1.5吉瓦计算能力，无论营收是10亿还是800亿美元，计算成本不变。所以你可以预期这些公司的毛利率正在以我见过的科技公司中最快的速度上升。这绝不是什么负毛利率。你甚至可能会看到我所谓的“意外盈利”：他们可能来不及花掉这些营收，因为计算设施扩张不够快。而且他们只有2500人。当google跨过这个营收门槛时，他们拥有12万人。这些公司只有2500人。所以唯一能花钱的地方就是计算能力，但计算能力又搭建不上去。 chamath： 但这与我的逻辑对不上。如果毛利率真的接近90%以上…… brad： 我不是说它已经90%以上了，但它从18个月前的显著负数提升到了现在非常可观的正数。我看到传闻说可能达到50-60%。 chamath： 趋势是存在的。我要说的是，如果你是现有公司——比如meta、google和spacex——你会希望计算成本下降，因为这意味着你有更多优势。meta的模型评价是还不错，但性能极好，这反映了meta巨大的计算基础设施优势。所以如果你不是openai和anthropic，你希望把它变成一个资本问题，这样你就能赢。我们现在非常早期，大家还在随便谈毛利率和营收，离盈利还很远。facebook和谷歌在达到一定规模时，早就盈利了。 brad： 建设ai的成本当然比当年google建设搜索引擎的成本高得多。但有很多关于负毛利率的fud（恐惧、不确定、怀疑）。jason，你开场说这些公司烧大量现金。我预测它们的烧钱率会比人们想象的低得多。 jcal： anthropic还是openai？ brad： 对，两者都是。如果它们今年做到500亿美元营收，看看它们有多少人。人均营收很低。而推理成本每年下降90%。最后，就chamath引用的毛与净收入推特：anthropic通过超大规模云商分发的那部分营收占比例很小，而且就像snowflake或databricks的惯例，它们支付佣金。这在总营收中是个位数百分比。所以毛与净的不同不是什么大问题。如果你想保守点，把anthropic的营收下调5-10%就行。不管你怎么算，我认为这都是一种分散注意力的行为。 ---" style="--index: 4">
+                      <header class="timeline-heading">
+                        <span class="timeline-index">04</span>
+                        <span class="timeline-meta">00:42:15–00:55:27</span>
+                      </header>
+                      <div class="timeline-body">
+                        <h3>Anthropic的营收爆炸与盈利前景</h3>
+                        <div class="section-content"><h4>本段核心内容</h4>
 <ul>
 <li>Anthropic的营收年化运行率飙升到300亿美元，成为科技史上最快的增长曲线。</li>
 <li>Brad认为“智能的TAM（总可寻址市场）是无限的”，企业客户需求强劲，不仅限于边远端。</li>
@@ -541,16 +779,16 @@
 <p><strong>JCal：</strong> Anthropic还是OpenAI？</p>
 <p><strong>Brad：</strong> 对，两者都是。如果它们今年做到500亿美元营收，看看它们有多少人。人均营收很低。而推理成本每年下降90%。最后，就Chamath引用的毛与净收入推特：Anthropic通过超大规模云商分发的那部分营收占比例很小，而且就像Snowflake或Databricks的惯例，它们支付佣金。这在总营收中是个位数百分比。所以毛与净的不同不是什么大问题。如果你想保守点，把Anthropic的营收下调5-10%就行。不管你怎么算，我认为这都是一种分散注意力的行为。</p>
 <hr></div>
-                  </div>
-                </article>
-<article class="timeline-card" data-timeline-card data-search="00:55:27–01:01:34 ai泡沫争论、开源竞争、openai的挑战 本段核心内容： sacks回顾年初的ai泡沫论（capex大投入但缺营收证明），和ai同时被说成“太强大会取代人类”的矛盾。 认为这个编程领域（一个垂直领域）的营收爆炸是初步证明——硅谷愿意在直觉上下重注。 brad就openai与anthropic对比，认为市场上存在“openai fud恐慌高点”，但不应低估openai。 多极竞争态势下，“team america”在ai开放市场与自主调控的安全策略上领先全球。 详细中文整理： sacks： 我想强调brad说的一点，因为非常关键。想象一下年初的情况：所有人都在说ai是大泡沫，理由是数千亿美元的资本投入去建设数据中心，却没有显著收入来证明。讽刺的是，同一群看跌派一会说“ai太强大，会取代人类”，一会又说“ai不够强”。抛开这个矛盾，当时确实有人论证ai是一个大泡沫，这些巨额资本支出最终得不到回报。而我们正在看到回报：仅在一个ai垂直领域——编程——就出现了史上最快的营收增长。这是前所未有的。而这只ai的一个类别。接下来是代理（agents）和企业应用的大规模采用。我认为这是硅谷的独特之处：我们愿意根据直觉去下重注，相信“如果你建好了，他们就会来”。前四大超大规模云商今年预计有3500亿美元的capex。黄仁勋说2030年前会达到1万亿美元。硅谷——无论是大公司还是创始人——总是愿意押注下一个大事，不像华尔街需要复杂的电子表格来告诉他们该怎么做。他们知道技术走向了哪里，然后在此基础上押注。我认为这会有巨大回报，使美国经济保持活力和领先。 jcal： brad，你没回答openai vs claude的“氛围”问题。openai经历了很多动荡：员工离职，战略摇摆（消费者优先、关闭sora、撤回与迪士尼的交易）。许多核心创始人和贡献者去了anthropic。二级市场上openai的估值低于上一轮，而anthropic远高于3800亿美元。这是个微软vs苹果、谷歌vs facebook的竞争。 brad： 首先，anthropic值得巨大尊重：去年被彻底看衰，但过去12个月中，尤其在近90天击败了openai。他们做了什么选择？没有多模态、没有视频、没有硬件、没有芯片、不建数据中心。他们只专注于编程和协同工作，认为这是通往agi和asi的道路。他们执行顶呱呱，2500人紧紧拉着一根绳索朝同一方向划船。但你如果以为可以就此看衰openai，那你太傻了。我们正处于openai fud（恐惧、不确定、怀疑）的高峰期。从顶尖研究者和模型开始：我认为他们即将推出的spud模型将会非常出色，证明他们仍然在浪潮上。codex的采用也迅速增长。人们正在预览spud，告诉我它和mythos相当，而且易于使用。最重要的一点：这不是零和游戏。智能的tam远远超过我们过去20年投资生涯中见过的任何tam。只要在浪潮上，就能卖到全球最大的tam里去。我在目前的价格下是openai的买家。他们确实在对自身进行反思：“我们做错了什么？如何找回魔力？”他们渴望竞争。但别忘了meta、google、elon。如果你支持“美国队”，我们拥有5个前沿模型在竞争，没有被过度监管所遏制。mythos自我设限安全期，不是为了叫停或让政府介入。这种竞争正是我们扩大对世界其他地区领先地位的原因。 ---">
-                  <header class="timeline-heading">
-                    <span class="timeline-index">05</span>
-                    <span class="timeline-meta">00:55:27–01:01:34</span>
-                  </header>
-                  <div class="timeline-body">
-                    <h3>AI泡沫争论、开源竞争、OpenAI的挑战</h3>
-                    <div class="section-content"><h4>本段核心内容</h4>
+                      </div>
+                    </article>
+<article class="timeline-card" data-timeline-card data-search="00:55:27–01:01:34 ai泡沫争论、开源竞争、openai的挑战 本段核心内容： sacks回顾年初的ai泡沫论（capex大投入但缺营收证明），和ai同时被说成“太强大会取代人类”的矛盾。 认为这个编程领域（一个垂直领域）的营收爆炸是初步证明——硅谷愿意在直觉上下重注。 brad就openai与anthropic对比，认为市场上存在“openai fud恐慌高点”，但不应低估openai。 多极竞争态势下，“team america”在ai开放市场与自主调控的安全策略上领先全球。 详细中文整理： sacks： 我想强调brad说的一点，因为非常关键。想象一下年初的情况：所有人都在说ai是大泡沫，理由是数千亿美元的资本投入去建设数据中心，却没有显著收入来证明。讽刺的是，同一群看跌派一会说“ai太强大，会取代人类”，一会又说“ai不够强”。抛开这个矛盾，当时确实有人论证ai是一个大泡沫，这些巨额资本支出最终得不到回报。而我们正在看到回报：仅在一个ai垂直领域——编程——就出现了史上最快的营收增长。这是前所未有的。而这只ai的一个类别。接下来是代理（agents）和企业应用的大规模采用。我认为这是硅谷的独特之处：我们愿意根据直觉去下重注，相信“如果你建好了，他们就会来”。前四大超大规模云商今年预计有3500亿美元的capex。黄仁勋说2030年前会达到1万亿美元。硅谷——无论是大公司还是创始人——总是愿意押注下一个大事，不像华尔街需要复杂的电子表格来告诉他们该怎么做。他们知道技术走向了哪里，然后在此基础上押注。我认为这会有巨大回报，使美国经济保持活力和领先。 jcal： brad，你没回答openai vs claude的“氛围”问题。openai经历了很多动荡：员工离职，战略摇摆（消费者优先、关闭sora、撤回与迪士尼的交易）。许多核心创始人和贡献者去了anthropic。二级市场上openai的估值低于上一轮，而anthropic远高于3800亿美元。这是个微软vs苹果、谷歌vs facebook的竞争。 brad： 首先，anthropic值得巨大尊重：去年被彻底看衰，但过去12个月中，尤其在近90天击败了openai。他们做了什么选择？没有多模态、没有视频、没有硬件、没有芯片、不建数据中心。他们只专注于编程和协同工作，认为这是通往agi和asi的道路。他们执行顶呱呱，2500人紧紧拉着一根绳索朝同一方向划船。但你如果以为可以就此看衰openai，那你太傻了。我们正处于openai fud（恐惧、不确定、怀疑）的高峰期。从顶尖研究者和模型开始：我认为他们即将推出的spud模型将会非常出色，证明他们仍然在浪潮上。codex的采用也迅速增长。人们正在预览spud，告诉我它和mythos相当，而且易于使用。最重要的一点：这不是零和游戏。智能的tam远远超过我们过去20年投资生涯中见过的任何tam。只要在浪潮上，就能卖到全球最大的tam里去。我在目前的价格下是openai的买家。他们确实在对自身进行反思：“我们做错了什么？如何找回魔力？”他们渴望竞争。但别忘了meta、google、elon。如果你支持“美国队”，我们拥有5个前沿模型在竞争，没有被过度监管所遏制。mythos自我设限安全期，不是为了叫停或让政府介入。这种竞争正是我们扩大对世界其他地区领先地位的原因。 ---" style="--index: 5">
+                      <header class="timeline-heading">
+                        <span class="timeline-index">05</span>
+                        <span class="timeline-meta">00:55:27–01:01:34</span>
+                      </header>
+                      <div class="timeline-body">
+                        <h3>AI泡沫争论、开源竞争、OpenAI的挑战</h3>
+                        <div class="section-content"><h4>本段核心内容</h4>
 <ul>
 <li>Sacks回顾年初的AI泡沫论（CapEx大投入但缺营收证明），和AI同时被说成“太强大会取代人类”的矛盾。</li>
 <li>认为这个编程领域（一个垂直领域）的营收爆炸是初步证明——硅谷愿意在直觉上下重注。</li>
@@ -562,16 +800,16 @@
 <p><strong>JCal：</strong> Brad，你没回答OpenAI vs Claude的“氛围”问题。OpenAI经历了很多动荡：员工离职，战略摇摆（消费者优先、关闭Sora、撤回与迪士尼的交易）。许多核心创始人和贡献者去了Anthropic。二级市场上OpenAI的估值低于上一轮，而Anthropic远高于3800亿美元。这是个微软vs苹果、谷歌vs Facebook的竞争。</p>
 <p><strong>Brad：</strong> 首先，Anthropic值得巨大尊重：去年被彻底看衰，但过去12个月中，尤其在近90天击败了OpenAI。他们做了什么选择？没有多模态、没有视频、没有硬件、没有芯片、不建数据中心。他们只专注于编程和协同工作，认为这是通往AGI和ASI的道路。他们执行顶呱呱，2500人紧紧拉着一根绳索朝同一方向划船。但你如果以为可以就此看衰OpenAI，那你太傻了。我们正处于OpenAI FUD（恐惧、不确定、怀疑）的高峰期。从顶尖研究者和模型开始：我认为他们即将推出的SpuD模型将会非常出色，证明他们仍然在浪潮上。Codex的采用也迅速增长。人们正在预览SpuD，告诉我它和Mythos相当，而且易于使用。最重要的一点：这不是零和游戏。智能的TAM远远超过我们过去20年投资生涯中见过的任何TAM。只要在浪潮上，就能卖到全球最大的TAM里去。我在目前的价格下是OpenAI的买家。他们确实在对自身进行反思：“我们做错了什么？如何找回魔力？”他们渴望竞争。但别忘了Meta、Google、Elon。如果你支持“美国队”，我们拥有5个前沿模型在竞争，没有被过度监管所遏制。Mythos自我设限安全期，不是为了叫停或让政府介入。这种竞争正是我们扩大对世界其他地区领先地位的原因。</p>
 <hr></div>
-                  </div>
-                </article>
-<article class="timeline-card" data-timeline-card data-search="01:07:15–01:12:47 伊朗战争停火与国际政治 本段核心内容： 伊朗战争在经历6周后进入为期两周的停火期。 特朗普政府团队（jd vance、witkoff、jared kushner）前往伊斯兰堡参与和平谈判。 sacks谨慎表示他并非白宫外交政策团队一员，但认为实现停火是非常了不起的成就。 brad认为市场对这次战争的反应（5-7%的下跌）说明投资者信任特朗普会快速退出。 详细中文整理： jcal： 我们来谈第三轨——伊朗战争的最新进展。停火刚刚开始两天。副总统jd vance和特别顾问witkoff及朋友jared kushner前往巴基斯坦首都伊斯兰堡进行谈判。复活节周日，特朗普发了一条truth social说：“打开那个该死的海峡，你们这些疯狂的混蛋，要不然你们就等着下地狱吧。赞美真主。”周二早上他又说：“一个文明今晚将会灭亡，再也无法复活。” 他在8点给了个最后期限。当晚6点半，特朗普宣布接受一个两周停火，条件是伊朗开放海峡。他还说：我们控制了海峡，也许会设一个收费站，把大部分通行费分给伊朗。他提到伊朗交了一份10点提案，并认为是“可谈判的基础”。然后，内塔尼亚胡借停火之机对黎巴嫩实施了144小时内160次轰炸。sacks，你缺了一周，大家都想听你对这场战争和停火的看法。 sacks： 首先我必须声明，我不是白宫外交政策团队成员。上次我在节目中评论战争，结果被国际媒体报道成“特朗普顾问说x”，但这不在我的职责范围内。我今天说的只是个人观点。但我认为实现停火是非常好的事。战争有自己的生命，会沿着升级阶梯往上走。有一个“升级陷阱”的概念。我认为从其中抽身非常困难。我给了总统巨大的认可，为他谈判了目前达成的停火，并派团队去解决这个麻烦。 brad： 3月4日，我发了一条推特：“特朗普在伊朗的学说：大规模摧毁所有军事能力，杀死制造武器攻击我们的人，然后离开。保留如需再次攻击的能力。不试图构建麦迪逊式民主。伊朗得自己决定下一步。”看市场：去年在关税问题上，纳斯达克高点到低点下跌了22%，标普500下跌了15%。伊朗战争期间，市场下跌只有5-7%。说明市场信任特朗普说的话：他不会陷入一场旷日持久的战争。人们的恐慌情绪虽然真实，但最终相信总统会在战争上退出。今天标普500和纳斯达克都反弹到了战前水平。如果jd vance的降落到位，而且内塔尼亚胡表示以色列和黎巴嫩将开启直接政府谈判，那么基本上是“我们着陆成功”了。还有乌克兰-俄罗斯、委内瑞拉、古巴都可能取得进展。存在下行风险，但也有上行风险。如果这些事在7月4日美国建国250周年前全部着陆，市场可能会有巨大的上升空间。 ---">
-                  <header class="timeline-heading">
-                    <span class="timeline-index">06</span>
-                    <span class="timeline-meta">01:07:15–01:12:47</span>
-                  </header>
-                  <div class="timeline-body">
-                    <h3>伊朗战争停火与国际政治</h3>
-                    <div class="section-content"><h4>本段核心内容</h4>
+                      </div>
+                    </article>
+<article class="timeline-card" data-timeline-card data-search="01:07:15–01:12:47 伊朗战争停火与国际政治 本段核心内容： 伊朗战争在经历6周后进入为期两周的停火期。 特朗普政府团队（jd vance、witkoff、jared kushner）前往伊斯兰堡参与和平谈判。 sacks谨慎表示他并非白宫外交政策团队一员，但认为实现停火是非常了不起的成就。 brad认为市场对这次战争的反应（5-7%的下跌）说明投资者信任特朗普会快速退出。 详细中文整理： jcal： 我们来谈第三轨——伊朗战争的最新进展。停火刚刚开始两天。副总统jd vance和特别顾问witkoff及朋友jared kushner前往巴基斯坦首都伊斯兰堡进行谈判。复活节周日，特朗普发了一条truth social说：“打开那个该死的海峡，你们这些疯狂的混蛋，要不然你们就等着下地狱吧。赞美真主。”周二早上他又说：“一个文明今晚将会灭亡，再也无法复活。” 他在8点给了个最后期限。当晚6点半，特朗普宣布接受一个两周停火，条件是伊朗开放海峡。他还说：我们控制了海峡，也许会设一个收费站，把大部分通行费分给伊朗。他提到伊朗交了一份10点提案，并认为是“可谈判的基础”。然后，内塔尼亚胡借停火之机对黎巴嫩实施了144小时内160次轰炸。sacks，你缺了一周，大家都想听你对这场战争和停火的看法。 sacks： 首先我必须声明，我不是白宫外交政策团队成员。上次我在节目中评论战争，结果被国际媒体报道成“特朗普顾问说x”，但这不在我的职责范围内。我今天说的只是个人观点。但我认为实现停火是非常好的事。战争有自己的生命，会沿着升级阶梯往上走。有一个“升级陷阱”的概念。我认为从其中抽身非常困难。我给了总统巨大的认可，为他谈判了目前达成的停火，并派团队去解决这个麻烦。 brad： 3月4日，我发了一条推特：“特朗普在伊朗的学说：大规模摧毁所有军事能力，杀死制造武器攻击我们的人，然后离开。保留如需再次攻击的能力。不试图构建麦迪逊式民主。伊朗得自己决定下一步。”看市场：去年在关税问题上，纳斯达克高点到低点下跌了22%，标普500下跌了15%。伊朗战争期间，市场下跌只有5-7%。说明市场信任特朗普说的话：他不会陷入一场旷日持久的战争。人们的恐慌情绪虽然真实，但最终相信总统会在战争上退出。今天标普500和纳斯达克都反弹到了战前水平。如果jd vance的降落到位，而且内塔尼亚胡表示以色列和黎巴嫩将开启直接政府谈判，那么基本上是“我们着陆成功”了。还有乌克兰-俄罗斯、委内瑞拉、古巴都可能取得进展。存在下行风险，但也有上行风险。如果这些事在7月4日美国建国250周年前全部着陆，市场可能会有巨大的上升空间。 ---" style="--index: 6">
+                      <header class="timeline-heading">
+                        <span class="timeline-index">06</span>
+                        <span class="timeline-meta">01:07:15–01:12:47</span>
+                      </header>
+                      <div class="timeline-body">
+                        <h3>伊朗战争停火与国际政治</h3>
+                        <div class="section-content"><h4>本段核心内容</h4>
 <ul>
 <li>伊朗战争在经历6周后进入为期两周的停火期。</li>
 <li>特朗普政府团队（JD Vance、Witkoff、Jared Kushner）前往伊斯兰堡参与和平谈判。</li>
@@ -584,16 +822,16 @@
 <p><strong>Sacks：</strong> 首先我必须声明，我不是白宫外交政策团队成员。上次我在节目中评论战争，结果被国际媒体报道成“特朗普顾问说X”，但这不在我的职责范围内。我今天说的只是个人观点。但我认为实现停火是非常好的事。战争有自己的生命，会沿着升级阶梯往上走。有一个“升级陷阱”的概念。我认为从其中抽身非常困难。我给了总统巨大的认可，为他谈判了目前达成的停火，并派团队去解决这个麻烦。</p>
 <p><strong>Brad：</strong> 3月4日，我发了一条推特：“特朗普在伊朗的学说：大规模摧毁所有军事能力，杀死制造武器攻击我们的人，然后离开。保留如需再次攻击的能力。不试图构建麦迪逊式民主。伊朗得自己决定下一步。”看市场：去年在关税问题上，纳斯达克高点到低点下跌了22%，标普500下跌了15%。伊朗战争期间，市场下跌只有5-7%。说明市场信任特朗普说的话：他不会陷入一场旷日持久的战争。人们的恐慌情绪虽然真实，但最终相信总统会在战争上退出。今天标普500和纳斯达克都反弹到了战前水平。如果JD Vance的降落到位，而且内塔尼亚胡表示以色列和黎巴嫩将开启直接政府谈判，那么基本上是“我们着陆成功”了。还有乌克兰-俄罗斯、委内瑞拉、古巴都可能取得进展。存在下行风险，但也有上行风险。如果这些事在7月4日美国建国250周年前全部着陆，市场可能会有巨大的上升空间。</p>
 <hr></div>
-                  </div>
-                </article>
-<article class="timeline-card" data-timeline-card data-search="01:15:11–01:28:04 以色列的影响力与美国外交政策 本段核心内容： 《纽约时报》的“内幕报道”详细描写了特朗普于2月11日收到的内塔尼亚胡关于攻击伊朗的四点计划。 jcal指出美国许多犹太人认为内塔尼亚胡的战争策略加剧了反犹太主义，以及美国外交政策被以色列“绑架”。 sacks引用以色列前总理贝内特的推文指出以色列在美国的受欢迎程度正在下降，这是以色列需要反思的。 嘉宾以grok的自动翻译功能作结，赞扬其在跨文化理解上的革命性作用。 详细中文整理： jcal： sacks，我们来谈谈这场战争的根本原因。周二《纽约时报》发表了一篇“内部报道”，描述特朗普如何做出跟随内塔尼亚胡进入战争的决定（如果该报道属实）。报道称，2月11日，内塔尼亚胡在白宫向特朗普做了四点游说。jd vance据称警告特朗普，战争会导致地区混乱并打碎他的maga 2.0联盟。而事实证明这正是现在的情况——很多保守派（如megyn kelly、tucker carlson）都表达了担忧。每当我与犹太裔美国人交流，他们都认为内塔尼亚胡没有帮到犹太裔美国人和流散犹太人，甚至因为他的战争策略加剧了反犹太主义。你对这场战争背后的角色怎么看？ chamath： 决定者是美国总统。外国领导人无法控制美国。市场已经定价了这是一个小小的涟漪。我们很可能处于终局阶段。第二，如果我是以色列，我会非常担心：如果我找不到快出出口，失去美国这个可预测的坚定盟友的风险会增加。这对以色列的问题远大于对美国。因此经济上和地缘政治上，我们都会找到出口。以色列会希望确保不因为这场战争而毁掉一个长期的联盟关系。 jcal： 是的，主要问题就在于美国人根本不想卷入这场战争。美国人不认为我们的外交政策应该被以色列——尤其是内塔尼亚胡——所左右到这种程度。而且许多人认为，内塔尼亚胡在加沙、黎巴嫩、伊朗的过激行为直接加剧了今天的反犹太主义。（我采访的犹太裔美国人都这么告诉我。） 某位嘉宾： 我注意到今天前纳夫塔利·贝内特（以色列前总理）发了一条推特，引用民调表明以色列在美国的受欢迎程度正在下降，他对此表示关切。这说明有一些以色列政治家意识到了这个问题。 jcal： 很有趣的是，grok的自动翻译正在自动推送这条用希伯来语发的推特到你的信息流里。这功能太好用了。它做了比ai大语言模型本身还多的事情：把日语、希伯来语、法语的好内容自动翻译并推送到你的信息流。当你回复时，对面也自动翻译成他们的语言。这作为“真理机制”非常惊人。 chamath： 那确实是一个超酷的功能。 brad： 在中东方面，还有中文、俄文、日文内容上都看到了这种翻译。 jcal： 总之，grok的这个功能对跨文化理解太有用了。 ---">
-                  <header class="timeline-heading">
-                    <span class="timeline-index">07</span>
-                    <span class="timeline-meta">01:15:11–01:28:04</span>
-                  </header>
-                  <div class="timeline-body">
-                    <h3>以色列的影响力与美国外交政策</h3>
-                    <div class="section-content"><h4>本段核心内容</h4>
+                      </div>
+                    </article>
+<article class="timeline-card" data-timeline-card data-search="01:15:11–01:28:04 以色列的影响力与美国外交政策 本段核心内容： 《纽约时报》的“内幕报道”详细描写了特朗普于2月11日收到的内塔尼亚胡关于攻击伊朗的四点计划。 jcal指出美国许多犹太人认为内塔尼亚胡的战争策略加剧了反犹太主义，以及美国外交政策被以色列“绑架”。 sacks引用以色列前总理贝内特的推文指出以色列在美国的受欢迎程度正在下降，这是以色列需要反思的。 嘉宾以grok的自动翻译功能作结，赞扬其在跨文化理解上的革命性作用。 详细中文整理： jcal： sacks，我们来谈谈这场战争的根本原因。周二《纽约时报》发表了一篇“内部报道”，描述特朗普如何做出跟随内塔尼亚胡进入战争的决定（如果该报道属实）。报道称，2月11日，内塔尼亚胡在白宫向特朗普做了四点游说。jd vance据称警告特朗普，战争会导致地区混乱并打碎他的maga 2.0联盟。而事实证明这正是现在的情况——很多保守派（如megyn kelly、tucker carlson）都表达了担忧。每当我与犹太裔美国人交流，他们都认为内塔尼亚胡没有帮到犹太裔美国人和流散犹太人，甚至因为他的战争策略加剧了反犹太主义。你对这场战争背后的角色怎么看？ chamath： 决定者是美国总统。外国领导人无法控制美国。市场已经定价了这是一个小小的涟漪。我们很可能处于终局阶段。第二，如果我是以色列，我会非常担心：如果我找不到快出出口，失去美国这个可预测的坚定盟友的风险会增加。这对以色列的问题远大于对美国。因此经济上和地缘政治上，我们都会找到出口。以色列会希望确保不因为这场战争而毁掉一个长期的联盟关系。 jcal： 是的，主要问题就在于美国人根本不想卷入这场战争。美国人不认为我们的外交政策应该被以色列——尤其是内塔尼亚胡——所左右到这种程度。而且许多人认为，内塔尼亚胡在加沙、黎巴嫩、伊朗的过激行为直接加剧了今天的反犹太主义。（我采访的犹太裔美国人都这么告诉我。） 某位嘉宾： 我注意到今天前纳夫塔利·贝内特（以色列前总理）发了一条推特，引用民调表明以色列在美国的受欢迎程度正在下降，他对此表示关切。这说明有一些以色列政治家意识到了这个问题。 jcal： 很有趣的是，grok的自动翻译正在自动推送这条用希伯来语发的推特到你的信息流里。这功能太好用了。它做了比ai大语言模型本身还多的事情：把日语、希伯来语、法语的好内容自动翻译并推送到你的信息流。当你回复时，对面也自动翻译成他们的语言。这作为“真理机制”非常惊人。 chamath： 那确实是一个超酷的功能。 brad： 在中东方面，还有中文、俄文、日文内容上都看到了这种翻译。 jcal： 总之，grok的这个功能对跨文化理解太有用了。 ---" style="--index: 7">
+                      <header class="timeline-heading">
+                        <span class="timeline-index">07</span>
+                        <span class="timeline-meta">01:15:11–01:28:04</span>
+                      </header>
+                      <div class="timeline-body">
+                        <h3>以色列的影响力与美国外交政策</h3>
+                        <div class="section-content"><h4>本段核心内容</h4>
 <ul>
 <li>《纽约时报》的“内幕报道”详细描写了特朗普于2月11日收到的内塔尼亚胡关于攻击伊朗的四点计划。</li>
 <li>JCal指出美国许多犹太人认为内塔尼亚胡的战争策略加剧了反犹太主义，以及美国外交政策被以色列“绑架”。</li>
@@ -610,40 +848,47 @@
 <p><strong>Brad：</strong> 在中东方面，还有中文、俄文、日文内容上都看到了这种翻译。</p>
 <p><strong>JCal：</strong> 总之，Grok的这个功能对跨文化理解太有用了。</p>
 <hr></div>
-                  </div>
-                </article></div>
-      </section>
+                      </div>
+                    </article></div>
+            <p class="empty search-empty" data-search-empty hidden>没有匹配的时间线段落。</p>
+          </section>
 
-      <section id="speakers">
-        <div class="section-head">
-          <h2>人物观点对照</h2>
-          <p>比较嘉宾立场</p>
-        </div>
-        <div class="speaker-grid"><article class="speaker-card">
-              <h3>Jason Calacanis</h3>
-              <div><p>JCal 在整期节目中展现出强烈的支持开源、警惕AI巨头垄断的倾向。他认为OpenAI和Anthropic正在联手围剿开源项目OpenClaw，以阻止其成为AI界的“Android”。他主张不应该将自己整个生活和业务所需的知识交给任何一家大模型公司。在伊朗战争上，他认为美国外交政策被内塔尼亚胡过度影响，内塔尼亚胡的战争策略加剧了全球反犹太主义。他对Anthropic的营收飙升至300亿美元表示震惊，但认为关键问题在于它们何时能实现真正盈利。</p></div>
-            </article>
-<article class="speaker-card">
-              <h3>Chamath Palihapitiya</h3>
-              <div><p>Chamath 对Anthropic的Mythos安全事件持最大疑态度，认为是“剧场表演”，并嘲笑在100天内修补核心互联网漏洞的想法是天方夜谭。他认为Anthropic成功发明了一种高明的“恐惧营销”模式。在OpenClaw被断粮一事上，他强调了Anthropic在编程token市场拥有50-60%主导地位，但立即指出AI编程目前只占整个编程活动的大约5%，因为企业级技术债仍远非AI可解决。在营收和盈利方面，他质疑公布的营收是毛收入还是净收入、毛利率是否真实，强调离真正盈利还远。在伊朗问题上，他认为市场已经定价了这是一个短期冲突，并警告以色列要小心不要失去美国的支持。</p></div>
-            </article>
-<article class="speaker-card">
-              <h3>David Sacks</h3>
-              <div><p>Sacks 采用了平衡但审慎的态度。他承认Anthropic在安全宣传上有夸大其词和制造恐惧的历史（如勒索信研究），但这次承认网络安全风险是合理的。他呼吁所有人严肃对待，但认为未来几个月内的大量补丁会解决主要问题。在OpenClaw问题上，他警觉地指出这是否构成反竞争行为（价格歧视、捆绑），以及政府部门未来可能会用后见之明来审查这种排他性定价。他同意JCal关于开源与前沿模型竞争的长期观点。在营收方面，他认为AI营收增长的拐点已经到来，这是一个积极信号。在伊朗和以色列问题上，他非常谨慎地保持个人观点，并一致推动停火，引用贝内特的推文说明以色列应当关注自己在美受欢迎度下降的问题。</p></div>
-            </article>
-<article class="speaker-card">
-              <h3>Brad Gerstner (Altimeter)</h3>
-              <div><p>Brad 是Anthropic的直接投资者，对Mythos安全事件大加赞赏，认为是行业成熟的表现。他相信100天的安全加固期能够完成大量工作，同时正面肯定了Project Glasswing中的40个成员联盟。在OpenClaw争议上，他选择一分为二：企业行为是合理的价格调整，同时也承认如果自家工具捆绑而第三方API则分开计量，差异将构成反竞争问题。在营收部分，他提供了最乐观的预测：智能的TAM无限，年底Anthropic可达800-1000亿美元。在盈利上，他认为亏损被夸大，毛利率正在快升，公司甚至可能“意外盈利”。在伊朗战争上，他认为市场相信特朗普会快速退出，这与对贸易战的消极反应形成对比。</p>
+
+          <section id="speakers">
+            <div class="section-head">
+              <h2>人物观点对照</h2>
+              <p>比较嘉宾立场</p>
+            </div>
+            <div class="speaker-grid"><article class="speaker-card" style="--index: 1">
+                      <p class="speaker-kicker">嘉宾 01</p>
+                      <h3>Jason Calacanis</h3>
+                  <div><p>JCal 在整期节目中展现出强烈的支持开源、警惕AI巨头垄断的倾向。他认为OpenAI和Anthropic正在联手围剿开源项目OpenClaw，以阻止其成为AI界的“Android”。他主张不应该将自己整个生活和业务所需的知识交给任何一家大模型公司。在伊朗战争上，他认为美国外交政策被内塔尼亚胡过度影响，内塔尼亚胡的战争策略加剧了全球反犹太主义。他对Anthropic的营收飙升至300亿美元表示震惊，但认为关键问题在于它们何时能实现真正盈利。</p></div>
+                </article>
+<article class="speaker-card" style="--index: 2">
+                      <p class="speaker-kicker">嘉宾 02</p>
+                      <h3>Chamath Palihapitiya</h3>
+                  <div><p>Chamath 对Anthropic的Mythos安全事件持最大疑态度，认为是“剧场表演”，并嘲笑在100天内修补核心互联网漏洞的想法是天方夜谭。他认为Anthropic成功发明了一种高明的“恐惧营销”模式。在OpenClaw被断粮一事上，他强调了Anthropic在编程token市场拥有50-60%主导地位，但立即指出AI编程目前只占整个编程活动的大约5%，因为企业级技术债仍远非AI可解决。在营收和盈利方面，他质疑公布的营收是毛收入还是净收入、毛利率是否真实，强调离真正盈利还远。在伊朗问题上，他认为市场已经定价了这是一个短期冲突，并警告以色列要小心不要失去美国的支持。</p></div>
+                </article>
+<article class="speaker-card" style="--index: 3">
+                      <p class="speaker-kicker">嘉宾 03</p>
+                      <h3>David Sacks</h3>
+                  <div><p>Sacks 采用了平衡但审慎的态度。他承认Anthropic在安全宣传上有夸大其词和制造恐惧的历史（如勒索信研究），但这次承认网络安全风险是合理的。他呼吁所有人严肃对待，但认为未来几个月内的大量补丁会解决主要问题。在OpenClaw问题上，他警觉地指出这是否构成反竞争行为（价格歧视、捆绑），以及政府部门未来可能会用后见之明来审查这种排他性定价。他同意JCal关于开源与前沿模型竞争的长期观点。在营收方面，他认为AI营收增长的拐点已经到来，这是一个积极信号。在伊朗和以色列问题上，他非常谨慎地保持个人观点，并一致推动停火，引用贝内特的推文说明以色列应当关注自己在美受欢迎度下降的问题。</p></div>
+                </article>
+<article class="speaker-card" style="--index: 4">
+                      <p class="speaker-kicker">嘉宾 04</p>
+                      <h3>Brad Gerstner (Altimeter)</h3>
+                  <div><p>Brad 是Anthropic的直接投资者，对Mythos安全事件大加赞赏，认为是行业成熟的表现。他相信100天的安全加固期能够完成大量工作，同时正面肯定了Project Glasswing中的40个成员联盟。在OpenClaw争议上，他选择一分为二：企业行为是合理的价格调整，同时也承认如果自家工具捆绑而第三方API则分开计量，差异将构成反竞争问题。在营收部分，他提供了最乐观的预测：智能的TAM无限，年底Anthropic可达800-1000亿美元。在盈利上，他认为亏损被夸大，毛利率正在快升，公司甚至可能“意外盈利”。在伊朗战争上，他认为市场相信特朗普会快速退出，这与对贸易战的消极反应形成对比。</p>
 <hr></div>
-            </article></div>
-      </section>
+                </article></div>
+          </section>
 
-      <section id="quotes">
-        <div class="section-head">
-          <h2>值得引用的原话</h2>
-          <p>保留关键表达</p>
-        </div>
-        <div class="panel"><ol>
+
+          <section id="quotes">
+            <div class="section-head">
+              <h2>值得引用的原话</h2>
+              <p>保留关键表达</p>
+            </div>
+            <div class="panel"><ol>
 <li><strong>Mythos is withholding its newest model, saying it is far too dangerous for any of us to have access to it.</strong></li>
 <p>中文：Mythos 正在扣留其最新模型，称它对所有人来说都太危险了，不能开放使用。 说明：提出了本集最核心的辩论议题——AI的责任边界。</p>
 </ol>
@@ -675,7 +920,9 @@
 <li><strong>If I was Israel, I would really be concerned that unless I help find an off-ramp quickly, the risk that Israel loses America as a predictably steadfast ally could go down.</strong></li>
 <p>中文：如果我是以色列，我会非常担心，除非我尽快找到一个出口，否则以色列失去美国这个可预期的坚定盟友的风险就会增加。 说明：Chamath对以色列短期利益与长期盟友关系的忧虑。</p>
 </ol></div>
-      </section>
+          </section>
+        </div>
+      </div>
     </main>
   </div>
   <script>
@@ -683,31 +930,46 @@
     const searchBox = document.querySelector("[data-search-box]");
     const topButton = document.querySelector("[data-scroll-top]");
     const cards = Array.from(document.querySelectorAll("[data-timeline-card]"));
+    const searchEmpty = document.querySelector("[data-search-empty]");
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
     function updateProgress() {
       const scrollable = document.documentElement.scrollHeight - window.innerHeight;
       const ratio = scrollable > 0 ? window.scrollY / scrollable : 0;
-      progress.style.width = `${Math.max(0, Math.min(1, ratio)) * 100}%`;
+      if (progress) {
+        progress.style.width = `${Math.max(0, Math.min(1, ratio)) * 100}%`;
+      }
     }
 
     function applySearch() {
       const query = searchBox.value.trim().toLowerCase();
+      let visibleCount = 0;
       cards.forEach((card) => {
         const text = card.getAttribute("data-search") || "";
-        card.style.display = !query || text.includes(query) ? "" : "none";
+        const isVisible = !query || text.includes(query);
+        card.hidden = !isVisible;
+        if (isVisible) {
+          visibleCount += 1;
+        }
       });
+      if (searchEmpty) {
+        searchEmpty.hidden = !query || visibleCount > 0;
+      }
     }
 
     window.addEventListener("scroll", updateProgress, { passive: true });
     window.addEventListener("resize", updateProgress);
-    searchBox.addEventListener("input", applySearch);
-    topButton.addEventListener("click", () => {
-      window.scrollTo({
-        top: 0,
-        behavior: prefersReducedMotion.matches ? "auto" : "smooth"
+    if (searchBox) {
+      searchBox.addEventListener("input", applySearch);
+    }
+    if (topButton) {
+      topButton.addEventListener("click", () => {
+        window.scrollTo({
+          top: 0,
+          behavior: prefersReducedMotion.matches ? "auto" : "smooth"
+        });
       });
-    });
+    }
     updateProgress();
   </script>
 </body>

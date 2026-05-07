@@ -6,175 +6,341 @@
   <title>All-In Podcast 中文可视化笔记</title>
   <style>
     :root {
-      --bg: oklch(0.965 0.012 86);
-      --paper: oklch(0.986 0.006 86);
-      --paper-soft: oklch(0.94 0.014 86);
-      --ink: oklch(0.24 0.024 255);
-      --muted: oklch(0.48 0.026 255);
-      --line: oklch(0.84 0.016 86);
-      --line-strong: oklch(0.73 0.026 86);
-      --accent: oklch(0.54 0.13 35);
-      --accent-soft: oklch(0.91 0.045 45);
-      --blue: oklch(0.43 0.08 255);
-      --teal: oklch(0.47 0.075 188);
-      --shadow: 0 18px 46px color-mix(in oklch, var(--ink) 12%, transparent);
-      --radius: 10px;
+      --bg: oklch(0.974 0.006 238);
+      --paper: oklch(0.991 0.003 238);
+      --paper-soft: oklch(0.955 0.007 238);
+      --ink: oklch(0.205 0.018 246);
+      --muted: oklch(0.49 0.018 246);
+      --faint: oklch(0.63 0.014 246);
+      --line: oklch(0.875 0.009 238);
+      --line-strong: oklch(0.74 0.014 238);
+      --accent: oklch(0.43 0.064 164);
+      --accent-soft: oklch(0.94 0.024 164);
+      --accent-wash: oklch(0.973 0.012 164);
+      --shadow: 0 24px 54px color-mix(in oklch, var(--ink) 8%, transparent);
+      --radius: 8px;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
     }
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body {
       margin: 0;
+      min-width: 0;
       color: var(--ink);
-      background: var(--bg);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-      line-height: 1.74;
+      background:
+        linear-gradient(90deg, color-mix(in oklch, var(--line) 28%, transparent) 1px, transparent 1px) 0 0 / 92px 92px,
+        var(--bg);
+      font-family: "Geist", "Satoshi", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      line-height: 1.78;
+      text-rendering: optimizeLegibility;
+      overflow-x: clip;
     }
-    a { color: var(--blue); text-decoration-thickness: 1px; text-underline-offset: 3px; }
-
-    .container {
-      width: min(960px, calc(100% - 32px));
+    ::selection { background: var(--accent-soft); color: var(--ink); }
+    a {
+      color: var(--accent);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+      transition: color .22s var(--ease), background-color .22s var(--ease), border-color .22s var(--ease), transform .22s var(--ease);
+    }
+    .page {
+      width: min(1200px, calc(100% - 44px));
       margin: 0 auto;
-      padding: 48px 0 80px;
+      padding: 0 0 96px;
     }
-
-    .site-header {
-      margin-bottom: 40px;
+    .site-hero {
+      max-width: 880px;
+      margin-left: min(18vw, 220px);
+      padding: 72px 0 58px;
     }
-    .site-header h1 {
-      margin: 0 0 8px;
-      font-size: clamp(1.75rem, 4vw, 2.5rem);
-      line-height: 1.2;
+    .eyebrow {
+      margin: 0 0 18px;
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 12px;
       font-weight: 700;
-      letter-spacing: -0.01em;
+      letter-spacing: .08em;
+      text-transform: uppercase;
     }
-    .site-header p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 1rem;
-      line-height: 1.6;
+    h1 {
+      max-width: 12ch;
+      margin: 0 0 28px;
+      font-size: 52px;
+      font-weight: 760;
+      line-height: 1.06;
+      letter-spacing: 0;
     }
-    .site-header .accent-line {
-      display: block;
-      width: 48px;
-      height: 3px;
-      background: var(--accent);
-      margin: 16px 0 0;
-      border-radius: 2px;
-    }
-
-    .episode-list {
-      display: grid;
-      gap: 12px;
-    }
-
-    .episode-card {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      padding: 16px 20px;
+    .site-intro {
+      max-width: 760px;
+      padding: 24px 26px;
       border: 1px solid var(--line);
       border-radius: var(--radius);
-      background: var(--paper);
+      background: color-mix(in oklch, var(--paper) 88%, var(--accent-soft));
+      box-shadow: var(--shadow);
+    }
+    .site-intro p {
+      margin: 0;
+      font-size: 19px;
+      line-height: 1.72;
+    }
+    .content-shell {
+      display: grid;
+      grid-template-columns: minmax(170px, 212px) minmax(0, 820px);
+      gap: clamp(36px, 7vw, 88px);
+      align-items: start;
+      border-top: 1px solid var(--line);
+      padding-top: 40px;
+    }
+    .sidebar {
+      position: sticky;
+      top: 28px;
+      align-self: start;
+      padding-top: 4px;
+    }
+    .toc {
+      border-top: 1px solid var(--ink);
+      padding-top: 16px;
+    }
+    .toc-title {
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .site-notes {
+      display: grid;
+      gap: 12px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.45;
+    }
+    .site-notes span {
+      display: block;
+      padding: 8px 0;
+      border-bottom: 1px solid color-mix(in oklch, var(--line) 72%, transparent);
+    }
+    .content-flow { min-width: 0; }
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 18px;
+      align-items: end;
+      margin-bottom: 22px;
+      border-top: 1px solid var(--ink);
+      padding-top: 18px;
+    }
+    .section-head h2 {
+      margin: 0;
+      font-size: 28px;
+      font-weight: 740;
+      line-height: 1.16;
+      letter-spacing: 0;
+    }
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.4;
+      text-align: right;
+    }
+    .episode-list {
+      display: grid;
+      gap: 0;
+      border-top: 1px solid var(--line-strong);
+      counter-reset: episode;
+    }
+    .episode-card {
+      counter-increment: episode;
+      display: grid;
+      grid-template-columns: 52px minmax(0, 1fr) auto;
+      gap: 18px;
+      align-items: baseline;
+      padding: 22px 0;
+      border-bottom: 1px solid var(--line);
       text-decoration: none;
       color: inherit;
-      transition: border-color 0.2s, background 0.2s;
-      cursor: pointer;
     }
-    .episode-card:hover {
-      border-color: var(--line-strong);
-      background: var(--paper-soft);
+    .episode-card::before {
+      content: counter(episode, decimal-leading-zero);
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 15px;
+      font-weight: 720;
+      line-height: 1.65;
+    }
+    .episode-card:hover, .episode-card:focus-visible {
+      outline: none;
+      color: var(--accent);
+      transform: translate3d(2px, 0, 0);
     }
     .episode-card:focus-visible {
-      outline: none;
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px color-mix(in oklch, var(--accent) 16%, transparent);
+      background: var(--accent-wash);
     }
-
     .episode-title {
       margin: 0;
-      font-size: 1.05rem;
-      line-height: 1.45;
-      font-weight: 500;
+      max-width: 32ch;
+      font-size: 20px;
+      line-height: 1.32;
+      font-weight: 730;
       color: var(--ink);
+      overflow-wrap: anywhere;
     }
+    .episode-card:hover .episode-title,
+    .episode-card:focus-visible .episode-title { color: var(--accent); }
     .episode-date {
-      font-size: 0.875rem;
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 720;
       color: var(--muted);
       white-space: nowrap;
-      flex-shrink: 0;
     }
-
     .site-footer {
-      margin-top: 60px;
-      padding-top: 24px;
+      margin-top: 78px;
+      padding-top: 22px;
       border-top: 1px solid var(--line);
-      text-align: center;
       color: var(--muted);
-      font-size: 0.875rem;
+      font-size: 13px;
     }
+    .site-footer p { margin: 0; }
     .site-footer a { color: var(--muted); }
-    .site-footer a:hover { color: var(--blue); }
+    .site-footer a:hover { color: var(--accent); }
 
-    @media (max-width: 640px) {
-      .container {
-        width: calc(100% - 24px);
-        padding: 28px 0 60px;
+    @media (max-width: 1120px) {
+      .site-hero { margin-left: 0; }
+      .content-shell {
+        grid-template-columns: minmax(154px, 190px) minmax(0, 1fr);
+        gap: 36px;
+      }
+      h1 { font-size: 44px; }
+    }
+    @media (max-width: 780px) {
+      body { background: var(--bg); }
+      .page {
+        width: 100%;
+        padding: 0 14px 72px;
+        overflow-x: clip;
+      }
+      .site-hero { padding: 46px 0 36px; }
+      .eyebrow { margin-bottom: 14px; }
+      h1 {
+        max-width: none;
+        font-size: 30px;
+        line-height: 1.14;
+        overflow-wrap: anywhere;
+        word-break: break-word;
+      }
+      .site-intro {
+        max-width: 100%;
+        padding: 20px;
+      }
+      .site-intro p {
+        font-size: 17px;
+        overflow-wrap: anywhere;
+        word-break: break-word;
+      }
+      .content-shell { display: block; padding-top: 28px; }
+      .sidebar {
+        position: static;
+        padding-top: 0;
+        margin-bottom: 42px;
+      }
+      .toc { border-top-color: var(--line-strong); }
+      .site-notes {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0 18px;
+      }
+      .section-head {
+        display: block;
+        margin-bottom: 16px;
+      }
+      .section-head h2 { font-size: 24px; }
+      .section-head p {
+        margin-top: 6px;
+        text-align: left;
       }
       .episode-card {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 4px;
-        padding: 14px 16px;
+        grid-template-columns: 42px minmax(0, 1fr);
+        gap: 12px;
+        padding: 18px 0;
       }
       .episode-title {
-        font-size: 1rem;
+        max-width: none;
+        font-size: 18px;
+      }
+      .episode-date {
+        grid-column: 2;
       }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <header class="site-header">
+  <div class="page">
+    <header class="site-hero">
+      <p class="eyebrow">All-In Podcast 中文精读</p>
       <h1>All-In Podcast 中文可视化笔记</h1>
-      <p>将 All-In Podcast 的精彩内容以中文呈现，快速获取科技、商业与投资的前沿洞察。</p>
-      <span class="accent-line" aria-hidden="true"></span>
+      <div class="site-intro">
+        <p>将 All-In Podcast 的精彩内容以中文呈现，快速获取科技、商业与投资的前沿洞察。</p>
+      </div>
     </header>
 
-    <main class="episode-list" id="episode-list">
-<a
-        class="episode-card"
-        href="./episodes/fpc4sbawszq-openai-misses-targets-codex-vs-claude-elon-vs-sam-trial-big-hyperscaler-beats-peptide-cr/notes.visual.html"
-      >
-        <h2 class="episode-title">OpenAI 目标未达成、Codex vs Claude、Elon vs Sam 庭审、科技巨头财报、多肽热潮</h2>
-        <span class="episode-date">2026-05-04</span>
-      </a>
-      <a
-        class="episode-card"
-        href="./episodes/2026-04-24-spacex-cursor-deal-saas-debt-bomb-new-apple-ceo-splc-indictment-colon-cancer-spike/notes.visual.html"
-      >
-        <h2 class="episode-title">SpaceX-Cursor交易、SaaS债务炸弹、苹果换帅、SPLC起诉、结肠癌飙升</h2>
-        <span class="episode-date">2026-04-24</span>
-      </a>
-      <a
-        class="episode-card"
-        href="./episodes/2026-04-17-openai-s-identity-crisis-datacenter-wars-market-up-on-iran-news-mamdani-s-first-tax-swalw/notes.visual.html"
-      >
-        <h2 class="episode-title">OpenAI的信仰危机、数据中心战争、市场因伊朗消息而上涨，以及"投机税"与"政治丑闻"</h2>
-        <span class="episode-date">2026-04-17</span>
-      </a>
-      <a
-        class="episode-card"
-        href="./episodes/2026-04-10-anthropic-s-30b-ramp-mythos-doomsday-openclaw-ankled-iran-war-ceasefire-israel-s-influenc/notes.visual.html"
-      >
-        <h2 class="episode-title">AI安全与地缘政治：Anthropic的300亿美元狂奔、末日论争议、OpenClaw被"断粮"、伊朗停火与以色列影响力</h2>
-        <span class="episode-date">2026-04-10</span>
-      </a>
-    </main>
+    <div class="content-shell">
+      <aside class="sidebar">
+        <div class="toc" aria-label="站点信息">
+          <p class="toc-title">站点索引</p>
+          <div class="site-notes">
+            <span>已发布 4 期</span>
+            <span>最新 2026-05-04</span>
+            <span>中文长文精读</span>
+            <span>纯静态页面</span>
+          </div>
+        </div>
+      </aside>
 
-    <footer class="site-footer">
-      <p>基于 <a href="https://www.youtube.com/@allin" target="_blank" rel="noopener">All-In Podcast</a> 内容制作 · 仅供学习交流</p>
-    </footer>
+      <main class="content-flow">
+        <div class="section-head">
+          <h2>最新精读</h2>
+          <p>按发布时间排序</p>
+        </div>
+
+        <div class="episode-list" id="episode-list">
+          <a
+            class="episode-card"
+            href="./episodes/fpc4sbawszq-openai-misses-targets-codex-vs-claude-elon-vs-sam-trial-big-hyperscaler-beats-peptide-cr/notes.visual.html"
+          >
+            <h2 class="episode-title">OpenAI 目标未达成、Codex vs Claude、Elon vs Sam 庭审、科技巨头财报、多肽热潮</h2>
+            <span class="episode-date">2026-05-04</span>
+          </a>
+          <a
+            class="episode-card"
+            href="./episodes/2026-04-24-spacex-cursor-deal-saas-debt-bomb-new-apple-ceo-splc-indictment-colon-cancer-spike/notes.visual.html"
+          >
+            <h2 class="episode-title">SpaceX-Cursor交易、SaaS债务炸弹、苹果换帅、SPLC起诉、结肠癌飙升</h2>
+            <span class="episode-date">2026-04-24</span>
+          </a>
+          <a
+            class="episode-card"
+            href="./episodes/2026-04-17-openai-s-identity-crisis-datacenter-wars-market-up-on-iran-news-mamdani-s-first-tax-swalw/notes.visual.html"
+          >
+            <h2 class="episode-title">OpenAI的信仰危机、数据中心战争、市场因伊朗消息而上涨，以及"投机税"与"政治丑闻"</h2>
+            <span class="episode-date">2026-04-17</span>
+          </a>
+          <a
+            class="episode-card"
+            href="./episodes/2026-04-10-anthropic-s-30b-ramp-mythos-doomsday-openclaw-ankled-iran-war-ceasefire-israel-s-influenc/notes.visual.html"
+          >
+            <h2 class="episode-title">AI安全与地缘政治：Anthropic的300亿美元狂奔、末日论争议、OpenClaw被"断粮"、伊朗停火与以色列影响力</h2>
+            <span class="episode-date">2026-04-10</span>
+          </a>
+        </div>
+
+        <footer class="site-footer">
+          <p>基于 <a href="https://www.youtube.com/@allin" target="_blank" rel="noopener">All-In Podcast</a> 内容制作 · 仅供学习交流</p>
+        </footer>
+      </main>
+    </div>
   </div>
 </body>
 </html>

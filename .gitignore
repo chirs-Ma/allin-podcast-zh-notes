@@ -4,3 +4,6 @@
 .claude/
 PRODUCT.md
 DESIGN.md
+
+.agents/
+.DS_Store
