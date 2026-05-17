@@ -1,0 +1,1096 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>特朗普-习近平峰会、Benioff：“这不是我的第一次SaaSpocalypse”、OpenAI与苹果之争、多感官AI、厄尔尼诺 - 中文播客可视化笔记</title>
+  <style>
+    :root {
+      --bg: oklch(0.974 0.006 238);
+      --paper: oklch(0.991 0.003 238);
+      --paper-soft: oklch(0.955 0.007 238);
+      --ink: oklch(0.205 0.018 246);
+      --muted: oklch(0.49 0.018 246);
+      --faint: oklch(0.63 0.014 246);
+      --line: oklch(0.875 0.009 238);
+      --line-strong: oklch(0.74 0.014 238);
+      --accent: oklch(0.43 0.064 164);
+      --accent-soft: oklch(0.94 0.024 164);
+      --accent-wash: oklch(0.973 0.012 164);
+      --quote: oklch(0.965 0.010 92);
+      --shadow: 0 24px 54px color-mix(in oklch, var(--ink) 8%, transparent);
+      --radius: 8px;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-width: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(90deg, color-mix(in oklch, var(--line) 28%, transparent) 1px, transparent 1px) 0 0 / 92px 92px,
+        var(--bg);
+      font-family: "Geist", "Satoshi", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      line-height: 1.78;
+      text-rendering: optimizeLegibility;
+    }
+    ::selection { background: var(--accent-soft); color: var(--ink); }
+    a {
+      color: var(--accent);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+      transition: color .22s var(--ease), background-color .22s var(--ease), border-color .22s var(--ease), transform .22s var(--ease);
+    }
+    [hidden] { display: none !important; }
+    .progress {
+      position: fixed;
+      z-index: 4;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: var(--accent);
+    }
+    .quick-actions {
+      position: fixed;
+      right: max(18px, calc((100vw - 1200px) / 2));
+      bottom: 24px;
+      z-index: 3;
+      display: grid;
+      gap: 7px;
+    }
+    .quick-action {
+      display: inline-grid;
+      grid-template-columns: 16px auto;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      min-width: 74px;
+      min-height: 40px;
+      padding: 8px 12px;
+      border: 1px solid var(--line-strong);
+      border-radius: var(--radius);
+      background: color-mix(in oklch, var(--paper) 92%, transparent);
+      box-shadow: 0 12px 28px color-mix(in oklch, var(--ink) 7%, transparent);
+      color: var(--ink);
+      font: inherit;
+      font-size: 13px;
+      font-weight: 720;
+      line-height: 1.2;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .quick-action:hover, .quick-action:focus-visible {
+      outline: none;
+      border-color: var(--accent);
+      background: var(--accent-wash);
+      color: var(--accent);
+      transform: translate3d(0, -1px, 0);
+    }
+    .quick-action:active { transform: translate3d(0, 1px, 0) scale(.99); }
+    .page {
+      width: min(1760px, calc(100% - 56px));
+      margin: 0 auto;
+      padding: 0 0 104px;
+    }
+    .article { min-width: 0; }
+    .hero {
+      max-width: none;
+      margin-left: min(7vw, 140px);
+      padding: 72px 0 58px;
+    }
+    .eyebrow {
+      margin: 0 0 18px;
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    h1 {
+      max-width: none;
+      margin: 0 0 28px;
+      font-size: clamp(38px, 3vw, 52px);
+      font-weight: 760;
+      line-height: 1.08;
+      letter-spacing: 0;
+      text-wrap: balance;
+    }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 18px;
+      max-width: 72ch;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .meta a { font-weight: 650; }
+    .meta-strip {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+      max-width: 720px;
+      margin: 34px 0 28px;
+      border-top: 1px solid var(--line-strong);
+      padding-top: 16px;
+    }
+    .meta-pill {
+      display: grid;
+      gap: 2px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.35;
+    }
+    .meta-pill b {
+      color: var(--ink);
+      font-family: var(--mono);
+      font-size: 18px;
+      font-weight: 680;
+      line-height: 1;
+    }
+    .summary {
+      width: 100%;
+      max-width: 760px;
+      padding: 24px 26px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: color-mix(in oklch, var(--paper) 88%, var(--accent-soft));
+      box-shadow: var(--shadow);
+    }
+    .summary p {
+      margin: 0;
+      font-size: 19px;
+      line-height: 1.72;
+    }
+    h1, .summary, .takeaway p, .timeline-card h3, .section-content, .speaker-card, .panel {
+      overflow-wrap: anywhere;
+    }
+    .content-shell {
+      display: grid;
+      grid-template-columns: minmax(170px, 212px) minmax(0, 820px);
+      gap: clamp(36px, 7vw, 88px);
+      align-items: start;
+      border-top: 1px solid var(--line);
+      padding-top: 40px;
+    }
+    .sidebar {
+      position: sticky;
+      top: 28px;
+      align-self: start;
+      padding-top: 4px;
+    }
+    .toc {
+      border-top: 1px solid var(--ink);
+      padding-top: 16px;
+    }
+    .toc-title {
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .nav-links { display: grid; gap: 2px; }
+    .nav-links a {
+      display: block;
+      padding: 8px 0;
+      border-bottom: 1px solid color-mix(in oklch, var(--line) 72%, transparent);
+      color: var(--ink);
+      font-size: 14px;
+      line-height: 1.35;
+      text-decoration: none;
+    }
+    .nav-links a:hover, .nav-links a:focus-visible {
+      outline: none;
+      color: var(--accent);
+      transform: translate3d(2px, 0, 0);
+    }
+    .search {
+      display: grid;
+      gap: 8px;
+      margin-top: 22px;
+    }
+    .search span {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 720;
+    }
+    .search input {
+      width: 100%;
+      min-height: 40px;
+      padding: 8px 10px;
+      border: 1px solid var(--line-strong);
+      border-radius: var(--radius);
+      background: var(--paper);
+      color: var(--ink);
+      font: inherit;
+      font-size: 14px;
+      outline: none;
+      transition: border-color .22s var(--ease), box-shadow .22s var(--ease), transform .22s var(--ease);
+    }
+    .search input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px color-mix(in oklch, var(--accent) 14%, transparent);
+    }
+    .content-flow { min-width: 0; }
+    section { margin: 0 0 78px; }
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 18px;
+      align-items: end;
+      margin-bottom: 22px;
+      border-top: 1px solid var(--ink);
+      padding-top: 18px;
+    }
+    .section-head h2 {
+      margin: 0;
+      font-size: 28px;
+      font-weight: 740;
+      line-height: 1.16;
+      letter-spacing: 0;
+    }
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.4;
+      text-align: right;
+    }
+    .takeaway-list {
+      display: grid;
+      gap: 0;
+      margin: 0;
+      padding: 0;
+      border-top: 1px solid var(--line);
+      list-style: none;
+    }
+    .takeaway {
+      display: grid;
+      grid-template-columns: 52px minmax(0, 1fr);
+      gap: 18px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .takeaway span {
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 15px;
+      font-weight: 720;
+      line-height: 1.65;
+    }
+    .takeaway p {
+      margin: 0;
+      max-width: 70ch;
+      font-size: 16px;
+      line-height: 1.72;
+    }
+    .timeline {
+      display: grid;
+      gap: 0;
+      border-top: 1px solid var(--line-strong);
+    }
+    .timeline-card {
+      display: grid;
+      grid-template-columns: 132px minmax(0, 1fr);
+      gap: 32px;
+      padding: 34px 0 40px;
+      border-bottom: 1px solid var(--line);
+    }
+    .timeline-heading {
+      position: sticky;
+      top: 30px;
+      align-self: start;
+      display: grid;
+      gap: 10px;
+      padding-top: 2px;
+    }
+    .timeline-index {
+      color: var(--faint);
+      font-family: var(--mono);
+      font-size: 13px;
+      font-weight: 720;
+      line-height: 1;
+    }
+    .timeline-meta {
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 720;
+      line-height: 1.45;
+    }
+    .timeline-card h3 {
+      max-width: 24ch;
+      margin: 0 0 18px;
+      font-size: 27px;
+      font-weight: 730;
+      line-height: 1.22;
+      letter-spacing: 0;
+    }
+    .section-content {
+      color: color-mix(in oklch, var(--ink) 88%, var(--muted));
+      font-size: 16px;
+    }
+    .section-content p {
+      max-width: 72ch;
+      margin: 0 0 1.05em;
+    }
+    .section-content p strong:first-child {
+      color: var(--ink);
+      font-weight: 760;
+    }
+    .section-content h4 {
+      margin: 26px 0 10px;
+      color: var(--accent);
+      font-size: 14px;
+      font-weight: 760;
+      line-height: 1.35;
+    }
+    .section-content ul, .section-content ol, .panel ul, .panel ol, .speaker-card ul, .speaker-card ol {
+      margin: .75em 0 1em;
+      padding-left: 1.25em;
+    }
+    .section-content li, .panel li, .speaker-card li { margin: 6px 0; }
+    .speaker-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, .88fr);
+      gap: 26px 42px;
+      border-top: 1px solid var(--line);
+    }
+    .speaker-card {
+      padding: 22px 0 24px;
+      border-bottom: 1px solid var(--line);
+    }
+    .speaker-card:nth-child(even) { margin-top: 22px; }
+    .speaker-kicker {
+      margin: 0 0 8px;
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 720;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .speaker-card h3 {
+      margin: 0 0 12px;
+      font-size: 20px;
+      font-weight: 730;
+      line-height: 1.25;
+    }
+    .speaker-card p, .panel p {
+      max-width: 68ch;
+      margin-top: 0;
+    }
+    .panel {
+      border-top: 1px solid var(--line);
+      padding-top: 8px;
+    }
+    blockquote {
+      margin: 18px 0;
+      padding: 16px 18px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--quote);
+    }
+    code {
+      padding: 2px 5px;
+      border-radius: 5px;
+      background: color-mix(in oklch, var(--accent) 10%, var(--paper));
+      color: var(--ink);
+      font-family: var(--mono);
+      font-size: .92em;
+    }
+    hr {
+      height: 1px;
+      margin: 26px 0;
+      border: 0;
+      background: var(--line);
+    }
+    .empty {
+      margin: 0;
+      padding: 16px 18px;
+      border: 1px dashed var(--line-strong);
+      border-radius: var(--radius);
+      color: var(--muted);
+      background: color-mix(in oklch, var(--paper-soft) 70%, transparent);
+    }
+    .search-empty { margin-top: 16px; }
+    .muted { color: var(--muted); }
+    @keyframes rise-in {
+      from { opacity: 1; transform: translate3d(0, 6px, 0); }
+      to { opacity: 1; transform: translate3d(0, 0, 0); }
+    }
+    .hero > *, .takeaway, .timeline-card, .speaker-card, .panel {
+      animation: rise-in .55s var(--ease) both;
+    }
+    .hero > *:nth-child(2) { animation-delay: .04s; }
+    .hero > *:nth-child(3) { animation-delay: .08s; }
+    .hero > *:nth-child(4) { animation-delay: .12s; }
+    .hero > *:nth-child(5) { animation-delay: .16s; }
+    .takeaway, .timeline-card, .speaker-card {
+      animation-delay: calc(var(--index, 1) * 38ms);
+    }
+    @media (max-width: 1120px) {
+      .hero { margin-left: 0; }
+      .content-shell {
+        grid-template-columns: minmax(154px, 190px) minmax(0, 1fr);
+        gap: 36px;
+      }
+      h1 { font-size: 44px; }
+    }
+    @media (min-width: 1500px) {
+      h1 {
+        width: max-content;
+        max-width: 100%;
+        white-space: nowrap;
+        font-size: clamp(36px, 2.05vw, 42px);
+      }
+    }
+    @media (max-width: 780px) {
+      body { background: var(--bg); }
+      .page { width: min(1180px, calc(100% - 28px)); padding-bottom: 86px; }
+      .hero { padding: 46px 0 36px; }
+      .eyebrow { margin-bottom: 14px; }
+      h1 {
+        max-width: none;
+        font-size: 30px;
+        line-height: 1.14;
+        word-break: normal;
+      }
+      .summary, .summary p, .takeaway p, .section-content, .speaker-card, .panel {
+        max-width: 100%;
+        word-break: break-word;
+      }
+      .meta-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 20px; }
+      .summary { padding: 20px; }
+      .summary p { font-size: 17px; }
+      .content-shell { display: block; padding-top: 28px; }
+      .sidebar { position: static; padding-top: 0; margin-bottom: 42px; }
+      .toc { border-top-color: var(--line-strong); }
+      .nav-links { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 18px; }
+      section { margin-bottom: 58px; }
+      .section-head { display: block; margin-bottom: 16px; }
+      .section-head h2 { font-size: 24px; }
+      .section-head p { margin-top: 6px; text-align: left; }
+      .takeaway { grid-template-columns: 42px minmax(0, 1fr); gap: 12px; }
+      .timeline-card { display: block; padding: 28px 0 32px; }
+      .timeline-heading { position: static; display: flex; align-items: baseline; gap: 12px; margin-bottom: 12px; }
+      .timeline-card h3 { max-width: none; font-size: 23px; }
+      .speaker-grid { display: block; }
+      .speaker-card:nth-child(even) { margin-top: 0; }
+      .quick-actions {
+        right: 12px;
+        bottom: 12px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 6px;
+      }
+      .quick-action {
+        min-width: 66px;
+        min-height: 38px;
+        padding: 7px 9px;
+        font-size: 13px;
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: 1ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 1ms !important;
+      }
+      .speaker-card:nth-child(even) { margin-top: 0; }
+    }
+    @media print {
+      body { background: var(--paper); }
+      .sidebar, .progress, .quick-actions { display: none; }
+      .page { display: block; width: auto; padding-bottom: 0; }
+      .hero { margin-left: 0; padding: 0 0 28px; }
+      .content-shell { display: block; border-top: 0; padding-top: 0; }
+      .summary { box-shadow: none; }
+      .timeline-card, .speaker-card { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <div class="progress" data-progress></div>
+  <div class="quick-actions" aria-label="快捷操作">
+    <a class="quick-action" href="../../index.html" aria-label="返回首页">
+      <span aria-hidden="true">←</span>
+      <span>首页</span>
+    </a>
+    <button class="quick-action" type="button" data-scroll-top aria-label="回到顶部">
+      <span aria-hidden="true">↑</span>
+      <span>顶部</span>
+    </button>
+  </div>
+  <div class="page">
+    <main class="article">
+      <header class="hero">
+        <p class="eyebrow">All-In Podcast 中文精读</p>
+        <h1>特朗普-习近平峰会、Benioff：“这不是我的第一次SaaSpocalypse”、OpenAI与苹果之争、多感官AI、厄尔尼诺</h1>
+        <div class="meta">
+          <span>生成时间：2026-05-17 23:46</span>
+          <span>来源：<a href="https://www.youtube.com/watch?v=jJRAvZNGUvI" target="_blank" rel="noopener">YouTube</a></span>
+        </div>
+        <div class="meta-strip"><span class="meta-pill"><b>32 分钟</b>阅读时长</span>
+<span class="meta-pill"><b>10</b>核心要点</span>
+<span class="meta-pill"><b>11</b>时间线</span>
+<span class="meta-pill"><b>5</b>人物</span></div>
+        <div class="summary" aria-label="一句话摘要"><p>本期节目围绕特朗普与习近平的中美峰会展开深度讨论，涵盖贸易、芯片出口、台湾问题等核心议题；Marc Benioff现场解读SaaS行业面临的AI冲击与公司战略；同时讨论了OpenAI与Apple合作破裂、多感官AI的未来以及一场可能引发全球粮食危机的超级厄尔尼诺现象。</p></div>
+      </header>
+
+      <div class="content-shell">
+        <aside class="sidebar">
+          <nav class="toc" aria-label="页面导航">
+            <p class="toc-title">阅读导航</p>
+            <div class="nav-links">
+              <a href="#takeaways">核心要点</a>
+              <a href="#timeline">分段整理</a>
+              <a href="#speakers">人物观点</a>
+              <a href="#quotes">双语引语</a>
+            </div>
+            <label class="search">
+              <span>搜索时间线</span>
+              <input data-search-box type="search" placeholder="关键词" aria-label="搜索时间线">
+            </label>
+          </nav>
+        </aside>
+
+        <div class="content-flow">
+          <section id="takeaways">
+            <div class="section-head">
+              <h2>核心要点</h2>
+              <p>快速扫读本集主线</p>
+            </div>
+            <ol class="takeaway-list"><li class="takeaway" style="--index: 1"><span>01</span><p>特朗普与习近平的峰会在贸易、能源、飞机订单等方面取得进展，但台湾问题仍是潜在冲突点。</p></li>
+<li class="takeaway" style="--index: 2"><span>02</span><p>嘉宾们认为中美经济相互依存是避免冲突的最佳路径，建议“分割世界”而非对抗。</p></li>
+<li class="takeaway" style="--index: 3"><span>03</span><p>关于芯片出口，嘉宾一致认为应出售最新芯片给中国，因为中国已接近自主研发能力，且美国公司（如NVIDIA）应赢得市场而非华为。</p></li>
+<li class="takeaway" style="--index: 4"><span>04</span><p>Marc Benioff认为台湾问题可能被夸大，预计中美会找到和解方式。</p></li>
+<li class="takeaway" style="--index: 5"><span>05</span><p>Salesforce股价大跌37%，Benioff称之为“SaaS-pocalypse”，但坚信高价值企业软件需求依然强劲。</p></li>
+<li class="takeaway" style="--index: 6"><span>06</span><p>Chamath认为低端SaaS市场已基本结束，但高端市场（Salesforce层级）因客户信任与深度集成而相对安全。</p></li>
+<li class="takeaway" style="--index: 7"><span>07</span><p>OpenAI与Apple的合作濒临破裂，OpenAI考虑起诉Apple，核心问题包括用户必须手动激活ChatGPT、Apple不推广该集成等。</p></li>
+<li class="takeaway" style="--index: 8"><span>08</span><p>嘉宾认为多感官AI（实时监听、看、识别环境的模型）是下一波AI浪潮，可能彻底改变token使用量和工作方式。</p></li>
+<li class="takeaway" style="--index: 9"><span>09</span><p>Friedberg发出超级厄尔尼诺警告：海洋已储存相当于500年人类能源消耗的热量，可能导致全球粮食危机、农产品价格飙升和南亚动荡。</p></li>
+<li class="takeaway" style="--index: 10"><span>10</span><p>Anthropic宣布取消多层SPV（特殊目的载体）结构，Chamath认为这有利于推动公司尽早上市并清理不透明的二级市场交易。</p></li></ol>
+          </section>
+
+          <section id="timeline">
+            <div class="section-head">
+              <h2>分段详细整理</h2>
+              <p>按时间线阅读上下文</p>
+            </div>
+            <div class="timeline" data-timeline><article class="timeline-card" data-timeline-card data-search="00:00–00:31 开场：特朗普-习近平峰会背景 本段核心内容： 本期嘉宾阵容：marc benioff（salesforce ceo）做客，david sacks缺席。 讨论特朗普与习近平的第七次面对面会晤，首次访问中国自2017年以来。 中国在霍尔木兹海峡、台湾问题和中美关系上的关键表态。 背景解释与关键术语： 霍尔木兹海峡：中东关键石油通道，全球约20%石油运输经过此处。 修昔底德陷阱：由哈佛学者格雷厄姆·艾利森提出，指新兴大国与守成大国之间容易发生冲突的历史模式。 polymarket：去中心化预测市场平台，用户用加密货币下注预测事件。 lng：液化天然气。 详细中文整理： jcal： 欢迎回到全球第一播客《all-in》，第273期。sacks不在，所以我们请来了salesforce ceo marc benioff。 benioff： 我是唯一留在台上的人——这就是我上节目的资格。 jcal： 中国有软件ceo吗？好像没有。 benioff： 中国确实没有软件ceo。 jcal： 但你有没有收到特朗普政府的邀请？你以前是著名的民主党左派，我从来不是——抱歉，兄弟。 benioff： 你说什么呢？你以前也捐钱给那些人，现在你站特朗普这边？ benioff： 听着，第一要务是，我支持这个国家。这是我的态度。 jcal： 所以你站在中间，你对美国有忠诚感。 benioff： 是的，我不是民主党也不是共和党，我是一个美国人。 jcal： 好了，我们进入正题。特朗普-习近平峰会已经开始，这是两个月以来的头条故事。自从2017年以来，这是特朗普第一次访华，也是两人的第七次面对面会晤。今天有12到15个小时的会议。周四正式是第一天。以下成果已公布：中国同意霍尔木兹海峡应保持开放，未作军事承诺，且伊朗不应拥核，中美在这方面达成一致。关于台湾，有点火药味：习近平警告说，如果处理不当，两国可能“碰撞甚至冲突”，将整个中美关系置于“极其危险”的境地。polymarket数据显示，台湾2026年安全概率为94%，只有6%的概率中国今年入侵，投注规模2300万美元。2027年底前发生某种事件的可能性是17%。有很多争论，有人说会在特朗普卸任后发生，有人认为会在他在任期间发生。贸易方面，习近平承诺购买更多大豆、美国石油、lng以及200架波音飞机。美方表示会谈为建设性、战略性和稳定的双边关系描绘了愿景。特朗普盛赞他的友谊，但表示人们不喜欢他赞美习近平。我们停在这里讨论一下。friedberg，你一直比较关注这种双边关系的两极化特征。你怎么看？对特朗普来说，赢得这场会谈的“胜局”是什么？对习近平来说又是什么？" style="--index: 1">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">01</span>
+                    <span class="timeline-meta">00:00–00:31</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>开场：特朗普-习近平峰会背景</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>本期嘉宾阵容：Marc Benioff（Salesforce CEO）做客，David Sacks缺席。</li>
+<li>讨论特朗普与习近平的第七次面对面会晤，首次访问中国自2017年以来。</li>
+<li>中国在霍尔木兹海峡、台湾问题和中美关系上的关键表态。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>霍尔木兹海峡：中东关键石油通道，全球约20%石油运输经过此处。</li>
+<li>修昔底德陷阱：由哈佛学者格雷厄姆·艾利森提出，指新兴大国与守成大国之间容易发生冲突的历史模式。</li>
+<li>Polymarket：去中心化预测市场平台，用户用加密货币下注预测事件。</li>
+<li>LNG：液化天然气。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> 欢迎回到全球第一播客《All-In》，第273期。Sacks不在，所以我们请来了Salesforce CEO Marc Benioff。</p>
+<p><strong>Benioff：</strong> 我是唯一留在台上的人——这就是我上节目的资格。</p>
+<p><strong>JCal：</strong> 中国有软件CEO吗？好像没有。</p>
+<p><strong>Benioff：</strong> 中国确实没有软件CEO。</p>
+<p><strong>JCal：</strong> 但你有没有收到特朗普政府的邀请？你以前是著名的民主党左派，我从来不是——抱歉，兄弟。</p>
+<p><strong>Benioff：</strong> 你说什么呢？你以前也捐钱给那些人，现在你站特朗普这边？</p>
+<p><strong>Benioff：</strong> 听着，第一要务是，我支持这个国家。这是我的态度。</p>
+<p><strong>JCal：</strong> 所以你站在中间，你对美国有忠诚感。</p>
+<p><strong>Benioff：</strong> 是的，我不是民主党也不是共和党，我是一个美国人。</p>
+<p><strong>JCal：</strong> 好了，我们进入正题。特朗普-习近平峰会已经开始，这是两个月以来的头条故事。自从2017年以来，这是特朗普第一次访华，也是两人的第七次面对面会晤。今天有12到15个小时的会议。周四正式是第一天。以下成果已公布：中国同意霍尔木兹海峡应保持开放，未作军事承诺，且伊朗不应拥核，中美在这方面达成一致。关于台湾，有点火药味：习近平警告说，如果处理不当，两国可能“碰撞甚至冲突”，将整个中美关系置于“极其危险”的境地。Polymarket数据显示，台湾2026年安全概率为94%，只有6%的概率中国今年入侵，投注规模2300万美元。2027年底前发生某种事件的可能性是17%。有很多争论，有人说会在特朗普卸任后发生，有人认为会在他在任期间发生。贸易方面，习近平承诺购买更多大豆、美国石油、LNG以及200架波音飞机。美方表示会谈为建设性、战略性和稳定的双边关系描绘了愿景。特朗普盛赞他的友谊，但表示人们不喜欢他赞美习近平。我们停在这里讨论一下。Friedberg，你一直比较关注这种双边关系的两极化特征。你怎么看？对特朗普来说，赢得这场会谈的“胜局”是什么？对习近平来说又是什么？</p></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="00:03–00:08 中美关系的本质：避免修昔底德陷阱与经济合作 本段核心内容： friedberg提出，在当前ai、自动化、生物技术驱动的生产力增长时代，中美有机会共同做大蛋糕而非争夺存量。 chamath认为中美两国截然不同的社会哲学（自上而下的儒家vs自下而上的个人主义）反而为合作提供了空间。 chamath判断，闭门会议中双方实际上在讨论如何“划分全球地盘”。 背景解释与关键术语： 修昔底德陷阱：指新兴大国的崛起必然挑战守成大国的地位，易导致冲突。 两极vs多极：国际关系术语，指全球权力格局是由两个超级大国（两极）还是多个力量中心（多极）构成。 经济纠缠：通过经济互依关系降低冲突风险，即“商业和平论”。 儒家社会哲学：强调等级、集体、秩序，与美国个人主义、自下而上的模式形成对比。 详细中文整理： friedberg： 习近平在开场发言中提到，希望中美两国能避免修昔底德陷阱——我们之前和格雷厄姆·艾利森讨论过多次。当一个崛起的大国遭遇一个某种意义上衰退的大国时，总会有某种冲突时刻。历史上只有少数几次能避免。关键问题是，如果我们处于全球资源不断扩张、生产力和产出都在加速增长的时代，那冲突的理由就会减少。两国可以提高自己人民的生活水平，不必从对方那里夺取。在一个资源受限或静态的世界里，就必须通过战争、领土掠夺来实现。而我们现在正处在ai、自动化、生物技术驱动的极其重要的技术变革窗口——真正的富饶时代就在前面。这正是一个绝佳的时机，可以说“嘿，世界可以更多极化，不需要单极，也不需要两极，每个人都可以参与做大的蛋糕”。这是理想主义的视角。从行政政治层面看，如果总统能带回一系列贸易协定，增加就业、收入、投资，那就是巨大的胜利。但最重要的战略问题——如何避免冲突——是能否找到一条经济合作路径，不互相吞噬，而是分享更大的蛋糕。 chamath： 我认为和中国找到前进道路的方式是通过经济合作。中国是全球最大的消费经济体，但仍相对封闭。特朗普带去那么多ceo，带着金融火力，是为了打入那个市场。卖飞机、汽车、芯片，都是硬设备。我之前说过，中国是自上而下的儒家社会哲学，美国是自下而上的个人主义构建。正因为如此不同，反而有更多合作空间，而不是冲突。焦点就是经济合作。今天早上我一个朋友——非常著名的民主党人——打电话给我，他先批评了媒体，我很惊讶。他说媒体全错了，他们问“为什么带这些ceo？”，而事实是，实现无冲突缓和最简单最确定的路径就是经济纠缠，而且是双向的。这么多年大多是单向物流——他们向我们输送廉价商品。所以战略上这是正确的。而且我要稍微修正friedberg的说法，我觉得闭门会议上他们可能就是在商量如何分配蛋糕。 jcal： 分配什么蛋糕？全球？经济？西半球vs中国？ chamath： 中国仍然需要大量能源和关键科技。美国提供这些。条件是中国要在某些地区降低参与程度——中美和南美可能是最重要的，其次是中东，然后是在亚太区域找到合理的共识。这中间有可做的交易。这样你开始把世界切割成一个相当容易识别的两极结构。 jcal： 他们也需要客户来买他们的产品。我们释放的信号有些矛盾——去年的关税打击中国，疫情后的“脱钩”——“我们必须独立”，能源、ppe、药品、芯片都减少对中国依赖。现在又说“来谈判、建设连接”。mark，从商业角度帮我们梳理一下：两个国家应该深度纠缠吗？然后如何管理过度依赖中国的问题？" style="--index: 2">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">02</span>
+                    <span class="timeline-meta">00:03–00:08</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>中美关系的本质：避免修昔底德陷阱与经济合作</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>Friedberg提出，在当前AI、自动化、生物技术驱动的生产力增长时代，中美有机会共同做大蛋糕而非争夺存量。</li>
+<li>Chamath认为中美两国截然不同的社会哲学（自上而下的儒家vs自下而上的个人主义）反而为合作提供了空间。</li>
+<li>Chamath判断，闭门会议中双方实际上在讨论如何“划分全球地盘”。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>修昔底德陷阱：指新兴大国的崛起必然挑战守成大国的地位，易导致冲突。</li>
+<li>两极vs多极：国际关系术语，指全球权力格局是由两个超级大国（两极）还是多个力量中心（多极）构成。</li>
+<li>经济纠缠：通过经济互依关系降低冲突风险，即“商业和平论”。</li>
+<li>儒家社会哲学：强调等级、集体、秩序，与美国个人主义、自下而上的模式形成对比。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>Friedberg：</strong> 习近平在开场发言中提到，希望中美两国能避免修昔底德陷阱——我们之前和格雷厄姆·艾利森讨论过多次。当一个崛起的大国遭遇一个某种意义上衰退的大国时，总会有某种冲突时刻。历史上只有少数几次能避免。关键问题是，如果我们处于全球资源不断扩张、生产力和产出都在加速增长的时代，那冲突的理由就会减少。两国可以提高自己人民的生活水平，不必从对方那里夺取。在一个资源受限或静态的世界里，就必须通过战争、领土掠夺来实现。而我们现在正处在AI、自动化、生物技术驱动的极其重要的技术变革窗口——真正的富饶时代就在前面。这正是一个绝佳的时机，可以说“嘿，世界可以更多极化，不需要单极，也不需要两极，每个人都可以参与做大的蛋糕”。这是理想主义的视角。从行政政治层面看，如果总统能带回一系列贸易协定，增加就业、收入、投资，那就是巨大的胜利。但最重要的战略问题——如何避免冲突——是能否找到一条经济合作路径，不互相吞噬，而是分享更大的蛋糕。</p>
+<p><strong>Chamath：</strong> 我认为和中国找到前进道路的方式是通过经济合作。中国是全球最大的消费经济体，但仍相对封闭。特朗普带去那么多CEO，带着金融火力，是为了打入那个市场。卖飞机、汽车、芯片，都是硬设备。我之前说过，中国是自上而下的儒家社会哲学，美国是自下而上的个人主义构建。正因为如此不同，反而有更多合作空间，而不是冲突。焦点就是经济合作。今天早上我一个朋友——非常著名的民主党人——打电话给我，他先批评了媒体，我很惊讶。他说媒体全错了，他们问“为什么带这些CEO？”，而事实是，实现无冲突缓和最简单最确定的路径就是经济纠缠，而且是双向的。这么多年大多是单向物流——他们向我们输送廉价商品。所以战略上这是正确的。而且我要稍微修正Friedberg的说法，我觉得闭门会议上他们可能就是在商量如何分配蛋糕。</p>
+<p><strong>JCal：</strong> 分配什么蛋糕？全球？经济？西半球vs中国？</p>
+<p><strong>Chamath：</strong> 中国仍然需要大量能源和关键科技。美国提供这些。条件是中国要在某些地区降低参与程度——中美和南美可能是最重要的，其次是中东，然后是在亚太区域找到合理的共识。这中间有可做的交易。这样你开始把世界切割成一个相当容易识别的两极结构。</p>
+<p><strong>JCal：</strong> 他们也需要客户来买他们的产品。我们释放的信号有些矛盾——去年的关税打击中国，疫情后的“脱钩”——“我们必须独立”，能源、PPE、药品、芯片都减少对中国依赖。现在又说“来谈判、建设连接”。Mark，从商业角度帮我们梳理一下：两个国家应该深度纠缠吗？然后如何管理过度依赖中国的问题？</p></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="00:08–00:11 商业领袖视角下的峰会成果与特斯拉在中国的例外 本段核心内容： benioff盛赞到访的ceo团队（马斯克、黄仁勋、kelly ortberg等）是美国最好的销售队伍。 他透露salesforce在中国通过与阿里巴巴的独家合作运营，不设办事处、不雇员工，所有数据留在中国。 马斯克的特斯拉在中国无需合作伙伴，是唯一例外，benioff认为马斯克是全球最伟大的销售员。 背景解释与关键术语： 数据居留法：要求某些数据必须存储在特定国家境内的法律。 阿里巴巴：中国最大的电商和云计算公司。 ccp：中国共产党。 kyc：了解你的客户，合规流程。 详细中文整理： benioff： 你从今天习近平的讲话中听到了——他说要“更宽的大门”，意味着他希望两国之间的商业大门开得更宽。我们派出了最好的销售团队去那里，不只是我们的总统——他是我见过最好的销售之一——还有马斯克、黄仁勋去卖芯片，kelly ortberg去卖飞机——他已经卖了200架，想卖更多，500架，还有金融服务。brian——cargill的ceo——去卖大豆。cargill是总部明尼阿波利斯的全球最大私营公司。他会带回很多大豆订单。你会看到每个ceo都是那个类别最好销售员。他们会带着订单回来，这是惊人的。而且你说得很对，商业是变革的最佳平台。别忘了，这不是特朗普和习近平第一次见面。他们真的很喜欢彼此，很合拍，可以看到他们笑着、很有销售导向。我预计很多订单会回来。 jcal： 问你一个问题：你被允许在中国卖软件吗？ benioff： 嗯，中国有很严格的数据居留法。所以我们在中国没有办事处、没有员工。我们唯一有中国业务的时候是收购了一家在中国有业务的公司，然后我们必须剥离。我们和阿里巴巴有一个独家合作关系，一切通过他们走。我们不在中国做任何事情。 jcal： 这个业务规模多大？增长怎么样？占你收入多少？ benioff： 这是一个不错的合作关系。salesforce的关键客户，比如路易威登、loro piana——我知道chamath喜欢loro piana——他们在全球所有其他门店都用salesforce，但在中国是salesforce运行在阿里巴巴上。 chamath： 还是你的代码，但数据驻留在他们的服务器上。因为数据居留法令。 benioff： 这是全球唯一独特的合作关系。 chamath： 所有数据必须留在中国，所有数据必须可以被中国共产党访问。这就是为什么马斯克的特斯拉在中国如此非凡。他不需要合作伙伴，是唯一一个。他和习近平有非凡的关系。你看习近平和马斯克在一起的时候，他们是多么尊重对方。这些ai汽车满载摄像头，美国制造，中国工厂，在中国各地行驶——这太不可思议了。 jcal： 你认为他如何做到的？是特例吗？ benioff： 我认为马斯克是世界上最伟大的销售员。就这样。 jcal： 玩世不恭的看法是，chamath，他们希望他在那里以便研究公司和创新，然后他们自己成了最大的竞争者——电动汽车领域。这是某种“竞合”关系。" style="--index: 3">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">03</span>
+                    <span class="timeline-meta">00:08–00:11</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>商业领袖视角下的峰会成果与特斯拉在中国的例外</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>Benioff盛赞到访的CEO团队（马斯克、黄仁勋、Kelly Ortberg等）是美国最好的销售队伍。</li>
+<li>他透露Salesforce在中国通过与阿里巴巴的独家合作运营，不设办事处、不雇员工，所有数据留在中国。</li>
+<li>马斯克的特斯拉在中国无需合作伙伴，是唯一例外，Benioff认为马斯克是全球最伟大的销售员。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>数据居留法：要求某些数据必须存储在特定国家境内的法律。</li>
+<li>阿里巴巴：中国最大的电商和云计算公司。</li>
+<li>CCP：中国共产党。</li>
+<li>KYC：了解你的客户，合规流程。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>Benioff：</strong> 你从今天习近平的讲话中听到了——他说要“更宽的大门”，意味着他希望两国之间的商业大门开得更宽。我们派出了最好的销售团队去那里，不只是我们的总统——他是我见过最好的销售之一——还有马斯克、黄仁勋去卖芯片，Kelly Ortberg去卖飞机——他已经卖了200架，想卖更多，500架，还有金融服务。Brian——Cargill的CEO——去卖大豆。Cargill是总部明尼阿波利斯的全球最大私营公司。他会带回很多大豆订单。你会看到每个CEO都是那个类别最好销售员。他们会带着订单回来，这是惊人的。而且你说得很对，商业是变革的最佳平台。别忘了，这不是特朗普和习近平第一次见面。他们真的很喜欢彼此，很合拍，可以看到他们笑着、很有销售导向。我预计很多订单会回来。</p>
+<p><strong>JCal：</strong> 问你一个问题：你被允许在中国卖软件吗？</p>
+<p><strong>Benioff：</strong> 嗯，中国有很严格的数据居留法。所以我们在中国没有办事处、没有员工。我们唯一有中国业务的时候是收购了一家在中国有业务的公司，然后我们必须剥离。我们和阿里巴巴有一个独家合作关系，一切通过他们走。我们不在中国做任何事情。</p>
+<p><strong>JCal：</strong> 这个业务规模多大？增长怎么样？占你收入多少？</p>
+<p><strong>Benioff：</strong> 这是一个不错的合作关系。Salesforce的关键客户，比如路易威登、Loro Piana——我知道Chamath喜欢Loro Piana——他们在全球所有其他门店都用Salesforce，但在中国是Salesforce运行在阿里巴巴上。</p>
+<p><strong>Chamath：</strong> 还是你的代码，但数据驻留在他们的服务器上。因为数据居留法令。</p>
+<p><strong>Benioff：</strong> 这是全球唯一独特的合作关系。</p>
+<p><strong>Chamath：</strong> 所有数据必须留在中国，所有数据必须可以被中国共产党访问。这就是为什么马斯克的特斯拉在中国如此非凡。他不需要合作伙伴，是唯一一个。他和习近平有非凡的关系。你看习近平和马斯克在一起的时候，他们是多么尊重对方。这些AI汽车满载摄像头，美国制造，中国工厂，在中国各地行驶——这太不可思议了。</p>
+<p><strong>JCal：</strong> 你认为他如何做到的？是特例吗？</p>
+<p><strong>Benioff：</strong> 我认为马斯克是世界上最伟大的销售员。就这样。</p>
+<p><strong>JCal：</strong> 玩世不恭的看法是，Chamath，他们希望他在那里以便研究公司和创新，然后他们自己成了最大的竞争者——电动汽车领域。这是某种“竞合”关系。</p></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="00:11–00:15 美国国内政治、中期选举与中美关系的矛盾心理 本段核心内容： jcal提出核心矛盾：美国民众既希望买中国廉价商品，又面临关税和脱钩政策。 friedberg认为关税与贸易协定对普通选民的影响——就业安全、收入、生活成本——将决定中期选举投票。 chamath认为中期选举更多的受最高法院关于选区划分的裁决、以及vc（如a16z）政治捐款的影响，而非中国问题。 背景解释与关键术语： 中期选举：美国总统任期中间的国会选举，可能改变国会两党力量对比。 选区划分（gerrymandering）：通过重新划分选区边界以利于某个政党的做法。 aum：管理资产规模。 a16z：andreessen horowitz，硅谷顶级风投公司。 fomc：美联储公开市场委员会，负责制定利率政策。 详细中文整理： jcal： 再来谈一个矛盾：美国人民非常想要中国的廉价商品，但去年我们加了那么多关税，还有脱钩政策。你如何给中期选举、特朗普的时间表和习近平的时间表下注？他们的目标是什么？之后我们再谈台湾。 chamath： 这有点超出我的能力范围。但我认为中期选举可能会更多地受到最高法院最近的选区划分裁决、弗吉尼亚最高法院发生了什么、红蓝各州州议会将做什么的影响，而不是这次峰会的结果。另外，资金正在组织起来。《纽约时报》这周有一篇文章让我很吃惊——这个选举周期最大的捐赠者是andreessen horowitz。 jcal： 那是怎么回事？ chamath： 我认为他们正在试图确立自己作为美国金融支柱的地位，从商业角度看这很聪明。他们做aum生意，对吧？不会停留在1000亿aum，他们在向万亿进军，将成为下一个黑石，这是不可思议的成就。但他们也意识到，如果他们要在更高量化、更受地缘政治影响的资本周期和经济领域投资，政治将永久成为其中一部分。所以中期选举很大程度上是筹款加未来几个月的选区划分。再说一次，中国和美国有非常强的激励去分割世界。从今往后，你有这些关键资源输入，中国有垄断权。你还有能源和智能——ai，美国在其中一端享有垄断地位，另一端（能源）也有有效垄断。我认为那里有交易可做。只要你能协商出合理的给予和索取，他们就会找到共同点。中国真的需要在智利、委内瑞拉和巴拿马存在吗？大概不需要。美国真的需要对马六甲海峡抱有极其强硬的立场吗？大概也不需要。所以可能有一个交易：我们获得他们的稀土，他们获得更多石油，大家开心，一起找到富饶。 jcal： 关键问题是，中国——很多人对中国恐惧——但中国存在严重系统性问题：人口、房地产、gdp都处于下降趋势。我认为习近平最担心的是另一个“天安门事件”。如果不能提供更多就业机会……他们创造了史上最大的中产阶级增长，拥有全球最大的中产阶级。你说得对，mark，奢侈品供应商都去中国了，但那是脆弱的。 benioff： 顺便说一句，这是习近平的第一关注点。他的重点是让5亿人从贫困进入中产阶级。这不完全像我们美国看待世界的方式。那是政治领导人的主要焦点，他已经做到了。这是一个令人难以置信的成就。 jcal： 但现在面临风险，因为gdp在下降。他们的工厂需要运转，但被其他地区削弱。当然，他们最想得到的是台湾，以及在该地区的霸权。 benioff： 我并不确定。我想我们刚才已经说了——他们想要经济成功，继续壮大中产阶级，保持经济健康，更多贸易。有趣的是，特朗普在讨论“东-西贸易委员会”甚至“贸易委员会”——这是以前我们从未听到过的。然后是习近平说“更宽的门”，所有这些人去卖产品。我们没提到的还有visa和mastercard的ceo也去了。为什么？因为中国的商业由阿里巴巴这类公司主导，使用超级应用，并未完全对visa和mastercard开放。这对那些高管来说将是巨大的机会。就像我们想卖飞机、芯片、大豆、支付服务、一切。两个国家之间经济协作与合作越多，和平就越多。这就是现实。 chamath： 我同意。" style="--index: 4">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">04</span>
+                    <span class="timeline-meta">00:11–00:15</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>美国国内政治、中期选举与中美关系的矛盾心理</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>JCal提出核心矛盾：美国民众既希望买中国廉价商品，又面临关税和脱钩政策。</li>
+<li>Friedberg认为关税与贸易协定对普通选民的影响——就业安全、收入、生活成本——将决定中期选举投票。</li>
+<li>Chamath认为中期选举更多的受最高法院关于选区划分的裁决、以及VC（如a16z）政治捐款的影响，而非中国问题。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>中期选举：美国总统任期中间的国会选举，可能改变国会两党力量对比。</li>
+<li>选区划分（gerrymandering）：通过重新划分选区边界以利于某个政党的做法。</li>
+<li>AUM：管理资产规模。</li>
+<li>a16z：Andreessen Horowitz，硅谷顶级风投公司。</li>
+<li>FOMC：美联储公开市场委员会，负责制定利率政策。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> 再来谈一个矛盾：美国人民非常想要中国的廉价商品，但去年我们加了那么多关税，还有脱钩政策。你如何给中期选举、特朗普的时间表和习近平的时间表下注？他们的目标是什么？之后我们再谈台湾。</p>
+<p><strong>Chamath：</strong> 这有点超出我的能力范围。但我认为中期选举可能会更多地受到最高法院最近的选区划分裁决、弗吉尼亚最高法院发生了什么、红蓝各州州议会将做什么的影响，而不是这次峰会的结果。另外，资金正在组织起来。《纽约时报》这周有一篇文章让我很吃惊——这个选举周期最大的捐赠者是Andreessen Horowitz。</p>
+<p><strong>JCal：</strong> 那是怎么回事？</p>
+<p><strong>Chamath：</strong> 我认为他们正在试图确立自己作为美国金融支柱的地位，从商业角度看这很聪明。他们做AUM生意，对吧？不会停留在1000亿AUM，他们在向万亿进军，将成为下一个黑石，这是不可思议的成就。但他们也意识到，如果他们要在更高量化、更受地缘政治影响的资本周期和经济领域投资，政治将永久成为其中一部分。所以中期选举很大程度上是筹款加未来几个月的选区划分。再说一次，中国和美国有非常强的激励去分割世界。从今往后，你有这些关键资源输入，中国有垄断权。你还有能源和智能——AI，美国在其中一端享有垄断地位，另一端（能源）也有有效垄断。我认为那里有交易可做。只要你能协商出合理的给予和索取，他们就会找到共同点。中国真的需要在智利、委内瑞拉和巴拿马存在吗？大概不需要。美国真的需要对马六甲海峡抱有极其强硬的立场吗？大概也不需要。所以可能有一个交易：我们获得他们的稀土，他们获得更多石油，大家开心，一起找到富饶。</p>
+<p><strong>JCal：</strong> 关键问题是，中国——很多人对中国恐惧——但中国存在严重系统性问题：人口、房地产、GDP都处于下降趋势。我认为习近平最担心的是另一个“天安门事件”。如果不能提供更多就业机会……他们创造了史上最大的中产阶级增长，拥有全球最大的中产阶级。你说得对，Mark，奢侈品供应商都去中国了，但那是脆弱的。</p>
+<p><strong>Benioff：</strong> 顺便说一句，这是习近平的第一关注点。他的重点是让5亿人从贫困进入中产阶级。这不完全像我们美国看待世界的方式。那是政治领导人的主要焦点，他已经做到了。这是一个令人难以置信的成就。</p>
+<p><strong>JCal：</strong> 但现在面临风险，因为GDP在下降。他们的工厂需要运转，但被其他地区削弱。当然，他们最想得到的是台湾，以及在该地区的霸权。</p>
+<p><strong>Benioff：</strong> 我并不确定。我想我们刚才已经说了——他们想要经济成功，继续壮大中产阶级，保持经济健康，更多贸易。有趣的是，特朗普在讨论“东-西贸易委员会”甚至“贸易委员会”——这是以前我们从未听到过的。然后是习近平说“更宽的门”，所有这些人去卖产品。我们没提到的还有Visa和MasterCard的CEO也去了。为什么？因为中国的商业由阿里巴巴这类公司主导，使用超级应用，并未完全对Visa和MasterCard开放。这对那些高管来说将是巨大的机会。就像我们想卖飞机、芯片、大豆、支付服务、一切。两个国家之间经济协作与合作越多，和平就越多。这就是现实。</p>
+<p><strong>Chamath：</strong> 我同意。</p></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="00:15–00:26 芯片出口辩论、台湾问题与战略复盘 本段核心内容： benioff认为芯片问题已无关紧要，因为中国模型已几乎与美国相当，美国应该出售所有能卖的东西。 friedberg认为阻止技术流向其他国家最终会导致冲突，技术扩散可以令所有人受益、降低冲突概率。 jcal提出“以对台军售换取中国停止对伊朗军售”的交易可能性。 chamath认为18个月内台湾问题将不再重要，因为美国本土芯片制造能力（如tsmc亚利桑那工厂）会大幅提升。 背景解释与关键术语： blackwell：nvidia的最新一代gpu架构。 tsmc：台积电，全球最大半导体代工厂，在亚利桑那设有工厂。 asml：荷兰公司，全球唯一生产极紫外光刻机（euv）的公司，用于制造先进芯片。 kyc：了解你的客户，这里指对ai模型使用的合规审查。 中美脱钩：两国在经济和技术上的脱离趋势。 详细中文整理： jcal： 三个尖锐问题，mark。我们应该卖给他们最新芯片吗？是还是否？ benioff： 我认为这点上已经没有意义了。中国的模型已经和美国模型一样有竞争力，他们已经学会了不用最高端芯片制造这些模型。最高端芯片更多是我们的自我满足——我们有blackwell，有这个有那个。但你看他们的模型，非常优秀，快速跟随我们——我们6个月前最好的模型，他们现在就有了。 jcal： 既然他们反正能搞出来，我们为什么不直接卖给他们？ benioff： 我们大概应该卖所有我们能卖的东西。正如我说的，经济合作协作越多越好。如果你想要和平，我认为台湾是一个无谓的话题。 jcal： 好，回到那一点。friedberg，你对芯片怎么看？我们应该卖最新芯片吗？然后chamath，我也想听你的答案。 friedberg： 我认为他们达到这个水平是不可避免的。顺便说一句，这可能是这笔交易的关键方面之一。我之前说过——也许台湾对美国和中国都变得不那么重要了，因为双方都在建设大陆的晶圆厂。我们在美国建立自己的制造能力——尽管有波折——但台积电亚利桑那厂已经在运行了，在印刷制造。如果成功并规模化了，美国将有更多设施。而中国通过华为也在建立许多设施，有大量的政府投资确保竞争力，不仅是晶圆厂，还包括半导体制造设备，以免在供应链上被asml之类的公司切断。当他们建立起自己的半导体设备系统和晶圆厂，台湾还那么重要吗？它是否还是美国和中国意义上的安全风险？也许每个人都聚焦的台湾这个支点，并不是美国在“出卖”台湾，而是根本没有人在乎了。对中国来说可能有一个文化时刻，他们想在2040年之前把台湾完全纳入势力范围——从经济和安全角度来看，届时美国可能不那么在意了。这就是正在发生的事情之一。 jcal： 所以你站在“卖芯片给他们，这会降低中国夺取台积电或那些工厂的动力”的那一边？ friedberg： 这样说吧：全球生产力指数越高，全人类就越好。问题在于，你真的只想让西方提高生产力指数，然后有效地迫使冲突，与东方对抗吗？还是我们所有人同步提高生产力指数，制造更多东西？每个人都受益，有更好的工作，赚更多钱，获得更多商品。商品价格下降，世界不是更安全更和平吗？技术只属于世界的一边而不给另一边，这必然会导致冲突或增加冲突概率。允许技术扩散和普及，每个人都会受益，冲突指数会下降。 jcal： 因为技术完全商品化了，大家都拥有它。 friedberg： 给每个人更高的生活水平，提振经济，减少彼此冲突的理由。 jcal： 既然你提到台湾——我们应该把对台军售从谈判桌上拿开吗？是否可以要求中国停止对伊朗军售？ friedberg： 是的，我们应该要求中国停止对伊朗军售。 jcal： 好。但中国想要的是我们停止对台军售。你会做这个交易吗？ friedberg： 哦，这是个好问题。那是有细微差别的问题。我不……一般来说你可能认为这个交易应该做。 jcal： 那就做交易。 friedberg： 可以这么说。 chamath： jason，我认为我们在18个月后可能就不会像今天那样谈论台湾问题了。为什么18个月？因为我们可能离1到2纳米工艺的突破不远了，届时我们不需要台湾来做我们战略上需要它做的事。随着我们扩大芯片晶圆厂，增加产能——有趣的是，还有正交技术正在发展。我不知道你们有没有看到，neuralink展示了一台机器，能几乎在纳米级别上以全自动方式进行脑部操作植入。当你有如此机械灵活性和能力时，真实的原因就和今天完全不同了。今天的原因主要是经济。把经济从方程中去掉，我们对台湾的态度就会非常不同。第一，卖芯片。原因是我们希望nvidia赢。我们不想给华为提供足够的氧气，让它突然出现一个能用的芯片版本。mark说得完全正确——这些模型在赶超，几乎以同样速度前进。更重要的可能是大家都同意这一点：对模型的使用设立合理的“了解你的客户”合规框架，防止有人在地下室制造生物武器。但，卖芯片，让技术普及，让jensen赢。我宁愿他赢，不要华为赢。 jcal： mark，最后一个问题。如果中国对台湾设立封锁线并决定拿下它，美国应该防御吗？是还是否？ benioff： 我多年来一直说，我不同意neil ferguson在那个问题上的观点。我认为这是一个无谓的问题。中国和台湾会和解。 jcal： 我们先插一段轻松的，chamath你帮mark预约了neuralink——下周二下午5点，给chamath钻孔植入？你想要植入些同理心吗？ chamath： 我跟elon聊过，他说那个装置不提供反馈。 benioff： 直接打进去，然后就连接上了。 chamath： 这是最疯狂的事。 benioff： 周二下午5点，chamath。如果你紧张就握住我的手。 chamath： 是的，要是我真的有颗心——像“若我只有连接组织”那样——我会笑，会咯咯笑。 jcal： 我们可以演音乐剧《若我只有一颗心》《若我只有一个大脑》和《若我只有一个neuralink》。 benioff： 你需要勇气，friedberg。 jcal： 好啦，我们进入下一话题。" style="--index: 5">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">05</span>
+                    <span class="timeline-meta">00:15–00:26</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>芯片出口辩论、台湾问题与战略复盘</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>Benioff认为芯片问题已无关紧要，因为中国模型已几乎与美国相当，美国应该出售所有能卖的东西。</li>
+<li>Friedberg认为阻止技术流向其他国家最终会导致冲突，技术扩散可以令所有人受益、降低冲突概率。</li>
+<li>JCal提出“以对台军售换取中国停止对伊朗军售”的交易可能性。</li>
+<li>Chamath认为18个月内台湾问题将不再重要，因为美国本土芯片制造能力（如TSMC亚利桑那工厂）会大幅提升。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>Blackwell：NVIDIA的最新一代GPU架构。</li>
+<li>TSMC：台积电，全球最大半导体代工厂，在亚利桑那设有工厂。</li>
+<li>ASML：荷兰公司，全球唯一生产极紫外光刻机（EUV）的公司，用于制造先进芯片。</li>
+<li>KYC：了解你的客户，这里指对AI模型使用的合规审查。</li>
+<li>中美脱钩：两国在经济和技术上的脱离趋势。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> 三个尖锐问题，Mark。我们应该卖给他们最新芯片吗？是还是否？</p>
+<p><strong>Benioff：</strong> 我认为这点上已经没有意义了。中国的模型已经和美国模型一样有竞争力，他们已经学会了不用最高端芯片制造这些模型。最高端芯片更多是我们的自我满足——我们有Blackwell，有这个有那个。但你看他们的模型，非常优秀，快速跟随我们——我们6个月前最好的模型，他们现在就有了。</p>
+<p><strong>JCal：</strong> 既然他们反正能搞出来，我们为什么不直接卖给他们？</p>
+<p><strong>Benioff：</strong> 我们大概应该卖所有我们能卖的东西。正如我说的，经济合作协作越多越好。如果你想要和平，我认为台湾是一个无谓的话题。</p>
+<p><strong>JCal：</strong> 好，回到那一点。Friedberg，你对芯片怎么看？我们应该卖最新芯片吗？然后Chamath，我也想听你的答案。</p>
+<p><strong>Friedberg：</strong> 我认为他们达到这个水平是不可避免的。顺便说一句，这可能是这笔交易的关键方面之一。我之前说过——也许台湾对美国和中国都变得不那么重要了，因为双方都在建设大陆的晶圆厂。我们在美国建立自己的制造能力——尽管有波折——但台积电亚利桑那厂已经在运行了，在印刷制造。如果成功并规模化了，美国将有更多设施。而中国通过华为也在建立许多设施，有大量的政府投资确保竞争力，不仅是晶圆厂，还包括半导体制造设备，以免在供应链上被ASML之类的公司切断。当他们建立起自己的半导体设备系统和晶圆厂，台湾还那么重要吗？它是否还是美国和中国意义上的安全风险？也许每个人都聚焦的台湾这个支点，并不是美国在“出卖”台湾，而是根本没有人在乎了。对中国来说可能有一个文化时刻，他们想在2040年之前把台湾完全纳入势力范围——从经济和安全角度来看，届时美国可能不那么在意了。这就是正在发生的事情之一。</p>
+<p><strong>JCal：</strong> 所以你站在“卖芯片给他们，这会降低中国夺取台积电或那些工厂的动力”的那一边？</p>
+<p><strong>Friedberg：</strong> 这样说吧：全球生产力指数越高，全人类就越好。问题在于，你真的只想让西方提高生产力指数，然后有效地迫使冲突，与东方对抗吗？还是我们所有人同步提高生产力指数，制造更多东西？每个人都受益，有更好的工作，赚更多钱，获得更多商品。商品价格下降，世界不是更安全更和平吗？技术只属于世界的一边而不给另一边，这必然会导致冲突或增加冲突概率。允许技术扩散和普及，每个人都会受益，冲突指数会下降。</p>
+<p><strong>JCal：</strong> 因为技术完全商品化了，大家都拥有它。</p>
+<p><strong>Friedberg：</strong> 给每个人更高的生活水平，提振经济，减少彼此冲突的理由。</p>
+<p><strong>JCal：</strong> 既然你提到台湾——我们应该把对台军售从谈判桌上拿开吗？是否可以要求中国停止对伊朗军售？</p>
+<p><strong>Friedberg：</strong> 是的，我们应该要求中国停止对伊朗军售。</p>
+<p><strong>JCal：</strong> 好。但中国想要的是我们停止对台军售。你会做这个交易吗？</p>
+<p><strong>Friedberg：</strong> 哦，这是个好问题。那是有细微差别的问题。我不……一般来说你可能认为这个交易应该做。</p>
+<p><strong>JCal：</strong> 那就做交易。</p>
+<p><strong>Friedberg：</strong> 可以这么说。</p>
+<p><strong>Chamath：</strong> Jason，我认为我们在18个月后可能就不会像今天那样谈论台湾问题了。为什么18个月？因为我们可能离1到2纳米工艺的突破不远了，届时我们不需要台湾来做我们战略上需要它做的事。随着我们扩大芯片晶圆厂，增加产能——有趣的是，还有正交技术正在发展。我不知道你们有没有看到，Neuralink展示了一台机器，能几乎在纳米级别上以全自动方式进行脑部操作植入。当你有如此机械灵活性和能力时，真实的原因就和今天完全不同了。今天的原因主要是经济。把经济从方程中去掉，我们对台湾的态度就会非常不同。第一，卖芯片。原因是我们希望NVIDIA赢。我们不想给华为提供足够的氧气，让它突然出现一个能用的芯片版本。Mark说得完全正确——这些模型在赶超，几乎以同样速度前进。更重要的可能是大家都同意这一点：对模型的使用设立合理的“了解你的客户”合规框架，防止有人在地下室制造生物武器。但，卖芯片，让技术普及，让Jensen赢。我宁愿他赢，不要华为赢。</p>
+<p><strong>JCal：</strong> Mark，最后一个问题。如果中国对台湾设立封锁线并决定拿下它，美国应该防御吗？是还是否？</p>
+<p><strong>Benioff：</strong> 我多年来一直说，我不同意Neil Ferguson在那个问题上的观点。我认为这是一个无谓的问题。中国和台湾会和解。</p>
+<p><strong>JCal：</strong> 我们先插一段轻松的，Chamath你帮Mark预约了Neuralink——下周二下午5点，给Chamath钻孔植入？你想要植入些同理心吗？</p>
+<p><strong>Chamath：</strong> 我跟Elon聊过，他说那个装置不提供反馈。</p>
+<p><strong>Benioff：</strong> 直接打进去，然后就连接上了。</p>
+<p><strong>Chamath：</strong> 这是最疯狂的事。</p>
+<p><strong>Benioff：</strong> 周二下午5点，Chamath。如果你紧张就握住我的手。</p>
+<p><strong>Chamath：</strong> 是的，要是我真的有颗心——像“若我只有连接组织”那样——我会笑，会咯咯笑。</p>
+<p><strong>JCal：</strong> 我们可以演音乐剧《若我只有一颗心》《若我只有一个大脑》和《若我只有一个Neuralink》。</p>
+<p><strong>Benioff：</strong> 你需要勇气，Friedberg。</p>
+<p><strong>JCal：</strong> 好啦，我们进入下一话题。</p></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="00:31–00:38 ai对软件行业的影响：saas-pocalypse？ 本段核心内容： salesforce股价下跌37%，servicenow跌42%，workday跌45%，合计蒸发1800亿美元市值。 市场担心ai将使传统企业软件变得多余——用户可以直接问ai，不需要使用slack、salesforce等。 benioff表示这不是他第一次经历“saas-pocalypse”，市场总是周期性重新评级。 chamath认为低端saas市场已基本结束，但高端市场（salesforce层级）因客户信任和集成度而相对安全，并可能反弹。 背景解释与关键术语： saas-pocalypse：benioff自创词，指软件即服务（saas）行业正面临ai带来的生存危机/大清洗（借用apocalypse，“启示录/大灾难”）。 重新评级：市场对某类资产的估值水平的集体修正，通常为下调倍数。 hubspot：crm和营销软件公司，曾为高增长标杆，如今仅交易在2倍营收——远低于过去多年的水平。 净美元留存率（ndr）：衡量现有客户每年支出增长/减少的指标，负流失代表客户支出增加。 详细中文整理： jcal： ai对软件的影响正在在市场上蔓延开来。mark，你正处在一线。 benioff： 谢谢你提醒我这件事。 jcal： 痛苦和磨难都是教训，我想佛陀和tony robbins都教过我们。唯一穿越的方式是直面它。salesforce下跌了惊人的37%，你损失了900亿美元。servicenow跌42%，workday跌45%。共计1800亿美元市值蒸发。市场的假设是，ai会让你不再需要slack、salesforce或hubspot——你只需问ai解决你的问题，所有人看着一块玻璃界面，没有实际的软件了。ai会告诉我们该做什么。你对这种恐惧、批评有什么回应？你在内部怎么管理这种巨大的变化？ benioff： 你说得对，这是saas-pocalypse。说实话，这不是我第一次经历saas-pocalypse，但这是目前这个。所以我们现在都在喝salesforce的“saas-brillas”，我们还有一只宠物“sasquatch”（大脚怪saas谐音）。我们都有点“sassy”。这是第一点。第二，市场重新评级了。不是秘密，大家都知道——你们一直在谈论，我也身在其中。市场重新评价软件公司。市场就是这样。每过一段时间就会有周期。我做了27年salesforce，40年企业软件。市场重新评级。你提到hubspot，交易在2倍营收——我以前从来没见过。他们刚做了一个非常好的季度。我看了十大主要企业软件公司，它们都交了很好的季度，交易都在2倍营收。为什么？因为你刚才说的那些。大家都对ai有催眠般的着迷，而我们还没看到ai体现在数字里。如果体现在数字里，人们可能是对的。但就目前来说，我们只知道世界上仍然在卖很多企业软件。 jcal： 你经历过的，不是第一次。 benioff： 不是第一次saas-pocalypse。我记得2020年新冠发生时的saas-pocalypse——“大saas-pocalypse”。以及2016年的。 jcal： 认真的说，你的战略是什么？你如何对待你的内部团队？他们通过股票获得报酬，这是逆风。你还有来自openai、anthropic和spacex的员工竞争。你如何振作士气并制定战略？ benioff： 你说得对。现在做私营公司容易很多——你不需要被公开市场合理化。如果你在公开市场上被重新评级，那就是公开市场的现实。我告诉员工：你不能被股价嗨起来。如果你每天关注股价，用股价来决定情绪状态，那行不通。你得找到不同的锚点。我尽量不太在意股价。我关注客户成功、收入。我们今年做460亿美元营收，超过160亿美元现金牛，超过83000名员工。这些是我关注的。我控制不了股价，做不了任何事。员工也控制不了，他们需要相信公司和他们为客户带来的长期成功质量。你再看看市场，不止我们这些公司，它们都做得很好，我看到一些很棒的数字，但这不重要——市场重新评级了。 jcal： 你还有这么多自由现金流，你一直擅长收购，所以我相信你正在看便宜的机会。 benioff： 我买过一些很棒的公司。不错的折扣。我喜欢这样。 chamath： 我的看法是：低端市场已经基本结束了。我认为没有安全空间。高端市场，marc运营的地方，大公司运营的地方，相当安全。这周的“部署公司”交易告诉你openai遇到了什么：投入40亿美元，给所有这些人17.5%的优先保证回报，为了什么？基本上为了与安永、埃森哲、德勤、普华永道、cognizant之类的对手竞争。如果你单纯看数字，从这些公司的交易价格来看并不合理。但为什么openai做这件事？因为在高端市场中，所有人的共识是：等一下，这比以前难得多。不是“嘟、嘟”输入一个提示，“嘀、叭、嘟”就全好了。不是那样。我认为我们有点过度炒作。现在这种收敛和重新评级会因为相反的方向而发生。反向交易是什么？谁有建设性的净留存率、谁有可预测的负流失——也就是说，谁有最佳关系——深入cxo办公室和c-suite，有ceo的信任，合作了20年。我认为这些公司会大杀四方，因为最终，当公开市场对ai的狂热稍微冷静一点，他们会问一个简单问题：你们过去4年花了3万亿美元，这些token的roi是什么？他们不得不去找像mark这样的人和其他人求情：“请帮我把我的token卖掉。”这是下一个靴子落地。我预测那些营收倍数、资产倍数等不可思议的数字会大大下降，而传统企业软件公司的倍数会反弹，两者达到平衡。" style="--index: 6">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">06</span>
+                    <span class="timeline-meta">00:31–00:38</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>AI对软件行业的影响：SaaS-pocalypse？</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>Salesforce股价下跌37%，ServiceNow跌42%，Workday跌45%，合计蒸发1800亿美元市值。</li>
+<li>市场担心AI将使传统企业软件变得多余——用户可以直接问AI，不需要使用Slack、Salesforce等。</li>
+<li>Benioff表示这不是他第一次经历“SaaS-pocalypse”，市场总是周期性重新评级。</li>
+<li>Chamath认为低端SaaS市场已基本结束，但高端市场（Salesforce层级）因客户信任和集成度而相对安全，并可能反弹。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>SaaS-pocalypse：Benioff自创词，指软件即服务（SaaS）行业正面临AI带来的生存危机/大清洗（借用apocalypse，“启示录/大灾难”）。</li>
+<li>重新评级：市场对某类资产的估值水平的集体修正，通常为下调倍数。</li>
+<li>HubSpot：CRM和营销软件公司，曾为高增长标杆，如今仅交易在2倍营收——远低于过去多年的水平。</li>
+<li>净美元留存率（NDR）：衡量现有客户每年支出增长/减少的指标，负流失代表客户支出增加。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> AI对软件的影响正在在市场上蔓延开来。Mark，你正处在一线。</p>
+<p><strong>Benioff：</strong> 谢谢你提醒我这件事。</p>
+<p><strong>JCal：</strong> 痛苦和磨难都是教训，我想佛陀和Tony Robbins都教过我们。唯一穿越的方式是直面它。Salesforce下跌了惊人的37%，你损失了900亿美元。ServiceNow跌42%，Workday跌45%。共计1800亿美元市值蒸发。市场的假设是，AI会让你不再需要Slack、Salesforce或HubSpot——你只需问AI解决你的问题，所有人看着一块玻璃界面，没有实际的软件了。AI会告诉我们该做什么。你对这种恐惧、批评有什么回应？你在内部怎么管理这种巨大的变化？</p>
+<p><strong>Benioff：</strong> 你说得对，这是SaaS-pocalypse。说实话，这不是我第一次经历SaaS-pocalypse，但这是目前这个。所以我们现在都在喝Salesforce的“SaaS-brillas”，我们还有一只宠物“Sasquatch”（大脚怪SaaS谐音）。我们都有点“sassy”。这是第一点。第二，市场重新评级了。不是秘密，大家都知道——你们一直在谈论，我也身在其中。市场重新评价软件公司。市场就是这样。每过一段时间就会有周期。我做了27年Salesforce，40年企业软件。市场重新评级。你提到HubSpot，交易在2倍营收——我以前从来没见过。他们刚做了一个非常好的季度。我看了十大主要企业软件公司，它们都交了很好的季度，交易都在2倍营收。为什么？因为你刚才说的那些。大家都对AI有催眠般的着迷，而我们还没看到AI体现在数字里。如果体现在数字里，人们可能是对的。但就目前来说，我们只知道世界上仍然在卖很多企业软件。</p>
+<p><strong>JCal：</strong> 你经历过的，不是第一次。</p>
+<p><strong>Benioff：</strong> 不是第一次SaaS-pocalypse。我记得2020年新冠发生时的SaaS-pocalypse——“大SaaS-pocalypse”。以及2016年的。</p>
+<p><strong>JCal：</strong> 认真的说，你的战略是什么？你如何对待你的内部团队？他们通过股票获得报酬，这是逆风。你还有来自OpenAI、Anthropic和SpaceX的员工竞争。你如何振作士气并制定战略？</p>
+<p><strong>Benioff：</strong> 你说得对。现在做私营公司容易很多——你不需要被公开市场合理化。如果你在公开市场上被重新评级，那就是公开市场的现实。我告诉员工：你不能被股价嗨起来。如果你每天关注股价，用股价来决定情绪状态，那行不通。你得找到不同的锚点。我尽量不太在意股价。我关注客户成功、收入。我们今年做460亿美元营收，超过160亿美元现金牛，超过83000名员工。这些是我关注的。我控制不了股价，做不了任何事。员工也控制不了，他们需要相信公司和他们为客户带来的长期成功质量。你再看看市场，不止我们这些公司，它们都做得很好，我看到一些很棒的数字，但这不重要——市场重新评级了。</p>
+<p><strong>JCal：</strong> 你还有这么多自由现金流，你一直擅长收购，所以我相信你正在看便宜的机会。</p>
+<p><strong>Benioff：</strong> 我买过一些很棒的公司。不错的折扣。我喜欢这样。</p>
+<p><strong>Chamath：</strong> 我的看法是：低端市场已经基本结束了。我认为没有安全空间。高端市场，Marc运营的地方，大公司运营的地方，相当安全。这周的“部署公司”交易告诉你OpenAI遇到了什么：投入40亿美元，给所有这些人17.5%的优先保证回报，为了什么？基本上为了与安永、埃森哲、德勤、普华永道、Cognizant之类的对手竞争。如果你单纯看数字，从这些公司的交易价格来看并不合理。但为什么OpenAI做这件事？因为在高端市场中，所有人的共识是：等一下，这比以前难得多。不是“嘟、嘟”输入一个提示，“嘀、叭、嘟”就全好了。不是那样。我认为我们有点过度炒作。现在这种收敛和重新评级会因为相反的方向而发生。反向交易是什么？谁有建设性的净留存率、谁有可预测的负流失——也就是说，谁有最佳关系——深入CXO办公室和C-Suite，有CEO的信任，合作了20年。我认为这些公司会大杀四方，因为最终，当公开市场对AI的狂热稍微冷静一点，他们会问一个简单问题：你们过去4年花了3万亿美元，这些token的ROI是什么？他们不得不去找像Mark这样的人和其他人求情：“请帮我把我的token卖掉。”这是下一个靴子落地。我预测那些营收倍数、资产倍数等不可思议的数字会大大下降，而传统企业软件公司的倍数会反弹，两者达到平衡。</p></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="00:38–00:46 salesforce的底层战略：ai实际应用与slack数据价值 本段核心内容： benioff强调ai让公司效率暴增：他今年将在anthropic上花费3亿美元用于内部编码。 salesforce推出“agentforce”ai客服，实现“电话+网页+人工”三位一体，这是前ai时代不可能的。 jcal和chamath都指出slack是公司数据“金矿”——所有内部沟通成为ai的语境和语义层。 benioff认为“多感官模型”是下一波浪潮，ai仍在非常早期的阶段，目前token使用效率较低。 背景解释与关键术语： agentforce：salesforce的ai客服产品，可自动处理用户请求，必要时转入人工。 语境/语义层：ai要理解真实世界，需要对接真实数据（如crm、slack、邮件），而非单纯的概率预测。 mcp api：model context protocol，模型上下文协议，允许ai模型连接外部数据源的标准接口。 头less：指软件作为后台服务运行，不依赖特定前端界面。 详细中文整理： chamath： 你发起了史无前例的大规模股票回购，500亿美元，mark。 benioff： 我认为这是历史上最大的回购之一。在很高的层面，新的能力太棒了——代码代理非常棒，anthropic非常棒。我今年可能在salesforce内部编码上花3亿美元用anthropic。一切制造都更加便宜、更高效，我能做到以前做不到的事。更快。我能一边实现软件，一边卖软件——以前从未做到过。通过聚焦，因为我现在有代码代理和人类一起工作，人类、代理和无头平台全都互相操作——从没这样过。所以对于我自己的公司来说，服务支持、分销、营销等各方面的效率提升是史无前例的。可以为我们的客户做的事也是史无前例的。你看到anthropic了吗？那是一艘火箭，不会停，因为你可以用这个产品做那些不可思议的事，再搭配我们的平台。未来能为客户做的事是无法描述的。太棒了。而且，永远不要浪费危机。我超级关注效率、人员、回购和并购。我们刚完成了最大的交易之一——informatica，大约80-90亿美元。它很棒，因为如果缺乏语境，这些ai都不行。ai是概率性的，可以推算出一些东西，但必须扎根于真实数据，需要有语义层——需要锁定在真相、单一真实来源上，否则就做不好。客户需要更协调的、联合的、集成的数据。所以我们买了informatica。客户想让我们的应用使用大语言模型，不仅为员工提供自动化，也为代理提供自动能力。比如你现在拨打1-800-no‑software，27年来第一次接通agentforce。它会确认你的身份，当它不知道你是谁时，就会自动转接给人——人可以看到你所有历史记录：“哦，你只需要解决这个问题、那个问题。”那种电话、网页、人三位一体的组合，都是ai才实现的。以前我们永远做不到。太棒了。 jcal： 把slack变成“无头”是争议性的决定吗？大家基本支持吗？ benioff： 我们是最早的——我们的平台架构方式，chamath你知道的很清楚，因为你们的代码代理和正在建设的公司都可以直接在它之上运行并构建很棒的东西。我们最早拥有xml api、soap api、rest api、现在有cli api、mcp api。我们一直想要一个拥有所有可能api的平台。我们的应用从不硬编码，不需要切断顶部，它们始终嵌入在平台中。现在我们通过新的axl api将应用流式传输出去，可以分配到任何大语言模型、设备或任何东西——实际上运行得更好。 chamath： 我认为jack dorsey写那份备忘录时，他的一部分想法是用“世界模型”来运营公司。我的第一反应是：语境在哪里？你之前说的语义理解在哪里？实际上它很大一部分存在于slack中。 benioff： 是的，slack和邮件。就这两个地方。 chamath： 是的。我在slack中展示过一个bot——所有dm、所有频道，通过ai读取，现在可以告诉你比你公司自己还多的信息。我可以在slack上问任何关于公司的问题：我的前5大交易是什么？员工在不满什么？我最重要的3件事是什么？然后立即得到答案，因为它有数据。 benioff： 你应该看看slack的新版本，你会爱上的。每个ai公司——openai、anthropic——都以slack作为标准平台。我们的核心sales cloud和service cloud也是。我会给你看我们在做什么。 jcal： 太好了。 benioff： 它对中小企业ceo的用处令人惊讶。 jcal： 如果你在运营一家ai时代之前的私有软件公司（有一些本该上市却没上的），你该怎么做？董事会和ceo该怎么决策？ benioff： 给它们纸巾擦眼泪。我和这些ceo聊，他们哭诉“我的市场估值呢？我的付出没有被付钱”。各位，成熟点。我喜欢公开市场的一点是，它不断合理地评估一切。做私有市场，估值就是幻想世界，直到有人真正付钱给你。我一定要告诉他们：专注于收入、客户、现金流、盈利能力、创新。你如何为客户创造价值？那才是真正重要的。 friedberg： 我们在ohalo做了一笔大的salesforce实施。过去6个月的一个观察——我们大量讨论了使用生成式工具——我们放弃了所有垂直类软件，但加倍投入横向工具。我们加大投资在平台能力上，然后在之上构建应用和工作流，而非采购现成的app或工作流工具。这有一个有趣的时刻：你可以区分“创始人领导型”与“非创始人领导型”的企业软件。我还看到一个横向vs垂直的转向，现在它们交易水平差不多，但你可以打破这个平衡。我认为那里有好的套利机会。 jcal： 最后，mark，你们有1.5万名销售人员出去卖slack这些产品。但有一件酷事：过去27年，我们计算有2000万到3000万人我们没回电——因为没有足够人力。就在这周，我通过代理回叫了5万人，进行资格确认。我刚买了家公司叫qualified，让代理回拨，做bdr/sdr功能，可以做以前做不到的事情。ai自动化让这一切成为可能。再链接回应用，你可以跃升到另一个层次。" style="--index: 7">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">07</span>
+                    <span class="timeline-meta">00:38–00:46</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>Salesforce的底层战略：AI实际应用与Slack数据价值</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>Benioff强调AI让公司效率暴增：他今年将在Anthropic上花费3亿美元用于内部编码。</li>
+<li>Salesforce推出“AgentForce”AI客服，实现“电话+网页+人工”三位一体，这是前AI时代不可能的。</li>
+<li>JCal和Chamath都指出Slack是公司数据“金矿”——所有内部沟通成为AI的语境和语义层。</li>
+<li>Benioff认为“多感官模型”是下一波浪潮，AI仍在非常早期的阶段，目前token使用效率较低。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>AgentForce：Salesforce的AI客服产品，可自动处理用户请求，必要时转入人工。</li>
+<li>语境/语义层：AI要理解真实世界，需要对接真实数据（如CRM、Slack、邮件），而非单纯的概率预测。</li>
+<li>MCP API：Model Context Protocol，模型上下文协议，允许AI模型连接外部数据源的标准接口。</li>
+<li>头less：指软件作为后台服务运行，不依赖特定前端界面。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>Chamath：</strong> 你发起了史无前例的大规模股票回购，500亿美元，Mark。</p>
+<p><strong>Benioff：</strong> 我认为这是历史上最大的回购之一。在很高的层面，新的能力太棒了——代码代理非常棒，Anthropic非常棒。我今年可能在Salesforce内部编码上花3亿美元用Anthropic。一切制造都更加便宜、更高效，我能做到以前做不到的事。更快。我能一边实现软件，一边卖软件——以前从未做到过。通过聚焦，因为我现在有代码代理和人类一起工作，人类、代理和无头平台全都互相操作——从没这样过。所以对于我自己的公司来说，服务支持、分销、营销等各方面的效率提升是史无前例的。可以为我们的客户做的事也是史无前例的。你看到Anthropic了吗？那是一艘火箭，不会停，因为你可以用这个产品做那些不可思议的事，再搭配我们的平台。未来能为客户做的事是无法描述的。太棒了。而且，永远不要浪费危机。我超级关注效率、人员、回购和并购。我们刚完成了最大的交易之一——Informatica，大约80-90亿美元。它很棒，因为如果缺乏语境，这些AI都不行。AI是概率性的，可以推算出一些东西，但必须扎根于真实数据，需要有语义层——需要锁定在真相、单一真实来源上，否则就做不好。客户需要更协调的、联合的、集成的数据。所以我们买了Informatica。客户想让我们的应用使用大语言模型，不仅为员工提供自动化，也为代理提供自动能力。比如你现在拨打1-800-NO‑Software，27年来第一次接通AgentForce。它会确认你的身份，当它不知道你是谁时，就会自动转接给人——人可以看到你所有历史记录：“哦，你只需要解决这个问题、那个问题。”那种电话、网页、人三位一体的组合，都是AI才实现的。以前我们永远做不到。太棒了。</p>
+<p><strong>JCal：</strong> 把Slack变成“无头”是争议性的决定吗？大家基本支持吗？</p>
+<p><strong>Benioff：</strong> 我们是最早的——我们的平台架构方式，Chamath你知道的很清楚，因为你们的代码代理和正在建设的公司都可以直接在它之上运行并构建很棒的东西。我们最早拥有XML API、SOAP API、REST API、现在有CLI API、MCP API。我们一直想要一个拥有所有可能API的平台。我们的应用从不硬编码，不需要切断顶部，它们始终嵌入在平台中。现在我们通过新的AXL API将应用流式传输出去，可以分配到任何大语言模型、设备或任何东西——实际上运行得更好。</p>
+<p><strong>Chamath：</strong> 我认为Jack Dorsey写那份备忘录时，他的一部分想法是用“世界模型”来运营公司。我的第一反应是：语境在哪里？你之前说的语义理解在哪里？实际上它很大一部分存在于Slack中。</p>
+<p><strong>Benioff：</strong> 是的，Slack和邮件。就这两个地方。</p>
+<p><strong>Chamath：</strong> 是的。我在Slack中展示过一个bot——所有DM、所有频道，通过AI读取，现在可以告诉你比你公司自己还多的信息。我可以在Slack上问任何关于公司的问题：我的前5大交易是什么？员工在不满什么？我最重要的3件事是什么？然后立即得到答案，因为它有数据。</p>
+<p><strong>Benioff：</strong> 你应该看看Slack的新版本，你会爱上的。每个AI公司——OpenAI、Anthropic——都以Slack作为标准平台。我们的核心Sales Cloud和Service Cloud也是。我会给你看我们在做什么。</p>
+<p><strong>JCal：</strong> 太好了。</p>
+<p><strong>Benioff：</strong> 它对中小企业CEO的用处令人惊讶。</p>
+<p><strong>JCal：</strong> 如果你在运营一家AI时代之前的私有软件公司（有一些本该上市却没上的），你该怎么做？董事会和CEO该怎么决策？</p>
+<p><strong>Benioff：</strong> 给它们纸巾擦眼泪。我和这些CEO聊，他们哭诉“我的市场估值呢？我的付出没有被付钱”。各位，成熟点。我喜欢公开市场的一点是，它不断合理地评估一切。做私有市场，估值就是幻想世界，直到有人真正付钱给你。我一定要告诉他们：专注于收入、客户、现金流、盈利能力、创新。你如何为客户创造价值？那才是真正重要的。</p>
+<p><strong>Friedberg：</strong> 我们在Ohalo做了一笔大的Salesforce实施。过去6个月的一个观察——我们大量讨论了使用生成式工具——我们放弃了所有垂直类软件，但加倍投入横向工具。我们加大投资在平台能力上，然后在之上构建应用和工作流，而非采购现成的APP或工作流工具。这有一个有趣的时刻：你可以区分“创始人领导型”与“非创始人领导型”的企业软件。我还看到一个横向vs垂直的转向，现在它们交易水平差不多，但你可以打破这个平衡。我认为那里有好的套利机会。</p>
+<p><strong>JCal：</strong> 最后，Mark，你们有1.5万名销售人员出去卖Slack这些产品。但有一件酷事：过去27年，我们计算有2000万到3000万人我们没回电——因为没有足够人力。就在这周，我通过代理回叫了5万人，进行资格确认。我刚买了家公司叫Qualified，让代理回拨，做BDR/SDR功能，可以做以前做不到的事情。AI自动化让这一切成为可能。再链接回应用，你可以跃升到另一个层次。</p></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="00:46–00:52 突发新闻：openai与apple的破裂合作关系 本段核心内容： openai与apple的chatgpt集成合作破裂，openai考虑起诉apple违反合同。 核心问题：用户必须说“chatgpt”才能激活；apple未做任何推广；openai预期的数亿美元订阅收入未实现。 benioff以幽默的方式对比各家ai公司战略，指出anthropic因专注编码代理而获胜。 chamath认为apple最好的路径是收购perplexity或mistral等ai公司，依靠硬件本地模型策略。 背景解释与关键术语： siri：apple的语音助手，被认为在所有主要助手中最差。 jony ive：apple前首席设计官，曾领导imac、iphone等产品设计。 码代理：如anthropic发布的编码专用模型，可独立完成编程任务。 本地模型：在用户本地硬件上运行的ai模型，不需要联网发送数据，隐私更好。 详细中文整理： jcal： 突发新闻。openai正在考虑起诉apple，原因是它们的chatgpt集成合作。如大家所知，两年前apple和openai宣布chatgpt集成到siri、ios、macos。但据bloomberg报道，这笔交易对openai来说非常糟糕，他们可能起诉apple违反合同。openai的不满包括：必须用户明确说“chatgpt”才能得到结果——我们可能都经历过这个，如果还没放弃siri的话（史上最糟糕的个人助手，简直是耻辱）；apple根本没有推广这个集成；用户仍然主要使用独立的chatgpt或其他平台；openai期待的数亿订阅收入没有实现。apple这边的说法是：他们对openai的隐私实践有担忧、不信任负责人（本周诉讼反复提及）；他们对openai在构建与apple竞争的硬件以及挖走jony ive感到不满。mark benioff，你了解玩家，怎么回事？ benioff： 你需要升级一下。我们先把这个对话上一个层次。发生了什么？大语言模型开始出现。每家公司选择了略不同路径。elon出去有了grok，开始建造性爱机器人和各种东西——性爱机器人是他巨大焦点。然后openai在做sora视频功能、广告网络等疯狂事情。gemini有nano banana。然后anthropic站出来说“我们不知道那些性爱机器人和nano banana，但我们聚焦编码代理。”结果anthropic是对的。突然火箭起飞，所有人惊叹“哇anthropic飞哪儿去了？他们在上面。”然后所有人都reset，按钮敲下去：“编码代理！所有人聚焦！杀了siri！杀掉这个！换掉那个！性爱机器人关掉！cursor开起来！”这就是我们现在的位置。这就是这个时刻的激动人心之处——每个人都必须转型。你需要问自己“我现在真正想要什么？”所有人都在改变。如果你看一年前每个人在哪和现在在哪，完全是不同地方。当anthropic 4.6推出，砰——每个人都能在自己公司编码。之前？它是一个轻微的改进，但没有我们想要的好。现在每个人都看到了并说“哇，这太神奇了”。在slack内部我们也在开发使编码更简单的东西。你很快会看到slack和编码的炫酷东西。我还没准备好公布，但毫无疑问我们正处于编码的新时代。chamath整个公司围绕它。很多人围绕它。以前编码是人类操作键盘，我15岁开始，burlingame高中，手在键盘上写视频游戏……现在呢？产品经理、开发者还是ux设计师是创造者，还是三者融为一体？ benioff： 全融合了。 jcal： 谁赢了？ benioff： 都融合了。我公司大多数工程师直接口述——一个人用脚踏板加whisperflow加说话，根本没有手在键盘上。 friedberg： 我不了解长期合作中openai的处境——似乎没有多少长久的伙伴关系。 jcal： 一个非常含蓄的说法。apple应该怎么做？应该回到google的怀抱吗（搜索默认合作，他们从这个你曾经的母校赚了1000亿美元）？ friedberg： 最终，google有一个真正的机会：把gemini助手集成到你所有的个人信息中——gemini、日历、google drive、google photos——全部个人信息。它可以成为你的日历代理、个人生活问答助理：“我什么时候给这个人发过邮件？”在企业语境中，g suite这个领域也在争夺。所以google有真机会拥有那个助手界面。也许salesforce也有机会，mark。apple有嵌入的基础——多少人用apple服务管理邮件、日历、存储信息？不少。所以世界可能分化：你会有助手，但要真正有用，它必须访问你所有信息，无论企业还是个人。apple可能不得不自己构建或白标一个伙伴（anthropic或其他）让这工作。但他们将面对一个强大对手——google assistant最终会成为一个令人惊叹的产品，一旦这个飞轮运转起来。 chamath： apple有最清晰的路径成为ai领域前两三名玩家：直接买一个perplexity或mistral或某个ai实验室，然后利用他们超强的硬件底盘。我刚拿到这台48gb ram、m5的macbook——太牛了。即将推出的studio将有1tb ram。他们在保持隐私、运行本地模型方面有清晰路径——可以索引所有图片而不把数据交给没人信任的openai或gemini。这是他们选择当前ceo（工程师、硬件背景）的重要原因。我认为未来是本地模型运行在超强桌面硬件上。如果你让员工在这种硬件上运行本地模型，他们的价值会比不用的员工高10倍。apple是我未来一年的选择。 friedberg： 我不太相信本地模型——原因是持久性。你有多设备、多角色，在不同地方用不同电脑。到2026年没有跨设备持久性是一个破坏性功能。你不会到处背5磅重的macbook pro才能获得知识。比如医生诊断——等等你问医生……那就不是一个好体验。 benioff： 你们都说得对。 chamath： 你可能也能通过icloud完成。所以它会无缝…… jcal： 我怀疑的是——你是否假设这些形态因素不需要改变？我猜想有一个“iphone时刻”即将到来——有人会用新形式因器带来“我的天，这才是那个东西”。有足够的原料，有人会做出什么。然后你要考虑apple这种公司沉没成本——40年、30年精心工艺优化。如果形态因器、设备属性完全不同，你如何转动那艘大船？" style="--index: 8">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">08</span>
+                    <span class="timeline-meta">00:46–00:52</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>突发新闻：OpenAI与Apple的破裂合作关系</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>OpenAI与Apple的ChatGPT集成合作破裂，OpenAI考虑起诉Apple违反合同。</li>
+<li>核心问题：用户必须说“ChatGPT”才能激活；Apple未做任何推广；OpenAI预期的数亿美元订阅收入未实现。</li>
+<li>Benioff以幽默的方式对比各家AI公司战略，指出Anthropic因专注编码代理而获胜。</li>
+<li>Chamath认为Apple最好的路径是收购Perplexity或Mistral等AI公司，依靠硬件本地模型策略。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>Siri：Apple的语音助手，被认为在所有主要助手中最差。</li>
+<li>Jony Ive：Apple前首席设计官，曾领导iMac、iPhone等产品设计。</li>
+<li>码代理：如Anthropic发布的编码专用模型，可独立完成编程任务。</li>
+<li>本地模型：在用户本地硬件上运行的AI模型，不需要联网发送数据，隐私更好。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> 突发新闻。OpenAI正在考虑起诉Apple，原因是它们的ChatGPT集成合作。如大家所知，两年前Apple和OpenAI宣布ChatGPT集成到Siri、iOS、macOS。但据Bloomberg报道，这笔交易对OpenAI来说非常糟糕，他们可能起诉Apple违反合同。OpenAI的不满包括：必须用户明确说“ChatGPT”才能得到结果——我们可能都经历过这个，如果还没放弃Siri的话（史上最糟糕的个人助手，简直是耻辱）；Apple根本没有推广这个集成；用户仍然主要使用独立的ChatGPT或其他平台；OpenAI期待的数亿订阅收入没有实现。Apple这边的说法是：他们对OpenAI的隐私实践有担忧、不信任负责人（本周诉讼反复提及）；他们对OpenAI在构建与Apple竞争的硬件以及挖走Jony Ive感到不满。Mark Benioff，你了解玩家，怎么回事？</p>
+<p><strong>Benioff：</strong> 你需要升级一下。我们先把这个对话上一个层次。发生了什么？大语言模型开始出现。每家公司选择了略不同路径。Elon出去有了Grok，开始建造性爱机器人和各种东西——性爱机器人是他巨大焦点。然后OpenAI在做Sora视频功能、广告网络等疯狂事情。Gemini有Nano Banana。然后Anthropic站出来说“我们不知道那些性爱机器人和Nano Banana，但我们聚焦编码代理。”结果Anthropic是对的。突然火箭起飞，所有人惊叹“哇Anthropic飞哪儿去了？他们在上面。”然后所有人都reset，按钮敲下去：“编码代理！所有人聚焦！杀了Siri！杀掉这个！换掉那个！性爱机器人关掉！Cursor开起来！”这就是我们现在的位置。这就是这个时刻的激动人心之处——每个人都必须转型。你需要问自己“我现在真正想要什么？”所有人都在改变。如果你看一年前每个人在哪和现在在哪，完全是不同地方。当Anthropic 4.6推出，砰——每个人都能在自己公司编码。之前？它是一个轻微的改进，但没有我们想要的好。现在每个人都看到了并说“哇，这太神奇了”。在Slack内部我们也在开发使编码更简单的东西。你很快会看到Slack和编码的炫酷东西。我还没准备好公布，但毫无疑问我们正处于编码的新时代。Chamath整个公司围绕它。很多人围绕它。以前编码是人类操作键盘，我15岁开始，Burlingame高中，手在键盘上写视频游戏……现在呢？产品经理、开发者还是UX设计师是创造者，还是三者融为一体？</p>
+<p><strong>Benioff：</strong> 全融合了。</p>
+<p><strong>JCal：</strong> 谁赢了？</p>
+<p><strong>Benioff：</strong> 都融合了。我公司大多数工程师直接口述——一个人用脚踏板加WhisperFlow加说话，根本没有手在键盘上。</p>
+<p><strong>Friedberg：</strong> 我不了解长期合作中OpenAI的处境——似乎没有多少长久的伙伴关系。</p>
+<p><strong>JCal：</strong> 一个非常含蓄的说法。Apple应该怎么做？应该回到Google的怀抱吗（搜索默认合作，他们从这个你曾经的母校赚了1000亿美元）？</p>
+<p><strong>Friedberg：</strong> 最终，Google有一个真正的机会：把Gemini助手集成到你所有的个人信息中——Gemini、日历、Google Drive、Google Photos——全部个人信息。它可以成为你的日历代理、个人生活问答助理：“我什么时候给这个人发过邮件？”在企业语境中，G Suite这个领域也在争夺。所以Google有真机会拥有那个助手界面。也许Salesforce也有机会，Mark。Apple有嵌入的基础——多少人用Apple服务管理邮件、日历、存储信息？不少。所以世界可能分化：你会有助手，但要真正有用，它必须访问你所有信息，无论企业还是个人。Apple可能不得不自己构建或白标一个伙伴（Anthropic或其他）让这工作。但他们将面对一个强大对手——Google Assistant最终会成为一个令人惊叹的产品，一旦这个飞轮运转起来。</p>
+<p><strong>Chamath：</strong> Apple有最清晰的路径成为AI领域前两三名玩家：直接买一个Perplexity或Mistral或某个AI实验室，然后利用他们超强的硬件底盘。我刚拿到这台48GB RAM、M5的MacBook——太牛了。即将推出的Studio将有1TB RAM。他们在保持隐私、运行本地模型方面有清晰路径——可以索引所有图片而不把数据交给没人信任的OpenAI或Gemini。这是他们选择当前CEO（工程师、硬件背景）的重要原因。我认为未来是本地模型运行在超强桌面硬件上。如果你让员工在这种硬件上运行本地模型，他们的价值会比不用的员工高10倍。Apple是我未来一年的选择。</p>
+<p><strong>Friedberg：</strong> 我不太相信本地模型——原因是持久性。你有多设备、多角色，在不同地方用不同电脑。到2026年没有跨设备持久性是一个破坏性功能。你不会到处背5磅重的MacBook Pro才能获得知识。比如医生诊断——等等你问医生……那就不是一个好体验。</p>
+<p><strong>Benioff：</strong> 你们都说得对。</p>
+<p><strong>Chamath：</strong> 你可能也能通过iCloud完成。所以它会无缝……</p>
+<p><strong>JCal：</strong> 我怀疑的是——你是否假设这些形态因素不需要改变？我猜想有一个“iPhone时刻”即将到来——有人会用新形式因器带来“我的天，这才是那个东西”。有足够的原料，有人会做出什么。然后你要考虑Apple这种公司沉没成本——40年、30年精心工艺优化。如果形态因器、设备属性完全不同，你如何转动那艘大船？</p></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="00:52–01:02 多感官ai、token使用暴增与智能路由 本段核心内容： 提及mira murati的thinking machines展示了“实时世界模型”，可同时监控桌面、声音、摄像头，每200毫秒上传数据到两个模型（一个回顾30秒历史，一个实时）。 jcal认为这种模式会使token需求增加1000倍——如果是持续8小时工作，不是“问一下、答一下”的模式。 benioff认为llm（大语言模型）只是语言预测，并不通向agi，多感官模型才是下一波。 同时，benioff指出当前token浪费严重——需要中间层模型路由，区分何时用高端模型、何时用便宜模型。 背景解释与关键术语： 多感官模型：同时处理视觉、听觉、语言等多模态输入，而非仅文字。 token：ai模型处理的最小文本单位，使用量直接影响成本。 路由（routing）：根据任务复杂程度分配到不同模型（如简单查询给小模型、复杂推理给anthropic）以优化成本。 边缘（edge）vs 云：ai计算在本地设备上进行（边缘）或在远程服务器进行（云）。 详细中文整理： jcal： 你指出了非常重要的一点。mira murati的thinking machines发布了新的实时世界模型——超牛。同时apple申请了把摄像头放airpods的专利。你对了。还有我聊过的“爱心别针”（humane pin）——这些持续性硬件设备，手表、耳机，会知道你的全部现实。它们会监控你的整个桌面。这将导致token用量是现在业务用户用量的1000倍。因为mira的模型——我们应该请她上播客或来活动——她模型的工作方式，friedberg，是它看着你的桌面，听着所有语音，同时看着你的网络摄像头。每200毫秒上传到两个模型：一个深度思考回顾过去30秒片段，一个实时模型。如果一个人一天8小时这样用，就不只是“我最新提示、我的问题——得到回答”这种回合制，而是实时不断查询llm。这需要普通桌面硬件升级。marc benioff，你对这个新世界怎么看？ benioff： 这是人的一小步，却是迈向agi的一大步。你说得很好。我们一直认为llm是终极，是走向agi。但我不太理解大语言模型——只关于语言和单词，我们知道工作机制是一个单词接一个单词——如何才能让我们走到minority report或所有科幻电影里的状态。但你刚才说得非常好，jason——多感官模型。我是多感官模型——一个生物计算机里的多感官模型。我有眼睛、耳朵、嘴（通常正常工作）、某些大脑、心脏什么的，还有其他我自己都不理解的东西在运行。它全运行在一个生物计算机里。我本身不是大语言模型——尽管我有时会有一个。所以多感官模型是下一波大浪潮。但我们还没到agi。不过那个演示——它非常棒。每个人都应该看看。然后我们可以说：“嗯，现在我们走在什么路径上？”但每个模型公司都会说“等等，转型”，每个人都在转型。你不能什么都做。 jcal： 你说你在anthropic上花3亿美元用于token。现在想象一个普通员工需要1000倍于现在的token——不是花15万，而是1亿美元。 benioff： 但我不认为那是真的——我认为我们在被洗脑。我们浪费了很多token。我们今年花3亿美元在anthropic上用于编码——但绝大多数token根本不需要到anthropic。需要一个中间层判断哪些需要去anthropic，哪些可以用小模型解决。 jcal： 需要一个“指挥家”把任务路由到最经济的模型。 benioff： 但现在还是太早期。你之前说的关于边缘的重要性也很棒——边缘和云会融合，有更多分布式智能，它们协作起来非常有意义，chamath说的也完全正确——你们都对了。结合起来，我们更接近目标：分布式智能、边缘智能、多感官模型，编码更高效。所以认为它会永远那么贵，只是这个时间节点的情况。会有一家新公司出来说：“我在你和anthropic、openai之间，保证你只在真正需要时使用它们的高端token。”这就不是我们现在的情况。 jcal： 完全同意。 benioff： 就像“我需要洗澡，放水——不，我只需要一点水。” jcal： 是的。" style="--index: 9">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">09</span>
+                    <span class="timeline-meta">00:52–01:02</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>多感官AI、Token使用暴增与智能路由</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>提及Mira Murati的Thinking Machines展示了“实时世界模型”，可同时监控桌面、声音、摄像头，每200毫秒上传数据到两个模型（一个回顾30秒历史，一个实时）。</li>
+<li>JCal认为这种模式会使token需求增加1000倍——如果是持续8小时工作，不是“问一下、答一下”的模式。</li>
+<li>Benioff认为LLM（大语言模型）只是语言预测，并不通向AGI，多感官模型才是下一波。</li>
+<li>同时，Benioff指出当前token浪费严重——需要中间层模型路由，区分何时用高端模型、何时用便宜模型。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>多感官模型：同时处理视觉、听觉、语言等多模态输入，而非仅文字。</li>
+<li>Token：AI模型处理的最小文本单位，使用量直接影响成本。</li>
+<li>路由（Routing）：根据任务复杂程度分配到不同模型（如简单查询给小模型、复杂推理给Anthropic）以优化成本。</li>
+<li>边缘（Edge）vs 云：AI计算在本地设备上进行（边缘）或在远程服务器进行（云）。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> 你指出了非常重要的一点。Mira Murati的Thinking Machines发布了新的实时世界模型——超牛。同时Apple申请了把摄像头放AirPods的专利。你对了。还有我聊过的“爱心别针”（Humane Pin）——这些持续性硬件设备，手表、耳机，会知道你的全部现实。它们会监控你的整个桌面。这将导致token用量是现在业务用户用量的1000倍。因为Mira的模型——我们应该请她上播客或来活动——她模型的工作方式，Friedberg，是它看着你的桌面，听着所有语音，同时看着你的网络摄像头。每200毫秒上传到两个模型：一个深度思考回顾过去30秒片段，一个实时模型。如果一个人一天8小时这样用，就不只是“我最新提示、我的问题——得到回答”这种回合制，而是实时不断查询LLM。这需要普通桌面硬件升级。Marc Benioff，你对这个新世界怎么看？</p>
+<p><strong>Benioff：</strong> 这是人的一小步，却是迈向AGI的一大步。你说得很好。我们一直认为LLM是终极，是走向AGI。但我不太理解大语言模型——只关于语言和单词，我们知道工作机制是一个单词接一个单词——如何才能让我们走到Minority Report或所有科幻电影里的状态。但你刚才说得非常好，Jason——多感官模型。我是多感官模型——一个生物计算机里的多感官模型。我有眼睛、耳朵、嘴（通常正常工作）、某些大脑、心脏什么的，还有其他我自己都不理解的东西在运行。它全运行在一个生物计算机里。我本身不是大语言模型——尽管我有时会有一个。所以多感官模型是下一波大浪潮。但我们还没到AGI。不过那个演示——它非常棒。每个人都应该看看。然后我们可以说：“嗯，现在我们走在什么路径上？”但每个模型公司都会说“等等，转型”，每个人都在转型。你不能什么都做。</p>
+<p><strong>JCal：</strong> 你说你在Anthropic上花3亿美元用于token。现在想象一个普通员工需要1000倍于现在的token——不是花15万，而是1亿美元。</p>
+<p><strong>Benioff：</strong> 但我不认为那是真的——我认为我们在被洗脑。我们浪费了很多token。我们今年花3亿美元在Anthropic上用于编码——但绝大多数token根本不需要到Anthropic。需要一个中间层判断哪些需要去Anthropic，哪些可以用小模型解决。</p>
+<p><strong>JCal：</strong> 需要一个“指挥家”把任务路由到最经济的模型。</p>
+<p><strong>Benioff：</strong> 但现在还是太早期。你之前说的关于边缘的重要性也很棒——边缘和云会融合，有更多分布式智能，它们协作起来非常有意义，Chamath说的也完全正确——你们都对了。结合起来，我们更接近目标：分布式智能、边缘智能、多感官模型，编码更高效。所以认为它会永远那么贵，只是这个时间节点的情况。会有一家新公司出来说：“我在你和Anthropic、OpenAI之间，保证你只在真正需要时使用它们的高端token。”这就不是我们现在的情况。</p>
+<p><strong>JCal：</strong> 完全同意。</p>
+<p><strong>Benioff：</strong> 就像“我需要洗澡，放水——不，我只需要一点水。”</p>
+<p><strong>JCal：</strong> 是的。</p></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="01:02–01:10 超级厄尔尼诺：海洋存储500年人类能量，粮食危机可能爆发 本段核心内容： friedberg警告：海洋温度异常，预测将出现历史性的“超级厄尔尼诺”。 海洋已存储约1100万太瓦时额外能量——相当于全球全年能源消耗的500倍。 这将在未来几个月释放，导致：巴西、澳大利亚作物减产；印度可能因季风失败而面对1.5亿农民+15亿人的生存危机；能源价格、大宗商品价格飙升；可能引发南亚动荡。 背景解释与关键术语： 厄尔尼诺（el niño）：太平洋赤道附近海温异常升高的气候现象，通常每2-7年一次。 海表温度异常：某海域当前温度相对于过去数十年平均值的偏差值。 太瓦时（twh）：能量单位，1太瓦时=10亿千瓦时。 季风：南亚大陆夏季的年度降雨系统，对农业至关重要，直接关系印度、孟加拉等国粮食产量。 氮肥：伊朗是重要化肥原料出口国，海峡局势已影响全球化肥供应。 详细中文整理： jcal： 两个终题——anthropic取消多层spv（特殊目的载体），或friedberg的科学角落。我们快速做一下。冠军角落的粉丝每次错过都会抓狂。 friedberg： mark，你喜欢科学角落吗？不，你喜欢。 benioff： 我喜欢，如果只关于海洋的话。 jcal： mark是硅谷最伟大的销售——他爱一切，想听更多。 friedberg： 这个科学角落是令人恐惧的厄尔尼诺季节即将到来。这是我的海表温度异常预测图——海洋已热到程度，预测的海洋温度将超过近代史上任何纪录。这是海表温度异常——即海洋温度与平均值偏离多少。为什么这很重要？这幅图与1877年（有史以来最大厄尔尼诺年）对比。为什么重要？海洋是天气的电池。每年，海洋吸收热量，越来越多，越来越热，然后释放到大气中，驱动全球天气事件。基于当前海洋温度，你可以相当准确地预测未来一年的天气。现在海洋中储存了约1100万太瓦时额外能量。全球全年只用25000太瓦时！——1100万太瓦时，相当于500年的人类能源。未来几个月这些能量将释放到大气中，可以99%自信地说，明年将是有记录以来最热的一年（至少是近代历史最热）。这将改变信风模式，改变全球天气演化。主要影响：美国西南部、加州、墨西哥湾区域会有强烈的大气河流事件（大量降雨）；美国北部到加拿大降雪很少，热浪严重。你们记得几年前加拿大的大火吧？凤凰城等地五月已经106华氏度。超级厄尔尼诺预计将延长这些热穹顶的持续时间——产生前所未有的温度。南阿根廷、智利、巴西可能出现破纪录极端热浪。情况会变得棘手——农作物可能歉收。巴西（全球最大农产品出口国）、印度、澳大利亚，这些地区直接影响数亿人消费和全球出口。如果巴西歉收、澳大利亚小麦歉收（供应印尼、菲律宾等数亿人口），如果印度季风失败（现在概率非常高）——印度有1.5亿农民依赖农业产出生存，15亿人依赖这些粮食。这次厄尔尼诺事件不止是天气趣闻。接下来一年，你可以预期：西南地区能源价格飙升、电网故障，全球大宗商品价格飙升，印度、菲律宾、越南出现不稳——因为食品供应不足。印度问题非常棘手——没有好的解决方案。它依赖季风，但还因海峡危机与伊朗局势面临氮肥短缺——双重打击。未来一年南亚可能会出现卡路里赤字和重大经济危机。我就是提出这个——数据似乎已经确认未来几个月我们将迎来创纪录的厄尔尼诺、以及接下来一年的后果。 jcal： 这太吓人了。天了噜。怎么解决粮食问题？这是大问题。 friedberg： 很大的问题。这就是大宗商品市场正在交易的核心。 jcal： 上次厄尔尼诺时发生过吗？我的意思是粮食短缺？ friedberg： 是的。厄尔尼诺年份中，澳大利亚、巴西等国通常有粮食短缺事件。但今年指数完全偏离图表——远超过以往任何东西，显然与危机严重程度相关。美国作为净农产品出口国，主要担心的是火灾季、加州风暴事件、热浪、电价。我们可能比世界其他地区稳定。但巴西农产品出口占经济重要份额，巴西还有债务问题——这可能在一些地区变成经济麻烦。现在大宗商品市场已经在积极交易这个厄尔尼诺事件。 chamath： 你的超级种子能帮忙吗？ friedberg： 那是长期解决方案。作物遗传品种适应更快的气候变化在未来几十年至关重要。不过也要指出另一方面，随着某些地方变暖，土地实际上变得可行——比如加拿大和北部美国——可以种植的耕地正在扩大。我们在加拿大越来越多地种大豆，这20年前不是事实——既是植物育种的结果，也是温度变暖、冬天变短的结果。但几年前澳大利亚有巨大热浪和干旱——小麦运往印尼、越南这些拥有数亿人口依赖它的国家。他们得四处寻找。全球范围内一直有些此消彼长。但在今年这种能量大量注入大气的年份，可能没有这种平衡——事情就会崩溃。 jcal： 我记起来了——你4年前在乌克兰问题上发出了一个很好的粮食危机警告，后来确实导致了谈判，俄乌双方专门为小麦出口免于饥荒作了一个通道安排。 friedberg： 是的，战争初期也协商了化肥出口——那是关键。 jcal： friedberg，你在提高意识方面发挥了作用——给你那个功劳。 benioff： 我们是不是该结束在积极一点的事情上？比如anthropic的故事？ jcal： 好，我们快速把anthropic的事收尾。" style="--index: 10">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">10</span>
+                    <span class="timeline-meta">01:02–01:10</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>超级厄尔尼诺：海洋存储500年人类能量，粮食危机可能爆发</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>Friedberg警告：海洋温度异常，预测将出现历史性的“超级厄尔尼诺”。</li>
+<li>海洋已存储约1100万太瓦时额外能量——相当于全球全年能源消耗的500倍。</li>
+<li>这将在未来几个月释放，导致：巴西、澳大利亚作物减产；印度可能因季风失败而面对1.5亿农民+15亿人的生存危机；能源价格、大宗商品价格飙升；可能引发南亚动荡。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>厄尔尼诺（El Niño）：太平洋赤道附近海温异常升高的气候现象，通常每2-7年一次。</li>
+<li>海表温度异常：某海域当前温度相对于过去数十年平均值的偏差值。</li>
+<li>太瓦时（TWh）：能量单位，1太瓦时=10亿千瓦时。</li>
+<li>季风：南亚大陆夏季的年度降雨系统，对农业至关重要，直接关系印度、孟加拉等国粮食产量。</li>
+<li>氮肥：伊朗是重要化肥原料出口国，海峡局势已影响全球化肥供应。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> 两个终题——Anthropic取消多层SPV（特殊目的载体），或Friedberg的科学角落。我们快速做一下。冠军角落的粉丝每次错过都会抓狂。</p>
+<p><strong>Friedberg：</strong> Mark，你喜欢科学角落吗？不，你喜欢。</p>
+<p><strong>Benioff：</strong> 我喜欢，如果只关于海洋的话。</p>
+<p><strong>JCal：</strong> Mark是硅谷最伟大的销售——他爱一切，想听更多。</p>
+<p><strong>Friedberg：</strong> 这个科学角落是令人恐惧的厄尔尼诺季节即将到来。这是我的海表温度异常预测图——海洋已热到程度，预测的海洋温度将超过近代史上任何纪录。这是海表温度异常——即海洋温度与平均值偏离多少。为什么这很重要？这幅图与1877年（有史以来最大厄尔尼诺年）对比。为什么重要？海洋是天气的电池。每年，海洋吸收热量，越来越多，越来越热，然后释放到大气中，驱动全球天气事件。基于当前海洋温度，你可以相当准确地预测未来一年的天气。现在海洋中储存了约1100万太瓦时额外能量。全球全年只用25000太瓦时！——1100万太瓦时，相当于500年的人类能源。未来几个月这些能量将释放到大气中，可以99%自信地说，明年将是有记录以来最热的一年（至少是近代历史最热）。这将改变信风模式，改变全球天气演化。主要影响：美国西南部、加州、墨西哥湾区域会有强烈的大气河流事件（大量降雨）；美国北部到加拿大降雪很少，热浪严重。你们记得几年前加拿大的大火吧？凤凰城等地五月已经106华氏度。超级厄尔尼诺预计将延长这些热穹顶的持续时间——产生前所未有的温度。南阿根廷、智利、巴西可能出现破纪录极端热浪。情况会变得棘手——农作物可能歉收。巴西（全球最大农产品出口国）、印度、澳大利亚，这些地区直接影响数亿人消费和全球出口。如果巴西歉收、澳大利亚小麦歉收（供应印尼、菲律宾等数亿人口），如果印度季风失败（现在概率非常高）——印度有1.5亿农民依赖农业产出生存，15亿人依赖这些粮食。这次厄尔尼诺事件不止是天气趣闻。接下来一年，你可以预期：西南地区能源价格飙升、电网故障，全球大宗商品价格飙升，印度、菲律宾、越南出现不稳——因为食品供应不足。印度问题非常棘手——没有好的解决方案。它依赖季风，但还因海峡危机与伊朗局势面临氮肥短缺——双重打击。未来一年南亚可能会出现卡路里赤字和重大经济危机。我就是提出这个——数据似乎已经确认未来几个月我们将迎来创纪录的厄尔尼诺、以及接下来一年的后果。</p>
+<p><strong>JCal：</strong> 这太吓人了。天了噜。怎么解决粮食问题？这是大问题。</p>
+<p><strong>Friedberg：</strong> 很大的问题。这就是大宗商品市场正在交易的核心。</p>
+<p><strong>JCal：</strong> 上次厄尔尼诺时发生过吗？我的意思是粮食短缺？</p>
+<p><strong>Friedberg：</strong> 是的。厄尔尼诺年份中，澳大利亚、巴西等国通常有粮食短缺事件。但今年指数完全偏离图表——远超过以往任何东西，显然与危机严重程度相关。美国作为净农产品出口国，主要担心的是火灾季、加州风暴事件、热浪、电价。我们可能比世界其他地区稳定。但巴西农产品出口占经济重要份额，巴西还有债务问题——这可能在一些地区变成经济麻烦。现在大宗商品市场已经在积极交易这个厄尔尼诺事件。</p>
+<p><strong>Chamath：</strong> 你的超级种子能帮忙吗？</p>
+<p><strong>Friedberg：</strong> 那是长期解决方案。作物遗传品种适应更快的气候变化在未来几十年至关重要。不过也要指出另一方面，随着某些地方变暖，土地实际上变得可行——比如加拿大和北部美国——可以种植的耕地正在扩大。我们在加拿大越来越多地种大豆，这20年前不是事实——既是植物育种的结果，也是温度变暖、冬天变短的结果。但几年前澳大利亚有巨大热浪和干旱——小麦运往印尼、越南这些拥有数亿人口依赖它的国家。他们得四处寻找。全球范围内一直有些此消彼长。但在今年这种能量大量注入大气的年份，可能没有这种平衡——事情就会崩溃。</p>
+<p><strong>JCal：</strong> 我记起来了——你4年前在乌克兰问题上发出了一个很好的粮食危机警告，后来确实导致了谈判，俄乌双方专门为小麦出口免于饥荒作了一个通道安排。</p>
+<p><strong>Friedberg：</strong> 是的，战争初期也协商了化肥出口——那是关键。</p>
+<p><strong>JCal：</strong> Friedberg，你在提高意识方面发挥了作用——给你那个功劳。</p>
+<p><strong>Benioff：</strong> 我们是不是该结束在积极一点的事情上？比如Anthropic的故事？</p>
+<p><strong>JCal：</strong> 好，我们快速把Anthropic的事收尾。</p></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="01:10–01:16 闪电轮：anthropic取消多层spv、结尾回顾 本段核心内容： anthropic宣布取消多层特殊目的载体（spvs）——向牙医等个人投资者收取10%管理费的二级市场交易结构。 chamath强烈支持：认为这些spv应该被“一枪打死”，这种结构最终会伤害不知情的投资者。 marc benioff在结尾动情回忆已故youtube前ceo susan wojcicki。 背景解释与关键术语： spv（special purpose vehicle，特殊目的载体）：一种投资工具，允许个人投资者间接持有未上市公司股份，往往叠加多层管理费用。 双重carry：管理费之外的超额收益分成。 退出时法律诉讼：spv交易在二级市场（如uber案例）经常导致原始权益人与下游投资者之间的诉讼。 详细中文整理： jcal： 好消息：anthropic受够了多层spv的乱象——这些被卖给牙医的、收10%管理费的结构。他们点名了特定平台并宣布取消这些结构。chamath，是小风波还是长期应得的惩罚？ chamath： 爱了。mark说得对——所有这些公司应该尽早上市，获得市场估值，专注于更高层面的事情。所有这些让人可以不上市的小技巧都应该被枪毙。这些spv最糟糕——叠加spv的spv的spv。我敢保证，一旦spacex上市，一旦anthropic上市，一旦openai上市，你会看到一连串诉讼——spv卖家与买家之间。不应该允许。应该取消所有spv。你不能打破鸡蛋再复原，但必须叫它什么。我希望每家公司都这样做——让他们更早上市、更快地理顺股权结构。这是对的。 jcal： 直接说，chamath：disgraciado（耻辱）。 chamath： 倒不是耻辱。但spacex一旦上市，很多人会难过——因为uber已经发生过：不知情的人在叠加的spv结构里被坑了，然后说“怎么回事？”读小字。你付了双重carry、10%入场费、比上一轮高10%的价格——这是灾难的配方。 jcal： 灾难的配方。mark，干得好。非常感谢。 benioff： 很高兴跟你们一起。 jcal： 我们有个粉丝问题——你pr部门写的——在这个阶段，你作为创始人做慈善和创新，更像steve jobs还是lorraine powell？你的pr部门费了很多心思。 benioff： 他们知道答案。最好的决定，最好的。当我创办salesforce时，我们把1%股权、1%利润、1%员工时间投入基金会。今天，我们做了超过1000万小时志愿服务，捐了超过10亿美元赠款，在平台上免费运行超过5万家非营利组织。每个公司都应该这样做。pledge1percent.org。我最棒的决定是27年前，不论我个人的大量慈善——5家医院。 jcal： 有个非常个人化的项目——susan wojcicki不幸因癌症去世，你曾与她关系密切。 benioff： 你要让我哭——别往那儿去。你在说我的最好的朋友。 jcal： 她是个特别的人，对吗？ benioff： 她是个明星。最好的人。不，真的。听我说，她——不，她是地球上最伟大的人之一。了不起的女人，5个孩子的母亲，有两个出色的姐妹——伟大的家庭。大家知道她的姐姐anne、她的妹妹janet在ucsf。对不起，我眼睛在流泪。她得了一种罕见的癌症，过早去世。几年前。她曾在我们董事会。她是史上最伟大的人之一。我很感激她的家人在专注建立一个新的基金会对抗这种罕见癌症。我们在支持。每个人都该试试成为一个susan。她绝对是最伟大的之一。我的办公室里有一个神龛——你来看我时，你会看到我和她的照片。我每天想着她。我的心永远和她——她丈夫dennis、所有孩子、姐妹、整个wojcicki家族在一起。精彩的人，硅谷最伟大的家族之一。我们很幸运拥有整个家族。 jcal： 她非常棒。说得好。 benioff： 安息，susan wojcicki。谢谢。孩子们，爱你们。再见。" style="--index: 11">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">11</span>
+                    <span class="timeline-meta">01:10–01:16</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>闪电轮：Anthropic取消多层SPV、结尾回顾</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>Anthropic宣布取消多层特殊目的载体（SPVs）——向牙医等个人投资者收取10%管理费的二级市场交易结构。</li>
+<li>Chamath强烈支持：认为这些SPV应该被“一枪打死”，这种结构最终会伤害不知情的投资者。</li>
+<li>Marc Benioff在结尾动情回忆已故YouTube前CEO Susan Wojcicki。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>SPV（special purpose vehicle，特殊目的载体）：一种投资工具，允许个人投资者间接持有未上市公司股份，往往叠加多层管理费用。</li>
+<li>双重carry：管理费之外的超额收益分成。</li>
+<li>退出时法律诉讼：SPV交易在二级市场（如Uber案例）经常导致原始权益人与下游投资者之间的诉讼。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> 好消息：Anthropic受够了多层SPV的乱象——这些被卖给牙医的、收10%管理费的结构。他们点名了特定平台并宣布取消这些结构。Chamath，是小风波还是长期应得的惩罚？</p>
+<p><strong>Chamath：</strong> 爱了。Mark说得对——所有这些公司应该尽早上市，获得市场估值，专注于更高层面的事情。所有这些让人可以不上市的小技巧都应该被枪毙。这些SPV最糟糕——叠加SPV的SPV的SPV。我敢保证，一旦SpaceX上市，一旦Anthropic上市，一旦OpenAI上市，你会看到一连串诉讼——SPV卖家与买家之间。不应该允许。应该取消所有SPV。你不能打破鸡蛋再复原，但必须叫它什么。我希望每家公司都这样做——让他们更早上市、更快地理顺股权结构。这是对的。</p>
+<p><strong>JCal：</strong> 直接说，Chamath：disgraciado（耻辱）。</p>
+<p><strong>Chamath：</strong> 倒不是耻辱。但SpaceX一旦上市，很多人会难过——因为Uber已经发生过：不知情的人在叠加的SPV结构里被坑了，然后说“怎么回事？”读小字。你付了双重carry、10%入场费、比上一轮高10%的价格——这是灾难的配方。</p>
+<p><strong>JCal：</strong> 灾难的配方。Mark，干得好。非常感谢。</p>
+<p><strong>Benioff：</strong> 很高兴跟你们一起。</p>
+<p><strong>JCal：</strong> 我们有个粉丝问题——你PR部门写的——在这个阶段，你作为创始人做慈善和创新，更像Steve Jobs还是Lorraine Powell？你的PR部门费了很多心思。</p>
+<p><strong>Benioff：</strong> 他们知道答案。最好的决定，最好的。当我创办Salesforce时，我们把1%股权、1%利润、1%员工时间投入基金会。今天，我们做了超过1000万小时志愿服务，捐了超过10亿美元赠款，在平台上免费运行超过5万家非营利组织。每个公司都应该这样做。pledge1percent.org。我最棒的决定是27年前，不论我个人的大量慈善——5家医院。</p>
+<p><strong>JCal：</strong> 有个非常个人化的项目——Susan Wojcicki不幸因癌症去世，你曾与她关系密切。</p>
+<p><strong>Benioff：</strong> 你要让我哭——别往那儿去。你在说我的最好的朋友。</p>
+<p><strong>JCal：</strong> 她是个特别的人，对吗？</p>
+<p><strong>Benioff：</strong> 她是个明星。最好的人。不，真的。听我说，她——不，她是地球上最伟大的人之一。了不起的女人，5个孩子的母亲，有两个出色的姐妹——伟大的家庭。大家知道她的姐姐Anne、她的妹妹Janet在UCSF。对不起，我眼睛在流泪。她得了一种罕见的癌症，过早去世。几年前。她曾在我们董事会。她是史上最伟大的人之一。我很感激她的家人在专注建立一个新的基金会对抗这种罕见癌症。我们在支持。每个人都该试试成为一个Susan。她绝对是最伟大的之一。我的办公室里有一个神龛——你来看我时，你会看到我和她的照片。我每天想着她。我的心永远和她——她丈夫Dennis、所有孩子、姐妹、整个Wojcicki家族在一起。精彩的人，硅谷最伟大的家族之一。我们很幸运拥有整个家族。</p>
+<p><strong>JCal：</strong> 她非常棒。说得好。</p>
+<p><strong>Benioff：</strong> 安息，Susan Wojcicki。谢谢。孩子们，爱你们。再见。</p></div>
+                  </div>
+                </article></div>
+            <p class="empty search-empty" data-search-empty hidden>没有匹配的时间线段落。</p>
+          </section>
+
+          <section id="speakers">
+            <div class="section-head">
+              <h2>人物观点对照</h2>
+              <p>比较嘉宾立场</p>
+            </div>
+            <div class="speaker-grid"><article class="speaker-card" style="--index: 1">
+                  <p class="speaker-kicker">嘉宾 01</p>
+                  <h3>Jason Calacanis</h3>
+                  <div><p>JCal是本期的议程主持者，推动对话的节奏感和深度。他对中美峰会的矛盾心理非常关注——美国民众希望廉价中国商品，但同时又有关税和脱钩的焦虑。他特别关心美国国内政治（中期选举）如何受中国议题影响。在AI问题上，他多次展示了实际使用经验——利用Slack数据、构建CEO视角的决策评估prompt。他认为多感官AI可能使token需求暴增1000倍。对SPV持强烈批评态度，使用了贬义的“disgraciado”一词。</p></div>
+                </article>
+<article class="speaker-card" style="--index: 2">
+                  <p class="speaker-kicker">嘉宾 02</p>
+                  <h3>Chamath Palihapitiya</h3>
+                  <div><p>Chamath在峰会上保持宏观战略视角，认为中美完全可以达成“分割世界”的交易——中国减少在美洲和中东的参与，美国减少在亚洲部分区域的存在，并在稀土、能源等资源上交换。他认为中期选举更多受选区划分和政治资金影响，而非峰会直接结果。对SaaS行业持分化观点：低端已死，高端（Salesforce层级）因客户信任及深度集成而安全。他坚决支持出售芯片给中国，认为应让NVIDIA赢而非华为。极端反对SPV，视其为灾难配方。预测18个月内台湾问题将不再重要。</p></div>
+                </article>
+<article class="speaker-card" style="--index: 3">
+                  <p class="speaker-kicker">嘉宾 03</p>
+                  <h3>David Sacks</h3>
+                  <div><p>本期缺场，无观点。</p></div>
+                </article>
+<article class="speaker-card" style="--index: 4">
+                  <p class="speaker-kicker">嘉宾 04</p>
+                  <h3>David Friedberg</h3>
+                  <div><p>Friedberg是长期宏观与气候专家。他认为在中美历史上最富裕的生产力增长时代，有机会避免修昔底德陷阱——双方共同做大蛋糕而非争夺存量。他极其注重技术扩散的和平价值，反对封锁技术。他发出超级厄尔尼诺的严酷警告：1100万太瓦时额外海洋能量将在几个月内释放，可能重创南美、澳大利亚、印度粮食产出，引发全球性粮食危机和南亚动荡。他认为这是值得大宗商品市场积极交易的事件，其严重程度是历史未见的。</p></div>
+                </article>
+<article class="speaker-card" style="--index: 5">
+                  <p class="speaker-kicker">嘉宾 05</p>
+                  <h3>Marc Benioff</h3>
+                  <div><p>Benioff作为本期嘉宾，体现了资深企业软件CEO的冷静与韧劲。他面对市场对SaaS的AI恐惧，淡定称之为“SaaS-pocalypse”并强调“不是第一次”，用大额回购、并购（Informatica）以及聚焦自由现金流来应对。他指出客户信任、数据集成和产品深度是Salesforce的护城河。在AI应用上大手笔投入（3亿美元用Anthropic），同时敏锐地指出当前token使用效率极低，需要智能路由层。他断言“多感官模型”才是朝着AGI的下一次浪潮。在台湾问题上，他认为是“无谓话题”，相信中国和台湾会和解。结尾对Susan Wojcicki的真情流露展现了柔软一面。</p></div>
+                </article></div>
+          </section>
+
+          <section id="quotes">
+            <div class="section-head">
+              <h2>值得引用的原话</h2>
+              <p>保留关键表达</p>
+            </div>
+            <div class="panel"><h4>“This is not my first SaaS-pocalypse.”</h4>
+<p>“这不是我的第一次SaaS-pocalypse。” ——Marc Benioff用自创词表明自己在AI恐惧引发的市场抛售中保持镇定，以过来人的姿态应对循环性危机。</p>
+<h4>“The simplest and surest path to a no-conflict detente with China is economic entanglement.”</h4>
+<p>“与中国实现无冲突缓和的最简单最可靠的路径是经济纠缠。” ——Chamath引用一位民主党高层朋友的评论，强调经济相互依存比政治对抗更有效。</p>
+<h4>“Let technology diffuse and proliferate, everyone benefits and conflict indices go down.”</h4>
+<p>“让技术扩散和普及，每个人都受益，冲突概率就会下降。” ——Friedberg主张美国应出售最新芯片给中国，不封锁技术，以此降低全球冲突风险。</p>
+<h4>“The high-end market where the large monoliths operate is quite safe.”</h4>
+<p>“大型企业所在的高端市场是相当安全的。” ——Chamath指出SaaS价值转移中，Salesforce、ServiceNow等深度嵌入核心业务的公司反而受益于AI带来的强化，低端则进入末日。</p>
+<h4>“We should just sell whatever we can at this point.”</h4>
+<p>“在这一点上，我们应该卖所有我们能卖的东西。” ——Benioff对中国芯片出口问题上迅速明确立场，认为中方的追赶已使出口限制失去战略价值。</p>
+<h4>“The future is going to be local models running on extraordinary desktop hardware.”</h4>
+<p>“未来将是运行在超强桌面硬件上的本地模型。” ——Chamath押注Apple路线，认为隐私和离线能力将成为差异优势。</p>
+<h4>“The ocean has stored about 11 million terawatt-hours of extra energy. That’s 500 years worth of human energy.”</h4>
+<p>“海洋已经存储了大约1100万太瓦时的额外能量——相当于500年的人类能源消耗。” ——Friedberg警告海洋热量积累幅度令人震惊，未来一年可能触发全球粮食与能源危机。</p>
+<h4>“He knew the answer was to ask himself: What do I really want right now?”</h4>
+<p>“他知道了答案：问自己‘我现在真正想要什么？’” ——Benioff引用Tony Robbins的核心提问法，解释个人清晰度带来的变革力量。</p></div>
+          </section>
+        </div>
+      </div>
+    </main>
+  </div>
+  <script>
+    const progress = document.querySelector("[data-progress]");
+    const searchBox = document.querySelector("[data-search-box]");
+    const topButton = document.querySelector("[data-scroll-top]");
+    const cards = Array.from(document.querySelectorAll("[data-timeline-card]"));
+    const searchEmpty = document.querySelector("[data-search-empty]");
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    function updateProgress() {
+      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      const ratio = scrollable > 0 ? window.scrollY / scrollable : 0;
+      if (progress) {
+        progress.style.width = `${Math.max(0, Math.min(1, ratio)) * 100}%`;
+      }
+    }
+
+    function applySearch() {
+      const query = searchBox.value.trim().toLowerCase();
+      let visibleCount = 0;
+      cards.forEach((card) => {
+        const text = card.getAttribute("data-search") || "";
+        const isVisible = !query || text.includes(query);
+        card.hidden = !isVisible;
+        if (isVisible) {
+          visibleCount += 1;
+        }
+      });
+      if (searchEmpty) {
+        searchEmpty.hidden = !query || visibleCount > 0;
+      }
+    }
+
+    window.addEventListener("scroll", updateProgress, { passive: true });
+    window.addEventListener("resize", updateProgress);
+    if (searchBox) {
+      searchBox.addEventListener("input", applySearch);
+    }
+    if (topButton) {
+      topButton.addEventListener("click", () => {
+        window.scrollTo({
+          top: 0,
+          behavior: prefersReducedMotion.matches ? "auto" : "smooth"
+        });
+      });
+    }
+    updateProgress();
+  </script>
+</body>
+</html>
