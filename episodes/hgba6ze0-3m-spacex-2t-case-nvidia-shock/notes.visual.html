@@ -1,0 +1,937 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI的加速与恐惧：Karpathy加入Anthropic、SpaceX IPO与市场动荡 - 中文播客可视化笔记</title>
+  <style>
+    :root {
+      --bg: oklch(0.974 0.006 238);
+      --paper: oklch(0.991 0.003 238);
+      --paper-soft: oklch(0.955 0.007 238);
+      --ink: oklch(0.205 0.018 246);
+      --muted: oklch(0.49 0.018 246);
+      --faint: oklch(0.63 0.014 246);
+      --line: oklch(0.875 0.009 238);
+      --line-strong: oklch(0.74 0.014 238);
+      --accent: oklch(0.43 0.064 164);
+      --accent-soft: oklch(0.94 0.024 164);
+      --accent-wash: oklch(0.973 0.012 164);
+      --quote: oklch(0.965 0.010 92);
+      --shadow: 0 24px 54px color-mix(in oklch, var(--ink) 8%, transparent);
+      --radius: 8px;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-width: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(90deg, color-mix(in oklch, var(--line) 28%, transparent) 1px, transparent 1px) 0 0 / 92px 92px,
+        var(--bg);
+      font-family: "Geist", "Satoshi", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      line-height: 1.78;
+      text-rendering: optimizeLegibility;
+    }
+    ::selection { background: var(--accent-soft); color: var(--ink); }
+    a {
+      color: var(--accent);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+      transition: color .22s var(--ease), background-color .22s var(--ease), border-color .22s var(--ease), transform .22s var(--ease);
+    }
+    [hidden] { display: none !important; }
+    .progress {
+      position: fixed;
+      z-index: 4;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: var(--accent);
+    }
+    .quick-actions {
+      position: fixed;
+      right: max(18px, calc((100vw - 1200px) / 2));
+      bottom: 24px;
+      z-index: 3;
+      display: grid;
+      gap: 7px;
+    }
+    .quick-action {
+      display: inline-grid;
+      grid-template-columns: 16px auto;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      min-width: 74px;
+      min-height: 40px;
+      padding: 8px 12px;
+      border: 1px solid var(--line-strong);
+      border-radius: var(--radius);
+      background: color-mix(in oklch, var(--paper) 92%, transparent);
+      box-shadow: 0 12px 28px color-mix(in oklch, var(--ink) 7%, transparent);
+      color: var(--ink);
+      font: inherit;
+      font-size: 13px;
+      font-weight: 720;
+      line-height: 1.2;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .quick-action:hover, .quick-action:focus-visible {
+      outline: none;
+      border-color: var(--accent);
+      background: var(--accent-wash);
+      color: var(--accent);
+      transform: translate3d(0, -1px, 0);
+    }
+    .quick-action:active { transform: translate3d(0, 1px, 0) scale(.99); }
+    .page {
+      width: min(1760px, calc(100% - 56px));
+      margin: 0 auto;
+      padding: 0 0 104px;
+    }
+    .article { min-width: 0; }
+    .hero {
+      max-width: none;
+      margin-left: min(7vw, 140px);
+      padding: 72px 0 58px;
+    }
+    .eyebrow {
+      margin: 0 0 18px;
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    h1 {
+      max-width: none;
+      margin: 0 0 28px;
+      font-size: clamp(38px, 3vw, 52px);
+      font-weight: 760;
+      line-height: 1.08;
+      letter-spacing: 0;
+      text-wrap: balance;
+    }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 18px;
+      max-width: 72ch;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .meta a { font-weight: 650; }
+    .meta-strip {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+      max-width: 720px;
+      margin: 34px 0 28px;
+      border-top: 1px solid var(--line-strong);
+      padding-top: 16px;
+    }
+    .meta-pill {
+      display: grid;
+      gap: 2px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.35;
+    }
+    .meta-pill b {
+      color: var(--ink);
+      font-family: var(--mono);
+      font-size: 18px;
+      font-weight: 680;
+      line-height: 1;
+    }
+    .summary {
+      width: 100%;
+      max-width: 760px;
+      padding: 24px 26px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: color-mix(in oklch, var(--paper) 88%, var(--accent-soft));
+      box-shadow: var(--shadow);
+    }
+    .summary p {
+      margin: 0;
+      font-size: 19px;
+      line-height: 1.72;
+    }
+    h1, .summary, .takeaway p, .timeline-card h3, .section-content, .speaker-card, .panel {
+      overflow-wrap: anywhere;
+    }
+    .content-shell {
+      display: grid;
+      grid-template-columns: minmax(170px, 212px) minmax(0, 820px);
+      gap: clamp(36px, 7vw, 88px);
+      align-items: start;
+      border-top: 1px solid var(--line);
+      padding-top: 40px;
+    }
+    .sidebar {
+      position: sticky;
+      top: 28px;
+      align-self: start;
+      padding-top: 4px;
+    }
+    .toc {
+      border-top: 1px solid var(--ink);
+      padding-top: 16px;
+    }
+    .toc-title {
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .nav-links { display: grid; gap: 2px; }
+    .nav-links a {
+      display: block;
+      padding: 8px 0;
+      border-bottom: 1px solid color-mix(in oklch, var(--line) 72%, transparent);
+      color: var(--ink);
+      font-size: 14px;
+      line-height: 1.35;
+      text-decoration: none;
+    }
+    .nav-links a:hover, .nav-links a:focus-visible {
+      outline: none;
+      color: var(--accent);
+      transform: translate3d(2px, 0, 0);
+    }
+    .search {
+      display: grid;
+      gap: 8px;
+      margin-top: 22px;
+    }
+    .search span {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 720;
+    }
+    .search input {
+      width: 100%;
+      min-height: 40px;
+      padding: 8px 10px;
+      border: 1px solid var(--line-strong);
+      border-radius: var(--radius);
+      background: var(--paper);
+      color: var(--ink);
+      font: inherit;
+      font-size: 14px;
+      outline: none;
+      transition: border-color .22s var(--ease), box-shadow .22s var(--ease), transform .22s var(--ease);
+    }
+    .search input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px color-mix(in oklch, var(--accent) 14%, transparent);
+    }
+    .content-flow { min-width: 0; }
+    section { margin: 0 0 78px; }
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 18px;
+      align-items: end;
+      margin-bottom: 22px;
+      border-top: 1px solid var(--ink);
+      padding-top: 18px;
+    }
+    .section-head h2 {
+      margin: 0;
+      font-size: 28px;
+      font-weight: 740;
+      line-height: 1.16;
+      letter-spacing: 0;
+    }
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.4;
+      text-align: right;
+    }
+    .takeaway-list {
+      display: grid;
+      gap: 0;
+      margin: 0;
+      padding: 0;
+      border-top: 1px solid var(--line);
+      list-style: none;
+    }
+    .takeaway {
+      display: grid;
+      grid-template-columns: 52px minmax(0, 1fr);
+      gap: 18px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .takeaway span {
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 15px;
+      font-weight: 720;
+      line-height: 1.65;
+    }
+    .takeaway p {
+      margin: 0;
+      max-width: 70ch;
+      font-size: 16px;
+      line-height: 1.72;
+    }
+    .timeline {
+      display: grid;
+      gap: 0;
+      border-top: 1px solid var(--line-strong);
+    }
+    .timeline-card {
+      display: grid;
+      grid-template-columns: 132px minmax(0, 1fr);
+      gap: 32px;
+      padding: 34px 0 40px;
+      border-bottom: 1px solid var(--line);
+    }
+    .timeline-heading {
+      position: sticky;
+      top: 30px;
+      align-self: start;
+      display: grid;
+      gap: 10px;
+      padding-top: 2px;
+    }
+    .timeline-index {
+      color: var(--faint);
+      font-family: var(--mono);
+      font-size: 13px;
+      font-weight: 720;
+      line-height: 1;
+    }
+    .timeline-meta {
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 720;
+      line-height: 1.45;
+    }
+    .timeline-card h3 {
+      max-width: 24ch;
+      margin: 0 0 18px;
+      font-size: 27px;
+      font-weight: 730;
+      line-height: 1.22;
+      letter-spacing: 0;
+    }
+    .section-content {
+      color: color-mix(in oklch, var(--ink) 88%, var(--muted));
+      font-size: 16px;
+    }
+    .section-content p {
+      max-width: 72ch;
+      margin: 0 0 1.05em;
+    }
+    .section-content p strong:first-child {
+      color: var(--ink);
+      font-weight: 760;
+    }
+    .section-content h4 {
+      margin: 26px 0 10px;
+      color: var(--accent);
+      font-size: 14px;
+      font-weight: 760;
+      line-height: 1.35;
+    }
+    .section-content ul, .section-content ol, .panel ul, .panel ol, .speaker-card ul, .speaker-card ol {
+      margin: .75em 0 1em;
+      padding-left: 1.25em;
+    }
+    .section-content li, .panel li, .speaker-card li { margin: 6px 0; }
+    .speaker-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, .88fr);
+      gap: 26px 42px;
+      border-top: 1px solid var(--line);
+    }
+    .speaker-card {
+      padding: 22px 0 24px;
+      border-bottom: 1px solid var(--line);
+    }
+    .speaker-card:nth-child(even) { margin-top: 22px; }
+    .speaker-kicker {
+      margin: 0 0 8px;
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 720;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .speaker-card h3 {
+      margin: 0 0 12px;
+      font-size: 20px;
+      font-weight: 730;
+      line-height: 1.25;
+    }
+    .speaker-card p, .panel p {
+      max-width: 68ch;
+      margin-top: 0;
+    }
+    .panel {
+      border-top: 1px solid var(--line);
+      padding-top: 8px;
+    }
+    blockquote {
+      margin: 18px 0;
+      padding: 16px 18px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--quote);
+    }
+    code {
+      padding: 2px 5px;
+      border-radius: 5px;
+      background: color-mix(in oklch, var(--accent) 10%, var(--paper));
+      color: var(--ink);
+      font-family: var(--mono);
+      font-size: .92em;
+    }
+    hr {
+      height: 1px;
+      margin: 26px 0;
+      border: 0;
+      background: var(--line);
+    }
+    .empty {
+      margin: 0;
+      padding: 16px 18px;
+      border: 1px dashed var(--line-strong);
+      border-radius: var(--radius);
+      color: var(--muted);
+      background: color-mix(in oklch, var(--paper-soft) 70%, transparent);
+    }
+    .search-empty { margin-top: 16px; }
+    .muted { color: var(--muted); }
+    @keyframes rise-in {
+      from { opacity: 1; transform: translate3d(0, 6px, 0); }
+      to { opacity: 1; transform: translate3d(0, 0, 0); }
+    }
+    .hero > *, .takeaway, .timeline-card, .speaker-card, .panel {
+      animation: rise-in .55s var(--ease) both;
+    }
+    .hero > *:nth-child(2) { animation-delay: .04s; }
+    .hero > *:nth-child(3) { animation-delay: .08s; }
+    .hero > *:nth-child(4) { animation-delay: .12s; }
+    .hero > *:nth-child(5) { animation-delay: .16s; }
+    .takeaway, .timeline-card, .speaker-card {
+      animation-delay: calc(var(--index, 1) * 38ms);
+    }
+    @media (max-width: 1120px) {
+      .hero { margin-left: 0; }
+      .content-shell {
+        grid-template-columns: minmax(154px, 190px) minmax(0, 1fr);
+        gap: 36px;
+      }
+      h1 { font-size: 44px; }
+    }
+    @media (min-width: 1500px) {
+      h1 {
+        width: max-content;
+        max-width: 100%;
+        white-space: nowrap;
+        font-size: clamp(36px, 2.05vw, 42px);
+      }
+    }
+    @media (max-width: 780px) {
+      body { background: var(--bg); }
+      .page { width: min(1180px, calc(100% - 28px)); padding-bottom: 86px; }
+      .hero { padding: 46px 0 36px; }
+      .eyebrow { margin-bottom: 14px; }
+      h1 {
+        max-width: none;
+        font-size: 30px;
+        line-height: 1.14;
+        word-break: normal;
+      }
+      .summary, .summary p, .takeaway p, .section-content, .speaker-card, .panel {
+        max-width: 100%;
+        word-break: break-word;
+      }
+      .meta-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 20px; }
+      .summary { padding: 20px; }
+      .summary p { font-size: 17px; }
+      .content-shell { display: block; padding-top: 28px; }
+      .sidebar { position: static; padding-top: 0; margin-bottom: 42px; }
+      .toc { border-top-color: var(--line-strong); }
+      .nav-links { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 18px; }
+      section { margin-bottom: 58px; }
+      .section-head { display: block; margin-bottom: 16px; }
+      .section-head h2 { font-size: 24px; }
+      .section-head p { margin-top: 6px; text-align: left; }
+      .takeaway { grid-template-columns: 42px minmax(0, 1fr); gap: 12px; }
+      .timeline-card { display: block; padding: 28px 0 32px; }
+      .timeline-heading { position: static; display: flex; align-items: baseline; gap: 12px; margin-bottom: 12px; }
+      .timeline-card h3 { max-width: none; font-size: 23px; }
+      .speaker-grid { display: block; }
+      .speaker-card:nth-child(even) { margin-top: 0; }
+      .quick-actions {
+        right: 12px;
+        bottom: 12px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 6px;
+      }
+      .quick-action {
+        min-width: 66px;
+        min-height: 38px;
+        padding: 7px 9px;
+        font-size: 13px;
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: 1ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 1ms !important;
+      }
+      .speaker-card:nth-child(even) { margin-top: 0; }
+    }
+    @media print {
+      body { background: var(--paper); }
+      .sidebar, .progress, .quick-actions { display: none; }
+      .page { display: block; width: auto; padding-bottom: 0; }
+      .hero { margin-left: 0; padding: 0 0 28px; }
+      .content-shell { display: block; border-top: 0; padding-top: 0; }
+      .summary { box-shadow: none; }
+      .timeline-card, .speaker-card { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <div class="progress" data-progress></div>
+  <div class="quick-actions" aria-label="快捷操作">
+    <a class="quick-action" href="../../index.html" aria-label="返回首页">
+      <span aria-hidden="true">←</span>
+      <span>首页</span>
+    </a>
+    <button class="quick-action" type="button" data-scroll-top aria-label="回到顶部">
+      <span aria-hidden="true">↑</span>
+      <span>顶部</span>
+    </button>
+  </div>
+  <div class="page">
+    <main class="article">
+      <header class="hero">
+        <p class="eyebrow">All-In Podcast 中文精读</p>
+        <h1>AI的加速与恐惧：Karpathy加入Anthropic、SpaceX IPO与市场动荡</h1>
+        <div class="meta">
+          <span>生成时间：2026-05-25 15:23</span>
+          <span>来源：<a href="https://www.youtube.com/watch?v=HGbA6ze0_3M" target="_blank" rel="noopener">YouTube</a></span>
+        </div>
+        <div class="meta-strip"><span class="meta-pill"><b>28 分钟</b>阅读时长</span>
+<span class="meta-pill"><b>10</b>核心要点</span>
+<span class="meta-pill"><b>6</b>时间线</span>
+<span class="meta-pill"><b>5</b>人物</span></div>
+        <div class="summary" aria-label="一句话摘要"><p>本期深入讨论了Andrej Karpathy加入Anthropic推进递归自我改进、SpaceX IPO的万亿估值逻辑、AI行业面临的公关危机与公众恐惧，以及NVIDIA财报背后的技术竞争与宏观市场的通胀预警。</p></div>
+      </header>
+
+      <div class="content-shell">
+        <aside class="sidebar">
+          <nav class="toc" aria-label="页面导航">
+            <p class="toc-title">阅读导航</p>
+            <div class="nav-links">
+              <a href="#takeaways">核心要点</a>
+              <a href="#timeline">分段整理</a>
+              <a href="#speakers">人物观点</a>
+              <a href="#quotes">双语引语</a>
+            </div>
+            <label class="search">
+              <span>搜索时间线</span>
+              <input data-search-box type="search" placeholder="关键词" aria-label="搜索时间线">
+            </label>
+          </nav>
+        </aside>
+
+        <div class="content-flow">
+          <section id="takeaways">
+            <div class="section-head">
+              <h2>核心要点</h2>
+              <p>快速扫读本集主线</p>
+            </div>
+            <ol class="takeaway-list"><li class="takeaway" style="--index: 1"><span>01</span><p>Andrej Karpathy加入Anthropic负责递归自我改进，这可能推动AI能力每年提升一个数量级。</p></li>
+<li class="takeaway" style="--index: 2"><span>02</span><p>Anthropic最近实现EBIT正向，这对整个AI投资叙事是关键转折点。</p></li>
+<li class="takeaway" style="--index: 3"><span>03</span><p>AI行业存在严重的公关危机——CEO们的大规模裁员言论加剧了公众恐惧。</p></li>
+<li class="takeaway" style="--index: 4"><span>04</span><p>Chamath认为美国和中国需要在AI安全（KYC）上达成共识，而不是单方面监管。</p></li>
+<li class="takeaway" style="--index: 5"><span>05</span><p>SpaceX的S-1文件显示，Elon Web Services（对外租算力）已成为与Starlink并驾齐驱的重要收入来源。</p></li>
+<li class="takeaway" style="--index: 6"><span>06</span><p>Cursor的Composer 2.5模型仅用3周RL训练即成为Pareto领先模型，证明数据与算力结合的巨大潜力。</p></li>
+<li class="takeaway" style="--index: 7"><span>07</span><p>NVIDIA本季度营收816亿美元，同比增长85%，但股价仅微涨，令Jensen Huang感到沮丧。</p></li>
+<li class="takeaway" style="--index: 8"><span>08</span><p>Gavin Baker指出AI芯片公司的估值严重分化：高塔台公司的PE远低于内存和电力基础设施公司。</p></li>
+<li class="takeaway" style="--index: 9"><span>09</span><p>Friedberg发出宏观预警，认为全球债务与GDP之比已达310%，长期可能出现信用危机。</p></li>
+<li class="takeaway" style="--index: 10"><span>10</span><p>霍尔木兹海峡局势对美国相对有利，因为美国是能源自给国，而亚洲和欧洲受到严重冲击。</p></li></ol>
+          </section>
+
+          <section id="timeline">
+            <div class="section-head">
+              <h2>分段详细整理</h2>
+              <p>按时间线阅读上下文</p>
+            </div>
+            <div class="timeline" data-timeline><article class="timeline-card" data-timeline-card data-search="00:00:00–00:09:06 andrej karpathy加入anthropic与递归自我改进 本段核心内容： karpathy的背景与加入anthropic的意义 递归自我改进（recursive self-improvement）是ai的关键前沿 anthropic的盈利表现及其对整个ai叙事的影响 模型小型化与重新架构的前景 背景解释与关键术语： andrej karpathy：前openai创始成员、特斯拉自动驾驶负责人，2025年加入anthropic，负责预训练团队，专注于递归自我改进。 anthropic：由dario amodei创立的大语言模型公司，以claude系列闻名，最近在华尔街日报报道中实现ebit正向。 ebit：息税前利润（earnings before interest and taxes），衡量经营盈利能力。 递归自我改进：模型在训练过程中对自身训练过程产生反馈或参与，使模型能自主提升能力。 small language model（slm）：小型语言模型，参数量远小于大模型，但针对特定任务效率更高。 详细中文整理： jcal： 这周科技圈发生了很多大事，我们从andrej karpathy加入anthropic聊起。karpathy只有39岁，但在业界已经是个传奇人物。他还将在liquidity做主题演讲。 chamath： 他在第二天做主题演讲。gavin（baker）也会在第二天发言，他是anthropic的创始成员之一。 jcal： 看看这两个重磅人物，karpathy和gavin baker。liquidity真是什么明星都能请到。karpathy是openai的创始成员，曾领导特斯拉的自动驾驶团队。他还创造了“vibe coding”这个词，最近又做了一个叫autoresearch的开源训练工具，帮助ai模型通过运行5分钟的实验来自我改进，这个工具在github上获得了超过82,000颗星。他用一个周末就做出来了，然后普通人开始用它构建自己的递归式大语言模型，这真的很令人振奋。所以他加入anthropic负责新的预训练团队，重点显然是递归自我改进——让claude自我改进。 chamath： 有趣的是，回想谷歌的文化，他们做得对的一件事就是把那些独一无二的技术天才单独拎出来，叫他们google fellows。amit singhal、sridhar ramaswamy、jeff dean，这些都是明星。karpathy的特点是，每一次ai的浪潮，他都站在浪头。他可能是第一个真正将richard sutton的《苦涩的教训》那篇文章商业化的人，当时他在特斯拉领导fsd，核心就是暴力计算。我记得他给我讲过一个故事——我不确定他是否公开说过——他在特斯拉的时候花了大概四分之一的时间手动标注数据。你想想，2016、2017年，手动标注特斯拉的驾驶视频数据。然后他又当了openai的联合创始人。他真的是个天才，而且充满好奇心。之后他做自由人，成就也非常惊人。所以我认为这次加入非常重要。像他这样好奇心旺盛的人，只要把他定向派出去，他就会去发明新东西。递归自我学习这个概念，等于给模型同时加装了“超频模式”和“自动驾驶模式”。把这两者结合起来，你就可能实现每年提升一个数量级的改进——这是一种新的摩尔定律。模型质量将像这样直线飙升。 jcal： 扔一堆算力给问题，这些东西就能学得非常快，这就是要点。gavin，你对anthropic最近的成功和他们的大规模招聘怎么看？ gavin： 成功是非凡的，无可否认。据华尔街日报报道，他们最近一个季度实现了ebit正向，这整个ai叙事来说是一个非常关键的事实。因为现在你可以谈融资循环、roi，也可以去看超大容量的roic。但如果openai和anthropic已经达到大约1000亿arr，推理部分有80%左右的毛利率，那回报是实实在在的。再加上它们还在快速增长，再加上gemini、cursor、xai、开源等等，到今年年底，在整个大语言模型领域看到2000、3000、4000亿arr并不难。 jcal： 你指的是私人语言模型公司，不包括谷歌对吧？ gavin： 我包括了谷歌，但排除了那些用于facebook、google、amazon的推荐系统、广告定向、广告测算的gpu投入带来的回报。我只聚焦在大语言模型上——最严格的定义。这样看，今年回报会很强劲，即使排除那些仍然是gpu和ai基础设施最重要的、最盈利的经济应用场景。至于karpathy做的递归自我改进，我觉得非常重要，解锁这种能力和持续学习，可能是ai最后的两个前沿领域。递归自我改进，即模型在训练过程中，在正向传播时有输入到自己的训练中，或者另一个模型有输入到训练中。这非常强大。chamath说的每年10倍的改进，如果这个实现，可能还是保守的。而持续学习则是圣杯，模型像人类一样从经验中学习。这两者结合起来，可能真的会把未来拉近相当多。 chamath： 我们现在的情况是，anthropic比其他所有人有优势，可能是3个月或6个月，比开源领先6到12个月，比同行领先3到9个月。你把karpathy放进去，他做递归。到了某个点，ai改进语言模型的贡献会超过人类在循环中的贡献。当然人类仍在编排，friedberg，但你觉得什么时候会跨过这个“递归峡谷”，ai做构建语言模型的工作比人类多？ friedberg： 我不确定什么时候能把整个模型放进一个上下文窗口让它自己训练、构建新模型的想法会实现。但我认为有很多不同的架构路径可以探索。其中之一是，你可以做更小的模型，然后创建这些小模型的网络，它们协同工作，最终从模型聚合中产生每个token的能耗或成本比单个大型模型更低。我已经说了三四次了，在重新架构模型以及模型如何协同解决问题上，还有大量工作和机会。我猜karpathy能够引导这些路径的探索。只需要一个小突破，你的token成本就能减半。这是一个巨大的效率提升，似乎已经在眼前了，因为一些早期论文表明这里还有很大空间。 jcal： 这些非常小的模型、垂直化的模型就是未来。我们有一家公司abacus就在为企业做这个，做得很棒。每个人都有兴趣做这个。你们看到吗，大概两周前，谷歌在chrome浏览器里悄悄加入了gemini nano模型，4gb大小，放在你的电脑上，用来做校对、拼写、自动完成这些。他们没告诉任何人就这么做了。 chamath： 等等，“悄悄”这个词很重，别用这个词。 jcal： 没告诉人们，没有事先通知。 chamath： 我们可以换个方式说。我们现在处于一个阶段，喘不过气来谈论每一个模型的改进是在浪费时间，没有投资回报。我们走在加速学习的路上，会看到以前不可能实现的最终用户成就。比如，我们（openai）解决了一个悬而未决几十年的数学难题，是通过人类的帮助。另一个例子，有一些药物候选物即将进入临床试验，它们是躺在架子上的ind（研究性新药申请），人们根本不认为它们可行。现在我们到了这些东西走向前台的时候，它们对人们有用，越来越有价值。我们应该关注最终用户的使用案例，因为如果继续像现在这样表达，恰恰是问题的一部分——这开始制造鬼怪。这就是为什么那么多人在听到ai时把它当做一个贬义词。我们必须展示另一面，至少让人们看到数据。我不认为谷歌在做见不得人的事，他们不是那种公司。有些其他公司可能是，但谷歌不是。我认为他们这么做是因为对用户有用。我们应该关注用户效用，因为这是一个值得讲述的故事。我们四个人可以负责任地、平衡地讲好两方面的故事，因为如果变成卢德分子，回到过去，没有人会赢。如果我们说话不小心，那就会发生。 jcal： 当然我不是卢德分子，但确实有很多人报告说看到模型这么大规模在后台运行很惊讶，引发了隐私层面的讨论。我也同意谷歌不是坏主角，可能更多是做事太快而不是恶意。 chamath： 再加两点。一种是已经请好律师了，谷歌绝对是请了很多律师的。第二，我认为每个从事技术行业的美国人都有责任成为ai乐观、积极可能性的倡导者。因为现在开始让人觉得，可能有人在搞一场针对美国ai和数据中心的有组织宣传。这对中国来说很合理，但对美国不好。我认为我们有责任。" style="--index: 1">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">01</span>
+                    <span class="timeline-meta">00:00:00–00:09:06</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>Andrej Karpathy加入Anthropic与递归自我改进</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>Karpathy的背景与加入Anthropic的意义</li>
+<li>递归自我改进（recursive self-improvement）是AI的关键前沿</li>
+<li>Anthropic的盈利表现及其对整个AI叙事的影响</li>
+<li>模型小型化与重新架构的前景</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>Andrej Karpathy：前OpenAI创始成员、特斯拉自动驾驶负责人，2025年加入Anthropic，负责预训练团队，专注于递归自我改进。</li>
+<li>Anthropic：由Dario Amodei创立的大语言模型公司，以Claude系列闻名，最近在华尔街日报报道中实现EBIT正向。</li>
+<li>EBIT：息税前利润（Earnings Before Interest and Taxes），衡量经营盈利能力。</li>
+<li>递归自我改进：模型在训练过程中对自身训练过程产生反馈或参与，使模型能自主提升能力。</li>
+<li>Small Language Model（SLM）：小型语言模型，参数量远小于大模型，但针对特定任务效率更高。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> 这周科技圈发生了很多大事，我们从Andrej Karpathy加入Anthropic聊起。Karpathy只有39岁，但在业界已经是个传奇人物。他还将在Liquidity做主题演讲。</p>
+<p><strong>Chamath：</strong> 他在第二天做主题演讲。Gavin（Baker）也会在第二天发言，他是Anthropic的创始成员之一。</p>
+<p><strong>JCal：</strong> 看看这两个重磅人物，Karpathy和Gavin Baker。Liquidity真是什么明星都能请到。Karpathy是OpenAI的创始成员，曾领导特斯拉的自动驾驶团队。他还创造了“vibe coding”这个词，最近又做了一个叫AutoResearch的开源训练工具，帮助AI模型通过运行5分钟的实验来自我改进，这个工具在GitHub上获得了超过82,000颗星。他用一个周末就做出来了，然后普通人开始用它构建自己的递归式大语言模型，这真的很令人振奋。所以他加入Anthropic负责新的预训练团队，重点显然是递归自我改进——让Claude自我改进。</p>
+<p><strong>Chamath：</strong> 有趣的是，回想谷歌的文化，他们做得对的一件事就是把那些独一无二的技术天才单独拎出来，叫他们Google Fellows。Amit Singhal、Sridhar Ramaswamy、Jeff Dean，这些都是明星。Karpathy的特点是，每一次AI的浪潮，他都站在浪头。他可能是第一个真正将Richard Sutton的《苦涩的教训》那篇文章商业化的人，当时他在特斯拉领导FSD，核心就是暴力计算。我记得他给我讲过一个故事——我不确定他是否公开说过——他在特斯拉的时候花了大概四分之一的时间手动标注数据。你想想，2016、2017年，手动标注特斯拉的驾驶视频数据。然后他又当了OpenAI的联合创始人。他真的是个天才，而且充满好奇心。之后他做自由人，成就也非常惊人。所以我认为这次加入非常重要。像他这样好奇心旺盛的人，只要把他定向派出去，他就会去发明新东西。递归自我学习这个概念，等于给模型同时加装了“超频模式”和“自动驾驶模式”。把这两者结合起来，你就可能实现每年提升一个数量级的改进——这是一种新的摩尔定律。模型质量将像这样直线飙升。</p>
+<p><strong>JCal：</strong> 扔一堆算力给问题，这些东西就能学得非常快，这就是要点。Gavin，你对Anthropic最近的成功和他们的大规模招聘怎么看？</p>
+<p><strong>Gavin：</strong> 成功是非凡的，无可否认。据华尔街日报报道，他们最近一个季度实现了EBIT正向，这整个AI叙事来说是一个非常关键的事实。因为现在你可以谈融资循环、ROI，也可以去看超大容量的ROIC。但如果OpenAI和Anthropic已经达到大约1000亿ARR，推理部分有80%左右的毛利率，那回报是实实在在的。再加上它们还在快速增长，再加上Gemini、Cursor、xAI、开源等等，到今年年底，在整个大语言模型领域看到2000、3000、4000亿ARR并不难。</p>
+<p><strong>JCal：</strong> 你指的是私人语言模型公司，不包括谷歌对吧？</p>
+<p><strong>Gavin：</strong> 我包括了谷歌，但排除了那些用于Facebook、Google、Amazon的推荐系统、广告定向、广告测算的GPU投入带来的回报。我只聚焦在大语言模型上——最严格的定义。这样看，今年回报会很强劲，即使排除那些仍然是GPU和AI基础设施最重要的、最盈利的经济应用场景。至于Karpathy做的递归自我改进，我觉得非常重要，解锁这种能力和持续学习，可能是AI最后的两个前沿领域。递归自我改进，即模型在训练过程中，在正向传播时有输入到自己的训练中，或者另一个模型有输入到训练中。这非常强大。Chamath说的每年10倍的改进，如果这个实现，可能还是保守的。而持续学习则是圣杯，模型像人类一样从经验中学习。这两者结合起来，可能真的会把未来拉近相当多。</p>
+<p><strong>Chamath：</strong> 我们现在的情况是，Anthropic比其他所有人有优势，可能是3个月或6个月，比开源领先6到12个月，比同行领先3到9个月。你把Karpathy放进去，他做递归。到了某个点，AI改进语言模型的贡献会超过人类在循环中的贡献。当然人类仍在编排，Friedberg，但你觉得什么时候会跨过这个“递归峡谷”，AI做构建语言模型的工作比人类多？</p>
+<p><strong>Friedberg：</strong> 我不确定什么时候能把整个模型放进一个上下文窗口让它自己训练、构建新模型的想法会实现。但我认为有很多不同的架构路径可以探索。其中之一是，你可以做更小的模型，然后创建这些小模型的网络，它们协同工作，最终从模型聚合中产生每个token的能耗或成本比单个大型模型更低。我已经说了三四次了，在重新架构模型以及模型如何协同解决问题上，还有大量工作和机会。我猜Karpathy能够引导这些路径的探索。只需要一个小突破，你的token成本就能减半。这是一个巨大的效率提升，似乎已经在眼前了，因为一些早期论文表明这里还有很大空间。</p>
+<p><strong>JCal：</strong> 这些非常小的模型、垂直化的模型就是未来。我们有一家公司Abacus就在为企业做这个，做得很棒。每个人都有兴趣做这个。你们看到吗，大概两周前，谷歌在Chrome浏览器里悄悄加入了Gemini Nano模型，4GB大小，放在你的电脑上，用来做校对、拼写、自动完成这些。他们没告诉任何人就这么做了。</p>
+<p><strong>Chamath：</strong> 等等，“悄悄”这个词很重，别用这个词。</p>
+<p><strong>JCal：</strong> 没告诉人们，没有事先通知。</p>
+<p><strong>Chamath：</strong> 我们可以换个方式说。我们现在处于一个阶段，喘不过气来谈论每一个模型的改进是在浪费时间，没有投资回报。我们走在加速学习的路上，会看到以前不可能实现的最终用户成就。比如，我们（OpenAI）解决了一个悬而未决几十年的数学难题，是通过人类的帮助。另一个例子，有一些药物候选物即将进入临床试验，它们是躺在架子上的IND（研究性新药申请），人们根本不认为它们可行。现在我们到了这些东西走向前台的时候，它们对人们有用，越来越有价值。我们应该关注最终用户的使用案例，因为如果继续像现在这样表达，恰恰是问题的一部分——这开始制造鬼怪。这就是为什么那么多人在听到AI时把它当做一个贬义词。我们必须展示另一面，至少让人们看到数据。我不认为谷歌在做见不得人的事，他们不是那种公司。有些其他公司可能是，但谷歌不是。我认为他们这么做是因为对用户有用。我们应该关注用户效用，因为这是一个值得讲述的故事。我们四个人可以负责任地、平衡地讲好两方面的故事，因为如果变成卢德分子，回到过去，没有人会赢。如果我们说话不小心，那就会发生。</p>
+<p><strong>JCal：</strong> 当然我不是卢德分子，但确实有很多人报告说看到模型这么大规模在后台运行很惊讶，引发了隐私层面的讨论。我也同意谷歌不是坏主角，可能更多是做事太快而不是恶意。</p>
+<p><strong>Chamath：</strong> 再加两点。一种是已经请好律师了，谷歌绝对是请了很多律师的。第二，我认为每个从事技术行业的美国人都有责任成为AI乐观、积极可能性的倡导者。因为现在开始让人觉得，可能有人在搞一场针对美国AI和数据中心的有组织宣传。这对中国来说很合理，但对美国不好。我认为我们有责任。</p></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="00:09:06–00:45:13 ai的公关危机 本段核心内容： ai的公众舆论在恶化：毕业生典礼上ai演讲者被嘘 friedberg认为技术恐惧根源在于权力不对称、心理冲击（反人类中心）以及外国势力介入 chamath主张用最终用户的故事对抗恐惧 讨论是否应该放慢ai部署 背景解释与关键术语： eric schmidt：前谷歌ceo，在毕业典礼上发表ai主题演讲时被学生嘘。 luddite：指反对技术进步的人，源自19世纪英国毁坏机器的工人运动。 卢德主义者（luddite）：反对技术进步的人。 详细中文整理： jcal： 谁应该为此负责？是dario（anthropic ceo）总在那说“每个人都要失业了”吗？还是ceo们用ai做借口裁员？gavin，你怎么看？ gavin： 每个人都在为自己的利益说话。dario试图创造监管护城河的边界条件，这对他非常合理——他现在已经大到可以坐在帐篷里往外尿了。你会发现，很多焦虑的言论是和他们的融资轮次、规模成正比的。所以我认为这是一个合理的商业策略，他很聪明。如果你实际让一个nash bot在里面运行，它也会给出这个策略。与此同时，还有其他版本的反策略和反利用策略。关键在于每位ceo都有明确的激励，他们站在这样的尺度上，只是念着自己的剧本。我们得退一步，看森林而不是看树木。我记得有个片段，老朋友sham sankar（palantir cto）在福克斯新闻上说：“别再喘不过气来问这些模型制造者怎么想了。去找最终用户，去问工厂里正在用模型的人，问他怎么看；去问医生、科学家，然后讲那些故事。” chamath： 我完全同意。 jcal： 你觉得谁代表得比较好？elon说未来是极度丰饶的，工作会成为可选项。但这听起来有点吓人，因为人们听到的是没工作了。dario则是在吓唬人，想获取监管。到底怎么回事，我们行业怎么做得更好？ chamath： 我在10天前参加了一个活动，有个对冲基金经理，他女儿天生有一种罕见的基因突变，本来注定一生没有快乐——她脑中的神经元不放电，你都不知道她的寿命和生命质量会怎样。这是悲剧性的。他说他不接受这个答案。他用大语言模型做了大量研究，找到了一种已经在市场上的安全药物，他们相信对这个病会有重大影响。结果真的有效。神经元放电比例从30%或40%上升到了80%或90%，这意味着她可以过正常生活，可能不会特别聪明，但可以正常生活。他现在学会了如何用ai进一步定制这个药，蛋白质设计等方面也有进展。他相当有把握在几个月内会有一个完全治愈的药。这只是一个父亲，不愿接受女儿失败的命运，改变了她的生命以及所有有这种病的人的生命。我们应该讲这些故事。elon做得不错，他说的未来工作可选对有些人听起来很好，对有些很吓人。一周工作四天听起来对很多人不错。jensen也在有效倡导。任何试图推动限制的人都使整个事情变得贫穷。关键是我们要关注积极面。 jcal： friedberg，你怎么看ai的公关危机？最近有3个毕业典礼演讲者被嘘了，eric schmidt是其中之一。年轻人这么激烈地反对ai，为什么？ friedberg： 这个问题有很长的答案。它和你之前担心的社会主义和两极分化有关。为什么人们恨这种技术？他们爱他们的手机，爱互联网。为什么恨这个？ chamath： 说得对。 friedberg： 我认为根本上是人们觉得技术为少数人创造杠杆，从而制造了权力失衡。没有什么比ai更能代表这一点：少数人控制、获利、受益于ai，最终获得相对于人口整体的超额回报。尽管最终所有技术都会商品化、扩散，但这里的扩散时间将极其不对称。这有点像核弹，它在20世纪中期在人们心中创造了那种时刻：那些拥有知识和用知识设计解决方案的人可以为自己创造超额的权力，把你我、把世界上的其他人置于风险之下。因为关于“什么时候、怎么样让我受益”的问题现在无法回答，今天只有少数人获得了经济利益，这就成了叙事，成了故事，成了一个少数人从多数人那里拿东西的权力系统。这对普通人来说是深深不安的。他们不知道它如何工作、为什么工作、会为他们做什么、什么时候做到，他们听到的只有某些人赚了数万亿美元。所以反噬如此明显。第二，我认为有很深的外部能量在推动这种反技术情绪，而且已经持续了几十年。我认为不只有中国的ngo在干这事。国家角色在外国干预媒体活动、制造情绪、减缓竞争对手进步，这有很长历史，可以追溯到冷战时期的克格勃，不断被完善和提升。这不是阴谋论，有大量书籍。具体今天发生的事情我不够了解，但我不认为外国对减缓领先国家的技术进步没有兴趣。美国大概也会对其他国做类似的事。第三，哥白尼革命时，日心说对人是巨大的冲击，彻底颠覆了教会和权力中心。ai也有某种“不是以人为中心”的东西，它冲击和扰动人类的自我认知，几乎是反人本主义的。这对很多人的反感情绪有深层的心理驱动。不是原因，但驱动它。所以有很多复杂的方面，jcal，这不是简单地把某人请上来就能解决的问题。世界正在发生真正的转变，有真正的全球竞争正在进行，各种国家和利益在相互竞争。 jcal： 你觉得我们应该放慢速度吗？ friedberg： 我不认为你可以放慢。但我认为，就像曼哈顿计划后，研究实验室为了不让科学家把秘密泄露给对手美国而建立起来。他们反对核弹，但因为国家安全而工作。但后来俄罗斯拿到了秘密，因为有人担心如果美国掌握全部权力就没有制衡，所以秘密被泄露给了俄罗斯。当俄罗斯开始发展氢弹，美国又加速发展核弹作为制衡。当扩散开始，就停不住了。你必须拥有某种平衡，否则就会有一个不对称的权力可以全球为所欲为。我认为现在世界就处在那个时刻。如果美国不推进其ai技术，总会有其他人。如果别人做了，我们可以推演后果。如果中国拥有足够先进的模型和部署，而美国没有，你会发现，这大概不是世界健康的状态，让美国独拥ai也不是健康的状态。如果我们试图放慢ai，就会失去这种必要的平衡时刻，就像二战后的军备竞赛一样，我们会再次看到同样的事情。 chamath： 你说得对。但是我们能不能放慢？有人讨论过一些办法。比如对自动驾驶，人们害怕司机会失业——美国超过1000万人以驾驶为生。你是否赞成给这些人一定的工作保障，分阶段部署？另一种是在工厂里对机器人收税，用于再培训。这两个思路你觉得怎么样？ gavin： 有趣的是，所有这些讨论中，我还没看到任何对卡车司机和包裹分拣员本人的调查。我的问题是：做这些工作的人自己想要这些工作吗？如果他们说是的，他们爱这个工作、能养家，那就有理由保持现状。但如果亚马逊仓库里的人才有30%或40%的年离职率，我们应该问为什么。如果这是这么好的工作，我怀疑离职率会是3%或4%。我们到底要保护什么？你有没有问过他们？这又是一群坐在看台上的人，想站在道德高地，让别人感到内疚或糟糕。我们从来没有进行应该进行的对话。 jcal： 英国60分钟的节目里，伦敦、波士顿、纽约都强烈要求保留人类司机，禁止或严重限制自动驾驶。你是否赞成在那些地方分阶段部署？ chamath： 他们会被以过失杀人起诉——当有人开自动驾驶车撞死人，而你可以部署一个零死亡率的解决方案时。这和分拣包裹完全不一样。分拣包裹，你去问亚马逊仓库里的人他们更愿意做什么。 gavin： 我认为，去一个没有waymo或cybercab的城市，以后会觉得野蛮和不安全。最初uber刚出现时，去一个没有uber的城市你会非常沮丧，觉得不方便。无论各个城市做什么决定，chamath的那一点非常有力：美国每年有5万人死于交通事故，全球100万。这是不可容忍的。过失杀人诉讼一定会爆发。更重要的是，美国的优势就在于各州各市各自为政，竞争导致更好的结果。 chamath： 用flock safety作为例子，一个用ai监控犯罪的摄像头系统，隐私有争议。但它是自下而上的——每个镇自己决定，不是自上而下的。各州可以监管。自动驾驶也一样，州层面会有发言权。 jcal： 你们最近去拉斯维加斯了吗？我和妻子去看了ben horowitz和他太太felicia。她在拉斯维加斯警局做了非常惊人的工作。他们有枪声检测，有从警局屋顶起飞的无人机。我们在指挥室里看到：一旦出事，几分钟内就有画面，一路追踪坏人到藏身处。你走出来时觉得非常安全。而且投入相比于犯罪成本来说微不足道——每年三四千万美元就能让拉斯维加斯成为全美最安全的城市。 chamath： 完全正确。 jcal： 对于隐私问题，有非常简单的解决方法。flock ceo两次上过我的节目。他们允许滚动数据库，车牌最多保存2-3年，而且不做面部识别，有审计追踪。有很多手段可以保护隐私。关于ai的公关危机，我们必须承认大科技公司的裁员不仅仅是因为臃肿。我举两个例子来表明为什么人们害怕。cloudflare ceo matthew prince，上周裁了20%的人，不是因为公司困境，而是因为ai。他说“我们在移除‘计量员’”（measurers）——那些管理人数和衡量数据的人。他觉得这些人因为ai变得不必要了。同时，扎克伯格又做了另一轮裁员，以非常反乌托邦的方式。他甚至说，他公司在的人均智力水平远高于通过承包商招到的人，所以教模型写代码最好的方式是让公司内部的优秀工程师去教。然后他告诉所有人要裁员8000人，其中很多都是h-1b签证持有者，给他们的生活造成巨大混乱。同时，他在每台电脑上装记录软件，用来训练模型。之前员工们说他们在黑客马拉松里做了很多ai工具提高效率，结果还是被裁了。所以现在人们的感受是：你能期望的最好结果就是保住这份工作一段时间，然后训练自己出局。这就是恐惧的根源。我们必须有个说法。 chamath： 我认为matthew prince的备忘录太可怕了。这是公关学校的悲剧。你不能写得更差了——把人简化为一个标签“计量员”，然后说“我要裁掉所有计量员”。我说的那句话可以延伸应用到这里：别听ai发明者的话。去听工厂一线工人怎么说。第一部分的结论是：谁在乎matthew prince怎么想？如果你在如此关键的事务上用这种方式传达消息，那就是烂透了。你给这些人打上标签，让他们背上红字，以后找工作时别人会说“哦，你是那个cloudflare的计量员”。没必要这么做。很多科技ceo曝光在公众面前，你就会发现，他们真的只擅长一件事，不擅长其他事。所以我的建议是：闭嘴，回到键盘后面，干你的活。如果你要管理，就管理，但别写这些公报。你们所有人都非常糟糕。这是我的ted演讲。 chamath： 所以当大家都愤怒时，这就是原因。 chamath： 一旦这些公司发布下一份财报，授权大规模股票回购和分红增长，而他们的现金堆又大了，问题会更严重。我是说，有正确的方式做决定，也有错误的方式——他们现在做的就是用错误的方式传递消息。公关和传播部门的人完全不了解当下的时刻。" style="--index: 2">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">02</span>
+                    <span class="timeline-meta">00:09:06–00:45:13</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>AI的公关危机</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>AI的公众舆论在恶化：毕业生典礼上AI演讲者被嘘</li>
+<li>Friedberg认为技术恐惧根源在于权力不对称、心理冲击（反人类中心）以及外国势力介入</li>
+<li>Chamath主张用最终用户的故事对抗恐惧</li>
+<li>讨论是否应该放慢AI部署</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>Eric Schmidt：前谷歌CEO，在毕业典礼上发表AI主题演讲时被学生嘘。</li>
+<li>Luddite：指反对技术进步的人，源自19世纪英国毁坏机器的工人运动。</li>
+<li>卢德主义者（Luddite）：反对技术进步的人。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> 谁应该为此负责？是Dario（Anthropic CEO）总在那说“每个人都要失业了”吗？还是CEO们用AI做借口裁员？Gavin，你怎么看？</p>
+<p><strong>Gavin：</strong> 每个人都在为自己的利益说话。Dario试图创造监管护城河的边界条件，这对他非常合理——他现在已经大到可以坐在帐篷里往外尿了。你会发现，很多焦虑的言论是和他们的融资轮次、规模成正比的。所以我认为这是一个合理的商业策略，他很聪明。如果你实际让一个Nash bot在里面运行，它也会给出这个策略。与此同时，还有其他版本的反策略和反利用策略。关键在于每位CEO都有明确的激励，他们站在这样的尺度上，只是念着自己的剧本。我们得退一步，看森林而不是看树木。我记得有个片段，老朋友Sham Sankar（Palantir CTO）在福克斯新闻上说：“别再喘不过气来问这些模型制造者怎么想了。去找最终用户，去问工厂里正在用模型的人，问他怎么看；去问医生、科学家，然后讲那些故事。”</p>
+<p><strong>Chamath：</strong> 我完全同意。</p>
+<p><strong>JCal：</strong> 你觉得谁代表得比较好？Elon说未来是极度丰饶的，工作会成为可选项。但这听起来有点吓人，因为人们听到的是没工作了。Dario则是在吓唬人，想获取监管。到底怎么回事，我们行业怎么做得更好？</p>
+<p><strong>Chamath：</strong> 我在10天前参加了一个活动，有个对冲基金经理，他女儿天生有一种罕见的基因突变，本来注定一生没有快乐——她脑中的神经元不放电，你都不知道她的寿命和生命质量会怎样。这是悲剧性的。他说他不接受这个答案。他用大语言模型做了大量研究，找到了一种已经在市场上的安全药物，他们相信对这个病会有重大影响。结果真的有效。神经元放电比例从30%或40%上升到了80%或90%，这意味着她可以过正常生活，可能不会特别聪明，但可以正常生活。他现在学会了如何用AI进一步定制这个药，蛋白质设计等方面也有进展。他相当有把握在几个月内会有一个完全治愈的药。这只是一个父亲，不愿接受女儿失败的命运，改变了她的生命以及所有有这种病的人的生命。我们应该讲这些故事。Elon做得不错，他说的未来工作可选对有些人听起来很好，对有些很吓人。一周工作四天听起来对很多人不错。Jensen也在有效倡导。任何试图推动限制的人都使整个事情变得贫穷。关键是我们要关注积极面。</p>
+<p><strong>JCal：</strong> Friedberg，你怎么看AI的公关危机？最近有3个毕业典礼演讲者被嘘了，Eric Schmidt是其中之一。年轻人这么激烈地反对AI，为什么？</p>
+<p><strong>Friedberg：</strong> 这个问题有很长的答案。它和你之前担心的社会主义和两极分化有关。为什么人们恨这种技术？他们爱他们的手机，爱互联网。为什么恨这个？</p>
+<p><strong>Chamath：</strong> 说得对。</p>
+<p><strong>Friedberg：</strong> 我认为根本上是人们觉得技术为少数人创造杠杆，从而制造了权力失衡。没有什么比AI更能代表这一点：少数人控制、获利、受益于AI，最终获得相对于人口整体的超额回报。尽管最终所有技术都会商品化、扩散，但这里的扩散时间将极其不对称。这有点像核弹，它在20世纪中期在人们心中创造了那种时刻：那些拥有知识和用知识设计解决方案的人可以为自己创造超额的权力，把你我、把世界上的其他人置于风险之下。因为关于“什么时候、怎么样让我受益”的问题现在无法回答，今天只有少数人获得了经济利益，这就成了叙事，成了故事，成了一个少数人从多数人那里拿东西的权力系统。这对普通人来说是深深不安的。他们不知道它如何工作、为什么工作、会为他们做什么、什么时候做到，他们听到的只有某些人赚了数万亿美元。所以反噬如此明显。第二，我认为有很深的外部能量在推动这种反技术情绪，而且已经持续了几十年。我认为不只有中国的NGO在干这事。国家角色在外国干预媒体活动、制造情绪、减缓竞争对手进步，这有很长历史，可以追溯到冷战时期的克格勃，不断被完善和提升。这不是阴谋论，有大量书籍。具体今天发生的事情我不够了解，但我不认为外国对减缓领先国家的技术进步没有兴趣。美国大概也会对其他国做类似的事。第三，哥白尼革命时，日心说对人是巨大的冲击，彻底颠覆了教会和权力中心。AI也有某种“不是以人为中心”的东西，它冲击和扰动人类的自我认知，几乎是反人本主义的。这对很多人的反感情绪有深层的心理驱动。不是原因，但驱动它。所以有很多复杂的方面，JCal，这不是简单地把某人请上来就能解决的问题。世界正在发生真正的转变，有真正的全球竞争正在进行，各种国家和利益在相互竞争。</p>
+<p><strong>JCal：</strong> 你觉得我们应该放慢速度吗？</p>
+<p><strong>Friedberg：</strong> 我不认为你可以放慢。但我认为，就像曼哈顿计划后，研究实验室为了不让科学家把秘密泄露给对手美国而建立起来。他们反对核弹，但因为国家安全而工作。但后来俄罗斯拿到了秘密，因为有人担心如果美国掌握全部权力就没有制衡，所以秘密被泄露给了俄罗斯。当俄罗斯开始发展氢弹，美国又加速发展核弹作为制衡。当扩散开始，就停不住了。你必须拥有某种平衡，否则就会有一个不对称的权力可以全球为所欲为。我认为现在世界就处在那个时刻。如果美国不推进其AI技术，总会有其他人。如果别人做了，我们可以推演后果。如果中国拥有足够先进的模型和部署，而美国没有，你会发现，这大概不是世界健康的状态，让美国独拥AI也不是健康的状态。如果我们试图放慢AI，就会失去这种必要的平衡时刻，就像二战后的军备竞赛一样，我们会再次看到同样的事情。</p>
+<p><strong>Chamath：</strong> 你说得对。但是我们能不能放慢？有人讨论过一些办法。比如对自动驾驶，人们害怕司机会失业——美国超过1000万人以驾驶为生。你是否赞成给这些人一定的工作保障，分阶段部署？另一种是在工厂里对机器人收税，用于再培训。这两个思路你觉得怎么样？</p>
+<p><strong>Gavin：</strong> 有趣的是，所有这些讨论中，我还没看到任何对卡车司机和包裹分拣员本人的调查。我的问题是：做这些工作的人自己想要这些工作吗？如果他们说是的，他们爱这个工作、能养家，那就有理由保持现状。但如果亚马逊仓库里的人才有30%或40%的年离职率，我们应该问为什么。如果这是这么好的工作，我怀疑离职率会是3%或4%。我们到底要保护什么？你有没有问过他们？这又是一群坐在看台上的人，想站在道德高地，让别人感到内疚或糟糕。我们从来没有进行应该进行的对话。</p>
+<p><strong>JCal：</strong> 英国60分钟的节目里，伦敦、波士顿、纽约都强烈要求保留人类司机，禁止或严重限制自动驾驶。你是否赞成在那些地方分阶段部署？</p>
+<p><strong>Chamath：</strong> 他们会被以过失杀人起诉——当有人开自动驾驶车撞死人，而你可以部署一个零死亡率的解决方案时。这和分拣包裹完全不一样。分拣包裹，你去问亚马逊仓库里的人他们更愿意做什么。</p>
+<p><strong>Gavin：</strong> 我认为，去一个没有Waymo或CyberCab的城市，以后会觉得野蛮和不安全。最初Uber刚出现时，去一个没有Uber的城市你会非常沮丧，觉得不方便。无论各个城市做什么决定，Chamath的那一点非常有力：美国每年有5万人死于交通事故，全球100万。这是不可容忍的。过失杀人诉讼一定会爆发。更重要的是，美国的优势就在于各州各市各自为政，竞争导致更好的结果。</p>
+<p><strong>Chamath：</strong> 用Flock Safety作为例子，一个用AI监控犯罪的摄像头系统，隐私有争议。但它是自下而上的——每个镇自己决定，不是自上而下的。各州可以监管。自动驾驶也一样，州层面会有发言权。</p>
+<p><strong>JCal：</strong> 你们最近去拉斯维加斯了吗？我和妻子去看了Ben Horowitz和他太太Felicia。她在拉斯维加斯警局做了非常惊人的工作。他们有枪声检测，有从警局屋顶起飞的无人机。我们在指挥室里看到：一旦出事，几分钟内就有画面，一路追踪坏人到藏身处。你走出来时觉得非常安全。而且投入相比于犯罪成本来说微不足道——每年三四千万美元就能让拉斯维加斯成为全美最安全的城市。</p>
+<p><strong>Chamath：</strong> 完全正确。</p>
+<p><strong>JCal：</strong> 对于隐私问题，有非常简单的解决方法。Flock CEO两次上过我的节目。他们允许滚动数据库，车牌最多保存2-3年，而且不做面部识别，有审计追踪。有很多手段可以保护隐私。关于AI的公关危机，我们必须承认大科技公司的裁员不仅仅是因为臃肿。我举两个例子来表明为什么人们害怕。Cloudflare CEO Matthew Prince，上周裁了20%的人，不是因为公司困境，而是因为AI。他说“我们在移除‘计量员’”（measurers）——那些管理人数和衡量数据的人。他觉得这些人因为AI变得不必要了。同时，扎克伯格又做了另一轮裁员，以非常反乌托邦的方式。他甚至说，他公司在的人均智力水平远高于通过承包商招到的人，所以教模型写代码最好的方式是让公司内部的优秀工程师去教。然后他告诉所有人要裁员8000人，其中很多都是H-1B签证持有者，给他们的生活造成巨大混乱。同时，他在每台电脑上装记录软件，用来训练模型。之前员工们说他们在黑客马拉松里做了很多AI工具提高效率，结果还是被裁了。所以现在人们的感受是：你能期望的最好结果就是保住这份工作一段时间，然后训练自己出局。这就是恐惧的根源。我们必须有个说法。</p>
+<p><strong>Chamath：</strong> 我认为Matthew Prince的备忘录太可怕了。这是公关学校的悲剧。你不能写得更差了——把人简化为一个标签“计量员”，然后说“我要裁掉所有计量员”。我说的那句话可以延伸应用到这里：别听AI发明者的话。去听工厂一线工人怎么说。第一部分的结论是：谁在乎Matthew Prince怎么想？如果你在如此关键的事务上用这种方式传达消息，那就是烂透了。你给这些人打上标签，让他们背上红字，以后找工作时别人会说“哦，你是那个Cloudflare的计量员”。没必要这么做。很多科技CEO曝光在公众面前，你就会发现，他们真的只擅长一件事，不擅长其他事。所以我的建议是：闭嘴，回到键盘后面，干你的活。如果你要管理，就管理，但别写这些公报。你们所有人都非常糟糕。这是我的TED演讲。</p>
+<p><strong>Chamath：</strong> 所以当大家都愤怒时，这就是原因。</p>
+<p><strong>Chamath：</strong> 一旦这些公司发布下一份财报，授权大规模股票回购和分红增长，而他们的现金堆又大了，问题会更严重。我是说，有正确的方式做决定，也有错误的方式——他们现在做的就是用错误的方式传递消息。公关和传播部门的人完全不了解当下的时刻。</p></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="00:45:13–01:11:17 spacex的s-1、ipo估值与“elon web services” 本段核心内容： spacex提交s-1文件，寻求在约1.75万亿美元估值下筹集750亿美元用于ipo starlink是主要收入引擎（114亿美元营收，44亿美元运营利润） “elon web services”——对外出租算力的业务正在爆发，anthropic每月支付12.5亿美元 cursor与colossus的结合让xai的模型表现迅速提升 friedberg提出空间数据中心作为脱离政府控制的替代互联网基础设施的可能性 背景解释与关键术语： s-1：公司在美国证券交易委员会提交上市的注册声明，披露财务和业务细节。 starlink：spacex的低地球轨道卫星互联网服务。 colossus：xai（elon musk的ai公司）的超级计算集群。 elon web services：这个节目内部对elon musk对外出租计算基础设施业务的戏称，类比amazon的aws。 pareto frontier/pareto主导：在ai模型评估中，如果一个模型在多个维度（如准确率、速度、成本等）上都优于其它模型，就说它是pareto主导，处于pareto前沿。 flock safety：使用ai摄像头进行犯罪监控的公司，每台摄像头都有车牌记录数据库。 详细中文整理： jcal： spacex周三提交了s-1，目标在1.75万亿美元估值下筹集750亿美元。这将是史上最大ipo，远超前两位（沙特阿美的290亿美元）。预计6月12日上市，股票代码spcx。s-1暴露出很多有趣的信息。starlink去年收入114亿美元，增长50%，运营利润44亿美元，超过1000万用户订阅。太空业务40亿美元营收，增长17%，但亏损6.5亿美元。xai收入32亿美元，同比翻倍，但亏损64亿美元。spacex去年资本支出200亿美元，其中超过60%用于ai计算。但真正重磅的是：elon web services，正如我们在这个节目里叫的，正在爆炸式增长。anthropic每月付给spacex 12.5亿美元，租用colossus 1和部分colossus 2，这相当于3年450亿美元，每年150亿美元。这等于给spacex又增加了一个starlink级别的收入来源。再加上如果他们收购cursor，又会增加20-30亿美元。 chamath： 不是如果，我已经告诉过你他们已经买了。 jcal： polymarket上面显示spacex在首日交易后市值超过2万亿美元的概率是71%。 chamath： gavin，你是长期参与者，你对s-1和elon web services怎么看？ gavin： “elon web services”让我发笑，但150亿美元意味着ai业务实际上已经扩大了三倍。关键点是：他们的第一个数据中心用了122天，第二个91天，第三个大概66天。他们建数据中心的速度无人能比，成本也更低。现在有了一个明确的收入伙伴，而且是多个伙伴，我没理由他们不能开始大规模量产这些数据中心。jensen huang很在意他的gpu是否被用起来，gpu会分配给能插电、开机、从电子转换为token的人。所以我认为这个业务增长的速度可能比三个月前任何人能想象的快得多。anthropic的150亿美元实在惊人。 chamath： 重要说明：任何一方都可提前90天通知取消。所以elon可能想要回算力，或者anthropic找其他解决办法。 jcal： 确实有退出条款。还有一件事不属于s-1：cursor新发布的composer 2.5模型，只用了3周时间在colossus 2上做rl训练，就成为了pareto主导的模型。如果你画pareto前沿，蓝色点图上的composer 2.5已经远在前沿之外。cursor据说拥有比整个公共互联网还多的代码token数据。当你用这些数据做适当量的rl训练，效果惊人。而且composer 2.5和composer 2是同一个基座模型，仅仅用rl训练3周就实现了pareto主导。然后下一步是新的基座模型加上cursor数据做rl，用世界上最大的连贯计算集群。这可能非常重大。 chamath： 对xai和cursor极为重要。cursor在算力获取上曾经是死路，远远落后于codex、google、anthropic。elon让他们上了colossus，瞬间他们的模型增长最快。一年后，我们会不会认为elon会把算力卖给google和openai？ gavin： 卖给google更容易看到，肯定会发生。已经有人在讨论这个了。google肯定会希望参与轨道计算。有趣的是，唯一对轨道计算持怀疑态度的，是那些不参与数据中心或太空业务的人。google、anthropic、amazon、nvidia都非常确信轨道计算会成为现实，而spacex在这一点上处于绝佳位置。但composer 2.5的数据点确实非常有力。另外，grok build也上线了，之前grok缺乏像claude code、codex那样的‘工作台’（harness），现在有了grok build，这是一个运行时环境，管理状态和内存，使模型在agent世界里更有用。前沿模型的人越来越认为，工作台和模型一样重要，两者需要一起开发。现在xai有了cursor数据、pareto主导的模型和grok build，他们正在快速迭代。 jcal： elon对xai之前的状态非常沮丧，公开表达过，现在他没那么沮丧了，出货快了很多。friedberg，你怎么看spacex ipo，以及如果像很多人相信的那样，特斯拉和spacex最终合并？如果合并，市值会排到全球第四。 friedberg： 这会让我们回到之前讨论的反技术、反ai、反进步的社会情绪上。如果全球真的有组织地阻止信息获取、限制言论、购买决策等，这趋势正在出现。互联网一直被称赞为物理世界的开放替代品，但它必须物理上存在于某处。美国当前对数据中心的攻击可能表明了从基础层拥有一个替代互联网的重要性。如果你有一个不受地球上政府控制的中继网络，几乎就是文明的备份——不一定是备份完整文明，但它是进步的备份。我没持有spacex股票，也不是为他们做推销，但我认为创造一套不受政府控制的系统，作为在事情变得糟糕、受限、基本自由被限制时人类进步的保障，是重要的。有基于空间的通信网络，空间数据中心，再无线传输回地球，这很有价值。所以抛开所有经济学、估值倍数，我认为拥有存储、传输信息且无法被政府控制、操纵或破坏的空间系统是很重要的。 jcal： 很多人不记得，elon刚开始spacex时，原始想法是备份生物圈。他那时和adeo一起看俄罗斯火箭，后来回来说他觉得只能自己做火箭，因为这比从俄国人那里买更容易。他想在空间放测地圆顶，包含所有动植物。那个未知的起源故事。我认为在空间做数据中心似乎完全可行，对比那些当初说starlink也不行的人，现在他已经有了1万颗starlink。starlink卫星和数据中心卫星本质上没那么大差异。 chamath： 它们实际上很不一样——尺寸、整流罩、翅膀都大得多。 jcal： 但考虑到starship大了10倍，我认为技术上他将是第一个解决的人。 chamath： 如果你问我，如何给spacex以2万亿美元的估值做承销。基础数学：去年营收180-190亿美元，今年大概250-300亿美元。所以我是在以一个相当贵的价格购买。我买的是什么？一是自互联网本身以来最重要的互联网基础设施项目，它将扩展至数亿用户，因为非常有用且越来越便宜。二是配送基础设施，可能是个gdp+10到gdp+15的增长型业务。三是ai业务，包括顶层的应用和底层的计算能力。为什么colossus对anthropic如此有价值？因为真正有能力建设千兆瓦数据中心的人，他们是最接近的。jensen huang据说有一个著名故事，他解决了别人无法解决的一个问题，使得你们可以拆掉一堆机架，用东海岸的流量，让整个系统协同工作。我预计明年营收400-450亿美元，后年可能再翻倍。所以我是以20倍营收买入。为什么可以用营收而不是盈利估值？因为营收给他了运营杠杆来投资所有其他业务，最终形成了资本护城河、技术护城河、执行和学习护城河的综合飞轮。这个飞轮现在刚开始转，因为他还拥有所有分散的资产。特斯拉还搁在那里，我告诉你们，它会合进来。然后你将拥有一个惊人的物理能力体系：运动、计算、基础设施、连接。这个资产组合几年后会显得很便宜。他是唯一一个在舞台上总让你好奇“他袖子里还有什么”的人。不管喜欢还是讨厌，他就是那个“one more thing”的人。 chamath： 如果你必须选一个承销案例，我会把营收做灵活假设，仅计算地面数据中心，到2030-2032年就有1000-2000亿美元营收。那么你实际是用20倍营收买那个业务，其他一切——colossus 3、4——都是白送的。搞定一个千兆瓦数据中心非常非常难。而且杰森正在推动一项变革，需要合作伙伴，elon成为一个自然的伙伴：dc to dc——直接使用直流电从电网到机架，跳过dc-ac-dc的转换浪费。这需要从根本上重新架构，非常高效。jensen需要一个设计伙伴，elon可能是唯一的人。所以我有很多理由用营收倍数加上那个x因子——创造力和“onemore thing”来承销这个。 jcal： 然后给出两张图：第一张是starship的规格，和falcon heavy对比，starship内部大到可以坐300人，像一个747，而且starship还会更大。第二张是从1957年至今累计发射载荷量。spacex从2012年到现在，即将超过世界其余国家累计发射量的总和。这是真正的指数增长和颠覆式技术。gavin，从这两张图看，空间数据中心什么时候成真？对spacex的盈利何时产生影响？ gavin： 首先，那些发射图表是在starship投入使用之前完成的，大部分还是falcon的功劳。falcon已经可重复使用，starship的设计目标是快速可重复使用。如果blue origin解决了可重复使用，他们也只是spacex 10年前的水平。快速可重复使用意味着你可以在同一天多次发射和回收同一枚火箭。这对于实现月球基地、火星殖民地、月球质量驱动器等是必须的。我不知道具体时间表，但如果在一年到两年内搞定，我认为是共识。另外，有一块nvidia h100 gpu现在就在太空中正常工作，andrej karpathy已经在上面训练模型并用于推理。nvidia正在制造太空专用版本，散热、结构加固等都会不同。spacex的一个专长是，他们非常擅长设计火箭和载荷，使得可以使用非太空级别的半导体（更便宜），比如atreides投资的一家公司的芯片，没有经过辐射硬化，但还是通过了辐射测试，进入了每一颗starlink。至于轨道计算什么时候变成实际收入，我猜测是2028年下半年到2030年上半年。" style="--index: 3">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">03</span>
+                    <span class="timeline-meta">00:45:13–01:11:17</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>SpaceX的S-1、IPO估值与“Elon Web Services”</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>SpaceX提交S-1文件，寻求在约1.75万亿美元估值下筹集750亿美元用于IPO</li>
+<li>Starlink是主要收入引擎（114亿美元营收，44亿美元运营利润）</li>
+<li>“Elon Web Services”——对外出租算力的业务正在爆发，Anthropic每月支付12.5亿美元</li>
+<li>Cursor与Colossus的结合让xAI的模型表现迅速提升</li>
+<li>Friedberg提出空间数据中心作为脱离政府控制的替代互联网基础设施的可能性</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>S-1：公司在美国证券交易委员会提交上市的注册声明，披露财务和业务细节。</li>
+<li>Starlink：SpaceX的低地球轨道卫星互联网服务。</li>
+<li>Colossus：xAI（Elon Musk的AI公司）的超级计算集群。</li>
+<li>Elon Web Services：这个节目内部对Elon Musk对外出租计算基础设施业务的戏称，类比Amazon的AWS。</li>
+<li>Pareto Frontier/Pareto主导：在AI模型评估中，如果一个模型在多个维度（如准确率、速度、成本等）上都优于其它模型，就说它是Pareto主导，处于Pareto前沿。</li>
+<li>Flock Safety：使用AI摄像头进行犯罪监控的公司，每台摄像头都有车牌记录数据库。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> SpaceX周三提交了S-1，目标在1.75万亿美元估值下筹集750亿美元。这将是史上最大IPO，远超前两位（沙特阿美的290亿美元）。预计6月12日上市，股票代码SPCX。S-1暴露出很多有趣的信息。Starlink去年收入114亿美元，增长50%，运营利润44亿美元，超过1000万用户订阅。太空业务40亿美元营收，增长17%，但亏损6.5亿美元。xAI收入32亿美元，同比翻倍，但亏损64亿美元。SpaceX去年资本支出200亿美元，其中超过60%用于AI计算。但真正重磅的是：Elon Web Services，正如我们在这个节目里叫的，正在爆炸式增长。Anthropic每月付给SpaceX 12.5亿美元，租用Colossus 1和部分Colossus 2，这相当于3年450亿美元，每年150亿美元。这等于给SpaceX又增加了一个Starlink级别的收入来源。再加上如果他们收购Cursor，又会增加20-30亿美元。</p>
+<p><strong>Chamath：</strong> 不是如果，我已经告诉过你他们已经买了。</p>
+<p><strong>JCal：</strong> Polymarket上面显示SpaceX在首日交易后市值超过2万亿美元的概率是71%。</p>
+<p><strong>Chamath：</strong> Gavin，你是长期参与者，你对S-1和Elon Web Services怎么看？</p>
+<p><strong>Gavin：</strong> “Elon Web Services”让我发笑，但150亿美元意味着AI业务实际上已经扩大了三倍。关键点是：他们的第一个数据中心用了122天，第二个91天，第三个大概66天。他们建数据中心的速度无人能比，成本也更低。现在有了一个明确的收入伙伴，而且是多个伙伴，我没理由他们不能开始大规模量产这些数据中心。Jensen Huang很在意他的GPU是否被用起来，GPU会分配给能插电、开机、从电子转换为token的人。所以我认为这个业务增长的速度可能比三个月前任何人能想象的快得多。Anthropic的150亿美元实在惊人。</p>
+<p><strong>Chamath：</strong> 重要说明：任何一方都可提前90天通知取消。所以Elon可能想要回算力，或者Anthropic找其他解决办法。</p>
+<p><strong>JCal：</strong> 确实有退出条款。还有一件事不属于S-1：Cursor新发布的Composer 2.5模型，只用了3周时间在Colossus 2上做RL训练，就成为了Pareto主导的模型。如果你画Pareto前沿，蓝色点图上的Composer 2.5已经远在前沿之外。Cursor据说拥有比整个公共互联网还多的代码token数据。当你用这些数据做适当量的RL训练，效果惊人。而且Composer 2.5和Composer 2是同一个基座模型，仅仅用RL训练3周就实现了Pareto主导。然后下一步是新的基座模型加上Cursor数据做RL，用世界上最大的连贯计算集群。这可能非常重大。</p>
+<p><strong>Chamath：</strong> 对xAI和Cursor极为重要。Cursor在算力获取上曾经是死路，远远落后于Codex、Google、Anthropic。Elon让他们上了Colossus，瞬间他们的模型增长最快。一年后，我们会不会认为Elon会把算力卖给Google和OpenAI？</p>
+<p><strong>Gavin：</strong> 卖给Google更容易看到，肯定会发生。已经有人在讨论这个了。Google肯定会希望参与轨道计算。有趣的是，唯一对轨道计算持怀疑态度的，是那些不参与数据中心或太空业务的人。Google、Anthropic、Amazon、NVIDIA都非常确信轨道计算会成为现实，而SpaceX在这一点上处于绝佳位置。但Composer 2.5的数据点确实非常有力。另外，Grok Build也上线了，之前Grok缺乏像Claude Code、Codex那样的‘工作台’（harness），现在有了Grok Build，这是一个运行时环境，管理状态和内存，使模型在Agent世界里更有用。前沿模型的人越来越认为，工作台和模型一样重要，两者需要一起开发。现在xAI有了Cursor数据、Pareto主导的模型和Grok Build，他们正在快速迭代。</p>
+<p><strong>JCal：</strong> Elon对xAI之前的状态非常沮丧，公开表达过，现在他没那么沮丧了，出货快了很多。Friedberg，你怎么看SpaceX IPO，以及如果像很多人相信的那样，特斯拉和SpaceX最终合并？如果合并，市值会排到全球第四。</p>
+<p><strong>Friedberg：</strong> 这会让我们回到之前讨论的反技术、反AI、反进步的社会情绪上。如果全球真的有组织地阻止信息获取、限制言论、购买决策等，这趋势正在出现。互联网一直被称赞为物理世界的开放替代品，但它必须物理上存在于某处。美国当前对数据中心的攻击可能表明了从基础层拥有一个替代互联网的重要性。如果你有一个不受地球上政府控制的中继网络，几乎就是文明的备份——不一定是备份完整文明，但它是进步的备份。我没持有SpaceX股票，也不是为他们做推销，但我认为创造一套不受政府控制的系统，作为在事情变得糟糕、受限、基本自由被限制时人类进步的保障，是重要的。有基于空间的通信网络，空间数据中心，再无线传输回地球，这很有价值。所以抛开所有经济学、估值倍数，我认为拥有存储、传输信息且无法被政府控制、操纵或破坏的空间系统是很重要的。</p>
+<p><strong>JCal：</strong> 很多人不记得，Elon刚开始SpaceX时，原始想法是备份生物圈。他那时和Adeo一起看俄罗斯火箭，后来回来说他觉得只能自己做火箭，因为这比从俄国人那里买更容易。他想在空间放测地圆顶，包含所有动植物。那个未知的起源故事。我认为在空间做数据中心似乎完全可行，对比那些当初说Starlink也不行的人，现在他已经有了1万颗Starlink。Starlink卫星和数据中心卫星本质上没那么大差异。</p>
+<p><strong>Chamath：</strong> 它们实际上很不一样——尺寸、整流罩、翅膀都大得多。</p>
+<p><strong>JCal：</strong> 但考虑到Starship大了10倍，我认为技术上他将是第一个解决的人。</p>
+<p><strong>Chamath：</strong> 如果你问我，如何给SpaceX以2万亿美元的估值做承销。基础数学：去年营收180-190亿美元，今年大概250-300亿美元。所以我是在以一个相当贵的价格购买。我买的是什么？一是自互联网本身以来最重要的互联网基础设施项目，它将扩展至数亿用户，因为非常有用且越来越便宜。二是配送基础设施，可能是个GDP+10到GDP+15的增长型业务。三是AI业务，包括顶层的应用和底层的计算能力。为什么Colossus对Anthropic如此有价值？因为真正有能力建设千兆瓦数据中心的人，他们是最接近的。Jensen Huang据说有一个著名故事，他解决了别人无法解决的一个问题，使得你们可以拆掉一堆机架，用东海岸的流量，让整个系统协同工作。我预计明年营收400-450亿美元，后年可能再翻倍。所以我是以20倍营收买入。为什么可以用营收而不是盈利估值？因为营收给他了运营杠杆来投资所有其他业务，最终形成了资本护城河、技术护城河、执行和学习护城河的综合飞轮。这个飞轮现在刚开始转，因为他还拥有所有分散的资产。特斯拉还搁在那里，我告诉你们，它会合进来。然后你将拥有一个惊人的物理能力体系：运动、计算、基础设施、连接。这个资产组合几年后会显得很便宜。他是唯一一个在舞台上总让你好奇“他袖子里还有什么”的人。不管喜欢还是讨厌，他就是那个“one more thing”的人。</p>
+<p><strong>Chamath：</strong> 如果你必须选一个承销案例，我会把营收做灵活假设，仅计算地面数据中心，到2030-2032年就有1000-2000亿美元营收。那么你实际是用20倍营收买那个业务，其他一切——Colossus 3、4——都是白送的。搞定一个千兆瓦数据中心非常非常难。而且杰森正在推动一项变革，需要合作伙伴，Elon成为一个自然的伙伴：DC to DC——直接使用直流电从电网到机架，跳过DC-AC-DC的转换浪费。这需要从根本上重新架构，非常高效。Jensen需要一个设计伙伴，Elon可能是唯一的人。所以我有很多理由用营收倍数加上那个X因子——创造力和“onemore thing”来承销这个。</p>
+<p><strong>JCal：</strong> 然后给出两张图：第一张是Starship的规格，和Falcon Heavy对比，Starship内部大到可以坐300人，像一个747，而且Starship还会更大。第二张是从1957年至今累计发射载荷量。SpaceX从2012年到现在，即将超过世界其余国家累计发射量的总和。这是真正的指数增长和颠覆式技术。Gavin，从这两张图看，空间数据中心什么时候成真？对SpaceX的盈利何时产生影响？</p>
+<p><strong>Gavin：</strong> 首先，那些发射图表是在Starship投入使用之前完成的，大部分还是Falcon的功劳。Falcon已经可重复使用，Starship的设计目标是快速可重复使用。如果Blue Origin解决了可重复使用，他们也只是SpaceX 10年前的水平。快速可重复使用意味着你可以在同一天多次发射和回收同一枚火箭。这对于实现月球基地、火星殖民地、月球质量驱动器等是必须的。我不知道具体时间表，但如果在一年到两年内搞定，我认为是共识。另外，有一块NVIDIA H100 GPU现在就在太空中正常工作，Andrej Karpathy已经在上面训练模型并用于推理。NVIDIA正在制造太空专用版本，散热、结构加固等都会不同。SpaceX的一个专长是，他们非常擅长设计火箭和载荷，使得可以使用非太空级别的半导体（更便宜），比如Atreides投资的一家公司的芯片，没有经过辐射硬化，但还是通过了辐射测试，进入了每一颗Starlink。至于轨道计算什么时候变成实际收入，我猜测是2028年下半年到2030年上半年。</p></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="01:11:17–01:21:47 nvidia财报与竞争格局 本段核心内容： nvidia本季度营收816亿美元，同比增长85% 营收和利润率空前，但股价仅微涨 gavin baker分析跨芯片领域的估值矛盾 关于asic（如tpu）是否在抢占nvidia份额的叙事讨论 背景解释与关键术语： arr：年度经常性收入（annual recurring revenue） asic：专用集成电路（application-specific integrated circuit），如google的tpu、amazon的inferentia，用于特定ai任务。 roic：投入资本回报率（return on invested capital） 13f：机构投资者在sec每季度披露的持仓报告。 详细中文整理： jcal： nvidia又炸了。一季度营收816亿美元，同比增长85%，环比增长20%。很多高增长公司一年都做不到20%增长，他们一个季度就做到了。净收入580亿美元，自由现金流480亿美元，75%的毛利率，全球市值最大公司（5.3万亿美元）。股价今年只涨了16%而已。他们又批准了800亿美元的股票回购，并分红25倍从1美分到25美分。cfo说未来会返还50%的自由现金流给股东。历史上从未有过这样的公司，friedberg？ friedberg： 嗯哼。 jcal： 看看，你的那点热情。我有一个问题问gavin。你不久前和patrick o&#x27;shaughnessy做了一期很有趣的对话，说芯片公司的营收倍数和dram（内存）公司的营收倍数不能同时成立。你能不能简单解释一下？也解释一下价值在哪里。 gavin： 倒过来讲。leopold aschenbrenner那个基金是持仓数据显示大量空头。但我认为那是第一季度末，当时伊朗局势很紧张，很多人想要对冲。不要把13f理解为对芯片的极度悲观。第二，跨行业看，所有ai公司的估值不可能同时正确。内存制造商只有3-5倍市盈率，nvidia市盈率很低，其他加速器公司有合理倍数，而电力、冷却、光通信公司的倍数却在贴现截然不同的未来。如果光通信的估值是对的，nvidia和内存的估值应该更高；如果nvidia和内存是对的，其他东西会表现不佳。ai市场现在存在跨部门低效。关于nvidia的季度，他们改为新的报告结构：数据中心和边缘ai。如果做一个真正的苹果对苹果比较，broadcom预计其ai半导体营收同比增长143%，但如果你只看西方的ai世界（除去中国），nvidia的增长速度超过broadcom和其他被认为是asic分享侵蚀的公司的增长速度。jensen huang对此越来越沮丧。股票表现不佳，不管他拿出多好的数据，都没有得到信用。他认为的“份额被侵蚀”的叙事不可信，因为实际上他在获得份额。此外，其他asic（比如tpu、inferentia）根本不被提交到公开基准中进行比较，因为他们会在mlperf等测试中输给nvidia。还有一事，nvidia提到他们的cpu业务今年会达到200亿美元，这非常惊人，这意味着nvidia已成为全球最大的cpu供应商之一。他们有独一无二的优势——与每个实验室合作，因此能基于模型未来方向进行协同设计。所以，我认为发展中的domain-specific architecture（领域特定架构）其实更早发生在nvidia内部，而不是外部替代者。这就是我从财报中看到的。 chamath： 你的一个见解非常深刻，关于coreweave等人的gpu摊销或折旧问题。 gavin： 是的。当coreweave这些neocloud上市时，熊市说法是他们在用4-6年的寿命摊销gpu，但gpu实际寿命只有2年，所以利润被夸大。但michael burry提出过这个。现在，因为我们把推理聚合起来了，有了不同的领域特定加速器可以混搭，比如前端的grok、cerebras加速器做解码，后端用旧gpu。这些旧gpu的有用寿命实际上是10-15年。这意味着你可以用非常低的利率做资产支持融资——coreweave最低融资利率是6%，现在还会更低。如果你能以比其它芯片更低的利率获得资产抵押贷款来购买gpu，那就是一个巨大的优势。nvidia这个季度单枪匹马地拯救了这些neocloud。 jcal： core weave的ceo michael intrator告诉我他们6年期的合同很常见，客户提前付款，如果他们认为设备没有6年寿命，就不会签6年合同。这很简单。" style="--index: 4">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">04</span>
+                    <span class="timeline-meta">01:11:17–01:21:47</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>NVIDIA财报与竞争格局</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>NVIDIA本季度营收816亿美元，同比增长85%</li>
+<li>营收和利润率空前，但股价仅微涨</li>
+<li>Gavin Baker分析跨芯片领域的估值矛盾</li>
+<li>关于ASIC（如TPU）是否在抢占NVIDIA份额的叙事讨论</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>ARR：年度经常性收入（Annual Recurring Revenue）</li>
+<li>ASIC：专用集成电路（Application-Specific Integrated Circuit），如Google的TPU、Amazon的Inferentia，用于特定AI任务。</li>
+<li>ROIC：投入资本回报率（Return on Invested Capital）</li>
+<li>13F：机构投资者在SEC每季度披露的持仓报告。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> NVIDIA又炸了。一季度营收816亿美元，同比增长85%，环比增长20%。很多高增长公司一年都做不到20%增长，他们一个季度就做到了。净收入580亿美元，自由现金流480亿美元，75%的毛利率，全球市值最大公司（5.3万亿美元）。股价今年只涨了16%而已。他们又批准了800亿美元的股票回购，并分红25倍从1美分到25美分。CFO说未来会返还50%的自由现金流给股东。历史上从未有过这样的公司，Friedberg？</p>
+<p><strong>Friedberg：</strong> 嗯哼。</p>
+<p><strong>JCal：</strong> 看看，你的那点热情。我有一个问题问Gavin。你不久前和Patrick O&#x27;Shaughnessy做了一期很有趣的对话，说芯片公司的营收倍数和DRAM（内存）公司的营收倍数不能同时成立。你能不能简单解释一下？也解释一下价值在哪里。</p>
+<p><strong>Gavin：</strong> 倒过来讲。Leopold Aschenbrenner那个基金是持仓数据显示大量空头。但我认为那是第一季度末，当时伊朗局势很紧张，很多人想要对冲。不要把13F理解为对芯片的极度悲观。第二，跨行业看，所有AI公司的估值不可能同时正确。内存制造商只有3-5倍市盈率，NVIDIA市盈率很低，其他加速器公司有合理倍数，而电力、冷却、光通信公司的倍数却在贴现截然不同的未来。如果光通信的估值是对的，NVIDIA和内存的估值应该更高；如果NVIDIA和内存是对的，其他东西会表现不佳。AI市场现在存在跨部门低效。关于NVIDIA的季度，他们改为新的报告结构：数据中心和边缘AI。如果做一个真正的苹果对苹果比较，Broadcom预计其AI半导体营收同比增长143%，但如果你只看西方的AI世界（除去中国），NVIDIA的增长速度超过Broadcom和其他被认为是ASIC分享侵蚀的公司的增长速度。Jensen Huang对此越来越沮丧。股票表现不佳，不管他拿出多好的数据，都没有得到信用。他认为的“份额被侵蚀”的叙事不可信，因为实际上他在获得份额。此外，其他ASIC（比如TPU、Inferentia）根本不被提交到公开基准中进行比较，因为他们会在MLPerf等测试中输给NVIDIA。还有一事，NVIDIA提到他们的CPU业务今年会达到200亿美元，这非常惊人，这意味着NVIDIA已成为全球最大的CPU供应商之一。他们有独一无二的优势——与每个实验室合作，因此能基于模型未来方向进行协同设计。所以，我认为发展中的Domain-Specific Architecture（领域特定架构）其实更早发生在NVIDIA内部，而不是外部替代者。这就是我从财报中看到的。</p>
+<p><strong>Chamath：</strong> 你的一个见解非常深刻，关于CoreWeave等人的GPU摊销或折旧问题。</p>
+<p><strong>Gavin：</strong> 是的。当CoreWeave这些NeoCloud上市时，熊市说法是他们在用4-6年的寿命摊销GPU，但GPU实际寿命只有2年，所以利润被夸大。但Michael Burry提出过这个。现在，因为我们把推理聚合起来了，有了不同的领域特定加速器可以混搭，比如前端的Grok、Cerebras加速器做解码，后端用旧GPU。这些旧GPU的有用寿命实际上是10-15年。这意味着你可以用非常低的利率做资产支持融资——CoreWeave最低融资利率是6%，现在还会更低。如果你能以比其它芯片更低的利率获得资产抵押贷款来购买GPU，那就是一个巨大的优势。NVIDIA这个季度单枪匹马地拯救了这些NeoCloud。</p>
+<p><strong>JCal：</strong> Core Weave的CEO Michael Intrator告诉我他们6年期的合同很常见，客户提前付款，如果他们认为设备没有6年寿命，就不会签6年合同。这很简单。</p></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="01:21:47–01:32:22 宏观市场预警与霍尔木兹海峡局势 本段核心内容： 通胀预期急剧上升：polymarket有99%概率5月cpi≥4.2%，专业预言经济师预计cpi将在q2达到6% 全球债券收益率快速上升：10年期美债达4.6%，日本30年国债5.1%，英国高达金融危机以来最高 friedberg发出严重警告，chamath建议降低投资密度，gavin提供相对乐观视角 背景解释与关键术语： cpi：消费者物价指数（consumer price index），衡量通胀的关键指标。 10年期国债收益率：市场对长期利率、通胀、经济增长预期的综合反映。 霍尔木兹海峡：中东石油出口的重要通道，地缘政治风险触发点。 global debt/gdp：全球债务与国内生产总值之比，衡量债务负担。 carry trade：借入低息货币（如日元）购买高息资产（如美债）的策略。 详细中文整理： jcal： 宏观情况不太好。虽然可能伊朗有和解方案，但战争已进入第12周，远没解决。油价推高通胀。polymarket有99%概率5月通胀≥4.2%，专业预言经济师预测cpi会在q2达到6%。我们不是在谈3%，而是4%、5%、6%。这导致债券收益率上升：10年期美债达4.6%。bessant上任时目标是把10年期压到4%以下，现在远超。日本30年国债5.1%，史上最高；英国收益率金融危机以来最高；德国自2011年以来最高。韩国的散户在借钱大量交易ai芯片股——他们之前还在加密货币高位时押注过。friedberg，你的“末日人格”要出来了吗？ friedberg： 当我们已经坐过山车到了顶端，它开始下降了，有什么好担心的呢？重力不可避免。山车会向下冲。全球债务与gdp之比是310%。不管储备货币地位如何，政府层面的支出问题，联邦、州、地方，每个国家都一样。为了保持经济增长、支持现有杠杆，最终会产生级联效应，最终崩溃。当开始破裂时，你会有大通胀，因为货币价值崩溃，然后是印钱，推高资产价值，使你能继续还债——螺旋上升。我们就享受这段旅程吧。现在30年期美债5.2%，日本收益率让很多人担心可能成为信贷危机的催化剂，因为有很多人做套利交易。我们等着看吧。 jcal： “末日博士”在这里了。chamath，你怎么看这些信号？ chamath： 这就是你说的那些“下一次经济衰退的第17次预言”。有一些信号在闪烁。但市场有小小的板块仍然值得投资，如果你想买代表未来的公司，并愿意持有10年，那就买那些公司。其他东西，我觉得你不应该投机，不仅仅因为在牛市，在所有市场都是。随着我年龄增长，市场的起伏给我的快感远比以前少，下行时却让我感觉糟透了。所以我管理自己的方式是：找到几家真正相信的公司，买入很集中的大仓位，然后专注于阅读，埋头做事。这是更理性的做法。 jcal： 那你能在脑子中装多少只股票还能睡得着？5只？10只？ chamath： 5只或更少。最大的那两只可能占我净值的20%和15%，或者40%和20%。取决于时间。关键在于我没有30样东西需要跟踪——我没有那么多时间，我也不够聪明。 gavin： 我们公司管理超过100个仓位，但有30多人的团队。现在三件事可以同时成立：利率上升令人担忧；ai正在发生的事，anthropic的增长速度是历史上前所未有的，而且现在开始盈利了——这改变了整个叙事。技术泡沫时期，10年期和30年期利率远高于现在。当时泡沫时期的cisco交易在100倍远期市盈率。nvidia的实际市盈率可能只有lowteens到midteens。第三件事：霍尔木兹海峡关闭对所有人都坏，但相对美国最好，因为我们在能源、食品上自给自足，成为最大的石油出口国。所以这三件事可以同时成立。在美国，我们有最好的经济、最好的上市公司和初创公司，还是世界上最大的石油生产国之一，我们在良好的状态中。如果bundesbank还在掌权的德国马克还在，我们会面临极高风险，但只是因为我们是在全球高债务、坏邻居中最好的房子，并且我们有ai在墙角，有能源自给。霍尔木兹海峡的每一天关闭，都相对有利于美国的再工业化，就像新冠时那样，让我们更具韧性和自力更生。 jcal： 它是推手。 gavin： 是的。电力是所有制造业和工业的基础输入，美国发电主要用天然气。ng1的价格今年是下降的，而其他地区的lng价格涨了100%到200%。所以霍尔木兹海峡对所有人都不好，但相对对美国好，相对对trump的政策目标好。这也是为什么他不着急。每一天海峡关闭，对美国都是相对有利的，对欧洲、亚洲非常不利。" style="--index: 5">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">05</span>
+                    <span class="timeline-meta">01:21:47–01:32:22</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>宏观市场预警与霍尔木兹海峡局势</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>通胀预期急剧上升：Polymarket有99%概率5月CPI≥4.2%，专业预言经济师预计CPI将在Q2达到6%</li>
+<li>全球债券收益率快速上升：10年期美债达4.6%，日本30年国债5.1%，英国高达金融危机以来最高</li>
+<li>Friedberg发出严重警告，Chamath建议降低投资密度，Gavin提供相对乐观视角</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>CPI：消费者物价指数（Consumer Price Index），衡量通胀的关键指标。</li>
+<li>10年期国债收益率：市场对长期利率、通胀、经济增长预期的综合反映。</li>
+<li>霍尔木兹海峡：中东石油出口的重要通道，地缘政治风险触发点。</li>
+<li>Global Debt/GDP：全球债务与国内生产总值之比，衡量债务负担。</li>
+<li>Carry Trade：借入低息货币（如日元）购买高息资产（如美债）的策略。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> 宏观情况不太好。虽然可能伊朗有和解方案，但战争已进入第12周，远没解决。油价推高通胀。Polymarket有99%概率5月通胀≥4.2%，专业预言经济师预测CPI会在Q2达到6%。我们不是在谈3%，而是4%、5%、6%。这导致债券收益率上升：10年期美债达4.6%。Bessant上任时目标是把10年期压到4%以下，现在远超。日本30年国债5.1%，史上最高；英国收益率金融危机以来最高；德国自2011年以来最高。韩国的散户在借钱大量交易AI芯片股——他们之前还在加密货币高位时押注过。Friedberg，你的“末日人格”要出来了吗？</p>
+<p><strong>Friedberg：</strong> 当我们已经坐过山车到了顶端，它开始下降了，有什么好担心的呢？重力不可避免。山车会向下冲。全球债务与GDP之比是310%。不管储备货币地位如何，政府层面的支出问题，联邦、州、地方，每个国家都一样。为了保持经济增长、支持现有杠杆，最终会产生级联效应，最终崩溃。当开始破裂时，你会有大通胀，因为货币价值崩溃，然后是印钱，推高资产价值，使你能继续还债——螺旋上升。我们就享受这段旅程吧。现在30年期美债5.2%，日本收益率让很多人担心可能成为信贷危机的催化剂，因为有很多人做套利交易。我们等着看吧。</p>
+<p><strong>JCal：</strong> “末日博士”在这里了。Chamath，你怎么看这些信号？</p>
+<p><strong>Chamath：</strong> 这就是你说的那些“下一次经济衰退的第17次预言”。有一些信号在闪烁。但市场有小小的板块仍然值得投资，如果你想买代表未来的公司，并愿意持有10年，那就买那些公司。其他东西，我觉得你不应该投机，不仅仅因为在牛市，在所有市场都是。随着我年龄增长，市场的起伏给我的快感远比以前少，下行时却让我感觉糟透了。所以我管理自己的方式是：找到几家真正相信的公司，买入很集中的大仓位，然后专注于阅读，埋头做事。这是更理性的做法。</p>
+<p><strong>JCal：</strong> 那你能在脑子中装多少只股票还能睡得着？5只？10只？</p>
+<p><strong>Chamath：</strong> 5只或更少。最大的那两只可能占我净值的20%和15%，或者40%和20%。取决于时间。关键在于我没有30样东西需要跟踪——我没有那么多时间，我也不够聪明。</p>
+<p><strong>Gavin：</strong> 我们公司管理超过100个仓位，但有30多人的团队。现在三件事可以同时成立：利率上升令人担忧；AI正在发生的事，Anthropic的增长速度是历史上前所未有的，而且现在开始盈利了——这改变了整个叙事。技术泡沫时期，10年期和30年期利率远高于现在。当时泡沫时期的Cisco交易在100倍远期市盈率。NVIDIA的实际市盈率可能只有lowteens到midteens。第三件事：霍尔木兹海峡关闭对所有人都坏，但相对美国最好，因为我们在能源、食品上自给自足，成为最大的石油出口国。所以这三件事可以同时成立。在美国，我们有最好的经济、最好的上市公司和初创公司，还是世界上最大的石油生产国之一，我们在良好的状态中。如果Bundesbank还在掌权的德国马克还在，我们会面临极高风险，但只是因为我们是在全球高债务、坏邻居中最好的房子，并且我们有AI在墙角，有能源自给。霍尔木兹海峡的每一天关闭，都相对有利于美国的再工业化，就像新冠时那样，让我们更具韧性和自力更生。</p>
+<p><strong>JCal：</strong> 它是推手。</p>
+<p><strong>Gavin：</strong> 是的。电力是所有制造业和工业的基础输入，美国发电主要用天然气。NG1的价格今年是下降的，而其他地区的LNG价格涨了100%到200%。所以霍尔木兹海峡对所有人都不好，但相对对美国好，相对对Trump的政策目标好。这也是为什么他不着急。每一天海峡关闭，对美国都是相对有利的，对欧洲、亚洲非常不利。</p></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="01:32:22–01:40:48 特朗普访华后续与地缘政治棋盘 本段核心内容： 特朗普与xi的会晤看似热闹，但未达成实质性的大交易 中国与俄罗斯正在加强关系 chamath认为谈判桌上有更多未公开的默契 背景解释与关键术语： gcc：海湾合作委员会（gulf cooperation council），包括沙特、阿联酋、卡塔尔等主要石油生产国。 strait of hormuz：霍尔木兹海峡，全球约1/3的海运石油通过这里。 详细中文整理： jcal： 最后一件大事：特朗普和一群科技ceo去和xi会晤，握手、击掌，气氛很好。但出来之后似乎没有实质的政策突破。只卖了一些大豆、飞机，可能还有一些h100/a200芯片给百度等公司。没看到大交易。friedberg，你觉得这更多是表演，还是有什么效果？ friedberg： 问题是，政府是否带着一份大交易离开中国，让所有人觉得有长期伙伴关系？我不认为发生了。有一些声明，关于继续合作、建立额外贸易协议的意思，以及一些飞机和农产品采购承诺。但根本就没有像有些人希望的那样降级紧张局势的大交易。俄罗斯普京今天正和xi会面，这也是表演性的——美国访问之后中俄有了另一个关系纽带。故事没有快乐结局，没有彩虹色的第三章节，将继续戏剧化下去。这个新崛起的大国会继续挑战美国。 jcal： 你期待过一个快乐结局吗？ chamath： 表面看到的东西和紧闭的门后发生的是两回事。不说太多猜测，我认为这次访问是有用的、有成果的。他们在棋盘上对下一步如何走有了一些协调。我猜，这里有美国、中国、伊朗、台湾、委内瑞拉的棋盘，有一组划分方式对双方都有帮助。 gavin： 我可能有一点点不同意。我认为向中国出售落后的nvidia gpu，会降低他们开发自己替代生态系统的可能性，因为那个生态会更耗能，用光学等。有合理的观点认为这对世界是稳定的，是保持美国在ai领先地位和安全控制的最佳路径。我们不得不经历这个辩论有点可惜，因为哪怕有人之前不明白，现在也明白了。我不是说不应该进行辩论，但这是我的看法。 chamath： 我不确定我们有什么分歧，我同意你。我认为表面下的东西才是最重要的——有一些议题不会四色备忘录发布。 jcal： 中美沟通就是好的。中国也讨论过“陷阱”，他们都提出来了。 chamath： 从我的角度，特朗普最大的超能力是能和独裁者、君主、海湾王室建立联系。他看着他们的眼睛，他们互相理解。他毫无问题去访问他们，邀请他们去看ufc比赛。如果xi来美国，特朗普和dana white一起坐在场边，那我们就知道事情会好起来。我猜他可能给了xi在台湾问题上的一些“绿灯”，比如“你参加吧，但别在我的任期内”，可能做一个20年或30年的交接协议。如果有什么传达的，我肯定说了：战争消耗巨量石油，你的石油来自伊朗、委内瑞拉、俄罗斯。现在两个来源（伊朗、委内瑞拉）已经从棋盘上拿走了。如果你做了让我们不喜欢的事，委内瑞拉的石油会消失，美国的、巴西的。我们会告诉gcc的好朋友，很抱歉，我们要关闭霍尔木兹海峡。所以伊朗的、所有中东的石油对中国都没了。你只剩下俄罗斯，靠着俄罗斯的石油和美国、日本、韩国、澳大利亚、英国、法国、德国这个世界打一仗，那可不容易。" style="--index: 6">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">06</span>
+                    <span class="timeline-meta">01:32:22–01:40:48</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>特朗普访华后续与地缘政治棋盘</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>特朗普与Xi的会晤看似热闹，但未达成实质性的大交易</li>
+<li>中国与俄罗斯正在加强关系</li>
+<li>Chamath认为谈判桌上有更多未公开的默契</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>GCC：海湾合作委员会（Gulf Cooperation Council），包括沙特、阿联酋、卡塔尔等主要石油生产国。</li>
+<li>Strait of Hormuz：霍尔木兹海峡，全球约1/3的海运石油通过这里。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> 最后一件大事：特朗普和一群科技CEO去和Xi会晤，握手、击掌，气氛很好。但出来之后似乎没有实质的政策突破。只卖了一些大豆、飞机，可能还有一些H100/A200芯片给百度等公司。没看到大交易。Friedberg，你觉得这更多是表演，还是有什么效果？</p>
+<p><strong>Friedberg：</strong> 问题是，政府是否带着一份大交易离开中国，让所有人觉得有长期伙伴关系？我不认为发生了。有一些声明，关于继续合作、建立额外贸易协议的意思，以及一些飞机和农产品采购承诺。但根本就没有像有些人希望的那样降级紧张局势的大交易。俄罗斯普京今天正和Xi会面，这也是表演性的——美国访问之后中俄有了另一个关系纽带。故事没有快乐结局，没有彩虹色的第三章节，将继续戏剧化下去。这个新崛起的大国会继续挑战美国。</p>
+<p><strong>JCal：</strong> 你期待过一个快乐结局吗？</p>
+<p><strong>Chamath：</strong> 表面看到的东西和紧闭的门后发生的是两回事。不说太多猜测，我认为这次访问是有用的、有成果的。他们在棋盘上对下一步如何走有了一些协调。我猜，这里有美国、中国、伊朗、台湾、委内瑞拉的棋盘，有一组划分方式对双方都有帮助。</p>
+<p><strong>Gavin：</strong> 我可能有一点点不同意。我认为向中国出售落后的NVIDIA GPU，会降低他们开发自己替代生态系统的可能性，因为那个生态会更耗能，用光学等。有合理的观点认为这对世界是稳定的，是保持美国在AI领先地位和安全控制的最佳路径。我们不得不经历这个辩论有点可惜，因为哪怕有人之前不明白，现在也明白了。我不是说不应该进行辩论，但这是我的看法。</p>
+<p><strong>Chamath：</strong> 我不确定我们有什么分歧，我同意你。我认为表面下的东西才是最重要的——有一些议题不会四色备忘录发布。</p>
+<p><strong>JCal：</strong> 中美沟通就是好的。中国也讨论过“陷阱”，他们都提出来了。</p>
+<p><strong>Chamath：</strong> 从我的角度，特朗普最大的超能力是能和独裁者、君主、海湾王室建立联系。他看着他们的眼睛，他们互相理解。他毫无问题去访问他们，邀请他们去看UFC比赛。如果Xi来美国，特朗普和Dana White一起坐在场边，那我们就知道事情会好起来。我猜他可能给了Xi在台湾问题上的一些“绿灯”，比如“你参加吧，但别在我的任期内”，可能做一个20年或30年的交接协议。如果有什么传达的，我肯定说了：战争消耗巨量石油，你的石油来自伊朗、委内瑞拉、俄罗斯。现在两个来源（伊朗、委内瑞拉）已经从棋盘上拿走了。如果你做了让我们不喜欢的事，委内瑞拉的石油会消失，美国的、巴西的。我们会告诉GCC的好朋友，很抱歉，我们要关闭霍尔木兹海峡。所以伊朗的、所有中东的石油对中国都没了。你只剩下俄罗斯，靠着俄罗斯的石油和美国、日本、韩国、澳大利亚、英国、法国、德国这个世界打一仗，那可不容易。</p></div>
+                  </div>
+                </article></div>
+            <p class="empty search-empty" data-search-empty hidden>没有匹配的时间线段落。</p>
+          </section>
+
+          <section id="speakers">
+            <div class="section-head">
+              <h2>人物观点对照</h2>
+              <p>比较嘉宾立场</p>
+            </div>
+            <div class="speaker-grid"><article class="speaker-card" style="--index: 1">
+                  <p class="speaker-kicker">嘉宾 01</p>
+                  <h3>Jason Calacanis</h3>
+                  <div><p>关注AI的公关危机和公众恐惧，强调CEO们用AI做裁员的言论正在加深社会分裂。他对SpaceX IPO估值和AI公司的增长保持积极，但对宏观信号感到担忧。在Karpathy和Gavin的对话中是主持人和串联者。</p></div>
+                </article>
+<article class="speaker-card" style="--index: 2">
+                  <p class="speaker-kicker">嘉宾 02</p>
+                  <h3>Chamath Palihapitiya</h3>
+                  <div><p>高度看好AI和SpaceX的长期价值，认为递归自我改进和Elon的飞轮效应会带来巨大回报。对宏观市场持谨慎态度，建议极度集中在少数看好的头寸。对AI公关危机的解决方式强调整体叙事和最终用户故事，批评CEO们的负面传播。主张美国和中国在AI安全上达成KYC共识。认为特朗普有独特的外交能力。</p></div>
+                </article>
+<article class="speaker-card" style="--index: 3">
+                  <p class="speaker-kicker">嘉宾 03</p>
+                  <h3>David Sacks</h3>
+                  <div><p>本期缺席。</p></div>
+                </article>
+<article class="speaker-card" style="--index: 4">
+                  <p class="speaker-kicker">嘉宾 04</p>
+                  <h3>David Friedberg</h3>
+                  <div><p>长期悲观，认为全球债务/GDP比310%不可持续，通胀和债券收益率上升最终会触发信用危机。对AI的情绪分析深入——认为技术恐惧源于权力不对称和心理冲击（反人类中心），并指出外部势力可能有意推动这种情绪。但认为不能放慢AI，因为全球竞争不可逆。对特朗普访华持冷静态度，认为没有实质进展。看好空间数据中心作为文明备份的长期价值。</p></div>
+                </article>
+<article class="speaker-card" style="--index: 5">
+                  <p class="speaker-kicker">嘉宾 05</p>
+                  <h3>Gavin Baker</h3>
+                  <div><p>提供高度专业和量化的投资视角。对AI的投资价值非常乐观：Anthropic的盈利是转折点，NVIDIA的基本面被低估，ASIC份额蚕食叙事被夸大了。对宏观市场相对有把握：承认利率上行的风险，但认为美国在能源自给、技术和AI基本面方面是全球最佳，相对优势巨大。在芯片估值上指出严重的跨部门低效。对地缘政治看法更鹰派，认为霍尔木兹海峡关闭对美国相对有利。管理超过100个仓位，但认为AI公司的长期基本面正变得极强。</p></div>
+                </article></div>
+          </section>
+
+          <section id="quotes">
+            <div class="section-head">
+              <h2>值得引用的原话</h2>
+              <p>保留关键表达</p>
+            </div>
+            <div class="panel"><ol>
+<li>“Stop breathlessly asking these model makers what they think. Go to the end user and ask the person in the factory that&#x27;s using the model and ask him what he or she thinks.” — <strong>Sham Sankar (引述)</strong></li>
+<p>翻译：“别再喘不过气来问这些模型制造者怎么想了。去找最终用户，去问工厂里正在用模型的人，问他怎么看。”</p>
+</ol>
+<ol>
+<li>“We&#x27;re in the phase now where I think breathlessly talking about every model improvement is a waste of time. There&#x27;s no ROI in it.” — <strong>Chamath</strong></li>
+<p>翻译：“我觉得现在这个阶段，喘不过气来议论每一个模型的改进是在浪费时间，没有投资回报。”</p>
+</ol>
+<ol>
+<li>“It&#x27;s like you reduce humans to a label called the measurer, and then you&#x27;re like, &#x27;I&#x27;m going to lay off all the measurers.&#x27;” — <strong>Chamath</strong></li>
+<p>翻译：“你把人简化成了一个‘计量员’的标签，然后说‘我要裁掉所有计量员’。”</p>
+</ol>
+<ol>
+<li>“You have one thing that nobody else— If you look at the big CEOs, who steps on stage where you&#x27;re always curious, ‘Okay, what has he got up his sleeve?’ The Steve Jobs, ‘Oh, and one more thing.’ This is the only guy at the scale of civilizational, out-of-left-field shit.” — <strong>Chamath</strong></li>
+<p>翻译：“他有一件事没人能做到——看看那些大CEO，谁走上台时你总是好奇‘他又有什么王牌？’就像Steve Jobs的‘哦，还有一件事。’这是唯一一个能在文明层面、出人意料地拿出大杀器的人。”</p>
+</ol>
+<ol>
+<li>“The 3 things can be true: rates going up is very concerning; what is happening with AI right now is absolutely unprecedented; the Strait of Hormuz being closed is relatively best for America.” — <strong>Gavin Baker</strong></li>
+<p>翻译：“三件事可以同时成立：利率上升令人担忧；AI正在发生的绝对史无前例；霍尔木兹海峡关闭对美国相对最有利。”</p>
+</ol>
+<ol>
+<li>“What is the point of being concerned when you have ridden the roller coaster to the top and it is beginning its descent?” — <strong>Friedberg</strong></li>
+<p>翻译：“当我们已经坐过山车到了顶端，它开始下降时，有什么好担心的呢？”</p>
+</ol>
+<ol>
+<li>“I don&#x27;t love the idea of the United States doing it and no one else doing it… I think in a world where we hold hands with China and we are aligned and we trust each other, that&#x27;s much more palatable.” — <strong>Gavin Baker</strong></li>
+<p>翻译：“我不喜欢美国单方面这样做而其他国家不做……我认为在一个我们能和中国联手的世界，我们有协调、彼此信任，那才更容易接受。” （关于AI监管中美合作）</p>
+</ol>
+<ol>
+<li>“Every day the Strait is shut is relatively good for America. It is terrible for Europe. Terrible for Asia.” — <strong>Gavin Baker</strong></li>
+<p>翻译：“每一天霍尔木兹海峡关闭，对美国相对有利。对欧洲是糟糕的，对亚洲也是糟糕的。”</p>
+</ol></div>
+          </section>
+        </div>
+      </div>
+    </main>
+  </div>
+  <script>
+    const progress = document.querySelector("[data-progress]");
+    const searchBox = document.querySelector("[data-search-box]");
+    const topButton = document.querySelector("[data-scroll-top]");
+    const cards = Array.from(document.querySelectorAll("[data-timeline-card]"));
+    const searchEmpty = document.querySelector("[data-search-empty]");
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    function updateProgress() {
+      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      const ratio = scrollable > 0 ? window.scrollY / scrollable : 0;
+      if (progress) {
+        progress.style.width = `${Math.max(0, Math.min(1, ratio)) * 100}%`;
+      }
+    }
+
+    function applySearch() {
+      const query = searchBox.value.trim().toLowerCase();
+      let visibleCount = 0;
+      cards.forEach((card) => {
+        const text = card.getAttribute("data-search") || "";
+        const isVisible = !query || text.includes(query);
+        card.hidden = !isVisible;
+        if (isVisible) {
+          visibleCount += 1;
+        }
+      });
+      if (searchEmpty) {
+        searchEmpty.hidden = !query || visibleCount > 0;
+      }
+    }
+
+    window.addEventListener("scroll", updateProgress, { passive: true });
+    window.addEventListener("resize", updateProgress);
+    if (searchBox) {
+      searchBox.addEventListener("input", applySearch);
+    }
+    if (topButton) {
+      topButton.addEventListener("click", () => {
+        window.scrollTo({
+          top: 0,
+          behavior: prefersReducedMotion.matches ? "auto" : "smooth"
+        });
+      });
+    }
+    updateProgress();
+  </script>
+</body>
+</html>
