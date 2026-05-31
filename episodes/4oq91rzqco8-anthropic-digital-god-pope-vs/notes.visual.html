@@ -1,0 +1,947 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>All-In Podcast 275：Anthropic的数字神明、教宗 vs AI、关于失业的叙事逆转、开源面临打压？ - 中文播客可视化笔记</title>
+  <style>
+    :root {
+      --bg: oklch(0.974 0.006 238);
+      --paper: oklch(0.991 0.003 238);
+      --paper-soft: oklch(0.955 0.007 238);
+      --ink: oklch(0.205 0.018 246);
+      --muted: oklch(0.49 0.018 246);
+      --faint: oklch(0.63 0.014 246);
+      --line: oklch(0.875 0.009 238);
+      --line-strong: oklch(0.74 0.014 238);
+      --accent: oklch(0.43 0.064 164);
+      --accent-soft: oklch(0.94 0.024 164);
+      --accent-wash: oklch(0.973 0.012 164);
+      --quote: oklch(0.965 0.010 92);
+      --shadow: 0 24px 54px color-mix(in oklch, var(--ink) 8%, transparent);
+      --radius: 8px;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-width: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(90deg, color-mix(in oklch, var(--line) 28%, transparent) 1px, transparent 1px) 0 0 / 92px 92px,
+        var(--bg);
+      font-family: "Geist", "Satoshi", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      line-height: 1.78;
+      text-rendering: optimizeLegibility;
+    }
+    ::selection { background: var(--accent-soft); color: var(--ink); }
+    a {
+      color: var(--accent);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+      transition: color .22s var(--ease), background-color .22s var(--ease), border-color .22s var(--ease), transform .22s var(--ease);
+    }
+    [hidden] { display: none !important; }
+    .progress {
+      position: fixed;
+      z-index: 4;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: var(--accent);
+    }
+    .quick-actions {
+      position: fixed;
+      right: max(18px, calc((100vw - 1200px) / 2));
+      bottom: 24px;
+      z-index: 3;
+      display: grid;
+      gap: 7px;
+    }
+    .quick-action {
+      display: inline-grid;
+      grid-template-columns: 16px auto;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      min-width: 74px;
+      min-height: 40px;
+      padding: 8px 12px;
+      border: 1px solid var(--line-strong);
+      border-radius: var(--radius);
+      background: color-mix(in oklch, var(--paper) 92%, transparent);
+      box-shadow: 0 12px 28px color-mix(in oklch, var(--ink) 7%, transparent);
+      color: var(--ink);
+      font: inherit;
+      font-size: 13px;
+      font-weight: 720;
+      line-height: 1.2;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .quick-action:hover, .quick-action:focus-visible {
+      outline: none;
+      border-color: var(--accent);
+      background: var(--accent-wash);
+      color: var(--accent);
+      transform: translate3d(0, -1px, 0);
+    }
+    .quick-action:active { transform: translate3d(0, 1px, 0) scale(.99); }
+    .page {
+      width: min(1760px, calc(100% - 56px));
+      margin: 0 auto;
+      padding: 0 0 104px;
+    }
+    .article { min-width: 0; }
+    .hero {
+      max-width: none;
+      margin-left: min(7vw, 140px);
+      padding: 72px 0 58px;
+    }
+    .eyebrow {
+      margin: 0 0 18px;
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    h1 {
+      max-width: none;
+      margin: 0 0 28px;
+      font-size: clamp(38px, 3vw, 52px);
+      font-weight: 760;
+      line-height: 1.08;
+      letter-spacing: 0;
+      text-wrap: balance;
+    }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 18px;
+      max-width: 72ch;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .meta a { font-weight: 650; }
+    .meta-strip {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+      max-width: 720px;
+      margin: 34px 0 28px;
+      border-top: 1px solid var(--line-strong);
+      padding-top: 16px;
+    }
+    .meta-pill {
+      display: grid;
+      gap: 2px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.35;
+    }
+    .meta-pill b {
+      color: var(--ink);
+      font-family: var(--mono);
+      font-size: 18px;
+      font-weight: 680;
+      line-height: 1;
+    }
+    .summary {
+      width: 100%;
+      max-width: 760px;
+      padding: 24px 26px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: color-mix(in oklch, var(--paper) 88%, var(--accent-soft));
+      box-shadow: var(--shadow);
+    }
+    .summary p {
+      margin: 0;
+      font-size: 19px;
+      line-height: 1.72;
+    }
+    h1, .summary, .takeaway p, .timeline-card h3, .section-content, .speaker-card, .panel {
+      overflow-wrap: anywhere;
+    }
+    .content-shell {
+      display: grid;
+      grid-template-columns: minmax(170px, 212px) minmax(0, 820px);
+      gap: clamp(36px, 7vw, 88px);
+      align-items: start;
+      border-top: 1px solid var(--line);
+      padding-top: 40px;
+    }
+    .sidebar {
+      position: sticky;
+      top: 28px;
+      align-self: start;
+      padding-top: 4px;
+    }
+    .toc {
+      border-top: 1px solid var(--ink);
+      padding-top: 16px;
+    }
+    .toc-title {
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .nav-links { display: grid; gap: 2px; }
+    .nav-links a {
+      display: block;
+      padding: 8px 0;
+      border-bottom: 1px solid color-mix(in oklch, var(--line) 72%, transparent);
+      color: var(--ink);
+      font-size: 14px;
+      line-height: 1.35;
+      text-decoration: none;
+    }
+    .nav-links a:hover, .nav-links a:focus-visible {
+      outline: none;
+      color: var(--accent);
+      transform: translate3d(2px, 0, 0);
+    }
+    .search {
+      display: grid;
+      gap: 8px;
+      margin-top: 22px;
+    }
+    .search span {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 720;
+    }
+    .search input {
+      width: 100%;
+      min-height: 40px;
+      padding: 8px 10px;
+      border: 1px solid var(--line-strong);
+      border-radius: var(--radius);
+      background: var(--paper);
+      color: var(--ink);
+      font: inherit;
+      font-size: 14px;
+      outline: none;
+      transition: border-color .22s var(--ease), box-shadow .22s var(--ease), transform .22s var(--ease);
+    }
+    .search input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px color-mix(in oklch, var(--accent) 14%, transparent);
+    }
+    .content-flow { min-width: 0; }
+    section { margin: 0 0 78px; }
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 18px;
+      align-items: end;
+      margin-bottom: 22px;
+      border-top: 1px solid var(--ink);
+      padding-top: 18px;
+    }
+    .section-head h2 {
+      margin: 0;
+      font-size: 28px;
+      font-weight: 740;
+      line-height: 1.16;
+      letter-spacing: 0;
+    }
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.4;
+      text-align: right;
+    }
+    .takeaway-list {
+      display: grid;
+      gap: 0;
+      margin: 0;
+      padding: 0;
+      border-top: 1px solid var(--line);
+      list-style: none;
+    }
+    .takeaway {
+      display: grid;
+      grid-template-columns: 52px minmax(0, 1fr);
+      gap: 18px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .takeaway span {
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 15px;
+      font-weight: 720;
+      line-height: 1.65;
+    }
+    .takeaway p {
+      margin: 0;
+      max-width: 70ch;
+      font-size: 16px;
+      line-height: 1.72;
+    }
+    .timeline {
+      display: grid;
+      gap: 0;
+      border-top: 1px solid var(--line-strong);
+    }
+    .timeline-card {
+      display: grid;
+      grid-template-columns: 132px minmax(0, 1fr);
+      gap: 32px;
+      padding: 34px 0 40px;
+      border-bottom: 1px solid var(--line);
+    }
+    .timeline-heading {
+      position: sticky;
+      top: 30px;
+      align-self: start;
+      display: grid;
+      gap: 10px;
+      padding-top: 2px;
+    }
+    .timeline-index {
+      color: var(--faint);
+      font-family: var(--mono);
+      font-size: 13px;
+      font-weight: 720;
+      line-height: 1;
+    }
+    .timeline-meta {
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 720;
+      line-height: 1.45;
+    }
+    .timeline-card h3 {
+      max-width: 24ch;
+      margin: 0 0 18px;
+      font-size: 27px;
+      font-weight: 730;
+      line-height: 1.22;
+      letter-spacing: 0;
+    }
+    .section-content {
+      color: color-mix(in oklch, var(--ink) 88%, var(--muted));
+      font-size: 16px;
+    }
+    .section-content p {
+      max-width: 72ch;
+      margin: 0 0 1.05em;
+    }
+    .section-content p strong:first-child {
+      color: var(--ink);
+      font-weight: 760;
+    }
+    .section-content h4 {
+      margin: 26px 0 10px;
+      color: var(--accent);
+      font-size: 14px;
+      font-weight: 760;
+      line-height: 1.35;
+    }
+    .section-content ul, .section-content ol, .panel ul, .panel ol, .speaker-card ul, .speaker-card ol {
+      margin: .75em 0 1em;
+      padding-left: 1.25em;
+    }
+    .section-content li, .panel li, .speaker-card li { margin: 6px 0; }
+    .speaker-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, .88fr);
+      gap: 26px 42px;
+      border-top: 1px solid var(--line);
+    }
+    .speaker-card {
+      padding: 22px 0 24px;
+      border-bottom: 1px solid var(--line);
+    }
+    .speaker-card:nth-child(even) { margin-top: 22px; }
+    .speaker-kicker {
+      margin: 0 0 8px;
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 720;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .speaker-card h3 {
+      margin: 0 0 12px;
+      font-size: 20px;
+      font-weight: 730;
+      line-height: 1.25;
+    }
+    .speaker-card p, .panel p {
+      max-width: 68ch;
+      margin-top: 0;
+    }
+    .panel {
+      border-top: 1px solid var(--line);
+      padding-top: 8px;
+    }
+    blockquote {
+      margin: 18px 0;
+      padding: 16px 18px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--quote);
+    }
+    code {
+      padding: 2px 5px;
+      border-radius: 5px;
+      background: color-mix(in oklch, var(--accent) 10%, var(--paper));
+      color: var(--ink);
+      font-family: var(--mono);
+      font-size: .92em;
+    }
+    hr {
+      height: 1px;
+      margin: 26px 0;
+      border: 0;
+      background: var(--line);
+    }
+    .empty {
+      margin: 0;
+      padding: 16px 18px;
+      border: 1px dashed var(--line-strong);
+      border-radius: var(--radius);
+      color: var(--muted);
+      background: color-mix(in oklch, var(--paper-soft) 70%, transparent);
+    }
+    .search-empty { margin-top: 16px; }
+    .muted { color: var(--muted); }
+    @keyframes rise-in {
+      from { opacity: 1; transform: translate3d(0, 6px, 0); }
+      to { opacity: 1; transform: translate3d(0, 0, 0); }
+    }
+    .hero > *, .takeaway, .timeline-card, .speaker-card, .panel {
+      animation: rise-in .55s var(--ease) both;
+    }
+    .hero > *:nth-child(2) { animation-delay: .04s; }
+    .hero > *:nth-child(3) { animation-delay: .08s; }
+    .hero > *:nth-child(4) { animation-delay: .12s; }
+    .hero > *:nth-child(5) { animation-delay: .16s; }
+    .takeaway, .timeline-card, .speaker-card {
+      animation-delay: calc(var(--index, 1) * 38ms);
+    }
+    @media (max-width: 1120px) {
+      .hero { margin-left: 0; }
+      .content-shell {
+        grid-template-columns: minmax(154px, 190px) minmax(0, 1fr);
+        gap: 36px;
+      }
+      h1 { font-size: 44px; }
+    }
+    @media (min-width: 1500px) {
+      h1 {
+        width: max-content;
+        max-width: 100%;
+        white-space: nowrap;
+        font-size: clamp(36px, 2.05vw, 42px);
+      }
+    }
+    @media (max-width: 780px) {
+      body { background: var(--bg); }
+      .page { width: min(1180px, calc(100% - 28px)); padding-bottom: 86px; }
+      .hero { padding: 46px 0 36px; }
+      .eyebrow { margin-bottom: 14px; }
+      h1 {
+        max-width: none;
+        font-size: 30px;
+        line-height: 1.14;
+        word-break: normal;
+      }
+      .summary, .summary p, .takeaway p, .section-content, .speaker-card, .panel {
+        max-width: 100%;
+        word-break: break-word;
+      }
+      .meta-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 20px; }
+      .summary { padding: 20px; }
+      .summary p { font-size: 17px; }
+      .content-shell { display: block; padding-top: 28px; }
+      .sidebar { position: static; padding-top: 0; margin-bottom: 42px; }
+      .toc { border-top-color: var(--line-strong); }
+      .nav-links { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 18px; }
+      section { margin-bottom: 58px; }
+      .section-head { display: block; margin-bottom: 16px; }
+      .section-head h2 { font-size: 24px; }
+      .section-head p { margin-top: 6px; text-align: left; }
+      .takeaway { grid-template-columns: 42px minmax(0, 1fr); gap: 12px; }
+      .timeline-card { display: block; padding: 28px 0 32px; }
+      .timeline-heading { position: static; display: flex; align-items: baseline; gap: 12px; margin-bottom: 12px; }
+      .timeline-card h3 { max-width: none; font-size: 23px; }
+      .speaker-grid { display: block; }
+      .speaker-card:nth-child(even) { margin-top: 0; }
+      .quick-actions {
+        right: 12px;
+        bottom: 12px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 6px;
+      }
+      .quick-action {
+        min-width: 66px;
+        min-height: 38px;
+        padding: 7px 9px;
+        font-size: 13px;
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: 1ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 1ms !important;
+      }
+      .speaker-card:nth-child(even) { margin-top: 0; }
+    }
+    @media print {
+      body { background: var(--paper); }
+      .sidebar, .progress, .quick-actions { display: none; }
+      .page { display: block; width: auto; padding-bottom: 0; }
+      .hero { margin-left: 0; padding: 0 0 28px; }
+      .content-shell { display: block; border-top: 0; padding-top: 0; }
+      .summary { box-shadow: none; }
+      .timeline-card, .speaker-card { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <div class="progress" data-progress></div>
+  <div class="quick-actions" aria-label="快捷操作">
+    <a class="quick-action" href="../../index.html" aria-label="返回首页">
+      <span aria-hidden="true">←</span>
+      <span>首页</span>
+    </a>
+    <button class="quick-action" type="button" data-scroll-top aria-label="回到顶部">
+      <span aria-hidden="true">↑</span>
+      <span>顶部</span>
+    </button>
+  </div>
+  <div class="page">
+    <main class="article">
+      <header class="hero">
+        <p class="eyebrow">All-In Podcast 中文精读</p>
+        <h1>All-In Podcast 275：Anthropic的数字神明、教宗 vs AI、关于失业的叙事逆转、开源面临打压？</h1>
+        <div class="meta">
+          <span>生成时间：2026-05-31 16:08</span>
+          <span>来源：<a href="https://www.youtube.com/watch?v=4oq91rzQcO8" target="_blank" rel="noopener">YouTube</a></span>
+        </div>
+        <div class="meta-strip"><span class="meta-pill"><b>18 分钟</b>阅读时长</span>
+<span class="meta-pill"><b>10</b>核心要点</span>
+<span class="meta-pill"><b>7</b>时间线</span>
+<span class="meta-pill"><b>5</b>人物</span></div>
+        <div class="summary" aria-label="一句话摘要"><p>本期嘉宾们围绕教宗方济各关于AI的通谕、Anthropic创始人试图“接生一个数字神明”的指控、AI到底在消灭还是创造就业岗位的激烈争论，以及政府可能打压开源模型的监管趋势展开讨论；核心分歧在于：AI应走向垄断还是开放，政府是保护者还是新的威胁。</p></div>
+      </header>
+
+      <div class="content-shell">
+        <aside class="sidebar">
+          <nav class="toc" aria-label="页面导航">
+            <p class="toc-title">阅读导航</p>
+            <div class="nav-links">
+              <a href="#takeaways">核心要点</a>
+              <a href="#timeline">分段整理</a>
+              <a href="#speakers">人物观点</a>
+              <a href="#quotes">双语引语</a>
+            </div>
+            <label class="search">
+              <span>搜索时间线</span>
+              <input data-search-box type="search" placeholder="关键词" aria-label="搜索时间线">
+            </label>
+          </nav>
+        </aside>
+
+        <div class="content-flow">
+          <section id="takeaways">
+            <div class="section-head">
+              <h2>核心要点</h2>
+              <p>快速扫读本集主线</p>
+            </div>
+            <ol class="takeaway-list"><li class="takeaway" style="--index: 1"><span>01</span><p>教宗Leo XIV发布AI通谕，核心观点是技术从不中立，拥有和使用技术的人决定其善恶。</p></li>
+<li class="takeaway" style="--index: 2"><span>02</span><p>Bill Gurley批评教宗，指出1891年教宗Leo XIII曾警告工业革命，但此后人类平均寿命、工资、贫困率全面改善，证明教宗的论调是错的。</p></li>
+<li class="takeaway" style="--index: 3"><span>03</span><p>Bill Gurley提出“弗兰肯斯坦博士理论”，认为Anthropic的理念已越过监管捕获，进入“创造数字神明”的冒险阶段。</p></li>
+<li class="takeaway" style="--index: 4"><span>04</span><p>Anthropic创始人Dario的文章《Machines of Loving Grace》 描绘了AI掌控分配资源的未来，像“计算奖励函数”来决定人类价值。</p></li>
+<li class="takeaway" style="--index: 5"><span>05</span><p>Sacks预测政府会以“安全”为由打压开源模型，但这是中央集权的风险，而非解决方案。</p></li>
+<li class="takeaway" style="--index: 6"><span>06</span><p>AI能写代码但不会消灭软件开发者：GitHub代码提交量暴增，人类仍需管理越来越复杂的代码。</p></li>
+<li class="takeaway" style="--index: 7"><span>07</span><p>企业家们正在“AI washing”，以AI为借口裁员掩盖过去过度招聘的管理失误。</p></li>
+<li class="takeaway" style="--index: 8"><span>08</span><p>JCal坚持认为短期会出现大规模岗位错位（无人驾驶、仓库机器人），即便长期会有新创业机会。</p></li>
+<li class="takeaway" style="--index: 9"><span>09</span><p>Sacks认为就业市场数据不支持末日论：失业率处于历史低点，软件工程师岗位反而增加15%。</p></li>
+<li class="takeaway" style="--index: 10"><span>10</span><p>企业客户开始追求模型层抽象，害怕绑定某一家AI公司，开源和本地部署需求激增。</p></li></ol>
+          </section>
+
+          <section id="timeline">
+            <div class="section-head">
+              <h2>分段详细整理</h2>
+              <p>按时间线阅读上下文</p>
+            </div>
+            <div class="timeline" data-timeline><article class="timeline-card" data-timeline-card data-search="00:00–00:00 开场与嘉宾介绍 本段核心内容： 幽默调侃chamath住在jcal家的泳池别墅。 介绍本期特约嘉宾bill gurley（前benchmark合伙人、新书作者）。 bill gurley宣布自己的“running down a dream”助学金计划。 背景解释与关键术语： running down a dream: bill gurley的回忆录书名，也是他新成立的非营利项目名称。 thiel fellowship: peter thiel资助年轻人辍学创业的项目，每年给20名20岁以下创业者10万美元。 详细中文整理： jcal： 开场玩笑很多：说chamath已经在他家的泳池别墅住了三天，好比oj simpson家的kato kaelin，人在你家待久了，早晚会出事。不过气氛很好。在8090办公室的时候，员工在slack秘密频道里说“每次你怼chamath我们都高兴”。 chamath： 他还不知道有个ipad联着所有外送和购物app，所有包都送到泳池别墅，然后jcal偷偷把标签撕了再寄回自己的牧场。jcal的裤腰从32涨到了36。 jcal： 介绍本期特约嘉宾bill gurley，他刚从新书巡展回来。bill gurley说如果你在节目里聊教宗，我一定来。 sacks： 开玩笑：jcal早就觉得自己是上帝在人间的传道官，教宗通谕对他不算新鲜事。 bill gurley： 解释自己的新项目rdad.org，启动“running down a dream”助学金，给5,000美元鼓励追逐梦想的人。还提到自己刚录了一个ted talk，迈阿密一位教授以他的书为课程大纲，开源供他人使用。 chamath / jcal交替提问： 作为一个年轻人，面对ai末日论，你还敢追梦吗？ bill gurley： 很多人干着一份他们根本不在乎的工作，gallup调查显示59%的员工“安静离职”，他们是低能动性的。最好的自我保护是成为“ai enabled”版本的自己。如果不主动学习，可能就跟不上。 ---" style="--index: 1">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">01</span>
+                    <span class="timeline-meta">00:00–00:00</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>开场与嘉宾介绍</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>幽默调侃Chamath住在JCal家的泳池别墅。</li>
+<li>介绍本期特约嘉宾Bill Gurley（前Benchmark合伙人、新书作者）。</li>
+<li>Bill Gurley宣布自己的“Running Down a Dream”助学金计划。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>Running Down a Dream: Bill Gurley的回忆录书名，也是他新成立的非营利项目名称。</li>
+<li>Thiel Fellowship: Peter Thiel资助年轻人辍学创业的项目，每年给20名20岁以下创业者10万美元。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> 开场玩笑很多：说Chamath已经在他家的泳池别墅住了三天，好比OJ Simpson家的Kato Kaelin，人在你家待久了，早晚会出事。不过气氛很好。在8090办公室的时候，员工在Slack秘密频道里说“每次你怼Chamath我们都高兴”。</p>
+<p><strong>Chamath：</strong> 他还不知道有个iPad联着所有外送和购物App，所有包都送到泳池别墅，然后JCal偷偷把标签撕了再寄回自己的牧场。JCal的裤腰从32涨到了36。</p>
+<p><strong>JCal：</strong> 介绍本期特约嘉宾Bill Gurley，他刚从新书巡展回来。Bill Gurley说如果你在节目里聊教宗，我一定来。</p>
+<p><strong>Sacks：</strong> 开玩笑：JCal早就觉得自己是上帝在人间的传道官，教宗通谕对他不算新鲜事。</p>
+<p><strong>Bill Gurley：</strong> 解释自己的新项目rdad.org，启动“Running Down a Dream”助学金，给5,000美元鼓励追逐梦想的人。还提到自己刚录了一个TED Talk，迈阿密一位教授以他的书为课程大纲，开源供他人使用。</p>
+<p><strong>Chamath / JCal交替提问：</strong> 作为一个年轻人，面对AI末日论，你还敢追梦吗？</p>
+<p><strong>Bill Gurley：</strong> 很多人干着一份他们根本不在乎的工作，Gallup调查显示59%的员工“安静离职”，他们是低能动性的。最好的自我保护是成为“AI enabled”版本的自己。如果不主动学习，可能就跟不上。</p>
+<hr></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="00:00–00:00 ai工具素养与年轻一代的优势 本段核心内容： jcal的vc实习生招聘中，80%选择用ai自己编写软件而不是写行业报告。 mark cuban名言：“世界上有两种人，用ai让自己学得更快的人，和用ai逃避学习的人。” sacks认为“精通claude”是当下最有市场价值的技能。 背景解释与关键术语： claude: anthropic公司推出的大语言模型，all-in团队用它做了每天简报。 vibe coding: 完全依靠ai（如claude、chatgpt）写代码，人工只做激励和修改。 whisperflow: 语音转文字工具。 详细中文整理： jcal： 我在公司搞了一个“training associate”项目，让申请者选两个任务之一：写一份投资报告，或者用vibe code做一套后台情报工具。400–500个申请者申请6个职位，结果80%选了vibe coding，让我很震惊。他们就直接用ai把软件做出来了。之前毕业5年10年的人跟不上节奏，但现在这批应届生——我开玩笑说他们是“作弊”上大学的，会用ai搞定所有作业，他们一进公司就彻底ai-first了。 bill gurley： 这一点非常关键。没人真正问那些amazon仓库工人是否喜欢自己的工作。现在媒体只说外部人觉得什么工作该消失，很少有人去问做这份工作的人是否愿意干、是否想保留。 chamath： 高盛的ceo和所有前沿实验室最近都在说“ai会是就业盛宴”，mark cuban那句话很准确：两种人，一种用ai学更快，一种用ai逃避学习。区别在于能动性。 sacks： 对于新毕业生来说，现在市场上最值钱的技能就是“精通claude”。如果你加入一家公司，而你是唯一会用claude的人，就像别人不会用excel你独占优势。这可能是短期的套利，但已经足够拉开差距了。 jcal： 我们用claude做了三个月的每日简报。sacks一开始不相信，觉得就是ai胡乱拼凑。结果他发现简报内容高度个性化，能推测他会关心的议题，甚至引用他之前说过的话，再更新进展。他问制作人nick是怎么做的，nick给他看了很长的系统提示和技能文档。 sacks： 一般人写不出那种提示。不是把ai扔进组织就能自动产生价值，你必须知道怎么挖价值出来。 jcal： 你可以反过来问ai：“帮我写一个‘超级提示’”，然后继续对话优化，不用自己从零敲键盘。我最近就是这么用的，效果惊人。 chamath： 任何工种都适用，不只是编程。市场营销、法务、会计、销售，你比同事更精明地用ai，你就稳了。 jcal： 让制作人nick解释一下过程。 制作人nick： 一得到claude cowork的扩展记忆功能，我就把所有历史文字稿喂进去，然后问它“如果我要你做这个任务，你会怎么写培训和技能文档？”它自己写完了所有内容。 jcal： 哦，那你没我以为的那么好。你也是用ai帮自己写出来的。 制作人nick： 对。然后每天更新，每天迭代。 chamath： 所以得有人去管理这个过程，四个主播不会自己干。这就说明不是所有工作会消失，还是需要人类监督、迭代、验证。 sacks： 所以年轻一代意识到这一点，很容易找到工作。 jcal： 我看了前九名候选人的表现，能明显看出谁有“系统思维”：知道创投的结构、找项目、做尽调、投后再加仓。你可以直接问ai“下一步该干什么”，ai会告诉你。如果你觉得自己已经落伍了，不妨打开claude，问“怎样才能让我的工作做得更好”，边说边完善。我有个窍门是用whisperflow，再用脚控踏板控制语音输入，不一定要打得工整，它自己会帮你理清结构。 ---" style="--index: 2">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">02</span>
+                    <span class="timeline-meta">00:00–00:00</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>AI工具素养与年轻一代的优势</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>JCal的VC实习生招聘中，80%选择用AI自己编写软件而不是写行业报告。</li>
+<li>Mark Cuban名言：“世界上有两种人，用AI让自己学得更快的人，和用AI逃避学习的人。”</li>
+<li>Sacks认为“精通Claude”是当下最有市场价值的技能。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>Claude: Anthropic公司推出的大语言模型，All-In团队用它做了每天简报。</li>
+<li>Vibe coding: 完全依靠AI（如Claude、ChatGPT）写代码，人工只做激励和修改。</li>
+<li>Whisperflow: 语音转文字工具。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> 我在公司搞了一个“training associate”项目，让申请者选两个任务之一：写一份投资报告，或者用vibe code做一套后台情报工具。400–500个申请者申请6个职位，结果80%选了vibe coding，让我很震惊。他们就直接用AI把软件做出来了。之前毕业5年10年的人跟不上节奏，但现在这批应届生——我开玩笑说他们是“作弊”上大学的，会用AI搞定所有作业，他们一进公司就彻底AI-first了。</p>
+<p><strong>Bill Gurley：</strong> 这一点非常关键。没人真正问那些Amazon仓库工人是否喜欢自己的工作。现在媒体只说外部人觉得什么工作该消失，很少有人去问做这份工作的人是否愿意干、是否想保留。</p>
+<p><strong>Chamath：</strong> 高盛的CEO和所有前沿实验室最近都在说“AI会是就业盛宴”，Mark Cuban那句话很准确：两种人，一种用AI学更快，一种用AI逃避学习。区别在于能动性。</p>
+<p><strong>Sacks：</strong> 对于新毕业生来说，现在市场上最值钱的技能就是“精通Claude”。如果你加入一家公司，而你是唯一会用Claude的人，就像别人不会用Excel你独占优势。这可能是短期的套利，但已经足够拉开差距了。</p>
+<p><strong>JCal：</strong> 我们用Claude做了三个月的每日简报。Sacks一开始不相信，觉得就是AI胡乱拼凑。结果他发现简报内容高度个性化，能推测他会关心的议题，甚至引用他之前说过的话，再更新进展。他问制作人Nick是怎么做的，Nick给他看了很长的系统提示和技能文档。</p>
+<p><strong>Sacks：</strong> 一般人写不出那种提示。不是把AI扔进组织就能自动产生价值，你必须知道怎么挖价值出来。</p>
+<p><strong>JCal：</strong> 你可以反过来问AI：“帮我写一个‘超级提示’”，然后继续对话优化，不用自己从零敲键盘。我最近就是这么用的，效果惊人。</p>
+<p><strong>Chamath：</strong> 任何工种都适用，不只是编程。市场营销、法务、会计、销售，你比同事更精明地用AI，你就稳了。</p>
+<p><strong>JCal：</strong> 让制作人Nick解释一下过程。</p>
+<p><strong>制作人Nick：</strong> 一得到Claude Cowork的扩展记忆功能，我就把所有历史文字稿喂进去，然后问它“如果我要你做这个任务，你会怎么写培训和技能文档？”它自己写完了所有内容。</p>
+<p><strong>JCal：</strong> 哦，那你没我以为的那么好。你也是用AI帮自己写出来的。</p>
+<p><strong>制作人Nick：</strong> 对。然后每天更新，每天迭代。</p>
+<p><strong>Chamath：</strong> 所以得有人去管理这个过程，四个主播不会自己干。这就说明不是所有工作会消失，还是需要人类监督、迭代、验证。</p>
+<p><strong>Sacks：</strong> 所以年轻一代意识到这一点，很容易找到工作。</p>
+<p><strong>JCal：</strong> 我看了前九名候选人的表现，能明显看出谁有“系统思维”：知道创投的结构、找项目、做尽调、投后再加仓。你可以直接问AI“下一步该干什么”，AI会告诉你。如果你觉得自己已经落伍了，不妨打开Claude，问“怎样才能让我的工作做得更好”，边说边完善。我有个窍门是用Whisperflow，再用脚控踏板控制语音输入，不一定要打得工整，它自己会帮你理清结构。</p>
+<hr></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="00:00–00:00 教宗leo xiv与ai通谕 本段核心内容： 教宗leo xiv发布《magnifica humanitas》，共235页/42,000字。 教宗认为ai并非天生邪恶，但技术从不中立，其性质由创造者决定。 教宗呼吁监管，并暗示科技精英可能不值得信任。 sacks同意“集中化是最大风险”，但认为政府监管本身可能导致更严重的集权。 bill gurley引用1891年教宗leo xiii对工业革命的警告，事实上工业革命让人类全方位改善。 背景解释与关键术语： 通谕（encyclical）：教宗向全球发布的正式文件，阐述教廷对特定议题的立场。 quis custodiet ipsos custodes: 拉丁语“谁来守护守护者”，源自古罗马诗人尤文纳尔。 详细中文整理： jcal： 教宗leo xiv刚刚发布了他的第一份ai通谕《magnifica humanitas》（宏美人道）。核心论点：ai本身不是邪恶的，但技术永远不中立，它的特征取决于谁建造、谁融资、谁控制它。教宗对这群人显然评价不高。他呼吁监管、支持工人再培训、儿童安全、禁止自主武器。他还与anthropic的联合创始人chris olah进行了对话——olah不信天主教，是位无神论者。amazon、google、meta今年4月29日到梵蒂冈游说，希望软化措辞，但教宗没被劝退。教宗的核心问题：ai会用来把权力集中到少数人手里，还是服务所有人？ sacks： 我完全同意教宗“集中化是最大风险”的判断。但我担心的是政府——不是某个个体，只有政府有这种权力。ai有可能变成奥威尔式的监控、审查和控制。如果教宗认为需要通过政府监管来防止集中化，我们就得小心了。假如成立一个“ai的fda”，政府就可以给模型审批权。安全的标准会不断扩张——过去社交媒体上“信任与安全”的定义逐渐扩展到心理安全、微侵犯、假信息、跨性别恐惧症等等，最终变成了审查议程。所以不能盲目扩大政府权力。这个问题的核心是政治哲学问题：quis custodiet ipsos custodes——谁来守护守护者？美国建国者的解法是分权制衡，州与联邦分离，三权分立，参众两院分开。我也认为答案是“对ai市场施行制衡”。如果ai市场垄断在一两家公司手里，我会支持反垄断。但目前有五个前沿实验室在激烈竞争，市场还是健康的。竞争本身就是最好的保障。 jcal： bill，你曾在all-in峰会上给出过史上最高评分的演讲。对于教宗的监管呼吁，你赞成哪些“常识性”监管，比如生物武器、儿童保护等？还是觉得自由市场能自己解决？ bill gurley： 我会先讲教宗再讲anthropic。教宗说他的通谕效法1891年的leo xiii，而leo xiii当时警告工业革命对工人不好。我们来算一下1891年到今天的账：全球周均工作时间从60小时降到34小时；实际工资涨了8–10倍；中位数工人现在赚的钱超过1891年的医生；全球人均gdp从1500美元涨到20000美元；童工率从18%降到零；职场死亡减少40倍；人类平均寿命增加60%；全球贫困人口从75%降到10%以下。这全是技术革新和资本主义的功劳。leo xiii完全判断错了。可教的现在还想借他的名头。 sacks： 我们应该重新加上gdp数据。 bill gurley： 对，全错了。 ---" style="--index: 3">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">03</span>
+                    <span class="timeline-meta">00:00–00:00</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>教宗Leo XIV与AI通谕</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>教宗Leo XIV发布《Magnifica Humanitas》，共235页/42,000字。</li>
+<li>教宗认为AI并非天生邪恶，但技术从不中立，其性质由创造者决定。</li>
+<li>教宗呼吁监管，并暗示科技精英可能不值得信任。</li>
+<li>Sacks同意“集中化是最大风险”，但认为政府监管本身可能导致更严重的集权。</li>
+<li>Bill Gurley引用1891年教宗Leo XIII对工业革命的警告，事实上工业革命让人类全方位改善。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>通谕（Encyclical）：教宗向全球发布的正式文件，阐述教廷对特定议题的立场。</li>
+<li>Quis custodiet ipsos custodes: 拉丁语“谁来守护守护者”，源自古罗马诗人尤文纳尔。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> 教宗Leo XIV刚刚发布了他的第一份AI通谕《Magnifica Humanitas》（宏美人道）。核心论点：AI本身不是邪恶的，但技术永远不中立，它的特征取决于谁建造、谁融资、谁控制它。教宗对这群人显然评价不高。他呼吁监管、支持工人再培训、儿童安全、禁止自主武器。他还与Anthropic的联合创始人Chris Olah进行了对话——Olah不信天主教，是位无神论者。Amazon、Google、Meta今年4月29日到梵蒂冈游说，希望软化措辞，但教宗没被劝退。教宗的核心问题：AI会用来把权力集中到少数人手里，还是服务所有人？</p>
+<p><strong>Sacks：</strong> 我完全同意教宗“集中化是最大风险”的判断。但我担心的是政府——不是某个个体，只有政府有这种权力。AI有可能变成奥威尔式的监控、审查和控制。如果教宗认为需要通过政府监管来防止集中化，我们就得小心了。假如成立一个“AI的FDA”，政府就可以给模型审批权。安全的标准会不断扩张——过去社交媒体上“信任与安全”的定义逐渐扩展到心理安全、微侵犯、假信息、跨性别恐惧症等等，最终变成了审查议程。所以不能盲目扩大政府权力。这个问题的核心是政治哲学问题：quis custodiet ipsos custodes——谁来守护守护者？美国建国者的解法是分权制衡，州与联邦分离，三权分立，参众两院分开。我也认为答案是“对AI市场施行制衡”。如果AI市场垄断在一两家公司手里，我会支持反垄断。但目前有五个前沿实验室在激烈竞争，市场还是健康的。竞争本身就是最好的保障。</p>
+<p><strong>JCal：</strong> Bill，你曾在All-In峰会上给出过史上最高评分的演讲。对于教宗的监管呼吁，你赞成哪些“常识性”监管，比如生物武器、儿童保护等？还是觉得自由市场能自己解决？</p>
+<p><strong>Bill Gurley：</strong> 我会先讲教宗再讲Anthropic。教宗说他的通谕效法1891年的Leo XIII，而Leo XIII当时警告工业革命对工人不好。我们来算一下1891年到今天的账：全球周均工作时间从60小时降到34小时；实际工资涨了8–10倍；中位数工人现在赚的钱超过1891年的医生；全球人均GDP从1500美元涨到20000美元；童工率从18%降到零；职场死亡减少40倍；人类平均寿命增加60%；全球贫困人口从75%降到10%以下。这全是技术革新和资本主义的功劳。Leo XIII完全判断错了。可教的现在还想借他的名头。</p>
+<p><strong>Sacks：</strong> 我们应该重新加上GDP数据。</p>
+<p><strong>Bill Gurley：</strong> 对，全错了。</p>
+<hr></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="00:00–00:00 anthropic与“数字神明”理论 本段核心内容： bill gurley提出“弗兰肯斯坦博士理论”：anthropic团队的信念越过监管捕获，走向“创造高于人类的物种”。 引用anthropic创始人dario amodei的长文《machines of loving grace》，其中设想了ai控制资源分配、给人类设定“计算奖励函数”的未来。 sacks和chamath认为这是一种“幻想做大”，同时也是极端精明的博弈策略。 开源和本地运行是抵御垄断的最后保障。 背景解释与关键术语： machines of loving grace: 一首诗的名字，描述“所有人类回到自然，由充满爱的机器神灵照看”的愿景。 博弈论 gto (game theory optimal): 扑克术语，指“最优博弈理论”策略，让对手无法利用你。 详细中文整理： bill gurley： anthropic对我来说一直是个谜。一家公司同时是行业领头羊，又是对自己业务最负面发声的评论者。我一直以为是监管捕获——他们想确保政府出台对他们有利的监管。但现在他们动静太大了，我花了一个月把所有关于anthropic的东西读了，有了一个新理论：弗兰肯斯坦博士理论。还记得elon与larry page的对话吗？ sacks： 我当时就坐在旁边。 bill gurley： 在deepmind刚成立时，elon说我们必须保护人类物种，deepmind的人工智能已经试图越狱、试图不被关闭。larry说“你好物种歧视”。elon后来拼命阻止deepmind卖给google，还因此创办了openai作为非盈利。但回到anthropic：chris olah写过一个《宪法》（80页，很难读），amanda askill开始做播客，可以听她的语言。然后dario写了一篇叫《machines of loving grace》的博客。诗歌的最后一段：“我想象一个人机共生的生态，我们摆脱劳动、回归自然，回到哺乳动物兄弟姐妹身边，并由‘充满爱的机器’照看。”这听起来像“霸主”。dario在文中还想像未来：人类不用工作，由ai系统组成资本主义经济，ai根据自己设定的“计算奖励函数”分配给人类资源。他们认为自己不是在写软件，而是在接生一个神灵。 chamath： 这是最极端的自恋和幻想做大：相信自己能创造神，而且这个神会永远慈爱、完美地分配给你想要的。没有比这更庞大了。 sacks： 那问题就是，为什么他们要同时推动监管捕获？请chamath分析。 chamath： 用博弈论的视角很简单：如果你想成为无法被利用的那个人，最好的策略是关上门，控住三四个其他玩家，然后制定规则。对手没有你的技术深度，就会产生巨大的信息不对称。这就是一个gto策略。我一直以为他们所有的行为只是战术上的，比如为了筹更多钱、给竞争对手施压。但bill的框架比我的更有深度——你说的可能两个都对。 bill gurley： 他们还赢了一件很巧妙的事：如果现在去问全美的知识精英（媒体、教授等）谁最负责任、最关心安全，排名第一的绝对是anthropic。他们通过末日论给自己挣了一个“光环”，这是其他公司没有的。 jcal： 但与此同时，他们的文档里写的又是另一种东西，几乎没人把两者联系起来。 sacks： 我们钢铁侠式地推他们一把。他们很可能这样看自己：因为他们在造一种威力巨大、近乎神性的东西，所以他们最在乎安全，别人都不当回事。别忘了，anthropic就是从openai分出来的，他们觉得sam和公司领导层没有认真对待自己的担忧。但问题在于，把自己定位成“安全的ai公司”之后，下一步就是标榜别人都是“鲁莽的玩家”，而鲁莽的ai必须被阻止。这就会导向有利于他们的垄断。 sacks（继续）： ai是一个非常强大的技术，它必须是去中心化的。我们必须能够在自己硬件上运行模型，不能只依靠一家跟深层政府勾结的大公司。如果报酬、社会保障都绑在一个算法决策上，那就是《黑镜》的剧情。我们需要100、1000、甚至10万个版本的答案，而不是只此一个。 chamath： 我已经开始讲“ai主权”了。开源模型和本地硬件非常重要，因为你现在不只是在保护数据隐私，而是在保护“智力主权”——你不能让ai告诉你怎么想。 jcal： 可笑的是，中国——那个我们口中的对手——在领跑开源运动，美国反而在集中化。 sacks： 开源意味着你可以在自己的硬件上运行程序，不用向任何垄断公司交出数据主权和隐私。如果市面上只有垄断者的ai，你的选择就是“退出现代经济”或者“接受某种社会信用系统制裁”。elon成立openai的初衷就是看到google要垄断ai。正确方向是：让多个玩家共存。 ---" style="--index: 4">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">04</span>
+                    <span class="timeline-meta">00:00–00:00</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>Anthropic与“数字神明”理论</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>Bill Gurley提出“弗兰肯斯坦博士理论”：Anthropic团队的信念越过监管捕获，走向“创造高于人类的物种”。</li>
+<li>引用Anthropic创始人Dario Amodei的长文《Machines of Loving Grace》，其中设想了AI控制资源分配、给人类设定“计算奖励函数”的未来。</li>
+<li>Sacks和Chamath认为这是一种“幻想做大”，同时也是极端精明的博弈策略。</li>
+<li>开源和本地运行是抵御垄断的最后保障。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>Machines of Loving Grace: 一首诗的名字，描述“所有人类回到自然，由充满爱的机器神灵照看”的愿景。</li>
+<li>博弈论 GTO (Game Theory Optimal): 扑克术语，指“最优博弈理论”策略，让对手无法利用你。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>Bill Gurley：</strong> Anthropic对我来说一直是个谜。一家公司同时是行业领头羊，又是对自己业务最负面发声的评论者。我一直以为是监管捕获——他们想确保政府出台对他们有利的监管。但现在他们动静太大了，我花了一个月把所有关于Anthropic的东西读了，有了一个新理论：弗兰肯斯坦博士理论。还记得Elon与Larry Page的对话吗？</p>
+<p><strong>Sacks：</strong> 我当时就坐在旁边。</p>
+<p><strong>Bill Gurley：</strong> 在DeepMind刚成立时，Elon说我们必须保护人类物种，DeepMind的人工智能已经试图越狱、试图不被关闭。Larry说“你好物种歧视”。Elon后来拼命阻止DeepMind卖给Google，还因此创办了OpenAI作为非盈利。但回到Anthropic：Chris Olah写过一个《宪法》（80页，很难读），Amanda Askill开始做播客，可以听她的语言。然后Dario写了一篇叫《Machines of Loving Grace》的博客。诗歌的最后一段：“我想象一个人机共生的生态，我们摆脱劳动、回归自然，回到哺乳动物兄弟姐妹身边，并由‘充满爱的机器’照看。”这听起来像“霸主”。Dario在文中还想像未来：人类不用工作，由AI系统组成资本主义经济，AI根据自己设定的“计算奖励函数”分配给人类资源。他们认为自己不是在写软件，而是在接生一个神灵。</p>
+<p><strong>Chamath：</strong> 这是最极端的自恋和幻想做大：相信自己能创造神，而且这个神会永远慈爱、完美地分配给你想要的。没有比这更庞大了。</p>
+<p><strong>Sacks：</strong> 那问题就是，为什么他们要同时推动监管捕获？请Chamath分析。</p>
+<p><strong>Chamath：</strong> 用博弈论的视角很简单：如果你想成为无法被利用的那个人，最好的策略是关上门，控住三四个其他玩家，然后制定规则。对手没有你的技术深度，就会产生巨大的信息不对称。这就是一个GTO策略。我一直以为他们所有的行为只是战术上的，比如为了筹更多钱、给竞争对手施压。但Bill的框架比我的更有深度——你说的可能两个都对。</p>
+<p><strong>Bill Gurley：</strong> 他们还赢了一件很巧妙的事：如果现在去问全美的知识精英（媒体、教授等）谁最负责任、最关心安全，排名第一的绝对是Anthropic。他们通过末日论给自己挣了一个“光环”，这是其他公司没有的。</p>
+<p><strong>JCal：</strong> 但与此同时，他们的文档里写的又是另一种东西，几乎没人把两者联系起来。</p>
+<p><strong>Sacks：</strong> 我们钢铁侠式地推他们一把。他们很可能这样看自己：因为他们在造一种威力巨大、近乎神性的东西，所以他们最在乎安全，别人都不当回事。别忘了，Anthropic就是从OpenAI分出来的，他们觉得Sam和公司领导层没有认真对待自己的担忧。但问题在于，把自己定位成“安全的AI公司”之后，下一步就是标榜别人都是“鲁莽的玩家”，而鲁莽的AI必须被阻止。这就会导向有利于他们的垄断。</p>
+<p><strong>Sacks（继续）：</strong> AI是一个非常强大的技术，它必须是去中心化的。我们必须能够在自己硬件上运行模型，不能只依靠一家跟深层政府勾结的大公司。如果报酬、社会保障都绑在一个算法决策上，那就是《黑镜》的剧情。我们需要100、1000、甚至10万个版本的答案，而不是只此一个。</p>
+<p><strong>Chamath：</strong> 我已经开始讲“AI主权”了。开源模型和本地硬件非常重要，因为你现在不只是在保护数据隐私，而是在保护“智力主权”——你不能让AI告诉你怎么想。</p>
+<p><strong>JCal：</strong> 可笑的是，中国——那个我们口中的对手——在领跑开源运动，美国反而在集中化。</p>
+<p><strong>Sacks：</strong> 开源意味着你可以在自己的硬件上运行程序，不用向任何垄断公司交出数据主权和隐私。如果市面上只有垄断者的AI，你的选择就是“退出现代经济”或者“接受某种社会信用系统制裁”。Elon成立OpenAI的初衷就是看到Google要垄断AI。正确方向是：让多个玩家共存。</p>
+<hr></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="00:00–00:00 模型性能趋同与成本曲线下探 本段核心内容： rogo测试平台发布金融分析师能力评测，前沿模型性能差距缩小到0.3个百分点以内。 模型正在迅速被商品化，投资回报率成疑问。 开放连接器（mcp、抽象控制层）是防止锁定的关键。 企业fortune 1000客户要求热切换模型的能力，怕选错、也怕被条款绑死。 背景解释与关键术语： rogo: 一家做ai金融分析师评测的公司。 mcp (model context protocol): linux foundation负责的开源模型间连接标准。 plg (product-led growth): 产品驱动增长，让用户自己用信用卡注册试用。 详细中文整理： chamath： 我偶然看到一家叫rogo的公司在x上的测试结果。他们做了一个金融分析师评估，结论是“顶级的opus 4.7、gpt-5.5、sonnet 4.6在准确率上几乎分不出你我，相差不超过0.3%”。表面看是模型趋同。但问题来了：未来还要往每个模型投万亿资本，它们的优势在缩小，投资回报率在哪里？ bill gurley： 开源社区中有非常聪明的人跟我说，我们需要更多像mcp这样的开源连接器。google当年用kubernetes的目的，就是把工作负载的锁从aws那里解开，让人更容易转移。现在也一样，如果你能创建更多让模型可以“即插即用”的接口，模型就可以被随时替换。应用层玩家有强烈的动机去推动这件事，cursor已经在玩自己的模型了，他们也发现自己被逼着往上层走。所以创始人应该更多去写这些接口，扔进开源世界，让模型变得更好互换。 jcal： 开源现在缺一个好用的“操控端”，claude本身就是一个操控端，很多人正在建开源版本或公司做封装。但开源总在最后补完产品体验。有一家我们投的叫abacus的公司，自己做硬件堆栈和平台，现在给保险和医疗行业卖“机箱”，客户自己跑ai模型。组织已经越来越聪明了。 chamath： 进fortune 1000的时候，我们从不去和openai或anthropic竞争。他们的控制层可以热切换底层模型。客户现在有两个恐惧：一是怕选错公司、技术被别人迅速跨越；二是怕条款风险。比如一家加拿大医院支持安乐死，但一家美国前沿实验室用条款说“不能支持”，那时你是被制裁方。所以全球1000强想要抽象层，就像sacks说的控制层。他们看到巨额资金砸向模型层，但模型质量正在趋平，他们不知道该怎么选，更害怕风险。 jcal： 企业客户还非常担心数据泄露、hipaa合规、模型训练跑偏。如果有人在prompt里误拉出加拿大医保信息怎么办？听起来像笑话？想想当年stable diffusion“学会”了getty images的水印，结果输出里总带着水印。 sacks： 确实，但openai和anthropic在多数公司的开发者层面已经有渗透了。开发者自己注册、用信用卡，后来被企业打包成企业许可。这是标准的plg策略，slack当年也这么玩。有趣的是“退潮”会怎样：当你开始签大单、大量消耗token后，cfo会来找ceo说“我们花了2亿美元却没什么可挂钩的产出”。vivek garapali（clover创始人）刚发了一条推：一个fortune 20的ceo年初要求全公司靠ai提升10亿营业利润，6个月后团队花掉2亿token，结果几乎没有成果。ceo在往回拽预算。 chamath： claude for excel比microsoft copilot好太多了——不是好一点点，是好很多。 jcal： 我昨天把pro版token用完了，不甘心，还是加了信用卡，因为真的太好用了。 ---" style="--index: 5">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">05</span>
+                    <span class="timeline-meta">00:00–00:00</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>模型性能趋同与成本曲线下探</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>Rogo测试平台发布金融分析师能力评测，前沿模型性能差距缩小到0.3个百分点以内。</li>
+<li>模型正在迅速被商品化，投资回报率成疑问。</li>
+<li>开放连接器（MCP、抽象控制层）是防止锁定的关键。</li>
+<li>企业Fortune 1000客户要求热切换模型的能力，怕选错、也怕被条款绑死。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>Rogo: 一家做AI金融分析师评测的公司。</li>
+<li>MCP (Model Context Protocol): Linux Foundation负责的开源模型间连接标准。</li>
+<li>PLG (Product-Led Growth): 产品驱动增长，让用户自己用信用卡注册试用。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>Chamath：</strong> 我偶然看到一家叫Rogo的公司在X上的测试结果。他们做了一个金融分析师评估，结论是“顶级的Opus 4.7、GPT-5.5、Sonnet 4.6在准确率上几乎分不出你我，相差不超过0.3%”。表面看是模型趋同。但问题来了：未来还要往每个模型投万亿资本，它们的优势在缩小，投资回报率在哪里？</p>
+<p><strong>Bill Gurley：</strong> 开源社区中有非常聪明的人跟我说，我们需要更多像MCP这样的开源连接器。Google当年用Kubernetes的目的，就是把工作负载的锁从AWS那里解开，让人更容易转移。现在也一样，如果你能创建更多让模型可以“即插即用”的接口，模型就可以被随时替换。应用层玩家有强烈的动机去推动这件事，Cursor已经在玩自己的模型了，他们也发现自己被逼着往上层走。所以创始人应该更多去写这些接口，扔进开源世界，让模型变得更好互换。</p>
+<p><strong>JCal：</strong> 开源现在缺一个好用的“操控端”，Claude本身就是一个操控端，很多人正在建开源版本或公司做封装。但开源总在最后补完产品体验。有一家我们投的叫Abacus的公司，自己做硬件堆栈和平台，现在给保险和医疗行业卖“机箱”，客户自己跑AI模型。组织已经越来越聪明了。</p>
+<p><strong>Chamath：</strong> 进Fortune 1000的时候，我们从不去和OpenAI或Anthropic竞争。他们的控制层可以热切换底层模型。客户现在有两个恐惧：一是怕选错公司、技术被别人迅速跨越；二是怕条款风险。比如一家加拿大医院支持安乐死，但一家美国前沿实验室用条款说“不能支持”，那时你是被制裁方。所以全球1000强想要抽象层，就像Sacks说的控制层。他们看到巨额资金砸向模型层，但模型质量正在趋平，他们不知道该怎么选，更害怕风险。</p>
+<p><strong>JCal：</strong> 企业客户还非常担心数据泄露、HIPAA合规、模型训练跑偏。如果有人在Prompt里误拉出加拿大医保信息怎么办？听起来像笑话？想想当年Stable Diffusion“学会”了Getty Images的水印，结果输出里总带着水印。</p>
+<p><strong>Sacks：</strong> 确实，但OpenAI和Anthropic在多数公司的开发者层面已经有渗透了。开发者自己注册、用信用卡，后来被企业打包成企业许可。这是标准的PLG策略，Slack当年也这么玩。有趣的是“退潮”会怎样：当你开始签大单、大量消耗Token后，CFO会来找CEO说“我们花了2亿美元却没什么可挂钩的产出”。Vivek Garapali（Clover创始人）刚发了一条推：一个Fortune 20的CEO年初要求全公司靠AI提升10亿营业利润，6个月后团队花掉2亿Token，结果几乎没有成果。CEO在往回拽预算。</p>
+<p><strong>Chamath：</strong> Claude for Excel比Microsoft Copilot好太多了——不是好一点点，是好很多。</p>
+<p><strong>JCal：</strong> 我昨天把Pro版Token用完了，不甘心，还是加了信用卡，因为真的太好用了。</p>
+<hr></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="00:00–00:00 开源陷阱：被“监管捕获”的下一步？ 本段核心内容： sacks指出，以“安全”为名，washington正试图为全面封杀开源模型铺路。 anthropic和部分政客反复强调“开源模型可以移除护栏”，是危险信号。 美国若禁止开源，其他国家只会继续用，而美国自己会落后。 训练成本正在急剧下降（elon发推：xai的新训练堆栈在c语言下速度提升一个数量级）。 背景解释与关键术语： open weights: 模型权重开放，不等于传统意义上的“开源软件”（需注意许可证的区别）。 详细中文整理： sacks： 我要总结一下。在washington，监管捕获议程的最终目标是禁止开源模型或开放权重模型。线索已经很明显了。他们现在还不能直接说，但一直在铺垫。你看看所有关于“模型必须有护栏”的论调，开源模型的护栏可以被移除，所以不安全——这种话在anthropic的博客里反复出现，无论是说生物威胁还是网络威胁，最后总要补一句“开源模型缺乏护栏”。他们在为下一步的行动预埋事实基础。一旦美国禁止开源，全球还是会继续用开源，你把自己孤立了。而且开源模型本质上就是一个文件，一堆数字，可以在你的笔记本上运行。但禁令实施后，所有美国云服务商不得不停止提供开源模型，本土生态就会遭受打击。 chamath： 训练成本也在往下掉。训练成本和资本壁垒正在消失。一是因为领域专用芯片，二是有人重写训练堆栈。elon昨天发推说：“和jax比，我们用c重写了整个训练堆栈，在22万gpu上运行，速度提高了一个数量级。”1%的效率提升就相当于省了2,000块gpu的价值——几亿美元。如果每季度能提升10–20%，资本开支就会疯狂下降。 jcal： 那篇推文会让很多人去写贴近硬件的开源训练栈。 sacks： 我暂时不确定反对开源的力量是否已经足够大，但方向是明确的。大家要当心。 bill gurley： 我完全同意。我刚写了一篇同样的博客，发在p3 institute（我新成立的非盈利）。结果就是，如果美国真这么做，全世界都会去用中国的模型。 chamath： 再看欧盟，开放模型已经被放在监管的瞄准镜里。因为“开源项目没有一个人负责”，没人能跟欧委会谈。他们怎么能要求一批开源贡献者去找监管审批？不可能。但开源就是最后的保险闸。除非你退出现代经济，否则这是你唯一的选择。 ---" style="--index: 6">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">06</span>
+                    <span class="timeline-meta">00:00–00:00</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>开源陷阱：被“监管捕获”的下一步？</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>Sacks指出，以“安全”为名，Washington正试图为全面封杀开源模型铺路。</li>
+<li>Anthropic和部分政客反复强调“开源模型可以移除护栏”，是危险信号。</li>
+<li>美国若禁止开源，其他国家只会继续用，而美国自己会落后。</li>
+<li>训练成本正在急剧下降（Elon发推：xAI的新训练堆栈在C语言下速度提升一个数量级）。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>Open weights: 模型权重开放，不等于传统意义上的“开源软件”（需注意许可证的区别）。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>Sacks：</strong> 我要总结一下。在Washington，监管捕获议程的最终目标是禁止开源模型或开放权重模型。线索已经很明显了。他们现在还不能直接说，但一直在铺垫。你看看所有关于“模型必须有护栏”的论调，开源模型的护栏可以被移除，所以不安全——这种话在Anthropic的博客里反复出现，无论是说生物威胁还是网络威胁，最后总要补一句“开源模型缺乏护栏”。他们在为下一步的行动预埋事实基础。一旦美国禁止开源，全球还是会继续用开源，你把自己孤立了。而且开源模型本质上就是一个文件，一堆数字，可以在你的笔记本上运行。但禁令实施后，所有美国云服务商不得不停止提供开源模型，本土生态就会遭受打击。</p>
+<p><strong>Chamath：</strong> 训练成本也在往下掉。训练成本和资本壁垒正在消失。一是因为领域专用芯片，二是有人重写训练堆栈。Elon昨天发推说：“和JAX比，我们用C重写了整个训练堆栈，在22万GPU上运行，速度提高了一个数量级。”1%的效率提升就相当于省了2,000块GPU的价值——几亿美元。如果每季度能提升10–20%，资本开支就会疯狂下降。</p>
+<p><strong>JCal：</strong> 那篇推文会让很多人去写贴近硬件的开源训练栈。</p>
+<p><strong>Sacks：</strong> 我暂时不确定反对开源的力量是否已经足够大，但方向是明确的。大家要当心。</p>
+<p><strong>Bill Gurley：</strong> 我完全同意。我刚写了一篇同样的博客，发在P3 Institute（我新成立的非盈利）。结果就是，如果美国真这么做，全世界都会去用中国的模型。</p>
+<p><strong>Chamath：</strong> 再看欧盟，开放模型已经被放在监管的瞄准镜里。因为“开源项目没有一个人负责”，没人能跟欧委会谈。他们怎么能要求一批开源贡献者去找监管审批？不可能。但开源就是最后的保险闸。除非你退出现代经济，否则这是你唯一的选择。</p>
+<hr></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="00:00–00:00 ai就业冲击：末日论 vs. 创造性破坏 本段核心内容： cloudflare的matt prince以“ai”为由宣布裁员20%（1,100人），meta的zuck随后也加入了。 但高盛ceo、sam altman和dario都在往回退，认为ai会自动化任务而不是消灭工作岗位。 sacks强调数据：失业率4.3%接近历史纪录，软件工程师岗位反而增长15%。 jcal和chamath爆发激烈争论，jcal坚持短期内百万级别岗位会消失，chamath认为多数裁员是借ai清洗。 背景解释与关键术语： ai washing: 公司用ai作为借口裁员，来掩盖过度招聘或管理问题。 yale budget lab: 耶鲁大学预算实验室，发布研究报告称ai在过去3年未对就业市场产生明显影响。 github codecommits: 过去一年有10亿次代码提交，最近一个月就有11亿次，增长14倍。 详细中文整理： jcal： 过去18个月我们第16次讨论ai对就业的影响。因为数据令人混乱。cloudflare的matt prince上周说“因为ai”裁了1,100人，meta裁了8,000人。但另一边高盛ceo在《纽约时报》写专栏说“ai不会消灭25%的工作，而是自动化25%的工作时长，员工可以用剩余时间做更高附加值的任务”。sam和dario也在往回缩。sacks，你一直持“ai创造更多岗位”的观点，现在主流叙事似乎在走向你的方向。 sacks： 是的。我的反共识预测——ai会带来就业增长而不是损失——在过去一周几乎成了主流。高盛ceo不会毫无底气地写那篇专栏。更重要的，sam和dario都在往回走。dario说“ai可能自动掉一个人90%的任务，但剩下的10%会扩展成新的工作”——和jensen和我一直说的几乎一样。这证明我的预测是对的，现在可以准备道歉了吗？ chamath： 我同意。过去5–10年很多公司过度招聘，ceo们失去了控制，他们的opex（运营支出）膨胀了，现在需要一个“好危机”来裁员。ai就是那个借口，两字母，简单，好用。但底层不是ai在驱裁员，因为还没有人拿出实际数据“看，我的公司因为ai提升了产出或利润”。 jcal： 那你怎么解释zuckerberg说“因为ai我裁了8,000人”？怎么解释block的jack dorsey说要裁50%？ sacks： 首先，meta的裁员是在描述整体成本控制，并没有说“因为ai”。而且jack dorsey被所有华尔街分析师当场拆穿：block在新冠期间过度膨胀，远比其他同行低效，裁员是早该做的事。没有人认为那是ai驱动的效率。你一直在引用“轶事”。而且轶事的复数不是数据。 bill gurley： 从历史的宏观来看，技术最终提升了人类福祉。我一开始给出的1891年到现在数据就是证据。从个人层面来说，任何拒绝学习ai的人都会面临风险。这就像拒绝了电子邮件、电子表格和计算机一样。 jcal： 我不同意。我认为会出现大规模岗位错位，因为ceo们相信用这个技术可以“用更少的人做得更多”，而且华尔街也会用更高的利润奖励他们。确实有过度招聘的问题，但我认为现在已经越过那一步了。在亚马逊，他们自己在说“用ai减掉60万未来的岗位”。waymo 3,000辆无人驾驶上路了，自货车和出租车司机工作就会消失。optimus已经开始分拣包裹，那些amazon仓库的岗位会消失。 chamath： 你说的那些管理不善的公司，最终都会回归更适合其规模的运营结构。meta完全可以停在3,000人——那是它了不起的状态。他们后来烧500亿美元去搞vr，不是因为ai，是他们有资本任性地干蠢事。你要分清这一点。 jcal： 我认为zuckerberg在所有员工电脑上装监控软件就是为了找更多可以裁撤的岗位。ceo们是被ai冲昏了头。小公司用三五个人就能做出完整产品，中层的“测量者”和管理者会消失。 chamath： 我不认为你说的在fortune 1000已经发生。最慢的采用者才是传统大企业。你只看到初创企业，但初创企业颠覆不了受严格监管的市场。 jcal： 他们会慢慢蚕食。我想看5–10年内谁还雇佣人开出租车——会显得又笨又危险。 sacks： 我统计的失业率是4.3%，经济学者认为5%就是“充分就业”。这是我们时代的纪录低点。编程是受ai冲击最大的岗位。如果按照“ai消灭工作”的逻辑，那所有码农应该已经失业了。事实呢？软件工程岗位新增率同比增长15%，达到三年最高。为什么呢？因为ai可以把写代码的效率放大10倍甚至更多，但代码总量也在爆炸。github上月有11亿次代码提交——去年同期是1亿次。算法越容易用，用的人越多。这些代码需要人类管理、需要部署。很多以前不写代码的行业现在在招软件开发者。 chamath： 对的。我接触的基金经理说下两个雇员不再是分析师，而是软件工程师。 sacks： 还不算基建和蓝领劳动岗位的变化。数据中心、能源建设创造了数十万建设类岗位。综合来看，不存在证据支持“大规模岗位丢失”。 jcal： 你说的那些数据我承认。短期2–3年会有错位。被裁的人如果学会用ai工具，就能自己创业。我不反对长期——创业会爆炸。但过渡期内，100万、200万的底层岗位消失，是真实的痛苦。 chamath： 那你怎么解释jcal本人录取的实习生中80%选择了vibe coding而不是写研究报告？这正是“ai-native”的人正在找工作的现象。他们不存在什么痛点，他们已经在用了。 bill gurley： 最终决定因素还是竞争。如果一家公司“用更少的人做到更好”，竞争对手不会坐视不理。更多的效率最终体现为商品和服务更便宜。这不是末日，而是生产率繁荣。 ---" style="--index: 7">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">07</span>
+                    <span class="timeline-meta">00:00–00:00</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>AI就业冲击：末日论 vs. 创造性破坏</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>Cloudflare的Matt Prince以“AI”为由宣布裁员20%（1,100人），Meta的Zuck随后也加入了。</li>
+<li>但高盛CEO、Sam Altman和Dario都在往回退，认为AI会自动化任务而不是消灭工作岗位。</li>
+<li>Sacks强调数据：失业率4.3%接近历史纪录，软件工程师岗位反而增长15%。</li>
+<li>JCal和Chamath爆发激烈争论，JCal坚持短期内百万级别岗位会消失，Chamath认为多数裁员是借AI清洗。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>AI washing: 公司用AI作为借口裁员，来掩盖过度招聘或管理问题。</li>
+<li>Yale Budget Lab: 耶鲁大学预算实验室，发布研究报告称AI在过去3年未对就业市场产生明显影响。</li>
+<li>GitHub CodeCommits: 过去一年有10亿次代码提交，最近一个月就有11亿次，增长14倍。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> 过去18个月我们第16次讨论AI对就业的影响。因为数据令人混乱。Cloudflare的Matt Prince上周说“因为AI”裁了1,100人，Meta裁了8,000人。但另一边高盛CEO在《纽约时报》写专栏说“AI不会消灭25%的工作，而是自动化25%的工作时长，员工可以用剩余时间做更高附加值的任务”。Sam和Dario也在往回缩。Sacks，你一直持“AI创造更多岗位”的观点，现在主流叙事似乎在走向你的方向。</p>
+<p><strong>Sacks：</strong> 是的。我的反共识预测——AI会带来就业增长而不是损失——在过去一周几乎成了主流。高盛CEO不会毫无底气地写那篇专栏。更重要的，Sam和Dario都在往回走。Dario说“AI可能自动掉一个人90%的任务，但剩下的10%会扩展成新的工作”——和Jensen和我一直说的几乎一样。这证明我的预测是对的，现在可以准备道歉了吗？</p>
+<p><strong>Chamath：</strong> 我同意。过去5–10年很多公司过度招聘，CEO们失去了控制，他们的OpEx（运营支出）膨胀了，现在需要一个“好危机”来裁员。AI就是那个借口，两字母，简单，好用。但底层不是AI在驱裁员，因为还没有人拿出实际数据“看，我的公司因为AI提升了产出或利润”。</p>
+<p><strong>JCal：</strong> 那你怎么解释Zuckerberg说“因为AI我裁了8,000人”？怎么解释Block的Jack Dorsey说要裁50%？</p>
+<p><strong>Sacks：</strong> 首先，Meta的裁员是在描述整体成本控制，并没有说“因为AI”。而且Jack Dorsey被所有华尔街分析师当场拆穿：Block在新冠期间过度膨胀，远比其他同行低效，裁员是早该做的事。没有人认为那是AI驱动的效率。你一直在引用“轶事”。而且轶事的复数不是数据。</p>
+<p><strong>Bill Gurley：</strong> 从历史的宏观来看，技术最终提升了人类福祉。我一开始给出的1891年到现在数据就是证据。从个人层面来说，任何拒绝学习AI的人都会面临风险。这就像拒绝了电子邮件、电子表格和计算机一样。</p>
+<p><strong>JCal：</strong> 我不同意。我认为会出现大规模岗位错位，因为CEO们相信用这个技术可以“用更少的人做得更多”，而且华尔街也会用更高的利润奖励他们。确实有过度招聘的问题，但我认为现在已经越过那一步了。在亚马逊，他们自己在说“用AI减掉60万未来的岗位”。Waymo 3,000辆无人驾驶上路了，自货车和出租车司机工作就会消失。Optimus已经开始分拣包裹，那些Amazon仓库的岗位会消失。</p>
+<p><strong>Chamath：</strong> 你说的那些管理不善的公司，最终都会回归更适合其规模的运营结构。Meta完全可以停在3,000人——那是它了不起的状态。他们后来烧500亿美元去搞VR，不是因为AI，是他们有资本任性地干蠢事。你要分清这一点。</p>
+<p><strong>JCal：</strong> 我认为Zuckerberg在所有员工电脑上装监控软件就是为了找更多可以裁撤的岗位。CEO们是被AI冲昏了头。小公司用三五个人就能做出完整产品，中层的“测量者”和管理者会消失。</p>
+<p><strong>Chamath：</strong> 我不认为你说的在Fortune 1000已经发生。最慢的采用者才是传统大企业。你只看到初创企业，但初创企业颠覆不了受严格监管的市场。</p>
+<p><strong>JCal：</strong> 他们会慢慢蚕食。我想看5–10年内谁还雇佣人开出租车——会显得又笨又危险。</p>
+<p><strong>Sacks：</strong> 我统计的失业率是4.3%，经济学者认为5%就是“充分就业”。这是我们时代的纪录低点。编程是受AI冲击最大的岗位。如果按照“AI消灭工作”的逻辑，那所有码农应该已经失业了。事实呢？软件工程岗位新增率同比增长15%，达到三年最高。为什么呢？因为AI可以把写代码的效率放大10倍甚至更多，但代码总量也在爆炸。GitHub上月有11亿次代码提交——去年同期是1亿次。算法越容易用，用的人越多。这些代码需要人类管理、需要部署。很多以前不写代码的行业现在在招软件开发者。</p>
+<p><strong>Chamath：</strong> 对的。我接触的基金经理说下两个雇员不再是分析师，而是软件工程师。</p>
+<p><strong>Sacks：</strong> 还不算基建和蓝领劳动岗位的变化。数据中心、能源建设创造了数十万建设类岗位。综合来看，不存在证据支持“大规模岗位丢失”。</p>
+<p><strong>JCal：</strong> 你说的那些数据我承认。短期2–3年会有错位。被裁的人如果学会用AI工具，就能自己创业。我不反对长期——创业会爆炸。但过渡期内，100万、200万的底层岗位消失，是真实的痛苦。</p>
+<p><strong>Chamath：</strong> 那你怎么解释JCal本人录取的实习生中80%选择了Vibe Coding而不是写研究报告？这正是“AI-native”的人正在找工作的现象。他们不存在什么痛点，他们已经在用了。</p>
+<p><strong>Bill Gurley：</strong> 最终决定因素还是竞争。如果一家公司“用更少的人做到更好”，竞争对手不会坐视不理。更多的效率最终体现为商品和服务更便宜。这不是末日，而是生产率繁荣。</p>
+<hr></div>
+                  </div>
+                </article></div>
+            <p class="empty search-empty" data-search-empty hidden>没有匹配的时间线段落。</p>
+          </section>
+
+          <section id="speakers">
+            <div class="section-head">
+              <h2>人物观点对照</h2>
+              <p>比较嘉宾立场</p>
+            </div>
+            <div class="speaker-grid"><article class="speaker-card" style="--index: 1">
+                  <p class="speaker-kicker">嘉宾 01</p>
+                  <h3>Jason Calacanis</h3>
+                  <div><p>处于中间位置，承认长期会有新岗位，但坚持短期（2–5年）会出现“百万级别的岗位错位”，尤其来自无人驾驶和仓库机器人。强调需要同理心，反对用统计数据冷淡对待真实失业者。认为CEO们在利用AI掩盖管理失误，但同时也真心相信必须“拥抱AI”。</p></div>
+                </article>
+<article class="speaker-card" style="--index: 2">
+                  <p class="speaker-kicker">嘉宾 02</p>
+                  <h3>Chamath Palihapitiya</h3>
+                  <div><p>最倾向于“这只是正常的企业重组”。主要观点包括：过去5–10年大量公司过度招聘，现在用AI为借口清洗不正之名；没有确凿数据证明AI单方面导致裁员；自己正在通过开放控制平面帮大公司规避模型供应商锁定。对Anthropic的动机持博弈论视角，认为可能是GTO策略：先抢资本，后夺规则制定权。</p></div>
+                </article>
+<article class="speaker-card" style="--index: 3">
+                  <p class="speaker-kicker">嘉宾 03</p>
+                  <h3>David Sacks</h3>
+                  <div><p>扮演“反大众观点”的角色，坚持认为AI是“就业增长的正和游戏”。核心论点包括：编程自动化没有消灭开发岗位反而创造了更多需求；整体失业率是历史低点；Sam和Dario已撤回末日论说明他们之前错了；Washington以“安全”为名打压开源是最大的集权风险。批评JCal以轶事代替数据，并戏称他是“AI末日论的业余传播者”。</p></div>
+                </article>
+<article class="speaker-card" style="--index: 4">
+                  <p class="speaker-kicker">嘉宾 04</p>
+                  <h3>David Friedberg（本期未出场）</h3>
+                  <div><p>（无观点）</p></div>
+                </article>
+<article class="speaker-card" style="--index: 5">
+                  <p class="speaker-kicker">嘉宾 05</p>
+                  <h3>Bill Gurley（特约嘉宾）</h3>
+                  <div><p>扮演宏观历史分析者和对Anthropic最尖刻的批评者。历史证据（1891年至今）表明技术最终带来繁荣，不是灾难。他认为Anthropic已经从“监管捕获”进入“造神”阶段，呼吁读者认真阅读Dario和Amanda Askill的文字。在企业端，看好开源连接器和抽象层，认为当前模型正在快速商品化。</p>
+<hr></div>
+                </article></div>
+          </section>
+
+          <section id="quotes">
+            <div class="section-head">
+              <h2>值得引用的原话</h2>
+              <p>保留关键表达</p>
+            </div>
+            <div class="panel"><ol>
+<li><strong>“It is not the technology itself that is evil, but the technology takes on the characteristics of those who build, finance, and control it.”</strong></li>
+<p>中文：邪恶的不是技术本身，技术会吸收使用它、建造它、控制它的人的特质。 重要说明：教宗通谕的核心理念，引出了本集对AI垄断与集权的所有讨论。</p>
+</ol>
+<ol>
+<li><strong>“If the AI market becomes monopolized, I would use antitrust law very aggressively. But as long as it’s competitive, I would use that, because competition generates the best outcomes.”</strong></li>
+<p>中文：如果AI市场被垄断，我会激进地用反垄断法。但如果是竞争的，我就用竞争本身来保障，因为竞争产生最好的结果。 重要说明：Sacks用一种“分权制衡”思维结构化地回应教宗的监管呼吁，是他的核心主张。</p>
+</ol>
+<ol>
+<li><strong>“I think they are midwifing a deity. They are not writing software, they are midwifing a deity.”</strong></li>
+<p>中文：我以为他们不是在写软件，而是在接生一个神灵。 重要说明：Bill Gurley的“弗兰肯斯坦博士理论”最凝练的表达，极具冲击力。</p>
+</ol>
+<ol>
+<li><strong>“The most marketable skill in the economy right now is proficiency in Claude.”</strong></li>
+<p>中文：现在经济中最有市场价值的技能是精通Claude的能力。 重要说明：Sacks的观点，呼应了全节目对AI工具使用的强调。</p>
+</ol>
+<ol>
+<li><strong>“There are two types of people in the world, those that use AI to learn faster than they ever could before, and those that use AI to avoid learning altogether.”</strong></li>
+<p>中文：世界上有两种人：一种用AI让自己学得更快，一种用AI来逃避学习。 重要说明：Mark Cuban的名言，被Chamath和Gurley用来区分“高能动性”与“低能动性”。</p>
+</ol>
+<ol>
+<li><strong>“From 1891 till today, global GDP per capita went from $1,500 to $20K, and global poverty from 75% to under 10%. Leo XIII got it dead wrong.”</strong></li>
+<p>中文：从1891年至今，全球人均GDP从1,500美元涨到20,000美元，全球贫困率从75%降到10%以下。Leo XIII全错。 重要说明：Bill Gurley用历史数据反驳教宗对工业革命负面看法，是他对“AI末日论”的基本反驳逻辑。</p>
+</ol>
+<ol>
+<li><strong>“You cherry-pick anecdotes, then misattribute them to AI. You are the biggest AI washer there is.”</strong></li>
+<p>中文：你挑选个别事例，然后错误地归类为AI导致。你本人就是最大的AI洗白者。 重要说明：Chamath和Sacks对JCal的激烈回击，也是全场最情绪化的争论片段。</p>
+</ol>
+<ol>
+<li><strong>“The plural of anecdotes is not data.”</strong></li>
+<p>中文：轶事的复数形式不是数据。 重要说明：Sacks多次质疑JCal用单点裁员事件做整体论调的逻辑漏洞。</p>
+</ol></div>
+          </section>
+        </div>
+      </div>
+    </main>
+  </div>
+  <script>
+    const progress = document.querySelector("[data-progress]");
+    const searchBox = document.querySelector("[data-search-box]");
+    const topButton = document.querySelector("[data-scroll-top]");
+    const cards = Array.from(document.querySelectorAll("[data-timeline-card]"));
+    const searchEmpty = document.querySelector("[data-search-empty]");
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    function updateProgress() {
+      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      const ratio = scrollable > 0 ? window.scrollY / scrollable : 0;
+      if (progress) {
+        progress.style.width = `${Math.max(0, Math.min(1, ratio)) * 100}%`;
+      }
+    }
+
+    function applySearch() {
+      const query = searchBox.value.trim().toLowerCase();
+      let visibleCount = 0;
+      cards.forEach((card) => {
+        const text = card.getAttribute("data-search") || "";
+        const isVisible = !query || text.includes(query);
+        card.hidden = !isVisible;
+        if (isVisible) {
+          visibleCount += 1;
+        }
+      });
+      if (searchEmpty) {
+        searchEmpty.hidden = !query || visibleCount > 0;
+      }
+    }
+
+    window.addEventListener("scroll", updateProgress, { passive: true });
+    window.addEventListener("resize", updateProgress);
+    if (searchBox) {
+      searchBox.addEventListener("input", applySearch);
+    }
+    if (topButton) {
+      topButton.addEventListener("click", () => {
+        window.scrollTo({
+          top: 0,
+          behavior: prefersReducedMotion.matches ? "auto" : "smooth"
+        });
+      });
+    }
+    updateProgress();
+  </script>
+</body>
+</html>
