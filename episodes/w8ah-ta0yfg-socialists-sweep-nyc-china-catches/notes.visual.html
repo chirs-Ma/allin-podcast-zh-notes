@@ -1,0 +1,950 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>All-In Podcast 第278期：社会主义者横扫纽约市、中国AI模型追赶、内存危机、美光财报大爆发 - 中文播客可视化笔记</title>
+  <style>
+    :root {
+      --bg: oklch(0.974 0.006 238);
+      --paper: oklch(0.991 0.003 238);
+      --paper-soft: oklch(0.955 0.007 238);
+      --ink: oklch(0.205 0.018 246);
+      --muted: oklch(0.49 0.018 246);
+      --faint: oklch(0.63 0.014 246);
+      --line: oklch(0.875 0.009 238);
+      --line-strong: oklch(0.74 0.014 238);
+      --accent: oklch(0.43 0.064 164);
+      --accent-soft: oklch(0.94 0.024 164);
+      --accent-wash: oklch(0.973 0.012 164);
+      --quote: oklch(0.965 0.010 92);
+      --shadow: 0 24px 54px color-mix(in oklch, var(--ink) 8%, transparent);
+      --radius: 8px;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-width: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(90deg, color-mix(in oklch, var(--line) 28%, transparent) 1px, transparent 1px) 0 0 / 92px 92px,
+        var(--bg);
+      font-family: "Geist", "Satoshi", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      line-height: 1.78;
+      text-rendering: optimizeLegibility;
+    }
+    ::selection { background: var(--accent-soft); color: var(--ink); }
+    a {
+      color: var(--accent);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+      transition: color .22s var(--ease), background-color .22s var(--ease), border-color .22s var(--ease), transform .22s var(--ease);
+    }
+    [hidden] { display: none !important; }
+    .progress {
+      position: fixed;
+      z-index: 4;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: var(--accent);
+    }
+    .quick-actions {
+      position: fixed;
+      right: max(18px, calc((100vw - 1200px) / 2));
+      bottom: 24px;
+      z-index: 3;
+      display: grid;
+      gap: 7px;
+    }
+    .quick-action {
+      display: inline-grid;
+      grid-template-columns: 16px auto;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      min-width: 74px;
+      min-height: 40px;
+      padding: 8px 12px;
+      border: 1px solid var(--line-strong);
+      border-radius: var(--radius);
+      background: color-mix(in oklch, var(--paper) 92%, transparent);
+      box-shadow: 0 12px 28px color-mix(in oklch, var(--ink) 7%, transparent);
+      color: var(--ink);
+      font: inherit;
+      font-size: 13px;
+      font-weight: 720;
+      line-height: 1.2;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .quick-action:hover, .quick-action:focus-visible {
+      outline: none;
+      border-color: var(--accent);
+      background: var(--accent-wash);
+      color: var(--accent);
+      transform: translate3d(0, -1px, 0);
+    }
+    .quick-action:active { transform: translate3d(0, 1px, 0) scale(.99); }
+    .page {
+      width: min(1760px, calc(100% - 56px));
+      margin: 0 auto;
+      padding: 0 0 104px;
+    }
+    .article { min-width: 0; }
+    .hero {
+      max-width: none;
+      margin-left: min(7vw, 140px);
+      padding: 72px 0 58px;
+    }
+    .eyebrow {
+      margin: 0 0 18px;
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    h1 {
+      max-width: none;
+      margin: 0 0 28px;
+      font-size: clamp(38px, 3vw, 52px);
+      font-weight: 760;
+      line-height: 1.08;
+      letter-spacing: 0;
+      text-wrap: balance;
+    }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 18px;
+      max-width: 72ch;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .meta a { font-weight: 650; }
+    .meta-strip {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+      max-width: 720px;
+      margin: 34px 0 28px;
+      border-top: 1px solid var(--line-strong);
+      padding-top: 16px;
+    }
+    .meta-pill {
+      display: grid;
+      gap: 2px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.35;
+    }
+    .meta-pill b {
+      color: var(--ink);
+      font-family: var(--mono);
+      font-size: 18px;
+      font-weight: 680;
+      line-height: 1;
+    }
+    .summary {
+      width: 100%;
+      max-width: 760px;
+      padding: 24px 26px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: color-mix(in oklch, var(--paper) 88%, var(--accent-soft));
+      box-shadow: var(--shadow);
+    }
+    .summary p {
+      margin: 0;
+      font-size: 19px;
+      line-height: 1.72;
+    }
+    h1, .summary, .takeaway p, .timeline-card h3, .section-content, .speaker-card, .panel {
+      overflow-wrap: anywhere;
+    }
+    .content-shell {
+      display: grid;
+      grid-template-columns: minmax(170px, 212px) minmax(0, 820px);
+      gap: clamp(36px, 7vw, 88px);
+      align-items: start;
+      border-top: 1px solid var(--line);
+      padding-top: 40px;
+    }
+    .sidebar {
+      position: sticky;
+      top: 28px;
+      align-self: start;
+      padding-top: 4px;
+    }
+    .toc {
+      border-top: 1px solid var(--ink);
+      padding-top: 16px;
+    }
+    .toc-title {
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .nav-links { display: grid; gap: 2px; }
+    .nav-links a {
+      display: block;
+      padding: 8px 0;
+      border-bottom: 1px solid color-mix(in oklch, var(--line) 72%, transparent);
+      color: var(--ink);
+      font-size: 14px;
+      line-height: 1.35;
+      text-decoration: none;
+    }
+    .nav-links a:hover, .nav-links a:focus-visible {
+      outline: none;
+      color: var(--accent);
+      transform: translate3d(2px, 0, 0);
+    }
+    .search {
+      display: grid;
+      gap: 8px;
+      margin-top: 22px;
+    }
+    .search span {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 720;
+    }
+    .search input {
+      width: 100%;
+      min-height: 40px;
+      padding: 8px 10px;
+      border: 1px solid var(--line-strong);
+      border-radius: var(--radius);
+      background: var(--paper);
+      color: var(--ink);
+      font: inherit;
+      font-size: 14px;
+      outline: none;
+      transition: border-color .22s var(--ease), box-shadow .22s var(--ease), transform .22s var(--ease);
+    }
+    .search input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px color-mix(in oklch, var(--accent) 14%, transparent);
+    }
+    .content-flow { min-width: 0; }
+    section { margin: 0 0 78px; }
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 18px;
+      align-items: end;
+      margin-bottom: 22px;
+      border-top: 1px solid var(--ink);
+      padding-top: 18px;
+    }
+    .section-head h2 {
+      margin: 0;
+      font-size: 28px;
+      font-weight: 740;
+      line-height: 1.16;
+      letter-spacing: 0;
+    }
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.4;
+      text-align: right;
+    }
+    .takeaway-list {
+      display: grid;
+      gap: 0;
+      margin: 0;
+      padding: 0;
+      border-top: 1px solid var(--line);
+      list-style: none;
+    }
+    .takeaway {
+      display: grid;
+      grid-template-columns: 52px minmax(0, 1fr);
+      gap: 18px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .takeaway span {
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 15px;
+      font-weight: 720;
+      line-height: 1.65;
+    }
+    .takeaway p {
+      margin: 0;
+      max-width: 70ch;
+      font-size: 16px;
+      line-height: 1.72;
+    }
+    .timeline {
+      display: grid;
+      gap: 0;
+      border-top: 1px solid var(--line-strong);
+    }
+    .timeline-card {
+      display: grid;
+      grid-template-columns: 132px minmax(0, 1fr);
+      gap: 32px;
+      padding: 34px 0 40px;
+      border-bottom: 1px solid var(--line);
+    }
+    .timeline-heading {
+      position: sticky;
+      top: 30px;
+      align-self: start;
+      display: grid;
+      gap: 10px;
+      padding-top: 2px;
+    }
+    .timeline-index {
+      color: var(--faint);
+      font-family: var(--mono);
+      font-size: 13px;
+      font-weight: 720;
+      line-height: 1;
+    }
+    .timeline-meta {
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 720;
+      line-height: 1.45;
+    }
+    .timeline-card h3 {
+      max-width: 24ch;
+      margin: 0 0 18px;
+      font-size: 27px;
+      font-weight: 730;
+      line-height: 1.22;
+      letter-spacing: 0;
+    }
+    .section-content {
+      color: color-mix(in oklch, var(--ink) 88%, var(--muted));
+      font-size: 16px;
+    }
+    .section-content p {
+      max-width: 72ch;
+      margin: 0 0 1.05em;
+    }
+    .section-content p strong:first-child {
+      color: var(--ink);
+      font-weight: 760;
+    }
+    .section-content h4 {
+      margin: 26px 0 10px;
+      color: var(--accent);
+      font-size: 14px;
+      font-weight: 760;
+      line-height: 1.35;
+    }
+    .section-content ul, .section-content ol, .panel ul, .panel ol, .speaker-card ul, .speaker-card ol {
+      margin: .75em 0 1em;
+      padding-left: 1.25em;
+    }
+    .section-content li, .panel li, .speaker-card li { margin: 6px 0; }
+    .speaker-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, .88fr);
+      gap: 26px 42px;
+      border-top: 1px solid var(--line);
+    }
+    .speaker-card {
+      padding: 22px 0 24px;
+      border-bottom: 1px solid var(--line);
+    }
+    .speaker-card:nth-child(even) { margin-top: 22px; }
+    .speaker-kicker {
+      margin: 0 0 8px;
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 720;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .speaker-card h3 {
+      margin: 0 0 12px;
+      font-size: 20px;
+      font-weight: 730;
+      line-height: 1.25;
+    }
+    .speaker-card p, .panel p {
+      max-width: 68ch;
+      margin-top: 0;
+    }
+    .panel {
+      border-top: 1px solid var(--line);
+      padding-top: 8px;
+    }
+    blockquote {
+      margin: 18px 0;
+      padding: 16px 18px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--quote);
+    }
+    code {
+      padding: 2px 5px;
+      border-radius: 5px;
+      background: color-mix(in oklch, var(--accent) 10%, var(--paper));
+      color: var(--ink);
+      font-family: var(--mono);
+      font-size: .92em;
+    }
+    hr {
+      height: 1px;
+      margin: 26px 0;
+      border: 0;
+      background: var(--line);
+    }
+    .empty {
+      margin: 0;
+      padding: 16px 18px;
+      border: 1px dashed var(--line-strong);
+      border-radius: var(--radius);
+      color: var(--muted);
+      background: color-mix(in oklch, var(--paper-soft) 70%, transparent);
+    }
+    .search-empty { margin-top: 16px; }
+    .muted { color: var(--muted); }
+    @keyframes rise-in {
+      from { opacity: 1; transform: translate3d(0, 6px, 0); }
+      to { opacity: 1; transform: translate3d(0, 0, 0); }
+    }
+    .hero > *, .takeaway, .timeline-card, .speaker-card, .panel {
+      animation: rise-in .55s var(--ease) both;
+    }
+    .hero > *:nth-child(2) { animation-delay: .04s; }
+    .hero > *:nth-child(3) { animation-delay: .08s; }
+    .hero > *:nth-child(4) { animation-delay: .12s; }
+    .hero > *:nth-child(5) { animation-delay: .16s; }
+    .takeaway, .timeline-card, .speaker-card {
+      animation-delay: calc(var(--index, 1) * 38ms);
+    }
+    @media (max-width: 1120px) {
+      .hero { margin-left: 0; }
+      .content-shell {
+        grid-template-columns: minmax(154px, 190px) minmax(0, 1fr);
+        gap: 36px;
+      }
+      h1 { font-size: 44px; }
+    }
+    @media (min-width: 1500px) {
+      h1 {
+        width: max-content;
+        max-width: 100%;
+        white-space: nowrap;
+        font-size: clamp(36px, 2.05vw, 42px);
+      }
+    }
+    @media (max-width: 780px) {
+      body { background: var(--bg); }
+      .page { width: min(1180px, calc(100% - 28px)); padding-bottom: 86px; }
+      .hero { padding: 46px 0 36px; }
+      .eyebrow { margin-bottom: 14px; }
+      h1 {
+        max-width: none;
+        font-size: 30px;
+        line-height: 1.14;
+        word-break: normal;
+      }
+      .summary, .summary p, .takeaway p, .section-content, .speaker-card, .panel {
+        max-width: 100%;
+        word-break: break-word;
+      }
+      .meta-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 20px; }
+      .summary { padding: 20px; }
+      .summary p { font-size: 17px; }
+      .content-shell { display: block; padding-top: 28px; }
+      .sidebar { position: static; padding-top: 0; margin-bottom: 42px; }
+      .toc { border-top-color: var(--line-strong); }
+      .nav-links { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 18px; }
+      section { margin-bottom: 58px; }
+      .section-head { display: block; margin-bottom: 16px; }
+      .section-head h2 { font-size: 24px; }
+      .section-head p { margin-top: 6px; text-align: left; }
+      .takeaway { grid-template-columns: 42px minmax(0, 1fr); gap: 12px; }
+      .timeline-card { display: block; padding: 28px 0 32px; }
+      .timeline-heading { position: static; display: flex; align-items: baseline; gap: 12px; margin-bottom: 12px; }
+      .timeline-card h3 { max-width: none; font-size: 23px; }
+      .speaker-grid { display: block; }
+      .speaker-card:nth-child(even) { margin-top: 0; }
+      .quick-actions {
+        right: 12px;
+        bottom: 12px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 6px;
+      }
+      .quick-action {
+        min-width: 66px;
+        min-height: 38px;
+        padding: 7px 9px;
+        font-size: 13px;
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: 1ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 1ms !important;
+      }
+      .speaker-card:nth-child(even) { margin-top: 0; }
+    }
+    @media print {
+      body { background: var(--paper); }
+      .sidebar, .progress, .quick-actions { display: none; }
+      .page { display: block; width: auto; padding-bottom: 0; }
+      .hero { margin-left: 0; padding: 0 0 28px; }
+      .content-shell { display: block; border-top: 0; padding-top: 0; }
+      .summary { box-shadow: none; }
+      .timeline-card, .speaker-card { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <div class="progress" data-progress></div>
+  <div class="quick-actions" aria-label="快捷操作">
+    <a class="quick-action" href="../../index.html" aria-label="返回首页">
+      <span aria-hidden="true">←</span>
+      <span>首页</span>
+    </a>
+    <button class="quick-action" type="button" data-scroll-top aria-label="回到顶部">
+      <span aria-hidden="true">↑</span>
+      <span>顶部</span>
+    </button>
+  </div>
+  <div class="page">
+    <main class="article">
+      <header class="hero">
+        <p class="eyebrow">All-In Podcast 中文精读</p>
+        <h1>All-In Podcast 第278期：社会主义者横扫纽约市、中国AI模型追赶、内存危机、美光财报大爆发</h1>
+        <div class="meta">
+          <span>生成时间：2026-06-28 22:46</span>
+          <span>来源：<a href="https://www.youtube.com/watch?v=w8ah_tA0yfg" target="_blank" rel="noopener">YouTube</a></span>
+        </div>
+        <div class="meta-strip"><span class="meta-pill"><b>40 分钟</b>阅读时长</span>
+<span class="meta-pill"><b>10</b>核心要点</span>
+<span class="meta-pill"><b>4</b>时间线</span>
+<span class="meta-pill"><b>4</b>人物</span></div>
+        <div class="summary" aria-label="一句话摘要"><p>本期节目深度讨论了纽约市民主党初选中社会主义者的全面胜利及其对美国政治和AI发展的深远影响，以及中国开源模型的快速追赶正在使美国自我加严的AI监管变得毫无意义。</p></div>
+      </header>
+
+      <div class="content-shell">
+        <aside class="sidebar">
+          <nav class="toc" aria-label="页面导航">
+            <p class="toc-title">阅读导航</p>
+            <div class="nav-links">
+              <a href="#takeaways">核心要点</a>
+              <a href="#timeline">分段整理</a>
+              <a href="#speakers">人物观点</a>
+              <a href="#quotes">双语引语</a>
+            </div>
+            <label class="search">
+              <span>搜索时间线</span>
+              <input data-search-box type="search" placeholder="关键词" aria-label="搜索时间线">
+            </label>
+          </nav>
+        </aside>
+
+        <div class="content-flow">
+          <section id="takeaways">
+            <div class="section-head">
+              <h2>核心要点</h2>
+              <p>快速扫读本集主线</p>
+            </div>
+            <ol class="takeaway-list"><li class="takeaway" style="--index: 1"><span>01</span><p>纽约市市长Mamdami支持的3位候选人全胜，社会主义势力正在接管民主党。</p></li>
+<li class="takeaway" style="--index: 2"><span>02</span><p>AI是全球历史上最强大的经济均衡器，但硅谷糟糕的公共形象让社会主义叙事更有吸引力。</p></li>
+<li class="takeaway" style="--index: 3"><span>03</span><p>中国开源模型GLM 5.2已经达到接近美国前沿模型的水平，美国自设的监管窗口正在关闭。</p></li>
+<li class="takeaway" style="--index: 4"><span>04</span><p>蒸馏技术（distillation）让中国AI加速追赶，中国利用降低的模型蒸馏美国顶尖模型。</p></li>
+<li class="takeaway" style="--index: 5"><span>05</span><p>美光（Micron）财报显示高带宽内存（HBM）需求爆炸，2026年供应全部售罄，苹果等消费电子厂商被迫提价。</p></li>
+<li class="takeaway" style="--index: 6"><span>06</span><p>DRAM是AI基础设施最重要的瓶颈，全球只有3家公司能制造AI服务器所需的高端内存。</p></li>
+<li class="takeaway" style="--index: 7"><span>07</span><p>太空计算的经济学开始成立：发射成本大幅下降可能使轨道数据中心具有竞争力。</p></li>
+<li class="takeaway" style="--index: 8"><span>08</span><p>特斯拉注册“Megapod”商标，可能在超级充电站部署模块化AI计算中心。</p></li>
+<li class="takeaway" style="--index: 9"><span>09</span><p>Anthropic估值可能达到3万亿美元，但公司自己制造的监管陷阱导致旗舰模型Fable被迫回撤。</p></li>
+<li class="takeaway" style="--index: 10"><span>10</span><p>社交媒体禁令在加拿大、英国、澳大利亚已成为现实，但可能成为成人身份验证和内容审查的前奏。</p></li></ol>
+          </section>
+
+          <section id="timeline">
+            <div class="section-head">
+              <h2>分段详细整理</h2>
+              <p>按时间线阅读上下文</p>
+            </div>
+            <div class="timeline" data-timeline><article class="timeline-card" data-timeline-card data-search="00:00–00:10 纽约市社会主义者大胜：民主党正在被接管 本段核心内容： 纽约市民主党初选中，mamdami支持的3位候选人全部获胜，2位资深在任者被击败。 社会主义民主人士（dsa）明确表示他们只是在利用民主党的选举通道，目标是从内部接管。 嘉宾从多个角度分析了这一趋势的原因：硅谷形象不佳、年轻人经济前景悲观、移民政策变化、以及mamdami本人超凡的政治魅力。 背景解释与关键术语： dsa（democratic socialists of america）：美国民主社会主义者，是民主党内最左翼的政治组织。 第10选区：纽约最富有的选区之一，涵盖西村、华尔街、dumbo等高端社区。 第13选区：纽约最贫穷的选区之一，包括哈莱姆区和西布朗克斯。 第7选区：dsa的大本营，又称“卡米走廊”，包括布什维克、威廉斯堡等年轻人聚集区。 详细中文整理： jcal： 欢迎回来，这里是全球第一的播客all-in podcast第278期。由于社会主义者在纽约市大胜，freeberg今天请了心理健康假，所以我们请了两位嘉宾。travis kalanick从adams过来了，你好吗兄弟？ travis： 我很好，很高兴见到你。 jcal： 另外，在starbase度过胜利一周后，独一无二的、大家都喜欢的gavin baker从atreides management来了。你还好吗gavin？ gavin： 很好，谢谢你邀请我。 jcal： spacex ipo之后你还在云端飘着吗？ gavin： 那是一个非常特别的时刻，是几十年努力工作的结晶。但套用bill belichick的话，下一场从零开始。 jcal： 没错。现在说正事，社会主义者在纽约国会民主党初选中横扫了。周二，纽约市长mamdami支持的3位候选人都赢了各自的初选。第10选区，brad lander击败了两届在任议员dan goldman。第10选区是纽约最富有的选区之一，包括西村那些联排别墅、华尔街、dumbo、cobble hill、carroll gardens、park slope——这是个奇怪的选区划分。在纽约第13选区，chevalier击败了一位五届在任议员，这位议员的背后是众议院议长hakeem jeffries。看起来社会主义者正在向jeffries本人进军。第13选区是纽约最贫困的选区之一，包括哈莱姆和西布朗克斯。chevalier是一位32岁的民主社会主义者，有一系列争议言论的历史。纽约第7选区，claire valdez在开放席位中击败了在任者的钦定接班人。第7选区是dsa的堡垒，包括布什维克、威廉斯堡、长岛市、greenpoint——被称为卡米走廊。那里有很多穿着吊带裤的嬉皮士和咖啡师。根据合作伙伴polly market的数据，这算是一个相当大的冷门。选举日前mamdami横扫的概率只有26%。就像赌博中的三连中一样。这些候选人跟mamdami一样，在年轻、受过大学教育、高收入人群中表现更好——就是那些“负担得起当社会主义者的人”。这些都是安全席位，dsa几乎肯定会赢。 jcal： 你说“负担得起当社会主义者的人”这个说法最到位了。永远是那些有钱的穷人——他们有钱但装穷。 chamath： 说得太对了。这是这个国家从30年代、50年代、红色恐慌、黑豹党以来一直有的模式。简单来说，如果你很聪明而且去经商了，你就成了资本家。如果你极其聪明而且去搞学术了，你最终会有奢侈的信念，觉得社会主义很棒。我的看法是，老实说，我们正在失去主动权，部分原因是我们自己成了自己最大的敌人。我一直这么说，ai其实是看清这个问题的非常好的棱镜。我认为ai是我们有生之年能见到的最强大的经济均衡器。它是有史以来最能创造平等的东西。它能让地球上每个人的起跑线都变得平等。但我们在展示它、把它推向市场、谈论它方面做得太差了。我们让所有个人的斗争、不安全感、争吵都公开暴露出来。结果硅谷在大众中失去了更多可信度。在这个真空中，其他人就可以描绘出一幅画面：任何不是今天这种资本主义的东西都比他们看到的更好。这就是为什么我们看到这么多人获得了势头。如果你看一些关键的国会竞选，它们实际上是对ai的一次公投。好消息是我们在一些关键地方守住了底线，但只是勉强守住。在犹他和纽约，有几场非常重要的竞选，基本上是由anthropic资助的反ai团体——这本身就很疯狂——对阵由openai资助的亲ai团体，亲ai的一方赢了。 jcal： 你刚才说它是最强大的均衡器。你能不能举几个例子简单展开一下？我知道你的意思，但为了观众着想，你这几周一直在说这个，所以请把它说清楚。 chamath： 最好的解释方式是这样的：第一个真正重大的经济生产力突破是互联网时代，具体来说是google收集了全世界所有知识和信息，通过搜索让人们可以使用。但25年后我们发现，尽管它建立了伟大的生意，缺少的是把知识和信息转化为专业和智慧的能力。这就是ai做的事情。它掌握全世界的知识，让你能够行动，这样每一个男人、女人、孩子都有一个像travis kalanick一样的联合创始人坐在你身边——一个超级创始人，这个天才可以帮你思考所有问题，可以在工程上超越别人，可以在思考上超越别人，而且没有门槛能阻止你拥有它。现在你的能力只受限于你能否把这种能量引导到对你有价值的生产性方向。这是一种极其强大的力量。但我们却陷入悲观论，谈论工作消失、水资源消耗——这些全是谎言，全是编造的假信息。这些东西被创造出来，就是为了帮助ai竞赛中一小部分特定玩家，并由那些人资助。在真空中，jason，我们让其他人描绘了一个替代版本，现在那个版本看起来比当前版本更有吸引力，因为当前版本有非常糟糕的品牌大使。 sacks： 你怎么看这个，sacks？我想有些人把这件事看作左翼版的民粹主义接管，就像特朗普在过去10多年做的那样。你对社会主义及其惊人的吸引力有什么看法？它在选举中正在取胜。 sacks： 我认为这里面有些真相。我认为未来的选择要么是共产党的——如果你愿意叫社会主义——民主党那一套，要么是共和党的民族主义。这就是我们前进的方向。那是两个民粹主义方向。但我们来看看dsa候选人的主张是什么。看看他们的政纲。他们说要废除参议院，废除“监狱国家”——基本上就是废除警察和监狱。他们要废除ice（移民执法局），大赦所有人，不支持任何遣返。他们要废除总统和最高法院，代之以由国会选择并从属于国会的行政和司法机构——现在基本上就只是这个众议院了。就众议院选举而言，他们要废除选举人团，用多党民主替代两党制，扩大众议院，实施比例代表制和排序投票。这将是对于我们宪政体制的彻底改造。他们要自由巴勒斯坦。他们要公共拥有大公司。他们要削减“战争部”的预算。这是一个非常激进的组织，以前你会嘲笑很多这样的提议，但现在你笑不出来了，因为这些人正在接管民主党。你可以看到民主党当权派现在完全恐慌，因为他们已经失去了对党的控制，输给了zohra——呃，mamdami和他的盟友。jason，就拿纽约第13选区这场竞选来说。hakeem jeffries的盟友、长期在任的众议员espaillat，他担任国会西裔党团主席，结果被一位32岁、从未工作过、读了10年博士的失业博士生击败。她甚至按dsa的标准来看可能都有点疯。她公开宣称要终结西方文明，要灭绝西方文明。 jcal： 等等，什么？ chamath： 她正泡在西方文明里呢。 sacks： 是的，她曾说用美国国旗当餐巾纸擦手。她在10月7日第二天参加集会，庆祝屠杀以色列平民。她非常亲巴勒斯坦，甚至到了庆祝以色列平民死亡的地步。她称白人女性为丑陋的殖民者。她呼吁完全削减警察经费、废除所有监狱和边境。不希望有任何遣返。憎恨警察，公开称他们为“猪”。称美国军人为战争罪犯，说美国是一个丢人的国家。她曾撰文赞扬共产主义和夺取生产资料。诸如此类。所以这基本上就是新的民主党。即使民主党在11月拿下众议院、hakeem jeffries成为议长，管理所有这些新dsa议员将是他巨大的头痛，因为他们并不视传统建制派民主党为盟友。他们视其为障碍。dsa联合主席josh block说：“我们只是用民主党作为获得选票的工具，不是因为我们的目标一致。我们建立自己的组织，在民主党标签下参选，在有用的时候和民主党一起投票，从内部推动我们自己的议程。我们把民主党建制派视为障碍，不是家。”所以dsa正在向民主党进军。它已经控制了基本盘，所有能量都在那里。我认为这一接管将继续下去，dsa将逐步接管越来越多的民主党席位。我能对这些建制派民主党人说的就是：玩愚蠢的游戏，赢愚蠢的奖品。你们支持开放的边境政策，带来了这波大规模移民，这是dsa新派系庞大基本盘的重要组成部分。如果只是土生土长的纽约人投票，mamdami不可能赢得市长选举。是移民的投票让mamdami赢了。不只是dsa基本盘，还有这些所谓的“过度教育的白人进步派”——我说“过度教育”是因为他们的人生是向下流动的，最终只能在学术机构或ngo工作。他们是极左的先锋。正是这些刚毕业的大学生组织者加上这个移民运动，真正在接管民主党。但这一切又回到民主党的政策。他们可能不是意图让这一切发生。他们可能没想失去控制，但正是他们的开放边境政策，也是因为他们打破了“大熔炉”和多年来美国同化移民的政策。这一切都被多元文化主义和觉醒主义打破了。我们不再这样做了。所以你现在看到像chevalier这样的候选人公开宣称，他们不仅仅是反美，他们是“后美国”的。他们不尊重美国体制、我们的宪政秩序、我们的自由企业制度。他们要引入某种非常不同的东西，看起来会很像那些移民来源国的样貌。 jcal： 很有意思，你提到她想消灭所有这些机构，这跟特朗普很像，他也想删除一些东西：irs、usaid、教育部、epa。他们都用同样的剧本，“嘿，我们要删掉一些东西。”travis，你以《源泉》——兰德的小说为你的推特头像十几年之久…… travis： 不是，人家写了十几年关于这事。我只是读了本书然后换下头像。我读过《汉密尔顿》，读过《安德的游戏》。但你知道我认识你很久了，我相信个人的卓越性，相信一点坚毅精神。这显然跟那完全相反。你对这些地方正在发生的事情有什么看法？虽然在全国层面还没到那程度，但显然值得注意。 travis： 好，我有两条格言跟大家分享。第一，真相和正义是社会的免疫系统。当免疫系统被压制时，所有社会疾病都会爆发。如果你看到我们在失去真相——社交媒体、主流媒体，随便你怎么叫——那是社会正在发生坏事的一个早期指标。而且这不只是社交媒体、主流媒体，是我们周围的一切。正义方面也一样。如果人们犯罪后没有后果，这也是一个很好的早期指标。你可以观察这些指标说，今天真相赢了还是输了？今天正义赢了还是输了？而趋势会告诉我们，我们要变得更糟还是更好。 jcal： 对。新冠病毒和fauci案，我们现在看到更多信息浮出水面。我们很难得到真相。也许最终会得到正义。5年后我们好像得到了一点更多真相，但这正是你讨论的完美例子。 travis： 这里面有很多内容，如果有时间我们可以展开。但这些成为了你观察的原子层面的事情。另一件事是，有些人听我这么说会有点吃惊：共产主义存在于我们所有人之中。它在我们的血液里。作为人类。人们会说，你在说什么？你疯了吗？什么意思？我说，好啊，你一生中有没有懒惰过？每个人都说，是的，我有过懒惰。我说，你一生中有没有想过不劳而获？是的。区别在于你是否把这当作一种生活方式。当生态系统基本上允许你同时做这两件事而没有任何后果时，这些生态系统就达到临界质量并开始扎根。我认为这就是我们正在看到的现象。 jcal： 说得好。 chamath： 是的，说得好。gavin，我知道你不怎么谈政治，你谈市场，但这两件事确实有关联。给我们一个经济视角，解释为什么这正在发生。因为不同世代有不同的经济经历。我不想诱导证人，但我之前跟你聊过这事。 gavin： 是的，我认为ai显然会成为中期选举的定义性政治议题，也肯定会成为下一次总统选举的核心议题。但我觉得dsa现在正在发生的事情其实是两件事的融合。民主党我——我大部分人生都是民主党。它过去是工人阶级的政党，试图创造机会，也许平衡平等，帮助黑人和西裔美国人。你可以同意或不同意他们的方法，但我认为这些目标都是高尚的。但这些目标在dsa那里基本都不存在。一个都没有。如果你看谁为哪个候选人投票，dsa的投票基础是相对富裕的自由派白人，他们是向下流动的。他们正在失去工人阶级的选票，失去穷人的选票，失去黑人的选票，失去西裔美国人的选票。这些正是民主党长期以来试图——无论成功与否——代表和发声的人群。他们对dsa毫无兴趣。我认为dsa是危险的。我们正在选举一些极度反美的候选人，有些甚至呼吁使用暴力消灭美国。这很可悲。我认为有一整类人，他们上了精英学校，在非常优渥的环境中长大，但没有进入产业界，而是进入了这个庞大的ngo和非营利体系，他们的人生结果和那些为世界做生产性事情的人完全不同。我在节目上说过很多次，elon在脱碳方面做的贡献比所有活动家加起来还要多10倍。我认为这些ngo，以及政府越来越多地将大量资金外包给它们，是这个问题的很大一部分。他们在推行我在上次可能提到过的柯利效应——波士顿的一位市长，你推行你知道会对你的选民造成灾难的政策，但这些政策赶走了你的竞争对手。然后你可以把每年60万美元的ngo职位给你的朋友和盟友，而这些ngo不做任何生产性的事情。这是一个大规模的系统性腐败。不管你对特朗普政府怎么说，很多人对他从卡塔尔获得的新飞机感到愤怒。但第一，我们需要新飞机，第二，这就在那里，你能看到。我认为有数百亿甚至数千亿美元正在流向这些ngo。如果你看加州和纽约，用于无家可归问题的人均支出已经翻了一番以上，全都去了ngo，而结果变得更糟了。在加州，翻了4倍，结果更糟了。所以我认为这是危险的。我希望主流民主党能找到一个有说服力的候选人，因为我认为dsa日益崛起的原因不是他们的理念。我认为他们的理念只对那个非常狭窄的人群——向下流动的富裕白人——有吸引力，这些人可能过着准绅士的贫困生活，因为他们不做生产性的事情。他们可能本意良好，但他们不做生产性的事情。而且我认为他们崛起的原因是zohran mamdami这个人物。他是我这辈子见过的最有才华的政治人物。他能做精彩的演讲，采访表现很好，能够调动这一切。他是一个变色龙，可以随时切换。但他是dsa崛起的原因，不是他们的理念，也不是对ai的不满，而是他本人。民主党里没有第二个人了。我曾经认为aoc是迄今为止最有天赋的民主党政治人物。 jcal： 那是热身阶段。 gavin： 是的，她显然很有天赋。从政治上说。如果把他跟世代的沟通魅力结合起来——我们现在有两代“迷失的一代”，他们觉得自己的生活会比父母更糟。如果你看住房、大学债务、医疗，他们不相信自己能参与这个系统。他们觉得系统被操纵了。如果有人出现对他们说话，他们完全不知道社会主义是什么，德国或红色恐慌时期发生了什么。他们完全不知道社会主义或共产主义是什么。他们给它裹上了一个不可思议的外包装，叫“民主社会主义者”。这是社会主义的零度可乐，零度可口可乐。实际上就是共产主义。他们要直接没收人们的资产，没收这些公司一半的股票，没收他们的财富。他们要从做出东西的人那里拿走。正如我们上周讨论的，我们没有做任何事去改变他们的想法。我们没有建更多的房子，没有让大学更便宜。医疗是一场灾难。通胀是一场灾难。还发动毫无意义的战争——显然支持以色列也是这一切的一部分。 chamath： 我能说点别的吗？我昨天上了megyn kelly的节目，我一直在琢磨一个理论，跟大家分享一下，想听听你们的反应。如果你看社会主义的祸害，抛开那些言辞，只看结果，有3个国家在美国之前就已经远远偏向社会主义了：加拿大、英国和澳大利亚。我认为如果你从任何合理的发展指标来看，它们都是一种彻头彻尾的灾难。所有这些在社会议题上的道德炫耀、在移民和开放边界上的道德炫耀、在气候变化上的道德炫耀，让这3个国家都处于某种失修的状态，内部斗争巨大，政治非常不稳定。它们都是火药桶。有趣的是，这3个国家都发生了一件事，有可能扭转局面，这也呼应了gavin说的。这3个国家现在都禁止16岁以下的人使用社交媒体。我认为这就像确保孩子不要太早对毒品上瘾。当我们看像zohran mamdami这样的人时，我认为gavin是对的，我甚至要更进一步。他、aoc、刚赢的那个女士——chevalier，我们分析一下。他们都很帅气/漂亮，都有魅力，都知道现在的时代情绪，都知道如何使用社交媒体，而且他们在基本上在打造一支军队。现在，如果你砍掉他们的腿，说年轻人应该成熟之后才进入社交媒体，我怀疑他们最重要的信息消费渠道被拿走，实际上给了他们——也给了我们这些人机会——去展示均衡的信息饮食如何让你在以后的人生中更健康。就信息消费而言，我怀疑你会看到在这3个国家中，更少激进化的年轻人进入投票年龄。我怀疑如果你看到加拿大、英国和澳大利亚出现政治稳定性和可预测性，你可以把手指直接指向这个禁令。佛罗里达已经在美国做了，我认为我们需要在全美范围内认真考虑。 sacks： 社交媒体禁令16岁以下。加拿大已经实行了。可能也会来到美国。travis，你说。 travis： 我完全反对chamath这点。我们都同意社交媒体对孩子和成年人都是不好的。太多这些东西非常有害。它真的很伤脑子，会比香烟更糟糕。但禁止16岁以下使用社交媒体的真正目的是为了强制成年人进行身份识别和解匿名化，这样你就可以建立一个全面的审查制度，英国正在考虑这个。审查制度真正关心的不是有害内容，而是当权者不希望人们看到的那些不同意见的内容。如果内容跟他们意见一致，那就不是有害的。不一致的才是。所以他们实际上是在把表达不同意见定为犯罪。这是基于年龄的这个措施的一个副产品。 jcal： 年龄门槛。 travis： 它真正针对的是成年人，不是孩子。 gavin： 我完全同意16岁以下社交媒体禁令是好事，但如travis所说，代价很高。他们真正想做的是限制x上的匿名账户，特别是那些欧盟当权者不喜欢的内容。如果能在保留匿名和言论自由的前提下做到，我完全支持。但如果没有言论自由和x，我想我们今天会生活在一个完全不同且更糟糕的世界。接着你们大家说的这个，关于共产主义，它就是共产主义。人类其中最悲剧的一点就是，我们无法从他人的经验中学习。无论共产主义在不同的文化中用不同的机制被试行过多少次，都以失败和死亡、苦难告终，这也许根本不重要。每一代人都可能得亲自试一下。我认为言论自由的救赎价值和重要性在于，dsa的政策——尤其是超级进步派的民主党政策——是可以被衡量的，它们会导致坏的结果。如果你关心黑人生命，有一项无可争议的研究表明，当你选了一个共和党地方检察官时，那个城市年轻黑人男性的全因死亡率下降7%。就是这么简单。如果你关心环境？进步派搞了那么多规定，你连太阳能都建不了，而这才真正重要的事情。这个世界将靠阳光运行。如果你关心教育？他们取消精英学校的做法——那些给了低收入者真正机会的学校——还有加州取消数学，这对人们极其不利。这导致可怕的结果。犯罪方面我们都知道。实际上，有一定比例的人——我记得超过60%的暴力犯罪，也许是75%，来自那些有10次以上前科的人。 jcal： 对，我记得具体数据是0.1%的人犯了70%的罪。如果你只对付那0.1%，你就几乎可以消除所有犯罪。 gavin： 所以可怕的是——我第一次感到担心，作为一个历史学生，美国长期以来是一个非常稳定的政治经济实体，地理上也很稳定，这值得称赞，因为我们在二战之后本可以接管整个世界的。但如果他们完全控制了一些城市，把所有的生产者都赶走了，我不知道怎么才能回来。这让我对美国未来的前景有些担忧。 sacks： 而且，我不认为这只是纽约。洛杉矶的市长竞选——raman不知怎的靠着选举日之后的选票收割击败了spencer pratt？或者说是选举日后才被找到和计入的选票？这会是dsa的考验，因为他们高度组织化，学会了利用所有这些规则——选票收割规则之类的。dsa现在在洛杉矶市议会中大概占了一半席位，而且还在增长。尤其是在这些低投票率的选举中——这是纽约民主党初选，一个深蓝州。投票率可能只有17%。非常低。但这就是dsa真正如鱼得水的地方，因为他们充满热情、高度组织化、知道如何利用这些规则。这也是为什么他们想要排序投票这些东西。他们知道如何操纵和利用这些系统。所以我认为你会在很多其他选区看到同样的情况，只要他们在那里有组织。洛杉矶会是一个特别有趣的检验。所以我不认为这仅仅是zoran个人魅力的结果。这是一个全国性的运动，我们会在很多地方看到它。但毫无疑问mamdami现在是精神领袖。很多人都认为aoc是叛徒，或伯尼是叛徒。他们比那些人还要激进得多。 jcal： 再补充一点，sacks，他们确实从特朗普那里学到了一点：打造一个宽大的帐篷。所以你看到伯尼、mamdami、ro khanna都在说，“是的，我们不一样，但帐篷里有足够空间。”但实际上，这些更资深的进步派领袖想借助这股能量。甚至连民主党的建制派现在也在屈服。所以不管实际有多少dsa候选人当选，余下的政党现在正在对此作出反应，他们会屈服、会朝这个方向吹。因为他们不想在初选中被挑战。想想看，3场重要的国会竞选中mamdami支持的候选人赢了，其中两场推翻了非常强的在任议员。这是很大的冷门。所以现在每一个深蓝选区的国会议员都必须考虑到，自己也可能被挑战，他们得在投票、观点和言辞上都向dsa方向倾斜，以免重蹈dan goldman在纽约第10选区的覆辙。最后再提一点，jcal，你提到了以色列问题。我认为这在民主党的初选中已经变成了一个极其重要和显著的议题。显然，这是dsa政纲的一部分，其中一条就是“自由巴勒斯坦”。两届在任议员dan goldman的落败。他领导了对特朗普的弹劾行动，有一切正确的进步派资历，在左派政策上每一项都打了勾，经常上右派有线新闻。没人预料到他也会输。他输给了brad lander，实际上就是因为以色列问题。dan goldman非常亲以色列，基本上为以色列过去几年的行动辩护。而lander——同样是犹太裔，所以纸面上他们非常相似——就是在这个以色列议题上意见不同。lander去了一座清真寺谴责他所说的加沙种族灭绝。这几乎是你能得到的最接近直接以单一议题做选择的初选。lander以较大优势获胜。原因是，如果你看民意调查，80%的民主党人现在说不认可以色列。以前以色列在几乎所有群体中支持率都很高，是一个共识。现在80%的民主党人说他们不认可。你不能低估这对年轻民主党人的激励作用。 chamath： 我们在校园里已经看到了。 jcal： 它把人们都调动出来了。而且这在共和党内部也造成了很大的分裂。tucker因此离开了政党，megyn kelly也因此非常愤怒，根据报道，政府内部也有不少内斗。 sacks： 我不是在选边站，只是在描述发生了什么。 jcal： 绝对的，我也是。 sacks： 我认为共和党在这个议题上更混杂一些，实际上取决于年龄。如果你是更年长、建制派的共和党人——福克斯新闻观众——你仍然对以色列有很高的支持率。但如果你在50岁以下——你可能不太看福克斯了，你可能听播客——对以色列的不认同率现在是57%。有意思。所以在很大程度上取决于年龄。年轻人普遍对以色列的行为有严重问题。年龄段越往上，你开始看到民主党和共和党之间的巨大分歧。 chamath： 而且我要说清楚，chamath你在megyn kelly上解释得很好。有犹太人，有以色列国，有住在以色列的犹太人，还有bibi netanyahu。我认为很多人——跨宗教、跨政党——的共识是：netanyahu完全失控了。 chamath： 我们不打算重头讨论这个。但10月7日和9/11有很多相似之处。当你入侵一个国家并屠杀他们的民众时，会造成了巨大的情感、身体、心理伤害。那个国家通常会做的是，授权当时的领导人去把事情摆平。你要记得，9/11之后发生了很多事情，在其他任何情况下都绝不会发生。首当其冲就是《爱国者法案》，在另一个世界里它绝不可能通过，但9/11改变了这一切。所以有些时刻，领导者被放在一个位置上，他们基本上代表国家和人民行动，纠正错误。我理解这一点。我想每个人都理解。但现在已经发生的事情是，人们无法在逻辑上区分犹太人、以色列人和bibi。我认为这非常不幸，因为现在我们到了这样一个时刻：所有事情都被混为一谈，这事变成了第三条轨道。我觉得这绝对令人震惊。人们完全可以就bibi持有观点，说，“你知道吗？够了，或者已经太过了，或别的什么。”完全可以合理地说，是时候在以色列内部寻找不同的领导层、新的领导层，并有机会在国际舞台上重置其立场。他们值得这样。以色列人很了不起。犹太人很了不起。但把所有这些东西放在一起，盯着一个人，然后应用到整个国家和整个宗教上，这是疯狂的。 gavin： 我能加一点吗？两件事，很快。第一，以色列有一个巨大的公关问题。他们需要一个35岁以下的、精通英语、会用社交媒体的美籍以色列人在美国做他们的发言人。在法国、德国，每个国家都需要。他们没有。有一个年轻人——我忘了他名字——他做得很好，是美籍以色列人，在10月7日之后为以色列做代表。显然bibi的妻子不喜欢他，所以他们把他解雇了，之后再也找不到替代者。我认为这对以色列来说是个紧迫的问题，因为他们每秒钟都在挨拳，甚至都不还击。他们有时会推出一个60多岁的以色列英雄老人，战争英雄，但在社交媒体上不那么熟练，英语虽然技术性精确但有口音。他们都是好人，但不是好发言人。这是个紧迫的问题。至于解药，回到chamath的评论，我认为特朗普当选的一个重要原因是，很多我认识的民主党人投给特朗普，很大程度上是因为在疫情期间他们听到了自己的孩子在学校所学的东西。对他们来说那是第一次激进化教育。我认为很重要的是，作为美国教育系统的一部分，不要在课堂上公然反美。听着，我们作为国家犯过错误，我们不完美，但我们差不多是最好的了。我们需要在每个年级都一致地讲这个故事。我们可以辩论。我们做错了很多事，吸取教训。但奴隶制是世界上很多地方都有的，不是美国独有的问题。我们需要讲这些故事，因为我认为很多孩子之所以容易受到社交媒体宣传的影响，是因为他们被教育得要为自己是美国人感到羞耻、为身份的各个方面感到羞耻，被告知美国是邪恶的。我们需要纠正这一点，因为美国很了不起。而且我们是这个星球上唯一一个基本成功的多元文化社会。 jcal： 如果你说大熔炉是一件美好的事情，gavin，你会被封杀。因为“天哪，你在消灭人们的文化。”不，不是的，保留你的文化，然后加入这个文化，我们都能享受这个丰盛的自助餐。你知道我的文化是什么吗？ travis： 不知道。 jcal： 胜者的文化。我喜欢这个。就是它。学习、进步、冒险。 chamath： 你是不是像ricky bobby说的“尿出卓越”？有时候会。 sacks： 有时候会有点痛，但经常。 jcal： 警告那些愚蠢的民主党人，他们什么都没做成，社会主义者正在利用你们的政党。这哥们火了——他们只是一群宿主。他们就是要感染民主党，然后夺取投票基本盘。这个叫gustavo gordillo的人，你们可能看到了，他是纽约市dsa的共同主席，他直接说了。我们来读他的原话：“我们是民主党党团的一部分，但我们不同意民主党运作其机构的方式，所以我们通过关注志愿者领导的运动来建立自己的独立性。我们认为每个人都应该得到培训，成为能够参与政治过程的人，我们认为民主党不是这样运作的。在议程方面，民主党存在问题。他们由亿万富翁资助，同时又想代表工人阶级。我们认为，你必须在亿万富翁阶级和工人阶级之间做出选择。”他们正在接管政党。再说一遍，这个策略对特朗普来说效果很好。他接管了共和党，并且他主宰了它。他们试图把他赶出去，试了很多次，但他的信息和沟通方式实在太精准了。他知道人们想听什么，他知道如何精准传达。他是史上最伟大的喜剧表演者——在非喜剧演员中毫无疑问排名第一，在所有喜剧演员中也能排进前20。他沟通能力完美。而mamdami完全复制了这一点。他照搬了特朗普的剧本，用在了这里。他正在通过沟通接管。你们都知道我是尼克斯的死忠粉，一生都是。g5赢了总决赛时我又哭又跳。然后mamdami做了一场关于尼克斯的演讲——显然别人替他写的——我完全震惊了和生气了，因为它太好了。他有奥巴马-特朗普式的魅力，他会从内到外摧毁你们的政党。社会主义就是共产主义，是通往痛苦和苦难的道路。正如gavin所说，不会有好结果。 chamath： 是不是很神奇？天哪，你刚刚说mamdami是共产党，他代表的是极其邪恶的东西。但就因为他做了一场关于尼克斯的演讲，你现在就爱上他了？ jcal： 不，我爱那场演讲。我是带着清醒认识去看的。 chamath： 只需要这么多。 travis： 就这么多，我们就完了。不过这是真的。 sacks： 这个人是彻头彻尾的骗子。他一直微笑，假笑着，像个鳄鱼一样笑着。他谈论着要吃掉你，完全是假的。 jcal： 但他对尼克斯的演讲是我听过的最让人起立欢呼的演讲。我特别生气。这家伙真是个演说家。 chamath： 你被编程了。我恨他。我们得帮你除编程了。 jcal： 不，我被催眠了，但我自己抽出来了。我被卷进去了一秒。下个话题，肯定是。 关键原话或重要表达： “the only vaguely successful multicultural society on planet earth.”——美国是地球上唯一基本成功的多元文化社会（gavin baker） “communism is in all of us. in our blood. as humans. have you ever wanted something for nothing?”——共产主义就在我们每个人血液里。你有没有想过不劳而获？（travis kalanick） “the dsa are coming for the democratic party. they control the base now. it’s where all the energy is.”——dsa正在向民主党进军。他们现在已经控制了基本盘，所有能量都在那里（david sacks） ---" style="--index: 1">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">01</span>
+                    <span class="timeline-meta">00:00–00:10</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>纽约市社会主义者大胜：民主党正在被接管</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>纽约市民主党初选中，Mamdami支持的3位候选人全部获胜，2位资深在任者被击败。</li>
+<li>社会主义民主人士（DSA）明确表示他们只是在利用民主党的选举通道，目标是从内部接管。</li>
+<li>嘉宾从多个角度分析了这一趋势的原因：硅谷形象不佳、年轻人经济前景悲观、移民政策变化、以及Mamdami本人超凡的政治魅力。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>DSA（Democratic Socialists of America）：美国民主社会主义者，是民主党内最左翼的政治组织。</li>
+<li>第10选区：纽约最富有的选区之一，涵盖西村、华尔街、Dumbo等高端社区。</li>
+<li>第13选区：纽约最贫穷的选区之一，包括哈莱姆区和西布朗克斯。</li>
+<li>第7选区：DSA的大本营，又称“卡米走廊”，包括布什维克、威廉斯堡等年轻人聚集区。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> 欢迎回来，这里是全球第一的播客All-In Podcast第278期。由于社会主义者在纽约市大胜，Freeberg今天请了心理健康假，所以我们请了两位嘉宾。Travis Kalanick从Adams过来了，你好吗兄弟？</p>
+<p><strong>Travis：</strong> 我很好，很高兴见到你。</p>
+<p><strong>JCal：</strong> 另外，在Starbase度过胜利一周后，独一无二的、大家都喜欢的Gavin Baker从Atreides Management来了。你还好吗Gavin？</p>
+<p><strong>Gavin：</strong> 很好，谢谢你邀请我。</p>
+<p><strong>JCal：</strong> SpaceX IPO之后你还在云端飘着吗？</p>
+<p><strong>Gavin：</strong> 那是一个非常特别的时刻，是几十年努力工作的结晶。但套用Bill Belichick的话，下一场从零开始。</p>
+<p><strong>JCal：</strong> 没错。现在说正事，社会主义者在纽约国会民主党初选中横扫了。周二，纽约市长Mamdami支持的3位候选人都赢了各自的初选。第10选区，Brad Lander击败了两届在任议员Dan Goldman。第10选区是纽约最富有的选区之一，包括西村那些联排别墅、华尔街、Dumbo、Cobble Hill、Carroll Gardens、Park Slope——这是个奇怪的选区划分。在纽约第13选区，Chevalier击败了一位五届在任议员，这位议员的背后是众议院议长Hakeem Jeffries。看起来社会主义者正在向Jeffries本人进军。第13选区是纽约最贫困的选区之一，包括哈莱姆和西布朗克斯。Chevalier是一位32岁的民主社会主义者，有一系列争议言论的历史。纽约第7选区，Claire Valdez在开放席位中击败了在任者的钦定接班人。第7选区是DSA的堡垒，包括布什维克、威廉斯堡、长岛市、Greenpoint——被称为卡米走廊。那里有很多穿着吊带裤的嬉皮士和咖啡师。根据合作伙伴Polly Market的数据，这算是一个相当大的冷门。选举日前Mamdami横扫的概率只有26%。就像赌博中的三连中一样。这些候选人跟Mamdami一样，在年轻、受过大学教育、高收入人群中表现更好——就是那些“负担得起当社会主义者的人”。这些都是安全席位，DSA几乎肯定会赢。</p>
+<p><strong>JCal：</strong> 你说“负担得起当社会主义者的人”这个说法最到位了。永远是那些有钱的穷人——他们有钱但装穷。</p>
+<p><strong>Chamath：</strong> 说得太对了。这是这个国家从30年代、50年代、红色恐慌、黑豹党以来一直有的模式。简单来说，如果你很聪明而且去经商了，你就成了资本家。如果你极其聪明而且去搞学术了，你最终会有奢侈的信念，觉得社会主义很棒。我的看法是，老实说，我们正在失去主动权，部分原因是我们自己成了自己最大的敌人。我一直这么说，AI其实是看清这个问题的非常好的棱镜。我认为AI是我们有生之年能见到的最强大的经济均衡器。它是有史以来最能创造平等的东西。它能让地球上每个人的起跑线都变得平等。但我们在展示它、把它推向市场、谈论它方面做得太差了。我们让所有个人的斗争、不安全感、争吵都公开暴露出来。结果硅谷在大众中失去了更多可信度。在这个真空中，其他人就可以描绘出一幅画面：任何不是今天这种资本主义的东西都比他们看到的更好。这就是为什么我们看到这么多人获得了势头。如果你看一些关键的国会竞选，它们实际上是对AI的一次公投。好消息是我们在一些关键地方守住了底线，但只是勉强守住。在犹他和纽约，有几场非常重要的竞选，基本上是由Anthropic资助的反AI团体——这本身就很疯狂——对阵由OpenAI资助的亲AI团体，亲AI的一方赢了。</p>
+<p><strong>JCal：</strong> 你刚才说它是最强大的均衡器。你能不能举几个例子简单展开一下？我知道你的意思，但为了观众着想，你这几周一直在说这个，所以请把它说清楚。</p>
+<p><strong>Chamath：</strong> 最好的解释方式是这样的：第一个真正重大的经济生产力突破是互联网时代，具体来说是Google收集了全世界所有知识和信息，通过搜索让人们可以使用。但25年后我们发现，尽管它建立了伟大的生意，缺少的是把知识和信息转化为专业和智慧的能力。这就是AI做的事情。它掌握全世界的知识，让你能够行动，这样每一个男人、女人、孩子都有一个像Travis Kalanick一样的联合创始人坐在你身边——一个超级创始人，这个天才可以帮你思考所有问题，可以在工程上超越别人，可以在思考上超越别人，而且没有门槛能阻止你拥有它。现在你的能力只受限于你能否把这种能量引导到对你有价值的生产性方向。这是一种极其强大的力量。但我们却陷入悲观论，谈论工作消失、水资源消耗——这些全是谎言，全是编造的假信息。这些东西被创造出来，就是为了帮助AI竞赛中一小部分特定玩家，并由那些人资助。在真空中，Jason，我们让其他人描绘了一个替代版本，现在那个版本看起来比当前版本更有吸引力，因为当前版本有非常糟糕的品牌大使。</p>
+<p><strong>Sacks：</strong> 你怎么看这个，Sacks？我想有些人把这件事看作左翼版的民粹主义接管，就像特朗普在过去10多年做的那样。你对社会主义及其惊人的吸引力有什么看法？它在选举中正在取胜。</p>
+<p><strong>Sacks：</strong> 我认为这里面有些真相。我认为未来的选择要么是共产党的——如果你愿意叫社会主义——民主党那一套，要么是共和党的民族主义。这就是我们前进的方向。那是两个民粹主义方向。但我们来看看DSA候选人的主张是什么。看看他们的政纲。他们说要废除参议院，废除“监狱国家”——基本上就是废除警察和监狱。他们要废除ICE（移民执法局），大赦所有人，不支持任何遣返。他们要废除总统和最高法院，代之以由国会选择并从属于国会的行政和司法机构——现在基本上就只是这个众议院了。就众议院选举而言，他们要废除选举人团，用多党民主替代两党制，扩大众议院，实施比例代表制和排序投票。这将是对于我们宪政体制的彻底改造。他们要自由巴勒斯坦。他们要公共拥有大公司。他们要削减“战争部”的预算。这是一个非常激进的组织，以前你会嘲笑很多这样的提议，但现在你笑不出来了，因为这些人正在接管民主党。你可以看到民主党当权派现在完全恐慌，因为他们已经失去了对党的控制，输给了Zohra——呃，Mamdami和他的盟友。Jason，就拿纽约第13选区这场竞选来说。Hakeem Jeffries的盟友、长期在任的众议员Espaillat，他担任国会西裔党团主席，结果被一位32岁、从未工作过、读了10年博士的失业博士生击败。她甚至按DSA的标准来看可能都有点疯。她公开宣称要终结西方文明，要灭绝西方文明。</p>
+<p><strong>JCal：</strong> 等等，什么？</p>
+<p><strong>Chamath：</strong> 她正泡在西方文明里呢。</p>
+<p><strong>Sacks：</strong> 是的，她曾说用美国国旗当餐巾纸擦手。她在10月7日第二天参加集会，庆祝屠杀以色列平民。她非常亲巴勒斯坦，甚至到了庆祝以色列平民死亡的地步。她称白人女性为丑陋的殖民者。她呼吁完全削减警察经费、废除所有监狱和边境。不希望有任何遣返。憎恨警察，公开称他们为“猪”。称美国军人为战争罪犯，说美国是一个丢人的国家。她曾撰文赞扬共产主义和夺取生产资料。诸如此类。所以这基本上就是新的民主党。即使民主党在11月拿下众议院、Hakeem Jeffries成为议长，管理所有这些新DSA议员将是他巨大的头痛，因为他们并不视传统建制派民主党为盟友。他们视其为障碍。DSA联合主席Josh Block说：“我们只是用民主党作为获得选票的工具，不是因为我们的目标一致。我们建立自己的组织，在民主党标签下参选，在有用的时候和民主党一起投票，从内部推动我们自己的议程。我们把民主党建制派视为障碍，不是家。”所以DSA正在向民主党进军。它已经控制了基本盘，所有能量都在那里。我认为这一接管将继续下去，DSA将逐步接管越来越多的民主党席位。我能对这些建制派民主党人说的就是：玩愚蠢的游戏，赢愚蠢的奖品。你们支持开放的边境政策，带来了这波大规模移民，这是DSA新派系庞大基本盘的重要组成部分。如果只是土生土长的纽约人投票，Mamdami不可能赢得市长选举。是移民的投票让Mamdami赢了。不只是DSA基本盘，还有这些所谓的“过度教育的白人进步派”——我说“过度教育”是因为他们的人生是向下流动的，最终只能在学术机构或NGO工作。他们是极左的先锋。正是这些刚毕业的大学生组织者加上这个移民运动，真正在接管民主党。但这一切又回到民主党的政策。他们可能不是意图让这一切发生。他们可能没想失去控制，但正是他们的开放边境政策，也是因为他们打破了“大熔炉”和多年来美国同化移民的政策。这一切都被多元文化主义和觉醒主义打破了。我们不再这样做了。所以你现在看到像Chevalier这样的候选人公开宣称，他们不仅仅是反美，他们是“后美国”的。他们不尊重美国体制、我们的宪政秩序、我们的自由企业制度。他们要引入某种非常不同的东西，看起来会很像那些移民来源国的样貌。</p>
+<p><strong>JCal：</strong> 很有意思，你提到她想消灭所有这些机构，这跟特朗普很像，他也想删除一些东西：IRS、USAID、教育部、EPA。他们都用同样的剧本，“嘿，我们要删掉一些东西。”Travis，你以《源泉》——兰德的小说为你的推特头像十几年之久……</p>
+<p><strong>Travis：</strong> 不是，人家写了十几年关于这事。我只是读了本书然后换下头像。我读过《汉密尔顿》，读过《安德的游戏》。但你知道我认识你很久了，我相信个人的卓越性，相信一点坚毅精神。这显然跟那完全相反。你对这些地方正在发生的事情有什么看法？虽然在全国层面还没到那程度，但显然值得注意。</p>
+<p><strong>Travis：</strong> 好，我有两条格言跟大家分享。第一，真相和正义是社会的免疫系统。当免疫系统被压制时，所有社会疾病都会爆发。如果你看到我们在失去真相——社交媒体、主流媒体，随便你怎么叫——那是社会正在发生坏事的一个早期指标。而且这不只是社交媒体、主流媒体，是我们周围的一切。正义方面也一样。如果人们犯罪后没有后果，这也是一个很好的早期指标。你可以观察这些指标说，今天真相赢了还是输了？今天正义赢了还是输了？而趋势会告诉我们，我们要变得更糟还是更好。</p>
+<p><strong>JCal：</strong> 对。新冠病毒和Fauci案，我们现在看到更多信息浮出水面。我们很难得到真相。也许最终会得到正义。5年后我们好像得到了一点更多真相，但这正是你讨论的完美例子。</p>
+<p><strong>Travis：</strong> 这里面有很多内容，如果有时间我们可以展开。但这些成为了你观察的原子层面的事情。另一件事是，有些人听我这么说会有点吃惊：共产主义存在于我们所有人之中。它在我们的血液里。作为人类。人们会说，你在说什么？你疯了吗？什么意思？我说，好啊，你一生中有没有懒惰过？每个人都说，是的，我有过懒惰。我说，你一生中有没有想过不劳而获？是的。区别在于你是否把这当作一种生活方式。当生态系统基本上允许你同时做这两件事而没有任何后果时，这些生态系统就达到临界质量并开始扎根。我认为这就是我们正在看到的现象。</p>
+<p><strong>JCal：</strong> 说得好。</p>
+<p><strong>Chamath：</strong> 是的，说得好。Gavin，我知道你不怎么谈政治，你谈市场，但这两件事确实有关联。给我们一个经济视角，解释为什么这正在发生。因为不同世代有不同的经济经历。我不想诱导证人，但我之前跟你聊过这事。</p>
+<p><strong>Gavin：</strong> 是的，我认为AI显然会成为中期选举的定义性政治议题，也肯定会成为下一次总统选举的核心议题。但我觉得DSA现在正在发生的事情其实是两件事的融合。民主党我——我大部分人生都是民主党。它过去是工人阶级的政党，试图创造机会，也许平衡平等，帮助黑人和西裔美国人。你可以同意或不同意他们的方法，但我认为这些目标都是高尚的。但这些目标在DSA那里基本都不存在。一个都没有。如果你看谁为哪个候选人投票，DSA的投票基础是相对富裕的自由派白人，他们是向下流动的。他们正在失去工人阶级的选票，失去穷人的选票，失去黑人的选票，失去西裔美国人的选票。这些正是民主党长期以来试图——无论成功与否——代表和发声的人群。他们对DSA毫无兴趣。我认为DSA是危险的。我们正在选举一些极度反美的候选人，有些甚至呼吁使用暴力消灭美国。这很可悲。我认为有一整类人，他们上了精英学校，在非常优渥的环境中长大，但没有进入产业界，而是进入了这个庞大的NGO和非营利体系，他们的人生结果和那些为世界做生产性事情的人完全不同。我在节目上说过很多次，Elon在脱碳方面做的贡献比所有活动家加起来还要多10倍。我认为这些NGO，以及政府越来越多地将大量资金外包给它们，是这个问题的很大一部分。他们在推行我在上次可能提到过的柯利效应——波士顿的一位市长，你推行你知道会对你的选民造成灾难的政策，但这些政策赶走了你的竞争对手。然后你可以把每年60万美元的NGO职位给你的朋友和盟友，而这些NGO不做任何生产性的事情。这是一个大规模的系统性腐败。不管你对特朗普政府怎么说，很多人对他从卡塔尔获得的新飞机感到愤怒。但第一，我们需要新飞机，第二，这就在那里，你能看到。我认为有数百亿甚至数千亿美元正在流向这些NGO。如果你看加州和纽约，用于无家可归问题的人均支出已经翻了一番以上，全都去了NGO，而结果变得更糟了。在加州，翻了4倍，结果更糟了。所以我认为这是危险的。我希望主流民主党能找到一个有说服力的候选人，因为我认为DSA日益崛起的原因不是他们的理念。我认为他们的理念只对那个非常狭窄的人群——向下流动的富裕白人——有吸引力，这些人可能过着准绅士的贫困生活，因为他们不做生产性的事情。他们可能本意良好，但他们不做生产性的事情。而且我认为他们崛起的原因是Zohran Mamdami这个人物。他是我这辈子见过的最有才华的政治人物。他能做精彩的演讲，采访表现很好，能够调动这一切。他是一个变色龙，可以随时切换。但他是DSA崛起的原因，不是他们的理念，也不是对AI的不满，而是他本人。民主党里没有第二个人了。我曾经认为AOC是迄今为止最有天赋的民主党政治人物。</p>
+<p><strong>JCal：</strong> 那是热身阶段。</p>
+<p><strong>Gavin：</strong> 是的，她显然很有天赋。从政治上说。如果把他跟世代的沟通魅力结合起来——我们现在有两代“迷失的一代”，他们觉得自己的生活会比父母更糟。如果你看住房、大学债务、医疗，他们不相信自己能参与这个系统。他们觉得系统被操纵了。如果有人出现对他们说话，他们完全不知道社会主义是什么，德国或红色恐慌时期发生了什么。他们完全不知道社会主义或共产主义是什么。他们给它裹上了一个不可思议的外包装，叫“民主社会主义者”。这是社会主义的零度可乐，零度可口可乐。实际上就是共产主义。他们要直接没收人们的资产，没收这些公司一半的股票，没收他们的财富。他们要从做出东西的人那里拿走。正如我们上周讨论的，我们没有做任何事去改变他们的想法。我们没有建更多的房子，没有让大学更便宜。医疗是一场灾难。通胀是一场灾难。还发动毫无意义的战争——显然支持以色列也是这一切的一部分。</p>
+<p><strong>Chamath：</strong> 我能说点别的吗？我昨天上了Megyn Kelly的节目，我一直在琢磨一个理论，跟大家分享一下，想听听你们的反应。如果你看社会主义的祸害，抛开那些言辞，只看结果，有3个国家在美国之前就已经远远偏向社会主义了：加拿大、英国和澳大利亚。我认为如果你从任何合理的发展指标来看，它们都是一种彻头彻尾的灾难。所有这些在社会议题上的道德炫耀、在移民和开放边界上的道德炫耀、在气候变化上的道德炫耀，让这3个国家都处于某种失修的状态，内部斗争巨大，政治非常不稳定。它们都是火药桶。有趣的是，这3个国家都发生了一件事，有可能扭转局面，这也呼应了Gavin说的。这3个国家现在都禁止16岁以下的人使用社交媒体。我认为这就像确保孩子不要太早对毒品上瘾。当我们看像Zohran Mamdami这样的人时，我认为Gavin是对的，我甚至要更进一步。他、AOC、刚赢的那个女士——Chevalier，我们分析一下。他们都很帅气/漂亮，都有魅力，都知道现在的时代情绪，都知道如何使用社交媒体，而且他们在基本上在打造一支军队。现在，如果你砍掉他们的腿，说年轻人应该成熟之后才进入社交媒体，我怀疑他们最重要的信息消费渠道被拿走，实际上给了他们——也给了我们这些人机会——去展示均衡的信息饮食如何让你在以后的人生中更健康。就信息消费而言，我怀疑你会看到在这3个国家中，更少激进化的年轻人进入投票年龄。我怀疑如果你看到加拿大、英国和澳大利亚出现政治稳定性和可预测性，你可以把手指直接指向这个禁令。佛罗里达已经在美国做了，我认为我们需要在全美范围内认真考虑。</p>
+<p><strong>Sacks：</strong> 社交媒体禁令16岁以下。加拿大已经实行了。可能也会来到美国。Travis，你说。</p>
+<p><strong>Travis：</strong> 我完全反对Chamath这点。我们都同意社交媒体对孩子和成年人都是不好的。太多这些东西非常有害。它真的很伤脑子，会比香烟更糟糕。但禁止16岁以下使用社交媒体的真正目的是为了强制成年人进行身份识别和解匿名化，这样你就可以建立一个全面的审查制度，英国正在考虑这个。审查制度真正关心的不是有害内容，而是当权者不希望人们看到的那些不同意见的内容。如果内容跟他们意见一致，那就不是有害的。不一致的才是。所以他们实际上是在把表达不同意见定为犯罪。这是基于年龄的这个措施的一个副产品。</p>
+<p><strong>JCal：</strong> 年龄门槛。</p>
+<p><strong>Travis：</strong> 它真正针对的是成年人，不是孩子。</p>
+<p><strong>Gavin：</strong> 我完全同意16岁以下社交媒体禁令是好事，但如Travis所说，代价很高。他们真正想做的是限制X上的匿名账户，特别是那些欧盟当权者不喜欢的内容。如果能在保留匿名和言论自由的前提下做到，我完全支持。但如果没有言论自由和X，我想我们今天会生活在一个完全不同且更糟糕的世界。接着你们大家说的这个，关于共产主义，它就是共产主义。人类其中最悲剧的一点就是，我们无法从他人的经验中学习。无论共产主义在不同的文化中用不同的机制被试行过多少次，都以失败和死亡、苦难告终，这也许根本不重要。每一代人都可能得亲自试一下。我认为言论自由的救赎价值和重要性在于，DSA的政策——尤其是超级进步派的民主党政策——是可以被衡量的，它们会导致坏的结果。如果你关心黑人生命，有一项无可争议的研究表明，当你选了一个共和党地方检察官时，那个城市年轻黑人男性的全因死亡率下降7%。就是这么简单。如果你关心环境？进步派搞了那么多规定，你连太阳能都建不了，而这才真正重要的事情。这个世界将靠阳光运行。如果你关心教育？他们取消精英学校的做法——那些给了低收入者真正机会的学校——还有加州取消数学，这对人们极其不利。这导致可怕的结果。犯罪方面我们都知道。实际上，有一定比例的人——我记得超过60%的暴力犯罪，也许是75%，来自那些有10次以上前科的人。</p>
+<p><strong>JCal：</strong> 对，我记得具体数据是0.1%的人犯了70%的罪。如果你只对付那0.1%，你就几乎可以消除所有犯罪。</p>
+<p><strong>Gavin：</strong> 所以可怕的是——我第一次感到担心，作为一个历史学生，美国长期以来是一个非常稳定的政治经济实体，地理上也很稳定，这值得称赞，因为我们在二战之后本可以接管整个世界的。但如果他们完全控制了一些城市，把所有的生产者都赶走了，我不知道怎么才能回来。这让我对美国未来的前景有些担忧。</p>
+<p><strong>Sacks：</strong> 而且，我不认为这只是纽约。洛杉矶的市长竞选——Raman不知怎的靠着选举日之后的选票收割击败了Spencer Pratt？或者说是选举日后才被找到和计入的选票？这会是DSA的考验，因为他们高度组织化，学会了利用所有这些规则——选票收割规则之类的。DSA现在在洛杉矶市议会中大概占了一半席位，而且还在增长。尤其是在这些低投票率的选举中——这是纽约民主党初选，一个深蓝州。投票率可能只有17%。非常低。但这就是DSA真正如鱼得水的地方，因为他们充满热情、高度组织化、知道如何利用这些规则。这也是为什么他们想要排序投票这些东西。他们知道如何操纵和利用这些系统。所以我认为你会在很多其他选区看到同样的情况，只要他们在那里有组织。洛杉矶会是一个特别有趣的检验。所以我不认为这仅仅是Zoran个人魅力的结果。这是一个全国性的运动，我们会在很多地方看到它。但毫无疑问Mamdami现在是精神领袖。很多人都认为AOC是叛徒，或伯尼是叛徒。他们比那些人还要激进得多。</p>
+<p><strong>JCal：</strong> 再补充一点，Sacks，他们确实从特朗普那里学到了一点：打造一个宽大的帐篷。所以你看到伯尼、Mamdami、Ro Khanna都在说，“是的，我们不一样，但帐篷里有足够空间。”但实际上，这些更资深的进步派领袖想借助这股能量。甚至连民主党的建制派现在也在屈服。所以不管实际有多少DSA候选人当选，余下的政党现在正在对此作出反应，他们会屈服、会朝这个方向吹。因为他们不想在初选中被挑战。想想看，3场重要的国会竞选中Mamdami支持的候选人赢了，其中两场推翻了非常强的在任议员。这是很大的冷门。所以现在每一个深蓝选区的国会议员都必须考虑到，自己也可能被挑战，他们得在投票、观点和言辞上都向DSA方向倾斜，以免重蹈Dan Goldman在纽约第10选区的覆辙。最后再提一点，JCal，你提到了以色列问题。我认为这在民主党的初选中已经变成了一个极其重要和显著的议题。显然，这是DSA政纲的一部分，其中一条就是“自由巴勒斯坦”。两届在任议员Dan Goldman的落败。他领导了对特朗普的弹劾行动，有一切正确的进步派资历，在左派政策上每一项都打了勾，经常上右派有线新闻。没人预料到他也会输。他输给了Brad Lander，实际上就是因为以色列问题。Dan Goldman非常亲以色列，基本上为以色列过去几年的行动辩护。而Lander——同样是犹太裔，所以纸面上他们非常相似——就是在这个以色列议题上意见不同。Lander去了一座清真寺谴责他所说的加沙种族灭绝。这几乎是你能得到的最接近直接以单一议题做选择的初选。Lander以较大优势获胜。原因是，如果你看民意调查，80%的民主党人现在说不认可以色列。以前以色列在几乎所有群体中支持率都很高，是一个共识。现在80%的民主党人说他们不认可。你不能低估这对年轻民主党人的激励作用。</p>
+<p><strong>Chamath：</strong> 我们在校园里已经看到了。</p>
+<p><strong>JCal：</strong> 它把人们都调动出来了。而且这在共和党内部也造成了很大的分裂。Tucker因此离开了政党，Megyn Kelly也因此非常愤怒，根据报道，政府内部也有不少内斗。</p>
+<p><strong>Sacks：</strong> 我不是在选边站，只是在描述发生了什么。</p>
+<p><strong>JCal：</strong> 绝对的，我也是。</p>
+<p><strong>Sacks：</strong> 我认为共和党在这个议题上更混杂一些，实际上取决于年龄。如果你是更年长、建制派的共和党人——福克斯新闻观众——你仍然对以色列有很高的支持率。但如果你在50岁以下——你可能不太看福克斯了，你可能听播客——对以色列的不认同率现在是57%。有意思。所以在很大程度上取决于年龄。年轻人普遍对以色列的行为有严重问题。年龄段越往上，你开始看到民主党和共和党之间的巨大分歧。</p>
+<p><strong>Chamath：</strong> 而且我要说清楚，Chamath你在Megyn Kelly上解释得很好。有犹太人，有以色列国，有住在以色列的犹太人，还有Bibi Netanyahu。我认为很多人——跨宗教、跨政党——的共识是：Netanyahu完全失控了。</p>
+<p><strong>Chamath：</strong> 我们不打算重头讨论这个。但10月7日和9/11有很多相似之处。当你入侵一个国家并屠杀他们的民众时，会造成了巨大的情感、身体、心理伤害。那个国家通常会做的是，授权当时的领导人去把事情摆平。你要记得，9/11之后发生了很多事情，在其他任何情况下都绝不会发生。首当其冲就是《爱国者法案》，在另一个世界里它绝不可能通过，但9/11改变了这一切。所以有些时刻，领导者被放在一个位置上，他们基本上代表国家和人民行动，纠正错误。我理解这一点。我想每个人都理解。但现在已经发生的事情是，人们无法在逻辑上区分犹太人、以色列人和Bibi。我认为这非常不幸，因为现在我们到了这样一个时刻：所有事情都被混为一谈，这事变成了第三条轨道。我觉得这绝对令人震惊。人们完全可以就Bibi持有观点，说，“你知道吗？够了，或者已经太过了，或别的什么。”完全可以合理地说，是时候在以色列内部寻找不同的领导层、新的领导层，并有机会在国际舞台上重置其立场。他们值得这样。以色列人很了不起。犹太人很了不起。但把所有这些东西放在一起，盯着一个人，然后应用到整个国家和整个宗教上，这是疯狂的。</p>
+<p><strong>Gavin：</strong> 我能加一点吗？两件事，很快。第一，以色列有一个巨大的公关问题。他们需要一个35岁以下的、精通英语、会用社交媒体的美籍以色列人在美国做他们的发言人。在法国、德国，每个国家都需要。他们没有。有一个年轻人——我忘了他名字——他做得很好，是美籍以色列人，在10月7日之后为以色列做代表。显然Bibi的妻子不喜欢他，所以他们把他解雇了，之后再也找不到替代者。我认为这对以色列来说是个紧迫的问题，因为他们每秒钟都在挨拳，甚至都不还击。他们有时会推出一个60多岁的以色列英雄老人，战争英雄，但在社交媒体上不那么熟练，英语虽然技术性精确但有口音。他们都是好人，但不是好发言人。这是个紧迫的问题。至于解药，回到Chamath的评论，我认为特朗普当选的一个重要原因是，很多我认识的民主党人投给特朗普，很大程度上是因为在疫情期间他们听到了自己的孩子在学校所学的东西。对他们来说那是第一次激进化教育。我认为很重要的是，作为美国教育系统的一部分，不要在课堂上公然反美。听着，我们作为国家犯过错误，我们不完美，但我们差不多是最好的了。我们需要在每个年级都一致地讲这个故事。我们可以辩论。我们做错了很多事，吸取教训。但奴隶制是世界上很多地方都有的，不是美国独有的问题。我们需要讲这些故事，因为我认为很多孩子之所以容易受到社交媒体宣传的影响，是因为他们被教育得要为自己是美国人感到羞耻、为身份的各个方面感到羞耻，被告知美国是邪恶的。我们需要纠正这一点，因为美国很了不起。而且我们是这个星球上唯一一个基本成功的多元文化社会。</p>
+<p><strong>JCal：</strong> 如果你说大熔炉是一件美好的事情，Gavin，你会被封杀。因为“天哪，你在消灭人们的文化。”不，不是的，保留你的文化，然后加入这个文化，我们都能享受这个丰盛的自助餐。你知道我的文化是什么吗？</p>
+<p><strong>Travis：</strong> 不知道。</p>
+<p><strong>JCal：</strong> 胜者的文化。我喜欢这个。就是它。学习、进步、冒险。</p>
+<p><strong>Chamath：</strong> 你是不是像Ricky Bobby说的“尿出卓越”？有时候会。</p>
+<p><strong>Sacks：</strong> 有时候会有点痛，但经常。</p>
+<p><strong>JCal：</strong> 警告那些愚蠢的民主党人，他们什么都没做成，社会主义者正在利用你们的政党。这哥们火了——他们只是一群宿主。他们就是要感染民主党，然后夺取投票基本盘。这个叫Gustavo Gordillo的人，你们可能看到了，他是纽约市DSA的共同主席，他直接说了。我们来读他的原话：“我们是民主党党团的一部分，但我们不同意民主党运作其机构的方式，所以我们通过关注志愿者领导的运动来建立自己的独立性。我们认为每个人都应该得到培训，成为能够参与政治过程的人，我们认为民主党不是这样运作的。在议程方面，民主党存在问题。他们由亿万富翁资助，同时又想代表工人阶级。我们认为，你必须在亿万富翁阶级和工人阶级之间做出选择。”他们正在接管政党。再说一遍，这个策略对特朗普来说效果很好。他接管了共和党，并且他主宰了它。他们试图把他赶出去，试了很多次，但他的信息和沟通方式实在太精准了。他知道人们想听什么，他知道如何精准传达。他是史上最伟大的喜剧表演者——在非喜剧演员中毫无疑问排名第一，在所有喜剧演员中也能排进前20。他沟通能力完美。而Mamdami完全复制了这一点。他照搬了特朗普的剧本，用在了这里。他正在通过沟通接管。你们都知道我是尼克斯的死忠粉，一生都是。G5赢了总决赛时我又哭又跳。然后Mamdami做了一场关于尼克斯的演讲——显然别人替他写的——我完全震惊了和生气了，因为它太好了。他有奥巴马-特朗普式的魅力，他会从内到外摧毁你们的政党。社会主义就是共产主义，是通往痛苦和苦难的道路。正如Gavin所说，不会有好结果。</p>
+<p><strong>Chamath：</strong> 是不是很神奇？天哪，你刚刚说Mamdami是共产党，他代表的是极其邪恶的东西。但就因为他做了一场关于尼克斯的演讲，你现在就爱上他了？</p>
+<p><strong>JCal：</strong> 不，我爱那场演讲。我是带着清醒认识去看的。</p>
+<p><strong>Chamath：</strong> 只需要这么多。</p>
+<p><strong>Travis：</strong> 就这么多，我们就完了。不过这是真的。</p>
+<p><strong>Sacks：</strong> 这个人是彻头彻尾的骗子。他一直微笑，假笑着，像个鳄鱼一样笑着。他谈论着要吃掉你，完全是假的。</p>
+<p><strong>JCal：</strong> 但他对尼克斯的演讲是我听过的最让人起立欢呼的演讲。我特别生气。这家伙真是个演说家。</p>
+<p><strong>Chamath：</strong> 你被编程了。我恨他。我们得帮你除编程了。</p>
+<p><strong>JCal：</strong> 不，我被催眠了，但我自己抽出来了。我被卷进去了一秒。下个话题，肯定是。</p>
+<h4>关键原话或重要表达</h4>
+<ul>
+<li>“The only vaguely successful multicultural society on planet Earth.”——美国是地球上唯一基本成功的多元文化社会（Gavin Baker）</li>
+<li>“Communism is in all of us. In our blood. As humans. Have you ever wanted something for nothing?”——共产主义就在我们每个人血液里。你有没有想过不劳而获？（Travis Kalanick）</li>
+<li>“The DSA are coming for the Democratic Party. They control the base now. It’s where all the energy is.”——DSA正在向民主党进军。他们现在已经控制了基本盘，所有能量都在那里（David Sacks）</li>
+</ul>
+<hr></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="01:00:00–01:10:00 中国开源模型追赶、gpu紧缺与太空计算 本段核心内容： 中国开源模型glm 5.2发布，7440亿参数，性能接近美国前沿模型，价格仅为gpt的1/7。 嘉宾讨论蒸馏技术如何让中国绕过制裁快速追赶，认为美国自限式ai监管正在变得毫无意义。 美光财报大爆发，显示dram是ai基础设施最关键瓶颈，苹果等被迫提价。 太空计算的经济学：starship可重复使用可能让轨道计算中心成本低于地面。 背景解释与关键术语： glm 5.2：中国智谱ai发布的开源模型，7440亿参数，100万token上下文窗口，采用mit开源协议（最宽松的开源协议）。 蒸馏（distillation）：用一个强大的模型（如claude）不断提问，收割其推理过程，再用这些数据训练自己的小模型，大幅降低训练成本。 swe-bench：测试ai模型软件工程能力的基准。 hbm（high bandwidth memory）：高带宽内存，堆叠式dram芯片，是gpu性能的关键瓶颈。 mit license：最开放的开源协议，允许任何人自由使用、修改、分发代码，甚至可以商业化。 socamp：nvidia对其特定类型系统级芯片的称呼。 terafab：elon musk提出的超级芯片制造工厂项目。 详细中文整理： jcal： 第2个话题：中国的开源模型似乎正在追赶美国的前沿模型。我们先看glm 5.2，由中国智谱ai发布。这是一个前沿级的开源模型，可免费下载，7440亿参数，100万token上下文窗口，采用mit许可证——有史以来最开放的开源。你可以随意使用、分叉、基于它建立自己的公司。没有地区限制，不需要api，完全自托管。没有dario（anthropic ceo）参与。它就是你的。你想怎么用都行，只需要引用许可证。它在artificial analysis intelligence index上得了51分，是有史以来开放权重模型的最高分。接近前沿模型水平。在swe-bench编码基准上击败了gpt 5.5，落后claude opus 4.8不到1个百分点。api使用成本比gpt 5.5便宜85%。智谱创始人告诉elon musk，开放权重的fable级别能力将在2027年第一季度之前到来。gavin，换句话说，所有这些焦虑、法律限制、自我限制，如果第一季度他们就有了，现在基本上完全或接近完全没意义了。6个月在ai的大背景下到底重不重要？这对前沿模型意味着什么？ gavin： 我认为glm 5.2有多好确实挑战了我的一些信念。有一位tpu工程师发了个很好的帖子，说蒸馏无疑已经发生了。大量的蒸馏，毫无疑问。 jcal： 请你给观众解释一下什么是蒸馏。 gavin： 蒸馏就是你有一个农场，像中国人那种iphone农场——成千上万的手机、ipad和电脑通过匿名账户向claude api不断问非常具体的问题，然后这些推理痕迹被收集起来。因为你在api上可以看到每个token。这些推理痕迹被反馈到模型进行强化学习，可能也在预训练过程中使用。这就是一种大幅降低成本的接近前沿的方法。这肯定在发生，而且已经发生了很久。我认为这是一张“作弊清单”，让其他模型追赶上来。 jcal： 好比向谷歌问你能想象的所有问题，收集所有结果，然后建立自己的搜索引擎。 gavin： 对，就是这个道理。但现在这个模型已经足够好了，能自己做强化学习，猫可能已经出袋了。我们不知道openai和anthropic的下一个模型有多好——mythos、spacex的模型。所以那个差距可能会重新拉大。但无论如何，我坚信未来是可组合模型（composable models）的。每个企业都会有一个andrej karpathy所谓的“llm议会”。你会有anthropic、openai、google、至少两个，我认为groq永远应该是其中一个，因为它对真相的坚持，会告诉你作为企业主需要的政治上不便利的真相。但你也会有自己的开放权重模型，用你的数据做强化学习。你把这些前沿模型和自己的模型组合，就能得到帕累托最优的结果。也许一半的查询去开源模型，可能85%。只有最难的才去前沿模型。这就是未来。很多人的误解是开源模型对ai不好。它们对ai基础设施提供商来说非常棒。它们只是把经济价值从前沿大模型的利润转移到了基础设施。这对他们不是坏事。对他们来说很棒。但我仍然认为前沿模型有作用。也许到现在为止前沿token捕获了90%的经济价值，但开源token可能是80%以上的处理量。这个比例可能会持续。但可组合模型是未来。 jcal： 可组合模型是什么？ gavin： 就是你，作为一家公司，比如travis你的新超级棒的公司adams——你会有个路由器，每个来的问题、每项需要完成的任务，会被路由到你的基于glm 5.2或其它模型的版本。然后在工作流的某个点，一个前沿模型可能会进来检查、补充。像一支交响乐团的模型协同工作，前沿模型是指挥。这就是我说的可组合模型。 jcal： sachs，前ai顾问，现在主持pcast，你怎么看中国在开源领域的崛起？我们还在等待美国的开源冠军。感觉——不，让我说，nvidia就是美国的开源冠军。他们随时可以发布跟glm 5.2一样或更好的模型。但他们为什么没这么做？不想抢客户？冲突太多？ sacks： 各种原因吧，谁知道。 jcal： 所以我说出来，不是你说的jensen。经典渠道冲突。你不想跟客户竞争，他现在跟elon在自动驾驶上竞争，elon在自研芯片。所以这些前沿模型公司应该非常非常谨慎地考虑asic，以及这会给nvidia在模型方面创造什么动机。如果openai这周发布了他们的jalapeño芯片，说是由broadcom制造的，而且他们说“去你的jensen和nvidia”——他们已经是全面肉搏了——那么如果nvidia说“你知道吗，现在你进入我地盘了，你要造芯片”，不要感到意外可能nvidia会开始一个openai竞争对手。你们在all in这里最先听到的。 sacks： 我认为中国在开源方面已经做得很出色了，这不新鲜。但glm 5.2有几件事意义重大。首先它现在是编码、软件工程和长上下文agent工作方面最好的开放权重模型。swe-bench得分只比opus 4.8低一点点，跟gpt 5.5不相上下。所以如果你把这个跟anthropic和openai的前沿模型对比，它已经跟之前的模型相当了。但你要记住，anthropic的fable和openai的5.6现在都是由于我们上周讨论的所有原因处于一种“炼狱”状态。我最终怪罪dario和他沟通的方式，以及他给官员们下了“随时扣扳机”的决心。当政府收到来自anthropic最信任合作伙伴之一关于越狱的可信报告时，你只能回滚模型。这就是我们现在面对的局面：fable被回滚了，gpt 5.6正在努力通过新的审批关。现在我们有了一个中国的开放权重模型，跟openai和anthropic当前可用的模型一样好。这是我从加入政府第一天就在说的观点：我们与中国处于高度竞争状态。从一开始我们整个ai策略就是关于赢得这场ai竞赛，把它定义为一场竞赛，关乎全球竞争力。我们不能承担那些不必要地拖慢我们公司的事情。我希望——david，我能问你一下吗？你认为dario得到他想要的东西了吗？我感觉很可能这是一个经过计算的策略，故意激怒美国政府来做他们刚做的事，这就是他想要的。他现在有了监管护城河。他可以把未来的模型锁在幕后，交给glasswing去给他蒸馏。你认为这是他们想要的吗？ sacks： 在某种程度上这确实是他想要的，因为他们一直在倡导建立联邦监管机构、一个新机构。事实上，dario几周前刚发了一篇博客说想要一个“ai领域的faa”。他们想要政府批准程序。所以某种意义上他们确实得到了他们想要的。但话虽如此，我不认为他们乐意看到fable被回滚。所以你可以说dario被自己搬起石头砸了脚，或者这是一个“自找苦吃”的情况。但我的看法是，我们不应该奖励dario，给他一直渴望的、那套复杂的政府审批程序——那套程序奖励的是监管俘获。所以我希望尽快只要anthropic解决了越狱问题，就应该被允许带着fable重返市场。同样，openai也不应该被不必要地拖延。我们在这场竞赛中没有几个月可以浪费了。我再说一件事，这也是我几个月来一直在说的：关于网络安全的ai风险，毫无疑问它是个风险。但回应是什么？唯一的办法是你自己先去发现所有漏洞。白帽们，让白帽们先发现所有漏洞，进行一个大的升级周期，在漏洞被利用之前推出补丁。现实是，如果你只是用锁定方式来不让人使用这些模型，中国人本来很快就会有这些能力。他们已经达到opus 4.8水平了。智谱的创始人说在q1之前他们会有fable级别能力。我相信他们，因为中国——我说过他们的模型比我们大概落后9个月，正负3个月，取决于能力。但一旦他们知道在网络安全之类方面有突破，他们可以用更多资源针对该问题并更快赶上。我几个月来一直在说我们在计时器上。我们必须做聪明的事。我们不能只是放慢一切，因为这不会放慢中国人的速度。他们不在我们的司法管辖区内。我们必须把这些工具交到我们的网络安全行业手中。它们是力量放大器、使能器。我们必须快速进行这个大升级周期，因为我们只剩下几个月了。 chamath： 他们在模型上落后6个月，在芯片上落后24个月，但总体上他们只落后几个月了。我们在玩什么游戏？如果我们继续这样对自己，我们就会输。 sacks： 关于芯片我要说一点。中国政府在大力推动他们的ai实验室使用华为芯片进行开发和训练。你可以对这些声明存疑，但据说deepseek v4是在华为芯片上训练的，现在智谱说glm 5系列完全在华为ascend 910b芯片集群上训练。也许他们在撒谎，也许他们走私了一些nvidia芯片，但他们的说法是全部用了国产芯片。我相信中国正在进行一场强烈的国产化推动。他们想力推华为作为国家冠军，让所有公司都用华为芯片。他们仍然需要扩大制造规模，但他们会很快做到。然后他们会把这些华为优化的模型打包成“盒子里的ai”，以更低成本在全球销售。这是他们每个技术领域都做的事：更好，更便宜，更快——或者基本一样好。我从这届政府一开始就在说，我们必须支持出口，因为中国一两年内就会在那里。到时我们会后悔当初明明可以拥有整个全球市场，却自己发明借口不向外国朋友和伙伴销售，而现在中国马上就要来了。 关键原话或重要表达： “we are on a shot clock. we can’t just slow everything down because that will not slow down the chinese.”——我们正处在一个计时器上。我们不能放慢一切，因为这不会放慢中国人的速度（david sacks） “they are 6 months behind on the model and 24 months behind on the silicon, yet only a few months behind in total. what game are we playing?”——模型落后6个月，芯片落后24个月，但总体上只落后几个月了。我们在玩什么游戏？（chamath） “distillation is a cheat sheet for other models to catch up.”——蒸馏就是其他模型追赶的作弊清单（gavin baker） ---" style="--index: 2">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">02</span>
+                    <span class="timeline-meta">01:00:00–01:10:00</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>中国开源模型追赶、GPU紧缺与太空计算</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>中国开源模型GLM 5.2发布，7440亿参数，性能接近美国前沿模型，价格仅为GPT的1/7。</li>
+<li>嘉宾讨论蒸馏技术如何让中国绕过制裁快速追赶，认为美国自限式AI监管正在变得毫无意义。</li>
+<li>美光财报大爆发，显示DRAM是AI基础设施最关键瓶颈，苹果等被迫提价。</li>
+<li>太空计算的经济学：Starship可重复使用可能让轨道计算中心成本低于地面。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>GLM 5.2：中国智谱AI发布的开源模型，7440亿参数，100万token上下文窗口，采用MIT开源协议（最宽松的开源协议）。</li>
+<li>蒸馏（Distillation）：用一个强大的模型（如Claude）不断提问，收割其推理过程，再用这些数据训练自己的小模型，大幅降低训练成本。</li>
+<li>SWE-Bench：测试AI模型软件工程能力的基准。</li>
+<li>HBM（High Bandwidth Memory）：高带宽内存，堆叠式DRAM芯片，是GPU性能的关键瓶颈。</li>
+<li>MIT License：最开放的开源协议，允许任何人自由使用、修改、分发代码，甚至可以商业化。</li>
+<li>SoCAMP：NVIDIA对其特定类型系统级芯片的称呼。</li>
+<li>Terafab：Elon Musk提出的超级芯片制造工厂项目。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> 第2个话题：中国的开源模型似乎正在追赶美国的前沿模型。我们先看GLM 5.2，由中国智谱AI发布。这是一个前沿级的开源模型，可免费下载，7440亿参数，100万token上下文窗口，采用MIT许可证——有史以来最开放的开源。你可以随意使用、分叉、基于它建立自己的公司。没有地区限制，不需要API，完全自托管。没有Dario（Anthropic CEO）参与。它就是你的。你想怎么用都行，只需要引用许可证。它在Artificial Analysis Intelligence Index上得了51分，是有史以来开放权重模型的最高分。接近前沿模型水平。在SWE-Bench编码基准上击败了GPT 5.5，落后Claude Opus 4.8不到1个百分点。API使用成本比GPT 5.5便宜85%。智谱创始人告诉Elon Musk，开放权重的Fable级别能力将在2027年第一季度之前到来。Gavin，换句话说，所有这些焦虑、法律限制、自我限制，如果第一季度他们就有了，现在基本上完全或接近完全没意义了。6个月在AI的大背景下到底重不重要？这对前沿模型意味着什么？</p>
+<p><strong>Gavin：</strong> 我认为GLM 5.2有多好确实挑战了我的一些信念。有一位TPU工程师发了个很好的帖子，说蒸馏无疑已经发生了。大量的蒸馏，毫无疑问。</p>
+<p><strong>JCal：</strong> 请你给观众解释一下什么是蒸馏。</p>
+<p><strong>Gavin：</strong> 蒸馏就是你有一个农场，像中国人那种iPhone农场——成千上万的手机、iPad和电脑通过匿名账户向Claude API不断问非常具体的问题，然后这些推理痕迹被收集起来。因为你在API上可以看到每个token。这些推理痕迹被反馈到模型进行强化学习，可能也在预训练过程中使用。这就是一种大幅降低成本的接近前沿的方法。这肯定在发生，而且已经发生了很久。我认为这是一张“作弊清单”，让其他模型追赶上来。</p>
+<p><strong>JCal：</strong> 好比向谷歌问你能想象的所有问题，收集所有结果，然后建立自己的搜索引擎。</p>
+<p><strong>Gavin：</strong> 对，就是这个道理。但现在这个模型已经足够好了，能自己做强化学习，猫可能已经出袋了。我们不知道OpenAI和Anthropic的下一个模型有多好——Mythos、SpaceX的模型。所以那个差距可能会重新拉大。但无论如何，我坚信未来是可组合模型（composable models）的。每个企业都会有一个Andrej Karpathy所谓的“LLM议会”。你会有Anthropic、OpenAI、Google、至少两个，我认为Groq永远应该是其中一个，因为它对真相的坚持，会告诉你作为企业主需要的政治上不便利的真相。但你也会有自己的开放权重模型，用你的数据做强化学习。你把这些前沿模型和自己的模型组合，就能得到帕累托最优的结果。也许一半的查询去开源模型，可能85%。只有最难的才去前沿模型。这就是未来。很多人的误解是开源模型对AI不好。它们对AI基础设施提供商来说非常棒。它们只是把经济价值从前沿大模型的利润转移到了基础设施。这对他们不是坏事。对他们来说很棒。但我仍然认为前沿模型有作用。也许到现在为止前沿token捕获了90%的经济价值，但开源token可能是80%以上的处理量。这个比例可能会持续。但可组合模型是未来。</p>
+<p><strong>JCal：</strong> 可组合模型是什么？</p>
+<p><strong>Gavin：</strong> 就是你，作为一家公司，比如Travis你的新超级棒的公司Adams——你会有个路由器，每个来的问题、每项需要完成的任务，会被路由到你的基于GLM 5.2或其它模型的版本。然后在工作流的某个点，一个前沿模型可能会进来检查、补充。像一支交响乐团的模型协同工作，前沿模型是指挥。这就是我说的可组合模型。</p>
+<p><strong>JCal：</strong> Sachs，前AI顾问，现在主持PCAST，你怎么看中国在开源领域的崛起？我们还在等待美国的开源冠军。感觉——不，让我说，NVIDIA就是美国的开源冠军。他们随时可以发布跟GLM 5.2一样或更好的模型。但他们为什么没这么做？不想抢客户？冲突太多？</p>
+<p><strong>Sacks：</strong> 各种原因吧，谁知道。</p>
+<p><strong>JCal：</strong> 所以我说出来，不是你说的Jensen。经典渠道冲突。你不想跟客户竞争，他现在跟Elon在自动驾驶上竞争，Elon在自研芯片。所以这些前沿模型公司应该非常非常谨慎地考虑ASIC，以及这会给NVIDIA在模型方面创造什么动机。如果OpenAI这周发布了他们的Jalapeño芯片，说是由Broadcom制造的，而且他们说“去你的Jensen和NVIDIA”——他们已经是全面肉搏了——那么如果NVIDIA说“你知道吗，现在你进入我地盘了，你要造芯片”，不要感到意外可能NVIDIA会开始一个OpenAI竞争对手。你们在All In这里最先听到的。</p>
+<p><strong>Sacks：</strong> 我认为中国在开源方面已经做得很出色了，这不新鲜。但GLM 5.2有几件事意义重大。首先它现在是编码、软件工程和长上下文Agent工作方面最好的开放权重模型。SWE-Bench得分只比Opus 4.8低一点点，跟GPT 5.5不相上下。所以如果你把这个跟Anthropic和OpenAI的前沿模型对比，它已经跟之前的模型相当了。但你要记住，Anthropic的Fable和OpenAI的5.6现在都是由于我们上周讨论的所有原因处于一种“炼狱”状态。我最终怪罪Dario和他沟通的方式，以及他给官员们下了“随时扣扳机”的决心。当政府收到来自Anthropic最信任合作伙伴之一关于越狱的可信报告时，你只能回滚模型。这就是我们现在面对的局面：Fable被回滚了，GPT 5.6正在努力通过新的审批关。现在我们有了一个中国的开放权重模型，跟OpenAI和Anthropic当前可用的模型一样好。这是我从加入政府第一天就在说的观点：我们与中国处于高度竞争状态。从一开始我们整个AI策略就是关于赢得这场AI竞赛，把它定义为一场竞赛，关乎全球竞争力。我们不能承担那些不必要地拖慢我们公司的事情。我希望——David，我能问你一下吗？你认为Dario得到他想要的东西了吗？我感觉很可能这是一个经过计算的策略，故意激怒美国政府来做他们刚做的事，这就是他想要的。他现在有了监管护城河。他可以把未来的模型锁在幕后，交给Glasswing去给他蒸馏。你认为这是他们想要的吗？</p>
+<p><strong>Sacks：</strong> 在某种程度上这确实是他想要的，因为他们一直在倡导建立联邦监管机构、一个新机构。事实上，Dario几周前刚发了一篇博客说想要一个“AI领域的FAA”。他们想要政府批准程序。所以某种意义上他们确实得到了他们想要的。但话虽如此，我不认为他们乐意看到Fable被回滚。所以你可以说Dario被自己搬起石头砸了脚，或者这是一个“自找苦吃”的情况。但我的看法是，我们不应该奖励Dario，给他一直渴望的、那套复杂的政府审批程序——那套程序奖励的是监管俘获。所以我希望尽快只要Anthropic解决了越狱问题，就应该被允许带着Fable重返市场。同样，OpenAI也不应该被不必要地拖延。我们在这场竞赛中没有几个月可以浪费了。我再说一件事，这也是我几个月来一直在说的：关于网络安全的AI风险，毫无疑问它是个风险。但回应是什么？唯一的办法是你自己先去发现所有漏洞。白帽们，让白帽们先发现所有漏洞，进行一个大的升级周期，在漏洞被利用之前推出补丁。现实是，如果你只是用锁定方式来不让人使用这些模型，中国人本来很快就会有这些能力。他们已经达到Opus 4.8水平了。智谱的创始人说在Q1之前他们会有Fable级别能力。我相信他们，因为中国——我说过他们的模型比我们大概落后9个月，正负3个月，取决于能力。但一旦他们知道在网络安全之类方面有突破，他们可以用更多资源针对该问题并更快赶上。我几个月来一直在说我们在计时器上。我们必须做聪明的事。我们不能只是放慢一切，因为这不会放慢中国人的速度。他们不在我们的司法管辖区内。我们必须把这些工具交到我们的网络安全行业手中。它们是力量放大器、使能器。我们必须快速进行这个大升级周期，因为我们只剩下几个月了。</p>
+<p><strong>Chamath：</strong> 他们在模型上落后6个月，在芯片上落后24个月，但总体上他们只落后几个月了。我们在玩什么游戏？如果我们继续这样对自己，我们就会输。</p>
+<p><strong>Sacks：</strong> 关于芯片我要说一点。中国政府在大力推动他们的AI实验室使用华为芯片进行开发和训练。你可以对这些声明存疑，但据说Deepseek V4是在华为芯片上训练的，现在智谱说GLM 5系列完全在华为Ascend 910B芯片集群上训练。也许他们在撒谎，也许他们走私了一些NVIDIA芯片，但他们的说法是全部用了国产芯片。我相信中国正在进行一场强烈的国产化推动。他们想力推华为作为国家冠军，让所有公司都用华为芯片。他们仍然需要扩大制造规模，但他们会很快做到。然后他们会把这些华为优化的模型打包成“盒子里的AI”，以更低成本在全球销售。这是他们每个技术领域都做的事：更好，更便宜，更快——或者基本一样好。我从这届政府一开始就在说，我们必须支持出口，因为中国一两年内就会在那里。到时我们会后悔当初明明可以拥有整个全球市场，却自己发明借口不向外国朋友和伙伴销售，而现在中国马上就要来了。</p>
+<h4>关键原话或重要表达</h4>
+<ul>
+<li>“We are on a shot clock. We can’t just slow everything down because that will not slow down the Chinese.”——我们正处在一个计时器上。我们不能放慢一切，因为这不会放慢中国人的速度（David Sacks）</li>
+<li>“They are 6 months behind on the model and 24 months behind on the silicon, yet only a few months behind in total. What game are we playing?”——模型落后6个月，芯片落后24个月，但总体上只落后几个月了。我们在玩什么游戏？（Chamath）</li>
+<li>“Distillation is a cheat sheet for other models to catch up.”——蒸馏就是其他模型追赶的作弊清单（Gavin Baker）</li>
+</ul>
+<hr></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="01:11:00–01:25:00 内存危机、太空计算与模块化数据中心 本段核心内容： 美光财报超预期，收入同比增长4倍，2026年hbm供应全部售罄。 只有3家公司能制造ai所需的hbm，这个瓶颈将持续多年。 apple等消费电子厂商被迫提价，ai正在推高消费电子价格。 太空计算的经济模型正在成熟，starship可重复使用可能导致20倍成本下降。 特斯拉注册“megapod”商标，可能部署模块化ai计算中心。 背景解释与关键术语： hbm（high bandwidth memory）：高带宽内存，将多个dram芯片堆叠在一起，是gpu的关键配套芯片。hbm3目前是8层堆叠，正在向12层、16层发展。 dram：动态随机存取内存，计算机主存。 asic：专用集成电路，为特定任务设计的芯片。 cxmt：中国存储器制造商，即将上市。 terafab：elon musk拟建的超级芯片制造工厂。 neoscaler：新一代云计算服务商。 sla（service level agreement）：服务水平协议。 bittensor：一个去中心化的机器学习协议，允许分布式计算贡献。 详细中文整理： jcal： 美光股价涨了10倍。在2025年预测节目中gavin就看好hbm制造商，自那以后美光涨了14倍。关于apple涨价——大家都知道apple受益于“运行本地模型运动”，人们购买高配macbook pro和mac studio。但好日子到头了，因为apple不得不将这些成本转嫁给客户。新款macbook neo从699美元涨到799美元，涨幅约14%。mac studio涨了25%。成本变得非常显著。通胀来到了桌面端。gavin，你对美光和行业影响的看法？这只是一个暂时的瓶颈，还是所有人都得快速进这个领域？ gavin： dram是最重要的瓶颈。x上有一种人我称之为“瓶颈男”，他们会用claude做点研究，找到一些外面的日本小公司。但真正重要的瓶颈是dram和高带宽dram（hbm dram）。内存容量和带宽是每个ai模型的基础性能。这是最重要的瓶颈。elon在terafab上专注内存，因为他把它视为最重要的瓶颈——不是激光器、不是电容器、不是电源半导体、不是nand闪存、不是hdd。dram。我认为这个瓶颈还会持续一段时间。这相当惊人。关于美光财报的重要几点：他们宣布了一些供应链协议，带有价格下限和上限，面向越来越多的大客户。这些覆盖了他们大约50%的收入，大约4个客户。这些新合同中价格的下限，从毛利率角度已经超过了以往周期的峰值。所以我认为这对行业可能是变革性的。半导体供应链的其他部分都已经重新估值了。lam research这些设备制造商相对于以往周期都交易在dram的巨额溢价上，他们的商业模式改善了，但dram行业的产业结构也因hbm越来越成为定制化芯片而改善。至于别人能否做这个——中国的cxmt即将上市。他们可能在某种程度上对有apple病有疗效——他们会用廉价消费级dram充斥市场。但ai服务器所需的dram，只有3家公司能做。这太难了，基本上是科学中最接近魔法的事情。我认为terafab会是这个解决方案的重要部分。这些股票在整个ai领域里是便宜的。我一直在想一件事，dram可能占明年所有超大规模云厂商资本支出的30%到40%。每年数千亿美元直接去了dram。这很疯狂。但这实际上可能对社会很有价值，因为它可能把建设一个1gw数据中心推高到连超大规模厂商都不得不在意成本——尽管他们处于囚徒困境，不得不投。这就给了我们整个社会时间去适应我们朋友brad gershner所说的“社会契约”。所以高iphone价格——第一，cxmt要来打消费级dram市场了；第二，这对ai可能反而是好事，对社会也是好事。 jcal： 制造这些芯片需要超高纯度的硅，这本身就是前置瓶颈。 gavin： 对，hbm、nvidia叫的socamp、lpddr——这些是很难制造的dram，不是消费级，它们是ai数据中心越来越需要的东西。 sacks： 我的理解是hbm就是把dram晶圆或芯片堆叠起来。hbm3是8层堆叠，现在正在走向12层、16层。光把这些堆叠并封装在一起本身就是一个先进技术。如gavin所说，只有3家公司能做。但这也给所有消费电子业务带来了巨大的价格压力。apple今天宣布了大规模涨价，就是因为dram更少了——全部被吸到数据中心了。如果你是一个数据中心要买gpu，这些芯片使用巨大的内存量，因为每块hbm用了多层dram堆叠。所以内存被吸走光了。而新产能需要好几年才能上线。这些公司会去建新厂，但需要时间。我们在纽约就看到了，美光有一家厂刚开工同一天就因为奇怪的环境问题被迫停工。所以在美国不容易扩产。美光是唯一在美国的供应商，sk海力士和三星都在韩国。我们会看到更多所谓ai通胀。这是又一个我不喜欢ai的原因——在消费电子这种窄领域，对dram的竞争正导致价格上升。微软提高了xbox价格。switch、playstation也会涨。消费端会有需求破坏，而ai需求相对价格不敏感。david，我得修正一点：建美光不容易，但在深蓝州建新晶圆厂更难。你可以在其他地方建厂。他们在纽约真是疯了。即使纽约给了很多激励，但激励根本不管用。这有点像太阳能发电。你可以再支持环保，但如果法规让你建不了和装不了太阳能板，那就没用。所以也许这个美光工厂最后会在我的家乡德州建起来。 jcal： 激励游戏完全倒过来了。以前是州在追逐工厂和晶圆厂。现在是晶圆厂在问“哪个州能实际盖起来？你说多少钱我给你就是了。你告诉我把信封放哪。我送几个信封过去没问题。” jcal： gavin，在terafab建立新厂需要多长时间？ gavin： 正常的话是2到3年、3年半的过程。但我们已经看到elon对其它建设项目做的事，而且他从intel的合作中得到了一些优势。所以没人知道确切时间。基于过去历史，他可能会比其它晶圆厂建得更快。但真的很难。这是魔术和科学的交汇。你无法相信这有多么复杂。所以会很难，但如jensen所说，他有一项“完成不可能任务、超人般”的记录。我们会看到要花多长时间。 chamath： 还有一点——可能跟spacex ai有关，而不必仅限于此——人们假设随着时间的推移，建设新数据中心会变得更便宜更简单。但你现在说的实际上是它可能更难了、更贵了。因为对这些组件的竞争。内存正在变得更贵。我不确定gpu在变便宜。变压器、开关设备、能源也许在变便宜。但授权越来越难获得，政治环境越来越难。现在能建新数据中心的地方非常少。所以实际上会越来越贵——100%。 gavin： 建设一个1gw数据中心，芯片方面需要350亿美元的nvidia芯片，再加上250亿美元的电力、散热设备。这显然是通胀性的，因为那250亿美元中大量是安装这些设备所需的人力。所以对于轨道计算要做的计算是：每个太空站有350亿美元芯片。在太空中，在轨道上，在地面上。但如果你能把发射成本显著降到低于那250亿美元，数学就开始成立了。当starship可重复使用时，把1gw算力送入太空的发射成本将是50亿美元。让我很疯狂的是，人们想象的是五角大楼大小的数据中心。不，是在太空中用激光连接的机架。一种虚拟的太空数据中心。 jcal： 等等，50亿美元？是发射成本？ gavin： 是50亿美元发射成本。所以你总共花400亿美元把1gw送入太空。在地面上是600亿美元，而且那250亿美元的电力/散热成本显然在涨。所以可能在3、4年后地面是700亿对400亿，而随着starship快速可重复使用，那50亿几乎肯定会走向通缩。这就是轨道计算的第一性原理经济学。 chamath： 我猜一下，自2021年以来大约40%的数据中心被挑战过，这个比例还会上升。所以sachs，我怀疑我们预测的ai能源消耗量被严重低估了。供应非常非常有限，需求实际上是无穷的。这很可能会把经济方程拉向前——想要去太空。但这会偏好spacex和他们的计算堆栈，优先于超大规模云厂商和其他任何人。所以我认为地表上的token输出成本，特别是从超大规模云厂商来的，相对于spacex在规模化后会有经济性劣势。关键就是“规模化”这个条件。留在地面上的设施会变得极其有价值——像钻石一样。但要有合理的规模。你不能有一个10千瓦的钻石——那是小石头屑，没人关心。但如果你是几百兆瓦到1gw级别，那就是希望钻石，赶紧锁定。 jcal： 我拥有的那种。travis，这周有个有趣的商标登记——关于elon要把tesla和spacex合并的传闻，你一直在说。 travis： 你当然可以这么说，你可以把功劳给我。 chamath： 那多酷啊？这两家结合起来多酷？一定会发生。太棒了。如果你有幸拥有两者——每个人都可以决定成为所有者。 jcal： 当这事发生时，我会兴奋得不能自已。 gavin： 看这个“megapod”的商标，登记日期是2026年6月18日，非常近。“用于人工智能计算的模块化数据中心硬件，包括服务器、ai处理硬件、网络硬件、配电单元和冷却系统，作为一个单元出售，用于ai工作负载的独立模块化计算硬件系统。”等等。 sacks： 简单说——这个描述——我还是看不懂。基本上人们说这会是超级充电站上的一块大型电池包加上gpu，超级充电站早已获批了。这就是后门。chamath，你说。 chamath： 现在地表的计算有几个问题。假设你有土地，挺容易。假设你能获得用地许可，不太容易。假设你能获得电力，非常难。然后你有一个非常关键的设计决策。所有这些公司都会发布所谓的“设计基础”——几十到几百页的技术文件，规定了anthropic、openai、coreweave、aws、gcp的规格。现在的问题是，你们最近用过openai或anthropic吗？那个“请稍后回来”的提示是完全不能接受的。这意味着他们没有算力了。所以为了解决这个问题，这些设计基础的限制在放宽。一个关键限制是从google和nvidia推动的架构来了：我们必须对这些机架进行液冷，它们非常复杂、庞大。现在我们又回头说，“你知道吗，也许一些较旧、效率较低但也还可以风冷的东西也是有用的。”所有人都说，是啊，我们应该利用所有能用的东西。在第二类里，一些非常聪明的人在做什么呢？哇，这里有一个集装箱，在某个水泥地面上放下，接上电源就开干。jason，这就是你看到的投资水平。有些公司像dell做这些机架，vertiv做模块。我认为如果tesla可以做这些，像我们这样的人，在我的数据中心项目里，会是一个非常大量的买家——因为在仓库里预制好这些东西，装好芯片，用卡车运到地方，用吊车吊进去，开机，就可以跑了。这就是一个90天的建设周期，闻所未闻。这就是megapod的来源。我希望这不被tesla和spacex完全内部消化。 travis： 有传闻说他要把这些放在充电站——超级充电网络上。那里有大量土地，而且已经有电了。有些地方利用率很低。 chamath： 但有其它要求。你需要特定级别的物理访问权限。有一些信息安全要求、液冷要求，使得许多工作负载在超级充电站这种随便什么人都能走进去的地方不现实。 jcal： 放一个保安，一个optimus机器人。 travis： 我有500个物业，有大量能源、大量机械制冷系统、大量天然气。在我做机器人、ai、物理ai的所有项目上，我们正在认真考虑把一些算力放进我们的厨房里。 jcal： 计算厨房。 travis： 不重要。我就去买gpu，直接放在厨房里开机。就像比特币挖矿。 chamath： 没这么容易。如果你要建个云并贡献到池子里，你得签液冷损失协议，你不会想签的。 travis： 我不是超大规模云厂商，我自己用就行。 sacks： 机架装上放着就行。 chamath： 有趣的机会是你可以建立一个合成池，贡献给一个“新超大规模云厂商”（neoscaler）。但要做好那个，你得做一大堆事，可能跟你擅长的事偏离。 jcal： 安全问题是非数据中心不动产的主要问题。液冷、风冷机械系统、能源——有很多要做。但就算这些都有，数据中心的架构是有人口“陷阱”——你通过指纹进一个房间，门在你身后关上，再通过指纹进下一间，只有门关上后下一扇才开。 travis： 一个“人陷阱”多少钱？你为什么不在自己的地方装一些？ jcal： 我帮你抓些人。 gavin： 真正有价值的，我觉得是在travis的例子里非常令人兴奋的一点，如果你能把它贡献给一个分布式训练池或推理池，这个池子的sla更低，更面向社区协作。jason你谈论过bittensor、venice、pluralis这些项目。 travis： 但有一点——分布式训练。如果这些设备彼此相距很远——不紧挨着——效率会急剧下降。你至少需要一个数量级的效率，可能还要更多。这是一个大问题。我我们有2个设施——从一个gpu到另一个gpu传递任务非常重要。如果在点对点网络上，会存在延迟。 gavin： 没错。就算是你自己的光纤、距离2公里，都不行。 chamath： 但所有对训练不利的，对推理都有利。 gavin： 对。分布式推理云正在到来。这世界上有一家创业公司试图在人们房子上装4块gpu加电池，给用户电费折扣，然后全街区都能用那4块gpu做推理。锁起来别人进不去。还有另一个动态——可以跟megapod结合。crusoe在做模块化组装数据中心，像18轮卡车上的集装箱。这就是推理的解耦，分为预填（prefill）和解码（decode）。预填是理解你的问题和已有的答案——你记的越多越好。解码是生成下一个token——这受内存带宽约束，你说得越快越好。这两种推理正被越来越地解耦。chamath投资了groq，被nvidia收购。groq和解码优化芯片。你可以把groq或cerebras这样的解码优化芯片放在老nvidia gpu像h100前面。你可以把a100从老数据中心拿出来，放进megapod的集装箱里，前面放上groq或cerebras，就能得到非常有竞争力的方案。所以我确实认为推理解耦之后，我们会用gpu7年、10年、12年。这降低了融资成本，让这个ai革命更可融资。 chamath： 我完全同意。你在这个领域太渊博了，太令人兴奋了。我没有在分布式计算领域的投资，但在与中国竞争、拥有活跃的美国开源社区、拥有为言论自由的分布式模型这些方面，我认为分布式推理在美国生态系统中确实有一席之地。我不知道具体在哪里、房主如何赚钱，但谁把这个做成全美国的方案，就做成了大事。 gavin： 还有targon——你可以在上面以$3到$4每小时租到h200，而且是无需许可的。任何有硬件的人都能贡献，前提是——这就是bittensor的魔力所在——有验证器确保你放进去的就是你声称的算力。如果有人只是有硬件，而elon说，从现在起你买powerwall——我不认为他做不出来——你买powerwall，我们就给你折扣。每个powerwall里有我们的gpu。作为offer的一部分，你不能买powerwall但不带gpu。当你不使用时，我们会为你的电池付钱。给你屋顶上放个starlink。这样你就有了一个分布式系统。几块有芯片的powerwall和一个starlink。elon创造了无穷多的家用电池备用系统。人们免费得到电池系统，他得到20年独占权。 关键原话或重要表达： “dram is the most important bottleneck. this is as close to magic as science can get.”——dram是最重要的瓶颈。这是科学中最接近魔法的东西（gavin baker） “$5 billion of launch cost. when starship is rapidly reusable, that $5 billion is almost certainly deflationary.”——50亿美元的发射成本。当starship快速可重复使用时，这50亿美元几乎是确定的通缩因素（gavin baker） “it’s racks in space linked with lasers. it’s a virtual data center in space.”——是在太空中用激光连接的机架。一种太空中的虚拟数据中心（gavin baker） ---" style="--index: 3">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">03</span>
+                    <span class="timeline-meta">01:11:00–01:25:00</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>内存危机、太空计算与模块化数据中心</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>美光财报超预期，收入同比增长4倍，2026年HBM供应全部售罄。</li>
+<li>只有3家公司能制造AI所需的HBM，这个瓶颈将持续多年。</li>
+<li>Apple等消费电子厂商被迫提价，AI正在推高消费电子价格。</li>
+<li>太空计算的经济模型正在成熟，Starship可重复使用可能导致20倍成本下降。</li>
+<li>特斯拉注册“Megapod”商标，可能部署模块化AI计算中心。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>HBM（High Bandwidth Memory）：高带宽内存，将多个DRAM芯片堆叠在一起，是GPU的关键配套芯片。HBM3目前是8层堆叠，正在向12层、16层发展。</li>
+<li>DRAM：动态随机存取内存，计算机主存。</li>
+<li>ASIC：专用集成电路，为特定任务设计的芯片。</li>
+<li>CXMT：中国存储器制造商，即将上市。</li>
+<li>Terafab：Elon Musk拟建的超级芯片制造工厂。</li>
+<li>Neoscaler：新一代云计算服务商。</li>
+<li>SLA（Service Level Agreement）：服务水平协议。</li>
+<li>BitTensor：一个去中心化的机器学习协议，允许分布式计算贡献。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> 美光股价涨了10倍。在2025年预测节目中Gavin就看好HBM制造商，自那以后美光涨了14倍。关于Apple涨价——大家都知道Apple受益于“运行本地模型运动”，人们购买高配MacBook Pro和Mac Studio。但好日子到头了，因为Apple不得不将这些成本转嫁给客户。新款MacBook Neo从699美元涨到799美元，涨幅约14%。Mac Studio涨了25%。成本变得非常显著。通胀来到了桌面端。Gavin，你对美光和行业影响的看法？这只是一个暂时的瓶颈，还是所有人都得快速进这个领域？</p>
+<p><strong>Gavin：</strong> DRAM是最重要的瓶颈。X上有一种人我称之为“瓶颈男”，他们会用Claude做点研究，找到一些外面的日本小公司。但真正重要的瓶颈是DRAM和高带宽DRAM（HBM DRAM）。内存容量和带宽是每个AI模型的基础性能。这是最重要的瓶颈。Elon在Terafab上专注内存，因为他把它视为最重要的瓶颈——不是激光器、不是电容器、不是电源半导体、不是NAND闪存、不是HDD。DRAM。我认为这个瓶颈还会持续一段时间。这相当惊人。关于美光财报的重要几点：他们宣布了一些供应链协议，带有价格下限和上限，面向越来越多的大客户。这些覆盖了他们大约50%的收入，大约4个客户。这些新合同中价格的下限，从毛利率角度已经超过了以往周期的峰值。所以我认为这对行业可能是变革性的。半导体供应链的其他部分都已经重新估值了。Lam Research这些设备制造商相对于以往周期都交易在DRAM的巨额溢价上，他们的商业模式改善了，但DRAM行业的产业结构也因HBM越来越成为定制化芯片而改善。至于别人能否做这个——中国的CXMT即将上市。他们可能在某种程度上对有Apple病有疗效——他们会用廉价消费级DRAM充斥市场。但AI服务器所需的DRAM，只有3家公司能做。这太难了，基本上是科学中最接近魔法的事情。我认为Terafab会是这个解决方案的重要部分。这些股票在整个AI领域里是便宜的。我一直在想一件事，DRAM可能占明年所有超大规模云厂商资本支出的30%到40%。每年数千亿美元直接去了DRAM。这很疯狂。但这实际上可能对社会很有价值，因为它可能把建设一个1GW数据中心推高到连超大规模厂商都不得不在意成本——尽管他们处于囚徒困境，不得不投。这就给了我们整个社会时间去适应我们朋友Brad Gershner所说的“社会契约”。所以高iPhone价格——第一，CXMT要来打消费级DRAM市场了；第二，这对AI可能反而是好事，对社会也是好事。</p>
+<p><strong>JCal：</strong> 制造这些芯片需要超高纯度的硅，这本身就是前置瓶颈。</p>
+<p><strong>Gavin：</strong> 对，HBM、NVIDIA叫的SoCAMP、LPDDR——这些是很难制造的DRAM，不是消费级，它们是AI数据中心越来越需要的东西。</p>
+<p><strong>Sacks：</strong> 我的理解是HBM就是把DRAM晶圆或芯片堆叠起来。HBM3是8层堆叠，现在正在走向12层、16层。光把这些堆叠并封装在一起本身就是一个先进技术。如Gavin所说，只有3家公司能做。但这也给所有消费电子业务带来了巨大的价格压力。Apple今天宣布了大规模涨价，就是因为DRAM更少了——全部被吸到数据中心了。如果你是一个数据中心要买GPU，这些芯片使用巨大的内存量，因为每块HBM用了多层DRAM堆叠。所以内存被吸走光了。而新产能需要好几年才能上线。这些公司会去建新厂，但需要时间。我们在纽约就看到了，美光有一家厂刚开工同一天就因为奇怪的环境问题被迫停工。所以在美国不容易扩产。美光是唯一在美国的供应商，SK海力士和三星都在韩国。我们会看到更多所谓AI通胀。这是又一个我不喜欢AI的原因——在消费电子这种窄领域，对DRAM的竞争正导致价格上升。微软提高了Xbox价格。Switch、PlayStation也会涨。消费端会有需求破坏，而AI需求相对价格不敏感。David，我得修正一点：建美光不容易，但在深蓝州建新晶圆厂更难。你可以在其他地方建厂。他们在纽约真是疯了。即使纽约给了很多激励，但激励根本不管用。这有点像太阳能发电。你可以再支持环保，但如果法规让你建不了和装不了太阳能板，那就没用。所以也许这个美光工厂最后会在我的家乡德州建起来。</p>
+<p><strong>JCal：</strong> 激励游戏完全倒过来了。以前是州在追逐工厂和晶圆厂。现在是晶圆厂在问“哪个州能实际盖起来？你说多少钱我给你就是了。你告诉我把信封放哪。我送几个信封过去没问题。”</p>
+<p><strong>JCal：</strong> Gavin，在Terafab建立新厂需要多长时间？</p>
+<p><strong>Gavin：</strong> 正常的话是2到3年、3年半的过程。但我们已经看到Elon对其它建设项目做的事，而且他从Intel的合作中得到了一些优势。所以没人知道确切时间。基于过去历史，他可能会比其它晶圆厂建得更快。但真的很难。这是魔术和科学的交汇。你无法相信这有多么复杂。所以会很难，但如Jensen所说，他有一项“完成不可能任务、超人般”的记录。我们会看到要花多长时间。</p>
+<p><strong>Chamath：</strong> 还有一点——可能跟SpaceX AI有关，而不必仅限于此——人们假设随着时间的推移，建设新数据中心会变得更便宜更简单。但你现在说的实际上是它可能更难了、更贵了。因为对这些组件的竞争。内存正在变得更贵。我不确定GPU在变便宜。变压器、开关设备、能源也许在变便宜。但授权越来越难获得，政治环境越来越难。现在能建新数据中心的地方非常少。所以实际上会越来越贵——100%。</p>
+<p><strong>Gavin：</strong> 建设一个1GW数据中心，芯片方面需要350亿美元的NVIDIA芯片，再加上250亿美元的电力、散热设备。这显然是通胀性的，因为那250亿美元中大量是安装这些设备所需的人力。所以对于轨道计算要做的计算是：每个太空站有350亿美元芯片。在太空中，在轨道上，在地面上。但如果你能把发射成本显著降到低于那250亿美元，数学就开始成立了。当Starship可重复使用时，把1GW算力送入太空的发射成本将是50亿美元。让我很疯狂的是，人们想象的是五角大楼大小的数据中心。不，是在太空中用激光连接的机架。一种虚拟的太空数据中心。</p>
+<p><strong>JCal：</strong> 等等，50亿美元？是发射成本？</p>
+<p><strong>Gavin：</strong> 是50亿美元发射成本。所以你总共花400亿美元把1GW送入太空。在地面上是600亿美元，而且那250亿美元的电力/散热成本显然在涨。所以可能在3、4年后地面是700亿对400亿，而随着Starship快速可重复使用，那50亿几乎肯定会走向通缩。这就是轨道计算的第一性原理经济学。</p>
+<p><strong>Chamath：</strong> 我猜一下，自2021年以来大约40%的数据中心被挑战过，这个比例还会上升。所以Sachs，我怀疑我们预测的AI能源消耗量被严重低估了。供应非常非常有限，需求实际上是无穷的。这很可能会把经济方程拉向前——想要去太空。但这会偏好SpaceX和他们的计算堆栈，优先于超大规模云厂商和其他任何人。所以我认为地表上的token输出成本，特别是从超大规模云厂商来的，相对于SpaceX在规模化后会有经济性劣势。关键就是“规模化”这个条件。留在地面上的设施会变得极其有价值——像钻石一样。但要有合理的规模。你不能有一个10千瓦的钻石——那是小石头屑，没人关心。但如果你是几百兆瓦到1GW级别，那就是希望钻石，赶紧锁定。</p>
+<p><strong>JCal：</strong> 我拥有的那种。Travis，这周有个有趣的商标登记——关于Elon要把Tesla和SpaceX合并的传闻，你一直在说。</p>
+<p><strong>Travis：</strong> 你当然可以这么说，你可以把功劳给我。</p>
+<p><strong>Chamath：</strong> 那多酷啊？这两家结合起来多酷？一定会发生。太棒了。如果你有幸拥有两者——每个人都可以决定成为所有者。</p>
+<p><strong>JCal：</strong> 当这事发生时，我会兴奋得不能自已。</p>
+<p><strong>Gavin：</strong> 看这个“Megapod”的商标，登记日期是2026年6月18日，非常近。“用于人工智能计算的模块化数据中心硬件，包括服务器、AI处理硬件、网络硬件、配电单元和冷却系统，作为一个单元出售，用于AI工作负载的独立模块化计算硬件系统。”等等。</p>
+<p><strong>Sacks：</strong> 简单说——这个描述——我还是看不懂。基本上人们说这会是超级充电站上的一块大型电池包加上GPU，超级充电站早已获批了。这就是后门。Chamath，你说。</p>
+<p><strong>Chamath：</strong> 现在地表的计算有几个问题。假设你有土地，挺容易。假设你能获得用地许可，不太容易。假设你能获得电力，非常难。然后你有一个非常关键的设计决策。所有这些公司都会发布所谓的“设计基础”——几十到几百页的技术文件，规定了Anthropic、OpenAI、CoreWeave、AWS、GCP的规格。现在的问题是，你们最近用过OpenAI或Anthropic吗？那个“请稍后回来”的提示是完全不能接受的。这意味着他们没有算力了。所以为了解决这个问题，这些设计基础的限制在放宽。一个关键限制是从Google和NVIDIA推动的架构来了：我们必须对这些机架进行液冷，它们非常复杂、庞大。现在我们又回头说，“你知道吗，也许一些较旧、效率较低但也还可以风冷的东西也是有用的。”所有人都说，是啊，我们应该利用所有能用的东西。在第二类里，一些非常聪明的人在做什么呢？哇，这里有一个集装箱，在某个水泥地面上放下，接上电源就开干。Jason，这就是你看到的投资水平。有些公司像Dell做这些机架，Vertiv做模块。我认为如果Tesla可以做这些，像我们这样的人，在我的数据中心项目里，会是一个非常大量的买家——因为在仓库里预制好这些东西，装好芯片，用卡车运到地方，用吊车吊进去，开机，就可以跑了。这就是一个90天的建设周期，闻所未闻。这就是Megapod的来源。我希望这不被Tesla和SpaceX完全内部消化。</p>
+<p><strong>Travis：</strong> 有传闻说他要把这些放在充电站——超级充电网络上。那里有大量土地，而且已经有电了。有些地方利用率很低。</p>
+<p><strong>Chamath：</strong> 但有其它要求。你需要特定级别的物理访问权限。有一些信息安全要求、液冷要求，使得许多工作负载在超级充电站这种随便什么人都能走进去的地方不现实。</p>
+<p><strong>JCal：</strong> 放一个保安，一个Optimus机器人。</p>
+<p><strong>Travis：</strong> 我有500个物业，有大量能源、大量机械制冷系统、大量天然气。在我做机器人、AI、物理AI的所有项目上，我们正在认真考虑把一些算力放进我们的厨房里。</p>
+<p><strong>JCal：</strong> 计算厨房。</p>
+<p><strong>Travis：</strong> 不重要。我就去买GPU，直接放在厨房里开机。就像比特币挖矿。</p>
+<p><strong>Chamath：</strong> 没这么容易。如果你要建个云并贡献到池子里，你得签液冷损失协议，你不会想签的。</p>
+<p><strong>Travis：</strong> 我不是超大规模云厂商，我自己用就行。</p>
+<p><strong>Sacks：</strong> 机架装上放着就行。</p>
+<p><strong>Chamath：</strong> 有趣的机会是你可以建立一个合成池，贡献给一个“新超大规模云厂商”（neoscaler）。但要做好那个，你得做一大堆事，可能跟你擅长的事偏离。</p>
+<p><strong>JCal：</strong> 安全问题是非数据中心不动产的主要问题。液冷、风冷机械系统、能源——有很多要做。但就算这些都有，数据中心的架构是有人口“陷阱”——你通过指纹进一个房间，门在你身后关上，再通过指纹进下一间，只有门关上后下一扇才开。</p>
+<p><strong>Travis：</strong> 一个“人陷阱”多少钱？你为什么不在自己的地方装一些？</p>
+<p><strong>JCal：</strong> 我帮你抓些人。</p>
+<p><strong>Gavin：</strong> 真正有价值的，我觉得是在Travis的例子里非常令人兴奋的一点，如果你能把它贡献给一个分布式训练池或推理池，这个池子的SLA更低，更面向社区协作。Jason你谈论过BitTensor、Venice、Pluralis这些项目。</p>
+<p><strong>Travis：</strong> 但有一点——分布式训练。如果这些设备彼此相距很远——不紧挨着——效率会急剧下降。你至少需要一个数量级的效率，可能还要更多。这是一个大问题。我我们有2个设施——从一个GPU到另一个GPU传递任务非常重要。如果在点对点网络上，会存在延迟。</p>
+<p><strong>Gavin：</strong> 没错。就算是你自己的光纤、距离2公里，都不行。</p>
+<p><strong>Chamath：</strong> 但所有对训练不利的，对推理都有利。</p>
+<p><strong>Gavin：</strong> 对。分布式推理云正在到来。这世界上有一家创业公司试图在人们房子上装4块GPU加电池，给用户电费折扣，然后全街区都能用那4块GPU做推理。锁起来别人进不去。还有另一个动态——可以跟Megapod结合。Crusoe在做模块化组装数据中心，像18轮卡车上的集装箱。这就是推理的解耦，分为预填（prefill）和解码（decode）。预填是理解你的问题和已有的答案——你记的越多越好。解码是生成下一个token——这受内存带宽约束，你说得越快越好。这两种推理正被越来越地解耦。Chamath投资了Groq，被NVIDIA收购。Groq和解码优化芯片。你可以把Groq或Cerebras这样的解码优化芯片放在老NVIDIA GPU像H100前面。你可以把A100从老数据中心拿出来，放进Megapod的集装箱里，前面放上Groq或Cerebras，就能得到非常有竞争力的方案。所以我确实认为推理解耦之后，我们会用GPU7年、10年、12年。这降低了融资成本，让这个AI革命更可融资。</p>
+<p><strong>Chamath：</strong> 我完全同意。你在这个领域太渊博了，太令人兴奋了。我没有在分布式计算领域的投资，但在与中国竞争、拥有活跃的美国开源社区、拥有为言论自由的分布式模型这些方面，我认为分布式推理在美国生态系统中确实有一席之地。我不知道具体在哪里、房主如何赚钱，但谁把这个做成全美国的方案，就做成了大事。</p>
+<p><strong>Gavin：</strong> 还有Targon——你可以在上面以$3到$4每小时租到H200，而且是无需许可的。任何有硬件的人都能贡献，前提是——这就是BitTensor的魔力所在——有验证器确保你放进去的就是你声称的算力。如果有人只是有硬件，而Elon说，从现在起你买Powerwall——我不认为他做不出来——你买Powerwall，我们就给你折扣。每个Powerwall里有我们的GPU。作为offer的一部分，你不能买Powerwall但不带GPU。当你不使用时，我们会为你的电池付钱。给你屋顶上放个Starlink。这样你就有了一个分布式系统。几块有芯片的Powerwall和一个Starlink。Elon创造了无穷多的家用电池备用系统。人们免费得到电池系统，他得到20年独占权。</p>
+<h4>关键原话或重要表达</h4>
+<ul>
+<li>“DRAM is the most important bottleneck. This is as close to magic as science can get.”——DRAM是最重要的瓶颈。这是科学中最接近魔法的东西（Gavin Baker）</li>
+<li>“$5 billion of launch cost. When Starship is rapidly reusable, that $5 billion is almost certainly deflationary.”——50亿美元的发射成本。当Starship快速可重复使用时，这50亿美元几乎是确定的通缩因素（Gavin Baker）</li>
+<li>“It’s racks in space linked with lasers. It’s a virtual data center in space.”——是在太空中用激光连接的机架。一种太空中的虚拟数据中心（Gavin Baker）</li>
+</ul>
+<hr></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="01:25:00–01:40:00 anthropic估值3万亿美元、cerebras ipo与市场吸收能力 本段核心内容： gavin预测anthropic作为上市公司将值3万亿美元，今年收入将远超1000亿美元，毛利率85%。 cerebras上市后跌破发行价，gavin分析了原因——机构投资者的机械式卖出。 市场有能力吸收这些巨型ipo，因为全球资本市场体量远大于此。 嘉宾调侃过去和现在募资规模的巨大变化。 详细中文整理： jcal： 我们有没有cerebras的更新？显然cerebras有一个令人难以置信的ipo。鉴于spacex的ipo现在从$200高位回落了。我们还有anthropic和openai的ipo要到来，加上cerebras——总计4万亿美元的新发行。市场如何管理这么多新库存？流向spacex的量明显还小，但随着时间推移，内部投资者、founders fund等都会被解锁分发给lp。这会是一个不断变化的股价目标。市场能吸收吗？钱从哪来？零售？从卖比特币转投更兴奋的东西？gavin，我们在未知水域。 gavin： 肯定没有先例。但说几件事，没有顺序。我认为anthropic今天值3万亿美元。而且非常重要—— jcal： 对不起，你刚说anthropic值3万亿美元？ gavin： 是的，我认为在公开市场上大致会是这个价位。他们今年会以远超过1000亿美元的收入结束。2028年的数字？是2000亿还是3000亿美元？它不会按10倍销售交易，但到那个规模会很赚钱，因为推理占据了主导，而且据消息他们有85%的推理毛利率。关于市场吸收能力——市场实际上已经在吸收了。只是从私人市场转到公开市场。在全球化资本市场的尺度上，这些数字看起来很大，但你只是从私人市场转到更大的公开市场。另一个重要的事是，spacex的每一位投资者、员工在过去10年每6个月都有一次卖出机会。可能没有大家想的那种流动性墙。我读到纽约一家对冲基金在做空spacex，说锁定期结束后很多人要卖。但事实上，每个股东都有机会卖，而且spacex ipo时近一半员工买入了。但cerebras有一点—— jcal： 但我从2018年开始持有spacex。每年他们有少量流动性，去年是3500亿美元的1年涨了8倍。很多人可能会卖。 gavin： 可能。但员工在新价格买入，他们可能是最大的所有者之一要解锁。很多人可能是通过spv持有，这些可能不会很快解锁和分配。我不会轻易假设。我不认为elon会卖出他的50%。 jcal： 对。我们很多人也不会卖。 gavin： 是的，许多大持仓者在ipo上大举买入。关于cerebras，该公司上市后两个交易日表现不佳。有两点值得讨论：一是现在有一整代投资经理主张在ipo定价上榨干每一分钱。另一面是，如果某只股票跌破发行价，许多经理会无条件卖出，无论什么情况。他们会认为这是承诺被打破。这就是cerebras过去两天的情况。这看起来可能不理性，但我认识一些管理巨型基金的人，如果股票跌破发行价，他们无论如何都会卖。所以一只股票跌到发行价附近，空头就会进场做空，想把它打到发行价以下，快速赚10%或20%就撤。这就变成了一种踩踏。这就是cerebras的情况。人们谈论“恨售”，但实际上是跌破了发行价。所以如果你在准备上市，告诉银行家们，定价要确保前9个月内不会跌破发行价。 jcal： 我建议每个公司都这么做。 gavin： 公司需要时间学习如何向公开市场讲自己的故事，这和面向风险投资完全不同。如果是我来说cerebras的故事——因为cerebras发生的事是：他们公布了一季报，增长很快，但相对ai整体不算很快。所以我会说：我们去年12月和openai签了这个转折性的合同，大概200到250亿美元。我们立即向台积电订了更多晶圆。从下单到台积电开始生产要4个月。从芯片到服务器又要2个月左右。从服务器到通电算力要1个月。所以你会到劳动节前后才第一次看到openai合同的影响。q3会有一些，但q4才开始真正上量。简单的算术，借nvidia的数字来说：用350亿美元建1gw，用150亿美元你可以从这1gw生成150亿美元token收入和云收入。如果有人在电话会上说到2027年每月增加50mw，那么在2026年不考虑的情况下，到2027年年末是大约90亿美元的云收入年化运行率。而市值不到400亿美元。这当然很难做到，从没做过。所以我作为投资者关注的重点不是他们竞争地位多好、能拉来多少新需求，而是他们能多快拉来电力。除了超大规模云厂商，真正拉出1gw以上的只有coreweave、crusoe和spacex ai。拉600mw非常非常难。这就是我关注的——他们能拉来多少兆瓦。因为我知道他们会怎么变现。我们看着吧。 travis： 说得很好。 jcal： 其他近期有这种情况的公司，rivian、chamath很有名的facebook——上市第一年低于发行价。所以这不一定是公司不好，只是炒作太多或者ipo定价完美了。这可以有两个方向。 gavin： 只需要用拍卖就行了。我不是说承销，但银行家需要多一些做拍卖的方式。 jcal： 我们最后一个话题是——你那个3万亿的判断——anthropic值3万亿，所以大概是6万亿的发行？我们怎么看整体情况？ gavin： 它不是全部发行，只发一小部分。那一小部分在市场中很容易被吸收。没有先例，但全球资本市场吸收500亿发行并不难。 jcal： 5%的流通量是150亿。 gavin： 足够。 jcal： 记得什么时候150亿曾经是一大笔钱吗？怎么回事？钱从哪来的？哦都一直在这。 gavin： 回忆一下，我在fidelity的时候，我们给uber定价140亿，被媒体骂不知道在干什么。结果6个月后你们以420亿估值融了轮。140亿，那时对一家私人公司已经是革命性的了。 chamath： 是170亿，但没人计数。 jcal： 你对了，是170亿。我们做了拍卖。你开始时希望是200亿，我们最终定在170亿。我们的方式是每个人填一张表，从10亿到20亿不同价位要多少。然后我们做了荷兰拍卖，说我们要清1.5亿。就按拍卖清算，回去告诉人，“你没拿到，再来一次”，他们更新excel，价格上移一点，最后关盘。但确实是从9亿或10亿起步，最后到17亿。 gavin： 谢谢你的贡献。 chamath： 那时候150亿就是大钱了。10年前我们都得翻山越岭去上学。 jcal： 记得什么时候融50亿很难吗？ chamath： 记得融150万都很难吗？ jcal： 我记得。好了，不然我们听上去像老爷爷了。 关键原话或重要表达： “anthropic is worth $3 trillion today. they are going to end this year well over $100 billion in revenue.”——anthropic今天值3万亿美元。他们今年将以远超过1000亿美元的收入结束（gavin baker） “when a stock breaks deal price, a lot of portfolio managers sell it no matter what. they consider it a promise that was broken.”——当一只股票跌破发行价时，许多投资经理无论什么情况都会卖出。他们认为那是承诺被打破了（gavin baker）" style="--index: 4">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">04</span>
+                    <span class="timeline-meta">01:25:00–01:40:00</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>Anthropic估值3万亿美元、Cerebras IPO与市场吸收能力</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>Gavin预测Anthropic作为上市公司将值3万亿美元，今年收入将远超1000亿美元，毛利率85%。</li>
+<li>Cerebras上市后跌破发行价，Gavin分析了原因——机构投资者的机械式卖出。</li>
+<li>市场有能力吸收这些巨型IPO，因为全球资本市场体量远大于此。</li>
+<li>嘉宾调侃过去和现在募资规模的巨大变化。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> 我们有没有Cerebras的更新？显然Cerebras有一个令人难以置信的IPO。鉴于SpaceX的IPO现在从$200高位回落了。我们还有Anthropic和OpenAI的IPO要到来，加上Cerebras——总计4万亿美元的新发行。市场如何管理这么多新库存？流向SpaceX的量明显还小，但随着时间推移，内部投资者、Founders Fund等都会被解锁分发给LP。这会是一个不断变化的股价目标。市场能吸收吗？钱从哪来？零售？从卖比特币转投更兴奋的东西？Gavin，我们在未知水域。</p>
+<p><strong>Gavin：</strong> 肯定没有先例。但说几件事，没有顺序。我认为Anthropic今天值3万亿美元。而且非常重要——</p>
+<p><strong>JCal：</strong> 对不起，你刚说Anthropic值3万亿美元？</p>
+<p><strong>Gavin：</strong> 是的，我认为在公开市场上大致会是这个价位。他们今年会以远超过1000亿美元的收入结束。2028年的数字？是2000亿还是3000亿美元？它不会按10倍销售交易，但到那个规模会很赚钱，因为推理占据了主导，而且据消息他们有85%的推理毛利率。关于市场吸收能力——市场实际上已经在吸收了。只是从私人市场转到公开市场。在全球化资本市场的尺度上，这些数字看起来很大，但你只是从私人市场转到更大的公开市场。另一个重要的事是，SpaceX的每一位投资者、员工在过去10年每6个月都有一次卖出机会。可能没有大家想的那种流动性墙。我读到纽约一家对冲基金在做空SpaceX，说锁定期结束后很多人要卖。但事实上，每个股东都有机会卖，而且SpaceX IPO时近一半员工买入了。但Cerebras有一点——</p>
+<p><strong>JCal：</strong> 但我从2018年开始持有SpaceX。每年他们有少量流动性，去年是3500亿美元的1年涨了8倍。很多人可能会卖。</p>
+<p><strong>Gavin：</strong> 可能。但员工在新价格买入，他们可能是最大的所有者之一要解锁。很多人可能是通过SPV持有，这些可能不会很快解锁和分配。我不会轻易假设。我不认为Elon会卖出他的50%。</p>
+<p><strong>JCal：</strong> 对。我们很多人也不会卖。</p>
+<p><strong>Gavin：</strong> 是的，许多大持仓者在IPO上大举买入。关于Cerebras，该公司上市后两个交易日表现不佳。有两点值得讨论：一是现在有一整代投资经理主张在IPO定价上榨干每一分钱。另一面是，如果某只股票跌破发行价，许多经理会无条件卖出，无论什么情况。他们会认为这是承诺被打破。这就是Cerebras过去两天的情况。这看起来可能不理性，但我认识一些管理巨型基金的人，如果股票跌破发行价，他们无论如何都会卖。所以一只股票跌到发行价附近，空头就会进场做空，想把它打到发行价以下，快速赚10%或20%就撤。这就变成了一种踩踏。这就是Cerebras的情况。人们谈论“恨售”，但实际上是跌破了发行价。所以如果你在准备上市，告诉银行家们，定价要确保前9个月内不会跌破发行价。</p>
+<p><strong>JCal：</strong> 我建议每个公司都这么做。</p>
+<p><strong>Gavin：</strong> 公司需要时间学习如何向公开市场讲自己的故事，这和面向风险投资完全不同。如果是我来说Cerebras的故事——因为Cerebras发生的事是：他们公布了一季报，增长很快，但相对AI整体不算很快。所以我会说：我们去年12月和OpenAI签了这个转折性的合同，大概200到250亿美元。我们立即向台积电订了更多晶圆。从下单到台积电开始生产要4个月。从芯片到服务器又要2个月左右。从服务器到通电算力要1个月。所以你会到劳动节前后才第一次看到OpenAI合同的影响。Q3会有一些，但Q4才开始真正上量。简单的算术，借NVIDIA的数字来说：用350亿美元建1GW，用150亿美元你可以从这1GW生成150亿美元token收入和云收入。如果有人在电话会上说到2027年每月增加50MW，那么在2026年不考虑的情况下，到2027年年末是大约90亿美元的云收入年化运行率。而市值不到400亿美元。这当然很难做到，从没做过。所以我作为投资者关注的重点不是他们竞争地位多好、能拉来多少新需求，而是他们能多快拉来电力。除了超大规模云厂商，真正拉出1GW以上的只有CoreWeave、Crusoe和SpaceX AI。拉600MW非常非常难。这就是我关注的——他们能拉来多少兆瓦。因为我知道他们会怎么变现。我们看着吧。</p>
+<p><strong>Travis：</strong> 说得很好。</p>
+<p><strong>JCal：</strong> 其他近期有这种情况的公司，Rivian、Chamath很有名的Facebook——上市第一年低于发行价。所以这不一定是公司不好，只是炒作太多或者IPO定价完美了。这可以有两个方向。</p>
+<p><strong>Gavin：</strong> 只需要用拍卖就行了。我不是说承销，但银行家需要多一些做拍卖的方式。</p>
+<p><strong>JCal：</strong> 我们最后一个话题是——你那个3万亿的判断——Anthropic值3万亿，所以大概是6万亿的发行？我们怎么看整体情况？</p>
+<p><strong>Gavin：</strong> 它不是全部发行，只发一小部分。那一小部分在市场中很容易被吸收。没有先例，但全球资本市场吸收500亿发行并不难。</p>
+<p><strong>JCal：</strong> 5%的流通量是150亿。</p>
+<p><strong>Gavin：</strong> 足够。</p>
+<p><strong>JCal：</strong> 记得什么时候150亿曾经是一大笔钱吗？怎么回事？钱从哪来的？哦都一直在这。</p>
+<p><strong>Gavin：</strong> 回忆一下，我在Fidelity的时候，我们给Uber定价140亿，被媒体骂不知道在干什么。结果6个月后你们以420亿估值融了轮。140亿，那时对一家私人公司已经是革命性的了。</p>
+<p><strong>Chamath：</strong> 是170亿，但没人计数。</p>
+<p><strong>JCal：</strong> 你对了，是170亿。我们做了拍卖。你开始时希望是200亿，我们最终定在170亿。我们的方式是每个人填一张表，从10亿到20亿不同价位要多少。然后我们做了荷兰拍卖，说我们要清1.5亿。就按拍卖清算，回去告诉人，“你没拿到，再来一次”，他们更新Excel，价格上移一点，最后关盘。但确实是从9亿或10亿起步，最后到17亿。</p>
+<p><strong>Gavin：</strong> 谢谢你的贡献。</p>
+<p><strong>Chamath：</strong> 那时候150亿就是大钱了。10年前我们都得翻山越岭去上学。</p>
+<p><strong>JCal：</strong> 记得什么时候融50亿很难吗？</p>
+<p><strong>Chamath：</strong> 记得融150万都很难吗？</p>
+<p><strong>JCal：</strong> 我记得。好了，不然我们听上去像老爷爷了。</p>
+<h4>关键原话或重要表达</h4>
+<ul>
+<li>“Anthropic is worth $3 trillion today. They are going to end this year well over $100 billion in revenue.”——Anthropic今天值3万亿美元。他们今年将以远超过1000亿美元的收入结束（Gavin Baker）</li>
+<li>“When a stock breaks deal price, a lot of portfolio managers sell it no matter what. They consider it a promise that was broken.”——当一只股票跌破发行价时，许多投资经理无论什么情况都会卖出。他们认为那是承诺被打破了（Gavin Baker）</li>
+</ul></div>
+                  </div>
+                </article></div>
+            <p class="empty search-empty" data-search-empty hidden>没有匹配的时间线段落。</p>
+          </section>
+
+          <section id="speakers">
+            <div class="section-head">
+              <h2>人物观点对照</h2>
+              <p>比较嘉宾立场</p>
+            </div>
+            <div class="speaker-grid"><article class="speaker-card" style="--index: 1">
+                  <p class="speaker-kicker">嘉宾 01</p>
+                  <h3>JCal（Jason Calcanis）</h3>
+                  <div><p>作为主持人，他主要负责引出话题、设定场景、推动讨论节奏。他对社会主义在纽约的胜利持强烈的批评态度，认为DSA是危险的骗子，但也承认Mamdami是一位杰出演说家，甚至被他的尼克斯演讲短暂“催眠”。在AI话题上，他关注中国追赶的速度和对美国自我加严监管的讽刺。</p></div>
+                </article>
+<article class="speaker-card" style="--index: 2">
+                  <p class="speaker-kicker">嘉宾 02</p>
+                  <h3>Chamath Palihapitiya</h3>
+                  <div><p>他最核心的观点是AI是人类历史上最强大的经济均衡器，但硅谷糟糕的公共形象和内部争斗让社会主义叙事更具吸引力。他认为中国追赶的现实使美国自设的监管门槛变得毫无意义。在以色列问题上，他主张区分犹太人、以色列国与Netanyahu本人。他支持16岁以下社交媒体禁令，认为可以从源头上减少年轻人激进化。</p></div>
+                </article>
+<article class="speaker-card" style="--index: 3">
+                  <p class="speaker-kicker">嘉宾 03</p>
+                  <h3>David Sacks</h3>
+                  <div><p>他从前AI顾问的角度强调AI竞赛（尤其是与中国的竞争）的紧迫性。他坚称Dario（Anthropic CEO）的自限式监管要求正在弄巧成拙——中国已经追上来，美国没有几个月可以浪费。他用大量数据描述了DSA候选人的极端立场，并详细分析了这一趋势如何从根本上改变美国政治格局。</p></div>
+                </article>
+<article class="speaker-card" style="--index: 4">
+                  <p class="speaker-kicker">嘉宾 04</p>
+                  <h3>David Friedberg/Gavin Baker</h3>
+                  <div><p>他主要从投资和市场角度分析。他认为Anthropic值3万亿美元，DRAM是AI最重要的瓶颈，未来属于可组合模型。他对Cerebras的IPO做了详细技术分析，强调跌破发行价的机制问题。他也从经济角度分析了DSA的选民基础——富裕、向下流动的白人自由派，而工人阶级、黑人和西裔正在远离他们。</p></div>
+                </article></div>
+          </section>
+
+          <section id="quotes">
+            <div class="section-head">
+              <h2>值得引用的原话</h2>
+              <p>保留关键表达</p>
+            </div>
+            <div class="panel"><h4>1.</h4>
+<p>*原文：* “AI is the greatest economic leveler thing that we&#x27;ll ever find in our lifetime. It can even the starting line for every single person on Earth.” *翻译：* AI是我们有生之年能找到的最强大的经济均衡器。它能让地球上每个人的起跑线都变得平等。 *说明：* Chamath的核心论点，也是贯穿全集的思想主线——AI的巨大潜力与硅谷自我破坏形成讽刺对比。</p>
+<h4>2.</h4>
+<p>*原文：* “When the immune system is suppressed, all the social ills flare up.” *翻译：* 当免疫系统被压制时，所有社会疾病都会爆发。 *说明：* Travis Kalanick提出的“真理与正义是社会免疫系统”的隐喻，精辟解释了当前美国政治乱象。</p>
+<h4>3.</h4>
+<p>*原文：* “We are on a shot clock here. We cannot just slow everything down because that will not slow down the Chinese.” *翻译：* 我们正处在一个计时器上。我们不能放慢一切，因为这不会放慢中国人的速度。 *说明：* Sacks的核心论点——美国与中国的AI竞赛没有拖延的余地，自我监管等于缴械。</p>
+<h4>4.</h4>
+<p>*原文：* “DRAM is the most important bottleneck. This is as close to magic as science can get.” *翻译：* DRAM是最重要的瓶颈。这是科学中最接近魔法的事情。 *说明：* Gavin对内存瓶颈的精确总结，解释了为什么只有3家公司能供应关键元件。</p>
+<h4>5.</h4>
+<p>*原文：* “We are the only vaguely successful multicultural society on planet Earth.” *翻译：* 美国是地球上唯一基本成功的多元文化社会。 *说明：* Gavin对美国社会体制的辩护，反对DSA“后美国”主张。</p>
+<h4>6.</h4>
+<p>*原文：* “Distillation is a cheat sheet for other models to catch up.” *翻译：* 蒸馏就是其他模型追赶的作弊清单。 *说明：* Gavin解释了为什么中国能在芯片落后2年的情况下以更短时间追平模型能力。</p>
+<h4>7.</h4>
+<p>*原文：* “They are 6 months behind on the model and 24 months behind on the silicon, yet they are only a few months behind in total. What game are we playing?” *翻译：* 模型落后6个月，芯片落后24个月，但总体上只落后几个月。我们在玩什么游戏？ *说明：* Chamath对美国AI策略的尖锐质疑，讽刺美国自缚手脚的无意义性。</p></div>
+          </section>
+        </div>
+      </div>
+    </main>
+  </div>
+  <script>
+    const progress = document.querySelector("[data-progress]");
+    const searchBox = document.querySelector("[data-search-box]");
+    const topButton = document.querySelector("[data-scroll-top]");
+    const cards = Array.from(document.querySelectorAll("[data-timeline-card]"));
+    const searchEmpty = document.querySelector("[data-search-empty]");
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    function updateProgress() {
+      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      const ratio = scrollable > 0 ? window.scrollY / scrollable : 0;
+      if (progress) {
+        progress.style.width = `${Math.max(0, Math.min(1, ratio)) * 100}%`;
+      }
+    }
+
+    function applySearch() {
+      const query = searchBox.value.trim().toLowerCase();
+      let visibleCount = 0;
+      cards.forEach((card) => {
+        const text = card.getAttribute("data-search") || "";
+        const isVisible = !query || text.includes(query);
+        card.hidden = !isVisible;
+        if (isVisible) {
+          visibleCount += 1;
+        }
+      });
+      if (searchEmpty) {
+        searchEmpty.hidden = !query || visibleCount > 0;
+      }
+    }
+
+    window.addEventListener("scroll", updateProgress, { passive: true });
+    window.addEventListener("resize", updateProgress);
+    if (searchBox) {
+      searchBox.addEventListener("input", applySearch);
+    }
+    if (topButton) {
+      topButton.addEventListener("click", () => {
+        window.scrollTo({
+          top: 0,
+          behavior: prefersReducedMotion.matches ? "auto" : "smooth"
+        });
+      });
+    }
+    updateProgress();
+  </script>
+</body>
+</html>
