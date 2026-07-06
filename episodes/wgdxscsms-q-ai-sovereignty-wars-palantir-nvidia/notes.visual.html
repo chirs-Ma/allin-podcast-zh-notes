@@ -1,0 +1,974 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>主权AI之争、Palantir-NVIDIA合作、最高法院出生公民权裁决、纽森加州预算谎言 - 中文播客可视化笔记</title>
+  <style>
+    :root {
+      --bg: oklch(0.974 0.006 238);
+      --paper: oklch(0.991 0.003 238);
+      --paper-soft: oklch(0.955 0.007 238);
+      --ink: oklch(0.205 0.018 246);
+      --muted: oklch(0.49 0.018 246);
+      --faint: oklch(0.63 0.014 246);
+      --line: oklch(0.875 0.009 238);
+      --line-strong: oklch(0.74 0.014 238);
+      --accent: oklch(0.43 0.064 164);
+      --accent-soft: oklch(0.94 0.024 164);
+      --accent-wash: oklch(0.973 0.012 164);
+      --quote: oklch(0.965 0.010 92);
+      --shadow: 0 24px 54px color-mix(in oklch, var(--ink) 8%, transparent);
+      --radius: 8px;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-width: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(90deg, color-mix(in oklch, var(--line) 28%, transparent) 1px, transparent 1px) 0 0 / 92px 92px,
+        var(--bg);
+      font-family: "Geist", "Satoshi", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      line-height: 1.78;
+      text-rendering: optimizeLegibility;
+    }
+    ::selection { background: var(--accent-soft); color: var(--ink); }
+    a {
+      color: var(--accent);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+      transition: color .22s var(--ease), background-color .22s var(--ease), border-color .22s var(--ease), transform .22s var(--ease);
+    }
+    [hidden] { display: none !important; }
+    .progress {
+      position: fixed;
+      z-index: 4;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: var(--accent);
+    }
+    .quick-actions {
+      position: fixed;
+      right: max(18px, calc((100vw - 1200px) / 2));
+      bottom: 24px;
+      z-index: 3;
+      display: grid;
+      gap: 7px;
+    }
+    .quick-action {
+      display: inline-grid;
+      grid-template-columns: 16px auto;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      min-width: 74px;
+      min-height: 40px;
+      padding: 8px 12px;
+      border: 1px solid var(--line-strong);
+      border-radius: var(--radius);
+      background: color-mix(in oklch, var(--paper) 92%, transparent);
+      box-shadow: 0 12px 28px color-mix(in oklch, var(--ink) 7%, transparent);
+      color: var(--ink);
+      font: inherit;
+      font-size: 13px;
+      font-weight: 720;
+      line-height: 1.2;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .quick-action:hover, .quick-action:focus-visible {
+      outline: none;
+      border-color: var(--accent);
+      background: var(--accent-wash);
+      color: var(--accent);
+      transform: translate3d(0, -1px, 0);
+    }
+    .quick-action:active { transform: translate3d(0, 1px, 0) scale(.99); }
+    .page {
+      width: min(1760px, calc(100% - 56px));
+      margin: 0 auto;
+      padding: 0 0 104px;
+    }
+    .article { min-width: 0; }
+    .hero {
+      max-width: none;
+      margin-left: min(7vw, 140px);
+      padding: 72px 0 58px;
+    }
+    .eyebrow {
+      margin: 0 0 18px;
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    h1 {
+      max-width: none;
+      margin: 0 0 28px;
+      font-size: clamp(38px, 3vw, 52px);
+      font-weight: 760;
+      line-height: 1.08;
+      letter-spacing: 0;
+      text-wrap: balance;
+    }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 18px;
+      max-width: 72ch;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .meta a { font-weight: 650; }
+    .meta-strip {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+      max-width: 720px;
+      margin: 34px 0 28px;
+      border-top: 1px solid var(--line-strong);
+      padding-top: 16px;
+    }
+    .meta-pill {
+      display: grid;
+      gap: 2px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.35;
+    }
+    .meta-pill b {
+      color: var(--ink);
+      font-family: var(--mono);
+      font-size: 18px;
+      font-weight: 680;
+      line-height: 1;
+    }
+    .summary {
+      width: 100%;
+      max-width: 760px;
+      padding: 24px 26px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: color-mix(in oklch, var(--paper) 88%, var(--accent-soft));
+      box-shadow: var(--shadow);
+    }
+    .summary p {
+      margin: 0;
+      font-size: 19px;
+      line-height: 1.72;
+    }
+    h1, .summary, .takeaway p, .timeline-card h3, .section-content, .speaker-card, .panel {
+      overflow-wrap: anywhere;
+    }
+    .content-shell {
+      display: grid;
+      grid-template-columns: minmax(170px, 212px) minmax(0, 820px);
+      gap: clamp(36px, 7vw, 88px);
+      align-items: start;
+      border-top: 1px solid var(--line);
+      padding-top: 40px;
+    }
+    .sidebar {
+      position: sticky;
+      top: 28px;
+      align-self: start;
+      padding-top: 4px;
+    }
+    .toc {
+      border-top: 1px solid var(--ink);
+      padding-top: 16px;
+    }
+    .toc-title {
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .nav-links { display: grid; gap: 2px; }
+    .nav-links a {
+      display: block;
+      padding: 8px 0;
+      border-bottom: 1px solid color-mix(in oklch, var(--line) 72%, transparent);
+      color: var(--ink);
+      font-size: 14px;
+      line-height: 1.35;
+      text-decoration: none;
+    }
+    .nav-links a:hover, .nav-links a:focus-visible {
+      outline: none;
+      color: var(--accent);
+      transform: translate3d(2px, 0, 0);
+    }
+    .search {
+      display: grid;
+      gap: 8px;
+      margin-top: 22px;
+    }
+    .search span {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 720;
+    }
+    .search input {
+      width: 100%;
+      min-height: 40px;
+      padding: 8px 10px;
+      border: 1px solid var(--line-strong);
+      border-radius: var(--radius);
+      background: var(--paper);
+      color: var(--ink);
+      font: inherit;
+      font-size: 14px;
+      outline: none;
+      transition: border-color .22s var(--ease), box-shadow .22s var(--ease), transform .22s var(--ease);
+    }
+    .search input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px color-mix(in oklch, var(--accent) 14%, transparent);
+    }
+    .content-flow { min-width: 0; }
+    section { margin: 0 0 78px; }
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 18px;
+      align-items: end;
+      margin-bottom: 22px;
+      border-top: 1px solid var(--ink);
+      padding-top: 18px;
+    }
+    .section-head h2 {
+      margin: 0;
+      font-size: 28px;
+      font-weight: 740;
+      line-height: 1.16;
+      letter-spacing: 0;
+    }
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.4;
+      text-align: right;
+    }
+    .takeaway-list {
+      display: grid;
+      gap: 0;
+      margin: 0;
+      padding: 0;
+      border-top: 1px solid var(--line);
+      list-style: none;
+    }
+    .takeaway {
+      display: grid;
+      grid-template-columns: 52px minmax(0, 1fr);
+      gap: 18px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .takeaway span {
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 15px;
+      font-weight: 720;
+      line-height: 1.65;
+    }
+    .takeaway p {
+      margin: 0;
+      max-width: 70ch;
+      font-size: 16px;
+      line-height: 1.72;
+    }
+    .timeline {
+      display: grid;
+      gap: 0;
+      border-top: 1px solid var(--line-strong);
+    }
+    .timeline-card {
+      display: grid;
+      grid-template-columns: 132px minmax(0, 1fr);
+      gap: 32px;
+      padding: 34px 0 40px;
+      border-bottom: 1px solid var(--line);
+    }
+    .timeline-heading {
+      position: sticky;
+      top: 30px;
+      align-self: start;
+      display: grid;
+      gap: 10px;
+      padding-top: 2px;
+    }
+    .timeline-index {
+      color: var(--faint);
+      font-family: var(--mono);
+      font-size: 13px;
+      font-weight: 720;
+      line-height: 1;
+    }
+    .timeline-meta {
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 720;
+      line-height: 1.45;
+    }
+    .timeline-card h3 {
+      max-width: 24ch;
+      margin: 0 0 18px;
+      font-size: 27px;
+      font-weight: 730;
+      line-height: 1.22;
+      letter-spacing: 0;
+    }
+    .section-content {
+      color: color-mix(in oklch, var(--ink) 88%, var(--muted));
+      font-size: 16px;
+    }
+    .section-content p {
+      max-width: 72ch;
+      margin: 0 0 1.05em;
+    }
+    .section-content p strong:first-child {
+      color: var(--ink);
+      font-weight: 760;
+    }
+    .section-content h4 {
+      margin: 26px 0 10px;
+      color: var(--accent);
+      font-size: 14px;
+      font-weight: 760;
+      line-height: 1.35;
+    }
+    .section-content ul, .section-content ol, .panel ul, .panel ol, .speaker-card ul, .speaker-card ol {
+      margin: .75em 0 1em;
+      padding-left: 1.25em;
+    }
+    .section-content li, .panel li, .speaker-card li { margin: 6px 0; }
+    .speaker-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, .88fr);
+      gap: 26px 42px;
+      border-top: 1px solid var(--line);
+    }
+    .speaker-card {
+      padding: 22px 0 24px;
+      border-bottom: 1px solid var(--line);
+    }
+    .speaker-card:nth-child(even) { margin-top: 22px; }
+    .speaker-kicker {
+      margin: 0 0 8px;
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 720;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .speaker-card h3 {
+      margin: 0 0 12px;
+      font-size: 20px;
+      font-weight: 730;
+      line-height: 1.25;
+    }
+    .speaker-card p, .panel p {
+      max-width: 68ch;
+      margin-top: 0;
+    }
+    .panel {
+      border-top: 1px solid var(--line);
+      padding-top: 8px;
+    }
+    blockquote {
+      margin: 18px 0;
+      padding: 16px 18px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--quote);
+    }
+    code {
+      padding: 2px 5px;
+      border-radius: 5px;
+      background: color-mix(in oklch, var(--accent) 10%, var(--paper));
+      color: var(--ink);
+      font-family: var(--mono);
+      font-size: .92em;
+    }
+    hr {
+      height: 1px;
+      margin: 26px 0;
+      border: 0;
+      background: var(--line);
+    }
+    .empty {
+      margin: 0;
+      padding: 16px 18px;
+      border: 1px dashed var(--line-strong);
+      border-radius: var(--radius);
+      color: var(--muted);
+      background: color-mix(in oklch, var(--paper-soft) 70%, transparent);
+    }
+    .search-empty { margin-top: 16px; }
+    .muted { color: var(--muted); }
+    @keyframes rise-in {
+      from { opacity: 1; transform: translate3d(0, 6px, 0); }
+      to { opacity: 1; transform: translate3d(0, 0, 0); }
+    }
+    .hero > *, .takeaway, .timeline-card, .speaker-card, .panel {
+      animation: rise-in .55s var(--ease) both;
+    }
+    .hero > *:nth-child(2) { animation-delay: .04s; }
+    .hero > *:nth-child(3) { animation-delay: .08s; }
+    .hero > *:nth-child(4) { animation-delay: .12s; }
+    .hero > *:nth-child(5) { animation-delay: .16s; }
+    .takeaway, .timeline-card, .speaker-card {
+      animation-delay: calc(var(--index, 1) * 38ms);
+    }
+    @media (max-width: 1120px) {
+      .hero { margin-left: 0; }
+      .content-shell {
+        grid-template-columns: minmax(154px, 190px) minmax(0, 1fr);
+        gap: 36px;
+      }
+      h1 { font-size: 44px; }
+    }
+    @media (min-width: 1500px) {
+      h1 {
+        width: max-content;
+        max-width: 100%;
+        white-space: nowrap;
+        font-size: clamp(36px, 2.05vw, 42px);
+      }
+    }
+    @media (max-width: 780px) {
+      body { background: var(--bg); }
+      .page { width: min(1180px, calc(100% - 28px)); padding-bottom: 86px; }
+      .hero { padding: 46px 0 36px; }
+      .eyebrow { margin-bottom: 14px; }
+      h1 {
+        max-width: none;
+        font-size: 30px;
+        line-height: 1.14;
+        word-break: normal;
+      }
+      .summary, .summary p, .takeaway p, .section-content, .speaker-card, .panel {
+        max-width: 100%;
+        word-break: break-word;
+      }
+      .meta-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 20px; }
+      .summary { padding: 20px; }
+      .summary p { font-size: 17px; }
+      .content-shell { display: block; padding-top: 28px; }
+      .sidebar { position: static; padding-top: 0; margin-bottom: 42px; }
+      .toc { border-top-color: var(--line-strong); }
+      .nav-links { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 18px; }
+      section { margin-bottom: 58px; }
+      .section-head { display: block; margin-bottom: 16px; }
+      .section-head h2 { font-size: 24px; }
+      .section-head p { margin-top: 6px; text-align: left; }
+      .takeaway { grid-template-columns: 42px minmax(0, 1fr); gap: 12px; }
+      .timeline-card { display: block; padding: 28px 0 32px; }
+      .timeline-heading { position: static; display: flex; align-items: baseline; gap: 12px; margin-bottom: 12px; }
+      .timeline-card h3 { max-width: none; font-size: 23px; }
+      .speaker-grid { display: block; }
+      .speaker-card:nth-child(even) { margin-top: 0; }
+      .quick-actions {
+        right: 12px;
+        bottom: 12px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 6px;
+      }
+      .quick-action {
+        min-width: 66px;
+        min-height: 38px;
+        padding: 7px 9px;
+        font-size: 13px;
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: 1ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 1ms !important;
+      }
+      .speaker-card:nth-child(even) { margin-top: 0; }
+    }
+    @media print {
+      body { background: var(--paper); }
+      .sidebar, .progress, .quick-actions { display: none; }
+      .page { display: block; width: auto; padding-bottom: 0; }
+      .hero { margin-left: 0; padding: 0 0 28px; }
+      .content-shell { display: block; border-top: 0; padding-top: 0; }
+      .summary { box-shadow: none; }
+      .timeline-card, .speaker-card { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <div class="progress" data-progress></div>
+  <div class="quick-actions" aria-label="快捷操作">
+    <a class="quick-action" href="../../index.html" aria-label="返回首页">
+      <span aria-hidden="true">←</span>
+      <span>首页</span>
+    </a>
+    <button class="quick-action" type="button" data-scroll-top aria-label="回到顶部">
+      <span aria-hidden="true">↑</span>
+      <span>顶部</span>
+    </button>
+  </div>
+  <div class="page">
+    <main class="article">
+      <header class="hero">
+        <p class="eyebrow">All-In Podcast 中文精读</p>
+        <h1>主权AI之争、Palantir-NVIDIA合作、最高法院出生公民权裁决、纽森加州预算谎言</h1>
+        <div class="meta">
+          <span>生成时间：2026-07-06 14:09</span>
+          <span>来源：<a href="https://www.youtube.com/watch?v=wgdxSCsmS-Q" target="_blank" rel="noopener">YouTube</a></span>
+        </div>
+        <div class="meta-strip"><span class="meta-pill"><b>37 分钟</b>阅读时长</span>
+<span class="meta-pill"><b>10</b>核心要点</span>
+<span class="meta-pill"><b>5</b>时间线</span>
+<span class="meta-pill"><b>4</b>人物</span></div>
+        <div class="summary" aria-label="一句话摘要"><p>本期聚焦AI主权之争，详析Palantir与NVIDIA合作背后的企业数据安全与模型控制权之争；随后深入讨论最高法院对出生公民权的裁决与加州财政危机，并延续关于AI是否导致失业的长期辩论。</p></div>
+      </header>
+
+      <div class="content-shell">
+        <aside class="sidebar">
+          <nav class="toc" aria-label="页面导航">
+            <p class="toc-title">阅读导航</p>
+            <div class="nav-links">
+              <a href="#takeaways">核心要点</a>
+              <a href="#timeline">分段整理</a>
+              <a href="#speakers">人物观点</a>
+              <a href="#quotes">双语引语</a>
+            </div>
+            <label class="search">
+              <span>搜索时间线</span>
+              <input data-search-box type="search" placeholder="关键词" aria-label="搜索时间线">
+            </label>
+          </nav>
+        </aside>
+
+        <div class="content-flow">
+          <section id="takeaways">
+            <div class="section-head">
+              <h2>核心要点</h2>
+              <p>快速扫读本集主线</p>
+            </div>
+            <ol class="takeaway-list"><li class="takeaway" style="--index: 1"><span>01</span><p>Palantir与NVIDIA宣布主权AI合作，让美国政府机构拥有硬件、数据和模型权重的完全控制权。</p></li>
+<li class="takeaway" style="--index: 2"><span>02</span><p>企业客户正从对Anthropic等前沿模型实验室失去信任，原因是它们利用客户数据构建竞争性垂直应用。</p></li>
+<li class="takeaway" style="--index: 3"><span>03</span><p>Chamath展示数据，使用开源模型结合80/90的软件工厂，执行相同任务成本降低16.4倍。</p></li>
+<li class="takeaway" style="--index: 4"><span>04</span><p>所有人一致认为，企业和开发者应将数据保护视为优先事项，“与前沿模型公司合作等于选择被吞并”。</p></li>
+<li class="takeaway" style="--index: 5"><span>05</span><p>最高法院以6-3裁定Trump废除出生公民权的行政命令违宪，Roberts与三位自由派大法官组成多数。</p></li>
+<li class="takeaway" style="--index: 6"><span>06</span><p>嘉宾对出生公民权立场分歧：Sacks和Chamath倾向于限制；JCal和Friedberg主张对长期非法移民的宽容政策。</p></li>
+<li class="takeaway" style="--index: 7"><span>07</span><p>Friedberg详细陈述加州预算从2019年2150亿美元膨胀到3550亿美元，依赖会计伎俩和不具可持续性的税收结构。</p></li>
+<li class="takeaway" style="--index: 8"><span>08</span><p>Chamath引用佛罗里达vs伊利诺伊vs加州预算数据，结论是加州在财政管理上比伊利诺伊更糟糕。</p></li>
+<li class="takeaway" style="--index: 9"><span>09</span><p>Ramp/Revelio Labs研究发现，高AI采用率企业两年内员工总数增长约10%，初级岗位增长12%，不支持AI导致失业主张。</p></li>
+<li class="takeaway" style="--index: 10"><span>10</span><p>关于AI是否导致失业的内在辩论：JCal主张“部分岗位将被淘汰”，Friedberg和Sacks主张“目前数据不支持该论点”。</p></li></ol>
+          </section>
+
+          <section id="timeline">
+            <div class="section-head">
+              <h2>分段详细整理</h2>
+              <p>按时间线阅读上下文</p>
+            </div>
+            <div class="timeline" data-timeline><article class="timeline-card" data-timeline-card data-search="00:00-00:23 palantir与nvidia合作主权ai：核心讨论 本段核心内容： palantir与nvidia宣布主权ai合作，为美国政府部门构建独立运行的高性能模型 嘉宾一致认为，企业客户正担心与前沿模型实验室合作的风险：后者利用客户数据构建竞品 sacks提出“企业ai安全”新定义：控制自己的计算、模型、数据栈和专有知识 chamath展示开源模型结合80/90软件工厂的实测成本优势（16.4倍） 背景解释与关键术语： 主权ai（sovereign ai）：政府或企业拥有自己硬件、数据和模型权重的ai基础设施，不依赖第三方模型供应商 模型权重（model weights）：经过训练后神经网络中存储参数的数值，决定了模型的行为能力 nemotron：nvidia开发的开放式模型系列 openrouter：一个聚合多家模型api的平台，用户可接入不同模型 返回资本雇用率（roce，return on capital employed）：衡量企业利用资本产生利润能力的指标 柱层架构（hub and spoke）：中心节点负责核心模型训练，外围节点负责部署和推理 详细中文整理： jcal： 欢迎回到全球排名第一的播客，这是你们最爱的播客，也是播客播主最爱的播客——all-in podcast第279期。今天和我一起的有friedberg、sacks、chamath，老队伍都在。夏天到了我们准备好了，今天是个强力议程、火箭议程。palantir和nvidia宣布了一个主权ai合作，我们已经听说过这个词——palantir将使用nvidia的nemotron开源模型构建定制前沿模型，专门服务于美国政府。palantir把新平台称为“主权ai操作系统”，美国政府机构将拥有硬件、数据、模型权重。palantir还发布了一个病毒式的推特宣言：数据留存是你的宝藏，转移它你就要自担风险。ceo alex karp在cnbc上宣布了这一合作，他有一段经典karp式发言。 某位嘉宾（可能jcal）： 播放一段karp的片段。 karp（片段播放）： 我们的客户——说他们对前沿实验室（即anthropic、openai等）不满，就像说我被伯克利教职员欢迎一样不可能。他们感到极度不适，信任已经流失。sam和dario，没有什么比私下和dario辩论更有趣了——我不是在贬低他们——但出了大问题。这个国家企业的主流观点是：我要佛系地浪费大量时间在token上，却得不到任何价值，他们还会拿走我的知识产权。当国防部门来找你说“我需要这个应用”时，是由他们来控制模型权重，还是由你来控制？我们真的要把这个国家的战场外包给硅谷的共识吗？这简直是疯了。 jcal： 有人把这段叫“公开神经崩溃”，我们在all in称之为“alex karp的一个普通星期二”。我们在2月份就讨论过，我造了“智能主权（intelligence sovereignty）”这个词。你想把组织里所有秘密、所有知识产权交给sam altman吗？他一年要赚10亿美元才能跟上他的花费。他会构建所有应用。我一直在这里提ai主权：成本低得多，你不会用自己的知识和见解去训练别人的ai。 jcal： 这就是为什么开源模型、开源代理、本地硬件能运行这些模型如此重要，消费者和公司要学会自己运转身语言模型。智能主权和隐私不同。隐私是“你不能看我的照片、不能看我笔记里写的东西”。智能主权是“你不能用你的ai分析我的照片、邮件、消息，然后告诉我该怎么理解世界”。这将是下一个关键问题。 jcal： sacks，你现在在写“长推文时代”。这周你又写了一篇长推文——超过300字——可以上x.com/davidsacks看。我还想听听内部信息，你和这段讨论的关系，以及与政府的关系，我们会在之后的故事中提到。 sacks： jcal，我得给你肯定，你前半段说得完全正确，后半段收益递减，但开头很犀利。我们回到所谓karp在cnbc的“崩溃”——其实根本不是那回事。主流媒体说他是崩溃，这恰恰说明他说了有价值、有洞见的话。karp提出了一个我之前没想透的角度：企业的ai安全到底是什么样。技术客户真正想要的是：控制自己的计算、模型、数据栈和他们的“阿尔法”（即专有知识）。他们想要知道自己拥有“生产资料”，而不是被转移到别人手里。他指出的问题是：这些企业正面临风险——向模型供应商转移自己的知识、诀窍、商业机密、客户数据，而后者可能最终决定和客户直接竞争。 sacks： 就像你说的jcal，企业正在意识到这个威胁，他们很不高兴。karp说得完全正确。我认为这是很有趣的ai安全视角——对企业而言，安全意味着要能控制自己的数据、模型权重和计算。前沿实验室不能吸收你的专有知识、你的“阿尔法”，变成他们的下一个产品。如果你怀疑这会真的发生，看看figma发生了什么。根据《信息报》，anthropic“出其不备地”对他们的商业合作伙伴推出了claude design——这是一个垂直应用，在设计类别竞争。figma的创始人说anthropic没有对他们完全坦诚。anthropic的首席产品官甚至在figma董事会任职，直到claude design发布前三天才辞职。figma显然感到措手不及，股价今年下跌了约50%，而anthropic估值在飙升。 sacks： 这不是孤立事件。anthropic还推出了claude science、claude security、claude legal、claude financial，当然还有claude code。每一个垂直应用都扩张到了之前基于anthropic模型构建的公司所在的类别。如果你回首anthropic收入爆发的时间点——就是从claude code开始的。他们为什么知道要推出这个产品？因为他们看到cursor做得很出色，cursor是他们的最大客户之一。那些客户自己创造了编码助手类别。anthropic说：“嘿，为什么我们不垂直整合？”他们观察价值在哪里创建，然后直接介入。这是一种非常微软式的策略，也可以说是谷歌式的。他们要统治模型层——可以称之为操作系统——然后利用这种垄断地位夺取最有价值的垂直领域。微软拥有windows垄断，然后系统地主导了每一个有利可图的企业软件类别，从电子表格、文字处理开始，最终到了浏览器等等。谷歌在搜索上拥有垄断地位，早期搜索结果是把你带出谷歌网站，他们很自豪能快速送出结果。但逐渐地，他们用这些流量告诉自己在哪里建自己的资产。今天，不到一半的搜索会把用户带出谷歌——你留在谷歌产品上。类似的事情正在anthropic发生。模式很清楚：他们会利用在模型层的主导地位，夺取越来越多有趣且有利可图的地盘。 sacks： 回到alex karp的观点：如果你是企业客户或开发者，为什么你要和他们分享任何专有数据？你是在抵押你的未来、给你的命运画十字、导致公司灾难。还有一点：dario在同时推行这种业务策略时，也在主张开源模型很危险，需要限制。问题是：对谁危险？不是那些希望保留数据控制权的企业——而是对他的业务模式危险。因为他的业务模式需要一个模型层选择不多的环境。所以karp说，如果你要拥有真正的ai安全——作为企业——你必须保留在模型层做选择的能力，决定谁能看到和使用你的“阿尔法”。 chamath： 说得好，sacks。我的公司80/90正在做具体测试——我在推特上分享了。作为80/90的ceo，过去几周我们第一次在具体企业场景中使用开源模型，有一些一手经验。当你开公司时——你们都知道——你不是为了当前这一刻起步，你是在预测：如果发生某些事情，会创造出怎样的场景。因为构建产品和市场验证需要时间。对我来说，这一刻已经到来：所有人都会意识到两件事。第一，我的业务复杂，我想用ai加速，同时要保护自己。第二，我需要灵活性——使用独立的第三方控制平面来获得所有好处，这样不会泄露和埋没我的优势。 chamath： 我把这个叙述用三条推文来说明。第一条：我看到bcg一份很有趣的研究，研究各种企业的roce。资本成本因为长期利率回到8-11%的历史平均。问题是，美国有一半的大公司无法创造超过这个数字的回报。这是一个大问题。还有另一个问题：全球约七分之一公司处于持续的低回报状态（1-5%）。这说明做企业是复杂的，很难，不是所有东西都一直有效。在这个背景下来看sacks说的——有一家带着“魔法盒子”的公司找你说，“告诉我你在做什么，魔法盒子会让一切更好”。但是在暗中，魔法盒子说，“我来决定和你竞争”——这是巨大的风险。现在看到了足够多的案例，必须找别的路径了。 chamath： 第二段推文：一位前meta pm说，有种假设认为你不能用开源模型，因为那全是中国的。她的问题是：“就算它便宜100倍呢？”对方回答：“不行，我们关心安全。”她说：“你难道不明白你可以把开源模型托管在你的gpu上、在美国数据中心里吗？不向任何人回传数据。而你现在——有意或无意地——在把你所有数据送给几个前沿实验室，而不能私有地拥有它。100倍便宜是一个巨大的数字——你却在无意中付这笔钱。”这就是alex karp说的：为什么在有替代方案时还这么做？ chamath： 第三个是我们自己做的：使用我们的软件工厂（一个与模型无关的第三方控制平面）进行测试。任务非常典型：有一段旧代码，想迁移到新框架以便更灵活。我们做了实验：只用claude、用我们+claude、用最好的前沿开源模型、用我们+开源模型。数据很惊人。用我们的工具加上claude，比只用anthropic opus-4便宜1.4倍并快1.5倍。但如果把开源模型包进我们的软件工厂，便宜了16.4倍——尽管慢了3倍（多几小时去节省16.4倍的成本）。 jcal： chamath，慢的问题是因为claude使用的硬件还是？ chamath： 全部都是通过openrouter在传统硬件堆栈上运行。可以进一步优化，但关键是：如果你把sacks和karp的观点和这些实际数据结合起来，一个合理的企业应该问“为什么我不找独立的方式来获取智能，同时不泄露我的优势？”到现在还继续这样做，就变得玩忽职守和不负责任了。当时可以实验，因为你之前不知道。但现在你掌握所有数据，仍然做同样的决策——真的是极其愚蠢。 friedberg： 我是ohalo的ceo，我有大量专有数据。我问你直截了当：你把ohalo的数据信任前沿模型公司吗？还是像我们似乎达成共识的那样——保护数据、保护“皇冠上的明珠”，并使用开源？你是在实验吗？一句话，信任还是不信任？ jcal： 我替friedberg回答。 friedberg： 我来告诉你。anthropic在尝试签约生命科学公司加入他们新的生命科学模型项目。他们联系拥有大量专有数据集的巨头公司，说：“分享你的数据，我们会给你早期访问、一些专属价值，签nda，参与进来。”我几乎和所有人谈过——他们都意识到，这本质上是想把自己的业务商品化。因为你作为一家生命科学公司，你投入了数百亿美元来开展实验和产品开发，产生了所有这些专有数据——这是你组织真正的资产，花了数十亿美元建立起来的资产。把它交给一个模型公司，然后与别人的数据结合起来——你实际上是在把自己的核心差异化资产商品化。所以几乎所有人都在拒绝。 friedberg： 这个演变方向，我觉得和karp在cnbc上说的非常一致。如果我们回溯到两年前，我们都认为会有一种“中心-辐条”模式来发展ai模型和部署。即有一个大型中心，拥有资本优势。那些最多资本的公司（所以大家都募资了成百上千亿美元）训练模型，然后通过大型辐条——大型集群——来提供推理。每个人都在用neoclouds和超大规模云提供商。大家可能还有自己的专有数据层。但大家现在意识到，开发自己的权重和模型更好，要么用开源基础，要么有一些中间商业模式会发展出来。会有几个大型中心做核心基础模型开发；还有中型中心——用于训练集群——企业用来训练和开发自己的专有模型，用自己的数据。然后在推理端会有一个更分布的辐条模式，因为大家也在意识到本地部署的价值——在自己的数据中心或甚至it工具间放一组服务器，建立小型集群，很多企业工作流可以在本地跑。所以模式在转变：从大型中心、大型辐条，到大型中心、中型中心，再加上一个分布的辐条模式。仍然会有neoclouds和超大规模云提供商，但人们也会有自己的推理实例。 friedberg： 每个人都在走这条路。未来几个月都会走这条路，因为他们很快意识到，在一个知识和能力都在被商品化的世界里要竞争，你必须利用自己真正的核心差异化资产——也就是你必须建立自己的模型，你很可能最终也必须运行自己的推理，使用自己的专有模型。" style="--index: 1">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">01</span>
+                    <span class="timeline-meta">00:00-00:23</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>Palantir与NVIDIA合作主权AI：核心讨论</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>Palantir与NVIDIA宣布主权AI合作，为美国政府部门构建独立运行的高性能模型</li>
+<li>嘉宾一致认为，企业客户正担心与前沿模型实验室合作的风险：后者利用客户数据构建竞品</li>
+<li>Sacks提出“企业AI安全”新定义：控制自己的计算、模型、数据栈和专有知识</li>
+<li>Chamath展示开源模型结合80/90软件工厂的实测成本优势（16.4倍）</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>主权AI（Sovereign AI）：政府或企业拥有自己硬件、数据和模型权重的AI基础设施，不依赖第三方模型供应商</li>
+<li>模型权重（Model Weights）：经过训练后神经网络中存储参数的数值，决定了模型的行为能力</li>
+<li>NeMoTron：NVIDIA开发的开放式模型系列</li>
+<li>OpenRouter：一个聚合多家模型API的平台，用户可接入不同模型</li>
+<li>返回资本雇用率（ROCE，Return on Capital Employed）：衡量企业利用资本产生利润能力的指标</li>
+<li>柱层架构（Hub and Spoke）：中心节点负责核心模型训练，外围节点负责部署和推理</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> 欢迎回到全球排名第一的播客，这是你们最爱的播客，也是播客播主最爱的播客——All-In Podcast第279期。今天和我一起的有Friedberg、Sacks、Chamath，老队伍都在。夏天到了我们准备好了，今天是个强力议程、火箭议程。Palantir和NVIDIA宣布了一个主权AI合作，我们已经听说过这个词——Palantir将使用NVIDIA的NeMoTron开源模型构建定制前沿模型，专门服务于美国政府。Palantir把新平台称为“主权AI操作系统”，美国政府机构将拥有硬件、数据、模型权重。Palantir还发布了一个病毒式的推特宣言：数据留存是你的宝藏，转移它你就要自担风险。CEO Alex Karp在CNBC上宣布了这一合作，他有一段经典Karp式发言。</p>
+<p><strong>某位嘉宾（可能JCal）：</strong> 播放一段Karp的片段。</p>
+<p><strong>Karp（片段播放）：</strong> 我们的客户——说他们对前沿实验室（即Anthropic、OpenAI等）不满，就像说我被伯克利教职员欢迎一样不可能。他们感到极度不适，信任已经流失。Sam和Dario，没有什么比私下和Dario辩论更有趣了——我不是在贬低他们——但出了大问题。这个国家企业的主流观点是：我要佛系地浪费大量时间在token上，却得不到任何价值，他们还会拿走我的知识产权。当国防部门来找你说“我需要这个应用”时，是由他们来控制模型权重，还是由你来控制？我们真的要把这个国家的战场外包给硅谷的共识吗？这简直是疯了。</p>
+<p><strong>JCal：</strong> 有人把这段叫“公开神经崩溃”，我们在All In称之为“Alex Karp的一个普通星期二”。我们在2月份就讨论过，我造了“智能主权（intelligence sovereignty）”这个词。你想把组织里所有秘密、所有知识产权交给Sam Altman吗？他一年要赚10亿美元才能跟上他的花费。他会构建所有应用。我一直在这里提AI主权：成本低得多，你不会用自己的知识和见解去训练别人的AI。</p>
+<p><strong>JCal：</strong> 这就是为什么开源模型、开源代理、本地硬件能运行这些模型如此重要，消费者和公司要学会自己运转身语言模型。智能主权和隐私不同。隐私是“你不能看我的照片、不能看我笔记里写的东西”。智能主权是“你不能用你的AI分析我的照片、邮件、消息，然后告诉我该怎么理解世界”。这将是下一个关键问题。</p>
+<p><strong>JCal：</strong> Sacks，你现在在写“长推文时代”。这周你又写了一篇长推文——超过300字——可以上x.com/DavidSacks看。我还想听听内部信息，你和这段讨论的关系，以及与政府的关系，我们会在之后的故事中提到。</p>
+<p><strong>Sacks：</strong> JCal，我得给你肯定，你前半段说得完全正确，后半段收益递减，但开头很犀利。我们回到所谓Karp在CNBC的“崩溃”——其实根本不是那回事。主流媒体说他是崩溃，这恰恰说明他说了有价值、有洞见的话。Karp提出了一个我之前没想透的角度：企业的AI安全到底是什么样。技术客户真正想要的是：控制自己的计算、模型、数据栈和他们的“阿尔法”（即专有知识）。他们想要知道自己拥有“生产资料”，而不是被转移到别人手里。他指出的问题是：这些企业正面临风险——向模型供应商转移自己的知识、诀窍、商业机密、客户数据，而后者可能最终决定和客户直接竞争。</p>
+<p><strong>Sacks：</strong> 就像你说的JCal，企业正在意识到这个威胁，他们很不高兴。Karp说得完全正确。我认为这是很有趣的AI安全视角——对企业而言，安全意味着要能控制自己的数据、模型权重和计算。前沿实验室不能吸收你的专有知识、你的“阿尔法”，变成他们的下一个产品。如果你怀疑这会真的发生，看看Figma发生了什么。根据《信息报》，Anthropic“出其不备地”对他们的商业合作伙伴推出了Claude Design——这是一个垂直应用，在设计类别竞争。Figma的创始人说Anthropic没有对他们完全坦诚。Anthropic的首席产品官甚至在Figma董事会任职，直到Claude Design发布前三天才辞职。Figma显然感到措手不及，股价今年下跌了约50%，而Anthropic估值在飙升。</p>
+<p><strong>Sacks：</strong> 这不是孤立事件。Anthropic还推出了Claude Science、Claude Security、Claude Legal、Claude Financial，当然还有Claude Code。每一个垂直应用都扩张到了之前基于Anthropic模型构建的公司所在的类别。如果你回首Anthropic收入爆发的时间点——就是从Claude Code开始的。他们为什么知道要推出这个产品？因为他们看到Cursor做得很出色，Cursor是他们的最大客户之一。那些客户自己创造了编码助手类别。Anthropic说：“嘿，为什么我们不垂直整合？”他们观察价值在哪里创建，然后直接介入。这是一种非常微软式的策略，也可以说是谷歌式的。他们要统治模型层——可以称之为操作系统——然后利用这种垄断地位夺取最有价值的垂直领域。微软拥有Windows垄断，然后系统地主导了每一个有利可图的企业软件类别，从电子表格、文字处理开始，最终到了浏览器等等。谷歌在搜索上拥有垄断地位，早期搜索结果是把你带出谷歌网站，他们很自豪能快速送出结果。但逐渐地，他们用这些流量告诉自己在哪里建自己的资产。今天，不到一半的搜索会把用户带出谷歌——你留在谷歌产品上。类似的事情正在Anthropic发生。模式很清楚：他们会利用在模型层的主导地位，夺取越来越多有趣且有利可图的地盘。</p>
+<p><strong>Sacks：</strong> 回到Alex Karp的观点：如果你是企业客户或开发者，为什么你要和他们分享任何专有数据？你是在抵押你的未来、给你的命运画十字、导致公司灾难。还有一点：Dario在同时推行这种业务策略时，也在主张开源模型很危险，需要限制。问题是：对谁危险？不是那些希望保留数据控制权的企业——而是对他的业务模式危险。因为他的业务模式需要一个模型层选择不多的环境。所以Karp说，如果你要拥有真正的AI安全——作为企业——你必须保留在模型层做选择的能力，决定谁能看到和使用你的“阿尔法”。</p>
+<p><strong>Chamath：</strong> 说得好，Sacks。我的公司80/90正在做具体测试——我在推特上分享了。作为80/90的CEO，过去几周我们第一次在具体企业场景中使用开源模型，有一些一手经验。当你开公司时——你们都知道——你不是为了当前这一刻起步，你是在预测：如果发生某些事情，会创造出怎样的场景。因为构建产品和市场验证需要时间。对我来说，这一刻已经到来：所有人都会意识到两件事。第一，我的业务复杂，我想用AI加速，同时要保护自己。第二，我需要灵活性——使用独立的第三方控制平面来获得所有好处，这样不会泄露和埋没我的优势。</p>
+<p><strong>Chamath：</strong> 我把这个叙述用三条推文来说明。第一条：我看到BCG一份很有趣的研究，研究各种企业的ROCE。资本成本因为长期利率回到8-11%的历史平均。问题是，美国有一半的大公司无法创造超过这个数字的回报。这是一个大问题。还有另一个问题：全球约七分之一公司处于持续的低回报状态（1-5%）。这说明做企业是复杂的，很难，不是所有东西都一直有效。在这个背景下来看Sacks说的——有一家带着“魔法盒子”的公司找你说，“告诉我你在做什么，魔法盒子会让一切更好”。但是在暗中，魔法盒子说，“我来决定和你竞争”——这是巨大的风险。现在看到了足够多的案例，必须找别的路径了。</p>
+<p><strong>Chamath：</strong> 第二段推文：一位前Meta PM说，有种假设认为你不能用开源模型，因为那全是中国的。她的问题是：“就算它便宜100倍呢？”对方回答：“不行，我们关心安全。”她说：“你难道不明白你可以把开源模型托管在你的GPU上、在美国数据中心里吗？不向任何人回传数据。而你现在——有意或无意地——在把你所有数据送给几个前沿实验室，而不能私有地拥有它。100倍便宜是一个巨大的数字——你却在无意中付这笔钱。”这就是Alex Karp说的：为什么在有替代方案时还这么做？</p>
+<p><strong>Chamath：</strong> 第三个是我们自己做的：使用我们的软件工厂（一个与模型无关的第三方控制平面）进行测试。任务非常典型：有一段旧代码，想迁移到新框架以便更灵活。我们做了实验：只用Claude、用我们+Claude、用最好的前沿开源模型、用我们+开源模型。数据很惊人。用我们的工具加上Claude，比只用Anthropic Opus-4便宜1.4倍并快1.5倍。但如果把开源模型包进我们的软件工厂，便宜了16.4倍——尽管慢了3倍（多几小时去节省16.4倍的成本）。</p>
+<p><strong>JCal：</strong> Chamath，慢的问题是因为Claude使用的硬件还是？</p>
+<p><strong>Chamath：</strong> 全部都是通过OpenRouter在传统硬件堆栈上运行。可以进一步优化，但关键是：如果你把Sacks和Karp的观点和这些实际数据结合起来，一个合理的企业应该问“为什么我不找独立的方式来获取智能，同时不泄露我的优势？”到现在还继续这样做，就变得玩忽职守和不负责任了。当时可以实验，因为你之前不知道。但现在你掌握所有数据，仍然做同样的决策——真的是极其愚蠢。</p>
+<p><strong>Friedberg：</strong> 我是Ohalo的CEO，我有大量专有数据。我问你直截了当：你把Ohalo的数据信任前沿模型公司吗？还是像我们似乎达成共识的那样——保护数据、保护“皇冠上的明珠”，并使用开源？你是在实验吗？一句话，信任还是不信任？</p>
+<p><strong>JCal：</strong> 我替Friedberg回答。</p>
+<p><strong>Friedberg：</strong> 我来告诉你。Anthropic在尝试签约生命科学公司加入他们新的生命科学模型项目。他们联系拥有大量专有数据集的巨头公司，说：“分享你的数据，我们会给你早期访问、一些专属价值，签NDA，参与进来。”我几乎和所有人谈过——他们都意识到，这本质上是想把自己的业务商品化。因为你作为一家生命科学公司，你投入了数百亿美元来开展实验和产品开发，产生了所有这些专有数据——这是你组织真正的资产，花了数十亿美元建立起来的资产。把它交给一个模型公司，然后与别人的数据结合起来——你实际上是在把自己的核心差异化资产商品化。所以几乎所有人都在拒绝。</p>
+<p><strong>Friedberg：</strong> 这个演变方向，我觉得和Karp在CNBC上说的非常一致。如果我们回溯到两年前，我们都认为会有一种“中心-辐条”模式来发展AI模型和部署。即有一个大型中心，拥有资本优势。那些最多资本的公司（所以大家都募资了成百上千亿美元）训练模型，然后通过大型辐条——大型集群——来提供推理。每个人都在用Neoclouds和超大规模云提供商。大家可能还有自己的专有数据层。但大家现在意识到，开发自己的权重和模型更好，要么用开源基础，要么有一些中间商业模式会发展出来。会有几个大型中心做核心基础模型开发；还有中型中心——用于训练集群——企业用来训练和开发自己的专有模型，用自己的数据。然后在推理端会有一个更分布的辐条模式，因为大家也在意识到本地部署的价值——在自己的数据中心或甚至IT工具间放一组服务器，建立小型集群，很多企业工作流可以在本地跑。所以模式在转变：从大型中心、大型辐条，到大型中心、中型中心，再加上一个分布的辐条模式。仍然会有Neoclouds和超大规模云提供商，但人们也会有自己的推理实例。</p>
+<p><strong>Friedberg：</strong> 每个人都在走这条路。未来几个月都会走这条路，因为他们很快意识到，在一个知识和能力都在被商品化的世界里要竞争，你必须利用自己真正的核心差异化资产——也就是你必须建立自己的模型，你很可能最终也必须运行自己的推理，使用自己的专有模型。</p></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="00:23-00:35 ai和就业：数据驱动的叙事之争 本段核心内容： 本集嘉宾就ai是否导致失业展开激烈辩论 sacks引用ramp/revelio labs研究：高ai采用率企业两年内员工总数增长约10%，初级岗位增长12% jcal强调“岗位转移（displacement）而非岗位流失（job loss）”，认为部分工种将被ai自动替换 jcal预言：顾客服务、数据录入、翻译甚至出租车司机等工作将被替代；sacks和friedberg认为目前没有数据支持这一论点 关键术语： “向后衰退”：一种辩论策略，面对缺乏现实数据的批评时，将主张转向“未来才会发生” “岗位转移”（job displacement）：某个工种消失，但整体就业可能受益于其他新创造的岗位 “loop中有人的价值”：在ai和自动化运行的背景下，人类参与的增值价值 详细中文整理： jcal： 我说一下，微软的例子已经够明显了。如果你跟随我们之前谈到的，lotus 1-2-3、wordperfect曾是伙伴，但是他们被excel替代，被microsoft word替代。你大概都不知道wordperfect、wordstar、lotus 1-2-3、visicalc了。这是他们不得不做的：一个万亿美元市值的公司，必须赢应用层。sam altman去y combinator说，我会给你们200万美元的免费token。我表态过，完全不带个人因素：sam是一个极度激进的交易员，他想获得这些初创公司的数据，因为他亲自运营过yc，知道如果能拿到这些创始人对未来的最新想法，就能加入到平台中。没有免费午餐；当sam altman来找你说“这里有一些免费token”，你的警报要响。zuckerberg也做过同样的事：他说“我给你们访问权限、我给钱”，来facebook平台。80年代和微软、2000年代和facebook、2020年代和sam altman结成伙伴的人，没有一个是醒来时喉咙没被割断的。给创始人的消息：如果你和这些人中的任何一个合作，他们会割断你的喉咙并拿走你的整个业务。没有讨论余地。不要信任他们。用你自己的模型。 chamath： 我倒是没有那么针对openai。openai收入来源的多样性，特别是消费者业务，可能是它的救星。单从相对价值来看，现在openai的股权比anthropic的股权定价更合理。不是因为模型质量或团队（都是顶级团队），而是因为openai可以依赖一个相当健康的消费者业务。 jcal： 对。 chamath： anthropic会面临的困难是——sacks说的是事实：他们已经在根本信任上失守，不能被相信会待在自己的沙盒里。如果你一直展示“先学习、然后试图破坏宿主”的趋势，你最终会被边缘化、被围困，人们会找到办法绕开你。我把我对开源模型测试的推文发给一个知名行业人，他说：“如果你在控制平面收集的所有遥测数据上再做一些后期训练，我敢说它会变得和mythos一样好。”我想，如果是真的，我就拿glm（开源模型），完全控制它——在美国本地硬件上，只有美国公民可以碰它。这才是最显而易见的事情，而且便宜得多。 jcal： 完全正确。我补充一句：如果你走到这一步——开始自己处理——你最终一定会“fork”这些模型，构建你自己的。最终状态是：本地、在自己的硬件上。不要相信任何人，因为风险太高。你不能拿整个企业冒险。你需要成为先锋的一部分、开始投资这条路。你会“减速加速”——用本地模型会慢下来，但那是为了加速。不管你用80/90、abacus还是其他方案，你必须有ai主权、必须智能主权，否则你就把企业送给了竞争对手。 jcal： 唯一在规模上真正尊重开发者社区的公司是apple。apple在建立app store业务时非常策略性地希望支持开发者，并且他们明确说：如果你做的是一个显而易见在几周内可以建出来的东西，它最终可能会进入基础app集合。你iphone的stock应用、notepad应用极其基础。但如果看robinhood或google finance，只有更高级的功能开发；notepad花费了10年才加上evernote七八年前就有的功能。apple有目的地让它们简单，不干扰他们的生态系统，因为他们想抽30%的税。这是你的选择。但这里没有30%税收等价物——anthropic没有、openai也没有。 chamath： apple是在出租分发渠道。这里出租的是智能和判断力。所以你无法从这里出租智能、又从同一个地方出租给你的竞争对手。 某位嘉宾： 对。 chamath： 你不能。这样做太蠢了。它会溢出，越过墙。最终导致你和你竞争对手变得一模一样——那为什么你要做这件事？回到bcg发现的那些——如此多的公司已经在悬崖边上，无法为投入的资本产生足够的回报。为什么你要花这么多钱，最终得到和竞争对手一模一样的答案？ jcal： 这不是一个选择。而sacks，这里要看到技术的通缩性质——这些工具越来越便宜，token越来越便宜。nvidia在其中扮演什么角色？他们有nemotron。你用perplexity的话可以下拉选择，有deep thinking。你不会发现jensen huang的开源llm和claude在95%的搜索中有区别，我保证。为什么nvidia和jensen“低调”了他们的开源模型，直到现在？因为他的顶级客户非常担心他们在开源模型上的巨大进展——我没发现。但在openai宣布自己做芯片、anthropic开始做芯片、amd与这两家都成功合作、elon说要做自己的fab之后——nvidia摘下了手套。他们现在要拥有整个堆栈，并且要大谈开源。所以sacks，你可以解释一下nvidia现在愿意谈论他们的开源项目的表现吗？ sacks： 一部分原因是他们需要时间让这个方案更有竞争力。他们面对的是很优秀的ai实验室。现在的问题是为什么nvidia和palantir要合作——他们为什么是自然伙伴？让我解释下。如果思考ai堆栈，从最基础分三层：芯片、模型、应用。现在中间层——模型层——有两个主导者，anthropic和openai。据我们所知，anthropic有约600多亿美元arr（年化收入），openai约400多亿美元arr。看起来没有其他人在模型层产生可观的收入。所以我们有了一个新兴双头垄断（duopoly）。anthropic在推监管议程，可能打算在监管层面把这个双头垄断锁死，因为他们推动安全议程——dario明确说这些模型不安全，你得不到。所以市场生产双头垄断，政府可能不是去打破，而是要去强化它。所以在模型层你有这个状况。 jcal： 对。 sacks： 那么如果你是应用层——如palantir——或者芯片层公司，你最不想要的就是单一主导的模型层。你希望模型层有竞争。为什么？因为如果你做应用，你不想受某一个模型供应商的制约，你需要选择。如果你做企业，你不想把专有知识都给出去。如果你做芯片，你不想只有一个或两个买家——他们在生产自己的芯片时尤其如此。你希望有一个多元健康的生态系统。如果企业都使用开放模型，那是最理想的——因为会出现大量买家。所以整个生态系统——芯片公司、开发者、应用程序、企业——都有动机让模型层保持竞争。 某位嘉宾： 100%。 sacks： 唯一不希望如此的是anthropic和openai——因为他们显然想主导，成为一个双头垄断。我的观点是：如果你在我们的体系中以合法方式获得垄断，我们不会像反垄断一样禁止它（反的是非法反竞争策略）。如果你凭卓越表现合法获得垄断，我不会对你国有化或宣布违法。但政府绝不应该做任何让垄断或双头垄断更可能的事情——他们应该加大这些公司采用垄断策略的难度，尽力让模型层保持竞争。因为竞争带来最好的结果，有利于生态系统，保障我们的公民自由和消费者选择。 jcal： 而且对定价会是惊人的。想想这个竞争会做什么。你在华盛顿dc期间，很直言不讳：我们要一个公平赛场、我们要看到大规模竞争。我肯定你做了很好的铺垫，为2026年和2027年向前推进——让人们竞争。token价格会每年下降90%，接下来三年，你将能以1,000倍的数量购买更智能的token，因为会有免费的选择。很多都可能接近免费。 friedberg： 企业也会部署自己的硬件。这不只是neocloud和超大规模服务商的问题，企业自己也会有购买狂潮。当你这样做，做简单的数学，你不想依赖服务器可用性和云中断。你不想把模型放在第三方云，你想以更便宜的方式运行。很多人都在这样做了——我ohalo在工作流中也是一样——意识到可以在自己办公室里的一台机器上运行这些开源模型的工作流，何必把钱发回一些花哨的、可扩展的云服务商？ chamath： 你说得对。这个行业花了那么多年劝大家都搬到云上。在智能时代，也许共享基础设施这个主意不是最好的。 friedberg： 所以我说的分布辐条模式——不会是全部或没有。最终可能会是70-20-10的方式：70%大型云、20%本地、10%尝试其他云。你不会再像历史上那样做。你会很快意识到“浪费token是可以的”——让你的员工做出那些烧几十亿token却只持续几周的愚蠢应用——只要是在自己的硬件上运行，你只需要付办公室的电费it费。 jcal： 这就是我一年来一直在说的——大家都发现这一点了…… 某位嘉宾： 是的，就像，我用糖让孩子安静下来——没问题。 jcal： 你们有没有发现，过去三天，别人也开始想建立自己的锁定？微软刚宣布25亿美元的投入来建立forward deployed engineers部门。亚马逊投入10亿美元。tesla有，openai有。 某位嘉宾： “forward deployed engineers”是为听众解释——前部署工程师。 jcal： 当这些公司来敲门——chamath——他们是来敲门的，说“我能派工程师来研究你的业务，放进我的模型里”。人们会狠狠关门，就像看到耶和华见证人传教：“不，我不想成为你那个邪教的一部分，我要自己拥有。”这就是我一直说的。 jcal： 让我快速说一点然后交给你。在我谈到用本地硬件时——现在有hermes和一些其他产品——你组织中每个人都会有一台mac studio或dell，大量ram。你会花1万-2万美元每人为每个员工部署本地计算，让他们token穷尽到“retard-max”级别。谁在乎他们在本地电脑上做什么？让他们跑。你还会给他们一台连接到这台的笔记本电脑，用来同步和控制。这将会是每个员工的个人服务器。每个人都在一直训练自己的语言模型，处理工作，全本地，不发生数据泄露。friedberg，你给最后一个总结。 friedberg： 这揭示了一件事：并不存在“黄油滑梯”到失业。所有人都意识到了。我想知道“黄油”的说法是从哪来的——但是，两年前大家脑中的那个叙述——媒体是绝不会反转的。我已经意识到重要性——如果你作为一名记者，写了某种故事说某件事正在发生、将会发生——当叙事改变，你自己的信誉就毁了。你永远不能放下那个叙事。我们现在见证的就是这种问题：即使所有数据出来，即使企业使用ai的重组方式在所有地方显现，它表明他们不会简单地削减成本——而是会增长收入，虽然是以一种笨拙的方式，不是一夜之间。 friedberg： 没有通往失业和虚无主义的光滑滑坡。所有人都会醒过来说：“等等，我以为我生活在现实中的世界，其实不是我生活的现实。我们现实的世界中，ai是笨拙的，需要一些集成组装，比我们想象中更复杂。它肯定能提供价值，但不是关于关掉所有工作、让天才ai解决我的一切企业问题、在没有人类的情况下无限扩展。”这是重要的叙述转变。而媒体不会接受他们的叙述是错的。因为他们一旦需要承认他们关于失业的讨论错了——顺便说一下，他们做出这些宣言因为这样可以介入并控制ai，推动他们的社会主义体系——但如果他们进来说“数据与叙述不符”，信誉就毁了。所以他们会加倍下注。我要告诉所有人：操数据——没有ai相关的失业。这是对世界的绝对骗局，说ai在抢走工作、在破坏工作。它是笨拙的，有价值的，需要一些时间，会创造远多于它摧毁的工作。 jcal： 我们是一群猴子，被给了新工具，我们会用新工具解决更多问题。会有岗位转移（job displacement），但问题是很多人不理解这两个术语的细微差别。某些角色会被淘汰，它们会比你想象中更快地淘汰。但其他角色会出现。chamath你指出过，这是最有力量的工具。 chamath： jason，什么工作在消失？ jcal： 我只是说——部分会走，比你想象的快。 chamath： 你说“某些会比你想象的更快消失”——具体是什么？因为我还没看到明确的类别。 jcal： 顾客服务岗位。将很快消失。 chamath： 哪里？ jcal： 我看到了，在企业中不断。 chamath： 你看的哪个顾客服务企业关闭了？给我看看！它在房间里吗？哪里？ jcal： 我会做研究给你。 chamath： 我们之前有过这个辩论。你邀请我发问，让我回答完。顾客服务岗位会消失，因为消费者更喜欢与ai交谈，ai做到完美。数据录入、业务流程外包的初级岗位会消失。出租车司机这种也会消失。这些都是明显的低挂果实。就像我们之前打字池和信使消失一样——因为每个桌面都有文字处理器。那些岗位将被替换，数量百万计的岗位。 chamath： 我们已经在“出租车司机消失”上进入了第20年。uber出来时，所有人说司机工作会消失。 jcal： waymo卡在3000辆车，tesla卡在30辆——但在不久的将来会改变。 chamath： 你现在说的一切都是“前景”。你仍在展望未来。每次我们翻开一页，就是“等等，这还没发生”。 jcal： 那你的前提是自动驾驶不会消除出租车司机？是这个前提吗？ chamath： 我认为它会实现，但…… jcal： 你认为它会消除吗？你现在在争论说我错了——但你同意这会发生。 chamath： 我每天进车里让它开，然后在手机上工作。但你认为城市里的出租车不会变成自动驾驶？zipline不会跨境递送？ jcal： 你又做那个“马丁·贝利”的辩论技巧。不是“马丁·贝利”，我从投资中看到了。我有一家公司autolane正在做。 某位嘉宾： 但回到顾客服务——你一直在说。 jcal： 我唯一的主张是“岗位转移（displacement）而不是岗位流失（job loss）”。 friedberg： 是，是。每次别人反驳你时说“现在没有数据支持这个论点”，你说你谈的未来。好，这是个预言。现在没有数据支持。可以。但你说这会在未来发生。 jcal： 不不，我会给你数据点。你可以忽略它。可以。如果你和uber及waymo在waymo已经在的城市沟通，那里超过200辆车，他们会说已经停止招聘司机。司机数量要么持平要么在减少。所以这是绝对的证据表明这正在发生，而且推广会很快。这不是未来预言。对waymo ceo、lyft和uber的ceo可以直接问——他们会告诉你。 某位嘉宾： 那是冷营销。waymo有营销。 jcal： 你采访dara，他说工作正在增长。是的，因为他们配送多了，生产力提高带来更多配送，所以人开了更多的车。 某位嘉宾： 100%在骗人。 jcal： 不——上次我们采访他时，他说工作正在增长。 某位嘉宾： 在waymo已经规模化的市场中，司机人数下降。这是个事实。 jcal： 你在某些狭义的、任意定义的部分说持平。而dara告诉我们公司在面对这些趋势时招聘成本上升了。不，你错了。我们不同方式地同意。 friedberg： 我能提供一些实际数据吗？ramp和revelio labs合作刚发布新研究。覆盖21,000家美国公司，看他们的薪资数据和他们花在ai上的钱。 某位嘉宾： 太好了。 friedberg： 花最多钱在ai上的公司增长最快——在采用ai后的2年内，员工总数增加约10%。初级员工增长甚至更快：12%。所以关于初级会被消灭不成立。企业采纳越多ai，招越多的人。这是一种相关关系。并非因果，但这是相关。非高ai采用率的公司，要么没有用ai要么低采纳率，员工人数持平。所以没有数据支持ai正在导致失业的论点。 jcal： 岗位转移会发生的。工作会因ai增加、主权增加，人们赚更多钱。企业会更有利润。但有些工作岗位会被淘汰。如果你看翻译、电话接线员、收账员、waymo司机——这些简单任务正在被自动化。我为什么知道？因为我投资于融了好几亿美元来做ai替代这些工作的初创公司。我们有构建完美飞行员、完美司机、完美客服的团队。这是ai的重点。每一个ai公司的销售话术就是“替换那些不好工作”。没有人类会在亚马逊分拣包裹。这不会发生。所有那些工厂岗位正在被替换。elon明确在做optimus为此目的。当我说“将会发生”，我一直说是“未来发生”sacks。你不能用你愚蠢的辩论技巧说我用了疯狂的说法。这正在我们说话时发生。我们浸泡其中，这是过渡期。 chamath： 在80/90经营的每个环境中，我不记得有客户做过裁员。一个都没有。 friedberg： 在这份ramp研究中，他们写道：“收益是逐渐出现的，并且广泛分布在工程、销售、行政和客户服务等角色中。”所以他们没有看到某一类岗位被消灭的证据。当然未来可能发生，我们谁也不能说准。但如果你找现在的数据，我们还没看到。 chamath： 我认为会有一个强的人类“阿尔法”。就像自动售货机来了，但没有让调酒师消失——我喜欢到酒吧和调酒师聊天，他做一杯好酒。这些调酒师现在赚的比20年前多得多。也许自动售货替换模型在那种情况下不对。但我相信未来人类互动会有很高溢价，当越来越多东西被自动化，我可能会特意去拉斯维加斯想要一位真司机，而不是用waymo。我想要一个优秀的司机，一辆好车带我去吃晚饭。纽约市也一样。我不一定想用waymo。我想要一个可以做那些本来可以被自动化的事的人，我会付大价钱。我可以坐按摩椅，为什么我要付200美元一小时让人给我按摩？人类是有“阿尔法”价值的。 一位嘉宾： 这段可以剪掉。但确实、人类有溢价。 chamath： 人类在loop中将是溢价，所有人都将在接下来一年半意识到loop里有个人的重要性。即使ai和自动化正在工作——人在loop会更有价值，你将为loop里有人付溢价。 jcal： 你记得一年前klarna说要用ai取代整个客户服务部门？他们大做宣传，高峰光环营销。然后一年后反转：他们说从品牌角度看，向客户确保“如果你想要，总有一个真人”至关重要。 friedberg： 有这么多ceo想利用媒体的叙事周期。只要媒体抓住一个叙事，这么多ceo——不像karp——没有原创想法、没什么重要的事要说。所以他们能获得知名度的唯一方式就是蹭上那个新闻周期，说他们即将做疯狂的事——像“把整个客户支持部门消灭”之类的。然后一看，完全造假。 friedberg： ramp数据方向准确。根据我们的经验，我也同意：使用ai的公司往往增长更快、招更多人。 某位嘉宾： 他们赚更多钱。100%。 某位嘉宾： 是的。 某位嘉宾： 我也完全同意这个。 某位嘉宾： 从职业角度看，我不想做初级客户支持——如果你只做“我忘了密码”回复，这不是个好位置。但这些工作很久之前就已经被外包到菲律宾等地了。大多数企业在做的根本不是level 0/1的在美国国内。他们做level 2/3，处理升级、更有价值的事——这更难被ai取代。我倒有点担心其他一些国家，正在做超级初级工作的那些——这可能会导致他们大规模失业。但在美国可能不是特别大规模。 chamath： 对对——那是风险所在。坦率地说，不是在美国。 jcal： 也许我们正接近一致——岗位转移 vs 岗位流失。下面是brett adcock分享的figure在做的事：他们做了一个8小时挑战，用机器人分拣包裹，做了200小时。今天就是最差的情况——它会越来越好。我和elon一起相处过，看过optimus，可以说optimus比figure做的更好。当贝佐斯和andy jassy在amazon工厂释放optimus——它将消除所有的——让我明确——每一个包裹分拣、每个包裹投递在10年内不会由人类进行。今天正在开始。就像一些消费电子工厂里手工组装逐渐消失一样。我对sachs说的很赞同：其他国家会先经历。在美国，知识工作者、创业精神——我们会看到初创公司的寒武纪大爆发，意味着我们就是受益者。但如果你看那些其他国家——他们会首当其冲。我们在这边可能只会看司机——那也是500到1000万人。就像我们看到收银员一样。 一位嘉宾： 我们有些同意有些不同意的部分。 chamath： 等等，我刚去了麦当劳，从屏幕下单。零……你点了什么？ jcal： 我点的是“家常汉堡”，他们正在测试类似in-n-out的。味道不错。但重点是自动化——那里没有收银员、没有人类，也没有任何机器人。amazon仓库已经有大量自动化。fedex打包分拣中心全是传送带、用机器人推和引导。但那是人形机器人？不是。已经有非常多的自动化了。 jcal： 但最后1米部分——optimus走出特斯拉自动驾驶车、走到你的门廊、敲你的门、把包裹放在你的前门台阶——当这发生时将会非常惊人。 一位嘉宾： 那会导致繁荣——想想建房子。你知道建一个房子要多久？几年。 某位嘉宾： 3年。对，很多年。 一位嘉宾： 在china，一天。 jcal： 但想象如果有20个人和50个机器人的建筑队——人类要告诉机器做什么，作为监督。这还需要很久时间才能让机器人做超级高技能的工作。但它们可以被分配任务、完成更多。所以也许只用一年建一个房子，而不是两三年——那就是我们住房问题的解决方案。 某位嘉宾： 100%。" style="--index: 2">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">02</span>
+                    <span class="timeline-meta">00:23-00:35</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>AI和就业：数据驱动的叙事之争</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>本集嘉宾就AI是否导致失业展开激烈辩论</li>
+<li>Sacks引用Ramp/Revelio Labs研究：高AI采用率企业两年内员工总数增长约10%，初级岗位增长12%</li>
+<li>JCal强调“岗位转移（displacement）而非岗位流失（job loss）”，认为部分工种将被AI自动替换</li>
+<li>JCal预言：顾客服务、数据录入、翻译甚至出租车司机等工作将被替代；Sacks和Friedberg认为目前没有数据支持这一论点</li>
+</ul>
+<h4>关键术语</h4>
+<ul>
+<li>“向后衰退”：一种辩论策略，面对缺乏现实数据的批评时，将主张转向“未来才会发生”</li>
+<li>“岗位转移”（Job displacement）：某个工种消失，但整体就业可能受益于其他新创造的岗位</li>
+<li>“Loop中有人的价值”：在AI和自动化运行的背景下，人类参与的增值价值</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> 我说一下，微软的例子已经够明显了。如果你跟随我们之前谈到的，Lotus 1-2-3、WordPerfect曾是伙伴，但是他们被Excel替代，被Microsoft Word替代。你大概都不知道WordPerfect、WordStar、Lotus 1-2-3、VisiCalc了。这是他们不得不做的：一个万亿美元市值的公司，必须赢应用层。Sam Altman去Y Combinator说，我会给你们200万美元的免费token。我表态过，完全不带个人因素：Sam是一个极度激进的交易员，他想获得这些初创公司的数据，因为他亲自运营过YC，知道如果能拿到这些创始人对未来的最新想法，就能加入到平台中。没有免费午餐；当Sam Altman来找你说“这里有一些免费token”，你的警报要响。Zuckerberg也做过同样的事：他说“我给你们访问权限、我给钱”，来Facebook平台。80年代和微软、2000年代和Facebook、2020年代和Sam Altman结成伙伴的人，没有一个是醒来时喉咙没被割断的。给创始人的消息：如果你和这些人中的任何一个合作，他们会割断你的喉咙并拿走你的整个业务。没有讨论余地。不要信任他们。用你自己的模型。</p>
+<p><strong>Chamath：</strong> 我倒是没有那么针对OpenAI。OpenAI收入来源的多样性，特别是消费者业务，可能是它的救星。单从相对价值来看，现在OpenAI的股权比Anthropic的股权定价更合理。不是因为模型质量或团队（都是顶级团队），而是因为OpenAI可以依赖一个相当健康的消费者业务。</p>
+<p><strong>JCal：</strong> 对。</p>
+<p><strong>Chamath：</strong> Anthropic会面临的困难是——Sacks说的是事实：他们已经在根本信任上失守，不能被相信会待在自己的沙盒里。如果你一直展示“先学习、然后试图破坏宿主”的趋势，你最终会被边缘化、被围困，人们会找到办法绕开你。我把我对开源模型测试的推文发给一个知名行业人，他说：“如果你在控制平面收集的所有遥测数据上再做一些后期训练，我敢说它会变得和Mythos一样好。”我想，如果是真的，我就拿GLM（开源模型），完全控制它——在美国本地硬件上，只有美国公民可以碰它。这才是最显而易见的事情，而且便宜得多。</p>
+<p><strong>JCal：</strong> 完全正确。我补充一句：如果你走到这一步——开始自己处理——你最终一定会“fork”这些模型，构建你自己的。最终状态是：本地、在自己的硬件上。不要相信任何人，因为风险太高。你不能拿整个企业冒险。你需要成为先锋的一部分、开始投资这条路。你会“减速加速”——用本地模型会慢下来，但那是为了加速。不管你用80/90、Abacus还是其他方案，你必须有AI主权、必须智能主权，否则你就把企业送给了竞争对手。</p>
+<p><strong>JCal：</strong> 唯一在规模上真正尊重开发者社区的公司是Apple。Apple在建立App Store业务时非常策略性地希望支持开发者，并且他们明确说：如果你做的是一个显而易见在几周内可以建出来的东西，它最终可能会进入基础App集合。你iPhone的Stock应用、Notepad应用极其基础。但如果看Robinhood或Google Finance，只有更高级的功能开发；Notepad花费了10年才加上Evernote七八年前就有的功能。Apple有目的地让它们简单，不干扰他们的生态系统，因为他们想抽30%的税。这是你的选择。但这里没有30%税收等价物——Anthropic没有、OpenAI也没有。</p>
+<p><strong>Chamath：</strong> Apple是在出租分发渠道。这里出租的是智能和判断力。所以你无法从这里出租智能、又从同一个地方出租给你的竞争对手。</p>
+<p><strong>某位嘉宾：</strong> 对。</p>
+<p><strong>Chamath：</strong> 你不能。这样做太蠢了。它会溢出，越过墙。最终导致你和你竞争对手变得一模一样——那为什么你要做这件事？回到BCG发现的那些——如此多的公司已经在悬崖边上，无法为投入的资本产生足够的回报。为什么你要花这么多钱，最终得到和竞争对手一模一样的答案？</p>
+<p><strong>JCal：</strong> 这不是一个选择。而Sacks，这里要看到技术的通缩性质——这些工具越来越便宜，token越来越便宜。NVIDIA在其中扮演什么角色？他们有NeMoTron。你用Perplexity的话可以下拉选择，有deep thinking。你不会发现Jensen Huang的开源LLM和Claude在95%的搜索中有区别，我保证。为什么NVIDIA和Jensen“低调”了他们的开源模型，直到现在？因为他的顶级客户非常担心他们在开源模型上的巨大进展——我没发现。但在OpenAI宣布自己做芯片、Anthropic开始做芯片、AMD与这两家都成功合作、Elon说要做自己的fab之后——NVIDIA摘下了手套。他们现在要拥有整个堆栈，并且要大谈开源。所以Sacks，你可以解释一下NVIDIA现在愿意谈论他们的开源项目的表现吗？</p>
+<p><strong>Sacks：</strong> 一部分原因是他们需要时间让这个方案更有竞争力。他们面对的是很优秀的AI实验室。现在的问题是为什么NVIDIA和Palantir要合作——他们为什么是自然伙伴？让我解释下。如果思考AI堆栈，从最基础分三层：芯片、模型、应用。现在中间层——模型层——有两个主导者，Anthropic和OpenAI。据我们所知，Anthropic有约600多亿美元ARR（年化收入），OpenAI约400多亿美元ARR。看起来没有其他人在模型层产生可观的收入。所以我们有了一个新兴双头垄断（duopoly）。Anthropic在推监管议程，可能打算在监管层面把这个双头垄断锁死，因为他们推动安全议程——Dario明确说这些模型不安全，你得不到。所以市场生产双头垄断，政府可能不是去打破，而是要去强化它。所以在模型层你有这个状况。</p>
+<p><strong>JCal：</strong> 对。</p>
+<p><strong>Sacks：</strong> 那么如果你是应用层——如Palantir——或者芯片层公司，你最不想要的就是单一主导的模型层。你希望模型层有竞争。为什么？因为如果你做应用，你不想受某一个模型供应商的制约，你需要选择。如果你做企业，你不想把专有知识都给出去。如果你做芯片，你不想只有一个或两个买家——他们在生产自己的芯片时尤其如此。你希望有一个多元健康的生态系统。如果企业都使用开放模型，那是最理想的——因为会出现大量买家。所以整个生态系统——芯片公司、开发者、应用程序、企业——都有动机让模型层保持竞争。</p>
+<p><strong>某位嘉宾：</strong> 100%。</p>
+<p><strong>Sacks：</strong> 唯一不希望如此的是Anthropic和OpenAI——因为他们显然想主导，成为一个双头垄断。我的观点是：如果你在我们的体系中以合法方式获得垄断，我们不会像反垄断一样禁止它（反的是非法反竞争策略）。如果你凭卓越表现合法获得垄断，我不会对你国有化或宣布违法。但政府绝不应该做任何让垄断或双头垄断更可能的事情——他们应该加大这些公司采用垄断策略的难度，尽力让模型层保持竞争。因为竞争带来最好的结果，有利于生态系统，保障我们的公民自由和消费者选择。</p>
+<p><strong>JCal：</strong> 而且对定价会是惊人的。想想这个竞争会做什么。你在华盛顿DC期间，很直言不讳：我们要一个公平赛场、我们要看到大规模竞争。我肯定你做了很好的铺垫，为2026年和2027年向前推进——让人们竞争。token价格会每年下降90%，接下来三年，你将能以1,000倍的数量购买更智能的token，因为会有免费的选择。很多都可能接近免费。</p>
+<p><strong>Friedberg：</strong> 企业也会部署自己的硬件。这不只是Neocloud和超大规模服务商的问题，企业自己也会有购买狂潮。当你这样做，做简单的数学，你不想依赖服务器可用性和云中断。你不想把模型放在第三方云，你想以更便宜的方式运行。很多人都在这样做了——我Ohalo在工作流中也是一样——意识到可以在自己办公室里的一台机器上运行这些开源模型的工作流，何必把钱发回一些花哨的、可扩展的云服务商？</p>
+<p><strong>Chamath：</strong> 你说得对。这个行业花了那么多年劝大家都搬到云上。在智能时代，也许共享基础设施这个主意不是最好的。</p>
+<p><strong>Friedberg：</strong> 所以我说的分布辐条模式——不会是全部或没有。最终可能会是70-20-10的方式：70%大型云、20%本地、10%尝试其他云。你不会再像历史上那样做。你会很快意识到“浪费token是可以的”——让你的员工做出那些烧几十亿token却只持续几周的愚蠢应用——只要是在自己的硬件上运行，你只需要付办公室的电费IT费。</p>
+<p><strong>JCal：</strong> 这就是我一年来一直在说的——大家都发现这一点了……</p>
+<p><strong>某位嘉宾：</strong> 是的，就像，我用糖让孩子安静下来——没问题。</p>
+<p><strong>JCal：</strong> 你们有没有发现，过去三天，别人也开始想建立自己的锁定？微软刚宣布25亿美元的投入来建立Forward Deployed Engineers部门。亚马逊投入10亿美元。Tesla有，OpenAI有。</p>
+<p><strong>某位嘉宾：</strong> “Forward Deployed Engineers”是为听众解释——前部署工程师。</p>
+<p><strong>JCal：</strong> 当这些公司来敲门——Chamath——他们是来敲门的，说“我能派工程师来研究你的业务，放进我的模型里”。人们会狠狠关门，就像看到耶和华见证人传教：“不，我不想成为你那个邪教的一部分，我要自己拥有。”这就是我一直说的。</p>
+<p><strong>JCal：</strong> 让我快速说一点然后交给你。在我谈到用本地硬件时——现在有Hermes和一些其他产品——你组织中每个人都会有一台Mac Studio或Dell，大量RAM。你会花1万-2万美元每人为每个员工部署本地计算，让他们token穷尽到“retard-max”级别。谁在乎他们在本地电脑上做什么？让他们跑。你还会给他们一台连接到这台的笔记本电脑，用来同步和控制。这将会是每个员工的个人服务器。每个人都在一直训练自己的语言模型，处理工作，全本地，不发生数据泄露。Friedberg，你给最后一个总结。</p>
+<p><strong>Friedberg：</strong> 这揭示了一件事：并不存在“黄油滑梯”到失业。所有人都意识到了。我想知道“黄油”的说法是从哪来的——但是，两年前大家脑中的那个叙述——媒体是绝不会反转的。我已经意识到重要性——如果你作为一名记者，写了某种故事说某件事正在发生、将会发生——当叙事改变，你自己的信誉就毁了。你永远不能放下那个叙事。我们现在见证的就是这种问题：即使所有数据出来，即使企业使用AI的重组方式在所有地方显现，它表明他们不会简单地削减成本——而是会增长收入，虽然是以一种笨拙的方式，不是一夜之间。</p>
+<p><strong>Friedberg：</strong> 没有通往失业和虚无主义的光滑滑坡。所有人都会醒过来说：“等等，我以为我生活在现实中的世界，其实不是我生活的现实。我们现实的世界中，AI是笨拙的，需要一些集成组装，比我们想象中更复杂。它肯定能提供价值，但不是关于关掉所有工作、让天才AI解决我的一切企业问题、在没有人类的情况下无限扩展。”这是重要的叙述转变。而媒体不会接受他们的叙述是错的。因为他们一旦需要承认他们关于失业的讨论错了——顺便说一下，他们做出这些宣言因为这样可以介入并控制AI，推动他们的社会主义体系——但如果他们进来说“数据与叙述不符”，信誉就毁了。所以他们会加倍下注。我要告诉所有人：操数据——没有AI相关的失业。这是对世界的绝对骗局，说AI在抢走工作、在破坏工作。它是笨拙的，有价值的，需要一些时间，会创造远多于它摧毁的工作。</p>
+<p><strong>JCal：</strong> 我们是一群猴子，被给了新工具，我们会用新工具解决更多问题。会有岗位转移（job displacement），但问题是很多人不理解这两个术语的细微差别。某些角色会被淘汰，它们会比你想象中更快地淘汰。但其他角色会出现。Chamath你指出过，这是最有力量的工具。</p>
+<p><strong>Chamath：</strong> Jason，什么工作在消失？</p>
+<p><strong>JCal：</strong> 我只是说——部分会走，比你想象的快。</p>
+<p><strong>Chamath：</strong> 你说“某些会比你想象的更快消失”——具体是什么？因为我还没看到明确的类别。</p>
+<p><strong>JCal：</strong> 顾客服务岗位。将很快消失。</p>
+<p><strong>Chamath：</strong> 哪里？</p>
+<p><strong>JCal：</strong> 我看到了，在企业中不断。</p>
+<p><strong>Chamath：</strong> 你看的哪个顾客服务企业关闭了？给我看看！它在房间里吗？哪里？</p>
+<p><strong>JCal：</strong> 我会做研究给你。</p>
+<p><strong>Chamath：</strong> 我们之前有过这个辩论。你邀请我发问，让我回答完。顾客服务岗位会消失，因为消费者更喜欢与AI交谈，AI做到完美。数据录入、业务流程外包的初级岗位会消失。出租车司机这种也会消失。这些都是明显的低挂果实。就像我们之前打字池和信使消失一样——因为每个桌面都有文字处理器。那些岗位将被替换，数量百万计的岗位。</p>
+<p><strong>Chamath：</strong> 我们已经在“出租车司机消失”上进入了第20年。Uber出来时，所有人说司机工作会消失。</p>
+<p><strong>JCal：</strong> Waymo卡在3000辆车，Tesla卡在30辆——但在不久的将来会改变。</p>
+<p><strong>Chamath：</strong> 你现在说的一切都是“前景”。你仍在展望未来。每次我们翻开一页，就是“等等，这还没发生”。</p>
+<p><strong>JCal：</strong> 那你的前提是自动驾驶不会消除出租车司机？是这个前提吗？</p>
+<p><strong>Chamath：</strong> 我认为它会实现，但……</p>
+<p><strong>JCal：</strong> 你认为它会消除吗？你现在在争论说我错了——但你同意这会发生。</p>
+<p><strong>Chamath：</strong> 我每天进车里让它开，然后在手机上工作。但你认为城市里的出租车不会变成自动驾驶？Zipline不会跨境递送？</p>
+<p><strong>JCal：</strong> 你又做那个“马丁·贝利”的辩论技巧。不是“马丁·贝利”，我从投资中看到了。我有一家公司Autolane正在做。</p>
+<p><strong>某位嘉宾：</strong> 但回到顾客服务——你一直在说。</p>
+<p><strong>JCal：</strong> 我唯一的主张是“岗位转移（displacement）而不是岗位流失（job loss）”。</p>
+<p><strong>Friedberg：</strong> 是，是。每次别人反驳你时说“现在没有数据支持这个论点”，你说你谈的未来。好，这是个预言。现在没有数据支持。可以。但你说这会在未来发生。</p>
+<p><strong>JCal：</strong> 不不，我会给你数据点。你可以忽略它。可以。如果你和Uber及Waymo在Waymo已经在的城市沟通，那里超过200辆车，他们会说已经停止招聘司机。司机数量要么持平要么在减少。所以这是绝对的证据表明这正在发生，而且推广会很快。这不是未来预言。对Waymo CEO、Lyft和Uber的CEO可以直接问——他们会告诉你。</p>
+<p><strong>某位嘉宾：</strong> 那是冷营销。Waymo有营销。</p>
+<p><strong>JCal：</strong> 你采访Dara，他说工作正在增长。是的，因为他们配送多了，生产力提高带来更多配送，所以人开了更多的车。</p>
+<p><strong>某位嘉宾：</strong> 100%在骗人。</p>
+<p><strong>JCal：</strong> 不——上次我们采访他时，他说工作正在增长。</p>
+<p><strong>某位嘉宾：</strong> 在Waymo已经规模化的市场中，司机人数下降。这是个事实。</p>
+<p><strong>JCal：</strong> 你在某些狭义的、任意定义的部分说持平。而Dara告诉我们公司在面对这些趋势时招聘成本上升了。不，你错了。我们不同方式地同意。</p>
+<p><strong>Friedberg：</strong> 我能提供一些实际数据吗？Ramp和Revelio Labs合作刚发布新研究。覆盖21,000家美国公司，看他们的薪资数据和他们花在AI上的钱。</p>
+<p><strong>某位嘉宾：</strong> 太好了。</p>
+<p><strong>Friedberg：</strong> 花最多钱在AI上的公司增长最快——在采用AI后的2年内，员工总数增加约10%。初级员工增长甚至更快：12%。所以关于初级会被消灭不成立。企业采纳越多AI，招越多的人。这是一种相关关系。并非因果，但这是相关。非高AI采用率的公司，要么没有用AI要么低采纳率，员工人数持平。所以没有数据支持AI正在导致失业的论点。</p>
+<p><strong>JCal：</strong> 岗位转移会发生的。工作会因AI增加、主权增加，人们赚更多钱。企业会更有利润。但有些工作岗位会被淘汰。如果你看翻译、电话接线员、收账员、Waymo司机——这些简单任务正在被自动化。我为什么知道？因为我投资于融了好几亿美元来做AI替代这些工作的初创公司。我们有构建完美飞行员、完美司机、完美客服的团队。这是AI的重点。每一个AI公司的销售话术就是“替换那些不好工作”。没有人类会在亚马逊分拣包裹。这不会发生。所有那些工厂岗位正在被替换。Elon明确在做Optimus为此目的。当我说“将会发生”，我一直说是“未来发生”Sacks。你不能用你愚蠢的辩论技巧说我用了疯狂的说法。这正在我们说话时发生。我们浸泡其中，这是过渡期。</p>
+<p><strong>Chamath：</strong> 在80/90经营的每个环境中，我不记得有客户做过裁员。一个都没有。</p>
+<p><strong>Friedberg：</strong> 在这份Ramp研究中，他们写道：“收益是逐渐出现的，并且广泛分布在工程、销售、行政和客户服务等角色中。”所以他们没有看到某一类岗位被消灭的证据。当然未来可能发生，我们谁也不能说准。但如果你找现在的数据，我们还没看到。</p>
+<p><strong>Chamath：</strong> 我认为会有一个强的人类“阿尔法”。就像自动售货机来了，但没有让调酒师消失——我喜欢到酒吧和调酒师聊天，他做一杯好酒。这些调酒师现在赚的比20年前多得多。也许自动售货替换模型在那种情况下不对。但我相信未来人类互动会有很高溢价，当越来越多东西被自动化，我可能会特意去拉斯维加斯想要一位真司机，而不是用Waymo。我想要一个优秀的司机，一辆好车带我去吃晚饭。纽约市也一样。我不一定想用Waymo。我想要一个可以做那些本来可以被自动化的事的人，我会付大价钱。我可以坐按摩椅，为什么我要付200美元一小时让人给我按摩？人类是有“阿尔法”价值的。</p>
+<p><strong>一位嘉宾：</strong> 这段可以剪掉。但确实、人类有溢价。</p>
+<p><strong>Chamath：</strong> 人类在Loop中将是溢价，所有人都将在接下来一年半意识到Loop里有个人的重要性。即使AI和自动化正在工作——人在Loop会更有价值，你将为Loop里有人付溢价。</p>
+<p><strong>JCal：</strong> 你记得一年前Klarna说要用AI取代整个客户服务部门？他们大做宣传，高峰光环营销。然后一年后反转：他们说从品牌角度看，向客户确保“如果你想要，总有一个真人”至关重要。</p>
+<p><strong>Friedberg：</strong> 有这么多CEO想利用媒体的叙事周期。只要媒体抓住一个叙事，这么多CEO——不像Karp——没有原创想法、没什么重要的事要说。所以他们能获得知名度的唯一方式就是蹭上那个新闻周期，说他们即将做疯狂的事——像“把整个客户支持部门消灭”之类的。然后一看，完全造假。</p>
+<p><strong>Friedberg：</strong> Ramp数据方向准确。根据我们的经验，我也同意：使用AI的公司往往增长更快、招更多人。</p>
+<p><strong>某位嘉宾：</strong> 他们赚更多钱。100%。</p>
+<p><strong>某位嘉宾：</strong> 是的。</p>
+<p><strong>某位嘉宾：</strong> 我也完全同意这个。</p>
+<p><strong>某位嘉宾：</strong> 从职业角度看，我不想做初级客户支持——如果你只做“我忘了密码”回复，这不是个好位置。但这些工作很久之前就已经被外包到菲律宾等地了。大多数企业在做的根本不是Level 0/1的在美国国内。他们做Level 2/3，处理升级、更有价值的事——这更难被AI取代。我倒有点担心其他一些国家，正在做超级初级工作的那些——这可能会导致他们大规模失业。但在美国可能不是特别大规模。</p>
+<p><strong>Chamath：</strong> 对对——那是风险所在。坦率地说，不是在美国。</p>
+<p><strong>JCal：</strong> 也许我们正接近一致——岗位转移 vs 岗位流失。下面是Brett Adcock分享的Figure在做的事：他们做了一个8小时挑战，用机器人分拣包裹，做了200小时。今天就是最差的情况——它会越来越好。我和Elon一起相处过，看过Optimus，可以说Optimus比Figure做的更好。当贝佐斯和Andy Jassy在Amazon工厂释放Optimus——它将消除所有的——让我明确——每一个包裹分拣、每个包裹投递在10年内不会由人类进行。今天正在开始。就像一些消费电子工厂里手工组装逐渐消失一样。我对Sachs说的很赞同：其他国家会先经历。在美国，知识工作者、创业精神——我们会看到初创公司的寒武纪大爆发，意味着我们就是受益者。但如果你看那些其他国家——他们会首当其冲。我们在这边可能只会看司机——那也是500到1000万人。就像我们看到收银员一样。</p>
+<p><strong>一位嘉宾：</strong> 我们有些同意有些不同意的部分。</p>
+<p><strong>Chamath：</strong> 等等，我刚去了麦当劳，从屏幕下单。零……你点了什么？</p>
+<p><strong>JCal：</strong> 我点的是“家常汉堡”，他们正在测试类似In-N-Out的。味道不错。但重点是自动化——那里没有收银员、没有人类，也没有任何机器人。Amazon仓库已经有大量自动化。FedEx打包分拣中心全是传送带、用机器人推和引导。但那是人形机器人？不是。已经有非常多的自动化了。</p>
+<p><strong>JCal：</strong> 但最后1米部分——Optimus走出特斯拉自动驾驶车、走到你的门廊、敲你的门、把包裹放在你的前门台阶——当这发生时将会非常惊人。</p>
+<p><strong>一位嘉宾：</strong> 那会导致繁荣——想想建房子。你知道建一个房子要多久？几年。</p>
+<p><strong>某位嘉宾：</strong> 3年。对，很多年。</p>
+<p><strong>一位嘉宾：</strong> 在China，一天。</p>
+<p><strong>JCal：</strong> 但想象如果有20个人和50个机器人的建筑队——人类要告诉机器做什么，作为监督。这还需要很久时间才能让机器人做超级高技能的工作。但它们可以被分配任务、完成更多。所以也许只用一年建一个房子，而不是两三年——那就是我们住房问题的解决方案。</p>
+<p><strong>某位嘉宾：</strong> 100%。</p></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="00:35-00:58 出口管制与开源ai：中美模型之争 本段核心内容： 美国政府曾因安全担忧限制anthropic的“费布尔”（fable）模型出口，但2周后解禁 dario此前宣称模型是“网络武器”；亚马逊报告护栏失效；dario拒绝回退，触发出口管制 嘉宾探讨：是否应限制中国开源模型进入美国市场？ sacks：开源模型一旦开源就不“属于”中国，可被fork和定制；全面禁止会使美国企业承受较高token成本 背景解释与关键术语： ecra（国际紧急经济权力法案）：美国政府可用来管制技术出口的法律（此处没有直接出现） 出口管制函（bis letter）：美国商务部工业安全局针对特定公司与模型发布的限制措施 “护栏”（guardrails）：模型中防止滥用的安全约束，可被绕过（jailbreak） 详细中文整理： jcal： 本周相关消息：howard lutnick指示，允许dario amadei带来他的强大新模型fable 5进入市场，为了国家荣耀、国王trump的愉悦。记住，两周前美国政府限制了fable和mythos（以及《伊利亚特》《奥德赛》等所有名字）的出口。anthropic曾将mythos扩展给50个非授权实体，包括sk telecom（据称可能与中国有联系）。6月30号，howard（商务部长，我最喜欢的政府成员，对sacks没有不敬）解除fable 5的限制。mythos 5于6月26日恢复对美国客户开放。很多人猜到这会发生，因为anthropic将dario替换为首席谈判代表。联合创始人tom brown（一个不太出名的名字）接手——他似乎与trump政府相处得更好。比如他积极地转发lutnick宣布解除出口限制的推文：“感谢您在这件事上的合作，部长！” 笑得很开心。tom brown拯救了局面。 jcal： sacks，前ai沙皇，到底发生了什么？内部权谋，请给我们分析。 sacks： 出口管制函在2周后被撤销。我认为这是一个高度不寻常的事件，由三个因素共同导致——缺一不可。第一：dario几个月来一直在宣称他创造了一个“网络武器”——几乎是吹嘘——就是mythos。第二：有一个anthropic的信任合作伙伴（亚马逊）对加入了护栏的mythos进行了测试，报告护栏失效。所以按照dario自己的说法，fable成了网络武器。第三，当他被要求回退，他基本上拒绝了。至少这是他传达给行政当局的信息，行政当局也这么听到。我认为，如果这三件事中任何一件不同：dario没有把mythos描述为网络武器——不会发生；信任伙伴亚马逊没有报告——不会发生；dario没有拒绝行动——也不会发生。所以这是非常独特的状况。 sacks： 很多人大做文章。我知道外国公司、外国盟友和伙伴在问：这意味着我们访问美国技术的能力会受到限制？我认为不会。行政当局用他们可用的工具回应，总统关心的始终是：亲创新、亲出口、亲基础设施、支持美国公司在ai竞赛中获胜。我认为大家不要对过去几周发生的事情过度解读——这是高度特例的。 jcal： 我们谈了很多出口。来说说进口。似乎我们允许中国开源模型——kimi和deepseek——进入美国市场，而美国有nvidia和其他开源模型。为什么不在你担任ai沙皇时建议阻止进口？为什么不禁止中国模型？ sacks： 第一，一旦模型开源，它就不再是“中国”的——你可以fork它、定制它、运行在美国数据中心、自己的硬件上，没有数据包传回中国。不是数据泄露。是中国模型对开源社区做出了贡献，然后人们可以接手。当然应保持谨慎——要确保模型安全、没有后门——这是相对较新的网络安全区域。所以谨慎是当然的，但关键是：当美国公司取得一个开源模型、转换并自己运行时，它就变成美国公司的了。 jcal： 但它会围绕这个模型建立共识，通过更多人参与让它更强——和你的完全竞争论点一致？ sacks： 这引出了我的第二个论点：如果美国禁止开源模型，会使我们陷入孤立。世界其他地方不会跟从——他们想使用开放模型（更便宜、更可定制、更多控制）。而且它们一旦被fork并在用户自有的硬件上跑，就不再是中国的。而美国企业就只能为闭源模型支付更高token费了。 jcal： 但nvidia有开源模型，谷歌也有。如果美国有同等竞争力的开源模型，你是否会支持进口控制，让更多人把努力投入美国开源模型？ sacks： 我一直说了一年多：美国需要更多强有力的开源模型供应。我希望在开源类别和闭源类别都赢。我不希望任何人被迫使用他们不想用的模型。但如果美国开源模型比中国好，那就由市场决定是否胜出。我不反对限制某些中国产品进入美国——比如中国联网汽车被禁止，我认为我们应该三思是否允许中国机器人进入美国（毕竟我们禁止无人机）。我不想有“第五纵队”式的中国后门机器人。但我不是反对一切——限制同时可能招致对方报复。我们还有贸易关系，仍然需要一些稀土等。但我也希望最后能完全自主。整体需要谨慎考虑更大的中美贸易关系。 jcal： 禁止中国无人机进口是已经立法的内容。好，说点发布消息：2025年9月13-14-15日回归的all-in summit，已经是第5年。报名通道开启，allin.com。" style="--index: 3">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">03</span>
+                    <span class="timeline-meta">00:35-00:58</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>出口管制与开源AI：中美模型之争</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>美国政府曾因安全担忧限制Anthropic的“费布尔”（Fable）模型出口，但2周后解禁</li>
+<li>Dario此前宣称模型是“网络武器”；亚马逊报告护栏失效；Dario拒绝回退，触发出口管制</li>
+<li>嘉宾探讨：是否应限制中国开源模型进入美国市场？</li>
+<li>Sacks：开源模型一旦开源就不“属于”中国，可被fork和定制；全面禁止会使美国企业承受较高token成本</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>ECRA（国际紧急经济权力法案）：美国政府可用来管制技术出口的法律（此处没有直接出现）</li>
+<li>出口管制函（BIS Letter）：美国商务部工业安全局针对特定公司与模型发布的限制措施</li>
+<li>“护栏”（Guardrails）：模型中防止滥用的安全约束，可被绕过（Jailbreak）</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> 本周相关消息：Howard Lutnick指示，允许Dario Amadei带来他的强大新模型Fable 5进入市场，为了国家荣耀、国王Trump的愉悦。记住，两周前美国政府限制了Fable和Mythos（以及《伊利亚特》《奥德赛》等所有名字）的出口。Anthropic曾将Mythos扩展给50个非授权实体，包括SK Telecom（据称可能与中国有联系）。6月30号，Howard（商务部长，我最喜欢的政府成员，对Sacks没有不敬）解除Fable 5的限制。Mythos 5于6月26日恢复对美国客户开放。很多人猜到这会发生，因为Anthropic将Dario替换为首席谈判代表。联合创始人Tom Brown（一个不太出名的名字）接手——他似乎与Trump政府相处得更好。比如他积极地转发Lutnick宣布解除出口限制的推文：“感谢您在这件事上的合作，部长！” 笑得很开心。Tom Brown拯救了局面。</p>
+<p><strong>JCal：</strong> Sacks，前AI沙皇，到底发生了什么？内部权谋，请给我们分析。</p>
+<p><strong>Sacks：</strong> 出口管制函在2周后被撤销。我认为这是一个高度不寻常的事件，由三个因素共同导致——缺一不可。第一：Dario几个月来一直在宣称他创造了一个“网络武器”——几乎是吹嘘——就是Mythos。第二：有一个Anthropic的信任合作伙伴（亚马逊）对加入了护栏的Mythos进行了测试，报告护栏失效。所以按照Dario自己的说法，Fable成了网络武器。第三，当他被要求回退，他基本上拒绝了。至少这是他传达给行政当局的信息，行政当局也这么听到。我认为，如果这三件事中任何一件不同：Dario没有把Mythos描述为网络武器——不会发生；信任伙伴亚马逊没有报告——不会发生；Dario没有拒绝行动——也不会发生。所以这是非常独特的状况。</p>
+<p><strong>Sacks：</strong> 很多人大做文章。我知道外国公司、外国盟友和伙伴在问：这意味着我们访问美国技术的能力会受到限制？我认为不会。行政当局用他们可用的工具回应，总统关心的始终是：亲创新、亲出口、亲基础设施、支持美国公司在AI竞赛中获胜。我认为大家不要对过去几周发生的事情过度解读——这是高度特例的。</p>
+<p><strong>JCal：</strong> 我们谈了很多出口。来说说进口。似乎我们允许中国开源模型——KIMI和Deepseek——进入美国市场，而美国有NVIDIA和其他开源模型。为什么不在你担任AI沙皇时建议阻止进口？为什么不禁止中国模型？</p>
+<p><strong>Sacks：</strong> 第一，一旦模型开源，它就不再是“中国”的——你可以fork它、定制它、运行在美国数据中心、自己的硬件上，没有数据包传回中国。不是数据泄露。是中国模型对开源社区做出了贡献，然后人们可以接手。当然应保持谨慎——要确保模型安全、没有后门——这是相对较新的网络安全区域。所以谨慎是当然的，但关键是：当美国公司取得一个开源模型、转换并自己运行时，它就变成美国公司的了。</p>
+<p><strong>JCal：</strong> 但它会围绕这个模型建立共识，通过更多人参与让它更强——和你的完全竞争论点一致？</p>
+<p><strong>Sacks：</strong> 这引出了我的第二个论点：如果美国禁止开源模型，会使我们陷入孤立。世界其他地方不会跟从——他们想使用开放模型（更便宜、更可定制、更多控制）。而且它们一旦被fork并在用户自有的硬件上跑，就不再是中国的。而美国企业就只能为闭源模型支付更高token费了。</p>
+<p><strong>JCal：</strong> 但NVIDIA有开源模型，谷歌也有。如果美国有同等竞争力的开源模型，你是否会支持进口控制，让更多人把努力投入美国开源模型？</p>
+<p><strong>Sacks：</strong> 我一直说了一年多：美国需要更多强有力的开源模型供应。我希望在开源类别和闭源类别都赢。我不希望任何人被迫使用他们不想用的模型。但如果美国开源模型比中国好，那就由市场决定是否胜出。我不反对限制某些中国产品进入美国——比如中国联网汽车被禁止，我认为我们应该三思是否允许中国机器人进入美国（毕竟我们禁止无人机）。我不想有“第五纵队”式的中国后门机器人。但我不是反对一切——限制同时可能招致对方报复。我们还有贸易关系，仍然需要一些稀土等。但我也希望最后能完全自主。整体需要谨慎考虑更大的中美贸易关系。</p>
+<p><strong>JCal：</strong> 禁止中国无人机进口是已经立法的内容。好，说点发布消息：2025年9月13-14-15日回归的All-In Summit，已经是第5年。报名通道开启，allin.com。</p></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="00:58-01:10 scotus出生公民权裁决：历史、解读与分歧 本段核心内容： 最高法院以6-3裁定trump废除出生公民权的行政命令违宪，roberts与三位自由派大法官组成多数 出生公民权基于14修正案，sacks认为14修正案原初目的针对自由奴隶及其后代，不是非法移民 嘉宾分歧：sacks与chamath倾向于严格限制出生公民权；jcal与friedberg主张必须考虑长期非法移民的状况 讨论触及“文本主义vs意图主义”的法律解读之争 背景解释与关键术语： 出生公民权（birthright citizenship）：在美国出生即自动成为美国公民的权利，基于宪法第14修正案 dred scott案（1857）：最高法院判定黑人（包括自由黑人）不是美国公民，是历史上最恶名昭著的判决之一。第14修正案直接回应此案 14修正案（1868）：规定“所有在合众国出生或归化并受其管辖的人，都是合众国的公民” 出生旅游（birth tourism）：外国人为使孩子在美出生获得公民身份而来美分娩 文本主义（textualism）与意图主义（intentionalism）：法律解释的两种方法。文本主义严格依字面；意图主义看制定者当时的意图 详细中文整理： jcal： 这是scotus热潮夏天。发布11个判例。我们来谈前三：出生公民权——trump诉barbara案。trump在第二任期第一天签署行政命令，终止非法移民或临时签证者子女自动获公民权。这个权利在14修正案有明文。法院6-3裁决违宪。每年约25.5万新生儿来自非公民父母。首席大法官roberts撰写多数意见，三位自由派加入。法院仍然有些分歧。公民权“曾经和现在都是拥有权利的权利”，roberts写道，“我们至今遵守这个承诺。”kavanaugh为国会留下了收紧出生公民权的通道。trump的反应是：“国会应该立刻开始，结束出生公民权——我有完全支持。”对trump来说这明显是失败，但会继续斗争。 jcal： 这是对美国来说的一次失败，但是他会继续战斗。stephen miller（非法移民强硬派）——他不喜欢移民——和你们三位老兄不同。 jcal： 但他是合法移民。我们是合法移民。是的，但你理解区别吗？ sacks： 出生公民权在宪法之下可能是非法的。 某位嘉宾： 但整个问题在于：让一个九个月身孕的非法移民越境、生下一个孩子、然后那孩子自动成为美国公民——这合理吗？ sacks： 那如果一个非法移民在美国待了20年、努力工作、现在是非法身份、生了一个孩子——应该被驱逐，那个孩子不应是公民？你意思是，如果他、她是某人的保姆、园丁？我们国家有2000万、3000万非法移民——几十年来我们让这么多人进来——跨越多个共和党和民主党任期。 某位嘉宾： 你对有这种背景的人——有孩子——怎么处理？应该被驱逐？ sacks： 问题是宪法是怎么说的。我的观点是14修正案的原始目的和意图是确保解放奴隶的子女获得公民权，这是明确的。它不针对你现在说的情景。国会应该为此立法。但现在国会不能立法，因为最高法院已裁定公民权由出生决定。 jcal： 那你个人的观点是？如果一个非法移民在美国待了20年——应该拿到公民权吗？ sacks： 你说的是边缘案例。很复杂。但关键是14修正案为什么被批准——为了自由奴隶。现在我们在一个完全不同的领域。但最高法院已裁定，无论出生时身处美国的目的是否合法——孩子都是美国公民。 jcal： 世界上可能没有其他国家有这样的政策。我觉得这和stephen miller一样……我不确定是边缘案例。 jcal： 主流情况是那些非法但居住了几十年的人。我说的是边缘场景——怀孕的女性越境。让国会决定。 sacks： 你个人观点是什么？对于那种在美10-20年、纳税但非法、有孩子的——孩子应该是公民吗？ sacks： 我还没想清楚。 某位嘉宾： 好。这是关键。 friedberg： 存在很大的差别：是否将事物定义为宪法要求 vs 由国会立法。最高法院说国会不能做决定、多数美国人不能做决定——宪法规定了。如果不通过宪法修正案（不可能），我们就被困在这里了。 某位嘉宾： 如果读14修正案的辩论记录：参议员jacob howard说“每个在美国边界出生并受其管辖的人，由自然法和国家法成为合众国公民。这不包括……大使和外交使团的家族……，但包括所有其他类别。”1868年正值dred scott判决（拒绝奴隶孩子的公民权），最初意图确实是为自由奴隶及后代——这是原始意图。所以回归到最高法院常有的争论：文本主义vs意图主义。 某位嘉宾： 如果看意图——当时不应该有大规模移民的考虑。所以意图主义认为这不是他们原意，但文本主义文本说是这样。 friedberg： 我的个人观点：出生公民权应赋予美国合法居民的孩子——无论是否为公民。这是关键。所以如果你作为访客坐上飞机来度周末——你只有访问签证或临时访问状态——那你不是美国居民。除非你是居民（绿卡），你的孩子才应该是公民。我们不仅有公民/非公民，还有永久居民地位。我经过了多年绿卡。一旦你有了居民地位，你是美国永久居民（尚未有公民权利）。但如果你有孩子，那是合理的让你的孩子自动获得公民权利，因为你是合法居民而不是合法访客或非法访客。我希望这是法律——但现在这事已尘埃落定。 jcal： 我同意你。我也认为人们不应该做“生育旅游”。我们得处理。我认为应该有一个例外，对长期非罪行的非法移民。因为美国——特别是共和党——在nafta、自由贸易时代，大规模引入他们，要他们在我们企业里拿低于最低工资的工资。拜登也一样。我们对他们有道德义务，他们在这里受苦、拿那些工作，为了让我们更富和这个国家更富。我们有道义和道德义务对待他们和他们的孩子，除非他们是犯罪者——他们的孩子应该是美国人。我们把他们迎进门，是我们的失误。现在边境关闭了，我们应该对这些2000万人进行补偿。这是我的个人观点。 sacks： 所有人都在争论法律应该怎样——这应该是国会讨论、审议、处理的。这里是边缘案例、细微差别，应该被处理在公民权法律中。最高法院做的事情是取消了国会立法的空间。我认为国会需要这个空间——因为这些边缘案例——但他们把14修正案解释成我认为不是其初始目的的方式。 sacks： friedberg完全正确谈dred scott案——这是最高法院所有判决中最可怕的之一。1857年出来，裁定黑人（不管是否奴隶）不是美国公民，不能在联邦法院起诉。首席大法官taney写了这个判决，极度种族主义：黑人“没有权利需要白人尊重”。而且判决还裁定国会不能在新西部领地禁止奴隶制——推翻了维持自由州和蓄奴州数十年和平的密苏里妥协。这是直接导致3年后内战的原因之一。所以14修正案试图纠正：自由奴隶和他们的孩子应该…… 某位嘉宾： 一个从中国来度周末、然后生孩子的场景与当时完全不同。 jcal： 这是容易判定的事情。chamath，我想知道作为社会，现在我们因为trump关闭了边境（很容易做，意味着拜登随时可以做）——这带来了我们正在努力解决的分裂——另一个过去一年出现的分裂——关于ice（移民执法局），一些人（包括我自己）认为这是一种残酷的驱逐方式——但看起来trump压下去了，因为它不受欢迎——根据pew的指标。现在ice的强硬做法已停止，边境已关闭——似乎处于一种等待状态，我认为trump很明智地平静了局势——我希望他能更早冷静。你是怎么想到2027-28-29的？ chamath： 我认为西方国家正在失去使他们独特的文化表征——这很糟糕。我父母去加拿大并留下来，我认为部分原因是他们做出的明确决定：首先是加拿大人，然后才是斯里兰卡裔。我来美国时，是明确决定要做美国人，然后加拿大和斯里兰卡祖先排二三。如果你放弃移民，就是放弃自己的文化。人们有责任保持什么使那个国家独特的价值观。不需要看太远，英国、德国、法国。文化偏离是好是坏？普遍更坏。所以人们来这里应该要成为美国理想的一部分。所以需要有理性的移民政策，有同情心——但优先这一理念：“你不能在这里建立你之前国家的翻版”。同化是功能移民体系不可或缺的部分。 friedberg： 我同意同化。对我来说，有一个简单答案：回到“创造者vs索取者”框架。如果一个人来美国的首要动机是获得福利、获得支付、社会服务——他应该被拒绝移民。如果动机是工作、进步、成为创造者——创造东西、生产、赚钱、储蓄、购买、提升家庭状况——因为他们在原国得不到这些——那就应该给予移民身份，让他们贡献。因为最终，很多人可能不乐意听但正确：每一个这样的人实际上是在净增长我们经济体。每个人认为这是零和游戏——但真相是，只要是创造价值超过索取的人，他们在增长经济、创造更多工作。我会以“是否成为社会服务的使用者还是工作者”来筛选而不是文化定义。 chamath： 简单优雅地表述：你是创造者还是索取者。而如果你是“创造者”——你会从文化层面上同化，因为美国基于生产率、努力工作、创造事物、个人能动性——如果你利用这个机会，就会热爱美国的基础理想。也有一些可操作的方法：在边境用“说流利英语、理解我们制度”来计量，学习一些知识再做学习。可以用计分制。加拿大、澳大利亚、新西兰、大多数运作良好民主。 jcal： 计分制的一部分可以是“你临时来”，给定时间的签证——假如你承诺不犯罪、不碰福利体系——而你创造工作。我们无限量接受elon musk、david friedberg、david sacks和chamath palihapitiya式的“我美国第七、八代移民，代表在那里最长时间的人”——我们乐意无限接受。 某位嘉宾： 应该积极招募他们。每个我们招募的来自南非、斯里兰卡等国的高绩效者都给我们带来收益，同时对竞争对手——中国、伊朗——是损失。 jcal： sacks，你作为未来的jd vance参谋长，你会给他什么建议？怎么在选举季说服我这个温和派？ sacks： 我不会发生那事。（另一嘉宾：100%会发生）——我可以给出实际民调数据：封闭边境、不允许非法移民在美国普遍受欢迎。jcal你现在也同意这一点。唯一不同意的是一群dsa类型——他们想要开放边界、废除移民局、大赦——他们是疯子和共产主义疯子——如果看民调：约三分之一美国成年人支持所有非法移民全部驱逐；一半支持部分驱逐（核心是驱逐暴力犯罪者）。16%——dsa那一群——说一个都不驱逐。所以驱逐在一个“暴力犯罪者”的基础上是受欢迎的。但只有32%相信应一个不剩。这来自pew。 sacks： 我同意friedberg关于激励的观点：如果你来美国是为了福利，忘掉它。我们只应该允许人来工作、成功而非依赖福利。甚至在艾利斯岛时代，美国非常欢迎移民，但在那些到来的人里——三分之一其实回到了家。只有2%因健康或刑事问题被拒绝——但三分之一回去。因为那时没有福利——你在美国混不下去就会离开。现在，任何人可以越境、下载app、每月得到5000美元福利。拜登时期，他们在奢侈酒店、豪华巴士上全国旅行——疯了。必须停止。 jcal： 如果你入境——应有一个某种休止期，一定时间内不可享受任何社会项目。比如5年——你不能碰福利、社会安全等……如果你可以接受——来。如果你创造工作、一定经济产出，比如100万美元——触发前置审批。这样有目标。如果你是一个乌克兰ai开发者、伊朗创业者、带来了600万美元风投资金——直接上前线。随着我们冷静了移民措辞、关闭边境（关键一步），去招募、带走这些天才——横扫桌位。 某位嘉宾： dsa还没放弃。 chamath： 这些疯子。甚至共产党，民主党，如果不放弃自由派。如果dsa掌控民主党——我自己会成共和党。在纽约州，已经有15届众议员输给dsa。不仅仅是因为zohran mamdani。dsa正流行。在任何一个蓝州城市，社会主义会赢。这意味着民主党在自取灭亡。" style="--index: 4">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">04</span>
+                    <span class="timeline-meta">00:58-01:10</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>SCOTUS出生公民权裁决：历史、解读与分歧</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>最高法院以6-3裁定Trump废除出生公民权的行政命令违宪，Roberts与三位自由派大法官组成多数</li>
+<li>出生公民权基于14修正案，Sacks认为14修正案原初目的针对自由奴隶及其后代，不是非法移民</li>
+<li>嘉宾分歧：Sacks与Chamath倾向于严格限制出生公民权；JCal与Friedberg主张必须考虑长期非法移民的状况</li>
+<li>讨论触及“文本主义vs意图主义”的法律解读之争</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>出生公民权（Birthright Citizenship）：在美国出生即自动成为美国公民的权利，基于宪法第14修正案</li>
+<li>Dred Scott案（1857）：最高法院判定黑人（包括自由黑人）不是美国公民，是历史上最恶名昭著的判决之一。第14修正案直接回应此案</li>
+<li>14修正案（1868）：规定“所有在合众国出生或归化并受其管辖的人，都是合众国的公民”</li>
+<li>出生旅游（Birth Tourism）：外国人为使孩子在美出生获得公民身份而来美分娩</li>
+<li>文本主义（Textualism）与意图主义（Intentionalism）：法律解释的两种方法。文本主义严格依字面；意图主义看制定者当时的意图</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> 这是SCOTUS热潮夏天。发布11个判例。我们来谈前三：出生公民权——Trump诉Barbara案。Trump在第二任期第一天签署行政命令，终止非法移民或临时签证者子女自动获公民权。这个权利在14修正案有明文。法院6-3裁决违宪。每年约25.5万新生儿来自非公民父母。首席大法官Roberts撰写多数意见，三位自由派加入。法院仍然有些分歧。公民权“曾经和现在都是拥有权利的权利”，Roberts写道，“我们至今遵守这个承诺。”Kavanaugh为国会留下了收紧出生公民权的通道。Trump的反应是：“国会应该立刻开始，结束出生公民权——我有完全支持。”对Trump来说这明显是失败，但会继续斗争。</p>
+<p><strong>JCal：</strong> 这是对美国来说的一次失败，但是他会继续战斗。Stephen Miller（非法移民强硬派）——他不喜欢移民——和你们三位老兄不同。</p>
+<p><strong>JCal：</strong> 但他是合法移民。我们是合法移民。是的，但你理解区别吗？</p>
+<p><strong>Sacks：</strong> 出生公民权在宪法之下可能是非法的。</p>
+<p><strong>某位嘉宾：</strong> 但整个问题在于：让一个九个月身孕的非法移民越境、生下一个孩子、然后那孩子自动成为美国公民——这合理吗？</p>
+<p><strong>Sacks：</strong> 那如果一个非法移民在美国待了20年、努力工作、现在是非法身份、生了一个孩子——应该被驱逐，那个孩子不应是公民？你意思是，如果他、她是某人的保姆、园丁？我们国家有2000万、3000万非法移民——几十年来我们让这么多人进来——跨越多个共和党和民主党任期。</p>
+<p><strong>某位嘉宾：</strong> 你对有这种背景的人——有孩子——怎么处理？应该被驱逐？</p>
+<p><strong>Sacks：</strong> 问题是宪法是怎么说的。我的观点是14修正案的原始目的和意图是确保解放奴隶的子女获得公民权，这是明确的。它不针对你现在说的情景。国会应该为此立法。但现在国会不能立法，因为最高法院已裁定公民权由出生决定。</p>
+<p><strong>JCal：</strong> 那你个人的观点是？如果一个非法移民在美国待了20年——应该拿到公民权吗？</p>
+<p><strong>Sacks：</strong> 你说的是边缘案例。很复杂。但关键是14修正案为什么被批准——为了自由奴隶。现在我们在一个完全不同的领域。但最高法院已裁定，无论出生时身处美国的目的是否合法——孩子都是美国公民。</p>
+<p><strong>JCal：</strong> 世界上可能没有其他国家有这样的政策。我觉得这和Stephen Miller一样……我不确定是边缘案例。</p>
+<p><strong>JCal：</strong> 主流情况是那些非法但居住了几十年的人。我说的是边缘场景——怀孕的女性越境。让国会决定。</p>
+<p><strong>Sacks：</strong> 你个人观点是什么？对于那种在美10-20年、纳税但非法、有孩子的——孩子应该是公民吗？</p>
+<p><strong>Sacks：</strong> 我还没想清楚。</p>
+<p><strong>某位嘉宾：</strong> 好。这是关键。</p>
+<p><strong>Friedberg：</strong> 存在很大的差别：是否将事物定义为宪法要求 vs 由国会立法。最高法院说国会不能做决定、多数美国人不能做决定——宪法规定了。如果不通过宪法修正案（不可能），我们就被困在这里了。</p>
+<p><strong>某位嘉宾：</strong> 如果读14修正案的辩论记录：参议员Jacob Howard说“每个在美国边界出生并受其管辖的人，由自然法和国家法成为合众国公民。这不包括……大使和外交使团的家族……，但包括所有其他类别。”1868年正值Dred Scott判决（拒绝奴隶孩子的公民权），最初意图确实是为自由奴隶及后代——这是原始意图。所以回归到最高法院常有的争论：文本主义vs意图主义。</p>
+<p><strong>某位嘉宾：</strong> 如果看意图——当时不应该有大规模移民的考虑。所以意图主义认为这不是他们原意，但文本主义文本说是这样。</p>
+<p><strong>Friedberg：</strong> 我的个人观点：出生公民权应赋予美国合法居民的孩子——无论是否为公民。这是关键。所以如果你作为访客坐上飞机来度周末——你只有访问签证或临时访问状态——那你不是美国居民。除非你是居民（绿卡），你的孩子才应该是公民。我们不仅有公民/非公民，还有永久居民地位。我经过了多年绿卡。一旦你有了居民地位，你是美国永久居民（尚未有公民权利）。但如果你有孩子，那是合理的让你的孩子自动获得公民权利，因为你是合法居民而不是合法访客或非法访客。我希望这是法律——但现在这事已尘埃落定。</p>
+<p><strong>JCal：</strong> 我同意你。我也认为人们不应该做“生育旅游”。我们得处理。我认为应该有一个例外，对长期非罪行的非法移民。因为美国——特别是共和党——在NAFTA、自由贸易时代，大规模引入他们，要他们在我们企业里拿低于最低工资的工资。拜登也一样。我们对他们有道德义务，他们在这里受苦、拿那些工作，为了让我们更富和这个国家更富。我们有道义和道德义务对待他们和他们的孩子，除非他们是犯罪者——他们的孩子应该是美国人。我们把他们迎进门，是我们的失误。现在边境关闭了，我们应该对这些2000万人进行补偿。这是我的个人观点。</p>
+<p><strong>Sacks：</strong> 所有人都在争论法律应该怎样——这应该是国会讨论、审议、处理的。这里是边缘案例、细微差别，应该被处理在公民权法律中。最高法院做的事情是取消了国会立法的空间。我认为国会需要这个空间——因为这些边缘案例——但他们把14修正案解释成我认为不是其初始目的的方式。</p>
+<p><strong>Sacks：</strong> Friedberg完全正确谈Dred Scott案——这是最高法院所有判决中最可怕的之一。1857年出来，裁定黑人（不管是否奴隶）不是美国公民，不能在联邦法院起诉。首席大法官Taney写了这个判决，极度种族主义：黑人“没有权利需要白人尊重”。而且判决还裁定国会不能在新西部领地禁止奴隶制——推翻了维持自由州和蓄奴州数十年和平的密苏里妥协。这是直接导致3年后内战的原因之一。所以14修正案试图纠正：自由奴隶和他们的孩子应该……</p>
+<p><strong>某位嘉宾：</strong> 一个从中国来度周末、然后生孩子的场景与当时完全不同。</p>
+<p><strong>JCal：</strong> 这是容易判定的事情。Chamath，我想知道作为社会，现在我们因为Trump关闭了边境（很容易做，意味着拜登随时可以做）——这带来了我们正在努力解决的分裂——另一个过去一年出现的分裂——关于ICE（移民执法局），一些人（包括我自己）认为这是一种残酷的驱逐方式——但看起来Trump压下去了，因为它不受欢迎——根据Pew的指标。现在ICE的强硬做法已停止，边境已关闭——似乎处于一种等待状态，我认为Trump很明智地平静了局势——我希望他能更早冷静。你是怎么想到2027-28-29的？</p>
+<p><strong>Chamath：</strong> 我认为西方国家正在失去使他们独特的文化表征——这很糟糕。我父母去加拿大并留下来，我认为部分原因是他们做出的明确决定：首先是加拿大人，然后才是斯里兰卡裔。我来美国时，是明确决定要做美国人，然后加拿大和斯里兰卡祖先排二三。如果你放弃移民，就是放弃自己的文化。人们有责任保持什么使那个国家独特的价值观。不需要看太远，英国、德国、法国。文化偏离是好是坏？普遍更坏。所以人们来这里应该要成为美国理想的一部分。所以需要有理性的移民政策，有同情心——但优先这一理念：“你不能在这里建立你之前国家的翻版”。同化是功能移民体系不可或缺的部分。</p>
+<p><strong>Friedberg：</strong> 我同意同化。对我来说，有一个简单答案：回到“创造者vs索取者”框架。如果一个人来美国的首要动机是获得福利、获得支付、社会服务——他应该被拒绝移民。如果动机是工作、进步、成为创造者——创造东西、生产、赚钱、储蓄、购买、提升家庭状况——因为他们在原国得不到这些——那就应该给予移民身份，让他们贡献。因为最终，很多人可能不乐意听但正确：每一个这样的人实际上是在净增长我们经济体。每个人认为这是零和游戏——但真相是，只要是创造价值超过索取的人，他们在增长经济、创造更多工作。我会以“是否成为社会服务的使用者还是工作者”来筛选而不是文化定义。</p>
+<p><strong>Chamath：</strong> 简单优雅地表述：你是创造者还是索取者。而如果你是“创造者”——你会从文化层面上同化，因为美国基于生产率、努力工作、创造事物、个人能动性——如果你利用这个机会，就会热爱美国的基础理想。也有一些可操作的方法：在边境用“说流利英语、理解我们制度”来计量，学习一些知识再做学习。可以用计分制。加拿大、澳大利亚、新西兰、大多数运作良好民主。</p>
+<p><strong>JCal：</strong> 计分制的一部分可以是“你临时来”，给定时间的签证——假如你承诺不犯罪、不碰福利体系——而你创造工作。我们无限量接受Elon Musk、David Friedberg、David Sacks和Chamath Palihapitiya式的“我美国第七、八代移民，代表在那里最长时间的人”——我们乐意无限接受。</p>
+<p><strong>某位嘉宾：</strong> 应该积极招募他们。每个我们招募的来自南非、斯里兰卡等国的高绩效者都给我们带来收益，同时对竞争对手——中国、伊朗——是损失。</p>
+<p><strong>JCal：</strong> Sacks，你作为未来的JD Vance参谋长，你会给他什么建议？怎么在选举季说服我这个温和派？</p>
+<p><strong>Sacks：</strong> 我不会发生那事。（另一嘉宾：100%会发生）——我可以给出实际民调数据：封闭边境、不允许非法移民在美国普遍受欢迎。JCal你现在也同意这一点。唯一不同意的是一群DSA类型——他们想要开放边界、废除移民局、大赦——他们是疯子和共产主义疯子——如果看民调：约三分之一美国成年人支持所有非法移民全部驱逐；一半支持部分驱逐（核心是驱逐暴力犯罪者）。16%——DSA那一群——说一个都不驱逐。所以驱逐在一个“暴力犯罪者”的基础上是受欢迎的。但只有32%相信应一个不剩。这来自Pew。</p>
+<p><strong>Sacks：</strong> 我同意Friedberg关于激励的观点：如果你来美国是为了福利，忘掉它。我们只应该允许人来工作、成功而非依赖福利。甚至在艾利斯岛时代，美国非常欢迎移民，但在那些到来的人里——三分之一其实回到了家。只有2%因健康或刑事问题被拒绝——但三分之一回去。因为那时没有福利——你在美国混不下去就会离开。现在，任何人可以越境、下载APP、每月得到5000美元福利。拜登时期，他们在奢侈酒店、豪华巴士上全国旅行——疯了。必须停止。</p>
+<p><strong>JCal：</strong> 如果你入境——应有一个某种休止期，一定时间内不可享受任何社会项目。比如5年——你不能碰福利、社会安全等……如果你可以接受——来。如果你创造工作、一定经济产出，比如100万美元——触发前置审批。这样有目标。如果你是一个乌克兰AI开发者、伊朗创业者、带来了600万美元风投资金——直接上前线。随着我们冷静了移民措辞、关闭边境（关键一步），去招募、带走这些天才——横扫桌位。</p>
+<p><strong>某位嘉宾：</strong> DSA还没放弃。</p>
+<p><strong>Chamath：</strong> 这些疯子。甚至共产党，民主党，如果不放弃自由派。如果DSA掌控民主党——我自己会成共和党。在纽约州，已经有15届众议员输给DSA。不仅仅是因为Zohran Mamdani。DSA正流行。在任何一个蓝州城市，社会主义会赢。这意味着民主党在自取灭亡。</p></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="01:10-01:21 加州财政危机：代际骗局 本段核心内容： gavin newsom宣布“平衡”2028年零赤字预算，总额3510亿美元 friedberg系统性地拆解：预算从2019年的2150亿膨胀到3550亿（65%增长），依赖会计伎俩和债务去宣称“平衡” 加州收入基础极其依赖最富裕阶层：前150,000人支付一半个人收入税；前1,000人支付约220亿美元 税收基础加速流失：大公司、富人持续离境；新增软税新税种被推出 背景解释与关键术语： 加州最高个人所得税率14.4%（全国最高之一），企业税8.9% “软税”：数字服务/软件订阅的新征税 “加州规则”：养老金负债优先于州债券（在破产情景下） “bta”（亿万富翁税）：提案征收富人更高税率 详细中文整理： friedberg： 我从五个章节展开：膨胀的成本、会计伎俩、收入依赖、大规模出走和螺旋以及潜在的未记账负债。加州预算从2019年2150亿美元膨胀到今天3550亿美元——6年增长65%。用会计伎俩粉饰“平衡”——实际是收入和支出的差额通过债务填补。约有200-400亿美元债务——将被合法地消除在法律授权外。但这是纳税人终将埋单的。收入依赖：最高个人所得税14.4%，个人收入税占州收入1420亿美元——在总的2110亿美元收入中占比。前1%（约15万人）付一半个人所得税——700亿美元。前1000人付约220亿美元——超11%的州收入。企业税8.9%——也是全国最高之一——430亿美元。搬到其他州更便宜。 friedberg： 结果是大规模出走：2019年以来至少15家财富500企业搬走总部；2100家中型以上企业搬走；至少5%工作流失。更重要的统计数据：每年约1-1.5%的个人调整总收入（agi）离开加州。基于人才流失10年后你将看到15%收入离开。而新“亿万富翁税”被提出、通过，会加速出走——包括已知有朋友在2025、2026年离开。所以螺旋问题明显。成本在膨胀，收入在流失。为了弥补，州推出了更多税：8%软件订阅销售税（新方向——对word等）、预计年度增加10亿美元收入；健康保险税额外20亿；临时最高所得14.4%被永久化。 friedberg： 这种螺旋在继续，并且未来预估仍有400亿美元年度赤字。未计提负债：公共债务已达1.4万亿（州5000亿+地方政府8000亿）；未缴纳养老金缺口6660亿（接近1.5万亿）；退休人员医疗福利缺口1750亿。所以加总1.5-2万亿未计算负债。加利福尼亚规则使这些养老金优先于债券。而州还有迫在眉睫的悬崖。成本因工会要求和生活成本继续膨胀。 friedberg： 我认为newsom没有打上蝴蝶结完成一个平衡预算——实际上，我认为如果联邦政府不介入救助——加州无法宣布破产——那么红州和其他纳税人会说：“我为什么帮加州买单？” 我认为这些将是接下来10年在加州上演的故事。 friedberg： 我预测aoc会成为总统。largely due to living costs from government spending; wealth disparity fuels socialist movement within 24 months; if she bails out cali... 红州会问：为什么我们还要留在联合州——拒绝为蓝州债务买单？未来几年你们会看到联合州陷入危机。 sacks： 这场景相当遥远——但不算那么遥远，你会在未来几年需要联邦救助出来。但政府本身已需要救助——每年新增2-3万亿赤字。 chamath： 我认为弗里德伯格正确到联邦吸收那一点为止。实际可能：加州养老金和负债会全部消亡通过协商解决。会导致加州宪法被推翻、重新划选区、红潮横扫加州——把导致差的治理的全部东西拆除。有个不可思议的推文：joanna ives比较desantis vs jb pritzker八年；我让团队把newsom加入做三人对比，很清楚这些蓝州有多么破败。他们不擅长管理，直到少数人承受回报。找到这个推文并读出来——你会震惊于desantis在佛罗运行有多么好，jb pritzker多么悲剧地差。 sacks： 我去德州的决定越来越显得明智。自从bta提出——有人说它可能性很低——我不同意。自2025年bta可能被放选票，只要收集签名——不算多么难。一旦选票上，通过的概率不大低。而newsom被预测会杀死它。但在最后一天该被下架的那天，newsom在x上发布了支持增税的视频。 一位嘉宾： 那问题是——如果bta通过——会有200-300起诉讼、持续十年、最终可能被最高法院推倒——加州在十年里花数十亿法律费与所有亿万富翁打。 friedberg： 悲剧是：加州历史上多次盈余——来自硅谷的巨大税基——本来可以管理好。但无能、自私和腐败导致了。如果他们管理好任何州——加州本可以平衡预算。需要硬着陆。希望不要变成养老金被抹掉。我认为养老金领取者应该对加州民主党政治极为愤怒。 某位嘉宾： 你以为事情变得足够糟就带来红潮——不会发生。蓝州只会更蓝。社会主义加剧。 chamath： 将在10年内处理加州破产——它会不幸地导致那些债务和养老金完全重组——未支付。 friedberg： 看看人均预算：德州、佛州约人均5000美元服务；纽约1.3万，加州近9000。你得不到2-2.5倍价值。 某位嘉宾： 问题更糟、无能力。 chamath： 就是吸引了无能力的人——骗子。 某位嘉宾： 太无能。 某位嘉宾： 也与民众自给自足有关——在德州你得到你的牧场，然后自己负责垃圾收集、水井、能源等。他们不做向州伸手。有一种粗犷的、个人主义和自助精神，州不需要把税率提到54%-65%。 jcal： 我打赌，如果你留在加州、纽约，你会被征60-65%的税。现在纽约是54——我保证mamdane任期结束前会被提议破60。 jcal： 左翼最简单描述：这些人连词成句来合理化抢你的钱。就像猴子敲键盘——找新词来hack大家的脑子——来偷钱。有些词是“道德信号”、“罪恶感”等。总会有新词。但不解决问题——所有问题更糟——只是为了拿走你的钱。我想到mackenzie bezos最近捐出260亿美元给左翼事业；她赚了这钱也可以。但在之前他们说，全是因为elon musk的贪婪——如果他交出他的钱，就能解决世界饥饿。所以她捐了260亿——为什么还不见世界饥饿解决？金钱去了哪里？到了所有左翼ngo口袋里。 某位嘉宾： 她最好投资ohalo和其他公司。没有解决任何问题。 jcal： 关于gavin的总统几率？他现在掉到20%（曾40%）。但还有不少——我认为人们发现他发型好、能说会道。但我警告：他一直在偷你东西——他会在你没防备时偷钱。 某位嘉宾： 民调降低是因为民主党向左移、走向dsa——人们认为他太温和。问题是他发布视频支持增税来为自己做dsa定位。 一位嘉宾： 公平地说，他同天也说自己反对bta——是保持平衡。 jcal： 他没能杀bta——所有人都以为newsom会是他们的拯救者，这是巨大误判——sacks，你那个群聊怎么样，亿万富翁群聊的meme怎么样？ sacks： 我这边时间8:06pm，有会要参加。我想说我爱你们、我会思念你们所有人。也想对美国——世界上最不可思议的国家——大声一句生日快乐。我无法想象在任何地方我的生命能比现在更好。我感到如此有福、如此感恩是美国人。 一位嘉宾： 必须为之奋斗。 sacks： 生日快乐，美国。 jcal： 代表在美国7代的人——我们觉得你干得不错，会继续让你们留下。" style="--index: 5">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">05</span>
+                    <span class="timeline-meta">01:10-01:21</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>加州财政危机：代际骗局</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>Gavin Newsom宣布“平衡”2028年零赤字预算，总额3510亿美元</li>
+<li>Friedberg系统性地拆解：预算从2019年的2150亿膨胀到3550亿（65%增长），依赖会计伎俩和债务去宣称“平衡”</li>
+<li>加州收入基础极其依赖最富裕阶层：前150,000人支付一半个人收入税；前1,000人支付约220亿美元</li>
+<li>税收基础加速流失：大公司、富人持续离境；新增软税新税种被推出</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>加州最高个人所得税率14.4%（全国最高之一），企业税8.9%</li>
+<li>“软税”：数字服务/软件订阅的新征税</li>
+<li>“加州规则”：养老金负债优先于州债券（在破产情景下）</li>
+<li>“BTA”（亿万富翁税）：提案征收富人更高税率</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>Friedberg：</strong> 我从五个章节展开：膨胀的成本、会计伎俩、收入依赖、大规模出走和螺旋以及潜在的未记账负债。加州预算从2019年2150亿美元膨胀到今天3550亿美元——6年增长65%。用会计伎俩粉饰“平衡”——实际是收入和支出的差额通过债务填补。约有200-400亿美元债务——将被合法地消除在法律授权外。但这是纳税人终将埋单的。收入依赖：最高个人所得税14.4%，个人收入税占州收入1420亿美元——在总的2110亿美元收入中占比。前1%（约15万人）付一半个人所得税——700亿美元。前1000人付约220亿美元——超11%的州收入。企业税8.9%——也是全国最高之一——430亿美元。搬到其他州更便宜。</p>
+<p><strong>Friedberg：</strong> 结果是大规模出走：2019年以来至少15家财富500企业搬走总部；2100家中型以上企业搬走；至少5%工作流失。更重要的统计数据：每年约1-1.5%的个人调整总收入（AGI）离开加州。基于人才流失10年后你将看到15%收入离开。而新“亿万富翁税”被提出、通过，会加速出走——包括已知有朋友在2025、2026年离开。所以螺旋问题明显。成本在膨胀，收入在流失。为了弥补，州推出了更多税：8%软件订阅销售税（新方向——对Word等）、预计年度增加10亿美元收入；健康保险税额外20亿；临时最高所得14.4%被永久化。</p>
+<p><strong>Friedberg：</strong> 这种螺旋在继续，并且未来预估仍有400亿美元年度赤字。未计提负债：公共债务已达1.4万亿（州5000亿+地方政府8000亿）；未缴纳养老金缺口6660亿（接近1.5万亿）；退休人员医疗福利缺口1750亿。所以加总1.5-2万亿未计算负债。加利福尼亚规则使这些养老金优先于债券。而州还有迫在眉睫的悬崖。成本因工会要求和生活成本继续膨胀。</p>
+<p><strong>Friedberg：</strong> 我认为Newsom没有打上蝴蝶结完成一个平衡预算——实际上，我认为如果联邦政府不介入救助——加州无法宣布破产——那么红州和其他纳税人会说：“我为什么帮加州买单？” 我认为这些将是接下来10年在加州上演的故事。</p>
+<p><strong>Friedberg：</strong> 我预测AOC会成为总统。Largely due to living costs from government spending; wealth disparity fuels socialist movement within 24 months; if she bails out Cali... 红州会问：为什么我们还要留在联合州——拒绝为蓝州债务买单？未来几年你们会看到联合州陷入危机。</p>
+<p><strong>Sacks：</strong> 这场景相当遥远——但不算那么遥远，你会在未来几年需要联邦救助出来。但政府本身已需要救助——每年新增2-3万亿赤字。</p>
+<p><strong>Chamath：</strong> 我认为弗里德伯格正确到联邦吸收那一点为止。实际可能：加州养老金和负债会全部消亡通过协商解决。会导致加州宪法被推翻、重新划选区、红潮横扫加州——把导致差的治理的全部东西拆除。有个不可思议的推文：Joanna Ives比较DeSantis vs JB Pritzker八年；我让团队把Newsom加入做三人对比，很清楚这些蓝州有多么破败。他们不擅长管理，直到少数人承受回报。找到这个推文并读出来——你会震惊于DeSantis在佛罗运行有多么好，JB Pritzker多么悲剧地差。</p>
+<p><strong>Sacks：</strong> 我去德州的决定越来越显得明智。自从BTA提出——有人说它可能性很低——我不同意。自2025年BTA可能被放选票，只要收集签名——不算多么难。一旦选票上，通过的概率不大低。而Newsom被预测会杀死它。但在最后一天该被下架的那天，Newsom在X上发布了支持增税的视频。</p>
+<p><strong>一位嘉宾：</strong> 那问题是——如果BTA通过——会有200-300起诉讼、持续十年、最终可能被最高法院推倒——加州在十年里花数十亿法律费与所有亿万富翁打。</p>
+<p><strong>Friedberg：</strong> 悲剧是：加州历史上多次盈余——来自硅谷的巨大税基——本来可以管理好。但无能、自私和腐败导致了。如果他们管理好任何州——加州本可以平衡预算。需要硬着陆。希望不要变成养老金被抹掉。我认为养老金领取者应该对加州民主党政治极为愤怒。</p>
+<p><strong>某位嘉宾：</strong> 你以为事情变得足够糟就带来红潮——不会发生。蓝州只会更蓝。社会主义加剧。</p>
+<p><strong>Chamath：</strong> 将在10年内处理加州破产——它会不幸地导致那些债务和养老金完全重组——未支付。</p>
+<p><strong>Friedberg：</strong> 看看人均预算：德州、佛州约人均5000美元服务；纽约1.3万，加州近9000。你得不到2-2.5倍价值。</p>
+<p><strong>某位嘉宾：</strong> 问题更糟、无能力。</p>
+<p><strong>Chamath：</strong> 就是吸引了无能力的人——骗子。</p>
+<p><strong>某位嘉宾：</strong> 太无能。</p>
+<p><strong>某位嘉宾：</strong> 也与民众自给自足有关——在德州你得到你的牧场，然后自己负责垃圾收集、水井、能源等。他们不做向州伸手。有一种粗犷的、个人主义和自助精神，州不需要把税率提到54%-65%。</p>
+<p><strong>JCal：</strong> 我打赌，如果你留在加州、纽约，你会被征60-65%的税。现在纽约是54——我保证Mamdane任期结束前会被提议破60。</p>
+<p><strong>JCal：</strong> 左翼最简单描述：这些人连词成句来合理化抢你的钱。就像猴子敲键盘——找新词来hack大家的脑子——来偷钱。有些词是“道德信号”、“罪恶感”等。总会有新词。但不解决问题——所有问题更糟——只是为了拿走你的钱。我想到Mackenzie Bezos最近捐出260亿美元给左翼事业；她赚了这钱也可以。但在之前他们说，全是因为Elon Musk的贪婪——如果他交出他的钱，就能解决世界饥饿。所以她捐了260亿——为什么还不见世界饥饿解决？金钱去了哪里？到了所有左翼NGO口袋里。</p>
+<p><strong>某位嘉宾：</strong> 她最好投资Ohalo和其他公司。没有解决任何问题。</p>
+<p><strong>JCal：</strong> 关于Gavin的总统几率？他现在掉到20%（曾40%）。但还有不少——我认为人们发现他发型好、能说会道。但我警告：他一直在偷你东西——他会在你没防备时偷钱。</p>
+<p><strong>某位嘉宾：</strong> 民调降低是因为民主党向左移、走向DSA——人们认为他太温和。问题是他发布视频支持增税来为自己做DSA定位。</p>
+<p><strong>一位嘉宾：</strong> 公平地说，他同天也说自己反对BTA——是保持平衡。</p>
+<p><strong>JCal：</strong> 他没能杀BTA——所有人都以为Newsom会是他们的拯救者，这是巨大误判——Sacks，你那个群聊怎么样，亿万富翁群聊的meme怎么样？</p>
+<p><strong>Sacks：</strong> 我这边时间8:06PM，有会要参加。我想说我爱你们、我会思念你们所有人。也想对美国——世界上最不可思议的国家——大声一句生日快乐。我无法想象在任何地方我的生命能比现在更好。我感到如此有福、如此感恩是美国人。</p>
+<p><strong>一位嘉宾：</strong> 必须为之奋斗。</p>
+<p><strong>Sacks：</strong> 生日快乐，美国。</p>
+<p><strong>JCal：</strong> 代表在美国7代的人——我们觉得你干得不错，会继续让你们留下。</p></div>
+                  </div>
+                </article></div>
+            <p class="empty search-empty" data-search-empty hidden>没有匹配的时间线段落。</p>
+          </section>
+
+          <section id="speakers">
+            <div class="section-head">
+              <h2>人物观点对照</h2>
+              <p>比较嘉宾立场</p>
+            </div>
+            <div class="speaker-grid"><article class="speaker-card" style="--index: 1">
+                  <p class="speaker-kicker">嘉宾 01</p>
+                  <h3>Jason Calacanis</h3>
+                  <div><p>立场非常直接：企业必须保护专属数据，不应信任任何第三方模型提供商，因为后者最终会利用客户数据构建竞争性产品。对Jobs vs AI的辩论持“部分岗位会快速消失，但整体受益更大”的务实乐观态度，认为应该主动投资自有模型。</p></div>
+                </article>
+<article class="speaker-card" style="--index: 2">
+                  <p class="speaker-kicker">嘉宾 02</p>
+                  <h3>Chamath Palihapitiya</h3>
+                  <div><p>以80/90 CEO的第一手数据支持主权AI论点，演示开源模型在成本与可控性方面显著优于前沿实验室方案。从企业战略层面强调“企业数据是核心资产”，认为与Anthropic/OpenAI合作可能导致知识泄露。在出生公民权问题上主张严格限制，认为西方文化独特性正被稀释。</p></div>
+                </article>
+<article class="speaker-card" style="--index: 3">
+                  <p class="speaker-kicker">嘉宾 03</p>
+                  <h3>David Sacks</h3>
+                  <div><p>在AI议题上最完整阐述“企业AI安全”的新框架：企业须控制自己的计算、模型、数据栈和阿尔法（专有知识）。详细拆解Anthropic垂直整合模式并警告开发者警惕。对SCOTUS出生公民权裁决持批评态度——认为14修正案原初目的是保障自由奴隶后代，不应扩展到非法移民。移民政策偏向文化同化，反对开放边界。</p></div>
+                </article>
+<article class="speaker-card" style="--index: 4">
+                  <p class="speaker-kicker">嘉宾 04</p>
+                  <h3>David Friedberg</h3>
+                  <div><p>在AI部分聚焦数据安全角度，分享Ohalo对Anthropic生命科学模型的拒绝及行业普遍觉醒，预测基础设施模式将从“大型中心-大型辐条”转向“大型中心-中型中心-分布式辐条”。在加州预算部分做了最全面的财务分析，称Newsom的“平衡预算”是会计伎俩，预计加州未来会引发联邦危机并可能触发“联合州存续”问题。</p></div>
+                </article></div>
+          </section>
+
+          <section id="quotes">
+            <div class="section-head">
+              <h2>值得引用的原话</h2>
+              <p>保留关键表达</p>
+            </div>
+            <div class="panel"><p class="empty">没有识别到双语引语。</p></div>
+          </section>
+        </div>
+      </div>
+    </main>
+  </div>
+  <script>
+    const progress = document.querySelector("[data-progress]");
+    const searchBox = document.querySelector("[data-search-box]");
+    const topButton = document.querySelector("[data-scroll-top]");
+    const cards = Array.from(document.querySelectorAll("[data-timeline-card]"));
+    const searchEmpty = document.querySelector("[data-search-empty]");
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    function updateProgress() {
+      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      const ratio = scrollable > 0 ? window.scrollY / scrollable : 0;
+      if (progress) {
+        progress.style.width = `${Math.max(0, Math.min(1, ratio)) * 100}%`;
+      }
+    }
+
+    function applySearch() {
+      const query = searchBox.value.trim().toLowerCase();
+      let visibleCount = 0;
+      cards.forEach((card) => {
+        const text = card.getAttribute("data-search") || "";
+        const isVisible = !query || text.includes(query);
+        card.hidden = !isVisible;
+        if (isVisible) {
+          visibleCount += 1;
+        }
+      });
+      if (searchEmpty) {
+        searchEmpty.hidden = !query || visibleCount > 0;
+      }
+    }
+
+    window.addEventListener("scroll", updateProgress, { passive: true });
+    window.addEventListener("resize", updateProgress);
+    if (searchBox) {
+      searchBox.addEventListener("input", applySearch);
+    }
+    if (topButton) {
+      topButton.addEventListener("click", () => {
+        window.scrollTo({
+          top: 0,
+          behavior: prefersReducedMotion.matches ? "auto" : "smooth"
+        });
+      });
+    }
+    updateProgress();
+  </script>
+</body>
+</html>
