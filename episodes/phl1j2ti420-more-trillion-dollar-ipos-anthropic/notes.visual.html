@@ -1,0 +1,1044 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>万亿市值IPO、AI军备竞赛与“全民资本主义”革命：All-In Podcast 第280期深度整理 - 中文播客可视化笔记</title>
+  <style>
+    :root {
+      --bg: oklch(0.974 0.006 238);
+      --paper: oklch(0.991 0.003 238);
+      --paper-soft: oklch(0.955 0.007 238);
+      --ink: oklch(0.205 0.018 246);
+      --muted: oklch(0.49 0.018 246);
+      --faint: oklch(0.63 0.014 246);
+      --line: oklch(0.875 0.009 238);
+      --line-strong: oklch(0.74 0.014 238);
+      --accent: oklch(0.43 0.064 164);
+      --accent-soft: oklch(0.94 0.024 164);
+      --accent-wash: oklch(0.973 0.012 164);
+      --quote: oklch(0.965 0.010 92);
+      --shadow: 0 24px 54px color-mix(in oklch, var(--ink) 8%, transparent);
+      --radius: 8px;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-width: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(90deg, color-mix(in oklch, var(--line) 28%, transparent) 1px, transparent 1px) 0 0 / 92px 92px,
+        var(--bg);
+      font-family: "Geist", "Satoshi", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      line-height: 1.78;
+      text-rendering: optimizeLegibility;
+    }
+    ::selection { background: var(--accent-soft); color: var(--ink); }
+    a {
+      color: var(--accent);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+      transition: color .22s var(--ease), background-color .22s var(--ease), border-color .22s var(--ease), transform .22s var(--ease);
+    }
+    [hidden] { display: none !important; }
+    .progress {
+      position: fixed;
+      z-index: 4;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: var(--accent);
+    }
+    .quick-actions {
+      position: fixed;
+      right: max(18px, calc((100vw - 1200px) / 2));
+      bottom: 24px;
+      z-index: 3;
+      display: grid;
+      gap: 7px;
+    }
+    .quick-action {
+      display: inline-grid;
+      grid-template-columns: 16px auto;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      min-width: 74px;
+      min-height: 40px;
+      padding: 8px 12px;
+      border: 1px solid var(--line-strong);
+      border-radius: var(--radius);
+      background: color-mix(in oklch, var(--paper) 92%, transparent);
+      box-shadow: 0 12px 28px color-mix(in oklch, var(--ink) 7%, transparent);
+      color: var(--ink);
+      font: inherit;
+      font-size: 13px;
+      font-weight: 720;
+      line-height: 1.2;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .quick-action:hover, .quick-action:focus-visible {
+      outline: none;
+      border-color: var(--accent);
+      background: var(--accent-wash);
+      color: var(--accent);
+      transform: translate3d(0, -1px, 0);
+    }
+    .quick-action:active { transform: translate3d(0, 1px, 0) scale(.99); }
+    .page {
+      width: min(1760px, calc(100% - 56px));
+      margin: 0 auto;
+      padding: 0 0 104px;
+    }
+    .article { min-width: 0; }
+    .hero {
+      max-width: none;
+      margin-left: min(7vw, 140px);
+      padding: 72px 0 58px;
+    }
+    .eyebrow {
+      margin: 0 0 18px;
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    h1 {
+      max-width: none;
+      margin: 0 0 28px;
+      font-size: clamp(38px, 3vw, 52px);
+      font-weight: 760;
+      line-height: 1.08;
+      letter-spacing: 0;
+      text-wrap: balance;
+    }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 18px;
+      max-width: 72ch;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .meta a { font-weight: 650; }
+    .meta-strip {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+      max-width: 720px;
+      margin: 34px 0 28px;
+      border-top: 1px solid var(--line-strong);
+      padding-top: 16px;
+    }
+    .meta-pill {
+      display: grid;
+      gap: 2px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.35;
+    }
+    .meta-pill b {
+      color: var(--ink);
+      font-family: var(--mono);
+      font-size: 18px;
+      font-weight: 680;
+      line-height: 1;
+    }
+    .summary {
+      width: 100%;
+      max-width: 760px;
+      padding: 24px 26px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: color-mix(in oklch, var(--paper) 88%, var(--accent-soft));
+      box-shadow: var(--shadow);
+    }
+    .summary p {
+      margin: 0;
+      font-size: 19px;
+      line-height: 1.72;
+    }
+    h1, .summary, .takeaway p, .timeline-card h3, .section-content, .speaker-card, .panel {
+      overflow-wrap: anywhere;
+    }
+    .content-shell {
+      display: grid;
+      grid-template-columns: minmax(170px, 212px) minmax(0, 820px);
+      gap: clamp(36px, 7vw, 88px);
+      align-items: start;
+      border-top: 1px solid var(--line);
+      padding-top: 40px;
+    }
+    .sidebar {
+      position: sticky;
+      top: 28px;
+      align-self: start;
+      padding-top: 4px;
+    }
+    .toc {
+      border-top: 1px solid var(--ink);
+      padding-top: 16px;
+    }
+    .toc-title {
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .nav-links { display: grid; gap: 2px; }
+    .nav-links a {
+      display: block;
+      padding: 8px 0;
+      border-bottom: 1px solid color-mix(in oklch, var(--line) 72%, transparent);
+      color: var(--ink);
+      font-size: 14px;
+      line-height: 1.35;
+      text-decoration: none;
+    }
+    .nav-links a:hover, .nav-links a:focus-visible {
+      outline: none;
+      color: var(--accent);
+      transform: translate3d(2px, 0, 0);
+    }
+    .search {
+      display: grid;
+      gap: 8px;
+      margin-top: 22px;
+    }
+    .search span {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 720;
+    }
+    .search input {
+      width: 100%;
+      min-height: 40px;
+      padding: 8px 10px;
+      border: 1px solid var(--line-strong);
+      border-radius: var(--radius);
+      background: var(--paper);
+      color: var(--ink);
+      font: inherit;
+      font-size: 14px;
+      outline: none;
+      transition: border-color .22s var(--ease), box-shadow .22s var(--ease), transform .22s var(--ease);
+    }
+    .search input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px color-mix(in oklch, var(--accent) 14%, transparent);
+    }
+    .content-flow { min-width: 0; }
+    section { margin: 0 0 78px; }
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 18px;
+      align-items: end;
+      margin-bottom: 22px;
+      border-top: 1px solid var(--ink);
+      padding-top: 18px;
+    }
+    .section-head h2 {
+      margin: 0;
+      font-size: 28px;
+      font-weight: 740;
+      line-height: 1.16;
+      letter-spacing: 0;
+    }
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.4;
+      text-align: right;
+    }
+    .takeaway-list {
+      display: grid;
+      gap: 0;
+      margin: 0;
+      padding: 0;
+      border-top: 1px solid var(--line);
+      list-style: none;
+    }
+    .takeaway {
+      display: grid;
+      grid-template-columns: 52px minmax(0, 1fr);
+      gap: 18px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .takeaway span {
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 15px;
+      font-weight: 720;
+      line-height: 1.65;
+    }
+    .takeaway p {
+      margin: 0;
+      max-width: 70ch;
+      font-size: 16px;
+      line-height: 1.72;
+    }
+    .timeline {
+      display: grid;
+      gap: 0;
+      border-top: 1px solid var(--line-strong);
+    }
+    .timeline-card {
+      display: grid;
+      grid-template-columns: 132px minmax(0, 1fr);
+      gap: 32px;
+      padding: 34px 0 40px;
+      border-bottom: 1px solid var(--line);
+    }
+    .timeline-heading {
+      position: sticky;
+      top: 30px;
+      align-self: start;
+      display: grid;
+      gap: 10px;
+      padding-top: 2px;
+    }
+    .timeline-index {
+      color: var(--faint);
+      font-family: var(--mono);
+      font-size: 13px;
+      font-weight: 720;
+      line-height: 1;
+    }
+    .timeline-meta {
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 720;
+      line-height: 1.45;
+    }
+    .timeline-card h3 {
+      max-width: 24ch;
+      margin: 0 0 18px;
+      font-size: 27px;
+      font-weight: 730;
+      line-height: 1.22;
+      letter-spacing: 0;
+    }
+    .section-content {
+      color: color-mix(in oklch, var(--ink) 88%, var(--muted));
+      font-size: 16px;
+    }
+    .section-content p {
+      max-width: 72ch;
+      margin: 0 0 1.05em;
+    }
+    .section-content p strong:first-child {
+      color: var(--ink);
+      font-weight: 760;
+    }
+    .section-content h4 {
+      margin: 26px 0 10px;
+      color: var(--accent);
+      font-size: 14px;
+      font-weight: 760;
+      line-height: 1.35;
+    }
+    .section-content ul, .section-content ol, .panel ul, .panel ol, .speaker-card ul, .speaker-card ol {
+      margin: .75em 0 1em;
+      padding-left: 1.25em;
+    }
+    .section-content li, .panel li, .speaker-card li { margin: 6px 0; }
+    .speaker-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, .88fr);
+      gap: 26px 42px;
+      border-top: 1px solid var(--line);
+    }
+    .speaker-card {
+      padding: 22px 0 24px;
+      border-bottom: 1px solid var(--line);
+    }
+    .speaker-card:nth-child(even) { margin-top: 22px; }
+    .speaker-kicker {
+      margin: 0 0 8px;
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 720;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .speaker-card h3 {
+      margin: 0 0 12px;
+      font-size: 20px;
+      font-weight: 730;
+      line-height: 1.25;
+    }
+    .speaker-card p, .panel p {
+      max-width: 68ch;
+      margin-top: 0;
+    }
+    .panel {
+      border-top: 1px solid var(--line);
+      padding-top: 8px;
+    }
+    blockquote {
+      margin: 18px 0;
+      padding: 16px 18px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--quote);
+    }
+    code {
+      padding: 2px 5px;
+      border-radius: 5px;
+      background: color-mix(in oklch, var(--accent) 10%, var(--paper));
+      color: var(--ink);
+      font-family: var(--mono);
+      font-size: .92em;
+    }
+    hr {
+      height: 1px;
+      margin: 26px 0;
+      border: 0;
+      background: var(--line);
+    }
+    .empty {
+      margin: 0;
+      padding: 16px 18px;
+      border: 1px dashed var(--line-strong);
+      border-radius: var(--radius);
+      color: var(--muted);
+      background: color-mix(in oklch, var(--paper-soft) 70%, transparent);
+    }
+    .search-empty { margin-top: 16px; }
+    .muted { color: var(--muted); }
+    @keyframes rise-in {
+      from { opacity: 1; transform: translate3d(0, 6px, 0); }
+      to { opacity: 1; transform: translate3d(0, 0, 0); }
+    }
+    .hero > *, .takeaway, .timeline-card, .speaker-card, .panel {
+      animation: rise-in .55s var(--ease) both;
+    }
+    .hero > *:nth-child(2) { animation-delay: .04s; }
+    .hero > *:nth-child(3) { animation-delay: .08s; }
+    .hero > *:nth-child(4) { animation-delay: .12s; }
+    .hero > *:nth-child(5) { animation-delay: .16s; }
+    .takeaway, .timeline-card, .speaker-card {
+      animation-delay: calc(var(--index, 1) * 38ms);
+    }
+    @media (max-width: 1120px) {
+      .hero { margin-left: 0; }
+      .content-shell {
+        grid-template-columns: minmax(154px, 190px) minmax(0, 1fr);
+        gap: 36px;
+      }
+      h1 { font-size: 44px; }
+    }
+    @media (min-width: 1500px) {
+      h1 {
+        width: max-content;
+        max-width: 100%;
+        white-space: nowrap;
+        font-size: clamp(36px, 2.05vw, 42px);
+      }
+    }
+    @media (max-width: 780px) {
+      body { background: var(--bg); }
+      .page { width: min(1180px, calc(100% - 28px)); padding-bottom: 86px; }
+      .hero { padding: 46px 0 36px; }
+      .eyebrow { margin-bottom: 14px; }
+      h1 {
+        max-width: none;
+        font-size: 30px;
+        line-height: 1.14;
+        word-break: normal;
+      }
+      .summary, .summary p, .takeaway p, .section-content, .speaker-card, .panel {
+        max-width: 100%;
+        word-break: break-word;
+      }
+      .meta-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 20px; }
+      .summary { padding: 20px; }
+      .summary p { font-size: 17px; }
+      .content-shell { display: block; padding-top: 28px; }
+      .sidebar { position: static; padding-top: 0; margin-bottom: 42px; }
+      .toc { border-top-color: var(--line-strong); }
+      .nav-links { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 18px; }
+      section { margin-bottom: 58px; }
+      .section-head { display: block; margin-bottom: 16px; }
+      .section-head h2 { font-size: 24px; }
+      .section-head p { margin-top: 6px; text-align: left; }
+      .takeaway { grid-template-columns: 42px minmax(0, 1fr); gap: 12px; }
+      .timeline-card { display: block; padding: 28px 0 32px; }
+      .timeline-heading { position: static; display: flex; align-items: baseline; gap: 12px; margin-bottom: 12px; }
+      .timeline-card h3 { max-width: none; font-size: 23px; }
+      .speaker-grid { display: block; }
+      .speaker-card:nth-child(even) { margin-top: 0; }
+      .quick-actions {
+        right: 12px;
+        bottom: 12px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 6px;
+      }
+      .quick-action {
+        min-width: 66px;
+        min-height: 38px;
+        padding: 7px 9px;
+        font-size: 13px;
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: 1ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 1ms !important;
+      }
+      .speaker-card:nth-child(even) { margin-top: 0; }
+    }
+    @media print {
+      body { background: var(--paper); }
+      .sidebar, .progress, .quick-actions { display: none; }
+      .page { display: block; width: auto; padding-bottom: 0; }
+      .hero { margin-left: 0; padding: 0 0 28px; }
+      .content-shell { display: block; border-top: 0; padding-top: 0; }
+      .summary { box-shadow: none; }
+      .timeline-card, .speaker-card { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <div class="progress" data-progress></div>
+  <div class="quick-actions" aria-label="快捷操作">
+    <a class="quick-action" href="../../index.html" aria-label="返回首页">
+      <span aria-hidden="true">←</span>
+      <span>首页</span>
+    </a>
+    <button class="quick-action" type="button" data-scroll-top aria-label="回到顶部">
+      <span aria-hidden="true">↑</span>
+      <span>顶部</span>
+    </button>
+  </div>
+  <div class="page">
+    <main class="article">
+      <header class="hero">
+        <p class="eyebrow">All-In Podcast 中文精读</p>
+        <h1>万亿市值IPO、AI军备竞赛与“全民资本主义”革命：All-In Podcast 第280期深度整理</h1>
+        <div class="meta">
+          <span>生成时间：2026-07-12 16:26</span>
+          <span>来源：<a href="https://www.youtube.com/watch?v=PHL1j2ti420" target="_blank" rel="noopener">YouTube</a></span>
+        </div>
+        <div class="meta-strip"><span class="meta-pill"><b>39 分钟</b>阅读时长</span>
+<span class="meta-pill"><b>10</b>核心要点</span>
+<span class="meta-pill"><b>8</b>时间线</span>
+<span class="meta-pill"><b>4</b>人物</span></div>
+        <div class="summary" aria-label="一句话摘要"><p>本期节目围绕 Anthropic 和 OpenAI 即将进行的万亿级 IPO、AI 模型在开源与闭源之间的竞争格局、企业 AI 投资回报率的争议，以及一项影响深远的“特朗普账户”全民投资计划展开深入讨论。</p></div>
+      </header>
+
+      <div class="content-shell">
+        <aside class="sidebar">
+          <nav class="toc" aria-label="页面导航">
+            <p class="toc-title">阅读导航</p>
+            <div class="nav-links">
+              <a href="#takeaways">核心要点</a>
+              <a href="#timeline">分段整理</a>
+              <a href="#speakers">人物观点</a>
+              <a href="#quotes">双语引语</a>
+            </div>
+            <label class="search">
+              <span>搜索时间线</span>
+              <input data-search-box type="search" placeholder="关键词" aria-label="搜索时间线">
+            </label>
+          </nav>
+        </aside>
+
+        <div class="content-flow">
+          <section id="takeaways">
+            <div class="section-head">
+              <h2>核心要点</h2>
+              <p>快速扫读本集主线</p>
+            </div>
+            <ol class="takeaway-list"><li class="takeaway" style="--index: 1"><span>01</span><p>SpaceX 的 IPO 被认为是教科书级的成功，为 Anthropic 和 OpenAI 的上市提供了路线图。</p></li>
+<li class="takeaway" style="--index: 2"><span>02</span><p>Anthropic 据传年收入已超 1000 亿美元，如果上市，市值可能达到 3 万亿美元，增速史无前例。</p></li>
+<li class="takeaway" style="--index: 3"><span>03</span><p>企业 AI 投资的回报率（ROI）引发争议：Chamath 认为企业成本暴涨但收益不明显，而 Brad 则认为我们处于早期阶段，TAM 巨大，无需担忧。</p></li>
+<li class="takeaway" style="--index: 4"><span>04</span><p>小扎（Zuckerberg）发布低价模型，试图发动价格战，但企业端对前沿模型的需求依然强劲。</p></li>
+<li class="takeaway" style="--index: 5"><span>05</span><p>中国可能限制其顶级开源模型出口，效仿 OpenAI 从开源走向闭源的策略，以在追赶前沿后锁定价值。</p></li>
+<li class="takeaway" style="--index: 6"><span>06</span><p>开源模型的使用份额实际上在下降，而闭源前沿模型（Anthropic、OpenAI）的收入份额反而上升，尽管开源使用量也在增长。</p></li>
+<li class="takeaway" style="--index: 7"><span>07</span><p>AI 模型路由技术和“智能体”架构（如 Uber、DoorDash 的实践）成为企业优化 token 成本、获取 ROI 的关键。</p></li>
+<li class="takeaway" style="--index: 8"><span>08</span><p>美国在 AI 竞赛中的最大瓶颈可能是能源，预计未来将面临巨大的电力缺口。</p></li>
+<li class="takeaway" style="--index: 9"><span>09</span><p>“特朗普账户”（Trump Accounts）App 正式上线，为每个新生儿提供 1000 美元的政府投资账户，旨在让所有孩子成为资本家。</p></li>
+<li class="takeaway" style="--index: 10"><span>10</span><p>该计划获得迈克尔·戴尔、SpaceX 总裁格温·肖特维尔等人数十亿美元的捐赠承诺，被认为是自 1935 年以来美国社会契约的最大变革。</p></li></ol>
+          </section>
+
+          <section id="timeline">
+            <div class="section-head">
+              <h2>分段详细整理</h2>
+              <p>按时间线阅读上下文</p>
+            </div>
+            <div class="timeline" data-timeline><article class="timeline-card" data-timeline-card data-search="00:00–03:20 开场与背景介绍 本段核心内容： brad gerstner（奥特米特资本创始人）和 chamath 分别从度假中回归，分享近期动态。 chamath 透露他参加了马克·贝尼奥夫（salesforce ceo）主持的联合国 ai 委员会。sacks 调侃联合国能否做成任何事。 节目引入本期核心话题：万亿市值 ipo 潮以及 ai 模型的竞争格局。 背景解释与关键术语： raise 大会： 一个关于创业和投资的会议。 联合国 ai 委员会： 由 salesforce ceo 马克·贝尼奥夫联合主持的关于 ai 治理的委员会。 openai / anthropic： 目前 ai 领域最前沿的两家闭源模型公司。 tds： trump derangement syndrome，特朗普精神错乱综合征，指对特朗普的过度非理性反对。 详细中文整理： jcal： 欢迎回来，全球第一的播客。这是 7 月，all-in 第 280 集。friedberg 去度假了，我就说到这吧。今天我们最好的朋友 brad 也来了。brad，你怎么样？ brad： 我很好。我也在度假，可能在爱达荷州或其他什么地方。jcal，谁知道呢？ jcal： 谁知道呢？谁都不知道。他可能在任何地方。你看起来像是美国东北部某个地方。我不会深究的。你这周也在度假吗？ brad： 非常爱国——我在我的旗帜房间里，一个非常爱国的房间。你知道的，我在东海岸夏天的办公室。是的，这周我在华盛顿特区待了一段时间。这周很棒，庆祝美国 250 周年。 jcal： 太棒了。你会在八月的第二周离开那里，对吧？我是说 8 月 10 日到 30 日，对吧？ brad： 完全正确，完全正确。太好了。我只是想确认一下。 jcal： 哦，绝对的。你不知道的事还多着呢。我简直是在夏天狂欢。你又在哪？ chamath： 我在巴黎。我在 raise 大会上做了大约 8 次采访。它们会出现在 all-in 的节目里。当然，还有工厂里的你。看看他，在工厂里工作的 chamath palihapitiya。这将会是一个热门的软件夏天。chamath，你的热门软件夏天过得怎么样？ chamath： 不错。卖企业软件是件难事，但还不错。 jcal： jamal 在想，“天哪，我在 saas 时期对我所有的 ceo 都那么混蛋，现在你知道了吧。”我去了日内瓦。向马克·贝尼奥夫致敬。他常驻欧洲，会见所有欧洲客户。他在日内瓦举办了一个晚宴，我也参加了。然后我和 jensen、brad smith、grab 的 anthony tan 以及其他一些人一起，被列入了马克担任联合主席的联合国 ai 委员会。当你看到马克·贝尼奥夫的行动时，这家伙真是个大师。 jcal： 哇靠。 chamath： 他是大师中的大师。 jcal： 是的。 chamath： 你能看到他如何建立起如此庞大的生意。令人印象深刻。 jcal： 联合国的 ai 委员会是干什么的？他们的使命是什么？ chamath： 开源。 jcal： 哦不，但我的意思是说，联合国真的能做成什么事吗？ chamath： 实际上他们开始了——这太搞笑了。是的，我的意思是，anthropic 也在那里。有一位联合创始人，叫汤姆·布朗，我记得是。那很好。 jcal： 那个 anthropic 的家伙是不是到处说，“世界末日来了，世界末日来了”？不，不，不，他非常—— chamath： 汤姆很棒。汤姆很棒。 sacks： 公平地说，他把想法写在袖子上，就是说，“嘿，我们真的相信我们在做正确的事情。”对吧。请相信我们。我认为对所有这些国家来说，未来是开源的。 jcal： 好吧，我们马上就要谈到这个了。这肯定是讨论的重点。但我们先从 ipo 的最新消息开始。你知道，有一波价值万亿美元的 ipo 争着要上市。brad，这是上个月 liquidity summit 上讨论的一个大话题。我们以前从未见过万亿美元级别的 ipo。今年我们已经有一家了。spacex 的交易价格基本就在它上市时的位置，所以可以说是被完美定价了。理论上，我们还会再看到两家。 jcal： 嗯，brad 掌握内幕消息，所以我会努力从他那里套出话来。openai 和 anthropic 计划要上市了。我们先快速回顾一下 spacex 的情况。它股价涨到 200 美元，后来又跌了一些。现在是 150 美元一股，就像我说的，正好是 ipo 价格。所以它的市值是 2 万亿美元，目前是全球第七大公司。anthropic 在 6 月 1 日秘密提交了上市申请。我不知道为什么叫秘密提交，但消息立刻就传出来了。polly market 显示 anthropic 今年上市的概率是 65%，交易量不大，36 万。两周前，我们的另一位好朋友 gavin baker 说，他认为 anthropic 到 2026 年底将拥有超过 1000 亿美元的营收，并且非常盈利。我们节目里有几个人猜，如果现在上市，它的交易价格会是 3 万亿美元。chamath，你在节目里做出了一个很好的判断。你说，嘿，elon 先出来（上市）是个好主意。chamath，你认为另外这两家在今年或者 9 个月后，比如明年第一季度上市的可能性有多大？" style="--index: 1">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">01</span>
+                    <span class="timeline-meta">00:00–03:20</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>开场与背景介绍</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>Brad Gerstner（奥特米特资本创始人）和 Chamath 分别从度假中回归，分享近期动态。</li>
+<li>Chamath 透露他参加了马克·贝尼奥夫（Salesforce CEO）主持的联合国 AI 委员会。Sacks 调侃联合国能否做成任何事。</li>
+<li>节目引入本期核心话题：万亿市值 IPO 潮以及 AI 模型的竞争格局。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li><strong>RAISE 大会：</strong> 一个关于创业和投资的会议。</li>
+<li><strong>联合国 AI 委员会：</strong> 由 Salesforce CEO 马克·贝尼奥夫联合主持的关于 AI 治理的委员会。</li>
+<li><strong>OpenAI / Anthropic：</strong> 目前 AI 领域最前沿的两家闭源模型公司。</li>
+<li><strong>TDS：</strong> Trump Derangement Syndrome，特朗普精神错乱综合征，指对特朗普的过度非理性反对。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> 欢迎回来，全球第一的播客。这是 7 月，All-In 第 280 集。Friedberg 去度假了，我就说到这吧。今天我们最好的朋友 Brad 也来了。Brad，你怎么样？</p>
+<p><strong>Brad：</strong> 我很好。我也在度假，可能在爱达荷州或其他什么地方。JCal，谁知道呢？</p>
+<p><strong>JCal：</strong> 谁知道呢？谁都不知道。他可能在任何地方。你看起来像是美国东北部某个地方。我不会深究的。你这周也在度假吗？</p>
+<p><strong>Brad：</strong> 非常爱国——我在我的旗帜房间里，一个非常爱国的房间。你知道的，我在东海岸夏天的办公室。是的，这周我在华盛顿特区待了一段时间。这周很棒，庆祝美国 250 周年。</p>
+<p><strong>JCal：</strong> 太棒了。你会在八月的第二周离开那里，对吧？我是说 8 月 10 日到 30 日，对吧？</p>
+<p><strong>Brad：</strong> 完全正确，完全正确。太好了。我只是想确认一下。</p>
+<p><strong>JCal：</strong> 哦，绝对的。你不知道的事还多着呢。我简直是在夏天狂欢。你又在哪？</p>
+<p><strong>Chamath：</strong> 我在巴黎。我在 RAISE 大会上做了大约 8 次采访。它们会出现在 All-In 的节目里。当然，还有工厂里的你。看看他，在工厂里工作的 Chamath Palihapitiya。这将会是一个热门的软件夏天。Chamath，你的热门软件夏天过得怎么样？</p>
+<p><strong>Chamath：</strong> 不错。卖企业软件是件难事，但还不错。</p>
+<p><strong>JCal：</strong> Jamal 在想，“天哪，我在 SaaS 时期对我所有的 CEO 都那么混蛋，现在你知道了吧。”我去了日内瓦。向马克·贝尼奥夫致敬。他常驻欧洲，会见所有欧洲客户。他在日内瓦举办了一个晚宴，我也参加了。然后我和 Jensen、Brad Smith、Grab 的 Anthony Tan 以及其他一些人一起，被列入了马克担任联合主席的联合国 AI 委员会。当你看到马克·贝尼奥夫的行动时，这家伙真是个大师。</p>
+<p><strong>JCal：</strong> 哇靠。</p>
+<p><strong>Chamath：</strong> 他是大师中的大师。</p>
+<p><strong>JCal：</strong> 是的。</p>
+<p><strong>Chamath：</strong> 你能看到他如何建立起如此庞大的生意。令人印象深刻。</p>
+<p><strong>JCal：</strong> 联合国的 AI 委员会是干什么的？他们的使命是什么？</p>
+<p><strong>Chamath：</strong> 开源。</p>
+<p><strong>JCal：</strong> 哦不，但我的意思是说，联合国真的能做成什么事吗？</p>
+<p><strong>Chamath：</strong> 实际上他们开始了——这太搞笑了。是的，我的意思是，Anthropic 也在那里。有一位联合创始人，叫汤姆·布朗，我记得是。那很好。</p>
+<p><strong>JCal：</strong> 那个 Anthropic 的家伙是不是到处说，“世界末日来了，世界末日来了”？不，不，不，他非常——</p>
+<p><strong>Chamath：</strong> 汤姆很棒。汤姆很棒。</p>
+<p><strong>Sacks：</strong> 公平地说，他把想法写在袖子上，就是说，“嘿，我们真的相信我们在做正确的事情。”对吧。请相信我们。我认为对所有这些国家来说，未来是开源的。</p>
+<p><strong>JCal：</strong> 好吧，我们马上就要谈到这个了。这肯定是讨论的重点。但我们先从 IPO 的最新消息开始。你知道，有一波价值万亿美元的 IPO 争着要上市。Brad，这是上个月 Liquidity Summit 上讨论的一个大话题。我们以前从未见过万亿美元级别的 IPO。今年我们已经有一家了。SpaceX 的交易价格基本就在它上市时的位置，所以可以说是被完美定价了。理论上，我们还会再看到两家。</p>
+<p><strong>JCal：</strong> 嗯，Brad 掌握内幕消息，所以我会努力从他那里套出话来。OpenAI 和 Anthropic 计划要上市了。我们先快速回顾一下 SpaceX 的情况。它股价涨到 200 美元，后来又跌了一些。现在是 150 美元一股，就像我说的，正好是 IPO 价格。所以它的市值是 2 万亿美元，目前是全球第七大公司。Anthropic 在 6 月 1 日秘密提交了上市申请。我不知道为什么叫秘密提交，但消息立刻就传出来了。Polly Market 显示 Anthropic 今年上市的概率是 65%，交易量不大，36 万。两周前，我们的另一位好朋友 Gavin Baker 说，他认为 Anthropic 到 2026 年底将拥有超过 1000 亿美元的营收，并且非常盈利。我们节目里有几个人猜，如果现在上市，它的交易价格会是 3 万亿美元。Chamath，你在节目里做出了一个很好的判断。你说，嘿，Elon 先出来（上市）是个好主意。Chamath，你认为另外这两家在今年或者 9 个月后，比如明年第一季度上市的可能性有多大？</p></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="03:20–14:40 万亿市值 ipo：anthropic 与 openai 的上市前景 本段核心内容： chamath 认为问题在于市场的清算价格，并指出 openai 的现金消耗仍很高，而 anthropic 可能“意外地盈利”。 brad 认为 spacex 的 ipo 为 anthropic 和 openai 提供了完美的路线图，并预测它们几乎 100% 会在 6-9 个月内上市。 讨论 spacex ipo 中关于指数的“早期纳入”争议，brad 辩称规则调整是必要的，因为公司规模太大太重要。 jcal 对比了 openai 和 anthropic 的市场定位：openai 偏向消费者，而 anthropic 偏向企业；并质疑 openai 的消费者策略是否是个失误。 chamath 提出一个尖锐问题：企业收入的可持续性在于能否证明 roi。 背景解释与关键术语： lock-up（锁定期）： ipo 后，公司内部人员和早期投资者被禁止出售股票的一段时间。 指数早期纳入： 一家公司 ipo 后，通常要等一段时间才会被纳入主要股票指数（如 s&amp;p 500）。spacex 寻求了更快的纳入流程。 s-1 文件： 公司在美国证监会（sec）注册上市时提交的招股说明书。 altimeter capital： brad gerstner 创办的投资公司。 详细中文整理： chamath： 嗯，我认为这些都是伟大的企业。我认为问题在于市场的出清价格是多少。而这更多地取决于市场吸收新发行股票的能力和规模。这是第一点。我认为这主要由价格决定。所以我认为 anthropic 和 openai 可能处于两种不同的情况。我们上次听到 openai 的消息时，它们的现金消耗仍然很高，因为其业务性质分散，更多依赖消费者而非企业。我记得 brad 在某一期节目中提到过，anthropic 可能“意外地盈利了”。我记得他好像是这么说的。 brad： 是的。 chamath： 我给你讲一个非常有趣的事情。我今天和我的 cto 坐下来，我问：“我们在 token 支出上情况如何？”他说了一句让我非常震惊的话。他说：“现在，我们的 token 成本每 45 天就翻一番。” jcal： 好吧。 chamath： 我当时就“呃”了一下。他说，是的。我问，那下游的生产力提升呢？他说，最多只有 5%。 jcal： 好吧。 chamath： 我说，好吧，所以我的成本每 45 天翻一番，而我的收益基本持平。他基本也同意。我说，你解释一下为什么会这样。他说，老实说，我们发现在这个阶段，要获得下一轮改进，你需要使用更多的 token，因为我们实际上已经触及了天花板。我说，那我们该怎么办？他说，说实话，我们必须想办法解决这个问题。所以我们打算退一步，看看怎么处理。我不知道其他公司会如何，但关键是，未来 3、4 年内，所有人都肯定会经历这个过程。所以我怀疑，如果你现在能退出（上市），就应该马上退，在所有这些事情开始显现影响之前。因为这可能是你以高价退出并筹集巨额资金的时机。 jcal： 好的，brad，你在这两家公司都投资了很多，所以你可能有一些好的见解。你认为它们在接下来的 6 到 9 个月里上市的可能性有多大？两家都是？你会说 100% 可能，除非有些外部事件发生，比如台湾被封锁之类的黑天鹅事件？你觉得我们什么时候能在北海道滑雪时看到它们上市？ brad： 是的，我认为可能性非常高。但让我先说一点，你知道，spacex 的 ipo，我们也是其中的投资者，我也参与了 ipo。我的意思是，这是一个教科书式的案例。这是一个非常成功的 ipo。他们以 1.75 万亿美元的估值筹集了 750 亿美元。好吧，它是以低于我们当前的价格发行的，然后上涨了 25%。在大约 350 亿美元的远期营收基础上。所以如果你考虑这个收入倍数，它是在大约 2 万亿美元的市值上，基于 350 亿美元的营收。这是一个令人难以置信的成就。我认为这是个教科书案例。我认为 anthropic 和 openai 都在密切观察，因为坦率地说，我们以前从未有过这么大体量的 ipo。所以，功劳归功于 elon，归功于团队，bret 和 gwen，他们在那次 ipo 中真正开拓了一些非常聪明和有趣的东西。所以，你从 gavin 那里听到，anthropic 据传收入将超过 1000 亿美元，而 spacex 是 350 亿。如果它们年底达到 1000 亿，这意味着它们明年的 gaap 收入可能远超过 1000 亿。所以，基于 spacex 的成功，我认为这将会是一个轰动的 ipo。 jcal： 我认为 spacex 在很多方面，比如总融资额、定价、流动性、纳入指数、如何处理锁定期，都为它们指明了道路。我觉得它们已经去观摩学习过了。 brad： 它在解除锁定方面采用了分阶段释放的方式。 jcal： 必须达到某些里程碑，有些是时间上的，有些是早期纳入指数，筹集 750 亿美元。 brad： 比如说，早期纳入指数。让我解释一下这一点。 jcal： 是的。 brad： 因为有人说，嘿，这可能感觉不公平，别人被强迫买入它。你怎么看？这是不是只是黑粉在喷，还是有什么道理？ sacks： 我觉得这种担忧是合理的，对吧？这种事以前从未发生过—— jcal： 合理的担忧是什么？ brad： 是的，合理的担忧是，一家尚未经过 ipo 后市场检验的公司，其股价会非常波动。jason，你看到过那张图表，ipo 后 6 个月内的峰谷回撤是 50%。我们在这里也看到了很大的回撤。所以你不希望在峰值把它塞进指数，然后让人们承受 30% 的回撤，这在 ipo 中经常发生，因为人们很兴奋，它会冲高。但这次他们没有这样做。有人担心会发生这种情况。所以，交易所和指数都看了看，并做了一些修改，因为反方论点是它太大了、太重要了，必须成为指数的一部分，对吧？过去存在这些规则的原因是，大多数上市公司都更年轻、更早期、经受考验较少、收入更少、盈利更少，在整体格局中没那么重要。所以我认为他们开创了一些非常聪明的东西。它运作得很好，交易也很好。所以我认为这为 anthropic 提供了一份蓝图。但就热情而言，像 altimeter、fidelity、t. rowe 这些机构，它们会根据我们今天所知的盈利状况、模型改进和收入增长等，热衷于购买 anthropic 吗？是的，所有人都会蜂拥而入。所有人都会争相挤进买入名单的第一位。而且，我上次听说，又是一个传闻，anthropic 希望在今年上市。每个人都知道 anthropic 在收入增长曲线上已经超过了 openai。但我要告诉你，openai 已经找回了它的信心和魔力。它今天刚刚发布了一整套新模型。我们知道 gpt-6，有很多传言说它将在未来 30 天内发布，新一代的模型。我认为它的营收已经重新回升。我在 x 上看到的最新传闻大约是在 700 亿美元。所以，提醒一下，700 亿美元可能不到 anthropic 传闻中的 1000 亿美元，但它仍然是 spacex 收入的两倍。所以，它们能在那种收入增长下，作为两个前沿实验室之一，以超过万亿美元的估值上市吗？我认为答案是肯定的。我不确定它们两个谁先上市有巨大的竞赛。我觉得它们会在时机成熟时上市。我认为 openai 在公司重组方面有更多的复杂性。所以，如果它们比 anthropic 晚上市，我不会感到惊讶。但事实上，我不知道。今天，当我坐在这里时，altimeter 会在这两个 ipo 中以大规模和体量买入。 jcal： 在 3 万亿美元的估值上，你是会买入，还是说，“嘿，股价肯定会涨跌，我不急”？因为我想是你之前在节目上说过，或者是在 liquidity live 上，当我直接问你，嘿，散户应该参与 spacex 吗？你当时说，嘿，听着，它只有 4% 或 5% 的流通股。它会上下波动，但一年后它的交易价格可能基本不变。它会被定价到完美，现在看来确实如此。你的立场是它会被合理定价，你有足够的时间买入，不用恐慌。 brad： 是的。一旦一家公司估值超过万亿美元，快速致富的计划就结束了。对吧？我和 jason 有一个共同的热情，我们要让散户投资者，让美国公民更早地参与到这些创造价值的机会中来。 jcal： 是的。 brad： 对吧？这个国家的合格投资者法律是疯狂的，阻止了人们参与这些事。但现状就是这样。所以它们以超过万亿美元的估值上市。我仍然认为在 spacex、anthropic、openai 上还有很多肉。但是，我不期望它们会像预期的那样，在 ipo 后给你 50% 到 100% 的持久上涨。如果是那样，那意味着它们在 ipo 时可能被错误定价了。但我确实认为这些公司会成为复利机器。它们会以收入复利的速度增长。我认为所有这些公司都将在未来多年以远高于 30% 的速率增长。 jcal： 每年 30%——让大家明白，在公共市场上，在已经非常大的收入基数上实现高增长，这很不容易。从 1 亿增长 30% 是一回事，从 100 亿或 1000 亿增长 30% 是完全不同的任务。那么，我们来谈谈这两家公司，chamath，公众会如何看待它们？chatgpt 似乎是大型语言模型的公众品牌、消费品牌。而 claude 选择了企业路线。看起来 openai 被 sora 和迪士尼关系、与 jony ive 做的硬件等消费端的事情分心了。然后他们意识到，哦，收入似乎首先来自企业。当回顾时，这会成为一个巨大的错误吗？它们把谷歌那样的高增长位置让给了 claude 和 anthropic，而自己拿了雅虎的位置。或者你认为它们会在企业方面迎头赶上？也许它们应该回到消费者版本上。一年后它们会如何定位？公众会怎么看它们？ chamath： 企业收入的问题是，最终花钱的人需要看到投资回报率（roi）。" style="--index: 2">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">02</span>
+                    <span class="timeline-meta">03:20–14:40</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>万亿市值 IPO：Anthropic 与 OpenAI 的上市前景</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>Chamath 认为问题在于市场的清算价格，并指出 OpenAI 的现金消耗仍很高，而 Anthropic 可能“意外地盈利”。</li>
+<li>Brad 认为 SpaceX 的 IPO 为 Anthropic 和 OpenAI 提供了完美的路线图，并预测它们几乎 100% 会在 6-9 个月内上市。</li>
+<li>讨论 SpaceX IPO 中关于指数的“早期纳入”争议，Brad 辩称规则调整是必要的，因为公司规模太大太重要。</li>
+<li>JCal 对比了 OpenAI 和 Anthropic 的市场定位：OpenAI 偏向消费者，而 Anthropic 偏向企业；并质疑 OpenAI 的消费者策略是否是个失误。</li>
+<li>Chamath 提出一个尖锐问题：企业收入的可持续性在于能否证明 ROI。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li><strong>Lock-up（锁定期）：</strong> IPO 后，公司内部人员和早期投资者被禁止出售股票的一段时间。</li>
+<li><strong>指数早期纳入：</strong> 一家公司 IPO 后，通常要等一段时间才会被纳入主要股票指数（如 S&amp;P 500）。SpaceX 寻求了更快的纳入流程。</li>
+<li><strong>S-1 文件：</strong> 公司在美国证监会（SEC）注册上市时提交的招股说明书。</li>
+<li><strong>Altimeter Capital：</strong> Brad Gerstner 创办的投资公司。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>Chamath：</strong> 嗯，我认为这些都是伟大的企业。我认为问题在于市场的出清价格是多少。而这更多地取决于市场吸收新发行股票的能力和规模。这是第一点。我认为这主要由价格决定。所以我认为 Anthropic 和 OpenAI 可能处于两种不同的情况。我们上次听到 OpenAI 的消息时，它们的现金消耗仍然很高，因为其业务性质分散，更多依赖消费者而非企业。我记得 Brad 在某一期节目中提到过，Anthropic 可能“意外地盈利了”。我记得他好像是这么说的。</p>
+<p><strong>Brad：</strong> 是的。</p>
+<p><strong>Chamath：</strong> 我给你讲一个非常有趣的事情。我今天和我的 CTO 坐下来，我问：“我们在 token 支出上情况如何？”他说了一句让我非常震惊的话。他说：“现在，我们的 token 成本每 45 天就翻一番。”</p>
+<p><strong>JCal：</strong> 好吧。</p>
+<p><strong>Chamath：</strong> 我当时就“呃”了一下。他说，是的。我问，那下游的生产力提升呢？他说，最多只有 5%。</p>
+<p><strong>JCal：</strong> 好吧。</p>
+<p><strong>Chamath：</strong> 我说，好吧，所以我的成本每 45 天翻一番，而我的收益基本持平。他基本也同意。我说，你解释一下为什么会这样。他说，老实说，我们发现在这个阶段，要获得下一轮改进，你需要使用更多的 token，因为我们实际上已经触及了天花板。我说，那我们该怎么办？他说，说实话，我们必须想办法解决这个问题。所以我们打算退一步，看看怎么处理。我不知道其他公司会如何，但关键是，未来 3、4 年内，所有人都肯定会经历这个过程。所以我怀疑，如果你现在能退出（上市），就应该马上退，在所有这些事情开始显现影响之前。因为这可能是你以高价退出并筹集巨额资金的时机。</p>
+<p><strong>JCal：</strong> 好的，Brad，你在这两家公司都投资了很多，所以你可能有一些好的见解。你认为它们在接下来的 6 到 9 个月里上市的可能性有多大？两家都是？你会说 100% 可能，除非有些外部事件发生，比如台湾被封锁之类的黑天鹅事件？你觉得我们什么时候能在北海道滑雪时看到它们上市？</p>
+<p><strong>Brad：</strong> 是的，我认为可能性非常高。但让我先说一点，你知道，SpaceX 的 IPO，我们也是其中的投资者，我也参与了 IPO。我的意思是，这是一个教科书式的案例。这是一个非常成功的 IPO。他们以 1.75 万亿美元的估值筹集了 750 亿美元。好吧，它是以低于我们当前的价格发行的，然后上涨了 25%。在大约 350 亿美元的远期营收基础上。所以如果你考虑这个收入倍数，它是在大约 2 万亿美元的市值上，基于 350 亿美元的营收。这是一个令人难以置信的成就。我认为这是个教科书案例。我认为 Anthropic 和 OpenAI 都在密切观察，因为坦率地说，我们以前从未有过这么大体量的 IPO。所以，功劳归功于 Elon，归功于团队，Bret 和 Gwen，他们在那次 IPO 中真正开拓了一些非常聪明和有趣的东西。所以，你从 Gavin 那里听到，Anthropic 据传收入将超过 1000 亿美元，而 SpaceX 是 350 亿。如果它们年底达到 1000 亿，这意味着它们明年的 GAAP 收入可能远超过 1000 亿。所以，基于 SpaceX 的成功，我认为这将会是一个轰动的 IPO。</p>
+<p><strong>JCal：</strong> 我认为 SpaceX 在很多方面，比如总融资额、定价、流动性、纳入指数、如何处理锁定期，都为它们指明了道路。我觉得它们已经去观摩学习过了。</p>
+<p><strong>Brad：</strong> 它在解除锁定方面采用了分阶段释放的方式。</p>
+<p><strong>JCal：</strong> 必须达到某些里程碑，有些是时间上的，有些是早期纳入指数，筹集 750 亿美元。</p>
+<p><strong>Brad：</strong> 比如说，早期纳入指数。让我解释一下这一点。</p>
+<p><strong>JCal：</strong> 是的。</p>
+<p><strong>Brad：</strong> 因为有人说，嘿，这可能感觉不公平，别人被强迫买入它。你怎么看？这是不是只是黑粉在喷，还是有什么道理？</p>
+<p><strong>Sacks：</strong> 我觉得这种担忧是合理的，对吧？这种事以前从未发生过——</p>
+<p><strong>JCal：</strong> 合理的担忧是什么？</p>
+<p><strong>Brad：</strong> 是的，合理的担忧是，一家尚未经过 IPO 后市场检验的公司，其股价会非常波动。Jason，你看到过那张图表，IPO 后 6 个月内的峰谷回撤是 50%。我们在这里也看到了很大的回撤。所以你不希望在峰值把它塞进指数，然后让人们承受 30% 的回撤，这在 IPO 中经常发生，因为人们很兴奋，它会冲高。但这次他们没有这样做。有人担心会发生这种情况。所以，交易所和指数都看了看，并做了一些修改，因为反方论点是它太大了、太重要了，必须成为指数的一部分，对吧？过去存在这些规则的原因是，大多数上市公司都更年轻、更早期、经受考验较少、收入更少、盈利更少，在整体格局中没那么重要。所以我认为他们开创了一些非常聪明的东西。它运作得很好，交易也很好。所以我认为这为 Anthropic 提供了一份蓝图。但就热情而言，像 Altimeter、Fidelity、T. Rowe 这些机构，它们会根据我们今天所知的盈利状况、模型改进和收入增长等，热衷于购买 Anthropic 吗？是的，所有人都会蜂拥而入。所有人都会争相挤进买入名单的第一位。而且，我上次听说，又是一个传闻，Anthropic 希望在今年上市。每个人都知道 Anthropic 在收入增长曲线上已经超过了 OpenAI。但我要告诉你，OpenAI 已经找回了它的信心和魔力。它今天刚刚发布了一整套新模型。我们知道 GPT-6，有很多传言说它将在未来 30 天内发布，新一代的模型。我认为它的营收已经重新回升。我在 X 上看到的最新传闻大约是在 700 亿美元。所以，提醒一下，700 亿美元可能不到 Anthropic 传闻中的 1000 亿美元，但它仍然是 SpaceX 收入的两倍。所以，它们能在那种收入增长下，作为两个前沿实验室之一，以超过万亿美元的估值上市吗？我认为答案是肯定的。我不确定它们两个谁先上市有巨大的竞赛。我觉得它们会在时机成熟时上市。我认为 OpenAI 在公司重组方面有更多的复杂性。所以，如果它们比 Anthropic 晚上市，我不会感到惊讶。但事实上，我不知道。今天，当我坐在这里时，Altimeter 会在这两个 IPO 中以大规模和体量买入。</p>
+<p><strong>JCal：</strong> 在 3 万亿美元的估值上，你是会买入，还是说，“嘿，股价肯定会涨跌，我不急”？因为我想是你之前在节目上说过，或者是在 Liquidity Live 上，当我直接问你，嘿，散户应该参与 SpaceX 吗？你当时说，嘿，听着，它只有 4% 或 5% 的流通股。它会上下波动，但一年后它的交易价格可能基本不变。它会被定价到完美，现在看来确实如此。你的立场是它会被合理定价，你有足够的时间买入，不用恐慌。</p>
+<p><strong>Brad：</strong> 是的。一旦一家公司估值超过万亿美元，快速致富的计划就结束了。对吧？我和 Jason 有一个共同的热情，我们要让散户投资者，让美国公民更早地参与到这些创造价值的机会中来。</p>
+<p><strong>JCal：</strong> 是的。</p>
+<p><strong>Brad：</strong> 对吧？这个国家的合格投资者法律是疯狂的，阻止了人们参与这些事。但现状就是这样。所以它们以超过万亿美元的估值上市。我仍然认为在 SpaceX、Anthropic、OpenAI 上还有很多肉。但是，我不期望它们会像预期的那样，在 IPO 后给你 50% 到 100% 的持久上涨。如果是那样，那意味着它们在 IPO 时可能被错误定价了。但我确实认为这些公司会成为复利机器。它们会以收入复利的速度增长。我认为所有这些公司都将在未来多年以远高于 30% 的速率增长。</p>
+<p><strong>JCal：</strong> 每年 30%——让大家明白，在公共市场上，在已经非常大的收入基数上实现高增长，这很不容易。从 1 亿增长 30% 是一回事，从 100 亿或 1000 亿增长 30% 是完全不同的任务。那么，我们来谈谈这两家公司，Chamath，公众会如何看待它们？ChatGPT 似乎是大型语言模型的公众品牌、消费品牌。而 Claude 选择了企业路线。看起来 OpenAI 被 Sora 和迪士尼关系、与 Jony Ive 做的硬件等消费端的事情分心了。然后他们意识到，哦，收入似乎首先来自企业。当回顾时，这会成为一个巨大的错误吗？它们把谷歌那样的高增长位置让给了 Claude 和 Anthropic，而自己拿了雅虎的位置。或者你认为它们会在企业方面迎头赶上？也许它们应该回到消费者版本上。一年后它们会如何定位？公众会怎么看它们？</p>
+<p><strong>Chamath：</strong> 企业收入的问题是，最终花钱的人需要看到投资回报率（ROI）。</p></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="14:40–23:17 ai roi 之争：企业支出与模型价值 本段核心内容： chamath 用 s&amp;p 500 的每股收益（eps）增长数据质疑 ai 的 roi，认为给 nvidia 的钱不能算作 ai 的回报。 brad 则认为处于早期阶段，tam 巨大，且成本优化正从工程师扩散到全公司，uber cto 的案例说明企业正在深入部署 ai。 双方围绕“成本优化”和“价值创造”展开辩论：chamath 认为企业 cfo 将会出手削减成本，brad 认为前沿模型的价值不可替代。 背景解释与关键术语： eps（每股收益）： 衡量公司盈利能力的指标。 tam（总可寻址市场）： 一个产品或服务的潜在市场总规模。 roi（投资回报率）： 投资回报与投资成本的比率。 s&amp;p 493： 去掉 nvidia 等因 ai 热潮而业绩大增的公司后的指数，用以观察 ai 对其他行业的基本面影响。 前瞻部署工程师： 将工程师派到业务部门，以便更好地理解业务需求并开发解决方案。 详细中文整理： chamath： 企业收入的问题是，最终花钱的人需要看到投资回报率（roi）。我问了 anthropic 的新模型 fable 5：自 2024 年以来，ai 对 s&amp;p 500 每股收益的增长率贡献是多少？它回答说是 50%。然后我仔细一看，发现它把 nvidia 卖芯片赚的钱也算进去了。我问了另一个问题：那么 s&amp;p 493 的 eps 增长是多少？答案是 9%。我说，好吧，那不一样了。我再深入挖掘，发现其中绝大部分来自定价权（通货膨胀导致涨价），另外 3% 来自股票回购。所以，根据所有公开数据，实际的 ai roi 大约是 0% 到 2%。所以，我不知道。企业看起来很好，但问题在于像 brad 和 gavin 这样精明的投资者，最终会开始问公司，你们的 roi 是多少？实际的 eps 提升是多少？如果答案是，嗯，我不确定，而且你没有定价权来提高价格。那么企业市场可能相当脆弱，因为买家更少，要求更高。相反，消费者市场则成为不可思议的避风港，因为你有数千万买家。比你大两个数量级的买家，在更小的价格点上，让你免受 roi 讨论的影响。所以这完全取决于这些钱的实际 roi 是多少。我认为我们正处在被收入增长规模震惊的阶段。但迟早，你会问，谁在付钱给你，他们能持续付下去吗？我只是不知道这个问题的答案。总有一天，人们将不得不回答这个问题。如果每年在 token 上花 100 万美元，而这个数字还在翻番、翻三倍、四倍，你最终必须展示一个高于无风险回报率的 roi。否则，你就会有一些愤怒的投资者找上门。 jcal： 我们过去几周在节目里的讨论就围绕这个。这个行业已经在所有 cto、ceo 和资本配置者聚集的地方——x.com（原 twitter）上做出了回应。这是 uber 的 cto praveen 的帖子。当被问及他们如何获得 roi 时，人们现在把这个问题提到了前台，并在 x 上解释。他提到，uber 之前也是第一季度就把所有 token 用完了的公司。但在业务的另一边，涉及法务、市场、客服、hr 和采购等领域，他说，如今我们 99% 的工程师在使用 ai 工具。超过 70% 的 pull requests 由本地或云端 agent 完成。我们的工程师已经构建了 2500 个 agentic 技能。那么如何将 agentic ai 扩展到工程之外？他们决定的做法是建立“agentic pods”。这在我看来正是方向：把工程师（我们讨论过的“前瞻部署工程师”）派到各个部门，和那些理解系统思维的部门主管一起工作。 jcal： 总之，他说的意思是他们在业务运营端取得了巨大进展。brad，你对 uber 很熟悉，也长期支持它。这是一家很懂如何部署技术的公司，由 dara 这个运营机器管理。 brad： 他们应该报告可归因于 ai 的 eps 收益。 jcal： 是的，但第一步似乎很周到。先是，嘿，token 支出失控了，我们需要暂停并审视。然后是，这是它将如何降低成本、提高效率的方法。brad，我们谈谈这方面，不仅仅是开发者像拉老虎机一样 token maxing，而是更策略地部署到这些部门。 brad： 是的。首先我要说，chamath 是对的。唯一的问题是时间框架。毫无疑问，今天有很多钱花在了实验性质的项目上。chamath，你说的对，可能没有直接的 roi，但我觉得我们太早期了，没人关心。在企业采用层面，我们太早了。记住，这个 tam 是地球上所有的大、中、小公司。我们从未见过这样的收入增长，因为我们从未见过这么大的 tam。而且这些业务的收入分布不是集中在四五个客户手里。有数百万的独立客户，每天都独立地、经济地做出对他们自己合理的决定，就像 uber 的 praveen 那样。当然，他们现在努力在成本端找到节省，来证明他们在 token 上的投资是合理的。但我认为我们正处于智能突破的边缘，这将极大地改变许多公司的收入方程式。 brad： 例如，jensen huang 多次说过，nvidia 所有的设计工作现在都使用 ai 来设计下一代芯片。机器在构建机器。所以，即使你想，你也无法与之分离。在 jensen 所处的边界，微小的智能优势是必需的。我认为他不会使用除了最好的模型之外的任何东西。所以我认为接下来几年我们看不到泡沫破裂。你会看到成本优化在幕后发生，就像 salesforce 那样，但它们的收入增长不会停止。它们会进一步渗透用例和企业。让我说一个挑衅的观点：如果它们（前沿模型公司）年底营收超过 1000 亿美元，我认为它们明年收入还能再增长 3 到 5 倍。 jcal： 从 1000 亿到 3000 亿或 4000 亿？ brad： 是的，jason，就像我们讨论过的，当一个公司从 1 亿增长到 3 亿时，我们就觉得难以置信了。现在我们说的是从 1000 亿到 3000 亿。2000 亿美元的增量收入，在硅谷历史上，甚至在世界历史上，都是不可思议的。所以，仅仅是我们能接近这个数字的讨论，就表明一些不同寻常的事情正在发生。我认为不同之处在于，智能是我们见过的世界上最大的 tam。这些前沿实验室正在渗透它。所以是的，像 8090 和 chamath 在帮助的、那些正在优化 token 支出、处于早期采用阶段的高度复杂公司，100% 正在发生成本优化。但这并没有真正改变前沿实验室所处的收入增长轨道。" style="--index: 3">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">03</span>
+                    <span class="timeline-meta">14:40–23:17</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>AI ROI 之争：企业支出与模型价值</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>Chamath 用 S&amp;P 500 的每股收益（EPS）增长数据质疑 AI 的 ROI，认为给 NVIDIA 的钱不能算作 AI 的回报。</li>
+<li>Brad 则认为处于早期阶段，TAM 巨大，且成本优化正从工程师扩散到全公司，Uber CTO 的案例说明企业正在深入部署 AI。</li>
+<li>双方围绕“成本优化”和“价值创造”展开辩论：Chamath 认为企业 CFO 将会出手削减成本，Brad 认为前沿模型的价值不可替代。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li><strong>EPS（每股收益）：</strong> 衡量公司盈利能力的指标。</li>
+<li><strong>TAM（总可寻址市场）：</strong> 一个产品或服务的潜在市场总规模。</li>
+<li><strong>ROI（投资回报率）：</strong> 投资回报与投资成本的比率。</li>
+<li><strong>S&amp;P 493：</strong> 去掉 NVIDIA 等因 AI 热潮而业绩大增的公司后的指数，用以观察 AI 对其他行业的基本面影响。</li>
+<li><strong>前瞻部署工程师：</strong> 将工程师派到业务部门，以便更好地理解业务需求并开发解决方案。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>Chamath：</strong> 企业收入的问题是，最终花钱的人需要看到投资回报率（ROI）。我问了 Anthropic 的新模型 Fable 5：自 2024 年以来，AI 对 S&amp;P 500 每股收益的增长率贡献是多少？它回答说是 50%。然后我仔细一看，发现它把 NVIDIA 卖芯片赚的钱也算进去了。我问了另一个问题：那么 S&amp;P 493 的 EPS 增长是多少？答案是 9%。我说，好吧，那不一样了。我再深入挖掘，发现其中绝大部分来自定价权（通货膨胀导致涨价），另外 3% 来自股票回购。所以，根据所有公开数据，实际的 AI ROI 大约是 0% 到 2%。所以，我不知道。企业看起来很好，但问题在于像 Brad 和 Gavin 这样精明的投资者，最终会开始问公司，你们的 ROI 是多少？实际的 EPS 提升是多少？如果答案是，嗯，我不确定，而且你没有定价权来提高价格。那么企业市场可能相当脆弱，因为买家更少，要求更高。相反，消费者市场则成为不可思议的避风港，因为你有数千万买家。比你大两个数量级的买家，在更小的价格点上，让你免受 ROI 讨论的影响。所以这完全取决于这些钱的实际 ROI 是多少。我认为我们正处在被收入增长规模震惊的阶段。但迟早，你会问，谁在付钱给你，他们能持续付下去吗？我只是不知道这个问题的答案。总有一天，人们将不得不回答这个问题。如果每年在 token 上花 100 万美元，而这个数字还在翻番、翻三倍、四倍，你最终必须展示一个高于无风险回报率的 ROI。否则，你就会有一些愤怒的投资者找上门。</p>
+<p><strong>JCal：</strong> 我们过去几周在节目里的讨论就围绕这个。这个行业已经在所有 CTO、CEO 和资本配置者聚集的地方——X.com（原 Twitter）上做出了回应。这是 Uber 的 CTO Praveen 的帖子。当被问及他们如何获得 ROI 时，人们现在把这个问题提到了前台，并在 X 上解释。他提到，Uber 之前也是第一季度就把所有 token 用完了的公司。但在业务的另一边，涉及法务、市场、客服、HR 和采购等领域，他说，如今我们 99% 的工程师在使用 AI 工具。超过 70% 的 pull requests 由本地或云端 agent 完成。我们的工程师已经构建了 2500 个 agentic 技能。那么如何将 agentic AI 扩展到工程之外？他们决定的做法是建立“agentic pods”。这在我看来正是方向：把工程师（我们讨论过的“前瞻部署工程师”）派到各个部门，和那些理解系统思维的部门主管一起工作。</p>
+<p><strong>JCal：</strong> 总之，他说的意思是他们在业务运营端取得了巨大进展。Brad，你对 Uber 很熟悉，也长期支持它。这是一家很懂如何部署技术的公司，由 Dara 这个运营机器管理。</p>
+<p><strong>Brad：</strong> 他们应该报告可归因于 AI 的 EPS 收益。</p>
+<p><strong>JCal：</strong> 是的，但第一步似乎很周到。先是，嘿，token 支出失控了，我们需要暂停并审视。然后是，这是它将如何降低成本、提高效率的方法。Brad，我们谈谈这方面，不仅仅是开发者像拉老虎机一样 token maxing，而是更策略地部署到这些部门。</p>
+<p><strong>Brad：</strong> 是的。首先我要说，Chamath 是对的。唯一的问题是时间框架。毫无疑问，今天有很多钱花在了实验性质的项目上。Chamath，你说的对，可能没有直接的 ROI，但我觉得我们太早期了，没人关心。在企业采用层面，我们太早了。记住，这个 TAM 是地球上所有的大、中、小公司。我们从未见过这样的收入增长，因为我们从未见过这么大的 TAM。而且这些业务的收入分布不是集中在四五个客户手里。有数百万的独立客户，每天都独立地、经济地做出对他们自己合理的决定，就像 Uber 的 Praveen 那样。当然，他们现在努力在成本端找到节省，来证明他们在 token 上的投资是合理的。但我认为我们正处于智能突破的边缘，这将极大地改变许多公司的收入方程式。</p>
+<p><strong>Brad：</strong> 例如，Jensen Huang 多次说过，NVIDIA 所有的设计工作现在都使用 AI 来设计下一代芯片。机器在构建机器。所以，即使你想，你也无法与之分离。在 Jensen 所处的边界，微小的智能优势是必需的。我认为他不会使用除了最好的模型之外的任何东西。所以我认为接下来几年我们看不到泡沫破裂。你会看到成本优化在幕后发生，就像 Salesforce 那样，但它们的收入增长不会停止。它们会进一步渗透用例和企业。让我说一个挑衅的观点：如果它们（前沿模型公司）年底营收超过 1000 亿美元，我认为它们明年收入还能再增长 3 到 5 倍。</p>
+<p><strong>JCal：</strong> 从 1000 亿到 3000 亿或 4000 亿？</p>
+<p><strong>Brad：</strong> 是的，Jason，就像我们讨论过的，当一个公司从 1 亿增长到 3 亿时，我们就觉得难以置信了。现在我们说的是从 1000 亿到 3000 亿。2000 亿美元的增量收入，在硅谷历史上，甚至在世界历史上，都是不可思议的。所以，仅仅是我们能接近这个数字的讨论，就表明一些不同寻常的事情正在发生。我认为不同之处在于，智能是我们见过的世界上最大的 TAM。这些前沿实验室正在渗透它。所以是的，像 8090 和 Chamath 在帮助的、那些正在优化 token 支出、处于早期采用阶段的高度复杂公司，100% 正在发生成本优化。但这并没有真正改变前沿实验室所处的收入增长轨道。</p></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="23:17–35:25 底层兴起与开源 vs. 闭源之争 本段核心内容： jcal 认为这是一个“底层兴起”的产品，每个员工都可以用公司卡每月花 20 美元，导致普及速度极快，成本相对薪水微不足道。 chamath 以自己使用 bittensor 网络将 token 成本降低 95% 为例，阐述了 jevons 悖论：成本下降会导致使用量激增。 brad 引用数据显示，尽管开源模型使用量增加，但闭源前沿模型的经济价值份额在上升，推翻了“开源将杀死前沿模型”的普遍观点。 chamath 警告，企业 cfo 最终会介入，对企业 ai 支出进行审计。 背景解释与关键术语： jevons 悖论： 当一种资源的使用效率提升、成本下降时，其总消耗量反而会增加，而不是减少。 bittensor / tao： 一个基于加密货币的去中心化机器学习网络，允许用户以极低成本使用模型。 openrouter： 一个模型路由平台，用户可以通过它调用多种模型。 sovereign ai（主权 ai）： 国家建立自己的 ai 基础设施和模型，以减少对外国技术的依赖。 nimpoc（并非在我的投资组合中）： 对 nimby（不要在我的后院）的改编，指投资者不希望某类资产出现在自己的投资组合中。在此语境下，sacks 用此词形容投资者对该领域的态度。 详细中文整理： jcal： 这项技术非常独特的一点是，我们称之为“按需智能”。过去一个软件或技术革新，通常只惠及组织里的一两个部门。但 ai 不同。每个组织里的每一个人都在使用这些工具。如果所有人都在用，所有人都在尝试同时应用。一个 1000 人的组织，每人每月花 200 美元。然后 chamath，成本每若干个月翻一倍。现在每人每月花 400 美元。如果年薪是 10 万或 15 万美元，这仅仅是其薪资的 3% 到 5%。所以问题是，它是否让这些人提高了 3 到 5 倍的效率？我认为答案是肯定的。这就是为什么有这么多 token maxing。这也是一个底层兴起的产品。你每个月花 20 美元就能用上，没有 cio 或 cto 会阻止你用公司卡花这 20 美元。当一个底层技术同时触及所有人时，就能解释我们难以理解的收入增长曲线。chamath，我问你，有什么组织的哪个部门会说：“按需智能？”不，我们不使。 chamath： 好吧，与其说是拒绝，不如说是监管等因素不允许你按自己的意愿使用它。比如金融、医疗（hipaa）、hr 数据，现在还不能乱用。我发现一旦你开始使用并获得一些收益，就会非常上瘾。brad，大概今年 1 月，我遇到了那个 openclaw bug。然后我开始玩那个叫 hermes 的 agent（不是法国公司，他们只是用法语名字起名）。这是一款非常奇特的软件，但非常开放。我去 openrouter 用我自己的 key 开始玩。我做了一些事情。然后我讨论了一点 bittensor，也就是 tao。那是一个加密项目，有人创建了一个子网，以极低的价格提供 glm 5.2 等模型。我瞬间就经历到了 token 成本下降 95%。当你拥有无限的 token 时，这最终会发生在每个人身上。因为 groq 之类的公司（专注于推理），大家都在用推理。推理正在受到三四种方式的冲击：软件在变好，开源的进步，像 tau 这样的分布式网络，以及 groq 和 cerebras 等公司更好的芯片。当我的成本降低了 95%，我开始把 agent 从每日运行改为每小时运行。然后我把一个 agent 拆分成三个，让它们每小时做三件不同的事。当你开始每小时运行任务，第二天早上醒来发现 14 个任务已经完成了，你会觉得这完全不一样了。举个例子，我有一个 agent 收集所有 all-in 和 this week in startups 的剧集，设置 cron 任务去发现技术新趋势。我有一个趋势发现 agent，每小时运行一次，告诉我最热的三四个趋势。成本下降真的会改变你的思维方式。brad，你觉得明年的 token 成本会是多少？ brad： 是的，过去 2.5 年里，我们每年都看到 token 价格下降 90%。我们讨论过很多次 jevons 悖论，我认为你刚指出的就是这个：当成本下降时，你使用得会多得惊人。我认为目前 ai 领域核心的争论，就是 chamath 一直把我们引向的方向：自从 deepseek 时刻以来的 18 个月里发生了什么？当 deepseek 时刻发生时，市场下跌了 40%，这是有原因的。许多人开始争论，前沿模型完蛋了，开源会杀了它们，模型路由会让廉价 token 更容易被使用。但是，尽管有这些争论，现在我们进入这个周期 18 个月了，事实恰恰相反。经济价值的份额，我觉得应该提一下 jesse zhang 这周发的一条推特。经济价值和钱包份额实际上在增加，流向前沿模型，而 commodity token 的份额显然在流向其他模型。我这周和 nikesh 讨论过这个问题，想弄清楚为什么。因为人们本会认为，更便宜、足够好的 90% 的模型就能完成你所说的所有任务。所以没人会用 anthropic 或 openai。但尽管如此，它们的经济价值份额似乎上升了。 jcal： 我不这么认为。我认为更像是 iphone 刚兴起时，大家都会升级，因为觉得新价格值得。但到了某个时候，人们会说，旧的手机已经够好了，我看不出区别。ai 也会有这样一个时刻。比如我用 fable 5，问题在于它在很多事上被限制了。我周末和一个朋友在一起，他谈到一个健康问题，我把它输入 fable，它拒绝回答。我想，好吧。所以每个人都会在某个时刻觉得，我用的模型真的不重要吗？只要能得到我认为合理的答案就行了。另外，我认为当企业 cfo 介入时，那会是另一场完全不同的对话。我可以告诉你，在参加了 benioff、jensen 和 brad smith 那个联合国委员会之后，世界上没有一个国家不在试图弄清楚自己的主权 ai 策略。我不认为他们相信使用一个闭源的美国模型是答案。所以我们必须牢记几个趋势：一是用户的地理渗透，还有很多很多人没用它；二是实验需要转变为可重复的常规使用；三是所有这些需要与现有监管基础设施结合。综合来看，我不确定谁会赢，除了你会看到选择的多样性。这周之后我可以告诉你，某些国家绝对不想屈服于任何技术风险，他们愿意花钱建立自己的东西。他们会用 nvidia 开源的模型，从头建立自己的完整技术栈，供自己国家的人和公司使用。如果这些模型有 99% 或 95% 那么好，他们会声称“这已经足够好了”。 sacks： 那正是问题所在。 chamath： 然后，还有很多公司不会有足够的盈利增长来证明这些支出的合理性，而又没有勇气进行长期、艰巨的成本削减。你（指 jcal）给 zuck 写过那封著名的信，他是在压力下才最终动手的。除了极少数公司，大多数人只会让问题恶化。所以，我不认为当成本压力来临时，你不会去考虑其他的成本替代方案。如果像可口和百事那样，百事的成本只有千分之一，我不知道，我只是认为这是市场参与者和承销商必须管理的风险。 jcal： 补充一点，brad，开源很难实施，相比之下，直接打开 claude 这个已经在你组织里被批准的软件要容易得多。我花了几个小时配置新的网络接入 bittensor 和 openrouter。如你所说，chamath，它会动态路由。现在我动态路由到 glm 5.2，然后如果失败再回到 claude。但回到哪个 claude？另一条证据是，有些组织就是没能力做这个。他们没有这方面的团队。我们刚提到 uber 的 cto，现在说另一个 cto，doordash 的 andy fang。正如你所见，他发了条推文，说明他们是如何通过内部编码基准测试，谨慎地引入开源模型，用 fable 做最困难的工作，将低级别工作委派给 kimi 2.6。又一个 cto 出来解释他们如何解决 roi 问题。 chamath： 我们需要预测的是，当公司盈利不及预期时会发生什么。如果出现一系列盈利不及预期，人们会看哪里？裁员很难，削减其他成本更容易。这些公司短期内获得巨大成功却没有真正证明 roi，我认为风险越大。与这些企业打交道并解释这一切，很有挑战性。我会说，他们（企业）正在快速变得更聪明。 brad： 我只想说，chamath，你说的关于全球将建立的“主权技术栈”完全正确。这不是二选一。我们既会有开源，也会有前沿智能。目前 token 的大部分已经在转向更便宜的、落后的模型。xai 发布了新的模型。meta 今天也发布了出色的模型。gemini 还在竞争中。所以选择很多。" style="--index: 4">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">04</span>
+                    <span class="timeline-meta">23:17–35:25</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>底层兴起与开源 vs. 闭源之争</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>JCal 认为这是一个“底层兴起”的产品，每个员工都可以用公司卡每月花 20 美元，导致普及速度极快，成本相对薪水微不足道。</li>
+<li>Chamath 以自己使用 BitTensor 网络将 token 成本降低 95% 为例，阐述了 Jevons 悖论：成本下降会导致使用量激增。</li>
+<li>Brad 引用数据显示，尽管开源模型使用量增加，但闭源前沿模型的经济价值份额在上升，推翻了“开源将杀死前沿模型”的普遍观点。</li>
+<li>Chamath 警告，企业 CFO 最终会介入，对企业 AI 支出进行审计。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li><strong>Jevons 悖论：</strong> 当一种资源的使用效率提升、成本下降时，其总消耗量反而会增加，而不是减少。</li>
+<li><strong>BitTensor / TAO：</strong> 一个基于加密货币的去中心化机器学习网络，允许用户以极低成本使用模型。</li>
+<li><strong>OpenRouter：</strong> 一个模型路由平台，用户可以通过它调用多种模型。</li>
+<li><strong>Sovereign AI（主权 AI）：</strong> 国家建立自己的 AI 基础设施和模型，以减少对外国技术的依赖。</li>
+<li><strong>NIMPOC（并非在我的投资组合中）：</strong> 对 NIMBY（不要在我的后院）的改编，指投资者不希望某类资产出现在自己的投资组合中。在此语境下，Sacks 用此词形容投资者对该领域的态度。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> 这项技术非常独特的一点是，我们称之为“按需智能”。过去一个软件或技术革新，通常只惠及组织里的一两个部门。但 AI 不同。每个组织里的每一个人都在使用这些工具。如果所有人都在用，所有人都在尝试同时应用。一个 1000 人的组织，每人每月花 200 美元。然后 Chamath，成本每若干个月翻一倍。现在每人每月花 400 美元。如果年薪是 10 万或 15 万美元，这仅仅是其薪资的 3% 到 5%。所以问题是，它是否让这些人提高了 3 到 5 倍的效率？我认为答案是肯定的。这就是为什么有这么多 token maxing。这也是一个底层兴起的产品。你每个月花 20 美元就能用上，没有 CIO 或 CTO 会阻止你用公司卡花这 20 美元。当一个底层技术同时触及所有人时，就能解释我们难以理解的收入增长曲线。Chamath，我问你，有什么组织的哪个部门会说：“按需智能？”不，我们不使。</p>
+<p><strong>Chamath：</strong> 好吧，与其说是拒绝，不如说是监管等因素不允许你按自己的意愿使用它。比如金融、医疗（HIPAA）、HR 数据，现在还不能乱用。我发现一旦你开始使用并获得一些收益，就会非常上瘾。Brad，大概今年 1 月，我遇到了那个 OpenClaw bug。然后我开始玩那个叫 Hermes 的 agent（不是法国公司，他们只是用法语名字起名）。这是一款非常奇特的软件，但非常开放。我去 OpenRouter 用我自己的 key 开始玩。我做了一些事情。然后我讨论了一点 BitTensor，也就是 TAO。那是一个加密项目，有人创建了一个子网，以极低的价格提供 GLM 5.2 等模型。我瞬间就经历到了 token 成本下降 95%。当你拥有无限的 token 时，这最终会发生在每个人身上。因为 Groq 之类的公司（专注于推理），大家都在用推理。推理正在受到三四种方式的冲击：软件在变好，开源的进步，像 Tau 这样的分布式网络，以及 Groq 和 Cerebras 等公司更好的芯片。当我的成本降低了 95%，我开始把 agent 从每日运行改为每小时运行。然后我把一个 agent 拆分成三个，让它们每小时做三件不同的事。当你开始每小时运行任务，第二天早上醒来发现 14 个任务已经完成了，你会觉得这完全不一样了。举个例子，我有一个 agent 收集所有 All-In 和 This Week in Startups 的剧集，设置 cron 任务去发现技术新趋势。我有一个趋势发现 agent，每小时运行一次，告诉我最热的三四个趋势。成本下降真的会改变你的思维方式。Brad，你觉得明年的 token 成本会是多少？</p>
+<p><strong>Brad：</strong> 是的，过去 2.5 年里，我们每年都看到 token 价格下降 90%。我们讨论过很多次 Jevons 悖论，我认为你刚指出的就是这个：当成本下降时，你使用得会多得惊人。我认为目前 AI 领域核心的争论，就是 Chamath 一直把我们引向的方向：自从 Deepseek 时刻以来的 18 个月里发生了什么？当 Deepseek 时刻发生时，市场下跌了 40%，这是有原因的。许多人开始争论，前沿模型完蛋了，开源会杀了它们，模型路由会让廉价 token 更容易被使用。但是，尽管有这些争论，现在我们进入这个周期 18 个月了，事实恰恰相反。经济价值的份额，我觉得应该提一下 Jesse Zhang 这周发的一条推特。经济价值和钱包份额实际上在增加，流向前沿模型，而 commodity token 的份额显然在流向其他模型。我这周和 Nikesh 讨论过这个问题，想弄清楚为什么。因为人们本会认为，更便宜、足够好的 90% 的模型就能完成你所说的所有任务。所以没人会用 Anthropic 或 OpenAI。但尽管如此，它们的经济价值份额似乎上升了。</p>
+<p><strong>JCal：</strong> 我不这么认为。我认为更像是 iPhone 刚兴起时，大家都会升级，因为觉得新价格值得。但到了某个时候，人们会说，旧的手机已经够好了，我看不出区别。AI 也会有这样一个时刻。比如我用 Fable 5，问题在于它在很多事上被限制了。我周末和一个朋友在一起，他谈到一个健康问题，我把它输入 Fable，它拒绝回答。我想，好吧。所以每个人都会在某个时刻觉得，我用的模型真的不重要吗？只要能得到我认为合理的答案就行了。另外，我认为当企业 CFO 介入时，那会是另一场完全不同的对话。我可以告诉你，在参加了 Benioff、Jensen 和 Brad Smith 那个联合国委员会之后，世界上没有一个国家不在试图弄清楚自己的主权 AI 策略。我不认为他们相信使用一个闭源的美国模型是答案。所以我们必须牢记几个趋势：一是用户的地理渗透，还有很多很多人没用它；二是实验需要转变为可重复的常规使用；三是所有这些需要与现有监管基础设施结合。综合来看，我不确定谁会赢，除了你会看到选择的多样性。这周之后我可以告诉你，某些国家绝对不想屈服于任何技术风险，他们愿意花钱建立自己的东西。他们会用 NVIDIA 开源的模型，从头建立自己的完整技术栈，供自己国家的人和公司使用。如果这些模型有 99% 或 95% 那么好，他们会声称“这已经足够好了”。</p>
+<p><strong>Sacks：</strong> 那正是问题所在。</p>
+<p><strong>Chamath：</strong> 然后，还有很多公司不会有足够的盈利增长来证明这些支出的合理性，而又没有勇气进行长期、艰巨的成本削减。你（指 JCal）给 Zuck 写过那封著名的信，他是在压力下才最终动手的。除了极少数公司，大多数人只会让问题恶化。所以，我不认为当成本压力来临时，你不会去考虑其他的成本替代方案。如果像可口和百事那样，百事的成本只有千分之一，我不知道，我只是认为这是市场参与者和承销商必须管理的风险。</p>
+<p><strong>JCal：</strong> 补充一点，Brad，开源很难实施，相比之下，直接打开 Claude 这个已经在你组织里被批准的软件要容易得多。我花了几个小时配置新的网络接入 BitTensor 和 OpenRouter。如你所说，Chamath，它会动态路由。现在我动态路由到 GLM 5.2，然后如果失败再回到 Claude。但回到哪个 Claude？另一条证据是，有些组织就是没能力做这个。他们没有这方面的团队。我们刚提到 Uber 的 CTO，现在说另一个 CTO，DoorDash 的 Andy Fang。正如你所见，他发了条推文，说明他们是如何通过内部编码基准测试，谨慎地引入开源模型，用 Fable 做最困难的工作，将低级别工作委派给 KIMI 2.6。又一个 CTO 出来解释他们如何解决 ROI 问题。</p>
+<p><strong>Chamath：</strong> 我们需要预测的是，当公司盈利不及预期时会发生什么。如果出现一系列盈利不及预期，人们会看哪里？裁员很难，削减其他成本更容易。这些公司短期内获得巨大成功却没有真正证明 ROI，我认为风险越大。与这些企业打交道并解释这一切，很有挑战性。我会说，他们（企业）正在快速变得更聪明。</p>
+<p><strong>Brad：</strong> 我只想说，Chamath，你说的关于全球将建立的“主权技术栈”完全正确。这不是二选一。我们既会有开源，也会有前沿智能。目前 token 的大部分已经在转向更便宜的、落后的模型。XAI 发布了新的模型。Meta 今天也发布了出色的模型。Gemini 还在竞争中。所以选择很多。</p></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="35:25–42:57 zuck 的价格战与企业 cto 的困境 本段核心内容： sacks 指出扎克伯格试图通过低价模型发动价格战。 jcal 展示了扎克伯格的帖子，宣布发布高性能低价模型。 brad 认为，对于关键任务，使用昂贵但可靠的前沿模型是值得的，因为错误成本高。 sacks 认为企业 cto 希望转向低成本模型，但多数缺乏技术能力，所以实际上开源模型的企业份额在下降。 背景解释与关键术语： musespark： 节目中提到的 meta 新模型名称（对应扎克伯格的帖子）。 详细中文整理： sacks： meta 这件事很有意思。我们讨论过博弈论，马克应该用开源模型“焦土”策略。我以为他们搞砸了。但看起来他现在要发动价格战。他宣布要提供相同质量的模型，但成本只有百分之一。当然，中间有很多事情，企业分发很复杂，但很有趣的是，挑战的载体是成本。 jcal： 这是马克·扎克伯格的帖子，他的旧账号是 finkd。他今天关于这个 musespark 公告发的帖子比他历史上都多。他正在加入 x 的讨论。“今天我们发布 musespark 1.1，一个强大的 agentic 编码模型，价格非常低。可通过我们的新 meta 模型 api 和 meta ai 使用。”所以他在说，“嘿，我们有最强的 agentic 工具，来用吧。”他还想进入 token 提供市场。 sacks： 所以，我们会有大量的选择。竞争对美国是好的。但让我举个例子。如果你在做一项高价值任务，比如让一个 ai agent 替代一个时薪 200 美元的顾问。花费 3 美元用便宜模型还是 15 美元用昂贵模型来替代这个 200 美元一小时的顾问，推理成本差异是无关紧要的。如果你花 15 美元能得到一个万无一失的结果，你就会选它。这就是我们看到的。最好的证据就是收入增长。我们可以整天猜测这家公司在做什么。来自不同公司的数百万独立行动者每天都在选择。那家开源公司也在增长，但他们卖的是非常便宜的东西。每一级市场都有空间——高端、中端和低端产品。人们猜测商品模型与前沿模型之间的智能差距会缩小到没人再愿意为前沿模型付费。今天，现场没有证据表明这一点。未来几年可能会发生，但今天没有。 jcal： 为了让大家更具体地了解主权 ai，阿联酋的阿布扎比技术研究所推出了 falcon 模型。沙特有 humane，在开发阿拉伯语模型。日本投资 60 亿美元成立 neoterra 联盟，目标是物理 ai（机器人）。sacks，你参与了这个 ro i 的讨论。很多 cto 在 x 上说他们如何用智能路由先把任务送到开源模型，失败后再回退到前沿模型。你怎么看？如果你投资前沿模型，面对 cfo 的质疑和更便宜的替代方案，你怎么思考其增长？ sacks： 好吧，我认为企业 cto 当然希望把 token 消费转移到更便宜的模型上，因为那样更有效率。他们看到 token 成本在飙升，每个人都在想办法刹车。他们还有上周我们讨论的 ai 主权问题：担心自己的商业机密被一方参与竞争的前沿实验室得到。毫无疑问，企业希望实现多元化，在可能的情况下脱离前沿模型。问题是，在大多数情况下，他们没有技术能力做到这一点。coinbase 搞定了，doordash 搞定了，他们构建了 token 路由系统，一个中间件层。但我不认为一般企业有这样的技术能力。所以这个例子是，“心有余而力不足”。他们有愿望，但没能力。这就是为什么闭源模型的经济价值份额反而增加了。开源模型的企业支出份额从去年的 19% 降到了今年的 11%。但这不意味着使用量在下降，我认为两者的使用量都在飙升。但任何人说闭源模型会输或正在输，你从数据里根本看不到。收入正在飙升。你最多可以说，有技术能力的企业希望朝混合架构发展，但这也需要技术专长，而对开发者或企业来说，直接使用前沿实验室的东西非常便利。这就是为什么它们的收入也在飙升。 jcal： 这是最容易的选择。 sacks： 最精致的产品。 sacks： 还有一点。decagon 的创始人（做 ai 客服）写过一篇很有意思的博客。他说，开源模型在你确切知道要做什么时很好。为什么？它们是更小、更便宜的模型，但你需要微调（post-training），你需要数据集。如果你不知道要做什么，你想要最强的通用智能。所以成熟的用例用开源，但对不成熟的用例（所有新发现的东西），你会直接使用最强大的通用模型。等你想清楚了工作流是什么，再优化。 jcal： 你在事后优化以获得收益。 sacks： 对客服来说，不需要模型懂物理。所以你必须用最强大的前沿模型来探索技术所有的可能性。我看到的另一篇有趣文章是 nikesh arora 的。他说企业想要“模型可替换性”，他们想把这些模型商品化，就像“无头”（headless）那样，可以随意热插拔。但问题是，如何解决记忆、上下文和历史的问题？如果没人能把这些信息从模型中抽象出来，那么创建最高效 token 路由的中间件层的技术挑战依然存在。除非你能把所有上下文和记忆移植到你想热插拔的便宜模型上。 brad： 那些在前 1% 的技术公司已经开始想办法了。databricks 的创始人 ali 发现，当你拆开任务所用的“工具套件”（harness），看看技能、记忆等组件时，对于同一个模型，选择不同的工具套件可以节省 50% 的成本。我自己的经历也是如此。我让我的 agent 去优化它自己，结果 token 使用减少了 80%。现在你可以去分析栈里看到你的 token 每小时、每项任务的消耗，这非常复杂且困难。 sacks： 他用的工具套件是自建的吗？ brad： 是的，我认为是自主研发的。 chamath： 他用了 omnigent 在前端，可以给不同任务分配不同的工具套件和模型。他不仅在路由到正确的 llm，还在路由到正确的工具套件。大多数人还不知道什么是“技能”和“记忆”。这些都抽象在 claude 或 perplexity 这样的产品里了。以后会有巨大的生意，所有推理云公司（base tens、fireworks，所有云巨头）都会提供工具让你实现一定程度的模型可替换性。最终，局面会是高度异构的，但混合比例是关键。我再次认为 tam 巨大，开源案例和主权案例都很多，前沿实验室也有足够的空间。" style="--index: 5">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">05</span>
+                    <span class="timeline-meta">35:25–42:57</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>Zuck 的价格战与企业 CTO 的困境</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>Sacks 指出扎克伯格试图通过低价模型发动价格战。</li>
+<li>JCal 展示了扎克伯格的帖子，宣布发布高性能低价模型。</li>
+<li>Brad 认为，对于关键任务，使用昂贵但可靠的前沿模型是值得的，因为错误成本高。</li>
+<li>Sacks 认为企业 CTO 希望转向低成本模型，但多数缺乏技术能力，所以实际上开源模型的企业份额在下降。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li><strong>MuseSpark：</strong> 节目中提到的 Meta 新模型名称（对应扎克伯格的帖子）。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>Sacks：</strong> Meta 这件事很有意思。我们讨论过博弈论，马克应该用开源模型“焦土”策略。我以为他们搞砸了。但看起来他现在要发动价格战。他宣布要提供相同质量的模型，但成本只有百分之一。当然，中间有很多事情，企业分发很复杂，但很有趣的是，挑战的载体是成本。</p>
+<p><strong>JCal：</strong> 这是马克·扎克伯格的帖子，他的旧账号是 FinkD。他今天关于这个 MuseSpark 公告发的帖子比他历史上都多。他正在加入 X 的讨论。“今天我们发布 MuseSpark 1.1，一个强大的 agentic 编码模型，价格非常低。可通过我们的新 Meta 模型 API 和 Meta AI 使用。”所以他在说，“嘿，我们有最强的 agentic 工具，来用吧。”他还想进入 token 提供市场。</p>
+<p><strong>Sacks：</strong> 所以，我们会有大量的选择。竞争对美国是好的。但让我举个例子。如果你在做一项高价值任务，比如让一个 AI agent 替代一个时薪 200 美元的顾问。花费 3 美元用便宜模型还是 15 美元用昂贵模型来替代这个 200 美元一小时的顾问，推理成本差异是无关紧要的。如果你花 15 美元能得到一个万无一失的结果，你就会选它。这就是我们看到的。最好的证据就是收入增长。我们可以整天猜测这家公司在做什么。来自不同公司的数百万独立行动者每天都在选择。那家开源公司也在增长，但他们卖的是非常便宜的东西。每一级市场都有空间——高端、中端和低端产品。人们猜测商品模型与前沿模型之间的智能差距会缩小到没人再愿意为前沿模型付费。今天，现场没有证据表明这一点。未来几年可能会发生，但今天没有。</p>
+<p><strong>JCal：</strong> 为了让大家更具体地了解主权 AI，阿联酋的阿布扎比技术研究所推出了 Falcon 模型。沙特有 Humane，在开发阿拉伯语模型。日本投资 60 亿美元成立 Neoterra 联盟，目标是物理 AI（机器人）。Sacks，你参与了这个 RO I 的讨论。很多 CTO 在 X 上说他们如何用智能路由先把任务送到开源模型，失败后再回退到前沿模型。你怎么看？如果你投资前沿模型，面对 CFO 的质疑和更便宜的替代方案，你怎么思考其增长？</p>
+<p><strong>Sacks：</strong> 好吧，我认为企业 CTO 当然希望把 token 消费转移到更便宜的模型上，因为那样更有效率。他们看到 token 成本在飙升，每个人都在想办法刹车。他们还有上周我们讨论的 AI 主权问题：担心自己的商业机密被一方参与竞争的前沿实验室得到。毫无疑问，企业希望实现多元化，在可能的情况下脱离前沿模型。问题是，在大多数情况下，他们没有技术能力做到这一点。Coinbase 搞定了，DoorDash 搞定了，他们构建了 token 路由系统，一个中间件层。但我不认为一般企业有这样的技术能力。所以这个例子是，“心有余而力不足”。他们有愿望，但没能力。这就是为什么闭源模型的经济价值份额反而增加了。开源模型的企业支出份额从去年的 19% 降到了今年的 11%。但这不意味着使用量在下降，我认为两者的使用量都在飙升。但任何人说闭源模型会输或正在输，你从数据里根本看不到。收入正在飙升。你最多可以说，有技术能力的企业希望朝混合架构发展，但这也需要技术专长，而对开发者或企业来说，直接使用前沿实验室的东西非常便利。这就是为什么它们的收入也在飙升。</p>
+<p><strong>JCal：</strong> 这是最容易的选择。</p>
+<p><strong>Sacks：</strong> 最精致的产品。</p>
+<p><strong>Sacks：</strong> 还有一点。Decagon 的创始人（做 AI 客服）写过一篇很有意思的博客。他说，开源模型在你确切知道要做什么时很好。为什么？它们是更小、更便宜的模型，但你需要微调（post-training），你需要数据集。如果你不知道要做什么，你想要最强的通用智能。所以成熟的用例用开源，但对不成熟的用例（所有新发现的东西），你会直接使用最强大的通用模型。等你想清楚了工作流是什么，再优化。</p>
+<p><strong>JCal：</strong> 你在事后优化以获得收益。</p>
+<p><strong>Sacks：</strong> 对客服来说，不需要模型懂物理。所以你必须用最强大的前沿模型来探索技术所有的可能性。我看到的另一篇有趣文章是 Nikesh Arora 的。他说企业想要“模型可替换性”，他们想把这些模型商品化，就像“无头”（headless）那样，可以随意热插拔。但问题是，如何解决记忆、上下文和历史的问题？如果没人能把这些信息从模型中抽象出来，那么创建最高效 token 路由的中间件层的技术挑战依然存在。除非你能把所有上下文和记忆移植到你想热插拔的便宜模型上。</p>
+<p><strong>Brad：</strong> 那些在前 1% 的技术公司已经开始想办法了。Databricks 的创始人 Ali 发现，当你拆开任务所用的“工具套件”（harness），看看技能、记忆等组件时，对于同一个模型，选择不同的工具套件可以节省 50% 的成本。我自己的经历也是如此。我让我的 agent 去优化它自己，结果 token 使用减少了 80%。现在你可以去分析栈里看到你的 token 每小时、每项任务的消耗，这非常复杂且困难。</p>
+<p><strong>Sacks：</strong> 他用的工具套件是自建的吗？</p>
+<p><strong>Brad：</strong> 是的，我认为是自主研发的。</p>
+<p><strong>Chamath：</strong> 他用了 Omnigent 在前端，可以给不同任务分配不同的工具套件和模型。他不仅在路由到正确的 LLM，还在路由到正确的工具套件。大多数人还不知道什么是“技能”和“记忆”。这些都抽象在 Claude 或 Perplexity 这样的产品里了。以后会有巨大的生意，所有推理云公司（Base Tens、Fireworks，所有云巨头）都会提供工具让你实现一定程度的模型可替换性。最终，局面会是高度异构的，但混合比例是关键。我再次认为 TAM 巨大，开源案例和主权案例都很多，前沿实验室也有足够的空间。</p></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="42:57–53:40 智能会收敛吗？超级智能时代的赢家通吃 本段核心内容： brad 提出一个非共识观点：智能可能不会收敛，反而会发散。超级智能是递归的，越强越有钱，越有钱买越多的算力，差距会拉大。 jcal 指出 lovable 和 elevenlabs 这两个前沿实验室的大客户正试图自研模型以摆脱依赖。 sacks 认为市场正走向双头垄断，anthropic 和 openai 瓜分了绝大部分收入，而开源模型的收入是“看不见的”。 chamath 提醒，开源的使用量不体现在收入里（“黑暗 token”），体现在 nvidia 等硬件供应商的账上。 背景解释与关键术语： fable 5： anthropic 新模型名称。 glm 5.2 / kimi： 中国的先进模型。 cerebras / neoclouds： 提供 ai 芯片或算力的公司。 nvidia： 主导 ai 训练和推理芯片市场的公司。 mythos： 节目中提到的 ai 模型名称。 详细中文整理： brad： 让我抛出一个观点。这世界上有一个隐含假设：智能最终会收敛。从基准测试看，好像所有模型都在收敛。但收入分布完全不收敛。我的问题是：模型路由器自身能聪明到超越前沿实验室的固有智能优势吗？非共识的论点可能是，智能根本没有收敛，超级智能是完全自我递归的。它越智能，收入越高；收入越高，能买的算力越多；算力越多，能构建的模型越好。所以未来 2-3 年，随着我们处理更复杂的 agentic 任务，前沿和其余所有人之间的距离不会收敛，反而会拉大。我认为这需要深入研究，而不是默认收敛。 jcal： 另一个数据点：我采访了 lovable（一个 vibe coding 平台）的 ceo anton，他们从 0 到 3.5 亿美元收入用了 2 年。以及 elevenlabs 的 ceo matti。我问他们，你们是前沿模型的大客户（每年消费数千万美元），担心数据泄露和竞品发布吗？两者都表示他们正在研发自己的模型。这些前沿实验室的 8 位甚至 9 位数的大客户，正试图脱离它们。 brad： 反驳点是，elevenlabs 需要世界上最好的语音模型。如果他自研的模型不够好，在一个竞争激烈的市场里，他能冒险使用次优模型吗？ jcal： 但他认为他能做出更好的版本。 brad： 所以关键问题在于，这是否那么容易。 sacks： decagon 说他们 90% 的使用量已转向开源模型。但那是他们有机会微调和自定义过的开源模型。所以又回到用例成熟度的问题。不成熟的用例，你会用最强模型；成熟并明确定义后，再迁移到微调后的开源模型。 brad： 这正是实干者们正在做的。他们正努力让工作路由、工具套件独立自主。 chamath： 但我同意 brad 所说的：市场正走向双头垄断。以 token 收入衡量市场份额，只有两家公司在赚取可观的收入。anthropic 年收入大概 600 多亿美元，openai 400 多亿。还有其他公司能排上号吗？可能正是 anthropic 和 openai 产出的 token 越多，他们学到的也越多，能更好地提供服务。差距可能在拉大。一年前我们有 5 个主要实验室，现在看起来只有前二了。ai 很容易变成又一个科技市场的双头垄断。历史趋势就是如此，大多数科技类别都是垄断或双头垄断。 sacks： 但我们是用收入来定义赢家。当你在用开源模型时，那是“黑暗 token”，不算收入。我们不知道 doordash 用开源模型的精确使用量，只知道他们付给 anthropic 的钱。当他们用自己硬件部署时，你只看到 nvidia 或其他硬件公司的收入。" style="--index: 6">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">06</span>
+                    <span class="timeline-meta">42:57–53:40</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>智能会收敛吗？超级智能时代的赢家通吃</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>Brad 提出一个非共识观点：智能可能不会收敛，反而会发散。超级智能是递归的，越强越有钱，越有钱买越多的算力，差距会拉大。</li>
+<li>JCal 指出 Lovable 和 ElevenLabs 这两个前沿实验室的大客户正试图自研模型以摆脱依赖。</li>
+<li>Sacks 认为市场正走向双头垄断，Anthropic 和 OpenAI 瓜分了绝大部分收入，而开源模型的收入是“看不见的”。</li>
+<li>Chamath 提醒，开源的使用量不体现在收入里（“黑暗 token”），体现在 NVIDIA 等硬件供应商的账上。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li><strong>Fable 5：</strong> Anthropic 新模型名称。</li>
+<li><strong>GLM 5.2 / KIMI：</strong> 中国的先进模型。</li>
+<li><strong>Cerebras / NeoClouds：</strong> 提供 AI 芯片或算力的公司。</li>
+<li><strong>NVIDIA：</strong> 主导 AI 训练和推理芯片市场的公司。</li>
+<li><strong>Mythos：</strong> 节目中提到的 AI 模型名称。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>Brad：</strong> 让我抛出一个观点。这世界上有一个隐含假设：智能最终会收敛。从基准测试看，好像所有模型都在收敛。但收入分布完全不收敛。我的问题是：模型路由器自身能聪明到超越前沿实验室的固有智能优势吗？非共识的论点可能是，智能根本没有收敛，超级智能是完全自我递归的。它越智能，收入越高；收入越高，能买的算力越多；算力越多，能构建的模型越好。所以未来 2-3 年，随着我们处理更复杂的 agentic 任务，前沿和其余所有人之间的距离不会收敛，反而会拉大。我认为这需要深入研究，而不是默认收敛。</p>
+<p><strong>JCal：</strong> 另一个数据点：我采访了 Lovable（一个 vibe coding 平台）的 CEO Anton，他们从 0 到 3.5 亿美元收入用了 2 年。以及 ElevenLabs 的 CEO Matti。我问他们，你们是前沿模型的大客户（每年消费数千万美元），担心数据泄露和竞品发布吗？两者都表示他们正在研发自己的模型。这些前沿实验室的 8 位甚至 9 位数的大客户，正试图脱离它们。</p>
+<p><strong>Brad：</strong> 反驳点是，ElevenLabs 需要世界上最好的语音模型。如果他自研的模型不够好，在一个竞争激烈的市场里，他能冒险使用次优模型吗？</p>
+<p><strong>JCal：</strong> 但他认为他能做出更好的版本。</p>
+<p><strong>Brad：</strong> 所以关键问题在于，这是否那么容易。</p>
+<p><strong>Sacks：</strong> Decagon 说他们 90% 的使用量已转向开源模型。但那是他们有机会微调和自定义过的开源模型。所以又回到用例成熟度的问题。不成熟的用例，你会用最强模型；成熟并明确定义后，再迁移到微调后的开源模型。</p>
+<p><strong>Brad：</strong> 这正是实干者们正在做的。他们正努力让工作路由、工具套件独立自主。</p>
+<p><strong>Chamath：</strong> 但我同意 Brad 所说的：市场正走向双头垄断。以 token 收入衡量市场份额，只有两家公司在赚取可观的收入。Anthropic 年收入大概 600 多亿美元，OpenAI 400 多亿。还有其他公司能排上号吗？可能正是 Anthropic 和 OpenAI 产出的 token 越多，他们学到的也越多，能更好地提供服务。差距可能在拉大。一年前我们有 5 个主要实验室，现在看起来只有前二了。AI 很容易变成又一个科技市场的双头垄断。历史趋势就是如此，大多数科技类别都是垄断或双头垄断。</p>
+<p><strong>Sacks：</strong> 但我们是用收入来定义赢家。当你在用开源模型时，那是“黑暗 token”，不算收入。我们不知道 DoorDash 用开源模型的精确使用量，只知道他们付给 Anthropic 的钱。当他们用自己硬件部署时，你只看到 NVIDIA 或其他硬件公司的收入。</p></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="53:40–01:02:00 中国限制开源与地缘政治博弈 本段核心内容： jcal 引用路透社报道，称中国共产党可能限制其顶级 ai 模型的海外访问。 sacks 分析这是典型的追赶者策略：落后时开源以吸引开发者（如安卓），赶上前沿后就关闭以锁定价值。 brad 以其在 dc 的经历强调，美国两党在“领先中国”上形成共识，将采取行动防止模型蒸馏。 讨论美国 ai 发展的潜在瓶颈：能源。 背景解释与关键术语： 蒸馏（distillation）： 一种模型压缩技术，利用大模型（教师）的输出训练小模型（学生），可能被用于未经授权地复制技术。 rlhf： 从人类反馈中进行强化学习，是训练模型使其更符合人类价值观和偏好的关键步骤。 asml： 荷兰公司，全球最先进光刻机（用于制造高端芯片）的垄断供应商。 详细中文整理： jcal： 中国可能会限制其顶级模型出海。路透社报道，ccp 官员与阿里巴巴、字节跳动、智谱 ai（做 glm 5.2 的）会面，讨论限制顶级开源和闭源模型在海外提供。他们将 ai 研究盗窃/泄露列为危害国家安全罪，并控制谁可以资助中国 ai 实验室。我们在 manus 这家公司上看到了，他们试图去新加坡，ccp 把员工拉回了中国。主要担忧是“mythos”这类模型可能利用软件漏洞，以及华盛顿可能部署模型对抗中国利益。sacks，上周我们讨论了美国是否应该禁止中国模型。现在反过来了，中国可能限制我们获得他们的开源模型。你怎么看？ sacks： 嗯，上周我解释了为什么美国禁止开源模型会伤害自己。所以，如果中国想伤害美国，他们可能会那么做。这说得通，因为我们的公司正从中国的研发中受益。但最终，这个故事可能有点夸大其词。个别中国模型确实从开源转向了闭源。但我不认为所有都会转向闭源。比如字节跳动的模型，本来就是闭源，像他们的 chatgpt。阿里的 qwen 从开源转闭源。智谱的 glm 5.2 可能也要转闭源。策略是：在追赶上或接近前沿之前保持开源，然后就会有巨大的动力转向闭源以独占价值。 jcal： 这正是 sam altman 在 openai 做的：从非营利到盈利，从开源模型到闭源模型。 sacks： 某种程度上，meta 原始的 llama 策略也是如此，虽然他们后来有所后退。这是很明显的策略：当你要追赶时，你会选择开源。因为如果没达到前沿，闭源也没人买你的产品。但开源能获得开发者社区，能有更多使用量，这在 ai 里意味着强化学习（rlhf）。 brad（sacks）： 我这周在华盛顿与白宫和财政部讨论了 ai 问题。我可以告诉你，虽然对国内模型监管有分歧，但在“尽一切努力保持领先于中国”这一点上，绝对共识。从总统到各级，都非常关注这个问题。他们是华盛顿的团结力量。如果我们让前沿实验室退出赛道，同时让中国开源模型自由运行，并在此基础上蒸馏我们的模型（比如 glm 5.2 就有 mythos 的水印），这很危险。美国政府会对蒸馏采取措施。所以中国这样做，某种程度上不会伤害美国。美国可以推出自己的开源模型。我咨询过一些前沿实验室，问他们为什么不出开源模型，他们都说“需求不大”，如果有需求他们会做的。所以我认为美国处于有利位置。这更像中国的棋术而非实际威胁。因为从长远看，这会伤害他们比伤害我们更多。 jcal： 就像谷歌做安卓，曾经开源，后来收紧许可证，必须捆绑谷歌服务。 sacks： 最有利于美国赢得 ai 竞赛的事情，就是中国内部出现他们自己的“末日主义”者（doomer community），开始像美国这边的 doomer 一样，限制自己的实验室。 brad（sacks）： 是的，毫无疑问，从总统以下，每个人都想赢得 ai 竞赛。问题可能在较低层的官僚机构。总统自己能做决定的话会很完美，但下层可能做出适得其反的笨拙决定。还有国会中受 doomer 影响的政治压力。 jcal： 我们都忽略了最大的瓶颈：能源。chamath，你看看你的数据中心项目。如果大家需要更多 token 进行推理，美国有一个瓶颈，那就是能源。 chamath： 我团队做了一项分析：从现在到 2050 年的预期负荷增长，我们缺大约 3 个加利福尼亚州那么大的能源。这还是只考虑了普通家电、汽车和电脑。所以我们在电力方面有个巨大的问题。 jcal： 是的，还有台湾。一篇《华尔街日报》文章提到，台湾的 lng 储备只有 2-3 周。如果中国封锁台湾，他们将立即耗尽能源。这关系到美国、中国、台湾。我们必须让核电、太阳能、电池等一切快速发展。在美国，这又是一个监管挑战。" style="--index: 7">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">07</span>
+                    <span class="timeline-meta">53:40–01:02:00</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>中国限制开源与地缘政治博弈</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>JCal 引用路透社报道，称中国共产党可能限制其顶级 AI 模型的海外访问。</li>
+<li>Sacks 分析这是典型的追赶者策略：落后时开源以吸引开发者（如安卓），赶上前沿后就关闭以锁定价值。</li>
+<li>Brad 以其在 DC 的经历强调，美国两党在“领先中国”上形成共识，将采取行动防止模型蒸馏。</li>
+<li>讨论美国 AI 发展的潜在瓶颈：能源。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li><strong>蒸馏（Distillation）：</strong> 一种模型压缩技术，利用大模型（教师）的输出训练小模型（学生），可能被用于未经授权地复制技术。</li>
+<li><strong>RLHF：</strong> 从人类反馈中进行强化学习，是训练模型使其更符合人类价值观和偏好的关键步骤。</li>
+<li><strong>ASML：</strong> 荷兰公司，全球最先进光刻机（用于制造高端芯片）的垄断供应商。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> 中国可能会限制其顶级模型出海。路透社报道，CCP 官员与阿里巴巴、字节跳动、智谱 AI（做 GLM 5.2 的）会面，讨论限制顶级开源和闭源模型在海外提供。他们将 AI 研究盗窃/泄露列为危害国家安全罪，并控制谁可以资助中国 AI 实验室。我们在 Manus 这家公司上看到了，他们试图去新加坡，CCP 把员工拉回了中国。主要担忧是“Mythos”这类模型可能利用软件漏洞，以及华盛顿可能部署模型对抗中国利益。Sacks，上周我们讨论了美国是否应该禁止中国模型。现在反过来了，中国可能限制我们获得他们的开源模型。你怎么看？</p>
+<p><strong>Sacks：</strong> 嗯，上周我解释了为什么美国禁止开源模型会伤害自己。所以，如果中国想伤害美国，他们可能会那么做。这说得通，因为我们的公司正从中国的研发中受益。但最终，这个故事可能有点夸大其词。个别中国模型确实从开源转向了闭源。但我不认为所有都会转向闭源。比如字节跳动的模型，本来就是闭源，像他们的 ChatGPT。阿里的 Qwen 从开源转闭源。智谱的 GLM 5.2 可能也要转闭源。策略是：在追赶上或接近前沿之前保持开源，然后就会有巨大的动力转向闭源以独占价值。</p>
+<p><strong>JCal：</strong> 这正是 Sam Altman 在 OpenAI 做的：从非营利到盈利，从开源模型到闭源模型。</p>
+<p><strong>Sacks：</strong> 某种程度上，Meta 原始的 Llama 策略也是如此，虽然他们后来有所后退。这是很明显的策略：当你要追赶时，你会选择开源。因为如果没达到前沿，闭源也没人买你的产品。但开源能获得开发者社区，能有更多使用量，这在 AI 里意味着强化学习（RLHF）。</p>
+<p><strong>Brad（Sacks）：</strong> 我这周在华盛顿与白宫和财政部讨论了 AI 问题。我可以告诉你，虽然对国内模型监管有分歧，但在“尽一切努力保持领先于中国”这一点上，绝对共识。从总统到各级，都非常关注这个问题。他们是华盛顿的团结力量。如果我们让前沿实验室退出赛道，同时让中国开源模型自由运行，并在此基础上蒸馏我们的模型（比如 GLM 5.2 就有 Mythos 的水印），这很危险。美国政府会对蒸馏采取措施。所以中国这样做，某种程度上不会伤害美国。美国可以推出自己的开源模型。我咨询过一些前沿实验室，问他们为什么不出开源模型，他们都说“需求不大”，如果有需求他们会做的。所以我认为美国处于有利位置。这更像中国的棋术而非实际威胁。因为从长远看，这会伤害他们比伤害我们更多。</p>
+<p><strong>JCal：</strong> 就像谷歌做安卓，曾经开源，后来收紧许可证，必须捆绑谷歌服务。</p>
+<p><strong>Sacks：</strong> 最有利于美国赢得 AI 竞赛的事情，就是中国内部出现他们自己的“末日主义”者（doomer community），开始像美国这边的 Doomer 一样，限制自己的实验室。</p>
+<p><strong>Brad（Sacks）：</strong> 是的，毫无疑问，从总统以下，每个人都想赢得 AI 竞赛。问题可能在较低层的官僚机构。总统自己能做决定的话会很完美，但下层可能做出适得其反的笨拙决定。还有国会中受 Doomer 影响的政治压力。</p>
+<p><strong>JCal：</strong> 我们都忽略了最大的瓶颈：能源。Chamath，你看看你的数据中心项目。如果大家需要更多 token 进行推理，美国有一个瓶颈，那就是能源。</p>
+<p><strong>Chamath：</strong> 我团队做了一项分析：从现在到 2050 年的预期负荷增长，我们缺大约 3 个加利福尼亚州那么大的能源。这还是只考虑了普通家电、汽车和电脑。所以我们在电力方面有个巨大的问题。</p>
+<p><strong>JCal：</strong> 是的，还有台湾。一篇《华尔街日报》文章提到，台湾的 LNG 储备只有 2-3 周。如果中国封锁台湾，他们将立即耗尽能源。这关系到美国、中国、台湾。我们必须让核电、太阳能、电池等一切快速发展。在美国，这又是一个监管挑战。</p></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="01:02:00–01:41:00 “特朗普账户”：全民投资平台的诞生与深远影响 本段核心内容： brad gerstner 宣布“特朗普账户”（trump accounts）app 正式上线，当天成为 app store 第一。 该计划为每个新生儿提供 1000 美元的 s&amp;p 500 投资账户，并可接受个人、雇主和慈善家的捐赠，免税复利至 18 岁。 总统指令 brad 自动为所有 7000 万儿童创建账户。 spacex（gwen shotwell）、michael dell 等巨头承诺提供大额捐赠，总额可能达 1000 亿美元。 讨论其作为税务规划工具的巨大价值（cpa 称其为三大必做税务策略之一）。 jcal 呼吁超越政治分歧，将其视为对抗社会主义、重塑美国梦的利器。 brad 认为这是自 1935 年社保以来最大的社会契约变革，旨在让所有孩子成为资本家。 背景解释与关键术语： trump accounts： 以总统特朗普命名的官方投资账户 app。 invest america act： 该计划的立法基础。 529 账户： 美国一种专门为教育储蓄提供税收优惠的账户。 s&amp;p 500： 标准普尔 500 指数，代表美国最大的 500 家上市公司。 ira（个人退休账户）/ roth ira（罗斯个人退休账户）： 美国两种享有税收优惠的个人退休储蓄账户。传统 ira 是存入时或取款时免税，roth ira 是存入时使用税后资金，取款时（符合条件）免税。 tds（trump derangement syndrome）： 特朗普精神错乱综合征，指对特朗普的过度非理性反对。 详细中文整理： jcal： 让我们谈谈你在华盛顿的行程。brad gerstner 去了 dc。恭喜你，“特朗普账户”app 上线了，成为了全球下载量第一（指该 app 在特定排行成为第一）。告诉我们发生了什么？有哪些宣布？带我们看看幕后吧。 brad： 这是四年使命的成果。感谢你们，早期支持者。创始人都很疯狂，你们可能觉得我在浪费时间。当一年前它被签署成为法律，那是创始人旅程中类似拿到首轮投资的巨大时刻。但今年 7 月 4 日，app 正式上线。这意味着数百万账户被创建，资金进入。为了庆祝并进入下一步，我们在白宫椭圆形办公室举行了纽交所和纳斯达克首次联合敲钟仪式。这太不可思议了。有 100 位 ceo、孩子和受到影响的家庭出席。总统指出，这远不止是给一些孩子账户的计划，这是让每个孩子都成为一个资本家。他提议，为所有 5000 万或 7000 万 18 岁以下儿童自动创建账户。他号召我们更快为更多人开设账户，不让一个孩子掉队。 jcal： brad，放慢点，很多人不知道“特朗普账户”是什么。 brad： 好。想法很简单：每个孩子出生时获得 1000 美元，存入一个私人所有的投资账户，可以终身复利。你出生，拿社安号，得到一个投资账户。如果开始有 1000 美元，有人帮你匹配，加上每周存 10 美元，18 岁时就有 5 万美元。这些钱投入 s&amp;p 500。账户终身免费。这就是“invest america act”。这就是 7 月 4 日发生的事：所有这些孩子都获得了账户。 brad： “特朗普账户” app 成为 app store 第一，因为父母们听说后下载。我们在上线头 24 小时创建了超过 150 万个账户，收到了超过 10 亿美元的存款。我自己也往里存了钱。所有账户 app 都有一个 qr 码，你可以通过 apple pay 发 25 或 50 美元给孩子的账户。我们还有一堆慈善宣布。 jcal： 澄清一下，你可以在 18、19、20 岁访问这笔钱用于教育，或转入你的 ira，比如 roth ira。迈克尔和苏珊·戴尔是慈善锚定方，投入超过 60 亿美元，为 2500 万低收入和中等收入儿童每人 250 美元。spacex 的总裁 gwynne shotwell 也加入，捐赠了价值 3.5 亿美元的 spacex 股票给低收入社区儿童。捐款按邮政编码和年龄定向。 brad： 美光投入了 2.5 亿美元，为每位员工提供最高 1000 美元的配捐。这似乎是一种非常有趣的雇主捐赠方式。 jcal： brad，你为印第安纳州的所有孩子也做了捐赠？这是个巨大的数字。brad，你总抱怨牌局上输了 6000 美元就 rage quit，现在你捐了 1 亿美元。这真是从没见过你做慈善。对我们这些朋友来说，这是个巨大的决定。 brad： 我认为这将成为美国历史上最大的直接慈善平台。我们向总统保证，可以在头 12 个月筹集 1000 亿美元。慈善可以直接给到美国孩子，绕过慈善中间人。现在有一个平台可以大量捐出你的巨额财富，钱直接进账户，孩子 18 岁前不能取出。 jcal： 有很多噪音说，因为它叫“特朗普账户”，一些有 tds 的人拒绝使用。我发过推：如果你因为不喜欢这个名字就不让孩子参与，那是不负责任的疯狂。 sacks： 说说这个。 brad： 该计划的立法是“invest america act”。很多人、很多民主党人叫它“invest america 账户”。官方名称是“特朗普账户”。但事实是，来自不同收入和政见光谱的父母都在注册。是的，它叫特朗普账户。但我可以说，没有人比总统本人更关心每个孩子都能拥有账户。他推动我们更快地实现自动注册。他希望每个孩子都有这个机会，不能因为父母忙着打两份工或者不喜欢“特朗普账户”这个名字就错过。总统和财政部长都要求我们去做。 jcal： 他给你下达了命令：自动创建账户。他知道我们都有 18 岁以下公民的社安号。他要你开始工作，自动创建。brad，你会执行总统的命令吗？能违抗吗？ brad： 我们打算在接下来的 90 天内，利用所有数据创建所有 5000 到 7000 万个账户。但要与财政部、白宫、社保局协调工作。他们绝对支持加快进度。 jcal： 你还需要通过 elizabeth warren、bernie sanders 和 ro khanna 那一关。他们会试图阻止你吗？因为他们不想给特朗普一个胜利？ brad： 不过，cory booker 表示支持，gavin newsom、马里兰州长 wes moore、参议员 john fetterman 都表示支持。很多民主党人能克服这个障碍。正如我昨天在 cnbc 上所说，一方面是 bernie 和 mamdani 这类政治人物想征税并让华盛顿控制一切，让你依赖政府。另一方面是总统和很多更中间派的民主党人，他们想为每个孩子建立私人账户，让他们独立于政府，自己积累财富。这是两种完全不同的世界观。我认为，对抗更多社会主义的解毒剂是更多资本主义。我告诉总统，这就是更多资本主义。 sacks： 如果成功，如果 brad 执行总统的指令，我们将从 50% 的人拥有股票，变成 70-75% 的全国人口都能参与。你怎么看，sacks？ sacks： 我认为这是好事，也是一个了不起的慈善平台。在一个对亿万富翁存在愤怒和民粹主义回潮的时代，这是至关重要的解药。但我几乎认为慈善方面得到了太多关注。大家自然被免费的东西吸引。我认为被忽略的是来自 cpa 们的评论：这是一个令人难以置信的遗产规划工具或税务优化策略。以前从来没有什么东西能像这样。他们基本上说，这是你必须做的三件事之一：跟公司 401(k) 匹配计划一样，你必须做；跟健康储蓄账户或 roth ira 一样，你必须有。因为两者兼得：孩子的免费钱，还有巨大的税务优势。 sacks： 我们来梳理一下。你每年最多可以给每个 18 岁以下的孩子捐赠 5000 美元。不仅限于你，朋友和家人也可以。然后这笔钱免税复利到 18 岁。你的雇主每年还可以免税贡献 2500 美元。所以至少，你应该让你的雇主参与进来，你可以从薪资里扣 2500 美元捐给孩子账户，双方都省税。这就像一个 ira。然后当孩子 18 岁，他们可以把钱（最多 25% 用于买房、创业、大学）转入 roth ira。如果他们当时是 0% 税率的低收入期间（比如大学刚毕业），那转换成本极低。这样到 60 岁，那本金就可能变成 1000 万美元以上。这比社保强多了！ jcal： 我们在创造一堆“信托基金宝宝”啊。 brad： chamath 需要去卖软件了。chamath，你应该说服 openai 和 anthropic 把他们的股权捐给所有孩子。 chamath： 我必须走了，我爱你们。 brad： 是的，随着我们大规模建设平台，想象一下 5000 万个账户打开。我曾和 dario、sam、elon 谈过捐赠。我不喜欢向公司施压拿走股份放进政府的“共产主义基金”。必须是自愿的，而且应该直接进入公民账户。你问如何解决每年 5000 美元限额的问题？这也是为什么需要打开 5000 万个账户。我们也可以设立一个“汇集账户”，在一段时间内分配。今天的有余，可以分配给明年或后年的新生 350 万孩子。未来十年，我们将拥有超过 1 亿个此类账户。每个人，包括打暑期工的孩子，都可以往自己的账户里存 10 美元、100 美元。他们可以随时在手机上看到。每个孩子都持有了一点 nvidia、苹果、微软。想象一下，中学或高中时打开账户，看到自己拥有股权，那该多兴奋！ brad： 而迈克尔·戴尔、我和 gwen 都专注于那 50% 感觉被抛弃的美国人。未来 15 年，我们可以为这些孩子和家庭增加 2 到 4 万亿美元的财富，否则他们一分钱都没有。 sacks： 所以慈善方面是，慈善家可以帮孩子贡献到 5000 美元的限额里。当 gwen 给 200 万个孩子各送一股价值 150 美元的 spacex 股票时，这就用掉了那部分限额。这让计划很有吸引力：能付得起 5000 美元的家庭必须做，因为它有巨大的税务优势。付不起的家庭，则会成为慈善家直接捐赠的受益者。这比那些 ngo（非政府组织）把 40% 的钱花在办公室和薪水上的模式好多了。 jcal： 是的，只是敛财。 sacks： 另一个惊人的数字：如果“特朗普账户”被最大化使用，按过去 30 年的市场回报，孩子 28 岁时就能成为百万富翁。 brad： 对。我们说的 5 万、20 万是指普通储蓄。总统说了，这不是为了帮助顶部的 10%（他们有 529 账户），这是关于“大街（main street）”议程。这是关于那些他选战时承诺、感觉被抛弃的家庭。我们通过全民拥有权让他们重新连接美国梦。这是自 1935 年社保以来社会契约的最大变革。 jcal： 我对那些因为“特朗普账户”这个名字就否定它的人说话。我把球和击球分开。我有很多批评这个政府和总统的理由，并在节目里说过。但无论你对特朗普的批评多么成立，这与他无关。把你的 tds 和批评放到一边。这个国家正在经历 k 型复苏，富人和穷人有巨大张力，以至于有人相信社会主义和共产主义比我们最伟大的操作系统——民主加资本主义——更好。孩子们热爱资本主义和创业。我们现在处在生死攸关的关头。如果年轻一代不再相信美国，那在这个 250 周年的时刻，这（特朗普账户）是最美国的事情。放下政治，拥抱它，把鲜花送给 brad，送给迈克尔·戴尔、gwen 这些捐赠者。这是我能给这个国家的最美的礼物。它可能成为一个团结原则，让每个人参与资本主义。这是最好的方式。让孩子们在手机上看到，而不是被 mondavi 之流蛊惑去抢夺 ken griffin 的顶层公寓。去吃 ceo 的枪击、房屋炸弹袭击。去吧。 jcal： 如果你是一个非常成功的 ceo，有“捐赠誓言”（giving pledge）。这个计划是“捐赠誓言”的完美版本。不仅仅是死后捐出财富，而是策略性地让每个美国人参与到美国最好的部分——创业，每个人都将成为“股权国家”的一部分。 jcal： 世界上最幸福的国家之一是澳大利亚。澳大利亚人很幸福，因为他们的超级年金（强制储蓄养老金）系统。这个计划本质上是一样的，强制储蓄。它可以取代社保，取代“捐赠誓言”。brad，很多朋友涉足了政治，变得分裂。但你在此刻是坚持到底的。你像一个大师，在疯狂的两党间取得了平衡。作为你的朋友，我给你鲜花。没有你，这个计划不会成真。这是你毕生的遗产。这将是你所做过所有事的一百万倍。你会因此被铭记。这是一个伟大的架构。 brad： 谢谢。 sacks： 这应该像社保一样大。 jcal： 它会更大。它是一个全新的平台。不仅是慈善，也是退休储蓄。而且它是动态的，我们可以添加功能。 sacks： 我看到很多人说，为什么 18 岁就停止？可以继续推到 ira 或 roth ira。你也可以说，下一代将在这个新平台上，而不是老社保，那会更高效。 jcal： 让政府别管这事。 brad： 政府不运营这个平台。你说得对。 sacks： 让我问个问题，如果孩子 18 岁后想挥霍掉钱怎么办？ brad： 这总是政治上的权衡。我希望他们复利到 30 岁，因为 30 岁更成熟。但政治共识是：18 岁能投票、能当兵，就应该能支配自己的钱。不过他们只能提取最多 25% 用于买房、创业、上学。剩下的转入 ira，有早期取款罚金。所以有抑制挥霍的机制。但更重要的是，我们需要更好的公共教育系统，把这个账户作为理财教育的平台。如果一个 7 年级孩子已经有了 12000 美元钱，现在你得到了他的注意。他持有 nike、apple、nvidia 的股票。我们来谈谈那个。37 个州要求金融知识教育。每个州都应该以此作为课程。我们正在与 25 个州合作，他们的州政府也会向孩子账户里注资。 sacks： 所以州也能参与进来。 brad： 是的，西弗吉尼亚、俄克拉荷马、印第安纳等。这些州在审视那些无效的计划，把资金直接以“整笔拨款”给到孩子。正如我在椭圆形办公室所说，这是第一天。我、迈克尔和苏珊·戴尔都完全致力于未来十年。那是我一生中最具深远意义、最让我感到荣幸的工作。站在椭圆形办公室，我的两个儿子（我的联合创始人）在我身边。这个想法是 2020 年秋天在我们家餐桌上画出的草图。林肯（他的儿子）和我一起见了每一位国会议员、参议员、总统、前总统。总统在敲钟仪式上还点了林肯的名。作为一个父亲，这段旅程的回报难以言表。 jcal： 还有一点值得一提：joe gebbia（airbnb 联合创始人）加入了政府。很多科技界对他加入特朗普政府有批评。但他是一名世界级的设计师。我们制作人 nick 告诉我，他和他妻子都注册了。这个软件非常出色。美国政府做出了卓越的软件，并全部在特朗普的头 18 个月完成。大量的赞誉。对于这个政府面临的所有挑战，他们做出了超棒的软件。对 joe 来说，他完全可以做自己想做的事，但他选择做这个。这是真正的爱国。我对此欣喜若狂。 brad： 梦之队：我、迈克尔·戴尔、vlad tenev（robinhood ceo）、joe gebbia、财政部长、luke pettit。我们过去一年几乎每天都在开会。我们的目标不是做出最好的政府软件，而是要做出有史以来最好的消费产品之一。 jcal： 任务完成。 brad： 任何硅谷的消费公司都会对我们看到的数字、评分和用户参与度感到激动。与这个不可思议的团队一起工作非常愉快。大家都带着正确的使命。如你所说，政府很少这样招募或拥抱这种使命。帐篷正在变得更大。这是两党合作。昨天马里兰州长 wes moore 说，“共和党和民主党 40 年来都尝试做类似的事。这个人做成了，给他赞誉。”对美国和我们的孩子来说，这是好事。尤其是在 250 周年纪念日。站在椭圆形办公室，看着《独立宣言》原件，想到先辈们为这个实验所做的牺牲。然后我看到那些激进左派想要放火烧掉这个国家。不，答案是在这个奏效了 250 年的模式上进化并加倍投入。不要让孩子成为社会主义者，而是让他们都成为资本主义的参与者和持有者。这就是我们所完成的。 jcal： 听你说话太棒了。看到你完成它，真是精彩。科技行业、资本家、创造者、制造者需要赢。这是我们的机会，证明有一件能帮助底层人民的事。我们还有 7 美元的最低工资，也需要解决。如果我们对那些没有我们拥有的人有同理心，给他们一条相信美国梦的道路，他们就会走上这条路。这比那些社会主义疯子好得多。让我们再来一次。让这个精神在每个国家扩展。我去过的每个国家都想复制硅谷。 brad： 我们不会停。无论是来自 ai 公司的、intel 的股份，还是 tiktok 的费用，我们现在有了一个地方，政府的所有这些胜利可以直接送到所有美国公民的账户中，终身复利。还有就是关于 18 岁以上的人群。我们有很多讨论。社安金是两党神圣的承诺，没人会改变它。但有很大机会做一个补充版。为什么 20-30 岁的人不能拥有一个补充的、自己拥有和控制的“特朗普账户”呢？记住它与社保的关键区别：社保从我收入中拿走 12.4%，放进类似政府黑洞的东西里。我不拥有它，如果问 3000 个人他们缴了多少，没人知道。我死了它不会传给我的继承人。它不是我的。所以，谈论的延伸方向有很多。但在 250 岁生日那天，在椭圆形办公室敲响钟声，看到所有孩子账户被点亮，是一个极不寻常的里程碑。 brad： 我认为“特朗普账户”非常酷的地方在于，它是一个了不起的慈善平台，但更重要的是，它是一个了不起的中产阶级家庭财务规划平台。所有 cpa 都说，如果只能告诉客户一件事，那就是这个。这是终于给中产阶级的东西。人们一直要求，给中产阶级一些东西。 sacks： 市场空白在于，直到你有一份工作和收入（通常 22 岁以后），你才能有一个 ira。所以在孩子生命头 22 年，他们没有这种税务优惠的工具。这个计划等于给了每个孩子一个从出生开始的 ira。它甚至比 ira 更好，因为雇主可以免税贡献 2500 美元，慈善家也可以。 brad： 巴菲特说，秘诀是找到一个非常小的雪球，放在一个非常长的山坡上。但这个国家把山坡的头三分之一砍掉了。人们在 25 岁之前几乎不存钱。0 到 25 岁之间是世界上最容易复利的时期。现在我们把人生活跃期的头三分之一加入到了复利中。这太了不起了。 jcal： 太棒了。我们都为你骄傲。" style="--index: 8">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">08</span>
+                    <span class="timeline-meta">01:02:00–01:41:00</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>“特朗普账户”：全民投资平台的诞生与深远影响</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>Brad Gerstner 宣布“特朗普账户”（Trump Accounts）App 正式上线，当天成为 App Store 第一。</li>
+<li>该计划为每个新生儿提供 1000 美元的 S&amp;P 500 投资账户，并可接受个人、雇主和慈善家的捐赠，免税复利至 18 岁。</li>
+<li>总统指令 Brad 自动为所有 7000 万儿童创建账户。</li>
+<li>SpaceX（Gwen Shotwell）、Michael Dell 等巨头承诺提供大额捐赠，总额可能达 1000 亿美元。</li>
+<li>讨论其作为税务规划工具的巨大价值（CPA 称其为三大必做税务策略之一）。</li>
+<li>JCal 呼吁超越政治分歧，将其视为对抗社会主义、重塑美国梦的利器。</li>
+<li>Brad 认为这是自 1935 年社保以来最大的社会契约变革，旨在让所有孩子成为资本家。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li><strong>Trump Accounts：</strong> 以总统特朗普命名的官方投资账户 App。</li>
+<li><strong>Invest America Act：</strong> 该计划的立法基础。</li>
+<li><strong>529 账户：</strong> 美国一种专门为教育储蓄提供税收优惠的账户。</li>
+<li><strong>S&amp;P 500：</strong> 标准普尔 500 指数，代表美国最大的 500 家上市公司。</li>
+<li><strong>IRA（个人退休账户）/ Roth IRA（罗斯个人退休账户）：</strong> 美国两种享有税收优惠的个人退休储蓄账户。传统 IRA 是存入时或取款时免税，Roth IRA 是存入时使用税后资金，取款时（符合条件）免税。</li>
+<li><strong>TDS（Trump Derangement Syndrome）：</strong> 特朗普精神错乱综合征，指对特朗普的过度非理性反对。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> 让我们谈谈你在华盛顿的行程。Brad Gerstner 去了 DC。恭喜你，“特朗普账户”App 上线了，成为了全球下载量第一（指该 App 在特定排行成为第一）。告诉我们发生了什么？有哪些宣布？带我们看看幕后吧。</p>
+<p><strong>Brad：</strong> 这是四年使命的成果。感谢你们，早期支持者。创始人都很疯狂，你们可能觉得我在浪费时间。当一年前它被签署成为法律，那是创始人旅程中类似拿到首轮投资的巨大时刻。但今年 7 月 4 日，App 正式上线。这意味着数百万账户被创建，资金进入。为了庆祝并进入下一步，我们在白宫椭圆形办公室举行了纽交所和纳斯达克首次联合敲钟仪式。这太不可思议了。有 100 位 CEO、孩子和受到影响的家庭出席。总统指出，这远不止是给一些孩子账户的计划，这是让每个孩子都成为一个资本家。他提议，为所有 5000 万或 7000 万 18 岁以下儿童自动创建账户。他号召我们更快为更多人开设账户，不让一个孩子掉队。</p>
+<p><strong>JCal：</strong> Brad，放慢点，很多人不知道“特朗普账户”是什么。</p>
+<p><strong>Brad：</strong> 好。想法很简单：每个孩子出生时获得 1000 美元，存入一个私人所有的投资账户，可以终身复利。你出生，拿社安号，得到一个投资账户。如果开始有 1000 美元，有人帮你匹配，加上每周存 10 美元，18 岁时就有 5 万美元。这些钱投入 S&amp;P 500。账户终身免费。这就是“Invest America Act”。这就是 7 月 4 日发生的事：所有这些孩子都获得了账户。</p>
+<p><strong>Brad：</strong> “特朗普账户” App 成为 App Store 第一，因为父母们听说后下载。我们在上线头 24 小时创建了超过 150 万个账户，收到了超过 10 亿美元的存款。我自己也往里存了钱。所有账户 App 都有一个 QR 码，你可以通过 Apple Pay 发 25 或 50 美元给孩子的账户。我们还有一堆慈善宣布。</p>
+<p><strong>JCal：</strong> 澄清一下，你可以在 18、19、20 岁访问这笔钱用于教育，或转入你的 IRA，比如 Roth IRA。迈克尔和苏珊·戴尔是慈善锚定方，投入超过 60 亿美元，为 2500 万低收入和中等收入儿童每人 250 美元。SpaceX 的总裁 Gwynne Shotwell 也加入，捐赠了价值 3.5 亿美元的 SpaceX 股票给低收入社区儿童。捐款按邮政编码和年龄定向。</p>
+<p><strong>Brad：</strong> 美光投入了 2.5 亿美元，为每位员工提供最高 1000 美元的配捐。这似乎是一种非常有趣的雇主捐赠方式。</p>
+<p><strong>JCal：</strong> Brad，你为印第安纳州的所有孩子也做了捐赠？这是个巨大的数字。Brad，你总抱怨牌局上输了 6000 美元就 rage quit，现在你捐了 1 亿美元。这真是从没见过你做慈善。对我们这些朋友来说，这是个巨大的决定。</p>
+<p><strong>Brad：</strong> 我认为这将成为美国历史上最大的直接慈善平台。我们向总统保证，可以在头 12 个月筹集 1000 亿美元。慈善可以直接给到美国孩子，绕过慈善中间人。现在有一个平台可以大量捐出你的巨额财富，钱直接进账户，孩子 18 岁前不能取出。</p>
+<p><strong>JCal：</strong> 有很多噪音说，因为它叫“特朗普账户”，一些有 TDS 的人拒绝使用。我发过推：如果你因为不喜欢这个名字就不让孩子参与，那是不负责任的疯狂。</p>
+<p><strong>Sacks：</strong> 说说这个。</p>
+<p><strong>Brad：</strong> 该计划的立法是“Invest America Act”。很多人、很多民主党人叫它“Invest America 账户”。官方名称是“特朗普账户”。但事实是，来自不同收入和政见光谱的父母都在注册。是的，它叫特朗普账户。但我可以说，没有人比总统本人更关心每个孩子都能拥有账户。他推动我们更快地实现自动注册。他希望每个孩子都有这个机会，不能因为父母忙着打两份工或者不喜欢“特朗普账户”这个名字就错过。总统和财政部长都要求我们去做。</p>
+<p><strong>JCal：</strong> 他给你下达了命令：自动创建账户。他知道我们都有 18 岁以下公民的社安号。他要你开始工作，自动创建。Brad，你会执行总统的命令吗？能违抗吗？</p>
+<p><strong>Brad：</strong> 我们打算在接下来的 90 天内，利用所有数据创建所有 5000 到 7000 万个账户。但要与财政部、白宫、社保局协调工作。他们绝对支持加快进度。</p>
+<p><strong>JCal：</strong> 你还需要通过 Elizabeth Warren、Bernie Sanders 和 Ro Khanna 那一关。他们会试图阻止你吗？因为他们不想给特朗普一个胜利？</p>
+<p><strong>Brad：</strong> 不过，Cory Booker 表示支持，Gavin Newsom、马里兰州长 Wes Moore、参议员 John Fetterman 都表示支持。很多民主党人能克服这个障碍。正如我昨天在 CNBC 上所说，一方面是 Bernie 和 Mamdani 这类政治人物想征税并让华盛顿控制一切，让你依赖政府。另一方面是总统和很多更中间派的民主党人，他们想为每个孩子建立私人账户，让他们独立于政府，自己积累财富。这是两种完全不同的世界观。我认为，对抗更多社会主义的解毒剂是更多资本主义。我告诉总统，这就是更多资本主义。</p>
+<p><strong>Sacks：</strong> 如果成功，如果 Brad 执行总统的指令，我们将从 50% 的人拥有股票，变成 70-75% 的全国人口都能参与。你怎么看，Sacks？</p>
+<p><strong>Sacks：</strong> 我认为这是好事，也是一个了不起的慈善平台。在一个对亿万富翁存在愤怒和民粹主义回潮的时代，这是至关重要的解药。但我几乎认为慈善方面得到了太多关注。大家自然被免费的东西吸引。我认为被忽略的是来自 CPA 们的评论：这是一个令人难以置信的遗产规划工具或税务优化策略。以前从来没有什么东西能像这样。他们基本上说，这是你必须做的三件事之一：跟公司 401(k) 匹配计划一样，你必须做；跟健康储蓄账户或 Roth IRA 一样，你必须有。因为两者兼得：孩子的免费钱，还有巨大的税务优势。</p>
+<p><strong>Sacks：</strong> 我们来梳理一下。你每年最多可以给每个 18 岁以下的孩子捐赠 5000 美元。不仅限于你，朋友和家人也可以。然后这笔钱免税复利到 18 岁。你的雇主每年还可以免税贡献 2500 美元。所以至少，你应该让你的雇主参与进来，你可以从薪资里扣 2500 美元捐给孩子账户，双方都省税。这就像一个 IRA。然后当孩子 18 岁，他们可以把钱（最多 25% 用于买房、创业、大学）转入 Roth IRA。如果他们当时是 0% 税率的低收入期间（比如大学刚毕业），那转换成本极低。这样到 60 岁，那本金就可能变成 1000 万美元以上。这比社保强多了！</p>
+<p><strong>JCal：</strong> 我们在创造一堆“信托基金宝宝”啊。</p>
+<p><strong>Brad：</strong> Chamath 需要去卖软件了。Chamath，你应该说服 OpenAI 和 Anthropic 把他们的股权捐给所有孩子。</p>
+<p><strong>Chamath：</strong> 我必须走了，我爱你们。</p>
+<p><strong>Brad：</strong> 是的，随着我们大规模建设平台，想象一下 5000 万个账户打开。我曾和 Dario、Sam、Elon 谈过捐赠。我不喜欢向公司施压拿走股份放进政府的“共产主义基金”。必须是自愿的，而且应该直接进入公民账户。你问如何解决每年 5000 美元限额的问题？这也是为什么需要打开 5000 万个账户。我们也可以设立一个“汇集账户”，在一段时间内分配。今天的有余，可以分配给明年或后年的新生 350 万孩子。未来十年，我们将拥有超过 1 亿个此类账户。每个人，包括打暑期工的孩子，都可以往自己的账户里存 10 美元、100 美元。他们可以随时在手机上看到。每个孩子都持有了一点 NVIDIA、苹果、微软。想象一下，中学或高中时打开账户，看到自己拥有股权，那该多兴奋！</p>
+<p><strong>Brad：</strong> 而迈克尔·戴尔、我和 Gwen 都专注于那 50% 感觉被抛弃的美国人。未来 15 年，我们可以为这些孩子和家庭增加 2 到 4 万亿美元的财富，否则他们一分钱都没有。</p>
+<p><strong>Sacks：</strong> 所以慈善方面是，慈善家可以帮孩子贡献到 5000 美元的限额里。当 Gwen 给 200 万个孩子各送一股价值 150 美元的 SpaceX 股票时，这就用掉了那部分限额。这让计划很有吸引力：能付得起 5000 美元的家庭必须做，因为它有巨大的税务优势。付不起的家庭，则会成为慈善家直接捐赠的受益者。这比那些 NGO（非政府组织）把 40% 的钱花在办公室和薪水上的模式好多了。</p>
+<p><strong>JCal：</strong> 是的，只是敛财。</p>
+<p><strong>Sacks：</strong> 另一个惊人的数字：如果“特朗普账户”被最大化使用，按过去 30 年的市场回报，孩子 28 岁时就能成为百万富翁。</p>
+<p><strong>Brad：</strong> 对。我们说的 5 万、20 万是指普通储蓄。总统说了，这不是为了帮助顶部的 10%（他们有 529 账户），这是关于“大街（Main Street）”议程。这是关于那些他选战时承诺、感觉被抛弃的家庭。我们通过全民拥有权让他们重新连接美国梦。这是自 1935 年社保以来社会契约的最大变革。</p>
+<p><strong>JCal：</strong> 我对那些因为“特朗普账户”这个名字就否定它的人说话。我把球和击球分开。我有很多批评这个政府和总统的理由，并在节目里说过。但无论你对特朗普的批评多么成立，这与他无关。把你的 TDS 和批评放到一边。这个国家正在经历 K 型复苏，富人和穷人有巨大张力，以至于有人相信社会主义和共产主义比我们最伟大的操作系统——民主加资本主义——更好。孩子们热爱资本主义和创业。我们现在处在生死攸关的关头。如果年轻一代不再相信美国，那在这个 250 周年的时刻，这（特朗普账户）是最美国的事情。放下政治，拥抱它，把鲜花送给 Brad，送给迈克尔·戴尔、Gwen 这些捐赠者。这是我能给这个国家的最美的礼物。它可能成为一个团结原则，让每个人参与资本主义。这是最好的方式。让孩子们在手机上看到，而不是被 Mondavi 之流蛊惑去抢夺 Ken Griffin 的顶层公寓。去吃 CEO 的枪击、房屋炸弹袭击。去吧。</p>
+<p><strong>JCal：</strong> 如果你是一个非常成功的 CEO，有“捐赠誓言”（Giving Pledge）。这个计划是“捐赠誓言”的完美版本。不仅仅是死后捐出财富，而是策略性地让每个美国人参与到美国最好的部分——创业，每个人都将成为“股权国家”的一部分。</p>
+<p><strong>JCal：</strong> 世界上最幸福的国家之一是澳大利亚。澳大利亚人很幸福，因为他们的超级年金（强制储蓄养老金）系统。这个计划本质上是一样的，强制储蓄。它可以取代社保，取代“捐赠誓言”。Brad，很多朋友涉足了政治，变得分裂。但你在此刻是坚持到底的。你像一个大师，在疯狂的两党间取得了平衡。作为你的朋友，我给你鲜花。没有你，这个计划不会成真。这是你毕生的遗产。这将是你所做过所有事的一百万倍。你会因此被铭记。这是一个伟大的架构。</p>
+<p><strong>Brad：</strong> 谢谢。</p>
+<p><strong>Sacks：</strong> 这应该像社保一样大。</p>
+<p><strong>JCal：</strong> 它会更大。它是一个全新的平台。不仅是慈善，也是退休储蓄。而且它是动态的，我们可以添加功能。</p>
+<p><strong>Sacks：</strong> 我看到很多人说，为什么 18 岁就停止？可以继续推到 IRA 或 Roth IRA。你也可以说，下一代将在这个新平台上，而不是老社保，那会更高效。</p>
+<p><strong>JCal：</strong> 让政府别管这事。</p>
+<p><strong>Brad：</strong> 政府不运营这个平台。你说得对。</p>
+<p><strong>Sacks：</strong> 让我问个问题，如果孩子 18 岁后想挥霍掉钱怎么办？</p>
+<p><strong>Brad：</strong> 这总是政治上的权衡。我希望他们复利到 30 岁，因为 30 岁更成熟。但政治共识是：18 岁能投票、能当兵，就应该能支配自己的钱。不过他们只能提取最多 25% 用于买房、创业、上学。剩下的转入 IRA，有早期取款罚金。所以有抑制挥霍的机制。但更重要的是，我们需要更好的公共教育系统，把这个账户作为理财教育的平台。如果一个 7 年级孩子已经有了 12000 美元钱，现在你得到了他的注意。他持有 Nike、Apple、NVIDIA 的股票。我们来谈谈那个。37 个州要求金融知识教育。每个州都应该以此作为课程。我们正在与 25 个州合作，他们的州政府也会向孩子账户里注资。</p>
+<p><strong>Sacks：</strong> 所以州也能参与进来。</p>
+<p><strong>Brad：</strong> 是的，西弗吉尼亚、俄克拉荷马、印第安纳等。这些州在审视那些无效的计划，把资金直接以“整笔拨款”给到孩子。正如我在椭圆形办公室所说，这是第一天。我、迈克尔和苏珊·戴尔都完全致力于未来十年。那是我一生中最具深远意义、最让我感到荣幸的工作。站在椭圆形办公室，我的两个儿子（我的联合创始人）在我身边。这个想法是 2020 年秋天在我们家餐桌上画出的草图。林肯（他的儿子）和我一起见了每一位国会议员、参议员、总统、前总统。总统在敲钟仪式上还点了林肯的名。作为一个父亲，这段旅程的回报难以言表。</p>
+<p><strong>JCal：</strong> 还有一点值得一提：Joe Gebbia（Airbnb 联合创始人）加入了政府。很多科技界对他加入特朗普政府有批评。但他是一名世界级的设计师。我们制作人 Nick 告诉我，他和他妻子都注册了。这个软件非常出色。美国政府做出了卓越的软件，并全部在特朗普的头 18 个月完成。大量的赞誉。对于这个政府面临的所有挑战，他们做出了超棒的软件。对 Joe 来说，他完全可以做自己想做的事，但他选择做这个。这是真正的爱国。我对此欣喜若狂。</p>
+<p><strong>Brad：</strong> 梦之队：我、迈克尔·戴尔、Vlad Tenev（Robinhood CEO）、Joe Gebbia、财政部长、Luke Pettit。我们过去一年几乎每天都在开会。我们的目标不是做出最好的政府软件，而是要做出有史以来最好的消费产品之一。</p>
+<p><strong>JCal：</strong> 任务完成。</p>
+<p><strong>Brad：</strong> 任何硅谷的消费公司都会对我们看到的数字、评分和用户参与度感到激动。与这个不可思议的团队一起工作非常愉快。大家都带着正确的使命。如你所说，政府很少这样招募或拥抱这种使命。帐篷正在变得更大。这是两党合作。昨天马里兰州长 Wes Moore 说，“共和党和民主党 40 年来都尝试做类似的事。这个人做成了，给他赞誉。”对美国和我们的孩子来说，这是好事。尤其是在 250 周年纪念日。站在椭圆形办公室，看着《独立宣言》原件，想到先辈们为这个实验所做的牺牲。然后我看到那些激进左派想要放火烧掉这个国家。不，答案是在这个奏效了 250 年的模式上进化并加倍投入。不要让孩子成为社会主义者，而是让他们都成为资本主义的参与者和持有者。这就是我们所完成的。</p>
+<p><strong>JCal：</strong> 听你说话太棒了。看到你完成它，真是精彩。科技行业、资本家、创造者、制造者需要赢。这是我们的机会，证明有一件能帮助底层人民的事。我们还有 7 美元的最低工资，也需要解决。如果我们对那些没有我们拥有的人有同理心，给他们一条相信美国梦的道路，他们就会走上这条路。这比那些社会主义疯子好得多。让我们再来一次。让这个精神在每个国家扩展。我去过的每个国家都想复制硅谷。</p>
+<p><strong>Brad：</strong> 我们不会停。无论是来自 AI 公司的、Intel 的股份，还是 TikTok 的费用，我们现在有了一个地方，政府的所有这些胜利可以直接送到所有美国公民的账户中，终身复利。还有就是关于 18 岁以上的人群。我们有很多讨论。社安金是两党神圣的承诺，没人会改变它。但有很大机会做一个补充版。为什么 20-30 岁的人不能拥有一个补充的、自己拥有和控制的“特朗普账户”呢？记住它与社保的关键区别：社保从我收入中拿走 12.4%，放进类似政府黑洞的东西里。我不拥有它，如果问 3000 个人他们缴了多少，没人知道。我死了它不会传给我的继承人。它不是我的。所以，谈论的延伸方向有很多。但在 250 岁生日那天，在椭圆形办公室敲响钟声，看到所有孩子账户被点亮，是一个极不寻常的里程碑。</p>
+<p><strong>Brad：</strong> 我认为“特朗普账户”非常酷的地方在于，它是一个了不起的慈善平台，但更重要的是，它是一个了不起的中产阶级家庭财务规划平台。所有 CPA 都说，如果只能告诉客户一件事，那就是这个。这是终于给中产阶级的东西。人们一直要求，给中产阶级一些东西。</p>
+<p><strong>Sacks：</strong> 市场空白在于，直到你有一份工作和收入（通常 22 岁以后），你才能有一个 IRA。所以在孩子生命头 22 年，他们没有这种税务优惠的工具。这个计划等于给了每个孩子一个从出生开始的 IRA。它甚至比 IRA 更好，因为雇主可以免税贡献 2500 美元，慈善家也可以。</p>
+<p><strong>Brad：</strong> 巴菲特说，秘诀是找到一个非常小的雪球，放在一个非常长的山坡上。但这个国家把山坡的头三分之一砍掉了。人们在 25 岁之前几乎不存钱。0 到 25 岁之间是世界上最容易复利的时期。现在我们把人生活跃期的头三分之一加入到了复利中。这太了不起了。</p>
+<p><strong>JCal：</strong> 太棒了。我们都为你骄傲。</p></div>
+                  </div>
+                </article></div>
+            <p class="empty search-empty" data-search-empty hidden>没有匹配的时间线段落。</p>
+          </section>
+
+          <section id="speakers">
+            <div class="section-head">
+              <h2>人物观点对照</h2>
+              <p>比较嘉宾立场</p>
+            </div>
+            <div class="speaker-grid"><article class="speaker-card" style="--index: 1">
+                  <p class="speaker-kicker">嘉宾 01</p>
+                  <h3>Jason Calacanis</h3>
+                  <div><p>核心立场是推动技术普及和公民参与。他极力赞扬“特朗普账户”作为一个跨越党派分歧、解决贫富差距、复兴“美国梦”的工具，并呼吁听众超越政治偏见支持它。在 AI 方面，他相信这是一个自下而上的、影响所有人的技术，但通过自己使用低成本模型的经验，证明了成本降低会导致使用量激增（Jevons 悖论），并认同企业需要从疯狂的 token 消耗转向战略性部署以获得 ROI。</p></div>
+                </article>
+<article class="speaker-card" style="--index: 2">
+                  <p class="speaker-kicker">嘉宾 02</p>
+                  <h3>Chamath Palihapitiya</h3>
+                  <div><p>核心立场是审慎和怀疑。他是本集最鲜明的 AI 怀疑论者，通过 S&amp;P 493 的 EPS 增长数据揭露了 AI ROI 可能并不存在（0-2%），认为当前的企业 AI 支出是脆弱的。他力劝 Anthropic 和 OpenAI 尽快上市，因为企业成本压力将导致未来增长放缓。他坚信主权 AI 和国家基础设施将形成，开源会进一步压低成本，企业的 CFO 最终会对没有 ROI 的支出施加压力。他对“特朗普账户”持有积极态度但未深入讨论。</p></div>
+                </article>
+<article class="speaker-card" style="--index: 3">
+                  <p class="speaker-kicker">嘉宾 03</p>
+                  <h3>David Sacks</h3>
+                  <div><p>核心立场是务实的技术和市场分析家。他赞同双头垄断的预测，认为企业缺乏技术能力去脱离前沿模型，解释了为什么开源份额在下降。他将中国的开源转向闭源视为标准的追赶者战略。在“特朗普账户”方面，他是最强有力的税务和财务规划倡导者，重点计算了其作为税务优化、遗产规划和社会新契约的巨大价值。</p></div>
+                </article>
+<article class="speaker-card" style="--index: 4">
+                  <p class="speaker-kicker">嘉宾 04</p>
+                  <h3>David Friedberg</h3>
+                  <div><p>本集未出席。</p></div>
+                </article></div>
+          </section>
+
+          <section id="quotes">
+            <div class="section-head">
+              <h2>值得引用的原话</h2>
+              <p>保留关键表达</p>
+            </div>
+            <div class="panel"><ol>
+<li><strong>英文原话：</strong> “The problem with enterprise revenue is at some point the person that&#x27;s spending it has to see an ROI.”</li>
+<p><strong>中文翻译：</strong> “企业收入的问题是，最终花钱的人必须看到投资回报率。” <strong>简短说明：</strong> Chamath 提出了本集 AI 讨论的核心问题——可持续性。</p>
+</ol>
+<ol>
+<li><strong>英文原话：</strong> “It&#x27;s the easiest choice. It&#x27;s the most refined product.”</li>
+<p><strong>中文翻译：</strong> “这是最简单的选择。这是最精致的产品。” <strong>简短说明：</strong> Sacks 解释了为什么尽管成本高，企业仍倾向使用闭源前沿模型。</p>
+</ol>
+<ol>
+<li><strong>英文原话：</strong> “The non-consensus argument might be that intelligence is not converging at all, that superintelligence becomes fully self-recursive… the smarter your model gets, the more revenue you get, the more compute you can buy, the more compute you can buy, the better the model is that you can build.”</li>
+<p><strong>中文翻译：</strong> “非共识论点可能是，智能根本没有在收敛，超级智能是完全自我递归的……你的模型越聪明，你获得的收入就越多；你可以购买的算力就越多；你就可以构建更好的模型。” <strong>简短说明：</strong> Brad 提出了一个关键的逆向观点——赢家通吃的反馈回路可能会加速差距的拉大。</p>
+</ol>
+<ol>
+<li><strong>英文原话：</strong> “We are about 3 entire Californias worth of energy short.”</li>
+<p><strong>中文翻译：</strong> “我们大约缺少相当于 3 个加州总和的能源。” <strong>简短说明：</strong> Chamath 将瓶颈指向能源基础设施，这是 AI 和地缘战略竞争中的核心议题。</p>
+</ol>
+<ol>
+<li><strong>英文原话：</strong> “This is the largest change to our social contract since 1935 and Social Security.”</li>
+<p><strong>中文翻译：</strong> “这是自 1935 年和社保体系以来，对我们的社会契约做出的最大变革。” <strong>简短说明：</strong> Brad Gerstner 对“特朗普账户”历史地位的定性，极其有分量。</p>
+</ol>
+<ol>
+<li><strong>英文原话：</strong> “Put aside your TDS, put aside your valid criticisms, and embrace this and give the flowers to Brad… This is the most beautiful gift I&#x27;ve ever seen to a country.”</li>
+<p><strong>中文翻译：</strong> “把你的 TDS 放在一边，把你有效的批评放在一边，拥抱这个，把鲜花献给布拉德……这是我见过的给一个国家的最美丽的礼物。” <strong>简短说明：</strong> JCal 这段话极具感染力，是本集情感上的高潮，将政治分歧与拯救国家信仰联系起来。</p>
+</ol></div>
+          </section>
+        </div>
+      </div>
+    </main>
+  </div>
+  <script>
+    const progress = document.querySelector("[data-progress]");
+    const searchBox = document.querySelector("[data-search-box]");
+    const topButton = document.querySelector("[data-scroll-top]");
+    const cards = Array.from(document.querySelectorAll("[data-timeline-card]"));
+    const searchEmpty = document.querySelector("[data-search-empty]");
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    function updateProgress() {
+      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      const ratio = scrollable > 0 ? window.scrollY / scrollable : 0;
+      if (progress) {
+        progress.style.width = `${Math.max(0, Math.min(1, ratio)) * 100}%`;
+      }
+    }
+
+    function applySearch() {
+      const query = searchBox.value.trim().toLowerCase();
+      let visibleCount = 0;
+      cards.forEach((card) => {
+        const text = card.getAttribute("data-search") || "";
+        const isVisible = !query || text.includes(query);
+        card.hidden = !isVisible;
+        if (isVisible) {
+          visibleCount += 1;
+        }
+      });
+      if (searchEmpty) {
+        searchEmpty.hidden = !query || visibleCount > 0;
+      }
+    }
+
+    window.addEventListener("scroll", updateProgress, { passive: true });
+    window.addEventListener("resize", updateProgress);
+    if (searchBox) {
+      searchBox.addEventListener("input", applySearch);
+    }
+    if (topButton) {
+      topButton.addEventListener("click", () => {
+        window.scrollTo({
+          top: 0,
+          behavior: prefersReducedMotion.matches ? "auto" : "smooth"
+        });
+      });
+    }
+    updateProgress();
+  </script>
+</body>
+</html>
