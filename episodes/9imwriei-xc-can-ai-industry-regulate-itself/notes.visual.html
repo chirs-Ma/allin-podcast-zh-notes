@@ -1,0 +1,903 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>All-In Podcast 精编整理：AI行业能否自我监管？Stripe欲收购PayPal，中国追赶，纽约禁建数据中心 - 中文播客可视化笔记</title>
+  <style>
+    :root {
+      --bg: oklch(0.974 0.006 238);
+      --paper: oklch(0.991 0.003 238);
+      --paper-soft: oklch(0.955 0.007 238);
+      --ink: oklch(0.205 0.018 246);
+      --muted: oklch(0.49 0.018 246);
+      --faint: oklch(0.63 0.014 246);
+      --line: oklch(0.875 0.009 238);
+      --line-strong: oklch(0.74 0.014 238);
+      --accent: oklch(0.43 0.064 164);
+      --accent-soft: oklch(0.94 0.024 164);
+      --accent-wash: oklch(0.973 0.012 164);
+      --quote: oklch(0.965 0.010 92);
+      --shadow: 0 24px 54px color-mix(in oklch, var(--ink) 8%, transparent);
+      --radius: 8px;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-width: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(90deg, color-mix(in oklch, var(--line) 28%, transparent) 1px, transparent 1px) 0 0 / 92px 92px,
+        var(--bg);
+      font-family: "Geist", "Satoshi", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      line-height: 1.78;
+      text-rendering: optimizeLegibility;
+    }
+    ::selection { background: var(--accent-soft); color: var(--ink); }
+    a {
+      color: var(--accent);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+      transition: color .22s var(--ease), background-color .22s var(--ease), border-color .22s var(--ease), transform .22s var(--ease);
+    }
+    [hidden] { display: none !important; }
+    .progress {
+      position: fixed;
+      z-index: 4;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: var(--accent);
+    }
+    .quick-actions {
+      position: fixed;
+      right: max(18px, calc((100vw - 1200px) / 2));
+      bottom: 24px;
+      z-index: 3;
+      display: grid;
+      gap: 7px;
+    }
+    .quick-action {
+      display: inline-grid;
+      grid-template-columns: 16px auto;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      min-width: 74px;
+      min-height: 40px;
+      padding: 8px 12px;
+      border: 1px solid var(--line-strong);
+      border-radius: var(--radius);
+      background: color-mix(in oklch, var(--paper) 92%, transparent);
+      box-shadow: 0 12px 28px color-mix(in oklch, var(--ink) 7%, transparent);
+      color: var(--ink);
+      font: inherit;
+      font-size: 13px;
+      font-weight: 720;
+      line-height: 1.2;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .quick-action:hover, .quick-action:focus-visible {
+      outline: none;
+      border-color: var(--accent);
+      background: var(--accent-wash);
+      color: var(--accent);
+      transform: translate3d(0, -1px, 0);
+    }
+    .quick-action:active { transform: translate3d(0, 1px, 0) scale(.99); }
+    .page {
+      width: min(1760px, calc(100% - 56px));
+      margin: 0 auto;
+      padding: 0 0 104px;
+    }
+    .article { min-width: 0; }
+    .hero {
+      max-width: none;
+      margin-left: min(7vw, 140px);
+      padding: 72px 0 58px;
+    }
+    .eyebrow {
+      margin: 0 0 18px;
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    h1 {
+      max-width: none;
+      margin: 0 0 28px;
+      font-size: clamp(38px, 3vw, 52px);
+      font-weight: 760;
+      line-height: 1.08;
+      letter-spacing: 0;
+      text-wrap: balance;
+    }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 18px;
+      max-width: 72ch;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .meta a { font-weight: 650; }
+    .meta-strip {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+      max-width: 720px;
+      margin: 34px 0 28px;
+      border-top: 1px solid var(--line-strong);
+      padding-top: 16px;
+    }
+    .meta-pill {
+      display: grid;
+      gap: 2px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.35;
+    }
+    .meta-pill b {
+      color: var(--ink);
+      font-family: var(--mono);
+      font-size: 18px;
+      font-weight: 680;
+      line-height: 1;
+    }
+    .summary {
+      width: 100%;
+      max-width: 760px;
+      padding: 24px 26px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: color-mix(in oklch, var(--paper) 88%, var(--accent-soft));
+      box-shadow: var(--shadow);
+    }
+    .summary p {
+      margin: 0;
+      font-size: 19px;
+      line-height: 1.72;
+    }
+    h1, .summary, .takeaway p, .timeline-card h3, .section-content, .speaker-card, .panel {
+      overflow-wrap: anywhere;
+    }
+    .content-shell {
+      display: grid;
+      grid-template-columns: minmax(170px, 212px) minmax(0, 820px);
+      gap: clamp(36px, 7vw, 88px);
+      align-items: start;
+      border-top: 1px solid var(--line);
+      padding-top: 40px;
+    }
+    .sidebar {
+      position: sticky;
+      top: 28px;
+      align-self: start;
+      padding-top: 4px;
+    }
+    .toc {
+      border-top: 1px solid var(--ink);
+      padding-top: 16px;
+    }
+    .toc-title {
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .nav-links { display: grid; gap: 2px; }
+    .nav-links a {
+      display: block;
+      padding: 8px 0;
+      border-bottom: 1px solid color-mix(in oklch, var(--line) 72%, transparent);
+      color: var(--ink);
+      font-size: 14px;
+      line-height: 1.35;
+      text-decoration: none;
+    }
+    .nav-links a:hover, .nav-links a:focus-visible {
+      outline: none;
+      color: var(--accent);
+      transform: translate3d(2px, 0, 0);
+    }
+    .search {
+      display: grid;
+      gap: 8px;
+      margin-top: 22px;
+    }
+    .search span {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 720;
+    }
+    .search input {
+      width: 100%;
+      min-height: 40px;
+      padding: 8px 10px;
+      border: 1px solid var(--line-strong);
+      border-radius: var(--radius);
+      background: var(--paper);
+      color: var(--ink);
+      font: inherit;
+      font-size: 14px;
+      outline: none;
+      transition: border-color .22s var(--ease), box-shadow .22s var(--ease), transform .22s var(--ease);
+    }
+    .search input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px color-mix(in oklch, var(--accent) 14%, transparent);
+    }
+    .content-flow { min-width: 0; }
+    section { margin: 0 0 78px; }
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 18px;
+      align-items: end;
+      margin-bottom: 22px;
+      border-top: 1px solid var(--ink);
+      padding-top: 18px;
+    }
+    .section-head h2 {
+      margin: 0;
+      font-size: 28px;
+      font-weight: 740;
+      line-height: 1.16;
+      letter-spacing: 0;
+    }
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.4;
+      text-align: right;
+    }
+    .takeaway-list {
+      display: grid;
+      gap: 0;
+      margin: 0;
+      padding: 0;
+      border-top: 1px solid var(--line);
+      list-style: none;
+    }
+    .takeaway {
+      display: grid;
+      grid-template-columns: 52px minmax(0, 1fr);
+      gap: 18px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .takeaway span {
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 15px;
+      font-weight: 720;
+      line-height: 1.65;
+    }
+    .takeaway p {
+      margin: 0;
+      max-width: 70ch;
+      font-size: 16px;
+      line-height: 1.72;
+    }
+    .timeline {
+      display: grid;
+      gap: 0;
+      border-top: 1px solid var(--line-strong);
+    }
+    .timeline-card {
+      display: grid;
+      grid-template-columns: 132px minmax(0, 1fr);
+      gap: 32px;
+      padding: 34px 0 40px;
+      border-bottom: 1px solid var(--line);
+    }
+    .timeline-heading {
+      position: sticky;
+      top: 30px;
+      align-self: start;
+      display: grid;
+      gap: 10px;
+      padding-top: 2px;
+    }
+    .timeline-index {
+      color: var(--faint);
+      font-family: var(--mono);
+      font-size: 13px;
+      font-weight: 720;
+      line-height: 1;
+    }
+    .timeline-meta {
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 720;
+      line-height: 1.45;
+    }
+    .timeline-card h3 {
+      max-width: 24ch;
+      margin: 0 0 18px;
+      font-size: 27px;
+      font-weight: 730;
+      line-height: 1.22;
+      letter-spacing: 0;
+    }
+    .section-content {
+      color: color-mix(in oklch, var(--ink) 88%, var(--muted));
+      font-size: 16px;
+    }
+    .section-content p {
+      max-width: 72ch;
+      margin: 0 0 1.05em;
+    }
+    .section-content p strong:first-child {
+      color: var(--ink);
+      font-weight: 760;
+    }
+    .section-content h4 {
+      margin: 26px 0 10px;
+      color: var(--accent);
+      font-size: 14px;
+      font-weight: 760;
+      line-height: 1.35;
+    }
+    .section-content ul, .section-content ol, .panel ul, .panel ol, .speaker-card ul, .speaker-card ol {
+      margin: .75em 0 1em;
+      padding-left: 1.25em;
+    }
+    .section-content li, .panel li, .speaker-card li { margin: 6px 0; }
+    .speaker-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, .88fr);
+      gap: 26px 42px;
+      border-top: 1px solid var(--line);
+    }
+    .speaker-card {
+      padding: 22px 0 24px;
+      border-bottom: 1px solid var(--line);
+    }
+    .speaker-card:nth-child(even) { margin-top: 22px; }
+    .speaker-kicker {
+      margin: 0 0 8px;
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 720;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .speaker-card h3 {
+      margin: 0 0 12px;
+      font-size: 20px;
+      font-weight: 730;
+      line-height: 1.25;
+    }
+    .speaker-card p, .panel p {
+      max-width: 68ch;
+      margin-top: 0;
+    }
+    .panel {
+      border-top: 1px solid var(--line);
+      padding-top: 8px;
+    }
+    blockquote {
+      margin: 18px 0;
+      padding: 16px 18px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--quote);
+    }
+    code {
+      padding: 2px 5px;
+      border-radius: 5px;
+      background: color-mix(in oklch, var(--accent) 10%, var(--paper));
+      color: var(--ink);
+      font-family: var(--mono);
+      font-size: .92em;
+    }
+    hr {
+      height: 1px;
+      margin: 26px 0;
+      border: 0;
+      background: var(--line);
+    }
+    .empty {
+      margin: 0;
+      padding: 16px 18px;
+      border: 1px dashed var(--line-strong);
+      border-radius: var(--radius);
+      color: var(--muted);
+      background: color-mix(in oklch, var(--paper-soft) 70%, transparent);
+    }
+    .search-empty { margin-top: 16px; }
+    .muted { color: var(--muted); }
+    @keyframes rise-in {
+      from { opacity: 1; transform: translate3d(0, 6px, 0); }
+      to { opacity: 1; transform: translate3d(0, 0, 0); }
+    }
+    .hero > *, .takeaway, .timeline-card, .speaker-card, .panel {
+      animation: rise-in .55s var(--ease) both;
+    }
+    .hero > *:nth-child(2) { animation-delay: .04s; }
+    .hero > *:nth-child(3) { animation-delay: .08s; }
+    .hero > *:nth-child(4) { animation-delay: .12s; }
+    .hero > *:nth-child(5) { animation-delay: .16s; }
+    .takeaway, .timeline-card, .speaker-card {
+      animation-delay: calc(var(--index, 1) * 38ms);
+    }
+    @media (max-width: 1120px) {
+      .hero { margin-left: 0; }
+      .content-shell {
+        grid-template-columns: minmax(154px, 190px) minmax(0, 1fr);
+        gap: 36px;
+      }
+      h1 { font-size: 44px; }
+    }
+    @media (min-width: 1500px) {
+      h1 {
+        width: max-content;
+        max-width: 100%;
+        white-space: nowrap;
+        font-size: clamp(36px, 2.05vw, 42px);
+      }
+    }
+    @media (max-width: 780px) {
+      body { background: var(--bg); }
+      .page { width: min(1180px, calc(100% - 28px)); padding-bottom: 86px; }
+      .hero { padding: 46px 0 36px; }
+      .eyebrow { margin-bottom: 14px; }
+      h1 {
+        max-width: none;
+        font-size: 30px;
+        line-height: 1.14;
+        word-break: normal;
+      }
+      .summary, .summary p, .takeaway p, .section-content, .speaker-card, .panel {
+        max-width: 100%;
+        word-break: break-word;
+      }
+      .meta-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 20px; }
+      .summary { padding: 20px; }
+      .summary p { font-size: 17px; }
+      .content-shell { display: block; padding-top: 28px; }
+      .sidebar { position: static; padding-top: 0; margin-bottom: 42px; }
+      .toc { border-top-color: var(--line-strong); }
+      .nav-links { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 18px; }
+      section { margin-bottom: 58px; }
+      .section-head { display: block; margin-bottom: 16px; }
+      .section-head h2 { font-size: 24px; }
+      .section-head p { margin-top: 6px; text-align: left; }
+      .takeaway { grid-template-columns: 42px minmax(0, 1fr); gap: 12px; }
+      .timeline-card { display: block; padding: 28px 0 32px; }
+      .timeline-heading { position: static; display: flex; align-items: baseline; gap: 12px; margin-bottom: 12px; }
+      .timeline-card h3 { max-width: none; font-size: 23px; }
+      .speaker-grid { display: block; }
+      .speaker-card:nth-child(even) { margin-top: 0; }
+      .quick-actions {
+        right: 12px;
+        bottom: 12px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 6px;
+      }
+      .quick-action {
+        min-width: 66px;
+        min-height: 38px;
+        padding: 7px 9px;
+        font-size: 13px;
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: 1ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 1ms !important;
+      }
+      .speaker-card:nth-child(even) { margin-top: 0; }
+    }
+    @media print {
+      body { background: var(--paper); }
+      .sidebar, .progress, .quick-actions { display: none; }
+      .page { display: block; width: auto; padding-bottom: 0; }
+      .hero { margin-left: 0; padding: 0 0 28px; }
+      .content-shell { display: block; border-top: 0; padding-top: 0; }
+      .summary { box-shadow: none; }
+      .timeline-card, .speaker-card { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <div class="progress" data-progress></div>
+  <div class="quick-actions" aria-label="快捷操作">
+    <a class="quick-action" href="../../index.html" aria-label="返回首页">
+      <span aria-hidden="true">←</span>
+      <span>首页</span>
+    </a>
+    <button class="quick-action" type="button" data-scroll-top aria-label="回到顶部">
+      <span aria-hidden="true">↑</span>
+      <span>顶部</span>
+    </button>
+  </div>
+  <div class="page">
+    <main class="article">
+      <header class="hero">
+        <p class="eyebrow">All-In Podcast 中文精读</p>
+        <h1>All-In Podcast 精编整理：AI行业能否自我监管？Stripe欲收购PayPal，中国追赶，纽约禁建数据中心</h1>
+        <div class="meta">
+          <span>生成时间：2026-07-20 10:03</span>
+          <span>来源：<a href="https://www.youtube.com/watch?v=9IMwRIei-Xc" target="_blank" rel="noopener">YouTube</a></span>
+        </div>
+        <div class="meta-strip"><span class="meta-pill"><b>31 分钟</b>阅读时长</span>
+<span class="meta-pill"><b>10</b>核心要点</span>
+<span class="meta-pill"><b>5</b>时间线</span>
+<span class="meta-pill"><b>4</b>人物</span></div>
+        <div class="summary" aria-label="一句话摘要"><p>本集四位嘉宾围绕Demis Hassabis的AI行业自我监管提案、Stripe联合财团竞购PayPal、Apple起诉OpenAI窃取商业机密以及纽约州全面暂停超大规模数据中心建设等重大新闻展开了深入讨论，并就AI监管的实质困境、中国企业快速追赶以及能源危机对AI产业的影响达成了高度一致。</p></div>
+      </header>
+
+      <div class="content-shell">
+        <aside class="sidebar">
+          <nav class="toc" aria-label="页面导航">
+            <p class="toc-title">阅读导航</p>
+            <div class="nav-links">
+              <a href="#takeaways">核心要点</a>
+              <a href="#timeline">分段整理</a>
+              <a href="#speakers">人物观点</a>
+              <a href="#quotes">双语引语</a>
+            </div>
+            <label class="search">
+              <span>搜索时间线</span>
+              <input data-search-box type="search" placeholder="关键词" aria-label="搜索时间线">
+            </label>
+          </nav>
+        </aside>
+
+        <div class="content-flow">
+          <section id="takeaways">
+            <div class="section-head">
+              <h2>核心要点</h2>
+              <p>快速扫读本集主线</p>
+            </div>
+            <ol class="takeaway-list"><li class="takeaway" style="--index: 1"><span>01</span><p>DeepMind CEO Demis Hassabis提出AI行业SRO模式： 参照FINRA，由行业出资、专家运营、联邦监督，前沿模型发布前需经过安全评估。Sacks为此提出5项关键条件，包括必须代表初创和开源社区、仅适用于前沿模型、仅限灾难性风险、自愿先行、并且必须替代而非新增政府机构。</p></li>
+<li class="takeaway" style="--index: 2"><span>02</span><p>Anthropic被指为监管升级核心推手： Sacks指控Anthropic正在通过在各州推动层层加码的AI监管法案（如加州SB 53），利用监管收编策略扼杀初创和开源生态。Chamath和JCal基本同意这一判断。</p></li>
+<li class="takeaway" style="--index: 3"><span>03</span><p>Stripe联合Advent、Block出价约530亿美元竞购PayPal： 这三位&quot;父母&quot;如果联手，将打造一个拥有6-7亿账户、整合Stripe商家端与PayPal消费者端、自带稳定币基础设施、能够直接挑战Visa/MasterCard双头垄断的支付超级平台。</p></li>
+<li class="takeaway" style="--index: 4"><span>04</span><p>&quot;僵尸数字企业&quot;的AI化收购浪潮开始启动： Friedberg将PayPal视为第一代数字原生企业因被非创始人团队管理而&quot;疲软&quot;的典型，认为此类资产将成为现代AI运营商的并购目标。Ryan Cohen对eBay的收购以及Bending Spoons对AOL/Vimeo的整合被视为同类信号。</p></li>
+<li class="takeaway" style="--index: 5"><span>05</span><p>能源短缺已成为AI产业最紧急的瓶颈： Chamath警告美国到2050年将面临&quot;2.5个加州&quot;的能源缺口，PJM电力拍卖出现巨大供货缺口。AI公司若不能获取充足、低成本的电力，药物发现、癌症诊断、法律咨询等领域的应用都将被延缓。</p></li>
+<li class="takeaway" style="--index: 6"><span>06</span><p>纽约州长Kathy Hochul签署全美首个州级超大规模数据中心全面暂停令： Sacks逐条驳斥其关于能源、用地、噪音、水耗的论证，指出现代数据中心为闭环水冷，用水量仅相当于2.5家In-N-Out汉堡。Friedberg展示了RT（今日俄罗斯）等外国媒体如何通过&quot;定向措施&quot;影响美国公众对GMO的看法，暗示数据中心议题可能面临类似操作。</p></li>
+<li class="takeaway" style="--index: 7"><span>07</span><p>苹果起诉OpenAI窃取商业机密： 涉及前iPhone设计副总裁Tang Tan和前高级工程师Chang Liu，后者被指控在面试中涉嫌要求候选者携带&quot;实物零件&quot;参加&quot;展示汇报&quot;，以及非法进入苹果网络存储。Chamath强调&quot;没有人应该从原雇主那里窃取东西&quot;，但他不认为Sam Altman或Sarah Friar主动诱导了这种行为。</p></li>
+<li class="takeaway" style="--index: 8"><span>08</span><p>xCode发生数据泄露事件： Groq Build在公测期间向xCode服务器上传了用户的完整代码库（包括密码和API密钥），而非仅限任务相关文件。Chamath将此与&quot;零数据保留&quot;承诺的不可靠性联系起来，强调企业需要一个独立的第三方层来管理AI模型暴露风险。</p></li>
+<li class="takeaway" style="--index: 9"><span>09</span><p>AI推理成本差异巨大： JCal展示了各模型每百万输入token的价格：Fable约56美元，Sol约26美元，Groq约1.50美元，xAI约1美元，中国模型约0.50美元。他预测CFO们将面临因token支出失控而被华尔街&quot;miss quarter&quot;的风险。</p></li>
+<li class="takeaway" style="--index: 10"><span>10</span><p>Science Corner：AI药物发现新突破： Calico和Revel Pharma联合发表论文，利用AlphaFold和定向进化技术，创造出一种全新酶，能够分解使皮肤衰老的CML分子，将70岁以上老年捐赠者的皮肤&quot;逆龄&quot;至31岁水平。Friedberg称其第一个市场将是化妆品，市场潜力达万亿美元。</p></li></ol>
+          </section>
+
+          <section id="timeline">
+            <div class="section-head">
+              <h2>分段详细整理</h2>
+              <p>按时间线阅读上下文</p>
+            </div>
+            <div class="timeline" data-timeline><article class="timeline-card" data-timeline-card data-search="00:00–00:03 开场与demo: fintech讨论第一部分 本段核心内容： 节目开始，嘉宾互相调侃，chamath开玩笑地说jcal的祖先是个&quot;hooker&quot;（妓女）和&quot;purse snatcher&quot;（扒手），并提到1719年法国的一种刑罚：囚犯若愿意娶一名妓女并移居路易斯安那，就可以重获自由。 简述节目议程，包括deepmind的ai监管方案、stripe竞购paypal、苹果起诉openai、纽约州数据中心暂停令和科学角落。 详细中文整理： jcal： 好的各位，欢迎回到全世界最好的播客——排名第一的节目、你们最喜欢的all-in podcast。我是jason calacanis，全世界最棒的主持人。跟我一起的是chamath palihapitiya。 chamath： 兄弟，你的祖母、祖母的祖母、祖母的祖母的祖母……是个hooker（妓女）和purse snatcher（扒手）。 jcal： 你是在法国看到的这个？ chamath： 这是来自法国某个历史频道的。他们说，1719年有一个交易：如果你是个巴黎的囚犯，你可以通过在服刑期间娶一个妓女并搬到伟大的路易斯安那州来换取自由。sacks，你怎么看这个交易？ sacks： 这倒是解释了你某些方面的爱好，jcal。 jcal： 我还以为你是在问我能不能把这个规定套用在你身上呢！ chamath： 不，我非常明确地告诉你，你祖母的祖母的祖母是个妓女。 jcal： 我是希腊人。 chamath： 我就是这个意思。非常明确。 jcal： 我们可从来没蹲过监狱。好，david friedberg也在这里。你怎么样，兄弟？ friedberg： 好极了。 jcal： 很好。欢迎回来。上周你不在，brad怎么样？他接手得如何？ friedberg： brad很棒。 jcal： 没错，他表现很好。 friedberg： 他在trump的凯旋巡礼上有何表现？ jcal： 他搞了个小小的凯旋巡礼，我们播放了《火战车》的背景音乐。你这一周的空白期过得如何？下周又要去blank？ chamath： 谢谢你让我上你的节目，yigal。 jcal： 好了，我们今天的议程很满。有很多故事要聊。我们先从deepmind的demis hassabis刚刚发布的一项ai监管提案开始。这个提案在圈内反响不错。他在x上发表了一篇文章，呼吁建立美国主导的国际ai标准机构。提案是参照finra（金融业监管局）的模式设计的——它是一个自我监管机构，接受联邦监督，由行业出资，并由独立技术专家运营。前沿实验室需要在发布模型前30天提交模型，初期自愿，后期可能变为强制。模型将接受网络安全、国家安全、生物威胁及其他高风险领域的风险评估。基准测试标准每个季度更新一次，如果情况需要，该机构可以协调延缓开发进程。目前在支持方名单中我们看到了elon musk（认为&quot;深思熟虑&quot;）、sam altman（openai）、jack clark（anthropic）、sundar pichai、satya nadella、jack dorsey（block）以及carlson兄弟。所以，friedberg，你的看法是？ friedberg： 哇，你读得好，真是花了不少功夫。jcal，把话筒给我，我来处理这个。既然你关心，那就让我来。 jcal： 好吧，来吧！ friedberg： 3，2，1，给大家放一段我在all-in播客上第一次预言的片段：整个行业都需要被监管，而我认为行业需要自我监管。这才是关键。我们需要google、microsoft、amazon都同意一套测试标准。elon，这就是我们应该测试的几项内容。他们应该在请求政府——政府根本不理解模型——认证之前，先自行认证每个模型。行业应该像无数其他行业那样，拥有行业认证。我以前谈过mpaa（美国电影协会）和电子游戏行业的做法。我们应该搞自我认证。这是世界上最简单的事，然后我们就可以在政府不介入的情况下自行发布模型了。friedberg，你不想祝贺我又一次猜对了吗？ friedberg： 好吧，首先，我本来觉得demis的提案非常聪明、非常有见地。但现在我知道你之前也提出过类似想法——我觉得我们应该完全换一种做法。 jcal： 我是赢不了的，sacks。就算我投中半场球，chamath也会说：把球网挪一挪，把球网挪一挪。" style="--index: 1">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">01</span>
+                    <span class="timeline-meta">00:00–00:03</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>开场与Demo: FinTech讨论第一部分</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>节目开始，嘉宾互相调侃，Chamath开玩笑地说JCal的祖先是个&quot;hooker&quot;（妓女）和&quot;purse snatcher&quot;（扒手），并提到1719年法国的一种刑罚：囚犯若愿意娶一名妓女并移居路易斯安那，就可以重获自由。</li>
+<li>简述节目议程，包括DeepMind的AI监管方案、Stripe竞购PayPal、苹果起诉OpenAI、纽约州数据中心暂停令和科学角落。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> 好的各位，欢迎回到全世界最好的播客——排名第一的节目、你们最喜欢的All-In Podcast。我是Jason Calacanis，全世界最棒的主持人。跟我一起的是Chamath Palihapitiya。</p>
+<p><strong>Chamath：</strong> 兄弟，你的祖母、祖母的祖母、祖母的祖母的祖母……是个hooker（妓女）和purse snatcher（扒手）。</p>
+<p><strong>JCal：</strong> 你是在法国看到的这个？</p>
+<p><strong>Chamath：</strong> 这是来自法国某个历史频道的。他们说，1719年有一个交易：如果你是个巴黎的囚犯，你可以通过在服刑期间娶一个妓女并搬到伟大的路易斯安那州来换取自由。Sacks，你怎么看这个交易？</p>
+<p><strong>Sacks：</strong> 这倒是解释了你某些方面的爱好，JCal。</p>
+<p><strong>JCal：</strong> 我还以为你是在问我能不能把这个规定套用在你身上呢！</p>
+<p><strong>Chamath：</strong> 不，我非常明确地告诉你，你祖母的祖母的祖母是个妓女。</p>
+<p><strong>JCal：</strong> 我是希腊人。</p>
+<p><strong>Chamath：</strong> 我就是这个意思。非常明确。</p>
+<p><strong>JCal：</strong> 我们可从来没蹲过监狱。好，David Friedberg也在这里。你怎么样，兄弟？</p>
+<p><strong>Friedberg：</strong> 好极了。</p>
+<p><strong>JCal：</strong> 很好。欢迎回来。上周你不在，Brad怎么样？他接手得如何？</p>
+<p><strong>Friedberg：</strong> Brad很棒。</p>
+<p><strong>JCal：</strong> 没错，他表现很好。</p>
+<p><strong>Friedberg：</strong> 他在Trump的凯旋巡礼上有何表现？</p>
+<p><strong>JCal：</strong> 他搞了个小小的凯旋巡礼，我们播放了《火战车》的背景音乐。你这一周的空白期过得如何？下周又要去Blank？</p>
+<p><strong>Chamath：</strong> 谢谢你让我上你的节目，Yigal。</p>
+<p><strong>JCal：</strong> 好了，我们今天的议程很满。有很多故事要聊。我们先从DeepMind的Demis Hassabis刚刚发布的一项AI监管提案开始。这个提案在圈内反响不错。他在X上发表了一篇文章，呼吁建立美国主导的国际AI标准机构。提案是参照FINRA（金融业监管局）的模式设计的——它是一个自我监管机构，接受联邦监督，由行业出资，并由独立技术专家运营。前沿实验室需要在发布模型前30天提交模型，初期自愿，后期可能变为强制。模型将接受网络安全、国家安全、生物威胁及其他高风险领域的风险评估。基准测试标准每个季度更新一次，如果情况需要，该机构可以协调延缓开发进程。目前在支持方名单中我们看到了Elon Musk（认为&quot;深思熟虑&quot;）、Sam Altman（OpenAI）、Jack Clark（Anthropic）、Sundar Pichai、Satya Nadella、Jack Dorsey（Block）以及Carlson兄弟。所以，Friedberg，你的看法是？</p>
+<p><strong>Friedberg：</strong> 哇，你读得好，真是花了不少功夫。JCal，把话筒给我，我来处理这个。既然你关心，那就让我来。</p>
+<p><strong>JCal：</strong> 好吧，来吧！</p>
+<p><strong>Friedberg：</strong> 3，2，1，给大家放一段我在All-In播客上第一次预言的片段：整个行业都需要被监管，而我认为行业需要自我监管。这才是关键。我们需要Google、Microsoft、Amazon都同意一套测试标准。Elon，这就是我们应该测试的几项内容。他们应该在请求政府——政府根本不理解模型——认证之前，先自行认证每个模型。行业应该像无数其他行业那样，拥有行业认证。我以前谈过MPAA（美国电影协会）和电子游戏行业的做法。我们应该搞自我认证。这是世界上最简单的事，然后我们就可以在政府不介入的情况下自行发布模型了。Friedberg，你不想祝贺我又一次猜对了吗？</p>
+<p><strong>Friedberg：</strong> 好吧，首先，我本来觉得Demis的提案非常聪明、非常有见地。但现在我知道你之前也提出过类似想法——我觉得我们应该完全换一种做法。</p>
+<p><strong>JCal：</strong> 我是赢不了的，Sacks。就算我投中半场球，Chamath也会说：把球网挪一挪，把球网挪一挪。</p></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="00:04–00:15 详解sro及其优势 本段核心内容： friedberg解释了sro（自我监管组织）的本质：它是一个让行业内参与方自行制定规则、相互监督、确保安全运作的机构，如finra和国家期货协会。 sro的关键优势在于可以随着技术快速迭代灵活调整测试标准和审核专家，而非像政府机构那样僵化。 sacks将自己与demis私下交流的结果分享出来，提出5项条件：sro必须有广泛行业代表性（含初创和开源）、仅审查前沿模型、仅针对灾难性风险、自愿先行、必须替代而非新增政府机构。 sacks高度警惕anthropic和dario的立场，指出anthropic可能将sro视为通向&quot;ai领域的faa&quot;的跳板，而faa审批一架新飞机设计需要5-9年，这将使得美国彻底输掉ai竞赛。 背景解释与关键术语： finra： 金融业监管局，是一个被美国证券交易委员会授权监管证券经纪商和交易商的非政府组织，由行业出资、运作独立，是&quot;自我监管组织&quot;（sro）的典型代表。 faa（联邦航空管理局）： 美国航空监管机构，任何新飞机设计必须获得&quot;型号认证&quot;，全新设计需5-9年，修改需3-5年，属于&quot;许可制监管&quot;。 sro（self-regulatory organization）： 自我监管组织，由行业组建并出资、接受政府监督但日常运营独立于政府之外，拥有制定和执行业务规则的权力。 详细中文整理： friedberg： 我觉得值得围绕这个提案做一点定义——就是组建一个sro，自我监管组织，因为它们是“不纯粹独立”的。像finra和国家期货协会这类sro存在于金融市场，它们建立的初衷是允许金融机构自己制定监管规则，规定如何互相检查，如何确保所有人都安全，因为它们在互相交易风险。所以行业不想把自己的风险敞口给外界，更不想因为外部干预而拖慢市场效率，导致交易低效。ai产业与这个类比非常恰当：有很多参与方都在推进ai技术，谁也不希望由一个从政府或外界而来的单一监管机构说：“你们要过这几项测试才能发布模型。”就像加州试图通过ai法案时——大概一年半前——他们写的内容当时就完全不合时宜。但一年快进到现在，那些规则和要求的设定与今天的技术现实完全不匹配。所以像finra和nfa这种sro的好处是，它们能够灵活调整测试如何执行、谁来执行、确保有合适的专家——而且是独立专家——来负责测试，同时接受联邦政府的监督但不是控制。在finra/nfa的案例中，它最终向参众两院的委员会报告，这些委员会对这些本应执行工作的治理机构拥有监督权，以确保它们尽职尽责。所以sro这个理念就是说，可以引入具备评估模型能力的行业专家，从网络安全、生物风险、武器风险、社会操纵等等维度进行评估。这个独立机构可以经过投票建立、可以随时间更替人员。由于它们确实拥有运行软件评估和这类测试的专业能力，它们能够比设立一个全新的政府机构运行得更快。所以这个解决方案非常优雅。 jcal： anthropic和openai有立场吗？ friedberg： 他们都签了字。dario没有直接表态，但dario的总裁点赞了，sam也点赞了——这意味着他们基本同意了。 sacks： 对，我和demis私下聊过这个问题。这听起来可能有点让人意外，但我告诉他——仅仅代表我自己，不代表政府中的任何人——我可以认为这个sro的方案是可行的，因为一个自我监管的思路，要远远好于设立一个全新的政府机构。我觉得那种机构会迅速变成&quot;ai界的车管局&quot;。dario称之为&quot;ai界的faa&quot;。问题是政府根本没有评估ai模型的专业能力。评估标准变化太快了。如果设立这样一个机构，很快就会产生排队现象：所有模型都得排队等着被测试。一开始可能是一个月延迟，结果可能变成好几个月。那我们就会直接输掉ai竞赛。所以我认为一个sro方案如果做对的话，要远好于那个方向。我向demis提出了5个条件或原则，我觉得非常重要。如果可以的话，我来说一下。 jcal： 请。 sacks： 第一，sro必须拥有广泛的行业代表性，必须包括初创公司和开源社区。不能只是最大的三家实验室。不能只是google。不能让结果被操控。如果代表利益足够多元化，就很难变成监管收编。举个例子，我认为如果团队里有jensen（黄仁勋）、elon、zuck，或许还有mira（因为她刚刚基于开源模式推出了一个非常有趣的开放平台），那就能很大程度上解决监管收编的问题。这是第一。第二，这个机构只能审查前沿模型，也就是真正的技术前沿，即那些确实代表了人工智能当前最先进水平突破的模型。在此水平以下的模型不应被阻止上市。在监管中有一个很大的风险：市场领导者用这种方式来捆住较弱模型的脚步。如果模型不是前沿模型，何必扣住它？第三，这个机构应该只处理灾难性风险，按我的理解，目前就是网络风险和cbrn（化学、生物、放射、核）。不应该包含虚假信息或微冒犯之类。不应成为言论监管者。设立这个机构的唯一理由就是真正的灾难性风险。第四，demis在帖子里也提了，我认为应该先采用自愿形式。这个新组织先证明自己能有效运作，然后才能得到法律承认并变成强制。第五，这应该是对新监管机构的替代品。如果是增加性的，那就违背了初衷，没有真正支持它的理由。所以，如果能够做到这5点，我觉得这个方案会变得更具可接受性。demis跟我说，他觉得这些想法很好。所以如果这些要点被采纳，我们是可以支持这个方案的。但这不代表我没有担忧。比如dario表示支持了，但我觉得这仅仅是anthropic的&quot;开价&quot;而已——他们会接受这个，说声谢谢，但绝不会就此止步。这只是个跳板，他们最终要的是dario反复提到的&quot;ai界的faa&quot;。最后我解释一下faa的运作：faa负责审批新飞机的设计，它要求新飞机设计或重大变更必须获得&quot;型号认证&quot;。一架全新飞机设计拿认证需要5到9年。即便只是修改变更也需要3到5年。比如说波音737 max，大概用了5年。这是一种&quot;许可制监管&quot;：没有批准就不能进行商业飞行。这在防止空难上或许有道理，但当你谈ai模型时，你谈的是将原来每几个月发布一个版本的发布机制，替换成一个完全由政府控制、全部需要政府批准、需要认证的系统，这个时间线就会从几个月变成数年。如果我们走这条路，中国是不会遵守这些规则的，所以我们会输掉ai竞赛。总结一下：如果我的选择是&quot;ai界的faa&quot;或者&quot;ai界的车管局&quot;，我宁愿选择demis的&quot;ai界的sro&quot;，即自我监管的办法。但我们必须保持它的纯正和诚实，否则它就会成为一个新一波监管浪潮的开端，变成一个巨大的监管收编载体。 jcal： 而且它不能限制开源。 sacks： 对，不能限制开源。这非常重要，因为其他所有方案都需要花钱，而正是花钱的地方才会发生监管收编。我们必须让初创公司和开源社区能够有效竞争。 chamath： 我认为这件事非常重要，而且我希望它能迅速成行。我们必须记住，将会有海量资金试图同时影响两党，把监管往有利于某种监管收编的方向去塑造。我们只是还不知道具体是哪一种。所以越快通过建立一套规则、绕开监管需求来避免这个岔路口，效果就越好。当然最终还是有某种形式的联邦监督——商务部在标准上仍然有很大作用，司法部也同样。所以这不是无法无天的&quot;西部荒野&quot;，但它阻止了少数玩家利用他们的资产负债和资金来&quot;抽走梯子&quot;。如果那种情况发生，我们就处于非常糟糕的局面了。所以我觉得demis的提案非常有道理，我们赶紧拍板执行吧。 sacks： 好，前提是我们必须确保它是纯正的。即使以finra为类比——demis就是把finra当作类比——finra最终要向sec报告。如果我们建立这个新的sro，它在政府中的报告链将是哪里？这将会引发巨大的政治争夺，然后它就会受到政治压力。软件行业从未以这种方式受到过监管。我们没有一个专门的软件监管机构。 chamath： 不，sacks，我同意你的担忧。但我只是说，从来没有完美的事情。但如果我们面临的结果是&quot;封杀开源，把整个市场变成双寡头，大家都拔梯子走人&quot;，那相比这个，我选这个。 sacks： 当然，这就是我的核心论点：它绝对是两害相权取其轻。我不确定是否只有这两种选择，但在现在这种环境下，监管ai的压力越来越大，这已经毫无疑问。所有这些实际上都可以追溯到anthropic的政府关系策略。他们捅了老虎。 jcal： 他们在给老虎投喂肉。" style="--index: 2">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">02</span>
+                    <span class="timeline-meta">00:04–00:15</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>详解SRO及其优势</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>Friedberg解释了SRO（自我监管组织）的本质：它是一个让行业内参与方自行制定规则、相互监督、确保安全运作的机构，如FINRA和国家期货协会。</li>
+<li>SRO的关键优势在于可以随着技术快速迭代灵活调整测试标准和审核专家，而非像政府机构那样僵化。</li>
+<li>Sacks将自己与Demis私下交流的结果分享出来，提出5项条件：SRO必须有广泛行业代表性（含初创和开源）、仅审查前沿模型、仅针对灾难性风险、自愿先行、必须替代而非新增政府机构。</li>
+<li>Sacks高度警惕Anthropic和Dario的立场，指出Anthropic可能将SRO视为通向&quot;AI领域的FAA&quot;的跳板，而FAA审批一架新飞机设计需要5-9年，这将使得美国彻底输掉AI竞赛。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li><strong>FINRA：</strong> 金融业监管局，是一个被美国证券交易委员会授权监管证券经纪商和交易商的非政府组织，由行业出资、运作独立，是&quot;自我监管组织&quot;（SRO）的典型代表。</li>
+<li><strong>FAA（联邦航空管理局）：</strong> 美国航空监管机构，任何新飞机设计必须获得&quot;型号认证&quot;，全新设计需5-9年，修改需3-5年，属于&quot;许可制监管&quot;。</li>
+<li><strong>SRO（Self-Regulatory Organization）：</strong> 自我监管组织，由行业组建并出资、接受政府监督但日常运营独立于政府之外，拥有制定和执行业务规则的权力。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>Friedberg：</strong> 我觉得值得围绕这个提案做一点定义——就是组建一个SRO，自我监管组织，因为它们是“不纯粹独立”的。像FINRA和国家期货协会这类SRO存在于金融市场，它们建立的初衷是允许金融机构自己制定监管规则，规定如何互相检查，如何确保所有人都安全，因为它们在互相交易风险。所以行业不想把自己的风险敞口给外界，更不想因为外部干预而拖慢市场效率，导致交易低效。AI产业与这个类比非常恰当：有很多参与方都在推进AI技术，谁也不希望由一个从政府或外界而来的单一监管机构说：“你们要过这几项测试才能发布模型。”就像加州试图通过AI法案时——大概一年半前——他们写的内容当时就完全不合时宜。但一年快进到现在，那些规则和要求的设定与今天的技术现实完全不匹配。所以像FINRA和NFA这种SRO的好处是，它们能够灵活调整测试如何执行、谁来执行、确保有合适的专家——而且是独立专家——来负责测试，同时接受联邦政府的监督但不是控制。在FINRA/NFA的案例中，它最终向参众两院的委员会报告，这些委员会对这些本应执行工作的治理机构拥有监督权，以确保它们尽职尽责。所以SRO这个理念就是说，可以引入具备评估模型能力的行业专家，从网络安全、生物风险、武器风险、社会操纵等等维度进行评估。这个独立机构可以经过投票建立、可以随时间更替人员。由于它们确实拥有运行软件评估和这类测试的专业能力，它们能够比设立一个全新的政府机构运行得更快。所以这个解决方案非常优雅。</p>
+<p><strong>JCal：</strong> Anthropic和OpenAI有立场吗？</p>
+<p><strong>Friedberg：</strong> 他们都签了字。Dario没有直接表态，但Dario的总裁点赞了，Sam也点赞了——这意味着他们基本同意了。</p>
+<p><strong>Sacks：</strong> 对，我和Demis私下聊过这个问题。这听起来可能有点让人意外，但我告诉他——仅仅代表我自己，不代表政府中的任何人——我可以认为这个SRO的方案是可行的，因为一个自我监管的思路，要远远好于设立一个全新的政府机构。我觉得那种机构会迅速变成&quot;AI界的车管局&quot;。Dario称之为&quot;AI界的FAA&quot;。问题是政府根本没有评估AI模型的专业能力。评估标准变化太快了。如果设立这样一个机构，很快就会产生排队现象：所有模型都得排队等着被测试。一开始可能是一个月延迟，结果可能变成好几个月。那我们就会直接输掉AI竞赛。所以我认为一个SRO方案如果做对的话，要远好于那个方向。我向Demis提出了5个条件或原则，我觉得非常重要。如果可以的话，我来说一下。</p>
+<p><strong>JCal：</strong> 请。</p>
+<p><strong>Sacks：</strong> 第一，SRO必须拥有广泛的行业代表性，必须包括初创公司和开源社区。不能只是最大的三家实验室。不能只是Google。不能让结果被操控。如果代表利益足够多元化，就很难变成监管收编。举个例子，我认为如果团队里有Jensen（黄仁勋）、Elon、Zuck，或许还有Mira（因为她刚刚基于开源模式推出了一个非常有趣的开放平台），那就能很大程度上解决监管收编的问题。这是第一。第二，这个机构只能审查前沿模型，也就是真正的技术前沿，即那些确实代表了人工智能当前最先进水平突破的模型。在此水平以下的模型不应被阻止上市。在监管中有一个很大的风险：市场领导者用这种方式来捆住较弱模型的脚步。如果模型不是前沿模型，何必扣住它？第三，这个机构应该只处理灾难性风险，按我的理解，目前就是网络风险和CBRN（化学、生物、放射、核）。不应该包含虚假信息或微冒犯之类。不应成为言论监管者。设立这个机构的唯一理由就是真正的灾难性风险。第四，Demis在帖子里也提了，我认为应该先采用自愿形式。这个新组织先证明自己能有效运作，然后才能得到法律承认并变成强制。第五，这应该是对新监管机构的替代品。如果是增加性的，那就违背了初衷，没有真正支持它的理由。所以，如果能够做到这5点，我觉得这个方案会变得更具可接受性。Demis跟我说，他觉得这些想法很好。所以如果这些要点被采纳，我们是可以支持这个方案的。但这不代表我没有担忧。比如Dario表示支持了，但我觉得这仅仅是Anthropic的&quot;开价&quot;而已——他们会接受这个，说声谢谢，但绝不会就此止步。这只是个跳板，他们最终要的是Dario反复提到的&quot;AI界的FAA&quot;。最后我解释一下FAA的运作：FAA负责审批新飞机的设计，它要求新飞机设计或重大变更必须获得&quot;型号认证&quot;。一架全新飞机设计拿认证需要5到9年。即便只是修改变更也需要3到5年。比如说波音737 MAX，大概用了5年。这是一种&quot;许可制监管&quot;：没有批准就不能进行商业飞行。这在防止空难上或许有道理，但当你谈AI模型时，你谈的是将原来每几个月发布一个版本的发布机制，替换成一个完全由政府控制、全部需要政府批准、需要认证的系统，这个时间线就会从几个月变成数年。如果我们走这条路，中国是不会遵守这些规则的，所以我们会输掉AI竞赛。总结一下：如果我的选择是&quot;AI界的FAA&quot;或者&quot;AI界的车管局&quot;，我宁愿选择Demis的&quot;AI界的SRO&quot;，即自我监管的办法。但我们必须保持它的纯正和诚实，否则它就会成为一个新一波监管浪潮的开端，变成一个巨大的监管收编载体。</p>
+<p><strong>JCal：</strong> 而且它不能限制开源。</p>
+<p><strong>Sacks：</strong> 对，不能限制开源。这非常重要，因为其他所有方案都需要花钱，而正是花钱的地方才会发生监管收编。我们必须让初创公司和开源社区能够有效竞争。</p>
+<p><strong>Chamath：</strong> 我认为这件事非常重要，而且我希望它能迅速成行。我们必须记住，将会有海量资金试图同时影响两党，把监管往有利于某种监管收编的方向去塑造。我们只是还不知道具体是哪一种。所以越快通过建立一套规则、绕开监管需求来避免这个岔路口，效果就越好。当然最终还是有某种形式的联邦监督——商务部在标准上仍然有很大作用，司法部也同样。所以这不是无法无天的&quot;西部荒野&quot;，但它阻止了少数玩家利用他们的资产负债和资金来&quot;抽走梯子&quot;。如果那种情况发生，我们就处于非常糟糕的局面了。所以我觉得Demis的提案非常有道理，我们赶紧拍板执行吧。</p>
+<p><strong>Sacks：</strong> 好，前提是我们必须确保它是纯正的。即使以FINRA为类比——Demis就是把FINRA当作类比——FINRA最终要向SEC报告。如果我们建立这个新的SRO，它在政府中的报告链将是哪里？这将会引发巨大的政治争夺，然后它就会受到政治压力。软件行业从未以这种方式受到过监管。我们没有一个专门的软件监管机构。</p>
+<p><strong>Chamath：</strong> 不，Sacks，我同意你的担忧。但我只是说，从来没有完美的事情。但如果我们面临的结果是&quot;封杀开源，把整个市场变成双寡头，大家都拔梯子走人&quot;，那相比这个，我选这个。</p>
+<p><strong>Sacks：</strong> 当然，这就是我的核心论点：它绝对是两害相权取其轻。我不确定是否只有这两种选择，但在现在这种环境下，监管AI的压力越来越大，这已经毫无疑问。所有这些实际上都可以追溯到Anthropic的政府关系策略。他们捅了老虎。</p>
+<p><strong>JCal：</strong> 他们在给老虎投喂肉。</p></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="00:16–00:20 anthropic的监管收编策略 本段核心内容： sacks提供了关于anthropic监管策略的新证据：politico的一篇报道详细描述了anthropic正在各州推动&quot;层层加码&quot;的ai监管规则，而非寻求统一的全国方案，目的是不断推高监管门槛。 jcal、chamath和sacks都同意，anthropic是当前州级监管浪潮的主要推动力，这损害了初创生态并推动了&quot;抽梯子&quot;的格局。 sacks警告：向政府要求&quot;请管我&quot;是非常危险的，政府永远不会嫌权力太多。技术界以为可以靠让步收买政府，但实际结果是政府会不断回来索取更多。 详细中文整理： sacks： 我上次在10月份（2023年）发过一条推文，说&quot;anthropic正基于散布恐惧来实施一套精密的监管收编策略&quot;。当时很多人为之疯狂，觉得我是在欺负一家小创业公司。现在大家都看到真相了：这根本不是小公司。他们已经有了万亿美金的估值。gavin baker认为ipo后市值将是3万亿美元。这实际上是最大的科技公司之一，几乎从任何标准来看——包括收入——都已经是领先的ai公司。现在大家能看到，他们拥有巨大的资源，而且正在把这些资源投入到——就像chamath说的——&quot;抽梯子&quot;的运动中，监管收编的经典套路。politico前几天有一篇文章叫《inside anthropic’s state-by-state plan to ratchet up ai rules》，里面直接说：&quot;ai巨头anthropic正在采用一种加码策略，鼓励各州施加越来越严厉的ai护栏，而不是围绕单一监管体系保持一致。&quot;基本意思就是，他们先在一个州通过一套监管法案，比如加州的sb 53，然后把这作为蓝本，但每到一个新州，他们就把规则设置得越来越严格，越来越广泛。所以这不是一个稳定的均衡状态。他们实际上在做与我们所希望的&quot;单一全国框架&quot;正好相反的事——他们想要的就是碎片化。他们用自己在州层面制造的压力来推动更多、更严格的法规。而我去年说过——anthropic是州级监管狂潮的主要责任方，它在损害初创生态。当时大家都在说我是疯子。现在有足够多证据表明这确实是他们的策略。而且他们会赢，因为州拥有很大的主权权利。就像我们在自动驾驶上看到的，最终会是各州决定，而不是联邦统一规定。 chamath： 他们在几个州已经赢了，sacks？已经发生了。 sacks： 他们在加州、伊利诺伊州、纽约州已经赢了。可以说，在几乎所有蓝州，在一些红州也赢了。但说到底，anthropic的论点之所以有市场，是因为当你走到政府面前说&quot;请监管我，你们应该拥有更多权力&quot;时，几乎不会有政府官员说&quot;不不不，我们不够称职，我们不想要这些新权力&quot;。绝大多数政府人员会说&quot;非常感谢，还有别的可以再给点吗？&quot;这就是我认为科技行业很多人犯的一个错误——他们以为可以通过做出让步来收买政客或政治系统。不，这只会导致压力不断升级。政府会很愿意接受这个，然后不断回来索取更多、更多、更多，直到完全被政府控制。所以我觉得这些公司迟早必须长出脊梁，打一场硬仗，明确他们愿意在什么地方划定底线。如果demis的sro方案就是这个底线，如果他们说&quot;我们认为这是正确的解决方案，我们就在这里抗争，这就是底线&quot;，以此为交换条件，他们需要得到联邦优先立法权或其他法律保护，确保这是底线，我觉得这样才可行。但如果只是免费地抛出sro这个概念，所有公司都说&quot;哦好啊，监管我们吧，给我们弄个sro&quot;，那绝对不会是结束，只是一个开始，政府会回来索取更多、更多。 jcal： 好，我们继续往下。stripe仍然是一家私人公司，这让很多股东很不爽。他们还在等待ipo。现在他们正在出价530亿美元收购你的老东家，david sacks——paypal，一家上市公司。stripe和私募股权基金advent联合提出以大约每股60美元的价格收购paypal，这个溢价其实不太大。很多人认为最终成交价应该会在70美元左右。paypal股票因这条消息上涨了。你们弄清楚了吗？到底是stripe和advent单干？还是block也加入了？ sacks： 有报道说block也来了。 jcal： 太混乱了，不同媒体说法完全不一样。 sacks： 可能是因为这是个突发新闻，他们想保持低调。 jcal： 这是一个巨大的交易啊，如果block也参与的话。block，也就是前square，是jack dorsey的支付公司，他是这个行业里极少数同时打造出两个&quot;十角兽&quot;的创业者。他们在这个联合收购中出资170亿美元的股权。他们怎么拆分paypal的内部资产将是一个大问题。paypal下面有很多不同品牌，包括venmo，再加上paypal本品牌。我猜测venmo可能和block的资产结合得很好。stripe现在手上有bridge，那个他们花10亿美元收购的稳定币基础设施公司。paypal本身有pyusd，已经在流通了。所以稳定币是这个交易的一部分。但最大的东西是，paypal至今仍然是巨无霸，sacks，4.39亿消费者账户。25年前你做的事情，到今天仍然屹立不倒。这有点神奇。 sacks： 真的很神奇。当一个品牌能持续这么久，是很奇怪的。但问题在于产品已经非常老化。它的年增长率大概只有7%，在这个体量上还行，但产品本身已经是某种意义上的遗留系统。我很想知道stripe的人会怎么修复它，因为我觉得这是一个极难解决的问题。也许他们根本不会修复，就是更高效地运营它，榨干它的价值。 chamath： 我觉得有个不同的问题更值得问。这三个&quot;父母&quot;——advent、stripe、block，如果生下&quot;一个宝宝&quot;，这个宝宝会是谁？我觉得只有一个答案：你正在创造一个与visa和mastercard竞争的对手。因为现在你有大约6到7亿用户账户，你有庞大的稳定币基础设施，你有stripe过去15到20年建立的所有风控基础设施。stripe商业模式早期的一个大问题是，他们不得不建这么多增值服务，因为所有人都觉得他们作为中间人，坐在传统支付轨道上，从中收取的费用迟早会被竞争掉。现在公平地说，他们做得太好了以至于这种情况没有发生。但这意味着现在你可以垂直整合，做全套服务。这可能是这件事最明显的价值——stripe可以获得超低成本的支付轨道，基本上就是零成本，并且把这带到全世界各地。block也一样。advent可以注入资金。如果这些能结合在一起，这是非常强大的。 friedberg： 说一下对这个私人市场公司大型化，以及stripe可能永远不会上市的观点的看法。这个私募股权公司如何能在2年、3年、4年内获得回报？他们是不是最终把更多股份卖给stripe？ friedberg： 我觉得这类交易会越来越多。如果你看ryan cohen对ebay的竞购，我倾向于认为这是新趋势的第二点。那就是一群可以称为&quot;ai原住民&quot;的人在看着那些&quot;第一代数字原住民&quot;企业，这些企业已经成熟、变得老旧、不再由创始人运营，还没有通过ai实现其潜力，在很多地方都超支了。如果以现代ai运营商的眼光去看这些企业，你会想：&quot;这啥？这些东西完全没有得到充分利用。他们没有好好利用网络。他们没有好好运营。他们超支了。他们没有很好地利用ai。&quot;存在一系列相当明显的机遇。资本市场上已经看到类似例子，比如josh kushner对会计事务所的整合，以及general catalyst做的类似项目，你可以用资本去买这些传统服务业公司然后进行ai化。我认为这是&quot;传统数字业务的ai化&quot;这条线的一部分。这样的目标还有很长一个名单，大概有几十个。你在公开市场上寻找那些初代互联网早期或近期出现的软件公司、网络业务，不再由创始人运营、陷入停滞——那里有巨大机会。作为资本方，问题是：你与谁合作去执行这种运营复兴？你不可能雇几个麦肯锡咨询师来做这个，必须找到行内最顶尖的玩家。ryan cohen在chewy和gamestop上证明过自己的实力——当然这还有争议。在支付领域，谁比stripe更合适？也许jack dorsey也能发挥作用。从资本结构上看，那170亿美元的股权出资意味着，stripe和block具体向现金投资者出售了170亿美元股权，用这些现金去买paypal。最终结果是stripe和block获得paypal的股份，私募股权投资者获得block和stripe的股份。交易文件中没有明确的是——我相信这不涉及公开市场——交易完成后谁将负责运营paypal。我打赌，这工作会交给stripe的人，因为他们最够格，而且他们的股份最大。 jcal： 所以我认为，ebay和paypal大概是一波大型交易的开端，交易对象就是那些&quot;疲软的&quot;数字业务—— friedberg： 用蓝筹资本加正确运营者盘活它，我认为这波浪潮还会继续。 jcal： 另外，这不是最终出价，我觉得成交价可能会再上浮10%到15%。而且我觉得某位个人肯定会非常认真地考虑提交一个竞争性报价。那位个人可能本身就是paypal的创始人之一，市值有4到5万亿美元可以动用，并且最近刚做了一笔600亿美元的收购。我们没有什么内幕消息，这只是friedberg说的。看起来这开始变成一种&quot;操作手册&quot;了。有一家公司叫bending spoons，刚上市，他们买了一大堆非创始人运营的资产：aol（14亿美元）、vimeo（14亿美元）、wetransfer、eventbrite、brightcove、evernote。这人在米兰经营。他买了evernote，然后直接诊断这些企业，问：&quot;你们在哪些方面超支？哪些方面投入不足？产品做错了什么？营销做错了什么？&quot;然后他就修好它。他简直就是个杀手。他把所有这些被称为web 2.0的业务，一个个重新激活、整合，从中印钞，同时压低运营成本。而且我听说他用的是年轻、ai-first的高管团队。 friedberg： 完全同意。所以bending spoons是那种&quot;整合策略&quot;的范例。而对于这种大型交易，后续还会有更多。 jcal： 我还想说，更高层面的东西——我们以前谈过好几年——风投在lina khan的压制下非常不景气。但trump当选后，所有做企业投并购的人都意识到：并购回来了。现在我们看到一个接一个的交易落地。uber今天刚收购delivery hero，这会让他们营收增加20%——大概是20%的摊薄换来24%的营收增长，太疯狂了。这会是接下来两年的大故事。所有流动性都在谈：我去跟lp和家族办公室交流，他们都在问：&quot;你们的下一个基金呢？你们的下一个项目什么时候？&quot;因为大家重新开始相信风投——因为有spacex的分红以及这些并购。自trump当选以来，我们已经有好几家公司被收购。谢谢您，trump总统，把并购带回餐桌。sacks，你为什么没有出价买paypal？ sacks： 去过了，做过了。 jcal： 有一个时刻，大概15年前，他们请sacks回去当ceo。 chamath： 我记得那次在牌桌上。 sacks： 不，他们根本没正式给我offer。但我是最后两个候选人之一，最后他们选了一个传统的信用卡行业的高管。坦率地说，这就是paypal停滞的原因。paypal在2002年被ebay收购后，他们基本上赶走了所有创始人和创始dna，交给了一群咨询界的人来运营。你得知道ebay当时的ceo是meg whitman，她在宝洁、迪士尼和贝恩工作过，是一种非常企业化的管理风格。在所有那个时代的互联网公司中，paypal绝对是最企业化的。他们把创始人一代视为一群无法控制的牛仔，完全没做任何努力去留住他们，甚至在他们都离开的时候还有点释然。而这恰恰造就了&quot;paypal黑帮&quot;这个说法——通常在一桩收购中，你会锁定所有人才，但在paypal这个案例中，他们直接锁掉大门，把创始人都关在外面，&quot;这帮人太不好管了，换锁&quot;。 jcal： 我早就说过，叫&quot;paypal黑帮&quot;是个误称，应该叫&quot;paypal大流散&quot;——我们的家园被占领了，庙宇被烧了，所有人都被踢了出来。 sacks： 是的。这就是所有那些公司都从paypal黑帮开始的原因。不过话说回来，当一个公司被收购，收购方有完全的权利决定这个资产怎么用。我不觉得谁对此很苦涩，大家都觉得：好吧，这给了我资本去做下一件事。 jcal： 顺便说一句，现在paypal的ceo enrique是一个非常厉害的人，他做得很棒。正因如此他们才收到了这些报价——因为过去几年他们把业务搞得非常紧凑。 sacks： 不，收到报价是因为它的市值已经跌到——最低时只有300多亿美元。这公司曾经值2000亿美元吧？ jcal： 我印象中峰值是3220亿美元。 sacks： 没错。收到报价之前，市值跌到了300到400亿美元。所以吸引报价的原因就是被打得太惨了。现在的问题是：有没有别人能拿它做点事？ friedberg： sacks，你说&quot;必须有协同效应&quot;。现在这个时代，一个优秀的运营者在做这种事情的时候，能够带来的核心协同效应就是ai。不管在这个业务还是在其他——你可以利用驱动自动化的工具，推动产品开发的工具，提高组织效率和用户使用体验。这些东西在这些业务里显然没有被很好实施。 sacks： 你必须有一个产品愿景，要能想明白如何用ai让整个用户体验更好。你说的用ai提升效率并改善利润是对的，从财务层面能让这笔收购合理。但我觉得paypal的生存问题在于：你面对的是一个25岁高龄的产品。它跟我们27年前造的东西本质上没太大变化——有变化但不多。交互模式已经过时了。如果你没有一个明确的愿景来盘活它、重现生机，那它最多就是个不错的财务操作。 chamath： 也许他们买的只是这些账户呢。 sacks： 是的。你刚才说的很有意思——stripe的优势是他们有大量商户。他们已经成为商户通过api接收付款的首选机制。stripe年交易额大概2万亿美元。paypal大概是1.7万亿。所以stripe现在已经稍大于paypal了。但paypal有stripe没有的东西：消费者关系。4亿多活跃消费者账户。所以如果把商户关系与这些消费者账户结合起来，再绕过信用卡网络（因为会有很多内部交易），那就有价值了。 chamath： 没错。 jcal： paypal手里还有braintree——它和stripe本来是竞争对手，现在变成一家了。再加上block带来全套pos基础设施和cash app——这简直就是向visa和mastercard示威。 chamath： braintree也是你刚提的重要资产，很多人不知道它属于paypal。venmo也能吸引大量年轻人。你等于得到了两代人：gen x和千禧一代。 sacks： 关键问题在于，你能不能把所有东西打包成一种消费者真正愿意选择的方式。拥有商户关系和消费者关系是一回事，但消费者不会因为你同时拥有这两样就选你。 chamath： 不用这样。你直接去找所有使用stripe的商户说：&quot;我们会给你3%到5%的折扣。&quot;他们都会同意。价格就直接被打下来了。想象一下shopify的商户有两个选项：旧的支付方式和新的支付方式。新的方式能直接往口袋里多放2%到4%的利润——他们当然选新的。 jcal： 而且这对消费者来说是好事。最终会降低物价。这正是两年前这交易在反垄断视角下做不了的原因——两年前这是绝对的噩耗。 sacks： 反垄断的关键问题是如何界定市场。如果你把市场定义为&quot;商户端的api支付&quot;，那stripe vs braintree就是集中性合并。但如果真正的市场是visa和mastercard的全球双头垄断——那这个交易能增加竞争，它是促进竞争的。市场怎么界定，决定了它是反竞争还是促进竞争。 jcal： 他们很聪明，不会搞砸。" style="--index: 3">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">03</span>
+                    <span class="timeline-meta">00:16–00:20</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>Anthropic的监管收编策略</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>Sacks提供了关于Anthropic监管策略的新证据：Politico的一篇报道详细描述了Anthropic正在各州推动&quot;层层加码&quot;的AI监管规则，而非寻求统一的全国方案，目的是不断推高监管门槛。</li>
+<li>JCal、Chamath和Sacks都同意，Anthropic是当前州级监管浪潮的主要推动力，这损害了初创生态并推动了&quot;抽梯子&quot;的格局。</li>
+<li>Sacks警告：向政府要求&quot;请管我&quot;是非常危险的，政府永远不会嫌权力太多。技术界以为可以靠让步收买政府，但实际结果是政府会不断回来索取更多。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>Sacks：</strong> 我上次在10月份（2023年）发过一条推文，说&quot;Anthropic正基于散布恐惧来实施一套精密的监管收编策略&quot;。当时很多人为之疯狂，觉得我是在欺负一家小创业公司。现在大家都看到真相了：这根本不是小公司。他们已经有了万亿美金的估值。Gavin Baker认为IPO后市值将是3万亿美元。这实际上是最大的科技公司之一，几乎从任何标准来看——包括收入——都已经是领先的AI公司。现在大家能看到，他们拥有巨大的资源，而且正在把这些资源投入到——就像Chamath说的——&quot;抽梯子&quot;的运动中，监管收编的经典套路。Politico前几天有一篇文章叫《Inside Anthropic’s State-by-State Plan to Ratchet Up AI Rules》，里面直接说：&quot;AI巨头Anthropic正在采用一种加码策略，鼓励各州施加越来越严厉的AI护栏，而不是围绕单一监管体系保持一致。&quot;基本意思就是，他们先在一个州通过一套监管法案，比如加州的SB 53，然后把这作为蓝本，但每到一个新州，他们就把规则设置得越来越严格，越来越广泛。所以这不是一个稳定的均衡状态。他们实际上在做与我们所希望的&quot;单一全国框架&quot;正好相反的事——他们想要的就是碎片化。他们用自己在州层面制造的压力来推动更多、更严格的法规。而我去年说过——Anthropic是州级监管狂潮的主要责任方，它在损害初创生态。当时大家都在说我是疯子。现在有足够多证据表明这确实是他们的策略。而且他们会赢，因为州拥有很大的主权权利。就像我们在自动驾驶上看到的，最终会是各州决定，而不是联邦统一规定。</p>
+<p><strong>Chamath：</strong> 他们在几个州已经赢了，Sacks？已经发生了。</p>
+<p><strong>Sacks：</strong> 他们在加州、伊利诺伊州、纽约州已经赢了。可以说，在几乎所有蓝州，在一些红州也赢了。但说到底，Anthropic的论点之所以有市场，是因为当你走到政府面前说&quot;请监管我，你们应该拥有更多权力&quot;时，几乎不会有政府官员说&quot;不不不，我们不够称职，我们不想要这些新权力&quot;。绝大多数政府人员会说&quot;非常感谢，还有别的可以再给点吗？&quot;这就是我认为科技行业很多人犯的一个错误——他们以为可以通过做出让步来收买政客或政治系统。不，这只会导致压力不断升级。政府会很愿意接受这个，然后不断回来索取更多、更多、更多，直到完全被政府控制。所以我觉得这些公司迟早必须长出脊梁，打一场硬仗，明确他们愿意在什么地方划定底线。如果Demis的SRO方案就是这个底线，如果他们说&quot;我们认为这是正确的解决方案，我们就在这里抗争，这就是底线&quot;，以此为交换条件，他们需要得到联邦优先立法权或其他法律保护，确保这是底线，我觉得这样才可行。但如果只是免费地抛出SRO这个概念，所有公司都说&quot;哦好啊，监管我们吧，给我们弄个SRO&quot;，那绝对不会是结束，只是一个开始，政府会回来索取更多、更多。</p>
+<p><strong>JCal：</strong> 好，我们继续往下。Stripe仍然是一家私人公司，这让很多股东很不爽。他们还在等待IPO。现在他们正在出价530亿美元收购你的老东家，David Sacks——PayPal，一家上市公司。Stripe和私募股权基金Advent联合提出以大约每股60美元的价格收购PayPal，这个溢价其实不太大。很多人认为最终成交价应该会在70美元左右。PayPal股票因这条消息上涨了。你们弄清楚了吗？到底是Stripe和Advent单干？还是Block也加入了？</p>
+<p><strong>Sacks：</strong> 有报道说Block也来了。</p>
+<p><strong>JCal：</strong> 太混乱了，不同媒体说法完全不一样。</p>
+<p><strong>Sacks：</strong> 可能是因为这是个突发新闻，他们想保持低调。</p>
+<p><strong>JCal：</strong> 这是一个巨大的交易啊，如果Block也参与的话。Block，也就是前Square，是Jack Dorsey的支付公司，他是这个行业里极少数同时打造出两个&quot;十角兽&quot;的创业者。他们在这个联合收购中出资170亿美元的股权。他们怎么拆分PayPal的内部资产将是一个大问题。PayPal下面有很多不同品牌，包括Venmo，再加上PayPal本品牌。我猜测Venmo可能和Block的资产结合得很好。Stripe现在手上有Bridge，那个他们花10亿美元收购的稳定币基础设施公司。PayPal本身有PYUSD，已经在流通了。所以稳定币是这个交易的一部分。但最大的东西是，PayPal至今仍然是巨无霸，Sacks，4.39亿消费者账户。25年前你做的事情，到今天仍然屹立不倒。这有点神奇。</p>
+<p><strong>Sacks：</strong> 真的很神奇。当一个品牌能持续这么久，是很奇怪的。但问题在于产品已经非常老化。它的年增长率大概只有7%，在这个体量上还行，但产品本身已经是某种意义上的遗留系统。我很想知道Stripe的人会怎么修复它，因为我觉得这是一个极难解决的问题。也许他们根本不会修复，就是更高效地运营它，榨干它的价值。</p>
+<p><strong>Chamath：</strong> 我觉得有个不同的问题更值得问。这三个&quot;父母&quot;——Advent、Stripe、Block，如果生下&quot;一个宝宝&quot;，这个宝宝会是谁？我觉得只有一个答案：你正在创造一个与Visa和MasterCard竞争的对手。因为现在你有大约6到7亿用户账户，你有庞大的稳定币基础设施，你有Stripe过去15到20年建立的所有风控基础设施。Stripe商业模式早期的一个大问题是，他们不得不建这么多增值服务，因为所有人都觉得他们作为中间人，坐在传统支付轨道上，从中收取的费用迟早会被竞争掉。现在公平地说，他们做得太好了以至于这种情况没有发生。但这意味着现在你可以垂直整合，做全套服务。这可能是这件事最明显的价值——Stripe可以获得超低成本的支付轨道，基本上就是零成本，并且把这带到全世界各地。Block也一样。Advent可以注入资金。如果这些能结合在一起，这是非常强大的。</p>
+<p><strong>Friedberg：</strong> 说一下对这个私人市场公司大型化，以及Stripe可能永远不会上市的观点的看法。这个私募股权公司如何能在2年、3年、4年内获得回报？他们是不是最终把更多股份卖给Stripe？</p>
+<p><strong>Friedberg：</strong> 我觉得这类交易会越来越多。如果你看Ryan Cohen对eBay的竞购，我倾向于认为这是新趋势的第二点。那就是一群可以称为&quot;AI原住民&quot;的人在看着那些&quot;第一代数字原住民&quot;企业，这些企业已经成熟、变得老旧、不再由创始人运营，还没有通过AI实现其潜力，在很多地方都超支了。如果以现代AI运营商的眼光去看这些企业，你会想：&quot;这啥？这些东西完全没有得到充分利用。他们没有好好利用网络。他们没有好好运营。他们超支了。他们没有很好地利用AI。&quot;存在一系列相当明显的机遇。资本市场上已经看到类似例子，比如Josh Kushner对会计事务所的整合，以及General Catalyst做的类似项目，你可以用资本去买这些传统服务业公司然后进行AI化。我认为这是&quot;传统数字业务的AI化&quot;这条线的一部分。这样的目标还有很长一个名单，大概有几十个。你在公开市场上寻找那些初代互联网早期或近期出现的软件公司、网络业务，不再由创始人运营、陷入停滞——那里有巨大机会。作为资本方，问题是：你与谁合作去执行这种运营复兴？你不可能雇几个麦肯锡咨询师来做这个，必须找到行内最顶尖的玩家。Ryan Cohen在Chewy和GameStop上证明过自己的实力——当然这还有争议。在支付领域，谁比Stripe更合适？也许Jack Dorsey也能发挥作用。从资本结构上看，那170亿美元的股权出资意味着，Stripe和Block具体向现金投资者出售了170亿美元股权，用这些现金去买PayPal。最终结果是Stripe和Block获得PayPal的股份，私募股权投资者获得Block和Stripe的股份。交易文件中没有明确的是——我相信这不涉及公开市场——交易完成后谁将负责运营PayPal。我打赌，这工作会交给Stripe的人，因为他们最够格，而且他们的股份最大。</p>
+<p><strong>JCal：</strong> 所以我认为，eBay和PayPal大概是一波大型交易的开端，交易对象就是那些&quot;疲软的&quot;数字业务——</p>
+<p><strong>Friedberg：</strong> 用蓝筹资本加正确运营者盘活它，我认为这波浪潮还会继续。</p>
+<p><strong>JCal：</strong> 另外，这不是最终出价，我觉得成交价可能会再上浮10%到15%。而且我觉得某位个人肯定会非常认真地考虑提交一个竞争性报价。那位个人可能本身就是PayPal的创始人之一，市值有4到5万亿美元可以动用，并且最近刚做了一笔600亿美元的收购。我们没有什么内幕消息，这只是Friedberg说的。看起来这开始变成一种&quot;操作手册&quot;了。有一家公司叫Bending Spoons，刚上市，他们买了一大堆非创始人运营的资产：AOL（14亿美元）、Vimeo（14亿美元）、WeTransfer、Eventbrite、Brightcove、Evernote。这人在米兰经营。他买了Evernote，然后直接诊断这些企业，问：&quot;你们在哪些方面超支？哪些方面投入不足？产品做错了什么？营销做错了什么？&quot;然后他就修好它。他简直就是个杀手。他把所有这些被称为Web 2.0的业务，一个个重新激活、整合，从中印钞，同时压低运营成本。而且我听说他用的是年轻、AI-first的高管团队。</p>
+<p><strong>Friedberg：</strong> 完全同意。所以Bending Spoons是那种&quot;整合策略&quot;的范例。而对于这种大型交易，后续还会有更多。</p>
+<p><strong>JCal：</strong> 我还想说，更高层面的东西——我们以前谈过好几年——风投在Lina Khan的压制下非常不景气。但Trump当选后，所有做企业投并购的人都意识到：并购回来了。现在我们看到一个接一个的交易落地。Uber今天刚收购Delivery Hero，这会让他们营收增加20%——大概是20%的摊薄换来24%的营收增长，太疯狂了。这会是接下来两年的大故事。所有流动性都在谈：我去跟LP和家族办公室交流，他们都在问：&quot;你们的下一个基金呢？你们的下一个项目什么时候？&quot;因为大家重新开始相信风投——因为有SpaceX的分红以及这些并购。自Trump当选以来，我们已经有好几家公司被收购。谢谢您，Trump总统，把并购带回餐桌。Sacks，你为什么没有出价买PayPal？</p>
+<p><strong>Sacks：</strong> 去过了，做过了。</p>
+<p><strong>JCal：</strong> 有一个时刻，大概15年前，他们请Sacks回去当CEO。</p>
+<p><strong>Chamath：</strong> 我记得那次在牌桌上。</p>
+<p><strong>Sacks：</strong> 不，他们根本没正式给我offer。但我是最后两个候选人之一，最后他们选了一个传统的信用卡行业的高管。坦率地说，这就是PayPal停滞的原因。PayPal在2002年被eBay收购后，他们基本上赶走了所有创始人和创始DNA，交给了一群咨询界的人来运营。你得知道eBay当时的CEO是Meg Whitman，她在宝洁、迪士尼和贝恩工作过，是一种非常企业化的管理风格。在所有那个时代的互联网公司中，PayPal绝对是最企业化的。他们把创始人一代视为一群无法控制的牛仔，完全没做任何努力去留住他们，甚至在他们都离开的时候还有点释然。而这恰恰造就了&quot;PayPal黑帮&quot;这个说法——通常在一桩收购中，你会锁定所有人才，但在PayPal这个案例中，他们直接锁掉大门，把创始人都关在外面，&quot;这帮人太不好管了，换锁&quot;。</p>
+<p><strong>JCal：</strong> 我早就说过，叫&quot;PayPal黑帮&quot;是个误称，应该叫&quot;PayPal大流散&quot;——我们的家园被占领了，庙宇被烧了，所有人都被踢了出来。</p>
+<p><strong>Sacks：</strong> 是的。这就是所有那些公司都从PayPal黑帮开始的原因。不过话说回来，当一个公司被收购，收购方有完全的权利决定这个资产怎么用。我不觉得谁对此很苦涩，大家都觉得：好吧，这给了我资本去做下一件事。</p>
+<p><strong>JCal：</strong> 顺便说一句，现在PayPal的CEO Enrique是一个非常厉害的人，他做得很棒。正因如此他们才收到了这些报价——因为过去几年他们把业务搞得非常紧凑。</p>
+<p><strong>Sacks：</strong> 不，收到报价是因为它的市值已经跌到——最低时只有300多亿美元。这公司曾经值2000亿美元吧？</p>
+<p><strong>JCal：</strong> 我印象中峰值是3220亿美元。</p>
+<p><strong>Sacks：</strong> 没错。收到报价之前，市值跌到了300到400亿美元。所以吸引报价的原因就是被打得太惨了。现在的问题是：有没有别人能拿它做点事？</p>
+<p><strong>Friedberg：</strong> Sacks，你说&quot;必须有协同效应&quot;。现在这个时代，一个优秀的运营者在做这种事情的时候，能够带来的核心协同效应就是AI。不管在这个业务还是在其他——你可以利用驱动自动化的工具，推动产品开发的工具，提高组织效率和用户使用体验。这些东西在这些业务里显然没有被很好实施。</p>
+<p><strong>Sacks：</strong> 你必须有一个产品愿景，要能想明白如何用AI让整个用户体验更好。你说的用AI提升效率并改善利润是对的，从财务层面能让这笔收购合理。但我觉得PayPal的生存问题在于：你面对的是一个25岁高龄的产品。它跟我们27年前造的东西本质上没太大变化——有变化但不多。交互模式已经过时了。如果你没有一个明确的愿景来盘活它、重现生机，那它最多就是个不错的财务操作。</p>
+<p><strong>Chamath：</strong> 也许他们买的只是这些账户呢。</p>
+<p><strong>Sacks：</strong> 是的。你刚才说的很有意思——Stripe的优势是他们有大量商户。他们已经成为商户通过API接收付款的首选机制。Stripe年交易额大概2万亿美元。PayPal大概是1.7万亿。所以Stripe现在已经稍大于PayPal了。但PayPal有Stripe没有的东西：消费者关系。4亿多活跃消费者账户。所以如果把商户关系与这些消费者账户结合起来，再绕过信用卡网络（因为会有很多内部交易），那就有价值了。</p>
+<p><strong>Chamath：</strong> 没错。</p>
+<p><strong>JCal：</strong> PayPal手里还有Braintree——它和Stripe本来是竞争对手，现在变成一家了。再加上Block带来全套POS基础设施和Cash App——这简直就是向Visa和MasterCard示威。</p>
+<p><strong>Chamath：</strong> Braintree也是你刚提的重要资产，很多人不知道它属于PayPal。Venmo也能吸引大量年轻人。你等于得到了两代人：Gen X和千禧一代。</p>
+<p><strong>Sacks：</strong> 关键问题在于，你能不能把所有东西打包成一种消费者真正愿意选择的方式。拥有商户关系和消费者关系是一回事，但消费者不会因为你同时拥有这两样就选你。</p>
+<p><strong>Chamath：</strong> 不用这样。你直接去找所有使用Stripe的商户说：&quot;我们会给你3%到5%的折扣。&quot;他们都会同意。价格就直接被打下来了。想象一下Shopify的商户有两个选项：旧的支付方式和新的支付方式。新的方式能直接往口袋里多放2%到4%的利润——他们当然选新的。</p>
+<p><strong>JCal：</strong> 而且这对消费者来说是好事。最终会降低物价。这正是两年前这交易在反垄断视角下做不了的原因——两年前这是绝对的噩耗。</p>
+<p><strong>Sacks：</strong> 反垄断的关键问题是如何界定市场。如果你把市场定义为&quot;商户端的API支付&quot;，那Stripe vs Braintree就是集中性合并。但如果真正的市场是Visa和MasterCard的全球双头垄断——那这个交易能增加竞争，它是促进竞争的。市场怎么界定，决定了它是反竞争还是促进竞争。</p>
+<p><strong>JCal：</strong> 他们很聪明，不会搞砸。</p></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="00:39–00:47 apple v. openai / xcode数据泄露 / 模型成本对比 本段核心内容： 苹果起诉openai窃取商业机密，涉及前高管tang tan和工程师chang liu，指控他们直接向面试候选者索要苹果产品的&quot;实物零件&quot;进行&quot;展示汇报&quot;，并被记录为非法访问苹果网络存储。openai过去一两年挖走400多名苹果员工。 chamath指出，苹果在硅谷25年来一向不主动起诉，这次起诉说明openai的行为可能&quot;极其过分&quot;。&quot;没人应该从原雇主那里拿走东西。&quot; xcode的groq build工具发生数据泄露：它向xcode服务器上传了开发者的完整代码库（包括密码和秘钥），而&quot;零数据保留&quot;承诺被证明存在重大漏洞。 chamath警告，ai中存在多种非明显的、偶然的数据泄露路径，组织必须通过第三方独立层来管理暴露风险。satya nadella在博客中提出的&quot;逆向信息悖论&quot;和&quot;信任边界&quot;概念与此完全吻合。 jcal展示了不同模型之间的巨额成本差异：fable每百万输入令牌56美元，openai约26美元，groq约1.50美元，xai约1美元，中国模型仅0.5美元。他预测cfo将因&quot;token支出失控&quot;而在财报季面临危机。 详细中文整理： jcal： 现在又有别的人在起诉openai了，这次是苹果。7月10日，苹果提交了一份41页的诉状，指控openai窃取其商业秘密，用于开发他们的消费硬件设备。我们之前在liquidity活动上见过sarah friar，我问过她关于这个新设备的事，她说它非常&#x27;人性化&#x27;和&#x27;可爱&#x27;。现在苹果声称其部分ip可能被窃取。苹果的前iphone设计副总裁tang tan现在是openai的首席硬件官，他被指控在面试苹果求职者时，要求他们把&quot;实物零件&quot;带到面试现场进行&#x27;展示汇报&#x27;。同时，前苹果高级技术工程师chang liu在给仍在苹果同事的短信里说：&quot;哈哈，我发现我能访问到网络存储。还挺好玩的。&quot;openai在过去一年左右挖走了400多名苹果员工。蒂姆·库克这次看来是忍不住了。chamath，这太疯狂。sam altman又找到了一种方式去惹恼一方——他之前惹怒了elon，他的第一个资助人。记得之前iphone ai的默认引擎应该是chatgpt，所以sam通过这个合作拿到了最重磅平台上的默认位置，现在又演变成了一个大诉讼。你有什么看法？ chamath： 我过去25年在硅谷没怎么见过苹果这么积极地打官司，所以我推测肯定有些让他们非常生气的事。可能非常极端。具体我也不清楚，得让法院来梳理。但没有人应该从原雇主那里窃取东西。这是绝对不允许的，非常明显。这些人非常聪明，非常成功，这也是openai想要他们的原因。他们所带来的集体经验应该已经足够了，不需要再干这种事。我希望这些事不是真的，我觉得sam或sarah或其他高层不会主动诱导这种事发生。 sacks： 就像chamath说的，我对此没有任何内幕信息。这是一起诉讼，所有事实都是控诉性陈述，我们不知道真假，最终会由法庭裁断，所以我真不想对此随便发表评论。但如果你想要一个非常简单的规则来避免这种纠纷，那就是：当一个人离开原公司加入新公司时，什么都别带走。你能带给新工作的，只有你脑袋里装着的记忆。 jcal： 这就够了。 friedberg： 仅仅几个点就连成线。 jcal： 不错，&quot;几个点就连成线&quot;——说得好。然后说xcode。xcode推出了groq build公测版。这个最新的编码模型groq 4.5非常棒，它运行在cursor里。xcode之前告诉用户，你的任何代码段都不会传输到xai服务器。但实际情况是，每当开发者使用groq build时，这个工具会把整个代码库——所有文件，包括密码、api密钥、变更日志——全部上传到xcode云服务器，而且不通知用户。隐私设置应该阻止这点，但没起作用。xcode在7月13日通过服务器的开关静默关闭了上传功能。elon musk在x上承诺所有此前上传的数据已被删除。然后作为回应，xcode开源了groq build的框架。这对开源社群又是一次胜利。你有什么看法？ chamath： 我想把这个连到我本周早些时候在cnbc上说过的话，那也延续了alex karp上周的观点：ai中的隐私非常脆弱，非常易碎。而且这还发生在好公司的最努力下。你可能对elon的性格有微词，但他非常值得信赖，而且是极其透明的。他们立即关停了它，这很诚实。但我的结论是：ai中存在大量不易察觉的数据泄露路径。如果你以为打开&quot;零数据保留&quot;开关（业内用来让你放心&quot;一切安全&quot;的神奇术语）就没事了，我认为答案和教训是：根本保证不了。模型公司或许在努力，但现实是他们不知情的路径被触发后才会被发现，就像这次的例子。所以这一切都指向：你必须有一个分层生态，必须有第三方。 jcal： 这就是satya最近发的博客里说的。他称之为&quot;逆向信息悖论&quot;。他吸收了alex karp关于&quot;有技术能力的企业想要控制自己的计算、模型权重、数据和alpha&quot;的观点，但走得更远，为现代企业应该如何操作化提供了一个路线图：他们必须建立真正的信任边界、私有评估、专有学习循环、解耦编排，以及明确微调自己输出的权利。他列出了一系列相当技术性的做法，来帮助企业实现karp所说的&quot;控制ai计算、模型和数据&quot;。 chamath： 你们看到这些数据了吗？fable的百万输入token是56美元，sol（可能指openai的某种模型）大约26美元，同claude 4.8差不多。groq是1.5美元，zux也是1.5美元，elon的差不多1美元，中国模型是0.5美元。 jcal： 我刚刚用perplexity computer做测试，它已经支持groq和glm-5-2。我给它同一个&quot;产品需求文档&quot;（prd），让它做一个deep link的播客播放器。大概花了几个小时，只用了11美元，用的还是groq的新模型。非常便宜。我还有一个数据：ramp的ceo eric gleiman今天在squawk box上说，过去一年，ramp客户的token支出增长了21倍——不是21%，是21倍。如果他们毫无控制地乱花——百万token花56美元——总有一天cfo会因opex失控而&quot;miss quarter&quot;（未能达到华尔街预期）。这只是时间问题。好消息是这创造了巨大的市场机会。谁都能说我给你更低价——你付26到56美元，你本来应该只付0.5美元。 sacks： mira murati的新创公司inkling很有意思。她的价值主张是：我这不是&quot;前沿智能&quot;，我离前沿差一点——但我是一个通过微调这些开源模型的平台。更便宜，能出同样结果。 jcal： 如果anthropic能得逞，这些开源模型就活不久了。 chamath： 这就是他想阻止它的原因。你以50美分卖核心产品，他卖56美元——他当然不想这样。 sacks： 但openai和anthropic仍然在大幅增长，它们仍然是行业营收增长的领导者，这些事正在并行发生。 friedberg： 如果eric gleiman不是因为cfo们在抱怨&quot;我控制不了token支出&quot;，他才不会去做ramp这个功能。如果太多cfo打开它开始限制支出——因为工程师不在乎roi，他们只想用最新最好的模型，而对于95%的需求，你根本不需要用最前沿浪费上百倍成本——那就危险了。 jcal： 我还有一个预测：苹果mac studio——明年的m7 ultra芯片支持1.5tb内存，足够运行opus级别的模型。想象一下每个人都有一台本地模型。苹果将大获全胜。 sacks： 我上周告诉过你们一个事实：美国到2050年将短缺&quot;2.5个加州&quot;的电力。这周pjm（服务13个州的巨大电网运营商）做了一次拍卖，需要7到8gw的远期合同容量——结果只来了156mw。这个市场彻底出问题了。 chamath： 说到数据中心的能源——elon在memphis做的就是在背后自己建电厂。因为你从电网拿到电越来越难。他甚至买了一堆18轮卡车的发动机，钉在地上发电。这就触到了清洁空气许可证的问题。他需要所有未来新增容量的合法路线。我们现在在电力和电价上处境非常危险。" style="--index: 4">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">04</span>
+                    <span class="timeline-meta">00:39–00:47</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>Apple v. OpenAI / xCode数据泄露 / 模型成本对比</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>苹果起诉OpenAI窃取商业机密，涉及前高管Tang Tan和工程师Chang Liu，指控他们直接向面试候选者索要苹果产品的&quot;实物零件&quot;进行&quot;展示汇报&quot;，并被记录为非法访问苹果网络存储。OpenAI过去一两年挖走400多名苹果员工。</li>
+<li>Chamath指出，苹果在硅谷25年来一向不主动起诉，这次起诉说明OpenAI的行为可能&quot;极其过分&quot;。&quot;没人应该从原雇主那里拿走东西。&quot;</li>
+<li>xCode的Groq Build工具发生数据泄露：它向xCode服务器上传了开发者的完整代码库（包括密码和秘钥），而&quot;零数据保留&quot;承诺被证明存在重大漏洞。</li>
+<li>Chamath警告，AI中存在多种非明显的、偶然的数据泄露路径，组织必须通过第三方独立层来管理暴露风险。Satya Nadella在博客中提出的&quot;逆向信息悖论&quot;和&quot;信任边界&quot;概念与此完全吻合。</li>
+<li>JCal展示了不同模型之间的巨额成本差异：Fable每百万输入令牌56美元，OpenAI约26美元，Groq约1.50美元，xAI约1美元，中国模型仅0.5美元。他预测CFO将因&quot;token支出失控&quot;而在财报季面临危机。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> 现在又有别的人在起诉OpenAI了，这次是苹果。7月10日，苹果提交了一份41页的诉状，指控OpenAI窃取其商业秘密，用于开发他们的消费硬件设备。我们之前在Liquidity活动上见过Sarah Friar，我问过她关于这个新设备的事，她说它非常&#x27;人性化&#x27;和&#x27;可爱&#x27;。现在苹果声称其部分IP可能被窃取。苹果的前iPhone设计副总裁Tang Tan现在是OpenAI的首席硬件官，他被指控在面试苹果求职者时，要求他们把&quot;实物零件&quot;带到面试现场进行&#x27;展示汇报&#x27;。同时，前苹果高级技术工程师Chang Liu在给仍在苹果同事的短信里说：&quot;哈哈，我发现我能访问到网络存储。还挺好玩的。&quot;OpenAI在过去一年左右挖走了400多名苹果员工。蒂姆·库克这次看来是忍不住了。Chamath，这太疯狂。Sam Altman又找到了一种方式去惹恼一方——他之前惹怒了Elon，他的第一个资助人。记得之前iPhone AI的默认引擎应该是ChatGPT，所以Sam通过这个合作拿到了最重磅平台上的默认位置，现在又演变成了一个大诉讼。你有什么看法？</p>
+<p><strong>Chamath：</strong> 我过去25年在硅谷没怎么见过苹果这么积极地打官司，所以我推测肯定有些让他们非常生气的事。可能非常极端。具体我也不清楚，得让法院来梳理。但没有人应该从原雇主那里窃取东西。这是绝对不允许的，非常明显。这些人非常聪明，非常成功，这也是OpenAI想要他们的原因。他们所带来的集体经验应该已经足够了，不需要再干这种事。我希望这些事不是真的，我觉得Sam或Sarah或其他高层不会主动诱导这种事发生。</p>
+<p><strong>Sacks：</strong> 就像Chamath说的，我对此没有任何内幕信息。这是一起诉讼，所有事实都是控诉性陈述，我们不知道真假，最终会由法庭裁断，所以我真不想对此随便发表评论。但如果你想要一个非常简单的规则来避免这种纠纷，那就是：当一个人离开原公司加入新公司时，什么都别带走。你能带给新工作的，只有你脑袋里装着的记忆。</p>
+<p><strong>JCal：</strong> 这就够了。</p>
+<p><strong>Friedberg：</strong> 仅仅几个点就连成线。</p>
+<p><strong>JCal：</strong> 不错，&quot;几个点就连成线&quot;——说得好。然后说xCode。xCode推出了Groq Build公测版。这个最新的编码模型Groq 4.5非常棒，它运行在Cursor里。xCode之前告诉用户，你的任何代码段都不会传输到xAI服务器。但实际情况是，每当开发者使用Groq Build时，这个工具会把整个代码库——所有文件，包括密码、API密钥、变更日志——全部上传到xCode云服务器，而且不通知用户。隐私设置应该阻止这点，但没起作用。xCode在7月13日通过服务器的开关静默关闭了上传功能。Elon Musk在X上承诺所有此前上传的数据已被删除。然后作为回应，xCode开源了Groq Build的框架。这对开源社群又是一次胜利。你有什么看法？</p>
+<p><strong>Chamath：</strong> 我想把这个连到我本周早些时候在CNBC上说过的话，那也延续了Alex Karp上周的观点：AI中的隐私非常脆弱，非常易碎。而且这还发生在好公司的最努力下。你可能对Elon的性格有微词，但他非常值得信赖，而且是极其透明的。他们立即关停了它，这很诚实。但我的结论是：AI中存在大量不易察觉的数据泄露路径。如果你以为打开&quot;零数据保留&quot;开关（业内用来让你放心&quot;一切安全&quot;的神奇术语）就没事了，我认为答案和教训是：根本保证不了。模型公司或许在努力，但现实是他们不知情的路径被触发后才会被发现，就像这次的例子。所以这一切都指向：你必须有一个分层生态，必须有第三方。</p>
+<p><strong>JCal：</strong> 这就是Satya最近发的博客里说的。他称之为&quot;逆向信息悖论&quot;。他吸收了Alex Karp关于&quot;有技术能力的企业想要控制自己的计算、模型权重、数据和alpha&quot;的观点，但走得更远，为现代企业应该如何操作化提供了一个路线图：他们必须建立真正的信任边界、私有评估、专有学习循环、解耦编排，以及明确微调自己输出的权利。他列出了一系列相当技术性的做法，来帮助企业实现Karp所说的&quot;控制AI计算、模型和数据&quot;。</p>
+<p><strong>Chamath：</strong> 你们看到这些数据了吗？Fable的百万输入token是56美元，Sol（可能指OpenAI的某种模型）大约26美元，同Claude 4.8差不多。Groq是1.5美元，Zux也是1.5美元，Elon的差不多1美元，中国模型是0.5美元。</p>
+<p><strong>JCal：</strong> 我刚刚用Perplexity Computer做测试，它已经支持Groq和GLM-5-2。我给它同一个&quot;产品需求文档&quot;（PRD），让它做一个deep link的播客播放器。大概花了几个小时，只用了11美元，用的还是Groq的新模型。非常便宜。我还有一个数据：Ramp的CEO Eric Gleiman今天在Squawk Box上说，过去一年，Ramp客户的token支出增长了21倍——不是21%，是21倍。如果他们毫无控制地乱花——百万token花56美元——总有一天CFO会因OpEx失控而&quot;miss quarter&quot;（未能达到华尔街预期）。这只是时间问题。好消息是这创造了巨大的市场机会。谁都能说我给你更低价——你付26到56美元，你本来应该只付0.5美元。</p>
+<p><strong>Sacks：</strong> Mira Murati的新创公司Inkling很有意思。她的价值主张是：我这不是&quot;前沿智能&quot;，我离前沿差一点——但我是一个通过微调这些开源模型的平台。更便宜，能出同样结果。</p>
+<p><strong>JCal：</strong> 如果Anthropic能得逞，这些开源模型就活不久了。</p>
+<p><strong>Chamath：</strong> 这就是他想阻止它的原因。你以50美分卖核心产品，他卖56美元——他当然不想这样。</p>
+<p><strong>Sacks：</strong> 但OpenAI和Anthropic仍然在大幅增长，它们仍然是行业营收增长的领导者，这些事正在并行发生。</p>
+<p><strong>Friedberg：</strong> 如果Eric Gleiman不是因为CFO们在抱怨&quot;我控制不了token支出&quot;，他才不会去做Ramp这个功能。如果太多CFO打开它开始限制支出——因为工程师不在乎ROI，他们只想用最新最好的模型，而对于95%的需求，你根本不需要用最前沿浪费上百倍成本——那就危险了。</p>
+<p><strong>JCal：</strong> 我还有一个预测：苹果Mac Studio——明年的M7 Ultra芯片支持1.5TB内存，足够运行Opus级别的模型。想象一下每个人都有一台本地模型。苹果将大获全胜。</p>
+<p><strong>Sacks：</strong> 我上周告诉过你们一个事实：美国到2050年将短缺&quot;2.5个加州&quot;的电力。这周PJM（服务13个州的巨大电网运营商）做了一次拍卖，需要7到8GW的远期合同容量——结果只来了156MW。这个市场彻底出问题了。</p>
+<p><strong>Chamath：</strong> 说到数据中心的能源——Elon在Memphis做的就是在背后自己建电厂。因为你从电网拿到电越来越难。他甚至买了一堆18轮卡车的发动机，钉在地上发电。这就触到了清洁空气许可证的问题。他需要所有未来新增容量的合法路线。我们现在在电力和电价上处境非常危险。</p></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="00:59–01:28 纽约州暂停数据中心 / 能源危机 / 科学角落 本段核心内容： 纽约州长kathy hochul签署全美首个州级超大规模数据中心暂停令，理由是&quot;化石燃料增加碳足迹、占用大量土地、推高居民电费、消耗水源、产生噪音&quot;。 sacks逐条驳斥：背后建厂能解决供电问题、美国不缺土地、现代数据中心闭环水冷（用水仅相当于2.5家in-n-out汉堡店）、噪音可控制。核心问题在于这些数据中心的建设遭到了不必要的政治和舆论阻力。 chamath指出，已确认的&quot;可即刻并网发电&quot;的数据中心资产在市场上享有极高溢价，因为未来项目的进度正在大量延迟或被直接废弃。44%的新项目已经&quot;被搁置&quot;。这从根本上限制了ai应用（药物发现、癌症诊断等）的落地能力。 friedberg展示了一个诡异的数据图表：在rt（今日俄罗斯）2010年进入美国市场前，美国社会几乎不存在反gmo情绪；rt被拜登政府2022年驱逐后，反gmo情绪随之下降。他推测类似的外国影响力正在通过资助ngo、影响媒体来塑造美国民众对数据中心的负面态度。 sacks补充说，这只是更大图景的一部分：外国势力有强烈的动机去&quot;让美国无法建设必要的基础设施，从而让中国赢得ai竞赛&quot;。 科学角落：calico和revel pharma利用alphafold和定向进化，创造出一种能分解cml（使细胞外基质衰老的关键分子）的全新酶，在老年人皮肤上实现了55%的清除效果，将皮肤&quot;年龄&quot;逆转至31岁水平。friedberg预测第一个市场将是化妆品，价值万亿美元。 详细中文整理： jcal： sacks，说到数据中心——所有人最喜欢的社会主义州长kathy hochul，在我的家乡纽约州，她今天签署了全美首个州级超大规模数据中心暂停令。她说：&quot;由化石燃料驱动，它们增加了我们的碳足迹。它们占据大量土地，可能排挤农业和开放空间。底线是：进步不应该以更高的电费、枯竭的水源和噪音污染为代价。我们别无选择，只能应对这些巨型设施带来的挑战。&quot; sacks： 她说的每一条假设，对数据中心的指责，几乎都是错误的。我们逐条来讲。&quot;吃掉了所有电力&quot;——是的，如果不带来新的电力、通过电网与居民竞争，确实会推高电费。但如果你让它们&quot;behind the meter&quot;（数据中心自建电厂），它们自带电力，就能解决。总统从一开始就主张让ai公司成为电力公司。然后是&quot;占用大量土地&quot;——美国有的是土地。数据中心与土地利用相比的经济影响和投资回报率，是全球最好的之一。&quot;噪音污染&quot;基本是捏造的，可以解决，离居民区远一点就好。水耗问题——现代数据中心都是闭环水冷系统。一项研究表明，典型数据中心的用水量相当于2.5家in-n-out汉堡店。你看看加州那些高楼和住户——到处都在用水。如果真担心水，应该去打杏仁（农业）和高尔夫球场。数据中心的经济影响远高于这些。另外还有大量的税收收入和蓝领建筑就业。kathy hochul的提案和言论，除了事实完全错误外，最愚蠢的是：纽约州80%的土地仍未开发。开车往北走，人们以为的纽约是纽约市，其实现代化程度远不及，全是土地。 chamath： 所有可能延缓数据中心的措施——这让&quot;即刻并网发电&quot;的数据中心在市场上拥有极端溢价。所有正在建设或筹划中的项目，大约44%已被废弃或暂停。这会制造一个巨大的可用能源赤字，实际上限制了ai驱动一切（药物发现、癌症诊断、医疗、法律咨询）的能力。能源就是达不到。 friedberg： 我上个月分享过一张图表，是关于rt（今日俄罗斯）进入美国市场前后，美国社会反gmo情绪的变化。gmo自1996年就存在了，但直到2010年后才爆发&quot;gmo有害论&quot;，与2010年rt进入美国高度相关。2022年拜登政府把rt逐出美国后，反gmo情绪也下降了。背后就是kgb时代设计的一种叫&quot;定向措施&quot;的方法，通过外国媒体影响目标民主国家的民意。类似的事在德国核电站问题上也出现过。现在我们对数据中心看到了同一种现象。ngo被资助、媒体被影响、然后被转发，最后公众在没有科学依据的情况下产生&quot;敌意&quot;。今天新出的一份民调显示，50%以上的美国人相信数据中心推高了水电费。即使数据中心用的是自己发的电、闭环回收水，仍然有这种反感。这背后一定有系统性的、可能是外国势力的影响操作。 sacks： 不仅如此。仅仅一个月前，openai发布了一篇博客叫《prc-linked influence operations targeting ai debates in us》。politico和其他媒体都报道了。中国正通过这类影响力运动来塑造美国对ai和数据中心的态度，这完全合理。 chamath： 有人通过资助anthropic、通过在各州推动监管层层加码、试图扼杀低成本开源模型来&quot;抽梯子&quot;，并在这个过程中由anthropic以52-56美元的高价售卖token，而开源模型和中国的价格是0.5美元。成本差距100倍，这生意根本做不成。 sacks： 现在整个&quot;道德恐慌&quot;的规模变得非常危险。ai带来的灾难性风险——迄今没有任何事真正发生。没有发生ai事故，没有恐怖灾难，没有大规模失业。但我们正处在一个边缘：我们可能会摧毁美国经济的王牌——自由市场创新体系，那种&quot;任何人有好想法都可以去融资、创业&quot;的文化。而我们现在居然在讨论用一个类似finra的机构来监管ai。finra是一帮股票经纪人写的规则。上次这个行业有什么创新？大概只有robinhood把交易费免了吧。那是一个定价模式的创新。我们现在居然在说这是&quot;最不差的替代方案&quot;：让一群经纪人制定新规则，所有ai公司都得遵守。我们在丢掉自己的领先地位。kimi k3刚刚出来了，很多人说它已经非常接近前沿水平。我们也许对中国的领先时间是以月计算的——还要搞这些疯狂规则和监管机构吗？ jcal： 值得监测风险，但不应恐慌。加州已经开始停止给自动驾驶汽车发放许可证了——因为搞得好，一些工人丢了工作，有点社会不安定，所以他们就暂停了。该监测的都要监测，但ai今天根本没有灾难。唯一最坏的可能就是多花几个token。太荒唐了。 friedberg： 科学角落。今天我们聊一篇全新的论文，来自calico（google的极度神秘抗衰老公司）和revel pharma。他们发现细胞外基质随着衰老，糖和脂肪会与蛋白质结合，形成一种叫cml的&quot;高级糖化终产物&quot;，这东西不能被自然降解。他们先用alphafold找到一种能结合并分解cml的原始蛋白，然后通过定向进化——迭代几千个dna变体——最终创造出一个自然界不存在的酶。他们在实验室里测试对不同蛋白质（如胶原蛋白、视蛋白、血红蛋白等）的cml清除率，达到52%到97%。然后在70岁以上捐赠者的真正人类皮肤上测试，这个酶上去之后清除了55%的cml，使皮肤&quot;年龄&quot;逆转到了31岁水平。这是ai+定向进化+高通量筛选的一个完美结合。第一个市场将是化妆品，万亿美元市场。 jcal： 这就是ai的真正应用——足够让所有人同意的事情，不受任何外国心理战感染。 friedberg： 太神奇了。我有各种关节疼痛——肩和髋。以后你会在皮肤上涂个霜，结果不仅皮肤变年轻，身体也舒服了。 jcal： 我爱你们。让你的赢家继续跑。" style="--index: 5">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">05</span>
+                    <span class="timeline-meta">00:59–01:28</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>纽约州暂停数据中心 / 能源危机 / 科学角落</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>纽约州长Kathy Hochul签署全美首个州级超大规模数据中心暂停令，理由是&quot;化石燃料增加碳足迹、占用大量土地、推高居民电费、消耗水源、产生噪音&quot;。</li>
+<li>Sacks逐条驳斥：背后建厂能解决供电问题、美国不缺土地、现代数据中心闭环水冷（用水仅相当于2.5家In-N-Out汉堡店）、噪音可控制。核心问题在于这些数据中心的建设遭到了不必要的政治和舆论阻力。</li>
+<li>Chamath指出，已确认的&quot;可即刻并网发电&quot;的数据中心资产在市场上享有极高溢价，因为未来项目的进度正在大量延迟或被直接废弃。44%的新项目已经&quot;被搁置&quot;。这从根本上限制了AI应用（药物发现、癌症诊断等）的落地能力。</li>
+<li>Friedberg展示了一个诡异的数据图表：在RT（今日俄罗斯）2010年进入美国市场前，美国社会几乎不存在反GMO情绪；RT被拜登政府2022年驱逐后，反GMO情绪随之下降。他推测类似的外国影响力正在通过资助NGO、影响媒体来塑造美国民众对数据中心的负面态度。</li>
+<li>Sacks补充说，这只是更大图景的一部分：外国势力有强烈的动机去&quot;让美国无法建设必要的基础设施，从而让中国赢得AI竞赛&quot;。</li>
+<li>科学角落：Calico和Revel Pharma利用AlphaFold和定向进化，创造出一种能分解CML（使细胞外基质衰老的关键分子）的全新酶，在老年人皮肤上实现了55%的清除效果，将皮肤&quot;年龄&quot;逆转至31岁水平。Friedberg预测第一个市场将是化妆品，价值万亿美元。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> Sacks，说到数据中心——所有人最喜欢的社会主义州长Kathy Hochul，在我的家乡纽约州，她今天签署了全美首个州级超大规模数据中心暂停令。她说：&quot;由化石燃料驱动，它们增加了我们的碳足迹。它们占据大量土地，可能排挤农业和开放空间。底线是：进步不应该以更高的电费、枯竭的水源和噪音污染为代价。我们别无选择，只能应对这些巨型设施带来的挑战。&quot;</p>
+<p><strong>Sacks：</strong> 她说的每一条假设，对数据中心的指责，几乎都是错误的。我们逐条来讲。&quot;吃掉了所有电力&quot;——是的，如果不带来新的电力、通过电网与居民竞争，确实会推高电费。但如果你让它们&quot;behind the meter&quot;（数据中心自建电厂），它们自带电力，就能解决。总统从一开始就主张让AI公司成为电力公司。然后是&quot;占用大量土地&quot;——美国有的是土地。数据中心与土地利用相比的经济影响和投资回报率，是全球最好的之一。&quot;噪音污染&quot;基本是捏造的，可以解决，离居民区远一点就好。水耗问题——现代数据中心都是闭环水冷系统。一项研究表明，典型数据中心的用水量相当于2.5家In-N-Out汉堡店。你看看加州那些高楼和住户——到处都在用水。如果真担心水，应该去打杏仁（农业）和高尔夫球场。数据中心的经济影响远高于这些。另外还有大量的税收收入和蓝领建筑就业。Kathy Hochul的提案和言论，除了事实完全错误外，最愚蠢的是：纽约州80%的土地仍未开发。开车往北走，人们以为的纽约是纽约市，其实现代化程度远不及，全是土地。</p>
+<p><strong>Chamath：</strong> 所有可能延缓数据中心的措施——这让&quot;即刻并网发电&quot;的数据中心在市场上拥有极端溢价。所有正在建设或筹划中的项目，大约44%已被废弃或暂停。这会制造一个巨大的可用能源赤字，实际上限制了AI驱动一切（药物发现、癌症诊断、医疗、法律咨询）的能力。能源就是达不到。</p>
+<p><strong>Friedberg：</strong> 我上个月分享过一张图表，是关于RT（今日俄罗斯）进入美国市场前后，美国社会反GMO情绪的变化。GMO自1996年就存在了，但直到2010年后才爆发&quot;GMO有害论&quot;，与2010年RT进入美国高度相关。2022年拜登政府把RT逐出美国后，反GMO情绪也下降了。背后就是KGB时代设计的一种叫&quot;定向措施&quot;的方法，通过外国媒体影响目标民主国家的民意。类似的事在德国核电站问题上也出现过。现在我们对数据中心看到了同一种现象。NGO被资助、媒体被影响、然后被转发，最后公众在没有科学依据的情况下产生&quot;敌意&quot;。今天新出的一份民调显示，50%以上的美国人相信数据中心推高了水电费。即使数据中心用的是自己发的电、闭环回收水，仍然有这种反感。这背后一定有系统性的、可能是外国势力的影响操作。</p>
+<p><strong>Sacks：</strong> 不仅如此。仅仅一个月前，OpenAI发布了一篇博客叫《PRC-linked Influence Operations Targeting AI Debates in US》。Politico和其他媒体都报道了。中国正通过这类影响力运动来塑造美国对AI和数据中心的态度，这完全合理。</p>
+<p><strong>Chamath：</strong> 有人通过资助Anthropic、通过在各州推动监管层层加码、试图扼杀低成本开源模型来&quot;抽梯子&quot;，并在这个过程中由Anthropic以52-56美元的高价售卖token，而开源模型和中国的价格是0.5美元。成本差距100倍，这生意根本做不成。</p>
+<p><strong>Sacks：</strong> 现在整个&quot;道德恐慌&quot;的规模变得非常危险。AI带来的灾难性风险——迄今没有任何事真正发生。没有发生AI事故，没有恐怖灾难，没有大规模失业。但我们正处在一个边缘：我们可能会摧毁美国经济的王牌——自由市场创新体系，那种&quot;任何人有好想法都可以去融资、创业&quot;的文化。而我们现在居然在讨论用一个类似FINRA的机构来监管AI。FINRA是一帮股票经纪人写的规则。上次这个行业有什么创新？大概只有Robinhood把交易费免了吧。那是一个定价模式的创新。我们现在居然在说这是&quot;最不差的替代方案&quot;：让一群经纪人制定新规则，所有AI公司都得遵守。我们在丢掉自己的领先地位。Kimi K3刚刚出来了，很多人说它已经非常接近前沿水平。我们也许对中国的领先时间是以月计算的——还要搞这些疯狂规则和监管机构吗？</p>
+<p><strong>JCal：</strong> 值得监测风险，但不应恐慌。加州已经开始停止给自动驾驶汽车发放许可证了——因为搞得好，一些工人丢了工作，有点社会不安定，所以他们就暂停了。该监测的都要监测，但AI今天根本没有灾难。唯一最坏的可能就是多花几个token。太荒唐了。</p>
+<p><strong>Friedberg：</strong> 科学角落。今天我们聊一篇全新的论文，来自Calico（Google的极度神秘抗衰老公司）和Revel Pharma。他们发现细胞外基质随着衰老，糖和脂肪会与蛋白质结合，形成一种叫CML的&quot;高级糖化终产物&quot;，这东西不能被自然降解。他们先用AlphaFold找到一种能结合并分解CML的原始蛋白，然后通过定向进化——迭代几千个DNA变体——最终创造出一个自然界不存在的酶。他们在实验室里测试对不同蛋白质（如胶原蛋白、视蛋白、血红蛋白等）的CML清除率，达到52%到97%。然后在70岁以上捐赠者的真正人类皮肤上测试，这个酶上去之后清除了55%的CML，使皮肤&quot;年龄&quot;逆转到了31岁水平。这是AI+定向进化+高通量筛选的一个完美结合。第一个市场将是化妆品，万亿美元市场。</p>
+<p><strong>JCal：</strong> 这就是AI的真正应用——足够让所有人同意的事情，不受任何外国心理战感染。</p>
+<p><strong>Friedberg：</strong> 太神奇了。我有各种关节疼痛——肩和髋。以后你会在皮肤上涂个霜，结果不仅皮肤变年轻，身体也舒服了。</p>
+<p><strong>JCal：</strong> 我爱你们。让你的赢家继续跑。</p></div>
+                  </div>
+                </article></div>
+            <p class="empty search-empty" data-search-empty hidden>没有匹配的时间线段落。</p>
+          </section>
+
+          <section id="speakers">
+            <div class="section-head">
+              <h2>人物观点对照</h2>
+              <p>比较嘉宾立场</p>
+            </div>
+            <div class="speaker-grid"><article class="speaker-card" style="--index: 1">
+                  <p class="speaker-kicker">嘉宾 01</p>
+                  <h3>Jason Calacanis (JCal)</h3>
+                  <div><p>整体基调是&quot;企业家+科技乐观主义者&quot;。对AI监管高度警惕，尤其反对任何限制开源和初创的举措。他认为Anthropic是当前监管浪潮的主要推手，并在更早时候就提出&quot;行业自我认证&quot;方案。对Stripe竞购PayPal非常兴奋，认为这是&quot;并购复兴&quot;和&quot;AI重塑传统数字资产&quot;趋势的一部分。他强烈看好苹果本地AI推理的硬件潜力。在数据泄露问题上，他信任Elon Musk的透明度。他深恶痛绝监管对创新的扼杀，并认为这些恐慌来自外国心理战和少数决策者的&quot;道德恐慌&quot;。</p></div>
+                </article>
+<article class="speaker-card" style="--index: 2">
+                  <p class="speaker-kicker">嘉宾 02</p>
+                  <h3>Chamath Palihapitiya</h3>
+                  <div><p>作为拥有大量能源类资产的投资者，能源是这一集的核心关切。他在本集中反复强调美国将面临&quot;2.5个加州&quot;级别的能源赤字，这已经成为制约AI落地的最紧迫瓶颈。他认为&quot;可即刻并网发电&quot;的数据中心资产拥有极端溢价，而政治/舆论阻力正在浪费这一优势。他对Hassabis的SRO方案表示支持，认为它能防止&quot;用资本抽梯子&quot;。他对AI隐私非常敏感，认为&quot;零数据保留&quot;是虚幻的保证，必须由第三方独立层介入。从交易角度，他将Stripe+Advent+Block的组合解读为&quot;创造Visa/MasterCard挑战者&quot;。</p></div>
+                </article>
+<article class="speaker-card" style="--index: 3">
+                  <p class="speaker-kicker">嘉宾 03</p>
+                  <h3>David Sacks</h3>
+                  <div><p>核心立场是&quot;技术自由市场的捍卫者&quot;。他对AI监管的警惕贯穿全集的每一秒。他不反对某种程度的安全检查，但提出了5项明确条件以确保SRO不会被滥用。最核心的担忧是Anthropic的&quot;监管收编&quot;策略——诱导政府层层加码，最终形成&quot;AI界的FAA&quot;这样的&quot;许可制监管&quot;，扼杀创新并让中国追上。他对Stripe收购PayPal的分析重点在产品老化与现实协同价值。他逐条驳斥了Kathy Hochul的暂停令，将其归因于错误事实和外国心理战。他高度担心美国正在通过道德恐慌丢掉竞争领先优势。</p></div>
+                </article>
+<article class="speaker-card" style="--index: 4">
+                  <p class="speaker-kicker">嘉宾 04</p>
+                  <h3>David Friedberg</h3>
+                  <div><p>在投资和科技界兼具学术派背景。他提供了关于SRO机制（FINRA类比）的清晰定义，认为这是一个&quot;最不差的方案&quot;。他是&quot;AI+X&quot;融资策略的理论基础提出者，将PayPal、eBay等列为&quot;第一代数字原生企业疲软版&quot;代表，认为AI运营商将大规模进场收购和盘活这些资产。他在AI隐私上尤其深入，警告隐性的数据泄露路径，并认为组织必须通过第三方独立层来管理。他带来了最硬核的&quot;抗衰老&quot;科学进展，充分展现了AI在药物发现和蛋白质工程上的正向推力。他对数据中心反对者背后存在外国心理战影响的观点提供了详尽的GMO类比图表证据。</p></div>
+                </article></div>
+          </section>
+
+          <section id="quotes">
+            <div class="section-head">
+              <h2>值得引用的原话</h2>
+              <p>保留关键表达</p>
+            </div>
+            <div class="panel"><ol>
+<li><strong>&quot;If my choices are between FAA for AI or what I would call the DMV for AI, I would much rather go for Demis&#x27;s SRO for AI.&quot;</strong></li>
+<p>——&quot;如果我的选择是在&#x27;AI界的FAA&#x27;和&#x27;AI界的车管局&#x27;之间，我宁可选择Demis的&#x27;AI界的SRO&#x27;。&quot; <strong>说明：</strong> Sacks找到了一个折中方案，依然保持了高度的质疑。</p>
+</ol>
+<ol>
+<li><strong>&quot;The reason why Anthropic&#x27;s arguments are finding purchase is because when you go to the government and say, &#x27;Please regulate me,&#x27; there&#x27;s hardly anyone in government who will say, &#x27;No, we&#x27;re not qualified.&#x27; Most will say, &#x27;Thank you very much, what else can we take?&#x27;&quot;</strong></li>
+<p>——&quot;Anthropic的论点之所以有市场，是因为当你走到政府面前说&#x27;请监管我&#x27;时，几乎不会有政府官员说&#x27;不不，我们不够格&#x27;。绝大多数人会说&#x27;非常感谢，还有别的可以再给点吗？&#x27;&quot; <strong>说明：</strong> Sacks揭露了监管扩张的天然政治逻辑。</p>
+</ol>
+<ol>
+<li><strong>&quot;The most incredible thing is how extreme the price is at the front end of the curve when you have verifiable energizable power today.&quot;</strong></li>
+<p>——&quot;最不可思议的是，在曲线上那些能立刻并网发电的资产，价格已经涨到了何等极端的地步。&quot; <strong>说明：</strong> Chamath点出了能源已是最重要的稀缺资源。</p>
+</ol>
+<ol>
+<li><strong>&quot;In a weird way, you have all these other countries running to try to embrace this stuff quickly. They&#x27;ve done a decent job. They&#x27;re doing stuff to displace some of the energy needed in the US, but we need to have enough surplus here because this is where most of the commerce is going to get created.&quot;</strong></li>
+<p>——&quot;奇怪的是，很多其他国家正在拼命拥抱这些技术。它们做得相当好，正在弥补美国的部分能源缺口，但美国必须有盈余，因为大部分商业创新会在这里发生。&quot; <strong>说明：</strong> Chamath的全球视角——美国不能过度依赖别国。</p>
+</ol>
+<ol>
+<li><strong>&quot;You&#x27;re paying $56 per million input tokens. You should be paying $0.50. That is insanity.&quot;</strong></li>
+<p>——&quot;你每百万输入token付56美元，其实应该只付0.5美元。这太疯狂了。&quot; <strong>说明：</strong> JCal用赤裸裸的成本数据揭示AI行业的定价泡沫。</p>
+</ol>
+<ol>
+<li><strong>&quot;This is exactly the reason why if this had happened 2 years ago, this would have been the antitrust equivalent of a colorectal exam.&quot;</strong></li>
+<p>——&quot;这正是为什么这个交易如果再早两年，在反垄断意义上就是一场结肠直肠检查。&quot; <strong>说明：</strong> JCal对新监管环境下大型并购可能性的辛辣总结。</p>
+</ol>
+<ol>
+<li><strong>&quot;We have a huge moral panic going on with respect to AI. ... We are on the threshold, I think, of destroying the crown jewel of our economy, which is the system of free market innovation.&quot;</strong></li>
+<p>——&quot;我们正在经历一场对AI的大规模道德恐慌。…… 我认为，我们正处在摧毁我们经济皇冠上的明珠——那个自由市场创新体系的边缘。&quot; <strong>说明：</strong> Sacks对当前危机深重感的总结。</p>
+</ol>
+<ol>
+<li><strong>&quot;That is the most ironic thing: you have these groups pushing back against data centers—and the number one thing slowing down Anthropic&#x27;s revenue growth is not demand, it&#x27;s the availability of compute and data centers.&quot;</strong></li>
+<p>——&quot;最具讽刺意味的是：那些最激烈地抵制数据中心的团体，同时也是Anthropic本身增长的最大拦路虎——不是需求，而是算力和数据中心本身的缺乏。&quot; <strong>说明：</strong> Sacks揭示了监管/抵制如何直接自我伤害。</p>
+</ol></div>
+          </section>
+        </div>
+      </div>
+    </main>
+  </div>
+  <script>
+    const progress = document.querySelector("[data-progress]");
+    const searchBox = document.querySelector("[data-search-box]");
+    const topButton = document.querySelector("[data-scroll-top]");
+    const cards = Array.from(document.querySelectorAll("[data-timeline-card]"));
+    const searchEmpty = document.querySelector("[data-search-empty]");
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    function updateProgress() {
+      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      const ratio = scrollable > 0 ? window.scrollY / scrollable : 0;
+      if (progress) {
+        progress.style.width = `${Math.max(0, Math.min(1, ratio)) * 100}%`;
+      }
+    }
+
+    function applySearch() {
+      const query = searchBox.value.trim().toLowerCase();
+      let visibleCount = 0;
+      cards.forEach((card) => {
+        const text = card.getAttribute("data-search") || "";
+        const isVisible = !query || text.includes(query);
+        card.hidden = !isVisible;
+        if (isVisible) {
+          visibleCount += 1;
+        }
+      });
+      if (searchEmpty) {
+        searchEmpty.hidden = !query || visibleCount > 0;
+      }
+    }
+
+    window.addEventListener("scroll", updateProgress, { passive: true });
+    window.addEventListener("resize", updateProgress);
+    if (searchBox) {
+      searchBox.addEventListener("input", applySearch);
+    }
+    if (topButton) {
+      topButton.addEventListener("click", () => {
+        window.scrollTo({
+          top: 0,
+          behavior: prefersReducedMotion.matches ? "auto" : "smooth"
+        });
+      });
+    }
+    updateProgress();
+  </script>
+</body>
+</html>
