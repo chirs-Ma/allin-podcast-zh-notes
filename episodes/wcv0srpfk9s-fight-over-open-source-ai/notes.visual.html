@@ -1,0 +1,901 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>All-In Podcast #282: 开源AI之争、Anthropic的15亿美金和解、纽约社会主义者：驱逐等于暴力？ - 中文播客可视化笔记</title>
+  <style>
+    :root {
+      --bg: oklch(0.974 0.006 238);
+      --paper: oklch(0.991 0.003 238);
+      --paper-soft: oklch(0.955 0.007 238);
+      --ink: oklch(0.205 0.018 246);
+      --muted: oklch(0.49 0.018 246);
+      --faint: oklch(0.63 0.014 246);
+      --line: oklch(0.875 0.009 238);
+      --line-strong: oklch(0.74 0.014 238);
+      --accent: oklch(0.43 0.064 164);
+      --accent-soft: oklch(0.94 0.024 164);
+      --accent-wash: oklch(0.973 0.012 164);
+      --quote: oklch(0.965 0.010 92);
+      --shadow: 0 24px 54px color-mix(in oklch, var(--ink) 8%, transparent);
+      --radius: 8px;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-width: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(90deg, color-mix(in oklch, var(--line) 28%, transparent) 1px, transparent 1px) 0 0 / 92px 92px,
+        var(--bg);
+      font-family: "Geist", "Satoshi", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      line-height: 1.78;
+      text-rendering: optimizeLegibility;
+    }
+    ::selection { background: var(--accent-soft); color: var(--ink); }
+    a {
+      color: var(--accent);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+      transition: color .22s var(--ease), background-color .22s var(--ease), border-color .22s var(--ease), transform .22s var(--ease);
+    }
+    [hidden] { display: none !important; }
+    .progress {
+      position: fixed;
+      z-index: 4;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: var(--accent);
+    }
+    .quick-actions {
+      position: fixed;
+      right: max(18px, calc((100vw - 1200px) / 2));
+      bottom: 24px;
+      z-index: 3;
+      display: grid;
+      gap: 7px;
+    }
+    .quick-action {
+      display: inline-grid;
+      grid-template-columns: 16px auto;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      min-width: 74px;
+      min-height: 40px;
+      padding: 8px 12px;
+      border: 1px solid var(--line-strong);
+      border-radius: var(--radius);
+      background: color-mix(in oklch, var(--paper) 92%, transparent);
+      box-shadow: 0 12px 28px color-mix(in oklch, var(--ink) 7%, transparent);
+      color: var(--ink);
+      font: inherit;
+      font-size: 13px;
+      font-weight: 720;
+      line-height: 1.2;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .quick-action:hover, .quick-action:focus-visible {
+      outline: none;
+      border-color: var(--accent);
+      background: var(--accent-wash);
+      color: var(--accent);
+      transform: translate3d(0, -1px, 0);
+    }
+    .quick-action:active { transform: translate3d(0, 1px, 0) scale(.99); }
+    .page {
+      width: min(1760px, calc(100% - 56px));
+      margin: 0 auto;
+      padding: 0 0 104px;
+    }
+    .article { min-width: 0; }
+    .hero {
+      max-width: none;
+      margin-left: min(7vw, 140px);
+      padding: 72px 0 58px;
+    }
+    .eyebrow {
+      margin: 0 0 18px;
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    h1 {
+      max-width: none;
+      margin: 0 0 28px;
+      font-size: clamp(38px, 3vw, 52px);
+      font-weight: 760;
+      line-height: 1.08;
+      letter-spacing: 0;
+      text-wrap: balance;
+    }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 18px;
+      max-width: 72ch;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .meta a { font-weight: 650; }
+    .meta-strip {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+      max-width: 720px;
+      margin: 34px 0 28px;
+      border-top: 1px solid var(--line-strong);
+      padding-top: 16px;
+    }
+    .meta-pill {
+      display: grid;
+      gap: 2px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.35;
+    }
+    .meta-pill b {
+      color: var(--ink);
+      font-family: var(--mono);
+      font-size: 18px;
+      font-weight: 680;
+      line-height: 1;
+    }
+    .summary {
+      width: 100%;
+      max-width: 760px;
+      padding: 24px 26px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: color-mix(in oklch, var(--paper) 88%, var(--accent-soft));
+      box-shadow: var(--shadow);
+    }
+    .summary p {
+      margin: 0;
+      font-size: 19px;
+      line-height: 1.72;
+    }
+    h1, .summary, .takeaway p, .timeline-card h3, .section-content, .speaker-card, .panel {
+      overflow-wrap: anywhere;
+    }
+    .content-shell {
+      display: grid;
+      grid-template-columns: minmax(170px, 212px) minmax(0, 820px);
+      gap: clamp(36px, 7vw, 88px);
+      align-items: start;
+      border-top: 1px solid var(--line);
+      padding-top: 40px;
+    }
+    .sidebar {
+      position: sticky;
+      top: 28px;
+      align-self: start;
+      padding-top: 4px;
+    }
+    .toc {
+      border-top: 1px solid var(--ink);
+      padding-top: 16px;
+    }
+    .toc-title {
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .nav-links { display: grid; gap: 2px; }
+    .nav-links a {
+      display: block;
+      padding: 8px 0;
+      border-bottom: 1px solid color-mix(in oklch, var(--line) 72%, transparent);
+      color: var(--ink);
+      font-size: 14px;
+      line-height: 1.35;
+      text-decoration: none;
+    }
+    .nav-links a:hover, .nav-links a:focus-visible {
+      outline: none;
+      color: var(--accent);
+      transform: translate3d(2px, 0, 0);
+    }
+    .search {
+      display: grid;
+      gap: 8px;
+      margin-top: 22px;
+    }
+    .search span {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 720;
+    }
+    .search input {
+      width: 100%;
+      min-height: 40px;
+      padding: 8px 10px;
+      border: 1px solid var(--line-strong);
+      border-radius: var(--radius);
+      background: var(--paper);
+      color: var(--ink);
+      font: inherit;
+      font-size: 14px;
+      outline: none;
+      transition: border-color .22s var(--ease), box-shadow .22s var(--ease), transform .22s var(--ease);
+    }
+    .search input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px color-mix(in oklch, var(--accent) 14%, transparent);
+    }
+    .content-flow { min-width: 0; }
+    section { margin: 0 0 78px; }
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 18px;
+      align-items: end;
+      margin-bottom: 22px;
+      border-top: 1px solid var(--ink);
+      padding-top: 18px;
+    }
+    .section-head h2 {
+      margin: 0;
+      font-size: 28px;
+      font-weight: 740;
+      line-height: 1.16;
+      letter-spacing: 0;
+    }
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.4;
+      text-align: right;
+    }
+    .takeaway-list {
+      display: grid;
+      gap: 0;
+      margin: 0;
+      padding: 0;
+      border-top: 1px solid var(--line);
+      list-style: none;
+    }
+    .takeaway {
+      display: grid;
+      grid-template-columns: 52px minmax(0, 1fr);
+      gap: 18px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .takeaway span {
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 15px;
+      font-weight: 720;
+      line-height: 1.65;
+    }
+    .takeaway p {
+      margin: 0;
+      max-width: 70ch;
+      font-size: 16px;
+      line-height: 1.72;
+    }
+    .timeline {
+      display: grid;
+      gap: 0;
+      border-top: 1px solid var(--line-strong);
+    }
+    .timeline-card {
+      display: grid;
+      grid-template-columns: 132px minmax(0, 1fr);
+      gap: 32px;
+      padding: 34px 0 40px;
+      border-bottom: 1px solid var(--line);
+    }
+    .timeline-heading {
+      position: sticky;
+      top: 30px;
+      align-self: start;
+      display: grid;
+      gap: 10px;
+      padding-top: 2px;
+    }
+    .timeline-index {
+      color: var(--faint);
+      font-family: var(--mono);
+      font-size: 13px;
+      font-weight: 720;
+      line-height: 1;
+    }
+    .timeline-meta {
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 720;
+      line-height: 1.45;
+    }
+    .timeline-card h3 {
+      max-width: 24ch;
+      margin: 0 0 18px;
+      font-size: 27px;
+      font-weight: 730;
+      line-height: 1.22;
+      letter-spacing: 0;
+    }
+    .section-content {
+      color: color-mix(in oklch, var(--ink) 88%, var(--muted));
+      font-size: 16px;
+    }
+    .section-content p {
+      max-width: 72ch;
+      margin: 0 0 1.05em;
+    }
+    .section-content p strong:first-child {
+      color: var(--ink);
+      font-weight: 760;
+    }
+    .section-content h4 {
+      margin: 26px 0 10px;
+      color: var(--accent);
+      font-size: 14px;
+      font-weight: 760;
+      line-height: 1.35;
+    }
+    .section-content ul, .section-content ol, .panel ul, .panel ol, .speaker-card ul, .speaker-card ol {
+      margin: .75em 0 1em;
+      padding-left: 1.25em;
+    }
+    .section-content li, .panel li, .speaker-card li { margin: 6px 0; }
+    .speaker-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, .88fr);
+      gap: 26px 42px;
+      border-top: 1px solid var(--line);
+    }
+    .speaker-card {
+      padding: 22px 0 24px;
+      border-bottom: 1px solid var(--line);
+    }
+    .speaker-card:nth-child(even) { margin-top: 22px; }
+    .speaker-kicker {
+      margin: 0 0 8px;
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 720;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .speaker-card h3 {
+      margin: 0 0 12px;
+      font-size: 20px;
+      font-weight: 730;
+      line-height: 1.25;
+    }
+    .speaker-card p, .panel p {
+      max-width: 68ch;
+      margin-top: 0;
+    }
+    .panel {
+      border-top: 1px solid var(--line);
+      padding-top: 8px;
+    }
+    blockquote {
+      margin: 18px 0;
+      padding: 16px 18px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--quote);
+    }
+    code {
+      padding: 2px 5px;
+      border-radius: 5px;
+      background: color-mix(in oklch, var(--accent) 10%, var(--paper));
+      color: var(--ink);
+      font-family: var(--mono);
+      font-size: .92em;
+    }
+    hr {
+      height: 1px;
+      margin: 26px 0;
+      border: 0;
+      background: var(--line);
+    }
+    .empty {
+      margin: 0;
+      padding: 16px 18px;
+      border: 1px dashed var(--line-strong);
+      border-radius: var(--radius);
+      color: var(--muted);
+      background: color-mix(in oklch, var(--paper-soft) 70%, transparent);
+    }
+    .search-empty { margin-top: 16px; }
+    .muted { color: var(--muted); }
+    @keyframes rise-in {
+      from { opacity: 1; transform: translate3d(0, 6px, 0); }
+      to { opacity: 1; transform: translate3d(0, 0, 0); }
+    }
+    .hero > *, .takeaway, .timeline-card, .speaker-card, .panel {
+      animation: rise-in .55s var(--ease) both;
+    }
+    .hero > *:nth-child(2) { animation-delay: .04s; }
+    .hero > *:nth-child(3) { animation-delay: .08s; }
+    .hero > *:nth-child(4) { animation-delay: .12s; }
+    .hero > *:nth-child(5) { animation-delay: .16s; }
+    .takeaway, .timeline-card, .speaker-card {
+      animation-delay: calc(var(--index, 1) * 38ms);
+    }
+    @media (max-width: 1120px) {
+      .hero { margin-left: 0; }
+      .content-shell {
+        grid-template-columns: minmax(154px, 190px) minmax(0, 1fr);
+        gap: 36px;
+      }
+      h1 { font-size: 44px; }
+    }
+    @media (min-width: 1500px) {
+      h1 {
+        width: max-content;
+        max-width: 100%;
+        white-space: nowrap;
+        font-size: clamp(36px, 2.05vw, 42px);
+      }
+    }
+    @media (max-width: 780px) {
+      body { background: var(--bg); }
+      .page { width: min(1180px, calc(100% - 28px)); padding-bottom: 86px; }
+      .hero { padding: 46px 0 36px; }
+      .eyebrow { margin-bottom: 14px; }
+      h1 {
+        max-width: none;
+        font-size: 30px;
+        line-height: 1.14;
+        word-break: normal;
+      }
+      .summary, .summary p, .takeaway p, .section-content, .speaker-card, .panel {
+        max-width: 100%;
+        word-break: break-word;
+      }
+      .meta-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 20px; }
+      .summary { padding: 20px; }
+      .summary p { font-size: 17px; }
+      .content-shell { display: block; padding-top: 28px; }
+      .sidebar { position: static; padding-top: 0; margin-bottom: 42px; }
+      .toc { border-top-color: var(--line-strong); }
+      .nav-links { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 18px; }
+      section { margin-bottom: 58px; }
+      .section-head { display: block; margin-bottom: 16px; }
+      .section-head h2 { font-size: 24px; }
+      .section-head p { margin-top: 6px; text-align: left; }
+      .takeaway { grid-template-columns: 42px minmax(0, 1fr); gap: 12px; }
+      .timeline-card { display: block; padding: 28px 0 32px; }
+      .timeline-heading { position: static; display: flex; align-items: baseline; gap: 12px; margin-bottom: 12px; }
+      .timeline-card h3 { max-width: none; font-size: 23px; }
+      .speaker-grid { display: block; }
+      .speaker-card:nth-child(even) { margin-top: 0; }
+      .quick-actions {
+        right: 12px;
+        bottom: 12px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 6px;
+      }
+      .quick-action {
+        min-width: 66px;
+        min-height: 38px;
+        padding: 7px 9px;
+        font-size: 13px;
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: 1ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 1ms !important;
+      }
+      .speaker-card:nth-child(even) { margin-top: 0; }
+    }
+    @media print {
+      body { background: var(--paper); }
+      .sidebar, .progress, .quick-actions { display: none; }
+      .page { display: block; width: auto; padding-bottom: 0; }
+      .hero { margin-left: 0; padding: 0 0 28px; }
+      .content-shell { display: block; border-top: 0; padding-top: 0; }
+      .summary { box-shadow: none; }
+      .timeline-card, .speaker-card { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <div class="progress" data-progress></div>
+  <div class="quick-actions" aria-label="快捷操作">
+    <a class="quick-action" href="../../index.html" aria-label="返回首页">
+      <span aria-hidden="true">←</span>
+      <span>首页</span>
+    </a>
+    <button class="quick-action" type="button" data-scroll-top aria-label="回到顶部">
+      <span aria-hidden="true">↑</span>
+      <span>顶部</span>
+    </button>
+  </div>
+  <div class="page">
+    <main class="article">
+      <header class="hero">
+        <p class="eyebrow">All-In Podcast 中文精读</p>
+        <h1>All-In Podcast #282: 开源AI之争、Anthropic的15亿美金和解、纽约社会主义者：驱逐等于暴力？</h1>
+        <div class="meta">
+          <span>生成时间：2026-07-26 21:40</span>
+          <span>来源：<a href="https://www.youtube.com/watch?v=wcV0SRPFK9s" target="_blank" rel="noopener">YouTube</a></span>
+        </div>
+        <div class="meta-strip"><span class="meta-pill"><b>22 分钟</b>阅读时长</span>
+<span class="meta-pill"><b>10</b>核心要点</span>
+<span class="meta-pill"><b>4</b>时间线</span>
+<span class="meta-pill"><b>4</b>人物</span></div>
+        <div class="summary" aria-label="一句话摘要"><p>本集围绕中国开源模型KIMI K3引发的美国AI政策辩论展开，四位嘉宾激烈争论是否应禁止中国开源模型，并深入探讨了Anthropic的版权和解案、科技巨头财报以及纽约市的社会主义住房政策。</p></div>
+      </header>
+
+      <div class="content-shell">
+        <aside class="sidebar">
+          <nav class="toc" aria-label="页面导航">
+            <p class="toc-title">阅读导航</p>
+            <div class="nav-links">
+              <a href="#takeaways">核心要点</a>
+              <a href="#timeline">分段整理</a>
+              <a href="#speakers">人物观点</a>
+              <a href="#quotes">双语引语</a>
+            </div>
+            <label class="search">
+              <span>搜索时间线</span>
+              <input data-search-box type="search" placeholder="关键词" aria-label="搜索时间线">
+            </label>
+          </nav>
+        </aside>
+
+        <div class="content-flow">
+          <section id="takeaways">
+            <div class="section-head">
+              <h2>核心要点</h2>
+              <p>快速扫读本集主线</p>
+            </div>
+            <ol class="takeaway-list"><li class="takeaway" style="--index: 1"><span>01</span><p>White House正考虑是否禁止中国开源模型，但目前尚无正式决定。</p></li>
+<li class="takeaway" style="--index: 2"><span>02</span><p>Sacks认为禁止开源AI将是一个悲剧性错误，会损害美国在AI竞赛中的地位。</p></li>
+<li class="takeaway" style="--index: 3"><span>03</span><p>Chamath指出基础模型正快速商品化，价值正在向应用层和基础设施层转移。</p></li>
+<li class="takeaway" style="--index: 4"><span>04</span><p>Friedberg从知识产权和第一修正案角度支持开源，认为知识不应被封锁。</p></li>
+<li class="takeaway" style="--index: 5"><span>05</span><p>Anthropic与版权方达成15亿美元和解，是历史上最大的版权和解案。</p></li>
+<li class="takeaway" style="--index: 6"><span>06</span><p>Sacks批评Anthropic和OpenAI在“蒸馏”问题上的“虚伪”立场。</p></li>
+<li class="takeaway" style="--index: 7"><span>07</span><p>四位嘉宾在Anthropic/OpenAI是否面临“商品化”威胁上有显著分歧。</p></li>
+<li class="takeaway" style="--index: 8"><span>08</span><p>Google和Tesla财报后股价下跌，但Chamath和Friedberg看好Google。</p></li>
+<li class="takeaway" style="--index: 9"><span>09</span><p>Friedberg从私有财产权角度批判纽约市社会主义政策，认为这是走向暴政的开始。</p></li>
+<li class="takeaway" style="--index: 10"><span>10</span><p>JCal认为开源模型正在夺走闭源模型的客户，可能影响其IPO前景。</p></li></ol>
+          </section>
+
+          <section id="timeline">
+            <div class="section-head">
+              <h2>分段详细整理</h2>
+              <p>按时间线阅读上下文</p>
+            </div>
+            <div class="timeline" data-timeline><article class="timeline-card" data-timeline-card data-search="00:00:00 – 00:14:01 开源ai之争：中国模型引发的政策辩论 本段核心内容： white house正在考虑是否禁止中国开源ai模型。 sacks认为禁止开源ai将是错误，批评anthropic搞“监管俘获”。 chamath指出基础模型正快速商品化，价值正在转移。 背景解释与关键术语： kimi k3：中国moonshot ai发布的开源模型，性能与美国顶尖模型相当，但成本低约50%。 蒸馏（distillation）：通过向一个大模型提问并观察其输出，再用这些输出来训练自己的模型的行为。 ar（annual recurring revenue，年化经常性收入）：saas公司最常用的收入指标。 监管俘获（regulatory capture）：企业通过游说让政府制定有利于自己的监管政策，从而限制竞争对手。 详细中文整理： jcal： 欢迎回来。本周的持续头条新闻是kimi k3。它引发了在美国禁止中国开源模型的辩论，已经一路到了白宫。中国moonshot ai发布的kimi k3开源模型，性能与opus 4.8和gpt-5.6相当——这本身就很惊人了——但成本还便宜50%。这造成了一种类似2025年初deepseek时刻的恐慌。white house的david sacks已经介入。我们节目的朋友michael kratzios说，他们掌握信息表明moonshot ai蒸馏了anthropic的fable模型来开发k3。axios周一报道说white house正在考虑禁止中国的开源模型。几周前sacks你提过这个假设，现在成真了。周三wired报道说，我们商务部的howard letnick不想禁止中国模型。所以白宫内部显然有不同意见——他们希望激励更多的美国前沿实验室开发更好的开源模型。polly market显示2026年美国政府禁止开源模型的概率是45%，几天前还是22%。sacks，你两个月前就预测到了。 sacks： 我认为这一切都指向一个方向——禁止开源模型的努力。有很多线索指向这里。你看到很多关于模型需要护栏的论调，而开源模型的护栏可以被移除，因而很危险——你在anthropic的博客里就能看到这种论调。他们描述的每一个威胁都硬要加一句对开源模型的攻击。我想他们是在试图创造理由，为后续行动铺垫基础。他们只是觉得时机还没到，但迟早会推动直接禁令。 jcal： 那么sacks，你在白宫那里听到的是什么？政府的立场是什么？为什么我们听到互相矛盾的信号？ sacks： 我有可靠消息，white house并没有决定要禁止开源模型。而且他们想让外界知道这一点。目前正在进行关于如何处理中国蒸馏问题的讨论，但还没有任何决定。总统会听取多方意见。我非常有信心，如果每个人都参与进来，总统会做出正确的决定，就像他在这些科技问题上一直做的那样。他的本能反应一直是支持更轻的监管、更开放的方式。这也是为什么美国在ai竞赛中领先。 jcal： 所以你是什么立场？ sacks： 我认为如果政府采取行动打击开源生态系统，将是一个悲剧性的错误。这只会伤害美国在这场ai竞赛中的地位，会产生严重的反效果。关键点是：无论你怎么看蒸馏问题，你都不能因此惩罚美国开发者。你不能说美国公司和开发者不能使用公开领域的中国贡献——这是自断其臂。美国公司必须能够使用公开领域的一切，因为全世界其他人都会用这些。我还要说，我一直认为anthropic在搞监管俘获，在寻求政府保护。这是历史上增长最快的科技公司——今年开始时arr是100亿美元，现在已超过700亿。这不是一家需要政府保护的公司。但他们非常成功地让所有人恐慌，以为自己需要政府保护。而判断这个“蒸馏”问题是否虚假的关键是：如果阻止蒸馏是他们的首要目标，anthropic应该推动禁止中国公司访问美国模型，而不是禁止美国公司访问中国模型。 某位嘉宾： 没错，他们完全能做到，可以封锁。 sacks： 他们才是最有条件阻止蒸馏的一方。如果工业规模的蒸馏是国家安全威胁，他们必须在源头阻止。一旦你让中国公司蒸馏成功，马已经跑出栅栏了。现实情况是，anthropic在增长欲望的驱动下，在阻止蒸馏方面做得非常差。他们说是工业规模的蒸馏在发生。如果是工业规模的，那应该很容易发现。 某位嘉宾： 发生的方式是，学生们创建大量账户，然后这些账户在暗网上被转卖。有人在马尼拉、印度注册这些账户，用美国ip地址在暗网上出售。 sacks： 但越是工业规模，就越应该明显可见。chamath一直在说，为什么你们不进行kyc（了解你的客户）身份验证？ 某位嘉宾： 没错。 sacks： 他们知道如果做kyc会拖慢他们的增长。所以他们反而说：禁止我们的竞争对手吧。这很荒谬。他们最有能力阻止蒸馏，我认为他们在这方面是疏忽大意。如果他们真的认为这是个巨大威胁，应该从90%的毛利率里拿出几个百分点来做这件事。而不是说美国开发者不能使用公开领域的东西。这个辩论完全是颠倒的。问题应该是anthropic需要解释为什么他们做得这么差，而不是让整个美国开源生态系统为anthropic的失败受过。 jcal： friedberg，我有一个很好的问题要问你。但先请chamath说说你在8090的销售电话上听到什么？企业客户打给你了吗？他们听到关于开源已经准备好、现在是时候获得ai主权的消息后，有没有说“我们准备好了，怎么把模型装上本地”？ chamath： 先讲第二件事。蒸馏是什么？是你启动一个模型，向它提问，观察它的输出，然后用这些输出来训练你自己的模型。把这个行为重复几千万次，你获取到的就是数万亿的问题和答案。sacks说得对，如果你真的关心蒸馏，就实施kyc。强迫人们用真实身份注册，或许还要绑定信用卡。有很多措施可以采取——虽然会拖慢收入增长——但可以解决蒸馏问题。所以蒸馏不象是真正的威胁，有点是障眼法。另一个问题是，每个人都在某个时候做过蒸馏。从谁那里蒸馏？就像是那个9个蜘蛛侠互相指着的搞笑图片——anthropic从所有出版商的输出中蒸馏。他们刚刚支付了15亿美元的罚款。openai从纽约时报蒸馏，诉讼还在进行。中国实验室从anthropic蒸馏。到处都是批发盗窃。但我不愿意称之为盗窃，因为首先也不清楚谁拥有这些版权。真正重要的观察是：这些模型正以比任何人预期的都更快的速度商品化。我们怎么知道的？因为一旦一个模型发布性能指标，就没有任何有意义的持续优势。几周之内，其他模型——有的是开源的，有的是闭源的，有的是开放权重的——就能匹配甚至在某些方面超越。所以我认为，少数几家美国公司已经意识到“我们现在的价值可能在5到10年内不可持续”。当你去华尔街展示商业模式时，你需要这种确定性，否则你的估值就会受影响。所以现在很多动作实际上是一场估值博弈——闭源前沿实验室想保住估值。因为如果你真的理解这些东西变得多么商品化，以及这种变化的速度有多快，你就会发现真正的商业模式已经不在基础模型层面了——而是在上面的应用层和下面的基础设施层，不管是云还是芯片。所以，在缺乏政府干预的情况下，如果人们认识到价值正在转移，就会把更多价值放在应用层和基础设施层。这对闭源前沿实验室不利，尤其是当它们被错误地定价为开放替代品的25到50倍时。这是试图阻止一个质量相同但便宜得多的竞争对手。还有另一件重要的事：如果美国政府干预，它会拖垮股票市场。没有争议。然后我们可以推演哪家公司会被打垮。比如，如果他们说不许再用开源，美国公司不能使用开源——以可口可乐为例。可口可乐试图用ai改善业务，但只能选两个选项，且成本是其他可用替代品的50到100倍。这最终会体现在成本里，因为ai应该是能帮你解决一切问题的神奇东西。但现在美国公司的重要成本输入比美国以外的竞争对手高出几个数量级。资本市场会说：你们有疯狂的成本结构，这说不通。可口可乐会被重新估值。再看看那些出售token的公司——anthropic和openai需要明白：如果政府真的保护他们，说没有开源了，他们的估值会暴跌。为什么？因为所有收入都是被人为支撑起来的，不是由市场竞争驱动的。这是因为监管俘获造成的虚假约束，而且它只在一个市场起作用。无论如何，所有路都通向市场混乱。所以谁都不应该干预。" style="--index: 1">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">01</span>
+                    <span class="timeline-meta">00:00:00 – 00:14:01</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>开源AI之争：中国模型引发的政策辩论</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>White House正在考虑是否禁止中国开源AI模型。</li>
+<li>Sacks认为禁止开源AI将是错误，批评Anthropic搞“监管俘获”。</li>
+<li>Chamath指出基础模型正快速商品化，价值正在转移。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li><strong>KIMI K3</strong>：中国Moonshot AI发布的开源模型，性能与美国顶尖模型相当，但成本低约50%。</li>
+<li><strong>蒸馏（Distillation）</strong>：通过向一个大模型提问并观察其输出，再用这些输出来训练自己的模型的行为。</li>
+<li><strong>AR（Annual Recurring Revenue，年化经常性收入）</strong>：SaaS公司最常用的收入指标。</li>
+<li><strong>监管俘获（Regulatory Capture）</strong>：企业通过游说让政府制定有利于自己的监管政策，从而限制竞争对手。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> 欢迎回来。本周的持续头条新闻是KIMI K3。它引发了在美国禁止中国开源模型的辩论，已经一路到了白宫。中国Moonshot AI发布的KIMI K3开源模型，性能与Opus 4.8和GPT-5.6相当——这本身就很惊人了——但成本还便宜50%。这造成了一种类似2025年初DeepSeek时刻的恐慌。White House的David Sacks已经介入。我们节目的朋友Michael Kratzios说，他们掌握信息表明Moonshot AI蒸馏了Anthropic的Fable模型来开发K3。Axios周一报道说White House正在考虑禁止中国的开源模型。几周前Sacks你提过这个假设，现在成真了。周三Wired报道说，我们商务部的Howard Letnick不想禁止中国模型。所以白宫内部显然有不同意见——他们希望激励更多的美国前沿实验室开发更好的开源模型。Polly Market显示2026年美国政府禁止开源模型的概率是45%，几天前还是22%。Sacks，你两个月前就预测到了。</p>
+<p><strong>Sacks：</strong> 我认为这一切都指向一个方向——禁止开源模型的努力。有很多线索指向这里。你看到很多关于模型需要护栏的论调，而开源模型的护栏可以被移除，因而很危险——你在Anthropic的博客里就能看到这种论调。他们描述的每一个威胁都硬要加一句对开源模型的攻击。我想他们是在试图创造理由，为后续行动铺垫基础。他们只是觉得时机还没到，但迟早会推动直接禁令。</p>
+<p><strong>JCal：</strong> 那么Sacks，你在白宫那里听到的是什么？政府的立场是什么？为什么我们听到互相矛盾的信号？</p>
+<p><strong>Sacks：</strong> 我有可靠消息，White House并没有决定要禁止开源模型。而且他们想让外界知道这一点。目前正在进行关于如何处理中国蒸馏问题的讨论，但还没有任何决定。总统会听取多方意见。我非常有信心，如果每个人都参与进来，总统会做出正确的决定，就像他在这些科技问题上一直做的那样。他的本能反应一直是支持更轻的监管、更开放的方式。这也是为什么美国在AI竞赛中领先。</p>
+<p><strong>JCal：</strong> 所以你是什么立场？</p>
+<p><strong>Sacks：</strong> 我认为如果政府采取行动打击开源生态系统，将是一个悲剧性的错误。这只会伤害美国在这场AI竞赛中的地位，会产生严重的反效果。关键点是：无论你怎么看蒸馏问题，你都不能因此惩罚美国开发者。你不能说美国公司和开发者不能使用公开领域的中国贡献——这是自断其臂。美国公司必须能够使用公开领域的一切，因为全世界其他人都会用这些。我还要说，我一直认为Anthropic在搞监管俘获，在寻求政府保护。这是历史上增长最快的科技公司——今年开始时ARR是100亿美元，现在已超过700亿。这不是一家需要政府保护的公司。但他们非常成功地让所有人恐慌，以为自己需要政府保护。而判断这个“蒸馏”问题是否虚假的关键是：如果阻止蒸馏是他们的首要目标，Anthropic应该推动禁止中国公司访问美国模型，而不是禁止美国公司访问中国模型。</p>
+<p><strong>某位嘉宾：</strong> 没错，他们完全能做到，可以封锁。</p>
+<p><strong>Sacks：</strong> 他们才是最有条件阻止蒸馏的一方。如果工业规模的蒸馏是国家安全威胁，他们必须在源头阻止。一旦你让中国公司蒸馏成功，马已经跑出栅栏了。现实情况是，Anthropic在增长欲望的驱动下，在阻止蒸馏方面做得非常差。他们说是工业规模的蒸馏在发生。如果是工业规模的，那应该很容易发现。</p>
+<p><strong>某位嘉宾：</strong> 发生的方式是，学生们创建大量账户，然后这些账户在暗网上被转卖。有人在马尼拉、印度注册这些账户，用美国IP地址在暗网上出售。</p>
+<p><strong>Sacks：</strong> 但越是工业规模，就越应该明显可见。Chamath一直在说，为什么你们不进行KYC（了解你的客户）身份验证？</p>
+<p><strong>某位嘉宾：</strong> 没错。</p>
+<p><strong>Sacks：</strong> 他们知道如果做KYC会拖慢他们的增长。所以他们反而说：禁止我们的竞争对手吧。这很荒谬。他们最有能力阻止蒸馏，我认为他们在这方面是疏忽大意。如果他们真的认为这是个巨大威胁，应该从90%的毛利率里拿出几个百分点来做这件事。而不是说美国开发者不能使用公开领域的东西。这个辩论完全是颠倒的。问题应该是Anthropic需要解释为什么他们做得这么差，而不是让整个美国开源生态系统为Anthropic的失败受过。</p>
+<p><strong>JCal：</strong> Friedberg，我有一个很好的问题要问你。但先请Chamath说说你在8090的销售电话上听到什么？企业客户打给你了吗？他们听到关于开源已经准备好、现在是时候获得AI主权的消息后，有没有说“我们准备好了，怎么把模型装上本地”？</p>
+<p><strong>Chamath：</strong> 先讲第二件事。蒸馏是什么？是你启动一个模型，向它提问，观察它的输出，然后用这些输出来训练你自己的模型。把这个行为重复几千万次，你获取到的就是数万亿的问题和答案。Sacks说得对，如果你真的关心蒸馏，就实施KYC。强迫人们用真实身份注册，或许还要绑定信用卡。有很多措施可以采取——虽然会拖慢收入增长——但可以解决蒸馏问题。所以蒸馏不象是真正的威胁，有点是障眼法。另一个问题是，每个人都在某个时候做过蒸馏。从谁那里蒸馏？就像是那个9个蜘蛛侠互相指着的搞笑图片——Anthropic从所有出版商的输出中蒸馏。他们刚刚支付了15亿美元的罚款。OpenAI从纽约时报蒸馏，诉讼还在进行。中国实验室从Anthropic蒸馏。到处都是批发盗窃。但我不愿意称之为盗窃，因为首先也不清楚谁拥有这些版权。真正重要的观察是：这些模型正以比任何人预期的都更快的速度商品化。我们怎么知道的？因为一旦一个模型发布性能指标，就没有任何有意义的持续优势。几周之内，其他模型——有的是开源的，有的是闭源的，有的是开放权重的——就能匹配甚至在某些方面超越。所以我认为，少数几家美国公司已经意识到“我们现在的价值可能在5到10年内不可持续”。当你去华尔街展示商业模式时，你需要这种确定性，否则你的估值就会受影响。所以现在很多动作实际上是一场估值博弈——闭源前沿实验室想保住估值。因为如果你真的理解这些东西变得多么商品化，以及这种变化的速度有多快，你就会发现真正的商业模式已经不在基础模型层面了——而是在上面的应用层和下面的基础设施层，不管是云还是芯片。所以，在缺乏政府干预的情况下，如果人们认识到价值正在转移，就会把更多价值放在应用层和基础设施层。这对闭源前沿实验室不利，尤其是当它们被错误地定价为开放替代品的25到50倍时。这是试图阻止一个质量相同但便宜得多的竞争对手。还有另一件重要的事：如果美国政府干预，它会拖垮股票市场。没有争议。然后我们可以推演哪家公司会被打垮。比如，如果他们说不许再用开源，美国公司不能使用开源——以可口可乐为例。可口可乐试图用AI改善业务，但只能选两个选项，且成本是其他可用替代品的50到100倍。这最终会体现在成本里，因为AI应该是能帮你解决一切问题的神奇东西。但现在美国公司的重要成本输入比美国以外的竞争对手高出几个数量级。资本市场会说：你们有疯狂的成本结构，这说不通。可口可乐会被重新估值。再看看那些出售token的公司——Anthropic和OpenAI需要明白：如果政府真的保护他们，说没有开源了，他们的估值会暴跌。为什么？因为所有收入都是被人为支撑起来的，不是由市场竞争驱动的。这是因为监管俘获造成的虚假约束，而且它只在一个市场起作用。无论如何，所有路都通向市场混乱。所以谁都不应该干预。</p></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="00:14:01 – 00:45:00 蒸馏、版权与价值转移：anthropic的虚伪？ 本段核心内容： 四位嘉宾就蒸馏是否属于ip盗窃、开源是否威胁闭源模型展开激烈辩论。 sacks和chamath认为anthropic在搞监管俘获，jcal则认为开源确实在抢走客户。 核心分歧：价值究竟在模型层还是应用层/基础设施层。 背景解释与关键术语： 模型权重（model weights）：模型内部的数值参数，相当于模型的“代码”。偷取权重才是真正的ip盗窃，而观察输出则不同。 技术中立（technology neutral）：friedberg提出的观点，认为看输出改进自己的产品是普遍做法。 roic（return on invested capital，投资资本回报率）：衡量公司创造价值效率的指标。 详细中文整理： sacks： 还有一个角度。这些禁止开源、来自anthropic的提议，并不能解决蒸馏问题。如果蒸馏是问题，你必须在源头阻止。换句话说，如果在美国禁止开源，世界其他地方仍然会用中国开源模型。他们仍会获得数据、进行强化学习，然后我们一定会输掉ai竞赛。 jcal： friedberg，从graham allison的视角来看，禁止中国模型会很挑衅。习近平会怎么回应？这看起来像是升级行为。 friedberg： 我不认为模型是哪个国家发布的相关性那么大。安全风险或许可以评估和解决。关于这个问题有三个值得强调的点。首先，蒸馏不仅仅是ai。蒸馏是你观察别人产出的最终产品，然后用来改进自己的产品——这是所有行业、所有产品类别的通用做法。一家汽车制造商看另一家的车是怎么运作的，然后用这个来设计更好的车。谷歌早期我们会向雅虎和微软搜索引擎提交数百万条搜索查询，看结果集，然后对比改进自己的算法。这是很常见的做法。这并不等于我们在偷他们的算法。我们没进他们的服务器偷软件。我们只是看他们软件的输出，然后用这个来改进我们的软件。 某位嘉宾： 这叫基准测试。 friedberg： 你可以叫它基准测试。所以我不认为这个问题有那么重要。版权或ip侵权的问题，sacks说得对，有服务条款的问题，但这应由服务提供商去处理。但版权和ip的争论核心是：他们有没有偷软件？他们没有偷软件，只是观察了输出。这在传统意义上不构成ip侵权或版权侵权。所以从蒸馏的ip角度，重要的是输出本身，而不是过程。问题是他们在复制版权软件并将其用于训练，还是只看输出？我认为你需要评估的是输出，而不是工程过程。 sacks： 我想补充一点。很多政策制定者不理解这个区别，但科技界人人都懂。这也是为什么有这么大的脱节。模型权重和输出之间有巨大差异。权重是——它是一堆数字的档案，是模型的数值参数。 某位嘉宾： 那是软件代码。 sacks： 那是软件。如果中国公司偷了anthropic或openai的权重，那就是盗窃。但我们现在讨论的不是这个，没有人指控这个。我们讨论的是拿模型的输出，然后试图从中学习。这正是你提到的谷歌搜索那种情况。而且这件事极其虚伪的是：openai和anthropic都主张他们有权利在世界所有的输出上进行训练，不管创作者是否同意——这是他们目前的立场。像chamath提到的，纽约时报起诉openai，openai说“我们没偷任何东西，我们只是拿纽约时报的输出，推导出自己的权重”——而这正是中国模型在做的事。 某位嘉宾： 所以指控的实质是，工业规模的、隐蔽地违反服务条款的问题。这才是white house介入的原因。 sacks： 让我说清楚：我并不是为中国辩护。事实上，我是在白宫第一个讨论蒸馏问题的人——2025年1月deepseek出来时，我就在laura ingraham节目上解释了这件事。我还是“赢得ai竞赛”报告的共同作者，该报告的整个前提就是我们想赢、想打败中国。我不是不想美国赢的人。我想美国赢。问题是方法。如果因为禁止开源而自残——不让美国公司利用开源，而全世界其他人可以——那就是大问题。anthropic和openai执行它们自己的服务条款，这没问题。他们需要做得更好，首先阻止蒸馏发生。政府能帮上什么忙，我不知道。需要的是这些公司更严格地执行服务条款。 jcal： friedberg，你还有两点没说。 friedberg： 第二点是言论自由。什么是开源模型？对非软件行业的人来说，开源是一个可下载的软件包。想象一下下载一本书，你拿到所有代码。一旦拿到，就在你电脑上，不需要联网，直接就能跑。如果试图限制开源，就会打开潘多拉魔盒——你怎么执行限制？你是在告诉人们，他们下载并持有软件副本后，不能使用它。我们没有很好的先例，这会非常难看。如果要走版权诉讼，那要通过法律程序来论证，才能停止某个开源模型的发布。第三点：开源对世界更好。如chamath所说，它便宜100倍。这对产业、对企业、对经济、对消费者都有利。互联网早期，netscape做了专有浏览器和服务器软件，上市了，非常有价值、利润很高。但这家公司最终被开源压垮了。mozilla基金会创建了开源浏览器firefox，google后来雇佣了所有人做了chrome，但仍然是开源的。apache foundation做了开源http服务器。任何人都能下载apache建立网站。结果，价值流向了互联网本身，而不是控制互联网入口的那几家软件提供商。基本上所有东西都开源源了，google、ebay、etsy、amazon以及数百万小网站都起来了。如果互联网是封闭的，每个人都要向专有软件付过路费，互联网就不会起飞。我们当时就有aol和compuserve这种东西。开源ai也是同样的逻辑：如果开源ai起飞，那么bernie sanders和elizabeth warren担心的所有问题都不会发生——ai的价值不会只落到少数公司及其亿万富翁股东手里。ai会扩散，全球数万家ai驱动的企业都会受益。经济会增长，工作会创造，ai会成为推动开放经济的力量。我知道有些政府和对面的人会反驳，但让中国开源和美国开源都扩散。如果中国在侵犯版权、偷软件，去起诉他们、制裁他们。但本质上，开源ai会改变全球经济，确保ai的经济价值扩散到所有人，而不是被少数人抓住。 某位嘉宾： 这就是为什么如果1%的人控制开源，那些寡头会失算，我们甚至不需要财富税。chamath，你要补充。 chamath： 我们必须承认，这一细分市场的价值捕获消失得有多么惊人。在硅谷25年，我从未见过一个经济部门可以吸收数千亿美元的资本，你以为未来几十年都有定价权，然后它在几个月内就蒸发了。 某位嘉宾： 几个月就爆发了。 chamath： 几个月就蒸发了。 sacks： 在这点上我不同意你们。“蒸发”这个词太重了。看起来可能会放缓，但可能是达到平台期。 jcal： 我这里有anthropic的收入图。可以看出来，最近几个月anthropic的收入有了一些放缓——当然这是第三方数据。然后还有openrouter的流量数据，好的开源模型表现越好、越容易部署到自己的服务器上，那些就是“暗黑token”，它们不会出现在任何收入图表上，因为基本免费。现在超过50%的token都来自开源，很多是中国模型。 chamath： 我需要澄清——我不是说这些公司不会赚钱。但市场很聪明，会问一个具体问题：10年后这个收入看起来如何？是增加还是减少？竞争是增多还是减少？是垄断还是商品？如果是商品，有多少人能定价？10年后的市场出清价格是多少？通常这些变量暴露得很慢，你有5到10年的周期来完成从独占供应商到商品供应商的转型。但科技能创造一个市场，把这个周期压缩到几年。作为资金配置者，看着这些数据，很难不想“5到10年内它为什么不成为商品？”每一个资本配置者都会得出这个结论——如果他们不这么想，那是疏忽。那非常难分配未来溢价。真正的资金流向，我们在google的财报中也看到了：正流向云和基础设施。还有一群人不希望开源结束，因为他们想提供最便宜的模型，知道那才是边际捕获的地方。 sacks： 你的想法是什么？我觉得对按需智能的需求是无限的，没有上限——只要智能继续变好。所以论点是：是，它是商品，价格下降，但消费在上升。你刚才用了浏览器的例子。浏览器是通往目的地的工具，价值在目的地应用上。如果智能变得完全普及、边际成本为零，它为什么不是浏览器？为什么不会被融入aws、elon web service这些云业务？ jcal： 那你的位置呢？然后是第二、第三个故事。 sacks： 这个讨论里有很多激烈的同意，所以让我说个反论。我认为开源和闭源都会大赢家。市场巨大，它们各自服务不同的需求。当kimi k3发布时，有点恐慌——觉得中国模型追上来了，他们要免费干掉我们领先的美国前沿实验室。anthropic和openai到处说“我们不能继续投资数十亿美元，如果中国能偷我们的权重”。ben thompson在他的博客中分析了成本数字，发现kimi k3并不便宜太多。而且中国并没有完全追上。kimi k3在arena battleground的前端编码测试中得分很高，但只有这一个维度。还有很多领域它得分不高。anthropic和openai的实验室里还有未公开的模型，遥遥领先。有报道说sam要去华盛顿讨论gpt 6.0——那是颠覆性的。所以我不相信中国真的追上了。还有在实验室里不可思议的未发布模型。我们应该让我们的马跑起来，不要加一堆不必要的障碍。如果你看收入——那是真实世界使用的检验——anthropic和openai正在一飞冲天。它们是历史上增长最快的科技公司。jason你展示的图表里anthropic似乎有一个波动。他们的内部预测是今年从100亿涨到1000亿。我们现在年中，他们已经超过700亿了。easy就可以到1000亿。如果叠加openai的图表，openai上个月还重新加速了。所以如果你把这两个加起来，根本看不到任何放缓。它们仍然在指数增长。 某位嘉宾： 这就像是篮球里的假摔。他们想吸引犯规、想政府干预。为什么？因为他们正在路演期间。chamath，他们确实会受到“为什么不会被开源商品化”的逼问。最好的回答是他们可以向上迁移到应用层。 某位嘉宾： 他们已经做了。端用户应用非常好。 sacks： 我应该给他们在wall street的回答：我们拥有最好的模型，最终我们会向上迁移。如果是我，我甚至会练习这样的回答：可能有某个版本的模型我不会发布，只留给自己用。 jcal： 那才是真正的回答——但那是反竞争的。 某位嘉宾： 用户角度可能会认为是反竞争。 jcal： 我认为开源正在迎来它的时刻。我接触的初创公司都在从闭源模型转移。他们用开源，便宜得多。很多任务不需要最新模型。大家用上一代模型，部署到本地、自己托管。这是非零概率会破坏anthropic和openai的ipo。它们会没事，但我认为可能会脱轨。它们会面临巨大的利润率压缩。花钱太多，陷入陷阱。 sacks： 我回来反驳，但让chamath先回应。 某位嘉宾： 你错了。 某位嘉宾： 我认为他们已经追上了95%的任务。 chamath： 我认为答案略有不同：不是95%的尖端任务其他人也能做，而是95%的任务有很多不同模型可以做。这对anthropic来说没问题——他们可以说，我有下一代模型，我要启动一个生命科学项目、一个网络安全业务，那里可以捕获万亿企业价值。但如果想认为模型层有巨大的终局价值，那是数学上的错误。 jcal： 开源对这些公司来说会是具体的逆风。因为所有最好的客户——我与lovable、elevenlabs等初创公司交流——他们曾经每季度花费数十万美元，现在全都搬到了glm-5.2，自己做模型。猫已经出袋了。google、aws和elon web services会托管这些模型。怎么知道的？每次我做一个任务，我用perplexity computer——不是赞助——我发现最好的套装是先试groq、nemotron、glm-5.2，也放claude里，结果一样或更好。换句话说，我甚至分辨不出区别。 某位嘉宾： 让我们把openai的数字叠在anthropic上面。 jcal： 这是估计值，不是公司官方数据。图显示openai的arr从5月的330亿上升到7月的413亿。所以他们在加速增长。 sacks： 我再给两个例子。mira murati的新模型thinking machines——目前是最好的美国开源模型——它是从中国模型qwen 2.5蒸馏出来初始化的。如果你说中国模型是基于ip盗窃，那thinking machines是什么？它是那个模型的派生作品，而anthropic正试图把那个模型污名化为ip侵权——但没有任何证据。另外，cursor新出了composer 2产品，他们用qwen 2.5加上自己的专有编程数据进行了后训练。他们从中国开源模型开始，用自己数据做了新派生品。这就是开源的工作方式：你拿公开领域的东西，fork它，做成自己的。一旦进入公开领域，它就不再是“中国模型”——它是任何人可自由使用的开放权重。它是一个文件。美国公司做fork，在自己的美国数据中心服务器上运行。没有数据包回中国，没有数据回中国。如果你们说美国公司不能这样做，或者这样被ip盗窃污染了，那就是在美国开源生态系统的心脏上插了一把刀。那正是anthropic想要的——因为他们不想有竞争。 friedberg： 让我退一步说。过去50年，美国通过知识经济和服务经济积累了巨大价值。我们开发ip、知识、把一种比特转换为另一种比特，获得数万亿美元gdp。同时我们把制造外包给了中国，创造了制造巨兽。从人类技术演化和繁荣的角度看，一切最终都可以归结为用最少能量把分子从一种形式转换成另一种形式的能力。如果知识经济和服务经济被压缩——开源ai尤其会扁平化这些价值——那美国的/western经济的价值就会大跌。剩下的就是分子经济——制造和利用能源转换分子的能力。现在美国有1太瓦电力，中国正向8太瓦迈进。美国100亿平方英尺制造业设施，中国2000亿平方英尺。所以中国有20倍的制造能力、8倍电力。我认为中国的长期游戏——10年、20年、30年——是压缩知识经济和服务经济，完全商品化它，然后他们只剩下所有价值，因为他们能制造东西，而且比任何人都便宜。因为他们有最多的电力。 某位嘉宾： 你相信他们想把知识和服务商品化，就像他们对全球化做的那样？ friedberg： 比特的产生和移动被商品化，剩下的是电力和分子的产生——两者中国都有难以逾越的优势。这就是长期游戏。 sacks： 我从我的渠道听说，anthropic和openai都在上调预测。我认为未来开源可能会蚕食份额，但市场太大了。开源更可控、可定制，你可以拥有它、数据主权、主权，但工作量也更大。所以有不同的用例、不同的市场部分。 某位嘉宾： 工作量这点很关键。3到6个月前，搭建开源还很难，但现在很多中间商在构建默认使用开源的套装，问题正在解决。 某位嘉宾： 其实所有人都在为自己说话——包括anthropic和openai的投资者。 某位嘉宾： 很多人突然变成对华鹰派——但他们都想把芯片卖到中国。 某位嘉宾： 首先披露你是否在anthropic的股东名单上。 jcal： 我没有。我也不直接。可能间接有一点。" style="--index: 2">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">02</span>
+                    <span class="timeline-meta">00:14:01 – 00:45:00</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>蒸馏、版权与价值转移：Anthropic的虚伪？</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>四位嘉宾就蒸馏是否属于IP盗窃、开源是否威胁闭源模型展开激烈辩论。</li>
+<li>Sacks和Chamath认为Anthropic在搞监管俘获，JCal则认为开源确实在抢走客户。</li>
+<li>核心分歧：价值究竟在模型层还是应用层/基础设施层。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li><strong>模型权重（Model Weights）</strong>：模型内部的数值参数，相当于模型的“代码”。偷取权重才是真正的IP盗窃，而观察输出则不同。</li>
+<li><strong>技术中立（Technology Neutral）</strong>：Friedberg提出的观点，认为看输出改进自己的产品是普遍做法。</li>
+<li><strong>ROIC（Return on Invested Capital，投资资本回报率）</strong>：衡量公司创造价值效率的指标。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>Sacks：</strong> 还有一个角度。这些禁止开源、来自Anthropic的提议，并不能解决蒸馏问题。如果蒸馏是问题，你必须在源头阻止。换句话说，如果在美国禁止开源，世界其他地方仍然会用中国开源模型。他们仍会获得数据、进行强化学习，然后我们一定会输掉AI竞赛。</p>
+<p><strong>JCal：</strong> Friedberg，从Graham Allison的视角来看，禁止中国模型会很挑衅。习近平会怎么回应？这看起来像是升级行为。</p>
+<p><strong>Friedberg：</strong> 我不认为模型是哪个国家发布的相关性那么大。安全风险或许可以评估和解决。关于这个问题有三个值得强调的点。首先，蒸馏不仅仅是AI。蒸馏是你观察别人产出的最终产品，然后用来改进自己的产品——这是所有行业、所有产品类别的通用做法。一家汽车制造商看另一家的车是怎么运作的，然后用这个来设计更好的车。谷歌早期我们会向雅虎和微软搜索引擎提交数百万条搜索查询，看结果集，然后对比改进自己的算法。这是很常见的做法。这并不等于我们在偷他们的算法。我们没进他们的服务器偷软件。我们只是看他们软件的输出，然后用这个来改进我们的软件。</p>
+<p><strong>某位嘉宾：</strong> 这叫基准测试。</p>
+<p><strong>Friedberg：</strong> 你可以叫它基准测试。所以我不认为这个问题有那么重要。版权或IP侵权的问题，Sacks说得对，有服务条款的问题，但这应由服务提供商去处理。但版权和IP的争论核心是：他们有没有偷软件？他们没有偷软件，只是观察了输出。这在传统意义上不构成IP侵权或版权侵权。所以从蒸馏的IP角度，重要的是输出本身，而不是过程。问题是他们在复制版权软件并将其用于训练，还是只看输出？我认为你需要评估的是输出，而不是工程过程。</p>
+<p><strong>Sacks：</strong> 我想补充一点。很多政策制定者不理解这个区别，但科技界人人都懂。这也是为什么有这么大的脱节。模型权重和输出之间有巨大差异。权重是——它是一堆数字的档案，是模型的数值参数。</p>
+<p><strong>某位嘉宾：</strong> 那是软件代码。</p>
+<p><strong>Sacks：</strong> 那是软件。如果中国公司偷了Anthropic或OpenAI的权重，那就是盗窃。但我们现在讨论的不是这个，没有人指控这个。我们讨论的是拿模型的输出，然后试图从中学习。这正是你提到的谷歌搜索那种情况。而且这件事极其虚伪的是：OpenAI和Anthropic都主张他们有权利在世界所有的输出上进行训练，不管创作者是否同意——这是他们目前的立场。像Chamath提到的，纽约时报起诉OpenAI，OpenAI说“我们没偷任何东西，我们只是拿纽约时报的输出，推导出自己的权重”——而这正是中国模型在做的事。</p>
+<p><strong>某位嘉宾：</strong> 所以指控的实质是，工业规模的、隐蔽地违反服务条款的问题。这才是White House介入的原因。</p>
+<p><strong>Sacks：</strong> 让我说清楚：我并不是为中国辩护。事实上，我是在白宫第一个讨论蒸馏问题的人——2025年1月DeepSeek出来时，我就在Laura Ingraham节目上解释了这件事。我还是“赢得AI竞赛”报告的共同作者，该报告的整个前提就是我们想赢、想打败中国。我不是不想美国赢的人。我想美国赢。问题是方法。如果因为禁止开源而自残——不让美国公司利用开源，而全世界其他人可以——那就是大问题。Anthropic和OpenAI执行它们自己的服务条款，这没问题。他们需要做得更好，首先阻止蒸馏发生。政府能帮上什么忙，我不知道。需要的是这些公司更严格地执行服务条款。</p>
+<p><strong>JCal：</strong> Friedberg，你还有两点没说。</p>
+<p><strong>Friedberg：</strong> 第二点是言论自由。什么是开源模型？对非软件行业的人来说，开源是一个可下载的软件包。想象一下下载一本书，你拿到所有代码。一旦拿到，就在你电脑上，不需要联网，直接就能跑。如果试图限制开源，就会打开潘多拉魔盒——你怎么执行限制？你是在告诉人们，他们下载并持有软件副本后，不能使用它。我们没有很好的先例，这会非常难看。如果要走版权诉讼，那要通过法律程序来论证，才能停止某个开源模型的发布。第三点：开源对世界更好。如Chamath所说，它便宜100倍。这对产业、对企业、对经济、对消费者都有利。互联网早期，Netscape做了专有浏览器和服务器软件，上市了，非常有价值、利润很高。但这家公司最终被开源压垮了。Mozilla基金会创建了开源浏览器Firefox，Google后来雇佣了所有人做了Chrome，但仍然是开源的。Apache Foundation做了开源HTTP服务器。任何人都能下载Apache建立网站。结果，价值流向了互联网本身，而不是控制互联网入口的那几家软件提供商。基本上所有东西都开源源了，Google、eBay、Etsy、Amazon以及数百万小网站都起来了。如果互联网是封闭的，每个人都要向专有软件付过路费，互联网就不会起飞。我们当时就有AOL和CompuServe这种东西。开源AI也是同样的逻辑：如果开源AI起飞，那么Bernie Sanders和Elizabeth Warren担心的所有问题都不会发生——AI的价值不会只落到少数公司及其亿万富翁股东手里。AI会扩散，全球数万家AI驱动的企业都会受益。经济会增长，工作会创造，AI会成为推动开放经济的力量。我知道有些政府和对面的人会反驳，但让中国开源和美国开源都扩散。如果中国在侵犯版权、偷软件，去起诉他们、制裁他们。但本质上，开源AI会改变全球经济，确保AI的经济价值扩散到所有人，而不是被少数人抓住。</p>
+<p><strong>某位嘉宾：</strong> 这就是为什么如果1%的人控制开源，那些寡头会失算，我们甚至不需要财富税。Chamath，你要补充。</p>
+<p><strong>Chamath：</strong> 我们必须承认，这一细分市场的价值捕获消失得有多么惊人。在硅谷25年，我从未见过一个经济部门可以吸收数千亿美元的资本，你以为未来几十年都有定价权，然后它在几个月内就蒸发了。</p>
+<p><strong>某位嘉宾：</strong> 几个月就爆发了。</p>
+<p><strong>Chamath：</strong> 几个月就蒸发了。</p>
+<p><strong>Sacks：</strong> 在这点上我不同意你们。“蒸发”这个词太重了。看起来可能会放缓，但可能是达到平台期。</p>
+<p><strong>JCal：</strong> 我这里有Anthropic的收入图。可以看出来，最近几个月Anthropic的收入有了一些放缓——当然这是第三方数据。然后还有OpenRouter的流量数据，好的开源模型表现越好、越容易部署到自己的服务器上，那些就是“暗黑token”，它们不会出现在任何收入图表上，因为基本免费。现在超过50%的token都来自开源，很多是中国模型。</p>
+<p><strong>Chamath：</strong> 我需要澄清——我不是说这些公司不会赚钱。但市场很聪明，会问一个具体问题：10年后这个收入看起来如何？是增加还是减少？竞争是增多还是减少？是垄断还是商品？如果是商品，有多少人能定价？10年后的市场出清价格是多少？通常这些变量暴露得很慢，你有5到10年的周期来完成从独占供应商到商品供应商的转型。但科技能创造一个市场，把这个周期压缩到几年。作为资金配置者，看着这些数据，很难不想“5到10年内它为什么不成为商品？”每一个资本配置者都会得出这个结论——如果他们不这么想，那是疏忽。那非常难分配未来溢价。真正的资金流向，我们在Google的财报中也看到了：正流向云和基础设施。还有一群人不希望开源结束，因为他们想提供最便宜的模型，知道那才是边际捕获的地方。</p>
+<p><strong>Sacks：</strong> 你的想法是什么？我觉得对按需智能的需求是无限的，没有上限——只要智能继续变好。所以论点是：是，它是商品，价格下降，但消费在上升。你刚才用了浏览器的例子。浏览器是通往目的地的工具，价值在目的地应用上。如果智能变得完全普及、边际成本为零，它为什么不是浏览器？为什么不会被融入AWS、Elon Web Service这些云业务？</p>
+<p><strong>JCal：</strong> 那你的位置呢？然后是第二、第三个故事。</p>
+<p><strong>Sacks：</strong> 这个讨论里有很多激烈的同意，所以让我说个反论。我认为开源和闭源都会大赢家。市场巨大，它们各自服务不同的需求。当KIMI K3发布时，有点恐慌——觉得中国模型追上来了，他们要免费干掉我们领先的美国前沿实验室。Anthropic和OpenAI到处说“我们不能继续投资数十亿美元，如果中国能偷我们的权重”。Ben Thompson在他的博客中分析了成本数字，发现KIMI K3并不便宜太多。而且中国并没有完全追上。KIMI K3在Arena Battleground的前端编码测试中得分很高，但只有这一个维度。还有很多领域它得分不高。Anthropic和OpenAI的实验室里还有未公开的模型，遥遥领先。有报道说Sam要去华盛顿讨论GPT 6.0——那是颠覆性的。所以我不相信中国真的追上了。还有在实验室里不可思议的未发布模型。我们应该让我们的马跑起来，不要加一堆不必要的障碍。如果你看收入——那是真实世界使用的检验——Anthropic和OpenAI正在一飞冲天。它们是历史上增长最快的科技公司。Jason你展示的图表里Anthropic似乎有一个波动。他们的内部预测是今年从100亿涨到1000亿。我们现在年中，他们已经超过700亿了。Easy就可以到1000亿。如果叠加OpenAI的图表，OpenAI上个月还重新加速了。所以如果你把这两个加起来，根本看不到任何放缓。它们仍然在指数增长。</p>
+<p><strong>某位嘉宾：</strong> 这就像是篮球里的假摔。他们想吸引犯规、想政府干预。为什么？因为他们正在路演期间。Chamath，他们确实会受到“为什么不会被开源商品化”的逼问。最好的回答是他们可以向上迁移到应用层。</p>
+<p><strong>某位嘉宾：</strong> 他们已经做了。端用户应用非常好。</p>
+<p><strong>Sacks：</strong> 我应该给他们在Wall Street的回答：我们拥有最好的模型，最终我们会向上迁移。如果是我，我甚至会练习这样的回答：可能有某个版本的模型我不会发布，只留给自己用。</p>
+<p><strong>JCal：</strong> 那才是真正的回答——但那是反竞争的。</p>
+<p><strong>某位嘉宾：</strong> 用户角度可能会认为是反竞争。</p>
+<p><strong>JCal：</strong> 我认为开源正在迎来它的时刻。我接触的初创公司都在从闭源模型转移。他们用开源，便宜得多。很多任务不需要最新模型。大家用上一代模型，部署到本地、自己托管。这是非零概率会破坏Anthropic和OpenAI的IPO。它们会没事，但我认为可能会脱轨。它们会面临巨大的利润率压缩。花钱太多，陷入陷阱。</p>
+<p><strong>Sacks：</strong> 我回来反驳，但让Chamath先回应。</p>
+<p><strong>某位嘉宾：</strong> 你错了。</p>
+<p><strong>某位嘉宾：</strong> 我认为他们已经追上了95%的任务。</p>
+<p><strong>Chamath：</strong> 我认为答案略有不同：不是95%的尖端任务其他人也能做，而是95%的任务有很多不同模型可以做。这对Anthropic来说没问题——他们可以说，我有下一代模型，我要启动一个生命科学项目、一个网络安全业务，那里可以捕获万亿企业价值。但如果想认为模型层有巨大的终局价值，那是数学上的错误。</p>
+<p><strong>JCal：</strong> 开源对这些公司来说会是具体的逆风。因为所有最好的客户——我与Lovable、ElevenLabs等初创公司交流——他们曾经每季度花费数十万美元，现在全都搬到了GLM-5.2，自己做模型。猫已经出袋了。Google、AWS和Elon Web Services会托管这些模型。怎么知道的？每次我做一个任务，我用Perplexity Computer——不是赞助——我发现最好的套装是先试Groq、Nemotron、GLM-5.2，也放Claude里，结果一样或更好。换句话说，我甚至分辨不出区别。</p>
+<p><strong>某位嘉宾：</strong> 让我们把OpenAI的数字叠在Anthropic上面。</p>
+<p><strong>JCal：</strong> 这是估计值，不是公司官方数据。图显示OpenAI的ARR从5月的330亿上升到7月的413亿。所以他们在加速增长。</p>
+<p><strong>Sacks：</strong> 我再给两个例子。Mira Murati的新模型Thinking Machines——目前是最好的美国开源模型——它是从中国模型Qwen 2.5蒸馏出来初始化的。如果你说中国模型是基于IP盗窃，那Thinking Machines是什么？它是那个模型的派生作品，而Anthropic正试图把那个模型污名化为IP侵权——但没有任何证据。另外，Cursor新出了Composer 2产品，他们用Qwen 2.5加上自己的专有编程数据进行了后训练。他们从中国开源模型开始，用自己数据做了新派生品。这就是开源的工作方式：你拿公开领域的东西，fork它，做成自己的。一旦进入公开领域，它就不再是“中国模型”——它是任何人可自由使用的开放权重。它是一个文件。美国公司做fork，在自己的美国数据中心服务器上运行。没有数据包回中国，没有数据回中国。如果你们说美国公司不能这样做，或者这样被IP盗窃污染了，那就是在美国开源生态系统的心脏上插了一把刀。那正是Anthropic想要的——因为他们不想有竞争。</p>
+<p><strong>Friedberg：</strong> 让我退一步说。过去50年，美国通过知识经济和服务经济积累了巨大价值。我们开发IP、知识、把一种比特转换为另一种比特，获得数万亿美元GDP。同时我们把制造外包给了中国，创造了制造巨兽。从人类技术演化和繁荣的角度看，一切最终都可以归结为用最少能量把分子从一种形式转换成另一种形式的能力。如果知识经济和服务经济被压缩——开源AI尤其会扁平化这些价值——那美国的/Western经济的价值就会大跌。剩下的就是分子经济——制造和利用能源转换分子的能力。现在美国有1太瓦电力，中国正向8太瓦迈进。美国100亿平方英尺制造业设施，中国2000亿平方英尺。所以中国有20倍的制造能力、8倍电力。我认为中国的长期游戏——10年、20年、30年——是压缩知识经济和服务经济，完全商品化它，然后他们只剩下所有价值，因为他们能制造东西，而且比任何人都便宜。因为他们有最多的电力。</p>
+<p><strong>某位嘉宾：</strong> 你相信他们想把知识和服务商品化，就像他们对全球化做的那样？</p>
+<p><strong>Friedberg：</strong> 比特的产生和移动被商品化，剩下的是电力和分子的产生——两者中国都有难以逾越的优势。这就是长期游戏。</p>
+<p><strong>Sacks：</strong> 我从我的渠道听说，Anthropic和OpenAI都在上调预测。我认为未来开源可能会蚕食份额，但市场太大了。开源更可控、可定制，你可以拥有它、数据主权、主权，但工作量也更大。所以有不同的用例、不同的市场部分。</p>
+<p><strong>某位嘉宾：</strong> 工作量这点很关键。3到6个月前，搭建开源还很难，但现在很多中间商在构建默认使用开源的套装，问题正在解决。</p>
+<p><strong>某位嘉宾：</strong> 其实所有人都在为自己说话——包括Anthropic和OpenAI的投资者。</p>
+<p><strong>某位嘉宾：</strong> 很多人突然变成对华鹰派——但他们都想把芯片卖到中国。</p>
+<p><strong>某位嘉宾：</strong> 首先披露你是否在Anthropic的股东名单上。</p>
+<p><strong>JCal：</strong> 我没有。我也不直接。可能间接有一点。</p></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="00:49:32 – 00:57:00 anthropic 15亿美元版权和解案 本段核心内容： anthropic与版权方达成15亿美元和解，是历史上最大的版权案。 sacks指出anthropic在版权问题上的虚伪立场。 jcal认为内容创作者应该联合起来争取权利。 背景解释与关键术语： libgen：著名的盗版电子书网站。 公平使用（fair use）：美国版权法中的例外，允许在特定情况下使用受版权保护的作品而不侵权。 详细中文整理： jcal： 这是我们的第二场victory fap——内容提供者需要联合起来争取权利。chatgpt说，作为群体，要么给我这些条款，要么不要索引我们。他们正在干扰内容创作者利用自己内容的能力。这非常不公平。 某位嘉宾： 你会被碾压的。 jcal： youtube就是一个很好的例子。 sacks： 让我对和解案做一个精细的区分。首先，我显然不是anthropic的粉丝，因为他们可能为了监管俘获而摧毁整个开源生态系统。但让我们明确这个判决是什么、不是什么。anthropic做的是从libgen盗版所有书籍，然后在上面进行训练。他们之所以被15亿美元判罚，是因为他们根本没有购买任意一本——连一本都没买。如果他们哪怕只买了一本，他们就可能主张公平使用，那才是正在法庭上辩论的问题。所以被罚15亿的原因是不买一本。anthropic和openai仍然认为，如果他们买了一本，就应该能在公平使用下用所有书训练。那个问题还没有裁决。这里你可以看到完全的虚伪：他们认为自己应该能在每一个创作者的输出上进行训练——或许只要买一本就可以，不管创作者是否愿意。但他们对公平使用的立场是：我们可以在公平使用下训练我们的模型，推导我们的权重。然而，唯一一种他们说“你们永远不能用来训练”的就是他们自己的输出。这就是他们目前的立场。完全虚伪。如果你去看anthropic 2月的博客，他们首次定义了“工业规模蒸馏攻击”的概念。没有人把“蒸馏”和“攻击”放在一起说过，直到anthropic写了那篇博客。蒸馏一直是行业标准做法。在那篇博客中，搜索“ip盗窃”这个词，找不到。即使是他们试图定义这个新概念时，他们也没有勇气说这是ip盗窃——因为他们自己正在做同样的事。他们说不出口。 某位嘉宾： “ip为我，但不为你。” sacks： 完全正确。所以jcal，我不管你在公平使用问题上是对是错。问题是虚伪。他们自己从未公开说中国公司做的是ip盗窃。他们说的是“国家安全威胁”——因为中国模型没有护栏。这个论点从未真正打动政策制定者。直到anthropic开始说“这是ip盗窃”，但他们不愿意公开做出这个论断——因为那会毒化他们所有的公平使用诉讼。实际上，纽时正在起诉openai——可以叫工业规模蒸馏攻击。openai上了纽时网站，用爬虫把所有信息抓取走。所以anthropic和openai自己都不会公开承认中国的行为是ip盗窃——因为他们在做同样的事。 friedberg： 让我问一个问题。假设jcal写了《伟大的美国小说》——genuflect。你决定不让人工智能使用它，不公开。某人付30块钱买了书，读完后写了个书评发在网上。ai引擎抓取到书评，从中学习并了解了你的书。有人问ai引擎关于你的书，ai做出回复。你感觉版权被侵犯了吗？ 某位嘉宾： 不，因为ai没有摄入你的书。它摄入了关于你的书的元数据、评论、第三方分析——全在开放互联网上。它没有复制那些东西，而是用它学习。 某位嘉宾： 所以它是从书评里学习的。我接受这个。但你不知道过程。你无法阻止知识扩散。 friedberg： 知识无法被封锁。版权法很明确：我不能直接从你的书中复制文本并声称是自己写的。但我阅读你的书、阅读书评、知识抽象转化为新输出——我认为这不太可能构成版权侵权。 jcal： 我理解你的说法。总有变通办法。但我们一直有cliff notes。有四个测试标准。我认为美国公司应该拿出10%的收入做闪亮现金和解——这就是正在发生的。如果你是个版权所有者，你应学习音乐产业。他们像疯狗一样，咬住不放，把你拖在法庭上直到你屈服、达成和解、承认许可关系。然后他们能用那个判例去对付下一个实体。当有人与我直接竞争时，版权法有特殊地位。那才是难点。 某位嘉宾： 考虑到公平使用还没裁决，anthropic和openai正陷入大诉讼，结果不确定、数十亿美元攸关，你认为他们犯了一个致命错误吗——声称未经同意蒸馏就是ip盗窃？他们本可以换一种说法：中国公司在违规设立虚假账户——那是欺骗性商业行为——但他们不说ip盗窃。 jcal： 是的。我称之为“自掘坟墓”。 某位嘉宾： 如果创作者看到anthropic刚对政府说“未经同意的训练是ip盗窃”，他们现在可以主张享有anthropic全部收入。这可能是桥太远了。如果他们只是说“那是欺骗性商业行为”，整个初创社区就不会反对。现在gary tan等200家初创写信抗议。为什么？因为他们知道如果ip盗窃这个标签贴上去，所有源于中国模型的派生作品都会被污染，整个初创生态系统都危险了。" style="--index: 3">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">03</span>
+                    <span class="timeline-meta">00:49:32 – 00:57:00</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>Anthropic 15亿美元版权和解案</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>Anthropic与版权方达成15亿美元和解，是历史上最大的版权案。</li>
+<li>Sacks指出Anthropic在版权问题上的虚伪立场。</li>
+<li>JCal认为内容创作者应该联合起来争取权利。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li><strong>LibGen</strong>：著名的盗版电子书网站。</li>
+<li><strong>公平使用（Fair Use）</strong>：美国版权法中的例外，允许在特定情况下使用受版权保护的作品而不侵权。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> 这是我们的第二场Victory FAP——内容提供者需要联合起来争取权利。ChatGPT说，作为群体，要么给我这些条款，要么不要索引我们。他们正在干扰内容创作者利用自己内容的能力。这非常不公平。</p>
+<p><strong>某位嘉宾：</strong> 你会被碾压的。</p>
+<p><strong>JCal：</strong> YouTube就是一个很好的例子。</p>
+<p><strong>Sacks：</strong> 让我对和解案做一个精细的区分。首先，我显然不是Anthropic的粉丝，因为他们可能为了监管俘获而摧毁整个开源生态系统。但让我们明确这个判决是什么、不是什么。Anthropic做的是从LibGen盗版所有书籍，然后在上面进行训练。他们之所以被15亿美元判罚，是因为他们根本没有购买任意一本——连一本都没买。如果他们哪怕只买了一本，他们就可能主张公平使用，那才是正在法庭上辩论的问题。所以被罚15亿的原因是不买一本。Anthropic和OpenAI仍然认为，如果他们买了一本，就应该能在公平使用下用所有书训练。那个问题还没有裁决。这里你可以看到完全的虚伪：他们认为自己应该能在每一个创作者的输出上进行训练——或许只要买一本就可以，不管创作者是否愿意。但他们对公平使用的立场是：我们可以在公平使用下训练我们的模型，推导我们的权重。然而，唯一一种他们说“你们永远不能用来训练”的就是他们自己的输出。这就是他们目前的立场。完全虚伪。如果你去看Anthropic 2月的博客，他们首次定义了“工业规模蒸馏攻击”的概念。没有人把“蒸馏”和“攻击”放在一起说过，直到Anthropic写了那篇博客。蒸馏一直是行业标准做法。在那篇博客中，搜索“IP盗窃”这个词，找不到。即使是他们试图定义这个新概念时，他们也没有勇气说这是IP盗窃——因为他们自己正在做同样的事。他们说不出口。</p>
+<p><strong>某位嘉宾：</strong> “IP为我，但不为你。”</p>
+<p><strong>Sacks：</strong> 完全正确。所以JCal，我不管你在公平使用问题上是对是错。问题是虚伪。他们自己从未公开说中国公司做的是IP盗窃。他们说的是“国家安全威胁”——因为中国模型没有护栏。这个论点从未真正打动政策制定者。直到Anthropic开始说“这是IP盗窃”，但他们不愿意公开做出这个论断——因为那会毒化他们所有的公平使用诉讼。实际上，纽时正在起诉OpenAI——可以叫工业规模蒸馏攻击。OpenAI上了纽时网站，用爬虫把所有信息抓取走。所以Anthropic和OpenAI自己都不会公开承认中国的行为是IP盗窃——因为他们在做同样的事。</p>
+<p><strong>Friedberg：</strong> 让我问一个问题。假设JCal写了《伟大的美国小说》——Genuflect。你决定不让人工智能使用它，不公开。某人付30块钱买了书，读完后写了个书评发在网上。AI引擎抓取到书评，从中学习并了解了你的书。有人问AI引擎关于你的书，AI做出回复。你感觉版权被侵犯了吗？</p>
+<p><strong>某位嘉宾：</strong> 不，因为AI没有摄入你的书。它摄入了关于你的书的元数据、评论、第三方分析——全在开放互联网上。它没有复制那些东西，而是用它学习。</p>
+<p><strong>某位嘉宾：</strong> 所以它是从书评里学习的。我接受这个。但你不知道过程。你无法阻止知识扩散。</p>
+<p><strong>Friedberg：</strong> 知识无法被封锁。版权法很明确：我不能直接从你的书中复制文本并声称是自己写的。但我阅读你的书、阅读书评、知识抽象转化为新输出——我认为这不太可能构成版权侵权。</p>
+<p><strong>JCal：</strong> 我理解你的说法。总有变通办法。但我们一直有Cliff Notes。有四个测试标准。我认为美国公司应该拿出10%的收入做闪亮现金和解——这就是正在发生的。如果你是个版权所有者，你应学习音乐产业。他们像疯狗一样，咬住不放，把你拖在法庭上直到你屈服、达成和解、承认许可关系。然后他们能用那个判例去对付下一个实体。当有人与我直接竞争时，版权法有特殊地位。那才是难点。</p>
+<p><strong>某位嘉宾：</strong> 考虑到公平使用还没裁决，Anthropic和OpenAI正陷入大诉讼，结果不确定、数十亿美元攸关，你认为他们犯了一个致命错误吗——声称未经同意蒸馏就是IP盗窃？他们本可以换一种说法：中国公司在违规设立虚假账户——那是欺骗性商业行为——但他们不说IP盗窃。</p>
+<p><strong>JCal：</strong> 是的。我称之为“自掘坟墓”。</p>
+<p><strong>某位嘉宾：</strong> 如果创作者看到Anthropic刚对政府说“未经同意的训练是IP盗窃”，他们现在可以主张享有Anthropic全部收入。这可能是桥太远了。如果他们只是说“那是欺骗性商业行为”，整个初创社区就不会反对。现在Gary Tan等200家初创写信抗议。为什么？因为他们知道如果IP盗窃这个标签贴上去，所有源于中国模型的派生作品都会被污染，整个初创生态系统都危险了。</p></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="01:06:50 – 01:32:00 科技市场、google财报与纽约社会主义 本段核心内容： google和tesla财报后股价下跌，但嘉宾看好google的长期前景。 friedberg从私有财产权角度激烈批判纽约市社会主义住房政策。 四位嘉宾都认为增加供应才是降低房租的方法。 背景解释与关键术语： 资本支出（capex）：公司用于购买、升级、维护物理资产（如数据中心、芯片）的支出。 roic（return on invested capital，投资资本回报率）：衡量公司用投入资本创造价值的能力。 自由现金流（free cash flow）：扣除资本支出后公司剩余现金——首次为负表明大规模投资。 私有财产权：friedberg认为这是美国自由的基石，社会主义政策是对它的侵蚀。 dsa（democratic socialists of america，美国民主社会主义者）：推动纽约当前住房政策的左翼团体。 详细中文整理： jcal： google财报非常疯狂。google cloud年化营收达到1000亿美元。tesla capex同比暴增142%，预计达250亿。google capex预测在1950-2050亿美元。tesla跌14%，google跌7%。两家都报告了负自由现金流。对google来说，这是ipo以来首次。spacex ipo后从首日收盘价跌了30%，现在交易在1.5万亿美元。 chamath： google上市25年来的平均roic是多少？猜猜。 某位嘉宾： 17%？21%？29%？35%？ chamath： 32%。当你是一个以32%复合收益持续20年的机器时，你要给这些人信任。他们不是在乱来。他们正在有条不紊地投资自己的优势。他们将从多个层面受益——芯片层、云层、以及youtube等应用。碎片化对他们有利。所以我认为市场的反应过度了。 某位嘉宾： 有人发推说google今年capex将达到军事预算的20%。这是人们可能感到震惊的原因——他们从未见过如此大规模。但这是巨大的投资期，即使回报率只有一半，也是超常发挥。 friedberg： 如果你认为google不应该投资基础设施，而是该给你回报现金，那你根本不该持有这只股票。google在很多方面都赢了。而且gcp可能是在企业级ai中捕捉价值最合适的云。你可以运行任何模型，不必绑定。最差最差的情况是，他们拥有世界上最低成本的基础设施来运行别人的模型——elon用colossus做的那个模式。所以如果最坏情况下应用层全部失败，他们仍然有全球最好的基础设施。 chamath： 苹果在过去十年做了9000亿的股票回购和1400亿的股息。如果他们把这笔钱投资到anthropic和spacex上，可能更有收获。 sacks： 但谁说那些获得现金的投资者没有找到好用途？ 某位嘉宾： 从社会层面，是的。但苹果本可以更进取。 jcal： 现在进入我们新的常规板块——“社会主义角”。纽约市市长zaran mamdani推出了新的租户保护法案，禁止房东收取信用检查申请费、要求房东不能同时要求信用检查和40倍租金标准、法律承认租户工会、冻结租金一年。在听证会上，一名蒙面活动家称“驱逐是暴力”。 某位嘉宾： （播放活动家发言）“mamdani政府正在让我们不再容忍作为常态的驱逐的暴力。” jcal： 这是什么东西？那个人还戴着超级口罩，像是covid还在。 friedberg： 让我做一段历史引述。1787年，john quincy adams发表了一篇作品《为美利坚合众国政府宪法辩护》，其中写道：“一旦社会承认财产不像神的法律那样神圣，且没有法律和公共正义的力量保护它，无政府状态和暴政就开始。”1791年，他公开说：“财产必须被保障，否则自由不能存在。”美国成立的基础就是私有财产权——因为来美国的人来自君主制暴政，那里没人能真正拥有财产。我们想要一个地方，一个人可以说“我拥有一件东西，没有人能从我这里拿走”。私有财产权是美国自由的基石。当人们开始声称“你对你的财产做了什么暴力”，然后政府有权拿走你的私有财产时，就是走向暴政的开始。无政府是暂时的状态，总会走向暴政。这些社会主义原则——我们正在拿走你的私有财产，你不再有权利——都始于道德化的包装：你是坏人，你有暴力。这就是为什么我们应该震惊。一旦财产权开始流失——即使是最微小的方式——就是雪崩式效应，一切都会变成暴政。 sacks： 还有一个层面：dsa社会主义者说驱逐是暴力。但这对于同一栋楼的租户意味着什么？如果房东不能收租金，就无法维护建筑，其他租户会遭殃。我有一个朋友管理公寓楼，他说那些应该被驱逐但不被驱逐的“擅自占用者”往往是最差的邻居——制造噪音、砸墙、有怪味、滥用公共区域。还有长期居住的老人，依赖租金控制。当不能驱逐坏租户时，邻居才是最大的受害者。这些dsa人士——往往是受过高等教育的富裕人士——从不使用公共设施。他们可以拥有“奢侈信念”。这影响最重的是工薪阶级。 chamath： 如果你想解决住房问题，最基本的经济学就是你得多建。austin的数据显示，放松审批就会建更多单位，每一套新单位上线都会拉低租金。就是这么简单。问题是政治意愿。mamdani与其搞这些法律，不如推进审批改革。如果强迫房东不能做信用检查，会发生什么？房东会把房租提高3到4倍，并要求预付一整年。所以租金不会下降，而是上升。 sacks： 更糟的是，有些情况下房东最好让公寓空着。有人离开后，房东被迫翻新并符合各种苛刻法规，成本上百万——所以他们干脆留空。纽约市有5万套“幽灵公寓”——空置但被锁定的存量。 某位嘉宾： 他们甚至禁止了airbnb。 某位嘉宾： 是的。所以房东只有卖房或等待这两个选择。 jcal： 谢谢大家的讨论。别忘了来all in summit。再见。" style="--index: 4">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">04</span>
+                    <span class="timeline-meta">01:06:50 – 01:32:00</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>科技市场、Google财报与纽约社会主义</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>Google和Tesla财报后股价下跌，但嘉宾看好Google的长期前景。</li>
+<li>Friedberg从私有财产权角度激烈批判纽约市社会主义住房政策。</li>
+<li>四位嘉宾都认为增加供应才是降低房租的方法。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li><strong>资本支出（CapEx）</strong>：公司用于购买、升级、维护物理资产（如数据中心、芯片）的支出。</li>
+<li><strong>ROIC（Return on Invested Capital，投资资本回报率）</strong>：衡量公司用投入资本创造价值的能力。</li>
+<li><strong>自由现金流（Free Cash Flow）</strong>：扣除资本支出后公司剩余现金——首次为负表明大规模投资。</li>
+<li><strong>私有财产权</strong>：Friedberg认为这是美国自由的基石，社会主义政策是对它的侵蚀。</li>
+<li><strong>DSA（Democratic Socialists of America，美国民主社会主义者）</strong>：推动纽约当前住房政策的左翼团体。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> Google财报非常疯狂。Google Cloud年化营收达到1000亿美元。Tesla CapEx同比暴增142%，预计达250亿。Google CapEx预测在1950-2050亿美元。Tesla跌14%，Google跌7%。两家都报告了负自由现金流。对Google来说，这是IPO以来首次。SpaceX IPO后从首日收盘价跌了30%，现在交易在1.5万亿美元。</p>
+<p><strong>Chamath：</strong> Google上市25年来的平均ROIC是多少？猜猜。</p>
+<p><strong>某位嘉宾：</strong> 17%？21%？29%？35%？</p>
+<p><strong>Chamath：</strong> 32%。当你是一个以32%复合收益持续20年的机器时，你要给这些人信任。他们不是在乱来。他们正在有条不紊地投资自己的优势。他们将从多个层面受益——芯片层、云层、以及YouTube等应用。碎片化对他们有利。所以我认为市场的反应过度了。</p>
+<p><strong>某位嘉宾：</strong> 有人发推说Google今年CapEx将达到军事预算的20%。这是人们可能感到震惊的原因——他们从未见过如此大规模。但这是巨大的投资期，即使回报率只有一半，也是超常发挥。</p>
+<p><strong>Friedberg：</strong> 如果你认为Google不应该投资基础设施，而是该给你回报现金，那你根本不该持有这只股票。Google在很多方面都赢了。而且GCP可能是在企业级AI中捕捉价值最合适的云。你可以运行任何模型，不必绑定。最差最差的情况是，他们拥有世界上最低成本的基础设施来运行别人的模型——Elon用Colossus做的那个模式。所以如果最坏情况下应用层全部失败，他们仍然有全球最好的基础设施。</p>
+<p><strong>Chamath：</strong> 苹果在过去十年做了9000亿的股票回购和1400亿的股息。如果他们把这笔钱投资到Anthropic和SpaceX上，可能更有收获。</p>
+<p><strong>Sacks：</strong> 但谁说那些获得现金的投资者没有找到好用途？</p>
+<p><strong>某位嘉宾：</strong> 从社会层面，是的。但苹果本可以更进取。</p>
+<p><strong>JCal：</strong> 现在进入我们新的常规板块——“社会主义角”。纽约市市长Zaran Mamdani推出了新的租户保护法案，禁止房东收取信用检查申请费、要求房东不能同时要求信用检查和40倍租金标准、法律承认租户工会、冻结租金一年。在听证会上，一名蒙面活动家称“驱逐是暴力”。</p>
+<p><strong>某位嘉宾：</strong> （播放活动家发言）“Mamdani政府正在让我们不再容忍作为常态的驱逐的暴力。”</p>
+<p><strong>JCal：</strong> 这是什么东西？那个人还戴着超级口罩，像是COVID还在。</p>
+<p><strong>Friedberg：</strong> 让我做一段历史引述。1787年，John Quincy Adams发表了一篇作品《为美利坚合众国政府宪法辩护》，其中写道：“一旦社会承认财产不像神的法律那样神圣，且没有法律和公共正义的力量保护它，无政府状态和暴政就开始。”1791年，他公开说：“财产必须被保障，否则自由不能存在。”美国成立的基础就是私有财产权——因为来美国的人来自君主制暴政，那里没人能真正拥有财产。我们想要一个地方，一个人可以说“我拥有一件东西，没有人能从我这里拿走”。私有财产权是美国自由的基石。当人们开始声称“你对你的财产做了什么暴力”，然后政府有权拿走你的私有财产时，就是走向暴政的开始。无政府是暂时的状态，总会走向暴政。这些社会主义原则——我们正在拿走你的私有财产，你不再有权利——都始于道德化的包装：你是坏人，你有暴力。这就是为什么我们应该震惊。一旦财产权开始流失——即使是最微小的方式——就是雪崩式效应，一切都会变成暴政。</p>
+<p><strong>Sacks：</strong> 还有一个层面：DSA社会主义者说驱逐是暴力。但这对于同一栋楼的租户意味着什么？如果房东不能收租金，就无法维护建筑，其他租户会遭殃。我有一个朋友管理公寓楼，他说那些应该被驱逐但不被驱逐的“擅自占用者”往往是最差的邻居——制造噪音、砸墙、有怪味、滥用公共区域。还有长期居住的老人，依赖租金控制。当不能驱逐坏租户时，邻居才是最大的受害者。这些DSA人士——往往是受过高等教育的富裕人士——从不使用公共设施。他们可以拥有“奢侈信念”。这影响最重的是工薪阶级。</p>
+<p><strong>Chamath：</strong> 如果你想解决住房问题，最基本的经济学就是你得多建。Austin的数据显示，放松审批就会建更多单位，每一套新单位上线都会拉低租金。就是这么简单。问题是政治意愿。Mamdani与其搞这些法律，不如推进审批改革。如果强迫房东不能做信用检查，会发生什么？房东会把房租提高3到4倍，并要求预付一整年。所以租金不会下降，而是上升。</p>
+<p><strong>Sacks：</strong> 更糟的是，有些情况下房东最好让公寓空着。有人离开后，房东被迫翻新并符合各种苛刻法规，成本上百万——所以他们干脆留空。纽约市有5万套“幽灵公寓”——空置但被锁定的存量。</p>
+<p><strong>某位嘉宾：</strong> 他们甚至禁止了Airbnb。</p>
+<p><strong>某位嘉宾：</strong> 是的。所以房东只有卖房或等待这两个选择。</p>
+<p><strong>JCal：</strong> 谢谢大家的讨论。别忘了来All In Summit。再见。</p></div>
+                  </div>
+                </article></div>
+            <p class="empty search-empty" data-search-empty hidden>没有匹配的时间线段落。</p>
+          </section>
+
+          <section id="speakers">
+            <div class="section-head">
+              <h2>人物观点对照</h2>
+              <p>比较嘉宾立场</p>
+            </div>
+            <div class="speaker-grid"><article class="speaker-card" style="--index: 1">
+                  <p class="speaker-kicker">嘉宾 01</p>
+                  <h3>Jason Calacanis</h3>
+                  <div><ul>
+<li>立场：开源正在夺走闭源模型的客户，他对Meta、Anthropic和OpenAI的IPO前景持怀疑态度，认为利润率压缩和客户流失是真实威胁。</li>
+<li>核心判断：95%的AI任务开源模型已能胜任，所以他看到的初创公司都在快速转向开源。</li>
+</ul></div>
+                </article>
+<article class="speaker-card" style="--index: 2">
+                  <p class="speaker-kicker">嘉宾 02</p>
+                  <h3>David Sacks</h3>
+                  <div><ul>
+<li>立场：强烈反对政府对开源AI的任何禁令，认为那是“悲剧性错误”。积极批评Anthropic和OpenAI的监管俘获行为，认为他们有能力自己解决蒸馏问题却推给政府。</li>
+<li>核心判断：Anthropic和OpenAI仍处于超高速增长中，市场巨大，开源和闭源都会是赢家。他不认为中国已“追平”了。</li>
+</ul></div>
+                </article>
+<article class="speaker-card" style="--index: 3">
+                  <p class="speaker-kicker">嘉宾 03</p>
+                  <h3>David Friedberg</h3>
+                  <div><ul>
+<li>立场：从知识产权法和言论自由角度支持开源AI。认为知识不能也不能被封锁，看输出学习是普遍做法。在纽约政策上，从私有财产权角度进行最激烈、最体系化的批判。</li>
+<li>核心判断：开源AI将导致知识经济价值扁平化，中国的长期游戏是制造能力而非模型本身。</li>
+</ul></div>
+                </article>
+<article class="speaker-card" style="--index: 4">
+                  <p class="speaker-kicker">嘉宾 04</p>
+                  <h3>Chamath Palihapitiya</h3>
+                  <div><ul>
+<li>立场：基础模型正快速商品化，价值已不可持续留在模型层——正在向基础设施（云、芯片）和应用层转移。强烈反对政府干预市场。</li>
+<li>核心判断：市场资金正流向基础设施提供商（如Google Cloud），而非闭源模型公司。他看好Google的长期前景。在纽约政策上认为房东只能通过提高租金应对。</li>
+</ul></div>
+                </article></div>
+          </section>
+
+          <section id="quotes">
+            <div class="section-head">
+              <h2>值得引用的原话</h2>
+              <p>保留关键表达</p>
+            </div>
+            <div class="panel"><ol>
+<li>“It would be a tragic mistake if the government were to take action against the open source ecosystem.”</li>
+<p>“如果政府采取行动打击开源生态系统，那将是一个悲剧性的错误。” ——表达Sacks的核心立场，强调禁令的反效果。</p>
+</ol>
+<ol>
+<li>“The real business model is not in the foundational model anymore. It‘s at the application layer above, and it’s in the infrastructure below.”</li>
+<p>“真正的商业模式已不在基础模型层，而是在上层的应用层和下层的底层设施。” ——Chamath对AI价值转移的核心判断。</p>
+</ol>
+<ol>
+<li>“Property must be secured or liberty cannot exist.”</li>
+<p>“财产必须被保障，否则自由不能存在。” ——Friedberg引用John Quincy Adams，论证私有财产权是自由的基石。</p>
+</ol>
+<ol>
+<li>“IP for we, but not for thee.”</li>
+<p>“IP为我，但不为你。” ——Sacks讽刺Anthropic/OpenAI在版权问题上的双重标准。</p>
+</ol>
+<ol>
+<li>“Open source is going to be a specific headwind to these companies specifically.”</li>
+<p>“开源将对这些公司构成具体的逆风。” ——JCal对自己立场的坚持，认为压力真实存在。</p>
+</ol>
+<ol>
+<li>“They are literally the most successful tech company of all time and they’re racing to the government to basically say you need to protect us against our competitors.”</li>
+<p>“它们是有史以来最成功的科技公司，却正在跑向政府说‘你需要保护我们免受竞争对手的威胁’。” ——Sacks对Anthropic寻求监管保护的批评。</p>
+</ol>
+<ol>
+<li>“Anarchy is a temporary state. It’s always in between one state and another. All anarchies end up in tyranny.”</li>
+<p>“无政府是暂时的状态，总是在一种状态和另一种状态之间。所有无政府最终都会走向暴政。” ——Friedberg对社会主义政策长期后果的警告。</p>
+</ol>
+<ol>
+<li>“If you want to bet against Google‘s deployment of capital into infrastructure because you’d rather have them give you cash for your shares today, you shouldn‘t own the stock.”</li>
+<p>“如果你因为宁要现金而不想要Google把资本投向基础设施，那你根本就不该持有这只股票。” ——Friedberg对Google资本支出争议的直白表态。</p>
+</ol></div>
+          </section>
+        </div>
+      </div>
+    </main>
+  </div>
+  <script>
+    const progress = document.querySelector("[data-progress]");
+    const searchBox = document.querySelector("[data-search-box]");
+    const topButton = document.querySelector("[data-scroll-top]");
+    const cards = Array.from(document.querySelectorAll("[data-timeline-card]"));
+    const searchEmpty = document.querySelector("[data-search-empty]");
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    function updateProgress() {
+      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      const ratio = scrollable > 0 ? window.scrollY / scrollable : 0;
+      if (progress) {
+        progress.style.width = `${Math.max(0, Math.min(1, ratio)) * 100}%`;
+      }
+    }
+
+    function applySearch() {
+      const query = searchBox.value.trim().toLowerCase();
+      let visibleCount = 0;
+      cards.forEach((card) => {
+        const text = card.getAttribute("data-search") || "";
+        const isVisible = !query || text.includes(query);
+        card.hidden = !isVisible;
+        if (isVisible) {
+          visibleCount += 1;
+        }
+      });
+      if (searchEmpty) {
+        searchEmpty.hidden = !query || visibleCount > 0;
+      }
+    }
+
+    window.addEventListener("scroll", updateProgress, { passive: true });
+    window.addEventListener("resize", updateProgress);
+    if (searchBox) {
+      searchBox.addEventListener("input", applySearch);
+    }
+    if (topButton) {
+      topButton.addEventListener("click", () => {
+        window.scrollTo({
+          top: 0,
+          behavior: prefersReducedMotion.matches ? "auto" : "smooth"
+        });
+      });
+    }
+    updateProgress();
+  </script>
+</body>
+</html>
