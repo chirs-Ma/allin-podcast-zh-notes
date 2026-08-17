@@ -1,0 +1,1291 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Anthropic 的 2 万亿美元 IPO、Zuck 的 AI 宣言、Nvidia 的 5000 亿算力豪赌与 Grok 的逆袭 - 中文播客可视化笔记</title>
+  <style>
+    :root {
+      --bg: oklch(0.974 0.006 238);
+      --paper: oklch(0.991 0.003 238);
+      --paper-soft: oklch(0.955 0.007 238);
+      --ink: oklch(0.205 0.018 246);
+      --muted: oklch(0.49 0.018 246);
+      --faint: oklch(0.63 0.014 246);
+      --line: oklch(0.875 0.009 238);
+      --line-strong: oklch(0.74 0.014 238);
+      --accent: oklch(0.43 0.064 164);
+      --accent-soft: oklch(0.94 0.024 164);
+      --accent-wash: oklch(0.973 0.012 164);
+      --quote: oklch(0.965 0.010 92);
+      --shadow: 0 24px 54px color-mix(in oklch, var(--ink) 8%, transparent);
+      --radius: 8px;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-width: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(90deg, color-mix(in oklch, var(--line) 28%, transparent) 1px, transparent 1px) 0 0 / 92px 92px,
+        var(--bg);
+      font-family: "Geist", "Satoshi", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      line-height: 1.78;
+      text-rendering: optimizeLegibility;
+    }
+    ::selection { background: var(--accent-soft); color: var(--ink); }
+    a {
+      color: var(--accent);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+      transition: color .22s var(--ease), background-color .22s var(--ease), border-color .22s var(--ease), transform .22s var(--ease);
+    }
+    [hidden] { display: none !important; }
+    .progress {
+      position: fixed;
+      z-index: 4;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: var(--accent);
+    }
+    .quick-actions {
+      position: fixed;
+      right: max(18px, calc((100vw - 1200px) / 2));
+      bottom: 24px;
+      z-index: 3;
+      display: grid;
+      gap: 7px;
+    }
+    .quick-action {
+      display: inline-grid;
+      grid-template-columns: 16px auto;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      min-width: 74px;
+      min-height: 40px;
+      padding: 8px 12px;
+      border: 1px solid var(--line-strong);
+      border-radius: var(--radius);
+      background: color-mix(in oklch, var(--paper) 92%, transparent);
+      box-shadow: 0 12px 28px color-mix(in oklch, var(--ink) 7%, transparent);
+      color: var(--ink);
+      font: inherit;
+      font-size: 13px;
+      font-weight: 720;
+      line-height: 1.2;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .quick-action:hover, .quick-action:focus-visible {
+      outline: none;
+      border-color: var(--accent);
+      background: var(--accent-wash);
+      color: var(--accent);
+      transform: translate3d(0, -1px, 0);
+    }
+    .quick-action:active { transform: translate3d(0, 1px, 0) scale(.99); }
+    .page {
+      width: min(1760px, calc(100% - 56px));
+      margin: 0 auto;
+      padding: 0 0 104px;
+    }
+    .article { min-width: 0; }
+    .hero {
+      max-width: none;
+      margin-left: min(7vw, 140px);
+      padding: 72px 0 58px;
+    }
+    .eyebrow {
+      margin: 0 0 18px;
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    h1 {
+      max-width: none;
+      margin: 0 0 28px;
+      font-size: clamp(38px, 3vw, 52px);
+      font-weight: 760;
+      line-height: 1.08;
+      letter-spacing: 0;
+      text-wrap: balance;
+    }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 18px;
+      max-width: 72ch;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .meta a { font-weight: 650; }
+    .meta-strip {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+      max-width: 720px;
+      margin: 34px 0 28px;
+      border-top: 1px solid var(--line-strong);
+      padding-top: 16px;
+    }
+    .meta-pill {
+      display: grid;
+      gap: 2px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.35;
+    }
+    .meta-pill b {
+      color: var(--ink);
+      font-family: var(--mono);
+      font-size: 18px;
+      font-weight: 680;
+      line-height: 1;
+    }
+    .summary {
+      width: 100%;
+      max-width: 760px;
+      padding: 24px 26px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: color-mix(in oklch, var(--paper) 88%, var(--accent-soft));
+      box-shadow: var(--shadow);
+    }
+    .summary p {
+      margin: 0;
+      font-size: 19px;
+      line-height: 1.72;
+    }
+    h1, .summary, .takeaway p, .timeline-card h3, .section-content, .speaker-card, .panel {
+      overflow-wrap: anywhere;
+    }
+    .content-shell {
+      display: grid;
+      grid-template-columns: minmax(170px, 212px) minmax(0, 820px);
+      gap: clamp(36px, 7vw, 88px);
+      align-items: start;
+      border-top: 1px solid var(--line);
+      padding-top: 40px;
+    }
+    .sidebar {
+      position: sticky;
+      top: 28px;
+      align-self: start;
+      padding-top: 4px;
+    }
+    .toc {
+      border-top: 1px solid var(--ink);
+      padding-top: 16px;
+    }
+    .toc-title {
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .nav-links { display: grid; gap: 2px; }
+    .nav-links a {
+      display: block;
+      padding: 8px 0;
+      border-bottom: 1px solid color-mix(in oklch, var(--line) 72%, transparent);
+      color: var(--ink);
+      font-size: 14px;
+      line-height: 1.35;
+      text-decoration: none;
+    }
+    .nav-links a:hover, .nav-links a:focus-visible {
+      outline: none;
+      color: var(--accent);
+      transform: translate3d(2px, 0, 0);
+    }
+    .search {
+      display: grid;
+      gap: 8px;
+      margin-top: 22px;
+    }
+    .search span {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 720;
+    }
+    .search input {
+      width: 100%;
+      min-height: 40px;
+      padding: 8px 10px;
+      border: 1px solid var(--line-strong);
+      border-radius: var(--radius);
+      background: var(--paper);
+      color: var(--ink);
+      font: inherit;
+      font-size: 14px;
+      outline: none;
+      transition: border-color .22s var(--ease), box-shadow .22s var(--ease), transform .22s var(--ease);
+    }
+    .search input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px color-mix(in oklch, var(--accent) 14%, transparent);
+    }
+    .content-flow { min-width: 0; }
+    section { margin: 0 0 78px; }
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 18px;
+      align-items: end;
+      margin-bottom: 22px;
+      border-top: 1px solid var(--ink);
+      padding-top: 18px;
+    }
+    .section-head h2 {
+      margin: 0;
+      font-size: 28px;
+      font-weight: 740;
+      line-height: 1.16;
+      letter-spacing: 0;
+    }
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.4;
+      text-align: right;
+    }
+    .takeaway-list {
+      display: grid;
+      gap: 0;
+      margin: 0;
+      padding: 0;
+      border-top: 1px solid var(--line);
+      list-style: none;
+    }
+    .takeaway {
+      display: grid;
+      grid-template-columns: 52px minmax(0, 1fr);
+      gap: 18px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .takeaway span {
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 15px;
+      font-weight: 720;
+      line-height: 1.65;
+    }
+    .takeaway p {
+      margin: 0;
+      max-width: 70ch;
+      font-size: 16px;
+      line-height: 1.72;
+    }
+    .timeline {
+      display: grid;
+      gap: 0;
+      border-top: 1px solid var(--line-strong);
+    }
+    .timeline-card {
+      display: grid;
+      grid-template-columns: 132px minmax(0, 1fr);
+      gap: 32px;
+      padding: 34px 0 40px;
+      border-bottom: 1px solid var(--line);
+    }
+    .timeline-heading {
+      position: sticky;
+      top: 30px;
+      align-self: start;
+      display: grid;
+      gap: 10px;
+      padding-top: 2px;
+    }
+    .timeline-index {
+      color: var(--faint);
+      font-family: var(--mono);
+      font-size: 13px;
+      font-weight: 720;
+      line-height: 1;
+    }
+    .timeline-meta {
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 720;
+      line-height: 1.45;
+    }
+    .timeline-card h3 {
+      max-width: 24ch;
+      margin: 0 0 18px;
+      font-size: 27px;
+      font-weight: 730;
+      line-height: 1.22;
+      letter-spacing: 0;
+    }
+    .section-content {
+      color: color-mix(in oklch, var(--ink) 88%, var(--muted));
+      font-size: 16px;
+    }
+    .section-content p {
+      max-width: 72ch;
+      margin: 0 0 1.05em;
+    }
+    .section-content p strong:first-child {
+      color: var(--ink);
+      font-weight: 760;
+    }
+    .section-content h4 {
+      margin: 26px 0 10px;
+      color: var(--accent);
+      font-size: 14px;
+      font-weight: 760;
+      line-height: 1.35;
+    }
+    .section-content ul, .section-content ol, .panel ul, .panel ol, .speaker-card ul, .speaker-card ol {
+      margin: .75em 0 1em;
+      padding-left: 1.25em;
+    }
+    .section-content li, .panel li, .speaker-card li { margin: 6px 0; }
+    .speaker-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, .88fr);
+      gap: 26px 42px;
+      border-top: 1px solid var(--line);
+    }
+    .speaker-card {
+      padding: 22px 0 24px;
+      border-bottom: 1px solid var(--line);
+    }
+    .speaker-card:nth-child(even) { margin-top: 22px; }
+    .speaker-kicker {
+      margin: 0 0 8px;
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 720;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .speaker-card h3 {
+      margin: 0 0 12px;
+      font-size: 20px;
+      font-weight: 730;
+      line-height: 1.25;
+    }
+    .speaker-card p, .panel p {
+      max-width: 68ch;
+      margin-top: 0;
+    }
+    .panel {
+      border-top: 1px solid var(--line);
+      padding-top: 8px;
+    }
+    blockquote {
+      margin: 18px 0;
+      padding: 16px 18px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--quote);
+    }
+    code {
+      padding: 2px 5px;
+      border-radius: 5px;
+      background: color-mix(in oklch, var(--accent) 10%, var(--paper));
+      color: var(--ink);
+      font-family: var(--mono);
+      font-size: .92em;
+    }
+    hr {
+      height: 1px;
+      margin: 26px 0;
+      border: 0;
+      background: var(--line);
+    }
+    .empty {
+      margin: 0;
+      padding: 16px 18px;
+      border: 1px dashed var(--line-strong);
+      border-radius: var(--radius);
+      color: var(--muted);
+      background: color-mix(in oklch, var(--paper-soft) 70%, transparent);
+    }
+    .search-empty { margin-top: 16px; }
+    .muted { color: var(--muted); }
+    @keyframes rise-in {
+      from { opacity: 1; transform: translate3d(0, 6px, 0); }
+      to { opacity: 1; transform: translate3d(0, 0, 0); }
+    }
+    .hero > *, .takeaway, .timeline-card, .speaker-card, .panel {
+      animation: rise-in .55s var(--ease) both;
+    }
+    .hero > *:nth-child(2) { animation-delay: .04s; }
+    .hero > *:nth-child(3) { animation-delay: .08s; }
+    .hero > *:nth-child(4) { animation-delay: .12s; }
+    .hero > *:nth-child(5) { animation-delay: .16s; }
+    .takeaway, .timeline-card, .speaker-card {
+      animation-delay: calc(var(--index, 1) * 38ms);
+    }
+    @media (max-width: 1120px) {
+      .hero { margin-left: 0; }
+      .content-shell {
+        grid-template-columns: minmax(154px, 190px) minmax(0, 1fr);
+        gap: 36px;
+      }
+      h1 { font-size: 44px; }
+    }
+    @media (min-width: 1500px) {
+      h1 {
+        width: max-content;
+        max-width: 100%;
+        white-space: nowrap;
+        font-size: clamp(36px, 2.05vw, 42px);
+      }
+    }
+    @media (max-width: 780px) {
+      body { background: var(--bg); }
+      .page { width: min(1180px, calc(100% - 28px)); padding-bottom: 86px; }
+      .hero { padding: 46px 0 36px; }
+      .eyebrow { margin-bottom: 14px; }
+      h1 {
+        max-width: none;
+        font-size: 30px;
+        line-height: 1.14;
+        word-break: normal;
+      }
+      .summary, .summary p, .takeaway p, .section-content, .speaker-card, .panel {
+        max-width: 100%;
+        word-break: break-word;
+      }
+      .meta-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 20px; }
+      .summary { padding: 20px; }
+      .summary p { font-size: 17px; }
+      .content-shell { display: block; padding-top: 28px; }
+      .sidebar { position: static; padding-top: 0; margin-bottom: 42px; }
+      .toc { border-top-color: var(--line-strong); }
+      .nav-links { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 18px; }
+      section { margin-bottom: 58px; }
+      .section-head { display: block; margin-bottom: 16px; }
+      .section-head h2 { font-size: 24px; }
+      .section-head p { margin-top: 6px; text-align: left; }
+      .takeaway { grid-template-columns: 42px minmax(0, 1fr); gap: 12px; }
+      .timeline-card { display: block; padding: 28px 0 32px; }
+      .timeline-heading { position: static; display: flex; align-items: baseline; gap: 12px; margin-bottom: 12px; }
+      .timeline-card h3 { max-width: none; font-size: 23px; }
+      .speaker-grid { display: block; }
+      .speaker-card:nth-child(even) { margin-top: 0; }
+      .quick-actions {
+        right: 12px;
+        bottom: 12px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 6px;
+      }
+      .quick-action {
+        min-width: 66px;
+        min-height: 38px;
+        padding: 7px 9px;
+        font-size: 13px;
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: 1ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 1ms !important;
+      }
+      .speaker-card:nth-child(even) { margin-top: 0; }
+    }
+    @media print {
+      body { background: var(--paper); }
+      .sidebar, .progress, .quick-actions { display: none; }
+      .page { display: block; width: auto; padding-bottom: 0; }
+      .hero { margin-left: 0; padding: 0 0 28px; }
+      .content-shell { display: block; border-top: 0; padding-top: 0; }
+      .summary { box-shadow: none; }
+      .timeline-card, .speaker-card { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <div class="progress" data-progress></div>
+  <div class="quick-actions" aria-label="快捷操作">
+    <a class="quick-action" href="../../index.html" aria-label="返回首页">
+      <span aria-hidden="true">←</span>
+      <span>首页</span>
+    </a>
+    <button class="quick-action" type="button" data-scroll-top aria-label="回到顶部">
+      <span aria-hidden="true">↑</span>
+      <span>顶部</span>
+    </button>
+  </div>
+  <div class="page">
+    <main class="article">
+      <header class="hero">
+        <p class="eyebrow">All-In Podcast 中文精读</p>
+        <h1>Anthropic 的 2 万亿美元 IPO、Zuck 的 AI 宣言、Nvidia 的 5000 亿算力豪赌与 Grok 的逆袭</h1>
+        <div class="meta">
+          <span>生成时间：2026-08-17 13:20</span>
+          <span>来源：<a href="https://www.youtube.com/watch?v=kVzYGVJ8zUk" target="_blank" rel="noopener">YouTube</a></span>
+        </div>
+        <div class="meta-strip"><span class="meta-pill"><b>51 分钟</b>阅读时长</span>
+<span class="meta-pill"><b>10</b>核心要点</span>
+<span class="meta-pill"><b>18</b>时间线</span>
+<span class="meta-pill"><b>5</b>人物</span></div>
+        <div class="summary" aria-label="一句话摘要"><p>本期 All-In Podcast 围绕 Anthropic 传闻中的 2 万亿美元 IPO 展开，三位嘉宾（JCal、Sacks 与特邀嘉宾 Gavin Baker）深入讨论了 AI 算力的物理约束、开源与集中化路线的根本分歧、Nvidia 的 GPU 金融化实验，以及 Elon Musk 用 6 个月让 Grok 追上前沿的故事。</p></div>
+      </header>
+
+      <div class="content-shell">
+        <aside class="sidebar">
+          <nav class="toc" aria-label="页面导航">
+            <p class="toc-title">阅读导航</p>
+            <div class="nav-links">
+              <a href="#takeaways">核心要点</a>
+              <a href="#timeline">分段整理</a>
+              <a href="#speakers">人物观点</a>
+              <a href="#quotes">双语引语</a>
+            </div>
+            <label class="search">
+              <span>搜索时间线</span>
+              <input data-search-box type="search" placeholder="关键词" aria-label="搜索时间线">
+            </label>
+          </nav>
+        </aside>
+
+        <div class="content-flow">
+          <section id="takeaways">
+            <div class="section-head">
+              <h2>核心要点</h2>
+              <p>快速扫读本集主线</p>
+            </div>
+            <ol class="takeaway-list"><li class="takeaway" style="--index: 1"><span>01</span><p>FT 报道 Anthropic 目标估值 2 万亿美元 IPO，预计 10 月上市，年底 ARR 将达 1000–1200 亿美元，一年增长约 10 倍，是硅谷历史上最快的营收爬坡。</p></li>
+<li class="takeaway" style="--index: 2"><span>02</span><p>Gavin Baker 对 2 万亿定价持怀疑态度，认为这是落选主承销商在向媒体放风、压低预期；他判断最终定价会更保守，上市后可能交易到 3 万亿。</p></li>
+<li class="takeaway" style="--index: 3"><span>03</span><p>Anthropic 与 SpaceX 达成&quot;和解&quot;：Elon 将 Colossus 超算的富余算力租给 Dario，且向 Gavin 确认 Dario 的&quot;道德探测器&quot;没有报警。</p></li>
+<li class="takeaway" style="--index: 4"><span>04</span><p>Dario 曾被传声称&quot;Anthropic 可能成为全球唯一私营公司&quot;，被三位嘉宾一致批为狂妄，JCal 甚至将其与 SBF 类比。</p></li>
+<li class="takeaway" style="--index: 5"><span>05</span><p>关于数据中心的水电恐慌，三位嘉宾一致认为媒体叙事几乎全错：用水量被夸大数万倍、数据中心实际拉低电价、还能振兴衰败小镇。</p></li>
+<li class="takeaway" style="--index: 6"><span>06</span><p>Zuckerberg 发表 6500 字 AI 宣言，主张开源、去中心化、为每个人创造智能体；Sacks 认为这击中了 EA/Anthropic 路线的内在矛盾。</p></li>
+<li class="takeaway" style="--index: 7"><span>07</span><p>Gavin 的核心框架：Anthropic 和有效利他主义者认为 AI &quot;太危险不能分发&quot;，而 Zuck、Elon、Jensen 认为 AI &quot;太危险不能集中&quot;——历史站在后者一边。</p></li>
+<li class="takeaway" style="--index: 8"><span>08</span><p>Nvidia 联合 Goldman、BlackRock、Blackstone 等机构成立独立融资平台，为 AI 算力筹集最高 5000 亿美元，把 GPU 变成可融资的收入型资产，Sacks 称之为&quot;AI 的美联储&quot;。</p></li>
+<li class="takeaway" style="--index: 9"><span>09</span><p>Anthropic 的 S-1 和季度财报将成为整个 AI 行业的&quot;配速车&quot;，若需求端出现任何摇摆，整个算力食物链都会连环追尾。</p></li>
+<li class="takeaway" style="--index: 10"><span>10</span><p>Grok 4.6 在 CursorBench 等基准上逼近甚至超越前沿模型且价格优势明显，Elon 靠收购 Cursor + 引入 SpaceX 管理层，6 个月完成追赶；另有消息称 Silver Lake 可能收购 Workday，标志着软件行业 PE 并购回暖。</p></li></ol>
+          </section>
+
+          <section id="timeline">
+            <div class="section-head">
+              <h2>分段详细整理</h2>
+              <p>按时间线阅读上下文</p>
+            </div>
+            <div class="timeline" data-timeline><article class="timeline-card" data-timeline-card data-search="00:00:00–00:02:51 开场：rahm emanuel 专访与民主党路线之争 本段核心内容： jcal、sacks 和本周嘉宾 gavin baker 回归，jcal 提到对 rahm emanuel 的专访很&quot;火爆&quot;。 大家讨论 emanuel 作为克林顿—奥巴马式温和民主党人，在当前 dsa（民主社会主义者）主导的民主党内的处境。 背景解释与关键术语： rahm emanuel：前芝加哥市长、奥巴马白宫幕僚长、前驻日大使，2028 年总统竞选潜在人选。 dsa（democratic socialists of america）：美国民主社会主义者组织，在年轻进步派中影响力很大。 sacks 提到&quot;你们的共和党&quot;——指 jcal 长期自称共和党人，而 sacks 本人是民主党温和派/前科技行业自由派。 详细中文整理： jcal： 欢迎回来，这是全球排名第一的播客。本周我们人少但议题多——david sacks 和 gavin baker 都在。gavin，你还好吗？你还在 spacex 成功的余晖里吧——这是你职业生涯最大的一笔赢，对吗？ gavin： spacex 确实是个神奇的时刻。世上只有一个 spacex。但借用 bill belichick 的话：该去辛辛那提了。spacex 的故事还没结束，后面还有很多事。 jcal： 在咱们这行，你只取决于上一笔投资。大家都在问：下一步是什么？sacks，你也回来了，夏天过得怎么样？ sacks： 很好，我很期待跟 gavin 聊。 jcal： 你错过了我们 all in interview show 上跟你的朋友 rahm emanuel 的那场对话——听说相当火爆。 sacks： 有多火？ jcal： 超级火爆。rahm 火力全开。这是一场非常棒的采访，任何想参选 2028 的人都欢迎来上我们的节目。基本结论是：rahm 是克林顿—奥巴马时代民主党的&quot;活化石&quot;。但如果你想想克林顿那套，在目前被 dsa 主导的民主党里完全没有机会。 sacks： 这很讽刺，而且这跟当年共和党内部发生的事非常像——一场内战。我希望温和派有机会，但谁知道这些疯狂的民主社会主义者会干出什么。 jcal： 他对民主社会主义者是坚决说不的，他认为社会主义政策是一条死路。他在这点上跟 sacks 你一样强硬。如果能出现一个温和或更温和的候选人，对大家都是好事。这期值得大家去看。" style="--index: 1">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">01</span>
+                    <span class="timeline-meta">00:00:00–00:02:51</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>开场：Rahm Emanuel 专访与民主党路线之争</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>JCal、Sacks 和本周嘉宾 Gavin Baker 回归，JCal 提到对 Rahm Emanuel 的专访很&quot;火爆&quot;。</li>
+<li>大家讨论 Emanuel 作为克林顿—奥巴马式温和民主党人，在当前 DSA（民主社会主义者）主导的民主党内的处境。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>Rahm Emanuel：前芝加哥市长、奥巴马白宫幕僚长、前驻日大使，2028 年总统竞选潜在人选。</li>
+<li>DSA（Democratic Socialists of America）：美国民主社会主义者组织，在年轻进步派中影响力很大。</li>
+<li>Sacks 提到&quot;你们的共和党&quot;——指 JCal 长期自称共和党人，而 Sacks 本人是民主党温和派/前科技行业自由派。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> 欢迎回来，这是全球排名第一的播客。本周我们人少但议题多——David Sacks 和 Gavin Baker 都在。Gavin，你还好吗？你还在 SpaceX 成功的余晖里吧——这是你职业生涯最大的一笔赢，对吗？</p>
+<p><strong>Gavin：</strong> SpaceX 确实是个神奇的时刻。世上只有一个 SpaceX。但借用 Bill Belichick 的话：该去辛辛那提了。SpaceX 的故事还没结束，后面还有很多事。</p>
+<p><strong>JCal：</strong> 在咱们这行，你只取决于上一笔投资。大家都在问：下一步是什么？Sacks，你也回来了，夏天过得怎么样？</p>
+<p><strong>Sacks：</strong> 很好，我很期待跟 Gavin 聊。</p>
+<p><strong>JCal：</strong> 你错过了我们 All In Interview Show 上跟你的朋友 Rahm Emanuel 的那场对话——听说相当火爆。</p>
+<p><strong>Sacks：</strong> 有多火？</p>
+<p><strong>JCal：</strong> 超级火爆。Rahm 火力全开。这是一场非常棒的采访，任何想参选 2028 的人都欢迎来上我们的节目。基本结论是：Rahm 是克林顿—奥巴马时代民主党的&quot;活化石&quot;。但如果你想想克林顿那套，在目前被 DSA 主导的民主党里完全没有机会。</p>
+<p><strong>Sacks：</strong> 这很讽刺，而且这跟当年共和党内部发生的事非常像——一场内战。我希望温和派有机会，但谁知道这些疯狂的民主社会主义者会干出什么。</p>
+<p><strong>JCal：</strong> 他对民主社会主义者是坚决说不的，他认为社会主义政策是一条死路。他在这点上跟 Sacks 你一样强硬。如果能出现一个温和或更温和的候选人，对大家都是好事。这期值得大家去看。</p></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="00:02:51–00:09:03 anthropic 2 万亿美元 ipo 传闻与 descartes 收购 本段核心内容： ft 报道 anthropic 目标 2 万亿美元 ipo，预计 10 月上市；polymarket 显示 80% 概率今年 ipo。 anthropic 年底 arr 预计 1000–1200 亿美元，同比 10 倍增长，16–20 倍市销率。 anthropic 正在洽谈以 60 亿美元收购 ai 芯片效率初创公司 descartes。 gavin baker 解释自己为何不投 anthropic：elon 与 dario 的&quot;和解&quot;来得太晚，他不投 elon 的竞争对手。 gavin 对 2 万亿 ipo 定价表示怀疑，认为 $2 万亿可能是落选投行的&quot;放风压价&quot;。 背景解释与关键术语： arr（annualized run rate）：年化经常性收入，用最近一个月的收入乘以 12 推算全年。 s-1：美国公司 ipo 时向 sec 提交的招股说明书。 lead left：ipo 主承销商（牵头账簿管理人），负责主导发行定价和销售。 polymarket：基于预测市场的博彩平台，这里用来衡量市场对 anthropic 年内 ipo 概率的预期。 colossus：elon musk 旗下 xai 在田纳西州孟菲斯建的超大规模算力集群。 dario：dario amodei，anthropic ceo。 sbf：sam bankman-fried，ftx 创始人，elon 曾与他对话后迅速终止，视为&quot;道德探测器&quot;判断的例子。 市销率（price-to-sales）：估值除以年收入，2 万亿 / 1000 亿 = 20 倍。 详细中文整理： jcal： 插播一条大新闻——在我们录制时（我们每周四录制、周五发布），据《金融时报》报道，anthropic 正在筹备目标 2 万亿美元的 ipo。这会打破 spacex 创下的 1.75 万亿美元 ipo 纪录。ft 周三晚报道说，投资者预计公司将于 10 月上市——也就是 6 到 8 周之后。这与 polymarket 上 80% 的年内 ipo 概率吻合，我们的第五好基友 brad gerstner 也在暗示这事会很快发生。年化收入——sacks 我们聊过很多次——年底将达到 1000 到 1200 亿美元。这是硅谷从未见过的收入爬坡速度。按 2 万亿估值算，是 16 到 20 倍市销率，比 spacex、palantir 等高价股上市时的倍数低不少。过去一年收入增长 10 倍。anthropic 目前仍拥有 ai 最强模型，但 grok——我们等会儿会细聊——正在快速追赶。openai 也不差。polymarket 显示年底 anthropic 保有最强模型的概率是 67%。 jcal： 周四还有消息：anthropic 正在洽谈以 60 亿美元收购一家叫 descartes 的 ai 初创公司。他们的软件通过提高芯片效率来降低 ai 训练和推理成本。gavin，你先发表意见——先问清楚：你是 anthropic 的股东吗？你对这个收入爬坡速度和 ipo 怎么看？ gavin： 几件事。我目前不是 anthropic 股东。anthropic 与 spacex 的&quot;和解&quot;来得太晚了——我一般不投 elon 的竞争对手，我觉得那不是明智的选择。 jcal： 这说得通。所谓&quot;和解&quot;显然是指 elon 在 colossus 拥有大量富余算力后，决定把它租给 dario 和 anthropic。 gavin： 绝对。而且我认为更重要的是，elon 对 dario 的为人放了心——dario 是个好人。人非圣贤，孰能无过，也许他在处理政府关系上犯过一些错误。但 elon 确信他的道德没问题。用 elon 的话说，&quot;他们没有触发我的邪恶探测器&quot;——而且 elon 那个探测器相当准，他当年跟 sbf 的对话就是谈了几句就挂了。回到 anthropic 本身：传闻中的数字非常惊人，我们真的从未见过这种情况。我认为今年四五月是资本主义历史上最不寻常的时刻之一。更疯狂的是，anthropic 可能正在把份额输给 openai、输给开源、输给 grok，但它仍然增长这么快。这说明—— jcal： 为什么？这是大家需要理解的关键。蛋糕本身在变得极其巨大。所以即使 anthropic 在百分比上失分，绝对数字——我们之前说过开源是&quot;暗 token&quot;，不被任何地方统计——这是一个巨大的、做大盘子的时刻。你指的就是这个，对吧？ gavin： 就是这个意思。我认为 ai 在 7 月份整体加速了，这与当时公开市场的表现形成鲜明对比——现在我们对当时发生了什么有了更清晰的图景。关于 anthropic ipo，首先，这是一家卓越的公司，执行非常好，而且不只是模型本身——产品也很出色。我经常想起 eric vishria 差不多两年前的一个思想实验：他认为即使 openai 和 anthropic 在模型层输了，它们仍然有巨大价值，因为产品、使用习惯、用户熟悉度都极其重要。我觉得这有一定道理。但说到 ipo，我首先想说的是：2 万亿这个数字，我有点怀疑。我们在 spacex 身上见过这种事——每个人都在争当主承销商，如果你没当上，你第一件想做的事就是让主承销商难堪。 jcal： 所以你就向媒体放风说&quot;我们在房间里，门槛是 2 万亿 ipo&quot;。 gavin： 对。而且我上期节目说过 3 到 4 万亿。 jcal： 那是你判断的价格？ gavin： 绝对，但那是它可能交易到的位置。所以现在他们是在压低预期。 jcal： 意思是他们在&quot;压气球&quot;？ gavin： 对，我们还没看到 s-1。我的看法是，如果你要负责任地带一家公司上市，你会把定价定得能吸收锁定期——你不想定价太高、制造巨大波动，那会让员工非常不安，你不想在这个时刻让任何人分心。所以他们会聪明地定价。也许就是 2 万亿，也许按 2 万亿发行然后交易到 3 万亿。但你得记住：这些泄漏通常来自输掉承销席位的投行，他们想让主承销商难看。所以如果最终真按 2 万亿发行，那说明 test-the-waters 和路演进行得非常好，人们确实想拥有这家公司。这些数字是前所未有的。 jcal： 那你的意思是路演可能已经发生过了？或者悄悄进行了？ gavin： 不，肯定没有。我的意思是：如果定价在 2 万亿，说明前期测试和路演进展顺利，他们对二级市场表现很有信心。 jcal： sacks，在硅谷历史上，你在 2026 年的节目里多次指出：我们没见过这样的收入爬坡。它能持续吗？如果能持续，对企业和 claude 占据绝对领先地位的领域意味着什么？ sacks： 我觉得可以持续，但这是个真问题。如果你年底以 1000 亿美元 run rate 收尾，同比 10 倍以上增长——顺便说，过去三年它每年都是 10 倍增长，所以是指数增长。如果这个增速继续，到明年底 arr 就到 1 万亿美元了。那你要问：tam 够不够大？但还有：算力够不够？能源够不够？我觉得你开始碰到物理约束。tam 我认为足够大，需求肯定在。ai 的新应用太多了，agent 刚起飞——grokbot 的发布就是例子。所有公司都会继续把 ai 延伸到更多场景，所以 token 需求只会指数增长。问题在于他们能不能在物理上满足这个需求。另外还有 gavin 说的市场份额问题——其他公司看到了他们在做什么，正在更有效地抢份额。 jcal： 记住，anthropic 在编程上下了大赌注，结果证明非常有远见。我不知道是出于意识形态——他们觉得这是通往递归自我改进的路径——还是因为他们看到了 cursor。 gavin： 就是这个原因。 jcal： 看到别人在它上面构建。 gavin： 他们观察 cursor 的使用量，然后说：我们要拿下这门生意。这是个很重要的观察点。 jcal： 所以他们垂直化地进入了他们看到用户在自己平台上成功构建的领域。不管怎样，他们第一个进入编程，非常成功，带来了一波繁荣。我们听说 openai 现在基本上也转向编程了，gpt-5.6 做得更好。我们听说他们的增速在加快——以前是每年 3 到 4 倍，过去两个月月环比超过 20%，外推 12 个月就是 10 倍增速。所以 openai 在完成转型后，增速已经跟 anthropic 一样快。spacex ai 能不能也做到，我们后面可以聊。总之，不管 anthropic 明年能不能再 10 倍，我认为它都会增长很快。问题只是市场份额相对竞争对手长什么样。" style="--index: 2">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">02</span>
+                    <span class="timeline-meta">00:02:51–00:09:03</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>Anthropic 2 万亿美元 IPO 传闻与 Descartes 收购</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>FT 报道 Anthropic 目标 2 万亿美元 IPO，预计 10 月上市；Polymarket 显示 80% 概率今年 IPO。</li>
+<li>Anthropic 年底 ARR 预计 1000–1200 亿美元，同比 10 倍增长，16–20 倍市销率。</li>
+<li>Anthropic 正在洽谈以 60 亿美元收购 AI 芯片效率初创公司 Descartes。</li>
+<li>Gavin Baker 解释自己为何不投 Anthropic：Elon 与 Dario 的&quot;和解&quot;来得太晚，他不投 Elon 的竞争对手。</li>
+<li>Gavin 对 2 万亿 IPO 定价表示怀疑，认为 $2 万亿可能是落选投行的&quot;放风压价&quot;。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>ARR（Annualized Run Rate）：年化经常性收入，用最近一个月的收入乘以 12 推算全年。</li>
+<li>S-1：美国公司 IPO 时向 SEC 提交的招股说明书。</li>
+<li>Lead Left：IPO 主承销商（牵头账簿管理人），负责主导发行定价和销售。</li>
+<li>Polymarket：基于预测市场的博彩平台，这里用来衡量市场对 Anthropic 年内 IPO 概率的预期。</li>
+<li>Colossus：Elon Musk 旗下 xAI 在田纳西州孟菲斯建的超大规模算力集群。</li>
+<li>Dario：Dario Amodei，Anthropic CEO。</li>
+<li>SBF：Sam Bankman-Fried，FTX 创始人，Elon 曾与他对话后迅速终止，视为&quot;道德探测器&quot;判断的例子。</li>
+<li>市销率（Price-to-Sales）：估值除以年收入，2 万亿 / 1000 亿 = 20 倍。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> 插播一条大新闻——在我们录制时（我们每周四录制、周五发布），据《金融时报》报道，Anthropic 正在筹备目标 2 万亿美元的 IPO。这会打破 SpaceX 创下的 1.75 万亿美元 IPO 纪录。FT 周三晚报道说，投资者预计公司将于 10 月上市——也就是 6 到 8 周之后。这与 Polymarket 上 80% 的年内 IPO 概率吻合，我们的第五好基友 Brad Gerstner 也在暗示这事会很快发生。年化收入——Sacks 我们聊过很多次——年底将达到 1000 到 1200 亿美元。这是硅谷从未见过的收入爬坡速度。按 2 万亿估值算，是 16 到 20 倍市销率，比 SpaceX、Palantir 等高价股上市时的倍数低不少。过去一年收入增长 10 倍。Anthropic 目前仍拥有 AI 最强模型，但 Grok——我们等会儿会细聊——正在快速追赶。OpenAI 也不差。Polymarket 显示年底 Anthropic 保有最强模型的概率是 67%。</p>
+<p><strong>JCal：</strong> 周四还有消息：Anthropic 正在洽谈以 60 亿美元收购一家叫 Descartes 的 AI 初创公司。他们的软件通过提高芯片效率来降低 AI 训练和推理成本。Gavin，你先发表意见——先问清楚：你是 Anthropic 的股东吗？你对这个收入爬坡速度和 IPO 怎么看？</p>
+<p><strong>Gavin：</strong> 几件事。我目前不是 Anthropic 股东。Anthropic 与 SpaceX 的&quot;和解&quot;来得太晚了——我一般不投 Elon 的竞争对手，我觉得那不是明智的选择。</p>
+<p><strong>JCal：</strong> 这说得通。所谓&quot;和解&quot;显然是指 Elon 在 Colossus 拥有大量富余算力后，决定把它租给 Dario 和 Anthropic。</p>
+<p><strong>Gavin：</strong> 绝对。而且我认为更重要的是，Elon 对 Dario 的为人放了心——Dario 是个好人。人非圣贤，孰能无过，也许他在处理政府关系上犯过一些错误。但 Elon 确信他的道德没问题。用 Elon 的话说，&quot;他们没有触发我的邪恶探测器&quot;——而且 Elon 那个探测器相当准，他当年跟 SBF 的对话就是谈了几句就挂了。回到 Anthropic 本身：传闻中的数字非常惊人，我们真的从未见过这种情况。我认为今年四五月是资本主义历史上最不寻常的时刻之一。更疯狂的是，Anthropic 可能正在把份额输给 OpenAI、输给开源、输给 Grok，但它仍然增长这么快。这说明——</p>
+<p><strong>JCal：</strong> 为什么？这是大家需要理解的关键。蛋糕本身在变得极其巨大。所以即使 Anthropic 在百分比上失分，绝对数字——我们之前说过开源是&quot;暗 token&quot;，不被任何地方统计——这是一个巨大的、做大盘子的时刻。你指的就是这个，对吧？</p>
+<p><strong>Gavin：</strong> 就是这个意思。我认为 AI 在 7 月份整体加速了，这与当时公开市场的表现形成鲜明对比——现在我们对当时发生了什么有了更清晰的图景。关于 Anthropic IPO，首先，这是一家卓越的公司，执行非常好，而且不只是模型本身——产品也很出色。我经常想起 Eric Vishria 差不多两年前的一个思想实验：他认为即使 OpenAI 和 Anthropic 在模型层输了，它们仍然有巨大价值，因为产品、使用习惯、用户熟悉度都极其重要。我觉得这有一定道理。但说到 IPO，我首先想说的是：2 万亿这个数字，我有点怀疑。我们在 SpaceX 身上见过这种事——每个人都在争当主承销商，如果你没当上，你第一件想做的事就是让主承销商难堪。</p>
+<p><strong>JCal：</strong> 所以你就向媒体放风说&quot;我们在房间里，门槛是 2 万亿 IPO&quot;。</p>
+<p><strong>Gavin：</strong> 对。而且我上期节目说过 3 到 4 万亿。</p>
+<p><strong>JCal：</strong> 那是你判断的价格？</p>
+<p><strong>Gavin：</strong> 绝对，但那是它可能交易到的位置。所以现在他们是在压低预期。</p>
+<p><strong>JCal：</strong> 意思是他们在&quot;压气球&quot;？</p>
+<p><strong>Gavin：</strong> 对，我们还没看到 S-1。我的看法是，如果你要负责任地带一家公司上市，你会把定价定得能吸收锁定期——你不想定价太高、制造巨大波动，那会让员工非常不安，你不想在这个时刻让任何人分心。所以他们会聪明地定价。也许就是 2 万亿，也许按 2 万亿发行然后交易到 3 万亿。但你得记住：这些泄漏通常来自输掉承销席位的投行，他们想让主承销商难看。所以如果最终真按 2 万亿发行，那说明 test-the-waters 和路演进行得非常好，人们确实想拥有这家公司。这些数字是前所未有的。</p>
+<p><strong>JCal：</strong> 那你的意思是路演可能已经发生过了？或者悄悄进行了？</p>
+<p><strong>Gavin：</strong> 不，肯定没有。我的意思是：如果定价在 2 万亿，说明前期测试和路演进展顺利，他们对二级市场表现很有信心。</p>
+<p><strong>JCal：</strong> Sacks，在硅谷历史上，你在 2026 年的节目里多次指出：我们没见过这样的收入爬坡。它能持续吗？如果能持续，对企业和 Claude 占据绝对领先地位的领域意味着什么？</p>
+<p><strong>Sacks：</strong> 我觉得可以持续，但这是个真问题。如果你年底以 1000 亿美元 run rate 收尾，同比 10 倍以上增长——顺便说，过去三年它每年都是 10 倍增长，所以是指数增长。如果这个增速继续，到明年底 ARR 就到 1 万亿美元了。那你要问：TAM 够不够大？但还有：算力够不够？能源够不够？我觉得你开始碰到物理约束。TAM 我认为足够大，需求肯定在。AI 的新应用太多了，agent 刚起飞——Grokbot 的发布就是例子。所有公司都会继续把 AI 延伸到更多场景，所以 token 需求只会指数增长。问题在于他们能不能在物理上满足这个需求。另外还有 Gavin 说的市场份额问题——其他公司看到了他们在做什么，正在更有效地抢份额。</p>
+<p><strong>JCal：</strong> 记住，Anthropic 在编程上下了大赌注，结果证明非常有远见。我不知道是出于意识形态——他们觉得这是通往递归自我改进的路径——还是因为他们看到了 Cursor。</p>
+<p><strong>Gavin：</strong> 就是这个原因。</p>
+<p><strong>JCal：</strong> 看到别人在它上面构建。</p>
+<p><strong>Gavin：</strong> 他们观察 Cursor 的使用量，然后说：我们要拿下这门生意。这是个很重要的观察点。</p>
+<p><strong>JCal：</strong> 所以他们垂直化地进入了他们看到用户在自己平台上成功构建的领域。不管怎样，他们第一个进入编程，非常成功，带来了一波繁荣。我们听说 OpenAI 现在基本上也转向编程了，GPT-5.6 做得更好。我们听说他们的增速在加快——以前是每年 3 到 4 倍，过去两个月月环比超过 20%，外推 12 个月就是 10 倍增速。所以 OpenAI 在完成转型后，增速已经跟 Anthropic 一样快。SpaceX AI 能不能也做到，我们后面可以聊。总之，不管 Anthropic 明年能不能再 10 倍，我认为它都会增长很快。问题只是市场份额相对竞争对手长什么样。</p></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="00:09:03–00:14:53 营收增速能否持续：从 1000 亿到 1 万亿？ 本段核心内容： 三位嘉宾尝试用&quot;信封背面&quot;的粗略计算，讨论 anthropic 从 1000 亿美元 arr 增长到 1 万亿需要什么条件。 gavin 透露 anthropic 内部极为自信，dario 曾宣称 anthropic 可能成为&quot;世界上唯一一家私营公司&quot;。 这一言论被三位嘉宾一致批评为傲慢，有人将其与 sbf 的狂妄相提并论。 需求端 tam 在 25 万亿—65 万亿美元之间；目前看 ai 在加速增长而非替代劳动力，软件程序员岗位反而比一年前更多。 背景解释与关键术语： tam（total addressable market）：潜在市场总规模。 &quot;ai jesus&quot;：节目中对 dario amodei 的戏称，因为他总以救世主姿态谈论 ai 安全。 递归自我改进（recursive self-improvement）：ai 自己改进自己的代码和能力的循环。 知识工作（knowledge work）：以信息处理为核心的脑力劳动，是当前 ai 的主要目标市场。 详细中文整理： jcal： gavin，值得深挖两个点。第一，这些 token 会有市场吗？增长能持续吗？也就是需求是否存在——我们三个人都同意需求当然在。但另外两个问题，sacks 提到了：能源和数据中心。这是我想让你回答的：他们能做到 1 万亿美元收入吗？我们慢下来做个粗略计算。这是你的主场。从每年 1000 亿美元收入再 10 倍，基础设施要什么条件？在一年内这在物理上可能吗？ gavin： 几个想法。首先，这确实是正确的问题。第一，anthropic 内部非常自信。多个我信任的人告诉我，dario 说过：anthropic 可能在某个时点成为世界上唯一一家私营公司。想想这意味着什么——在这个&quot;anthropic 至上主义&quot;的愿景里，世界上只有 anthropic，然后就是各国政府，没有别的了。所以他们信心爆棚。我肯定他们手里还有比 fable 更先进的 checkpoint。他们执行得非常好。但让我打赌的话，我会赌&quot;成为全球唯一私营公司&quot;这件事不会发生。他们离把火箭降下来、给你送午饭还早着呢。 jcal： 我不确定，世界上可能还有其他生意。zipline 可能想给你送卷饼，uber 可能想载你去某处……但当然，dario 说了算。 sacks： 我可能把这解读为一个负面信号，因为它太傲慢了。这有点进入 sbf 的领域了。 jcal： 是的，我肯定应该劝 dario 以后永远不要再对任何人说这种话。 sacks： 所以&quot;ai 耶稣&quot;不应该宣称自己是&quot;ai 耶稣&quot;。 jcal： 对。骄兵必败。 sacks： 是的。 jcal： 如果他们摔下来，那会是狠狠一摔。 gavin： 但我从公司其他人那里听到的是：当他们 arr 大约 600 亿美元时，他们认为一年内能到 6000 亿。也就是说他们相信自己从今年年中就处于 10 倍爬坡轨道上。现在他们已经超过 800 亿，看起来没有放缓。所以我认为关键问题是明年能增长多快——是 1000 或 1200 亿直接到 1 万亿，还是只到 4000 到 5000 亿？如果只到 4 到 5000 亿，那已经是最大的软件公司了。 jcal： 我是说，到 2000 亿就已经是惊人的结果了。 gavin： 那它就跟微软的 office 业务或者谷歌的搜索业务平起平坐了——我们开始成为这两家公司的对手了。 sacks： 1000 亿绝对已经是了。把问题拆成需求和供给。需求端，看你怎么算，知识工作大概是 25 万亿到 65 万亿美元。25 万亿是我常用的数字，但三大投行之一 ai 研究所的负责人告诉我这个数太低了。这就是他们在没有机器人之前的 tam。然后的问题是：这是劳动力替代还是增长加速？到目前为止看起来确实是增长加速——今天的软件程序员职位空缺比一年前还多，对程序员的需求反而增加了，而那里正是冲击震中。有一些证据表明对于刚毕业的年轻人可能有负面影响。但总的来说，必须来自两者之一。我认为对所有人更好的是来自增长加速。 gavin： 而且这些公司现在的规模意味着，如果真的是增长加速带来的，未来 18 个月我们会开始在国家账户数据里看到它。 jcal： 你要聊能源部分吗？ gavin： 供给端。 jcal： 对。 gavin： 这才是真正见真章的地方。你去跟那些建数据中心的人聊——最好的理解方式是去看《landman》那部剧。你需要 billy bob thornton 那样的角色，在二叠纪盆地，在油田里，你还得担心毒贩。那是尖刀上的刀尖。110 华氏度的高温。你要在偏远地点调度几千人。 jcal： 这是原子，不是比特。 gavin： 是原子，不是比特。这真的非常难。但美国一旦动员起来其实很擅长这个。美国和资本主义非常擅长解决这类问题。大家都在说最终瓶颈是涡轮叶片——这种东西全美国加欧洲只有两家工厂生产，每家工厂就是一个巨大的厂房加一台 40 吨的压机。但现在这些工厂在跑 24 小时三班倒。 jcal： 需求确实是创新之母，没有什么比资本主义更能推动这事。boom supersonic 在为超音速客机造新发动机——sacks 还预订了一架。他们说要先建燃气轮机业务，因为需求太大了。还有 elon，我听说有报道说他个人收购了一家燃气轮机公司——是个人名义买的，这告诉我他就是想快。另外私人飞机的残值现在特别强，很大一部分原因是人们把旧飞机上的发动机拆下来改装成燃气轮机给数据中心供电。 gavin： 百分之百。 jcal： 这太疯狂了。 gavin： 这是个很大的生意，而且增长非常快。然后你有 caterpillar、cummins、ge vernova、siemens energy——它们都在快速扩产。所以供给端的问题：美国这些&quot;billy bob thornton&quot;们会跟这些公司合作，把燃气轮机装到地上。瓶颈在于政治和监管。德州州长 abbott 本周宣布要进行能源审计——不是要放慢、不是暂停，而是所有人都要过审计。如果你自带能源（byoe），没问题。但如果你想用德州电网的电，就得先过审计，因为人们不想整个电网又在一月结冰时瘫痪。 sacks： 现在关于 ai 的叙事很糟。什么数据中心耗光了社区的水——那是三年前一本书里犯的错，把数据中心的用水量夸大了一个数量级。什么数据中心推高了你的电价——这也是错的，它其实降低了电价。《华尔街日报》刚报道了 ellendale 镇的故事：那是个垂死的小镇，建了数据中心后整个镇焕发生机，税收增长了 10 倍。这是发生过的最好的事。但没人讲这些故事，而人们需要听。我们在节目里说过很多次：中共在搞非常积极的&quot;反 ai、反数据中心&quot;宣传，因为这对他们有利、对美国有害。必须有人讲 ai 的真话。圣经里最好的话之一就是：真理必叫你们得以自由。" style="--index: 3">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">03</span>
+                    <span class="timeline-meta">00:09:03–00:14:53</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>营收增速能否持续：从 1000 亿到 1 万亿？</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>三位嘉宾尝试用&quot;信封背面&quot;的粗略计算，讨论 Anthropic 从 1000 亿美元 ARR 增长到 1 万亿需要什么条件。</li>
+<li>Gavin 透露 Anthropic 内部极为自信，Dario 曾宣称 Anthropic 可能成为&quot;世界上唯一一家私营公司&quot;。</li>
+<li>这一言论被三位嘉宾一致批评为傲慢，有人将其与 SBF 的狂妄相提并论。</li>
+<li>需求端 TAM 在 25 万亿—65 万亿美元之间；目前看 AI 在加速增长而非替代劳动力，软件程序员岗位反而比一年前更多。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>TAM（Total Addressable Market）：潜在市场总规模。</li>
+<li>&quot;AI Jesus&quot;：节目中对 Dario Amodei 的戏称，因为他总以救世主姿态谈论 AI 安全。</li>
+<li>递归自我改进（Recursive Self-Improvement）：AI 自己改进自己的代码和能力的循环。</li>
+<li>知识工作（Knowledge Work）：以信息处理为核心的脑力劳动，是当前 AI 的主要目标市场。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> Gavin，值得深挖两个点。第一，这些 token 会有市场吗？增长能持续吗？也就是需求是否存在——我们三个人都同意需求当然在。但另外两个问题，Sacks 提到了：能源和数据中心。这是我想让你回答的：他们能做到 1 万亿美元收入吗？我们慢下来做个粗略计算。这是你的主场。从每年 1000 亿美元收入再 10 倍，基础设施要什么条件？在一年内这在物理上可能吗？</p>
+<p><strong>Gavin：</strong> 几个想法。首先，这确实是正确的问题。第一，Anthropic 内部非常自信。多个我信任的人告诉我，Dario 说过：Anthropic 可能在某个时点成为世界上唯一一家私营公司。想想这意味着什么——在这个&quot;Anthropic 至上主义&quot;的愿景里，世界上只有 Anthropic，然后就是各国政府，没有别的了。所以他们信心爆棚。我肯定他们手里还有比 Fable 更先进的 checkpoint。他们执行得非常好。但让我打赌的话，我会赌&quot;成为全球唯一私营公司&quot;这件事不会发生。他们离把火箭降下来、给你送午饭还早着呢。</p>
+<p><strong>JCal：</strong> 我不确定，世界上可能还有其他生意。Zipline 可能想给你送卷饼，Uber 可能想载你去某处……但当然，Dario 说了算。</p>
+<p><strong>Sacks：</strong> 我可能把这解读为一个负面信号，因为它太傲慢了。这有点进入 SBF 的领域了。</p>
+<p><strong>JCal：</strong> 是的，我肯定应该劝 Dario 以后永远不要再对任何人说这种话。</p>
+<p><strong>Sacks：</strong> 所以&quot;AI 耶稣&quot;不应该宣称自己是&quot;AI 耶稣&quot;。</p>
+<p><strong>JCal：</strong> 对。骄兵必败。</p>
+<p><strong>Sacks：</strong> 是的。</p>
+<p><strong>JCal：</strong> 如果他们摔下来，那会是狠狠一摔。</p>
+<p><strong>Gavin：</strong> 但我从公司其他人那里听到的是：当他们 ARR 大约 600 亿美元时，他们认为一年内能到 6000 亿。也就是说他们相信自己从今年年中就处于 10 倍爬坡轨道上。现在他们已经超过 800 亿，看起来没有放缓。所以我认为关键问题是明年能增长多快——是 1000 或 1200 亿直接到 1 万亿，还是只到 4000 到 5000 亿？如果只到 4 到 5000 亿，那已经是最大的软件公司了。</p>
+<p><strong>JCal：</strong> 我是说，到 2000 亿就已经是惊人的结果了。</p>
+<p><strong>Gavin：</strong> 那它就跟微软的 Office 业务或者谷歌的搜索业务平起平坐了——我们开始成为这两家公司的对手了。</p>
+<p><strong>Sacks：</strong> 1000 亿绝对已经是了。把问题拆成需求和供给。需求端，看你怎么算，知识工作大概是 25 万亿到 65 万亿美元。25 万亿是我常用的数字，但三大投行之一 AI 研究所的负责人告诉我这个数太低了。这就是他们在没有机器人之前的 TAM。然后的问题是：这是劳动力替代还是增长加速？到目前为止看起来确实是增长加速——今天的软件程序员职位空缺比一年前还多，对程序员的需求反而增加了，而那里正是冲击震中。有一些证据表明对于刚毕业的年轻人可能有负面影响。但总的来说，必须来自两者之一。我认为对所有人更好的是来自增长加速。</p>
+<p><strong>Gavin：</strong> 而且这些公司现在的规模意味着，如果真的是增长加速带来的，未来 18 个月我们会开始在国家账户数据里看到它。</p>
+<p><strong>JCal：</strong> 你要聊能源部分吗？</p>
+<p><strong>Gavin：</strong> 供给端。</p>
+<p><strong>JCal：</strong> 对。</p>
+<p><strong>Gavin：</strong> 这才是真正见真章的地方。你去跟那些建数据中心的人聊——最好的理解方式是去看《Landman》那部剧。你需要 Billy Bob Thornton 那样的角色，在二叠纪盆地，在油田里，你还得担心毒贩。那是尖刀上的刀尖。110 华氏度的高温。你要在偏远地点调度几千人。</p>
+<p><strong>JCal：</strong> 这是原子，不是比特。</p>
+<p><strong>Gavin：</strong> 是原子，不是比特。这真的非常难。但美国一旦动员起来其实很擅长这个。美国和资本主义非常擅长解决这类问题。大家都在说最终瓶颈是涡轮叶片——这种东西全美国加欧洲只有两家工厂生产，每家工厂就是一个巨大的厂房加一台 40 吨的压机。但现在这些工厂在跑 24 小时三班倒。</p>
+<p><strong>JCal：</strong> 需求确实是创新之母，没有什么比资本主义更能推动这事。Boom Supersonic 在为超音速客机造新发动机——Sacks 还预订了一架。他们说要先建燃气轮机业务，因为需求太大了。还有 Elon，我听说有报道说他个人收购了一家燃气轮机公司——是个人名义买的，这告诉我他就是想快。另外私人飞机的残值现在特别强，很大一部分原因是人们把旧飞机上的发动机拆下来改装成燃气轮机给数据中心供电。</p>
+<p><strong>Gavin：</strong> 百分之百。</p>
+<p><strong>JCal：</strong> 这太疯狂了。</p>
+<p><strong>Gavin：</strong> 这是个很大的生意，而且增长非常快。然后你有 Caterpillar、Cummins、GE Vernova、Siemens Energy——它们都在快速扩产。所以供给端的问题：美国这些&quot;Billy Bob Thornton&quot;们会跟这些公司合作，把燃气轮机装到地上。瓶颈在于政治和监管。德州州长 Abbott 本周宣布要进行能源审计——不是要放慢、不是暂停，而是所有人都要过审计。如果你自带能源（BYOE），没问题。但如果你想用德州电网的电，就得先过审计，因为人们不想整个电网又在一月结冰时瘫痪。</p>
+<p><strong>Sacks：</strong> 现在关于 AI 的叙事很糟。什么数据中心耗光了社区的水——那是三年前一本书里犯的错，把数据中心的用水量夸大了一个数量级。什么数据中心推高了你的电价——这也是错的，它其实降低了电价。《华尔街日报》刚报道了 Ellendale 镇的故事：那是个垂死的小镇，建了数据中心后整个镇焕发生机，税收增长了 10 倍。这是发生过的最好的事。但没人讲这些故事，而人们需要听。我们在节目里说过很多次：中共在搞非常积极的&quot;反 AI、反数据中心&quot;宣传，因为这对他们有利、对美国有害。必须有人讲 AI 的真话。圣经里最好的话之一就是：真理必叫你们得以自由。</p></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="00:14:53–00:20:21 供给端约束：能源、燃气轮机和数据中心建设 本段核心内容： 数据中心建设的真正瓶颈是物理世界：燃气轮机产能、工人在偏远地点作业、高温和供应链。 美国资本主义和企业家精神正在快速响应：涡轮工厂开三班倒，boom 和 elon 都在布局燃气轮机业务。 政客和监管成为新的摩擦点，德州的能源审计就是一个例子。 （本段已在上文 00:14:53 起的讨论中覆盖，此处不再重复）" style="--index: 4">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">04</span>
+                    <span class="timeline-meta">00:14:53–00:20:21</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>供给端约束：能源、燃气轮机和数据中心建设</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>数据中心建设的真正瓶颈是物理世界：燃气轮机产能、工人在偏远地点作业、高温和供应链。</li>
+<li>美国资本主义和企业家精神正在快速响应：涡轮工厂开三班倒，Boom 和 Elon 都在布局燃气轮机业务。</li>
+<li>政客和监管成为新的摩擦点，德州的能源审计就是一个例子。</li>
+</ul>
+<p>（本段已在上文 00:14:53 起的讨论中覆盖，此处不再重复）</p></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="00:20:21–00:24:23 数据中心恐慌：媒体制造的谎言 本段核心内容： 三位嘉宾系统性反驳&quot;数据中心耗水、耗电、污染&quot;的媒体报道。 数据中心的用水量被夸大数万倍，实际少于一个高尔夫球场；水资源循环利用。 数据中心自建发电后向电网反售余电，还承担电网升级成本。 蓝州电价上涨的真正原因是&quot;去碳化&quot;和绿色监管，而非数据中心。 噪声污染是真实的，但完全可以靠选址管理。 背景解释与关键术语： 蓝州：美国政治中指民主党主导的州，如加州、纽约州。 去碳化（decarbonization）：推动能源系统摆脱化石燃料的政策，常伴随对新建电厂更严格的审批。 二叠纪盆地（permian basin）：德州和新墨西哥州的大型油气田，是美国页岩油气的核心地带。 详细中文整理： jcal： 数据中心恐慌证明了媒体有能力凭空制造骗局和歇斯底里。数据中心故事里每一个细节都是错的——是谎言。就像你说的，它们没有耗尽社区的水，用水量完全可以管理，比一个高尔夫球场还少，水是循环的。它降低电价——前提是数据中心自己建发电设施，因为它们会把多余的电卖回电网，而且它们掏钱升级电网。蓝州电价上涨的真正原因是去碳化以及其他所有让发电变得更难的绿色监管。还有什么指控？ sacks： 说它们制造污染。 gavin： 噪声污染是真实的。没有任何一个正常思维的人——它们不会建在谁家后院。 sacks： 对，现在没人那么干了。 gavin： 人们挖地（指地埋式）。 sacks： 曾经有人那么干过一阵，后来停了。 gavin： 是的，常识。你用常识就没有问题。说要完全禁止数据中心建设是愚蠢的。拥抱数据中心的社区看到的是更好的学校、更好的公共服务，因为它们带来了大量税收。 jcal： 而且，sacks，当企业家们开动起来，我们突然看到太阳能、电池、核能、更多清洁能源被用来给这些数据中心供电。这种需求会随时间降低这些服务的价格。太阳能板会更便宜、电池会更便宜，因为它们会被更快地规模化——这对人类是好事。这是基础常识，朋友们，非常基础。 gavin： 绿色能源短期无法规模化。新数据中心基本都靠天然气发电，这是未来一两年达到所需规模的唯一方式。太阳能更长期可行，但当然没有天然气快。我基本同意。另外，elon 在德州——我的家乡——建一座 100 亿美元的太阳能板制造工厂，是有原因的。世界最终会靠阳光运行，但接下来一段时间我们靠天然气。美国天然气储量巨大，它是清洁燃料，是最绿色的碳基燃料。媒体对数据中心的歇斯底里对低收入美国人、对小城镇美国人、常常也是对少数族裔美国人，造成了巨大的伤害。这件事方方面面都是好的，但媒体不报道另一面，必须有人站出来讲真话。 jcal： 我不知道现在还有谁靠媒体获取事实。我们上周收视全球第四是有原因的——我们真的参与了这个建设过程，我们了解它，能讲得更清楚。噪声污染是问题，天然气发电机的空气污染也是问题。把这些东西放在离人远的地方——像 sacks 说的——问题就不大了。还有一个次要问题：如果你在某个地方大规模布置，可能会让那个山谷的温度升高一两度，这值得监测。但这些都是完全可以管理的问题。如果你真想关心水——拜托，先别吃杏仁了，高尔夫球场也不必每年用 10 亿加仑水。" style="--index: 5">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">05</span>
+                    <span class="timeline-meta">00:20:21–00:24:23</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>数据中心恐慌：媒体制造的谎言</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>三位嘉宾系统性反驳&quot;数据中心耗水、耗电、污染&quot;的媒体报道。</li>
+<li>数据中心的用水量被夸大数万倍，实际少于一个高尔夫球场；水资源循环利用。</li>
+<li>数据中心自建发电后向电网反售余电，还承担电网升级成本。</li>
+<li>蓝州电价上涨的真正原因是&quot;去碳化&quot;和绿色监管，而非数据中心。</li>
+<li>噪声污染是真实的，但完全可以靠选址管理。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>蓝州：美国政治中指民主党主导的州，如加州、纽约州。</li>
+<li>去碳化（Decarbonization）：推动能源系统摆脱化石燃料的政策，常伴随对新建电厂更严格的审批。</li>
+<li>二叠纪盆地（Permian Basin）：德州和新墨西哥州的大型油气田，是美国页岩油气的核心地带。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> 数据中心恐慌证明了媒体有能力凭空制造骗局和歇斯底里。数据中心故事里每一个细节都是错的——是谎言。就像你说的，它们没有耗尽社区的水，用水量完全可以管理，比一个高尔夫球场还少，水是循环的。它降低电价——前提是数据中心自己建发电设施，因为它们会把多余的电卖回电网，而且它们掏钱升级电网。蓝州电价上涨的真正原因是去碳化以及其他所有让发电变得更难的绿色监管。还有什么指控？</p>
+<p><strong>Sacks：</strong> 说它们制造污染。</p>
+<p><strong>Gavin：</strong> 噪声污染是真实的。没有任何一个正常思维的人——它们不会建在谁家后院。</p>
+<p><strong>Sacks：</strong> 对，现在没人那么干了。</p>
+<p><strong>Gavin：</strong> 人们挖地（指地埋式）。</p>
+<p><strong>Sacks：</strong> 曾经有人那么干过一阵，后来停了。</p>
+<p><strong>Gavin：</strong> 是的，常识。你用常识就没有问题。说要完全禁止数据中心建设是愚蠢的。拥抱数据中心的社区看到的是更好的学校、更好的公共服务，因为它们带来了大量税收。</p>
+<p><strong>JCal：</strong> 而且，Sacks，当企业家们开动起来，我们突然看到太阳能、电池、核能、更多清洁能源被用来给这些数据中心供电。这种需求会随时间降低这些服务的价格。太阳能板会更便宜、电池会更便宜，因为它们会被更快地规模化——这对人类是好事。这是基础常识，朋友们，非常基础。</p>
+<p><strong>Gavin：</strong> 绿色能源短期无法规模化。新数据中心基本都靠天然气发电，这是未来一两年达到所需规模的唯一方式。太阳能更长期可行，但当然没有天然气快。我基本同意。另外，Elon 在德州——我的家乡——建一座 100 亿美元的太阳能板制造工厂，是有原因的。世界最终会靠阳光运行，但接下来一段时间我们靠天然气。美国天然气储量巨大，它是清洁燃料，是最绿色的碳基燃料。媒体对数据中心的歇斯底里对低收入美国人、对小城镇美国人、常常也是对少数族裔美国人，造成了巨大的伤害。这件事方方面面都是好的，但媒体不报道另一面，必须有人站出来讲真话。</p>
+<p><strong>JCal：</strong> 我不知道现在还有谁靠媒体获取事实。我们上周收视全球第四是有原因的——我们真的参与了这个建设过程，我们了解它，能讲得更清楚。噪声污染是问题，天然气发电机的空气污染也是问题。把这些东西放在离人远的地方——像 Sacks 说的——问题就不大了。还有一个次要问题：如果你在某个地方大规模布置，可能会让那个山谷的温度升高一两度，这值得监测。但这些都是完全可以管理的问题。如果你真想关心水——拜托，先别吃杏仁了，高尔夫球场也不必每年用 10 亿加仑水。</p></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="00:24:23–00:28:27 开源模型对 anthropic 定价权的威胁 本段核心内容： jcal 认为 anthropic 明年的增速会显著放缓，可能&quot;只&quot;增长到 3000–4000 亿美元 arr。 glm-5.2 等开源模型的价格比 claude opus 便宜约 90%，企业客户和创业公司正在大规模转向开源。 企业历史上从 20 年前就选择了开源（linux 等），因为不想被大科技公司&quot;绑架&quot;。 gavin 补充：开源带来了 ai 的多样性，不应让 1、2、3 个模型主导世界。 背景解释与关键术语： glm：智谱 ai 的开源大模型系列，在节目设定中为 5.2 版本。 开源（open source）：代码和模型权重公开可获取，任何人可以下载、修改、商用。 &quot;暗 token&quot;（dark tokens）：无法被统计的、通过开源模型私下运行的推理量。 dwarkesh：dwarkesh patel，关注 ai 的独立播客主持人。 详细中文整理： jcal： 关于需求和定价，我给你们看一个快速数据。我认为 anthropic 的增速明年会明显放缓。它显然一直在狂飙，但明年不可能到 1 万亿收入。我觉得也许能翻两倍，到 3000 或 4000 亿。原因在于：观察创业公司、以及一些大公司现在开始采用 glm-5.2；另外 zuckerberg——我们等会儿聊——发布了非常好的开源模型。看看 glm-5.2 和 claude opus 的定价对比：使用这些产品便宜 90%。我自己在用，我投资的创始人在用。企业界也会越来越多地采用这些方案——搭建稍微难一点，但正在到来。如果你认为企业界不会拥抱开源，那你就没注意过去 20 年——他们恰恰就是这么做的。20 年前有个大争论：&quot;天哪，企业界永远不会信任开源。&quot;结果企业界说：我们不想被绑架、不想被某家大型科技公司用他们的技术拿捏——那正是他们最擅长干的事。所以开源对我们来说是更安全的选择。这就是今天美国企业界正在发生的事。在创业公司内部，这也会非常真实。gavin，你都快从座位上跳起来了。 gavin： 对，这是个更大的话题。当然这对企业界好，开源对世界好，对美国好。但 dwarkesh 发了个东西让我很有共鸣。他说：归根结底，anthropic 的 ai 和它的&quot;宪法&quot;是被设定为做 anthropic 认为对人类最有利的事。我们假设 elon 的判断是金标准、他是对的，他的&quot;不作恶探测器&quot;没响，他们确实是好人——我真心相信他们是好人，在做他们认为对人类有益的事。问题在于：总是有意想不到的后果，世界是混乱和不可预测的。开源的美妙之处在于：我们会有丰富多样的 ai，有 ai 的多样性——这对人类和对美国都是好事。我们不想要一两个或三个主导模型垄断一切。这也是为什么——不是想一直提 grok——但 elon 把 grok 定位为追求客观真理，历史会因此善待 elon。客观真理。 jcal： 讲得好，gavin。关键是：如果你下了赌注，那是用你的智慧和判断选了你认为的赢家。我认为 elon 明确相信开源，他认为这是应该为了善而共享的技术。事实上他最初的尝试就是支持 openai。而 openai 的&quot;宣言&quot;本周被 mark zuckerberg 重写了——相当讽刺——在一篇 6500 字的文章里。标题是《未来属于每个人：通往积极 ai 未来的道路》。他描绘了一个极其乐观的 ai 世界观：他作为&quot;openai 2.0&quot;（facebook）会发布开源模型，为每个人创造一个 agent，把它免费提供给全世界每个人——每个人都有自己的导师和无限丰裕。他捡起了 sam altman 丢掉的那顶&quot;丰裕之冠&quot;——altman 去追求成为&quot;私营公司&quot;了。zuckerberg 说：超级智能是发明，不是自动化；ai 安全应该基于权力平衡，而不是某一个集中化的超级智能。" style="--index: 6">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">06</span>
+                    <span class="timeline-meta">00:24:23–00:28:27</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>开源模型对 Anthropic 定价权的威胁</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>JCal 认为 Anthropic 明年的增速会显著放缓，可能&quot;只&quot;增长到 3000–4000 亿美元 ARR。</li>
+<li>GLM-5.2 等开源模型的价格比 Claude Opus 便宜约 90%，企业客户和创业公司正在大规模转向开源。</li>
+<li>企业历史上从 20 年前就选择了开源（Linux 等），因为不想被大科技公司&quot;绑架&quot;。</li>
+<li>Gavin 补充：开源带来了 AI 的多样性，不应让 1、2、3 个模型主导世界。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>GLM：智谱 AI 的开源大模型系列，在节目设定中为 5.2 版本。</li>
+<li>开源（Open Source）：代码和模型权重公开可获取，任何人可以下载、修改、商用。</li>
+<li>&quot;暗 token&quot;（Dark Tokens）：无法被统计的、通过开源模型私下运行的推理量。</li>
+<li>Dwarkesh：Dwarkesh Patel，关注 AI 的独立播客主持人。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> 关于需求和定价，我给你们看一个快速数据。我认为 Anthropic 的增速明年会明显放缓。它显然一直在狂飙，但明年不可能到 1 万亿收入。我觉得也许能翻两倍，到 3000 或 4000 亿。原因在于：观察创业公司、以及一些大公司现在开始采用 GLM-5.2；另外 Zuckerberg——我们等会儿聊——发布了非常好的开源模型。看看 GLM-5.2 和 Claude Opus 的定价对比：使用这些产品便宜 90%。我自己在用，我投资的创始人在用。企业界也会越来越多地采用这些方案——搭建稍微难一点，但正在到来。如果你认为企业界不会拥抱开源，那你就没注意过去 20 年——他们恰恰就是这么做的。20 年前有个大争论：&quot;天哪，企业界永远不会信任开源。&quot;结果企业界说：我们不想被绑架、不想被某家大型科技公司用他们的技术拿捏——那正是他们最擅长干的事。所以开源对我们来说是更安全的选择。这就是今天美国企业界正在发生的事。在创业公司内部，这也会非常真实。Gavin，你都快从座位上跳起来了。</p>
+<p><strong>Gavin：</strong> 对，这是个更大的话题。当然这对企业界好，开源对世界好，对美国好。但 Dwarkesh 发了个东西让我很有共鸣。他说：归根结底，Anthropic 的 AI 和它的&quot;宪法&quot;是被设定为做 Anthropic 认为对人类最有利的事。我们假设 Elon 的判断是金标准、他是对的，他的&quot;不作恶探测器&quot;没响，他们确实是好人——我真心相信他们是好人，在做他们认为对人类有益的事。问题在于：总是有意想不到的后果，世界是混乱和不可预测的。开源的美妙之处在于：我们会有丰富多样的 AI，有 AI 的多样性——这对人类和对美国都是好事。我们不想要一两个或三个主导模型垄断一切。这也是为什么——不是想一直提 Grok——但 Elon 把 Grok 定位为追求客观真理，历史会因此善待 Elon。客观真理。</p>
+<p><strong>JCal：</strong> 讲得好，Gavin。关键是：如果你下了赌注，那是用你的智慧和判断选了你认为的赢家。我认为 Elon 明确相信开源，他认为这是应该为了善而共享的技术。事实上他最初的尝试就是支持 OpenAI。而 OpenAI 的&quot;宣言&quot;本周被 Mark Zuckerberg 重写了——相当讽刺——在一篇 6500 字的文章里。标题是《未来属于每个人：通往积极 AI 未来的道路》。他描绘了一个极其乐观的 AI 世界观：他作为&quot;OpenAI 2.0&quot;（Facebook）会发布开源模型，为每个人创造一个 agent，把它免费提供给全世界每个人——每个人都有自己的导师和无限丰裕。他捡起了 Sam Altman 丢掉的那顶&quot;丰裕之冠&quot;——Altman 去追求成为&quot;私营公司&quot;了。Zuckerberg 说：超级智能是发明，不是自动化；AI 安全应该基于权力平衡，而不是某一个集中化的超级智能。</p></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="00:28:27–00:33:22 zuckerberg 的 ai 宣言：开源与去中心化 本段核心内容： sacks 认真读了 zuckerberg 的宣言并大部分同意，尤其欣赏他对&quot;末日论者&quot;内在矛盾的反问。 sacks 将 anthropic/ea 的路线追溯到 thomas sowell 的《受膏者的愿景》：知识分子相信自己可以&quot;仁慈地&quot;工程化社会——历史上总是失败。 核心分歧被提炼为&quot;集中化 vs 去中心化&quot;：sacks 坚定站在去中心化一侧。 sacks 透露在华盛顿接触的前拜登政府 ai 官员的框架：ai 天生危险，必须集中控制，只能有 2–3 家公司，甚至要搞成一个&quot;卡特尔&quot;。 gavin 用一句话总结：anthropic 和 ea 认为技术太危险不能分发；zuck、elon、jensen 认为技术太危险不能集中。 背景解释与关键术语： 有效利他主义（effective altruism, ea）：一个哲学/慈善运动，强调用理性计算最大化善的效用；在 ai 安全领域，ea 群体（如 openai 早期的部分人和 anthropic 的思想根基）主张极其谨慎、严格管控 ai 发展。 thomas sowell《受膏者的愿景》（the vision of the anointed）：保守派经济学家索维尔的著作，批评知识分子精英自以为能设计社会、结果总是造成灾难。 mark andreessen 与拜登官员的会议：a16z 创始人 andreessen 曾与拜登政府 ai 官员会面，之后公开指责对方主张&quot;ai 卡特尔化&quot;。 原子能委员会（atomic energy commission）：美国二战后的核能监管机构，ea 派主张以此类比监管 ai。 详细中文整理： jcal： sacks，我猜你读了或者至少扫了 zuckerberg 宣言的报道。你对他的定位有什么看法？ sacks： 我读了，很多地方我都点头同意。我很喜欢他早期的一个观点——他显然是在怼那些末日论者，特别是有效利他主义者和 anthropic——他说：&quot;dario，你们为什么急着创造一个你们自己都不相信的未来？如果你们觉得这个未来这么反乌托邦——所有人失业、ai 失控、一堆安全问题——那你们为什么还这么兴奋地去创造它？&quot;我认为他确实指出了一个根本矛盾。这个问题当然有答案，其实有两个答案。第一：他们可能是在为了，姑且称之为，雇佣兵式的理由，去创造一个他们自己都不相信的未来——这可能有利可图。虽然我不认为这是真正的原因，我认为他们大多是&quot;传教士&quot;：他们真心相信那个未来是危险的，只有在自己开明的控制下，人类才能得到保护。这完全是 thomas sowell 30 年前在《受膏者的愿景》里写的东西——历史上的知识分子总认为，如果他们被最大化地赋权，他们就能把社会向更仁慈的方向工程化。而这总是适得其反，不仅导致空洞或破碎的承诺，还成为极权政权的借口——计划和国家权力结合。实际上 zuckerberg 接下来也说了类似的话。在指出&quot;你们为什么急着建设一个你们不想要的未来&quot;之后，他说：&quot;ai 危险到唯一安全路径是极端权力集中，这种观念本身就有问题。历史上，指望一个足够开明的绝对权力来仁慈地造福人类，从来没有带来更安全、更正面的结果。&quot;所以我认为他的核心观点是：整个 ai 辩论的框架不只是开放 vs 封闭，也是集中 vs 分散——你认为集中化的结果是对的，还是分散化的结果是对的。我站在分散化这边。 jcal： 你怎么能不站在分散化这边？这是最显而易见的事。 sacks： ea 那帮人不这么想。顺便说，我在华盛顿亲身经历过：所有前拜登政府的人都去了 anthropic 的政府事务部门。我还接触过属于这个圈子的智库人士，他们对 ai 的框架就是：ai 天生危险，我们必须把控制权集中在政府手里。只应该有两三家公司，它们基本上要一起合作——弄成一个卡特尔。记得 mark andreessen 跟那些拜登官员开会吗？ jcal： 别竞争了。 sacks： 他们否认这种描述，也许他们没有用同样的词。但我相信 mark 对他听到的东西的理解是对的，因为我也听到过类似的话。他们真的相信，控制这个他们本质上认为是有害的——或者至少非常危险的东西——的办法是：第一，限制在美国境内——不出口芯片、不出口模型，就是把它完全控在美国——这完全是白日梦，因为世界其他地方也会得到 ai。第二，成立一个类似原子能委员会的机构来&quot;卡特尔化&quot;这个行业。然后行业跟政府深度绑定，实际上是公司权力和国家权力的合并。这是一个极其集中化的未来愿景。我认为他们在某种程度上仍然相信这个。 jcal： 很明显 zuckerberg 在听 all-in 播客，很明显我们下周有个座位空缺。mark zuckerberg，谁能联系一下他？下周来上节目。我们周四上午 10 点、11 点录（你那边时间，不管你在夏威夷还是太浩湖），我们给你装一个 starlink，你可以在你的电动水翼板上录。但说真的，能把 zuck 请来就太好了。 gavin： 我读了，我同意，我完全同意 david 说的一切。我把它归结为：我认为 anthropic 和有效利他主义运动的人相信这项技术太危险了，不能分发。而 mark zuckerberg，我认为 elon 和 jensen 也相信：这项技术太危险了，不能集中化。历史已经给出了答案——当面临选择时，分发和去中心化永远是更好的。我想不出任何反例。先不管作为美国人——作为一个人，我希望有一个为我着想的 ai，为&quot;我&quot;这个独立的个体着想，主权个体。 jcal： 是的。 sacks： 我对什么对美国好有自己的理解：我根本不想让 dario amodei 或 anthropic 决定什么对我最好。我根本无法接受这件事。 jcal： 你不信任&quot;ai 耶稣&quot;。 sacks： 我是说，&quot;ai 耶稣&quot;看起来是个好人。但有个人说他被&quot;微笑脸诅咒&quot;了很有趣——他兴高采烈地微笑着，跟你讲他那个恐怖的人类愿景。 sacks： 他咧着嘴笑的时候，给你讲解《终结者》场景：只有他能拯救我们，而且连他自己都不知道——有 20% 的概率他可能救不了所有人。 jcal： gavin，我很喜欢&quot;太危险不能集中&quot;这个框架。还有另一个密切相关的点：你怎么看待竞争。我认为 ea 们认为竞争会创造&quot;竞次&quot;，产生不安全。而我信的是：竞争激发最好的一面。他们认为竞争暴露最坏的一面。也许两种情况都有例子，但根本上他们想集中控制、减少竞争，我们想分散化、增加竞争。 jcal： 我想在宪法里加上：我有持枪权，我觉得那很重要。我在德州长大，我认为这有点像——对暴政的最后一道防线。我爱德州。gavin，你什么时候回家？ gavin： 很快，我保证。我想拥有自己的 ai 的权利，让它的价值观跟我对齐，而不是跟某个——不管那个人多好——跟别人的价值观对齐。 sacks： 持枪权是个好类比，因为我们确实允许你有枪，尽管你可能会滥用。枪是用来杀生的。而 ai 的用途更有创造性、更有益，它是消费级技术，每个人都想用。所以如果我们允许你有枪，我同意，你更应该被允许拥有 ai。 jcal： 让我纠正你一下，sacks——你现在跟我一起在伟大的德州。枪也用来养活家人、抵御世上的邪恶。那是枪的美德用途。 sacks： 我懂，那是自卫。但我的意思是，你仍然是用枪去杀或伤害那个人——自卫。我不反对枪。 jcal： 我觉得这就是 dario 的妄想。你看这些有效利他主义者——你可以去查——他们认为自己将赚到世界上所有的钱，创建那唯一一家公司、那台印钞机，然后拯救我们所有人。这是巨大的自大妄想。 sacks： 而且技术无论如何都会扩散。&quot;把精灵关回瓶子里&quot;这种想法是荒谬的。 jcal： 但顺便说，sacks，我认为他们看待这件事的方式是：他们真的把这当成超级智能加核弹。如果你说服自己你在造核弹、在造你自己都控制不了的终结者，而且是会造出一百万个终结者、一百万颗炸弹的超级智能——他们真的是在 burning man 吃了佩奥特或 lsd 之后把自己骗到这个境地。这不是现实。你随时可以拔掉电源。他们就是有妄想症，句号。这不是核弹。 sacks： 你说得对。我刚到华盛顿时，那个主导类比就是：ai 像核武器，我们需要一个原子能委员会——全球性的——来监管。完全是白日梦，永远不可能实现。但你说得对，他们确实在用那个类比。他们用这个类比的原因在于：你没有权利拥有核武器、自己造核武器。你有权利有一把枪，但没有核弹。所以它们想把 ai 放进核弹那个桶里。但正如 jensen 所说：没有任何个人、任何消费者需要核武器。每个消费者、每个企业都需要 ai。这是根本区别。它是消费技术。在成为军事技术之前，它首先是消费技术。把 ai 主要类比成核弹是荒谬的。 jcal： 公平地说，没有人真的那么说。但公平地说，gavin，cyberdyne 工业公司当年也以为自己造的是好东西。科幻小说真的污染了人们的脑子。 sacks： 如果我们要有《终结者》那种东西，我想要属于我自己的、喜欢我的终结者。开源终结者。但简单说——我是个美国人，我是个爱国者。如果我们禁止开源、让控制权被集中，我们会输掉 ai，输掉地缘政治，输给中国，就这么简单。所以如果你是爱国者，你应该支持这项技术的分发、民主化、去中心化、个体化。" style="--index: 7">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">07</span>
+                    <span class="timeline-meta">00:28:27–00:33:22</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>Zuckerberg 的 AI 宣言：开源与去中心化</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>Sacks 认真读了 Zuckerberg 的宣言并大部分同意，尤其欣赏他对&quot;末日论者&quot;内在矛盾的反问。</li>
+<li>Sacks 将 Anthropic/EA 的路线追溯到 Thomas Sowell 的《受膏者的愿景》：知识分子相信自己可以&quot;仁慈地&quot;工程化社会——历史上总是失败。</li>
+<li>核心分歧被提炼为&quot;集中化 vs 去中心化&quot;：Sacks 坚定站在去中心化一侧。</li>
+<li>Sacks 透露在华盛顿接触的前拜登政府 AI 官员的框架：AI 天生危险，必须集中控制，只能有 2–3 家公司，甚至要搞成一个&quot;卡特尔&quot;。</li>
+<li>Gavin 用一句话总结：Anthropic 和 EA 认为技术太危险不能分发；Zuck、Elon、Jensen 认为技术太危险不能集中。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>有效利他主义（Effective Altruism, EA）：一个哲学/慈善运动，强调用理性计算最大化善的效用；在 AI 安全领域，EA 群体（如 OpenAI 早期的部分人和 Anthropic 的思想根基）主张极其谨慎、严格管控 AI 发展。</li>
+<li>Thomas Sowell《受膏者的愿景》（The Vision of the Anointed）：保守派经济学家索维尔的著作，批评知识分子精英自以为能设计社会、结果总是造成灾难。</li>
+<li>Mark Andreessen 与拜登官员的会议：a16z 创始人 Andreessen 曾与拜登政府 AI 官员会面，之后公开指责对方主张&quot;AI 卡特尔化&quot;。</li>
+<li>原子能委员会（Atomic Energy Commission）：美国二战后的核能监管机构，EA 派主张以此类比监管 AI。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> Sacks，我猜你读了或者至少扫了 Zuckerberg 宣言的报道。你对他的定位有什么看法？</p>
+<p><strong>Sacks：</strong> 我读了，很多地方我都点头同意。我很喜欢他早期的一个观点——他显然是在怼那些末日论者，特别是有效利他主义者和 Anthropic——他说：&quot;Dario，你们为什么急着创造一个你们自己都不相信的未来？如果你们觉得这个未来这么反乌托邦——所有人失业、AI 失控、一堆安全问题——那你们为什么还这么兴奋地去创造它？&quot;我认为他确实指出了一个根本矛盾。这个问题当然有答案，其实有两个答案。第一：他们可能是在为了，姑且称之为，雇佣兵式的理由，去创造一个他们自己都不相信的未来——这可能有利可图。虽然我不认为这是真正的原因，我认为他们大多是&quot;传教士&quot;：他们真心相信那个未来是危险的，只有在自己开明的控制下，人类才能得到保护。这完全是 Thomas Sowell 30 年前在《受膏者的愿景》里写的东西——历史上的知识分子总认为，如果他们被最大化地赋权，他们就能把社会向更仁慈的方向工程化。而这总是适得其反，不仅导致空洞或破碎的承诺，还成为极权政权的借口——计划和国家权力结合。实际上 Zuckerberg 接下来也说了类似的话。在指出&quot;你们为什么急着建设一个你们不想要的未来&quot;之后，他说：&quot;AI 危险到唯一安全路径是极端权力集中，这种观念本身就有问题。历史上，指望一个足够开明的绝对权力来仁慈地造福人类，从来没有带来更安全、更正面的结果。&quot;所以我认为他的核心观点是：整个 AI 辩论的框架不只是开放 vs 封闭，也是集中 vs 分散——你认为集中化的结果是对的，还是分散化的结果是对的。我站在分散化这边。</p>
+<p><strong>JCal：</strong> 你怎么能不站在分散化这边？这是最显而易见的事。</p>
+<p><strong>Sacks：</strong> EA 那帮人不这么想。顺便说，我在华盛顿亲身经历过：所有前拜登政府的人都去了 Anthropic 的政府事务部门。我还接触过属于这个圈子的智库人士，他们对 AI 的框架就是：AI 天生危险，我们必须把控制权集中在政府手里。只应该有两三家公司，它们基本上要一起合作——弄成一个卡特尔。记得 Mark Andreessen 跟那些拜登官员开会吗？</p>
+<p><strong>JCal：</strong> 别竞争了。</p>
+<p><strong>Sacks：</strong> 他们否认这种描述，也许他们没有用同样的词。但我相信 Mark 对他听到的东西的理解是对的，因为我也听到过类似的话。他们真的相信，控制这个他们本质上认为是有害的——或者至少非常危险的东西——的办法是：第一，限制在美国境内——不出口芯片、不出口模型，就是把它完全控在美国——这完全是白日梦，因为世界其他地方也会得到 AI。第二，成立一个类似原子能委员会的机构来&quot;卡特尔化&quot;这个行业。然后行业跟政府深度绑定，实际上是公司权力和国家权力的合并。这是一个极其集中化的未来愿景。我认为他们在某种程度上仍然相信这个。</p>
+<p><strong>JCal：</strong> 很明显 Zuckerberg 在听 All-In 播客，很明显我们下周有个座位空缺。Mark Zuckerberg，谁能联系一下他？下周来上节目。我们周四上午 10 点、11 点录（你那边时间，不管你在夏威夷还是太浩湖），我们给你装一个 Starlink，你可以在你的电动水翼板上录。但说真的，能把 Zuck 请来就太好了。</p>
+<p><strong>Gavin：</strong> 我读了，我同意，我完全同意 David 说的一切。我把它归结为：我认为 Anthropic 和有效利他主义运动的人相信这项技术太危险了，不能分发。而 Mark Zuckerberg，我认为 Elon 和 Jensen 也相信：这项技术太危险了，不能集中化。历史已经给出了答案——当面临选择时，分发和去中心化永远是更好的。我想不出任何反例。先不管作为美国人——作为一个人，我希望有一个为我着想的 AI，为&quot;我&quot;这个独立的个体着想，主权个体。</p>
+<p><strong>JCal：</strong> 是的。</p>
+<p><strong>Sacks：</strong> 我对什么对美国好有自己的理解：我根本不想让 Dario Amodei 或 Anthropic 决定什么对我最好。我根本无法接受这件事。</p>
+<p><strong>JCal：</strong> 你不信任&quot;AI 耶稣&quot;。</p>
+<p><strong>Sacks：</strong> 我是说，&quot;AI 耶稣&quot;看起来是个好人。但有个人说他被&quot;微笑脸诅咒&quot;了很有趣——他兴高采烈地微笑着，跟你讲他那个恐怖的人类愿景。</p>
+<p><strong>Sacks：</strong> 他咧着嘴笑的时候，给你讲解《终结者》场景：只有他能拯救我们，而且连他自己都不知道——有 20% 的概率他可能救不了所有人。</p>
+<p><strong>JCal：</strong> Gavin，我很喜欢&quot;太危险不能集中&quot;这个框架。还有另一个密切相关的点：你怎么看待竞争。我认为 EA 们认为竞争会创造&quot;竞次&quot;，产生不安全。而我信的是：竞争激发最好的一面。他们认为竞争暴露最坏的一面。也许两种情况都有例子，但根本上他们想集中控制、减少竞争，我们想分散化、增加竞争。</p>
+<p><strong>JCal：</strong> 我想在宪法里加上：我有持枪权，我觉得那很重要。我在德州长大，我认为这有点像——对暴政的最后一道防线。我爱德州。Gavin，你什么时候回家？</p>
+<p><strong>Gavin：</strong> 很快，我保证。我想拥有自己的 AI 的权利，让它的价值观跟我对齐，而不是跟某个——不管那个人多好——跟别人的价值观对齐。</p>
+<p><strong>Sacks：</strong> 持枪权是个好类比，因为我们确实允许你有枪，尽管你可能会滥用。枪是用来杀生的。而 AI 的用途更有创造性、更有益，它是消费级技术，每个人都想用。所以如果我们允许你有枪，我同意，你更应该被允许拥有 AI。</p>
+<p><strong>JCal：</strong> 让我纠正你一下，Sacks——你现在跟我一起在伟大的德州。枪也用来养活家人、抵御世上的邪恶。那是枪的美德用途。</p>
+<p><strong>Sacks：</strong> 我懂，那是自卫。但我的意思是，你仍然是用枪去杀或伤害那个人——自卫。我不反对枪。</p>
+<p><strong>JCal：</strong> 我觉得这就是 Dario 的妄想。你看这些有效利他主义者——你可以去查——他们认为自己将赚到世界上所有的钱，创建那唯一一家公司、那台印钞机，然后拯救我们所有人。这是巨大的自大妄想。</p>
+<p><strong>Sacks：</strong> 而且技术无论如何都会扩散。&quot;把精灵关回瓶子里&quot;这种想法是荒谬的。</p>
+<p><strong>JCal：</strong> 但顺便说，Sacks，我认为他们看待这件事的方式是：他们真的把这当成超级智能加核弹。如果你说服自己你在造核弹、在造你自己都控制不了的终结者，而且是会造出一百万个终结者、一百万颗炸弹的超级智能——他们真的是在 Burning Man 吃了佩奥特或 LSD 之后把自己骗到这个境地。这不是现实。你随时可以拔掉电源。他们就是有妄想症，句号。这不是核弹。</p>
+<p><strong>Sacks：</strong> 你说得对。我刚到华盛顿时，那个主导类比就是：AI 像核武器，我们需要一个原子能委员会——全球性的——来监管。完全是白日梦，永远不可能实现。但你说得对，他们确实在用那个类比。他们用这个类比的原因在于：你没有权利拥有核武器、自己造核武器。你有权利有一把枪，但没有核弹。所以它们想把 AI 放进核弹那个桶里。但正如 Jensen 所说：没有任何个人、任何消费者需要核武器。每个消费者、每个企业都需要 AI。这是根本区别。它是消费技术。在成为军事技术之前，它首先是消费技术。把 AI 主要类比成核弹是荒谬的。</p>
+<p><strong>JCal：</strong> 公平地说，没有人真的那么说。但公平地说，Gavin，Cyberdyne 工业公司当年也以为自己造的是好东西。科幻小说真的污染了人们的脑子。</p>
+<p><strong>Sacks：</strong> 如果我们要有《终结者》那种东西，我想要属于我自己的、喜欢我的终结者。开源终结者。但简单说——我是个美国人，我是个爱国者。如果我们禁止开源、让控制权被集中，我们会输掉 AI，输掉地缘政治，输给中国，就这么简单。所以如果你是爱国者，你应该支持这项技术的分发、民主化、去中心化、个体化。</p></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="00:33:22–00:39:42 &quot;太危险不能集中&quot;：核武器类比之争 （本段核心内容已在上文 00:28:27–00:33:22 的详细整理中完整覆盖，包括 gavin 的&quot;太危险不能分发 vs 太危险不能集中&quot;框架、sacks 的核武器类比批评、jcal 关于 dario 妄想症的论述。此处不再重复。）" style="--index: 8">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">08</span>
+                    <span class="timeline-meta">00:33:22–00:39:42</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>&quot;太危险不能集中&quot;：核武器类比之争</h3>
+                    <div class="section-content"><p>（本段核心内容已在上文 00:28:27–00:33:22 的详细整理中完整覆盖，包括 Gavin 的&quot;太危险不能分发 vs 太危险不能集中&quot;框架、Sacks 的核武器类比批评、JCal 关于 Dario 妄想症的论述。此处不再重复。）</p></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="00:39:42–00:46:18 jcal 的两个补充：就业冲击与&quot;双标&quot;质疑 本段核心内容： jcal 称赞 zuckerberg 对就业冲击的框架：ai 不必然加速自动化超过个体能力增长，数据反而显示个体能力增长可能匹配或超过自动化。 jcal 指出 zuckerberg 的&quot;双标&quot;：他主张可以学习任何可观察到的内容、为 ai 索引全世界的数据，却起诉过无数尝试索引 facebook/instagram 社交图谱的创业公司。 背景解释与关键术语： 蒸馏（distillation）：用大模型/现有数据训练新模型的行为，ai 行业版权争议的核心概念。 社交图谱（social graph）：用户在社交平台上的人际关系网络数据，facebook 长期将其视为核心资产并禁止第三方抓取。 详细中文整理： jcal： 跟你一样，sacks，我全程都在点头。因为他跑到了游行队伍前面，拿起接力棒说：我认同这里最好的观点——最好的观点就是开源赋能个体，这不是核技术。我想指出两个我觉得被埋没的点。第一，我想表扬他对就业冲击的看法。他说：确实可能存在就业替代。但人们恐惧自动化会超过个体能力增长的速度、导致就业替代，然后是人们学习新工作之前的困难期——我们都同意这是值得担忧的。但&quot;ai 必须让自动化快于个体能力增长或对新技能的需求增长&quot;并不是一条铁律。最近的统计表明，更可能的情况是个体能力增长能匹配甚至超过自动化。我觉得这个框架非常好，这就是 jensen 那句话的另一种说法：你不会因为 ai 丢掉工作，你会输给那个用 ai 的人。这就是当下正在发生的游戏。每次我用这个技术，就会冒出 3 个新的商业机会，我又创造出两个新的职位描述，人们用 5 倍 10 倍的速度干活——如果他们拥抱这个技术。这是个很大的&quot;如果&quot;。 jcal： 第二个我觉得很有意思的是：他为&quot;有权索引任何人的内容并从中学习&quot;做了辩护。原话是：&quot;所有 ai 模型都源自人类知识。&quot;这挺平白无奇的。&quot;有些人试图把蒸馏描述为有害的，但我觉得保护这个原则很重要：你可以从任何你能观察到的东西中学习。&quot;换句话说，他在预先声明：我要扫描全世界的数据。我给他的信息是：zuckerberg，请解释一下这个概念如何与这个事实兼容——你起诉过每一家试图索引或使用 instagram/facebook 社交图谱的创业公司，其中很多是我投资的。他们有几百起诉讼，起诉那些试图蒸馏&quot;谁是 instagram 头部网红&quot;&quot;我的社交图谱里有谁&quot;的人。他们把那个东西完全锁死了。 jcal： 所以这里有点虚伪。这让我想起，sacks，我们之前节目里聊过的&quot;claude 拆解旧书进行蒸馏&quot;的话题——我们已经做过很多次蒸馏辩论了。 sacks： 让我回到另一个点：有个巨大的讽刺是，dario 这届政府期间在华盛顿基本上没能如愿。因为我认为如果他如愿了——如果他实现了他那个高度监管 ai 机器的梦想——我不认为那家公司能成功 ipo。为什么？因为他们对 token 收取巨额溢价的权利——jcal 你之前说的就是这个——你怀疑在这么多开源模型出来卖便宜 token 的情况下，这个溢价能撑多久。他们所有定价权、他们能收的那个溢价，靠的都是他们比开源模型领先 6 个月。而如果他们要受监管审批，这 6 个月优势会瞬间蒸发。dario 自己在博客里一直在说：我们需要一个&quot;ai 的 faa&quot;。你知道 faa 认证一个新机型要多久吗？机身类最少 5 年。 jcal： 你要是想换飞机上的一个桌子，要 8 年。 sacks： 你知道 fda 批一个新药要多久吗？好几年。你要把这种监管框架用在 ai 模型发布上？游戏结束。你的 6 个月优势瞬间没了。你的模型会被商品化。用 gavin 的话说，中国竞争者会追上来，这对美国是坏事。对我们的竞争力是坏事。对 ai 竞赛是坏事。显然我们不想让中国赢。但除了地缘政治维度，这对 anthropic 作为一家公司也是灾难性的——因为他们的全部定价权都依赖保持 6 个月领先。 jcal： 如果他们失误——如果哪次丢掉了那 6 个月优势——他们就完了。那对收入意味着什么？对。但说实话，我觉得他们的定价权可能相当可持续，因为人们愿意付钱——不是整个市场，但足够大的一个子集——为真正的前沿智能付溢价。 sacks： 所以只要——如果顶部 20% 的市场愿意付 10 倍价钱，他们就稳了。就像我之前说的，这是 apple 对 android。大部分市场愿意用 android，更便宜，但有很大一个子集愿意为 apple 付高价，因为体验更好。同理：如果你的公司处在竞争激烈的市场，你想要绝对最好的——出于竞争原因或别的原因——你会为真正的前沿智能付溢价。但 anthropic 和 openai 在那台仓鼠轮上：他们必须保持领先才能维持那个溢价。顺便说，我认为他们能做到，他们自己也认为能做到——他们甚至认为他们的领先在扩大，因为他们在通往递归自我改进的路上。 jcal： 我还想再提一点关于&quot;ceo 直接表态&quot;这件事。zuck 从 twitter 创立初期就有账号，@finkd，那是他大学时的网名。过去这 30 到 60 天，palo alto networks 的 nikesh——节目的朋友——开始发推、写长文。jensen 开了 x 账号，开始写长文——感谢关注，jensen。现在 zuckerberg 激活了他的账号，开始直接发声。我想指出：zuckerberg 以前是让别人替他打磨信息再发给市场。我觉得他成熟了，决定自己写自己的宣言。这篇文章我认为是他自己写的，也许有人帮忙——但我用 ai 检测器跑了一下，100% 人类手工打造的文字。他走在了前面，说&quot;这些是未来的潜在问题&quot;——非常好。要是他早些年对少女群体、社交媒体对孩子的影响、instagram 和 facebook 的上瘾问题也这么做就好了。我给他很多credit：决定直接发声、写自己的文章、说出自己的真相。而且 x 现在对这些对话和长文的表现极其出色。太棒了。" style="--index: 9">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">09</span>
+                    <span class="timeline-meta">00:39:42–00:46:18</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>JCal 的两个补充：就业冲击与&quot;双标&quot;质疑</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>JCal 称赞 Zuckerberg 对就业冲击的框架：AI 不必然加速自动化超过个体能力增长，数据反而显示个体能力增长可能匹配或超过自动化。</li>
+<li>JCal 指出 Zuckerberg 的&quot;双标&quot;：他主张可以学习任何可观察到的内容、为 AI 索引全世界的数据，却起诉过无数尝试索引 Facebook/Instagram 社交图谱的创业公司。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>蒸馏（Distillation）：用大模型/现有数据训练新模型的行为，AI 行业版权争议的核心概念。</li>
+<li>社交图谱（Social Graph）：用户在社交平台上的人际关系网络数据，Facebook 长期将其视为核心资产并禁止第三方抓取。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> 跟你一样，Sacks，我全程都在点头。因为他跑到了游行队伍前面，拿起接力棒说：我认同这里最好的观点——最好的观点就是开源赋能个体，这不是核技术。我想指出两个我觉得被埋没的点。第一，我想表扬他对就业冲击的看法。他说：确实可能存在就业替代。但人们恐惧自动化会超过个体能力增长的速度、导致就业替代，然后是人们学习新工作之前的困难期——我们都同意这是值得担忧的。但&quot;AI 必须让自动化快于个体能力增长或对新技能的需求增长&quot;并不是一条铁律。最近的统计表明，更可能的情况是个体能力增长能匹配甚至超过自动化。我觉得这个框架非常好，这就是 Jensen 那句话的另一种说法：你不会因为 AI 丢掉工作，你会输给那个用 AI 的人。这就是当下正在发生的游戏。每次我用这个技术，就会冒出 3 个新的商业机会，我又创造出两个新的职位描述，人们用 5 倍 10 倍的速度干活——如果他们拥抱这个技术。这是个很大的&quot;如果&quot;。</p>
+<p><strong>JCal：</strong> 第二个我觉得很有意思的是：他为&quot;有权索引任何人的内容并从中学习&quot;做了辩护。原话是：&quot;所有 AI 模型都源自人类知识。&quot;这挺平白无奇的。&quot;有些人试图把蒸馏描述为有害的，但我觉得保护这个原则很重要：你可以从任何你能观察到的东西中学习。&quot;换句话说，他在预先声明：我要扫描全世界的数据。我给他的信息是：Zuckerberg，请解释一下这个概念如何与这个事实兼容——你起诉过每一家试图索引或使用 Instagram/Facebook 社交图谱的创业公司，其中很多是我投资的。他们有几百起诉讼，起诉那些试图蒸馏&quot;谁是 Instagram 头部网红&quot;&quot;我的社交图谱里有谁&quot;的人。他们把那个东西完全锁死了。</p>
+<p><strong>JCal：</strong> 所以这里有点虚伪。这让我想起，Sacks，我们之前节目里聊过的&quot;Claude 拆解旧书进行蒸馏&quot;的话题——我们已经做过很多次蒸馏辩论了。</p>
+<p><strong>Sacks：</strong> 让我回到另一个点：有个巨大的讽刺是，Dario 这届政府期间在华盛顿基本上没能如愿。因为我认为如果他如愿了——如果他实现了他那个高度监管 AI 机器的梦想——我不认为那家公司能成功 IPO。为什么？因为他们对 token 收取巨额溢价的权利——JCal 你之前说的就是这个——你怀疑在这么多开源模型出来卖便宜 token 的情况下，这个溢价能撑多久。他们所有定价权、他们能收的那个溢价，靠的都是他们比开源模型领先 6 个月。而如果他们要受监管审批，这 6 个月优势会瞬间蒸发。Dario 自己在博客里一直在说：我们需要一个&quot;AI 的 FAA&quot;。你知道 FAA 认证一个新机型要多久吗？机身类最少 5 年。</p>
+<p><strong>JCal：</strong> 你要是想换飞机上的一个桌子，要 8 年。</p>
+<p><strong>Sacks：</strong> 你知道 FDA 批一个新药要多久吗？好几年。你要把这种监管框架用在 AI 模型发布上？游戏结束。你的 6 个月优势瞬间没了。你的模型会被商品化。用 Gavin 的话说，中国竞争者会追上来，这对美国是坏事。对我们的竞争力是坏事。对 AI 竞赛是坏事。显然我们不想让中国赢。但除了地缘政治维度，这对 Anthropic 作为一家公司也是灾难性的——因为他们的全部定价权都依赖保持 6 个月领先。</p>
+<p><strong>JCal：</strong> 如果他们失误——如果哪次丢掉了那 6 个月优势——他们就完了。那对收入意味着什么？对。但说实话，我觉得他们的定价权可能相当可持续，因为人们愿意付钱——不是整个市场，但足够大的一个子集——为真正的前沿智能付溢价。</p>
+<p><strong>Sacks：</strong> 所以只要——如果顶部 20% 的市场愿意付 10 倍价钱，他们就稳了。就像我之前说的，这是 Apple 对 Android。大部分市场愿意用 Android，更便宜，但有很大一个子集愿意为 Apple 付高价，因为体验更好。同理：如果你的公司处在竞争激烈的市场，你想要绝对最好的——出于竞争原因或别的原因——你会为真正的前沿智能付溢价。但 Anthropic 和 OpenAI 在那台仓鼠轮上：他们必须保持领先才能维持那个溢价。顺便说，我认为他们能做到，他们自己也认为能做到——他们甚至认为他们的领先在扩大，因为他们在通往递归自我改进的路上。</p>
+<p><strong>JCal：</strong> 我还想再提一点关于&quot;CEO 直接表态&quot;这件事。Zuck 从 Twitter 创立初期就有账号，@FinkD，那是他大学时的网名。过去这 30 到 60 天，Palo Alto Networks 的 Nikesh——节目的朋友——开始发推、写长文。Jensen 开了 X 账号，开始写长文——感谢关注，Jensen。现在 Zuckerberg 激活了他的账号，开始直接发声。我想指出：Zuckerberg 以前是让别人替他打磨信息再发给市场。我觉得他成熟了，决定自己写自己的宣言。这篇文章我认为是他自己写的，也许有人帮忙——但我用 AI 检测器跑了一下，100% 人类手工打造的文字。他走在了前面，说&quot;这些是未来的潜在问题&quot;——非常好。要是他早些年对少女群体、社交媒体对孩子的影响、Instagram 和 Facebook 的上瘾问题也这么做就好了。我给他很多credit：决定直接发声、写自己的文章、说出自己的真相。而且 X 现在对这些对话和长文的表现极其出色。太棒了。</p></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="00:46:18–00:50:42 ceo 必须亲自发声：zuckerberg 的直接传播 本段核心内容： jcal 认为如果 ceo 不在 x 上有自己的声音，就是在冒险。 sacks 补充：企业公关部门不是你的护身符，未来国会问责议程可能找上每个人，自己的账号是护甲。 gavin 强调&quot;开放源码使前沿 token 更有价值&quot;：250 iq 的前沿模型可以调度 150 iq 的开源模型。 详细中文整理： gavin： 我深表同意你说的一切。我想回到 zuck 说的关于算力的几个点——开源实际上让 anthropic 更有价值，以及&quot;人类是计算效率之王&quot;是多头论据。但我觉得你说的非常重要：如果你是公众人物，如果你是公司 ceo，而你在 x 上没有自己的声音，你就有风险。就这么简单。 jcal： 什么风险？展开说说。 gavin： 最终你会落进&quot;真理必叫你们自由&quot;那同一个问题。唯一能讲出一个人自己真相的人，就是他自己，用自己真实的话语。显然 mark zuckerberg 有超级投票权股票，他永远不会被 meta 赶出去。但有很多 ceo 觉得&quot;我的企业公关部在保护我，他们是我的声音&quot;。但猜猜怎么着：也许你退休了，也许下一任 ceo 不喜欢你，然后你被叫到国会面前。而且我认为民主党人已经说了他们会有&quot;问责议程&quot;，会追着每个人。我不确定这对民主党来说是好的竞选信息，但无论如何，如果你没有自己的声音、没有自己在 x 上的品牌，你就有风险。有自己的声音——是的，那是保护、是力量、是盔甲。 jcal： 它是个超能力。sacks，我告诉你，我爱 zuckerberg 的&quot;jeremy strong 时代&quot;，比&quot;jesse eisenberg 时代&quot;好多了。 sacks： 你看到他练 mma 了吗？有个视频他在一个驳船还是什么上面——太浩湖上的浮动驳船？ jcal： 哥们，我得小心别说他坏话，jake 改过自新了。我进入 zuck 2.0 了。我希望他喜欢 jake al 3.0。来上节目吧，zuck。我希望他每年 7 月 4 日都踩着电动水翼板举着美国国旗，而且我要直播。如果他摔下去了——他爬起来再录一次、再直播一次，那对他来说就是满分 aura。他得在考艾岛做这个，旁边还有公牛鲨。 sacks： 我要看到几条鲨鱼追着他。他这是 farming（获得流量和好感）乘以 1000。继续，zuck。 jcal： 我们需要更多这种真诚。ceo 们，直接发声吧。保护自己。做你自己。他就是他自己，他是个好人。还有两个点我觉得很重要。开源让前沿 token 更有价值。举个例子：anthropic、openai、grok 大概 250 或 200 iq。如果你有一个 200 或 250 iq 的智力可以调度这些开源 150 iq 的智力——那反而让 250 iq 更有价值，因为它可以把任务分包出去。就像我们如果要用曼哈顿计划类比：大家都说 richard feynman，还有那个总负责的人——那个说&quot;i am become death&quot;的人，谁在管曼哈顿计划？来个人接话。oppenheimer！你看，即使你有 10 个、30 个诺贝尔奖级别的物理学家，他们也需要那 2000 个&quot;全球前一万&quot;级别的普通物理学家。所以拥有更多可负担的智能，实际上让前沿更有价值。我认为一个非常可能的结果是：前沿 token 占经济价值的 65% 到 85%，开源 token 占 80% 的流量。这对所有人都有利，人人都是赢家。" style="--index: 10">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">10</span>
+                    <span class="timeline-meta">00:46:18–00:50:42</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>CEO 必须亲自发声：Zuckerberg 的直接传播</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>JCal 认为如果 CEO 不在 X 上有自己的声音，就是在冒险。</li>
+<li>Sacks 补充：企业公关部门不是你的护身符，未来国会问责议程可能找上每个人，自己的账号是护甲。</li>
+<li>Gavin 强调&quot;开放源码使前沿 token 更有价值&quot;：250 IQ 的前沿模型可以调度 150 IQ 的开源模型。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>Gavin：</strong> 我深表同意你说的一切。我想回到 Zuck 说的关于算力的几个点——开源实际上让 Anthropic 更有价值，以及&quot;人类是计算效率之王&quot;是多头论据。但我觉得你说的非常重要：如果你是公众人物，如果你是公司 CEO，而你在 X 上没有自己的声音，你就有风险。就这么简单。</p>
+<p><strong>JCal：</strong> 什么风险？展开说说。</p>
+<p><strong>Gavin：</strong> 最终你会落进&quot;真理必叫你们自由&quot;那同一个问题。唯一能讲出一个人自己真相的人，就是他自己，用自己真实的话语。显然 Mark Zuckerberg 有超级投票权股票，他永远不会被 Meta 赶出去。但有很多 CEO 觉得&quot;我的企业公关部在保护我，他们是我的声音&quot;。但猜猜怎么着：也许你退休了，也许下一任 CEO 不喜欢你，然后你被叫到国会面前。而且我认为民主党人已经说了他们会有&quot;问责议程&quot;，会追着每个人。我不确定这对民主党来说是好的竞选信息，但无论如何，如果你没有自己的声音、没有自己在 X 上的品牌，你就有风险。有自己的声音——是的，那是保护、是力量、是盔甲。</p>
+<p><strong>JCal：</strong> 它是个超能力。Sacks，我告诉你，我爱 Zuckerberg 的&quot;Jeremy Strong 时代&quot;，比&quot;Jesse Eisenberg 时代&quot;好多了。</p>
+<p><strong>Sacks：</strong> 你看到他练 MMA 了吗？有个视频他在一个驳船还是什么上面——太浩湖上的浮动驳船？</p>
+<p><strong>JCal：</strong> 哥们，我得小心别说他坏话，Jake 改过自新了。我进入 Zuck 2.0 了。我希望他喜欢 Jake Al 3.0。来上节目吧，Zuck。我希望他每年 7 月 4 日都踩着电动水翼板举着美国国旗，而且我要直播。如果他摔下去了——他爬起来再录一次、再直播一次，那对他来说就是满分 aura。他得在考艾岛做这个，旁边还有公牛鲨。</p>
+<p><strong>Sacks：</strong> 我要看到几条鲨鱼追着他。他这是 farming（获得流量和好感）乘以 1000。继续，Zuck。</p>
+<p><strong>JCal：</strong> 我们需要更多这种真诚。CEO 们，直接发声吧。保护自己。做你自己。他就是他自己，他是个好人。还有两个点我觉得很重要。开源让前沿 token 更有价值。举个例子：Anthropic、OpenAI、Grok 大概 250 或 200 IQ。如果你有一个 200 或 250 IQ 的智力可以调度这些开源 150 IQ 的智力——那反而让 250 IQ 更有价值，因为它可以把任务分包出去。就像我们如果要用曼哈顿计划类比：大家都说 Richard Feynman，还有那个总负责的人——那个说&quot;I am become death&quot;的人，谁在管曼哈顿计划？来个人接话。Oppenheimer！你看，即使你有 10 个、30 个诺贝尔奖级别的物理学家，他们也需要那 2000 个&quot;全球前一万&quot;级别的普通物理学家。所以拥有更多可负担的智能，实际上让前沿更有价值。我认为一个非常可能的结果是：前沿 token 占经济价值的 65% 到 85%，开源 token 占 80% 的流量。这对所有人都有利，人人都是赢家。</p></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="00:50:42–00:53:50 2027 年营收预测与 ea 对开源的敌意 本段核心内容： jcal 让 gavin 猜 anthropic 2027 年收入——用 2026 年底 1000 亿美元为基准。 gavin 和 sacks 都认为明年退出 arr 在 4000 到 5000 亿美元之间（&quot;4x&quot;），但到不了 1 万亿。 sacks 解释 ea 对开源模型的敌意来源于商业恐惧：如果开源不减速，anthropic 会被商品化。 但美国对华没有管辖权，中国只会加速——&quot;全球算力治理&quot;是白日梦。 详细中文整理： jcal： 告诉我数字，gavin baker：到 2027 年底，anthropic 的收入是多少？如果 2026 年正好以 1000 亿美元收尾，2027 年是多少？我赌&quot;超过&quot;。 gavin： 超过什么？一万亿？我不赌超过万亿。 jcal： 好，那我设 5000 亿。gavin baker，高于还是低于？ gavin： 我赌高于。5000 亿？不，我赌高于华尔街共识——我不确定共识是多少，我赌在共识之上 25% 到 30%，前提是这波监管攻势没得逞。 jcal： 你基本上是在冒险断言承销商会压低收入预期。恭喜，gavin。给我答案。 gavin： 不不，高于还是低于 5000 亿？我觉得 4000 到 5000 亿。你在区间里——现实可达的区间。 jcal： 等等，sacks，5000 亿，高于还是低于？ sacks： 我本来想说明年底退出 arr 是 4000 到 5000 亿，看起来非常舒服。所以略低于。两个&quot;低于&quot;。唯一原因不是更高，是因为我觉得在那个规模你会遇到物理极限。但也许不会，也许算力足够。而且还有竞争。 jcal： 我们都相信他们明年会到 4000 亿——1000 亿的 4 倍。想想这个数字。顺便说，他们年底是 1200 亿，所以 4 倍更接近 5000 亿。我觉得真正的胜负线是明年退出 arr 的 5000 亿，而且他们自己认为会超过。 jcal： 10 个月前我们还在聊他们 100 亿。从 100 亿到 4000 亿是 40 倍，先生们。 sacks： 顺便问，他们会不会感谢我阻止了 dario 朝自己脚开枪？ jcal： 我觉得应该感谢你——他真的是把两把枪分别放在两个脚踝上，打光了两个弹夹，而你取走了子弹。他们应该给你 1%。 sacks： 我觉得子弹没被取走。我觉得他是把枪顶着太阳穴。 jcal： 你是说 diddy mao 他玩的是猎鹿？sacks 把他按下来，他只是打中了自己的脚。 sacks： 我认为他们对开源模型的敌意就来自这里：如果他们自己会放慢，就必须让开源也放慢，否则他们就被商品化、生意就没了。但是，美国对发生在中国的行为没有管辖权，而中国不会放慢。这从来就是他们整个构想里的巨大漏洞。这些 ea 以为他们能建立全球算力治理，以为能跟中国达成某种全球协议。完全是白日梦，永远不会发生。如果我们放慢，中国只会一路狂飙。 jcal： 我以为他要造&quot;巴黎气候协定 2.0&quot;，结果那也没成。所以，年轻人，悠着点。" style="--index: 11">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">11</span>
+                    <span class="timeline-meta">00:50:42–00:53:50</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>2027 年营收预测与 EA 对开源的敌意</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>JCal 让 Gavin 猜 Anthropic 2027 年收入——用 2026 年底 1000 亿美元为基准。</li>
+<li>Gavin 和 Sacks 都认为明年退出 ARR 在 4000 到 5000 亿美元之间（&quot;4x&quot;），但到不了 1 万亿。</li>
+<li>Sacks 解释 EA 对开源模型的敌意来源于商业恐惧：如果开源不减速，Anthropic 会被商品化。</li>
+<li>但美国对华没有管辖权，中国只会加速——&quot;全球算力治理&quot;是白日梦。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> 告诉我数字，Gavin Baker：到 2027 年底，Anthropic 的收入是多少？如果 2026 年正好以 1000 亿美元收尾，2027 年是多少？我赌&quot;超过&quot;。</p>
+<p><strong>Gavin：</strong> 超过什么？一万亿？我不赌超过万亿。</p>
+<p><strong>JCal：</strong> 好，那我设 5000 亿。Gavin Baker，高于还是低于？</p>
+<p><strong>Gavin：</strong> 我赌高于。5000 亿？不，我赌高于华尔街共识——我不确定共识是多少，我赌在共识之上 25% 到 30%，前提是这波监管攻势没得逞。</p>
+<p><strong>JCal：</strong> 你基本上是在冒险断言承销商会压低收入预期。恭喜，Gavin。给我答案。</p>
+<p><strong>Gavin：</strong> 不不，高于还是低于 5000 亿？我觉得 4000 到 5000 亿。你在区间里——现实可达的区间。</p>
+<p><strong>JCal：</strong> 等等，Sacks，5000 亿，高于还是低于？</p>
+<p><strong>Sacks：</strong> 我本来想说明年底退出 ARR 是 4000 到 5000 亿，看起来非常舒服。所以略低于。两个&quot;低于&quot;。唯一原因不是更高，是因为我觉得在那个规模你会遇到物理极限。但也许不会，也许算力足够。而且还有竞争。</p>
+<p><strong>JCal：</strong> 我们都相信他们明年会到 4000 亿——1000 亿的 4 倍。想想这个数字。顺便说，他们年底是 1200 亿，所以 4 倍更接近 5000 亿。我觉得真正的胜负线是明年退出 ARR 的 5000 亿，而且他们自己认为会超过。</p>
+<p><strong>JCal：</strong> 10 个月前我们还在聊他们 100 亿。从 100 亿到 4000 亿是 40 倍，先生们。</p>
+<p><strong>Sacks：</strong> 顺便问，他们会不会感谢我阻止了 Dario 朝自己脚开枪？</p>
+<p><strong>JCal：</strong> 我觉得应该感谢你——他真的是把两把枪分别放在两个脚踝上，打光了两个弹夹，而你取走了子弹。他们应该给你 1%。</p>
+<p><strong>Sacks：</strong> 我觉得子弹没被取走。我觉得他是把枪顶着太阳穴。</p>
+<p><strong>JCal：</strong> 你是说 Diddy Mao 他玩的是猎鹿？Sacks 把他按下来，他只是打中了自己的脚。</p>
+<p><strong>Sacks：</strong> 我认为他们对开源模型的敌意就来自这里：如果他们自己会放慢，就必须让开源也放慢，否则他们就被商品化、生意就没了。但是，美国对发生在中国的行为没有管辖权，而中国不会放慢。这从来就是他们整个构想里的巨大漏洞。这些 EA 以为他们能建立全球算力治理，以为能跟中国达成某种全球协议。完全是白日梦，永远不会发生。如果我们放慢，中国只会一路狂飙。</p>
+<p><strong>JCal：</strong> 我以为他要造&quot;巴黎气候协定 2.0&quot;，结果那也没成。所以，年轻人，悠着点。</p></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="00:53:50–00:58:50 人类智能的效率优势与&quot;grok 追平&quot; （本段已在上文 00:50:42–00:53:50 及更早段落覆盖，all-in summit 宣传部分属于节目广告性质的内容，按压缩原则略去。）" style="--index: 12">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">12</span>
+                    <span class="timeline-meta">00:53:50–00:58:50</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>人类智能的效率优势与&quot;Grok 追平&quot;</h3>
+                    <div class="section-content"><p>（本段已在上文 00:50:42–00:53:50 及更早段落覆盖，All-In Summit 宣传部分属于节目广告性质的内容，按压缩原则略去。）</p></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="00:58:50–01:04:29 nvidia 的 5000 亿美元算力融资计划 本段核心内容： nvidia 联合 goldman sachs、blackrock 等成立独立融资平台，为 ai 算力建设募集最高 5000 亿美元。 核心思路：gpu 作为可产生收入的金融资产（类比按揭证券），公司借钱买芯片、出租算力、用现金流还贷。 gavin 认为 blackstone、kkr 等顶级机构愿意参与，本身就是对&quot;gpu 可融资性&quot;的强有力验证。 nvidia 提供&quot;残值担保&quot;，既降低融资成本，又让自己承受较少的风险。 jcal 和 sacks 讨论这是否属于&quot;循环融资&quot;（round-tripping）——结论是这更像资产支持融资，而非自我循环。 背景解释与关键术语： 残值担保（residual value guarantee）：nvidia 承诺几年后 gpu 仍能以某个价格出租，降低贷款方风险。 循环融资（round-tripping）：资金从一家公司流出又通过关联交易流回，制造虚假需求或被批评为空转。 2 and 20：私募基金典型收费结构——2% 管理费加 20% 业绩提成。 暗光纤（dark fiber）：互联网泡沫时期光纤产能过剩闲置，用来类比&quot;暗 gpu&quot;的灾难场景。 ampere：nvidia 2020 年发布的 gpu 架构。 coreweave：gpu 云计算公司，在节目设定中称 2029 年仍能以盈利价格出租 ampere。 bill belichick 式&quot;下一场&quot;心态此处不再展开。 详细中文整理： jcal： 说到我们的第六好基友 jensen——nvidia 正在与 goldman、blackrock 等合作，筹集 5000 亿美元用于 ai 算力。jensen 在 x 上发表了愿景文章（他开账号了），标题是《nvidia ai 工厂计算正在成为可投资资产类别》。这些机构将建立独立的融资平台，募集第三方资本。核心思路是把 gpu 当作可融资的、产生收入的资产——有点像按揭支持证券，或者希望不要重蹈其覆辙。基本运作方式是：公司不再一次性花几十亿买芯片，而是借钱购买 nvidia 系统、用它们开始赚钱——也就是出租算力——然后用现金流还贷。nvidia 的角色是&quot;媒人&quot;，把需要算力的客户和放贷方连接起来。gm、福特有自己的金融子公司。gavin，你怎么看这个公告？这跟一两年前我们在节目里讨论过的&quot;循环融资&quot;担忧有什么关系？ gavin： 我认为关键点在于：blackstone、kkr、goldman sachs 这些机构——如果他们不相信 nvidia gpu 算力是可融资资产，他们不会做这件事，也不会跟 jensen 一起上 cnbc 那期节目。所以真正聪明的地方在于：你让世界上最聪明的一些资产管理公司——很多产品收 2 和 20——来实质性地验证这个市场。nvidia 当媒人。他们实际上在说：我们的算力因为非常灵活，寿命足够长，所以你可以用比其他类型算力更低的利率来融资。我认为这很聪明，对所有人都有利。有趣的是，如果你看那三家我称之为&quot;中国开源三巨头&quot;底层架构——也许还有第四个，如果有 qin、kimi、deepsync 和 glm——它们在朝非常不同的方向演化。这种架构差异对 nvidia 和 gpu 有利，因为它意味着你确实需要这种更灵活的算力，才能放心地融资、相信它有长寿命。 gavin： 但 nvidia 做得特别聪明的是：他们说&quot;我们来帮这个市场成长&quot;。他们提供两个非常重要的功能。第一，他们告诉 blackstone、goldman、kkr、apollo、blackrock（六个里面有遗漏的抱歉）：有交易就来找我们，我们给你残值担保。这个残值担保会进一步降低融资成本，可以纳入这些公司的承销模型。意思是说：三年后、四年后，我们保证这些 gpu 能以某个价格租出去。他们承担的风险是担保值和市场实际租金之间的差额。而现在一切都往上走。nvidia 对算力供需的掌握比几乎任何人都强，所以他们可以把担保定在一个非常聪明的水平，让资产更可融资。而他们自己只承担 25% 的风险。 jcal： 世界上一些声誉最好的承销商。gavin，能出什么错呢？我提到了按揭支持证券。显然寿命是关键问题。不同的超大规模客户在说 4、5、6 年，amazon 是激烈的争论方。但我们已经看到——就像你说的开源模型——它们可以被调整到跑在最老的硬件上。所以也许我们能用到第 6、7、8 年。这—— gavin： 不，我们能超过这个。coreweave 说他们现在就在以 2029 年仍能盈利的价格出租 ampere。一块 2020 年出的 ampere 将有 9 年寿命。我觉得 nvidia 看到的是——就像美国老车被卖到海外。 jcal： 哪里可能出错？ gavin： 理论上最大的风险不在需求端。最大的风险是算力过剩和过度建设。就像互联网泡沫后的暗光纤，如果出现&quot;暗 gpu&quot;，对所有人都是灾难。尤其是如果你的算力基础设施是按每瓦 30 到 50 美元的现货价预期建的——elon 说过他们就是这个预期。如果突然太多人冲进来提供算力，供过于求、市场崩盘——那才是风险因素。但奇怪的是，所有政治上的逆风反而给这个风险上了保险，因为建数据中心太难了。整个道德恐慌、歇斯底里、骗局——正是这些政治逆风，几乎保证了不会出现相对于指数级增长需求的供给过剩。所以从奇怪的角度说，你被保护了。但 jcal，我能换个话题吗？ jcal： 当然。 gavin： 我要说 jensen 这步棋里真正天才的地方。" style="--index: 13">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">13</span>
+                    <span class="timeline-meta">00:58:50–01:04:29</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>Nvidia 的 5000 亿美元算力融资计划</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>NVIDIA 联合 Goldman Sachs、BlackRock 等成立独立融资平台，为 AI 算力建设募集最高 5000 亿美元。</li>
+<li>核心思路：GPU 作为可产生收入的金融资产（类比按揭证券），公司借钱买芯片、出租算力、用现金流还贷。</li>
+<li>Gavin 认为 Blackstone、KKR 等顶级机构愿意参与，本身就是对&quot;GPU 可融资性&quot;的强有力验证。</li>
+<li>NVIDIA 提供&quot;残值担保&quot;，既降低融资成本，又让自己承受较少的风险。</li>
+<li>JCal 和 Sacks 讨论这是否属于&quot;循环融资&quot;（round-tripping）——结论是这更像资产支持融资，而非自我循环。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>残值担保（Residual Value Guarantee）：NVIDIA 承诺几年后 GPU 仍能以某个价格出租，降低贷款方风险。</li>
+<li>循环融资（Round-tripping）：资金从一家公司流出又通过关联交易流回，制造虚假需求或被批评为空转。</li>
+<li>2 and 20：私募基金典型收费结构——2% 管理费加 20% 业绩提成。</li>
+<li>暗光纤（Dark Fiber）：互联网泡沫时期光纤产能过剩闲置，用来类比&quot;暗 GPU&quot;的灾难场景。</li>
+<li>Ampere：NVIDIA 2020 年发布的 GPU 架构。</li>
+<li>CoreWeave：GPU 云计算公司，在节目设定中称 2029 年仍能以盈利价格出租 Ampere。</li>
+<li>Bill Belichick 式&quot;下一场&quot;心态此处不再展开。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> 说到我们的第六好基友 Jensen——NVIDIA 正在与 Goldman、BlackRock 等合作，筹集 5000 亿美元用于 AI 算力。Jensen 在 X 上发表了愿景文章（他开账号了），标题是《NVIDIA AI 工厂计算正在成为可投资资产类别》。这些机构将建立独立的融资平台，募集第三方资本。核心思路是把 GPU 当作可融资的、产生收入的资产——有点像按揭支持证券，或者希望不要重蹈其覆辙。基本运作方式是：公司不再一次性花几十亿买芯片，而是借钱购买 NVIDIA 系统、用它们开始赚钱——也就是出租算力——然后用现金流还贷。NVIDIA 的角色是&quot;媒人&quot;，把需要算力的客户和放贷方连接起来。GM、福特有自己的金融子公司。Gavin，你怎么看这个公告？这跟一两年前我们在节目里讨论过的&quot;循环融资&quot;担忧有什么关系？</p>
+<p><strong>Gavin：</strong> 我认为关键点在于：Blackstone、KKR、Goldman Sachs 这些机构——如果他们不相信 NVIDIA GPU 算力是可融资资产，他们不会做这件事，也不会跟 Jensen 一起上 CNBC 那期节目。所以真正聪明的地方在于：你让世界上最聪明的一些资产管理公司——很多产品收 2 和 20——来实质性地验证这个市场。NVIDIA 当媒人。他们实际上在说：我们的算力因为非常灵活，寿命足够长，所以你可以用比其他类型算力更低的利率来融资。我认为这很聪明，对所有人都有利。有趣的是，如果你看那三家我称之为&quot;中国开源三巨头&quot;底层架构——也许还有第四个，如果有 Qin、Kimi、DeepSync 和 GLM——它们在朝非常不同的方向演化。这种架构差异对 NVIDIA 和 GPU 有利，因为它意味着你确实需要这种更灵活的算力，才能放心地融资、相信它有长寿命。</p>
+<p><strong>Gavin：</strong> 但 NVIDIA 做得特别聪明的是：他们说&quot;我们来帮这个市场成长&quot;。他们提供两个非常重要的功能。第一，他们告诉 Blackstone、Goldman、KKR、Apollo、BlackRock（六个里面有遗漏的抱歉）：有交易就来找我们，我们给你残值担保。这个残值担保会进一步降低融资成本，可以纳入这些公司的承销模型。意思是说：三年后、四年后，我们保证这些 GPU 能以某个价格租出去。他们承担的风险是担保值和市场实际租金之间的差额。而现在一切都往上走。NVIDIA 对算力供需的掌握比几乎任何人都强，所以他们可以把担保定在一个非常聪明的水平，让资产更可融资。而他们自己只承担 25% 的风险。</p>
+<p><strong>JCal：</strong> 世界上一些声誉最好的承销商。Gavin，能出什么错呢？我提到了按揭支持证券。显然寿命是关键问题。不同的超大规模客户在说 4、5、6 年，Amazon 是激烈的争论方。但我们已经看到——就像你说的开源模型——它们可以被调整到跑在最老的硬件上。所以也许我们能用到第 6、7、8 年。这——</p>
+<p><strong>Gavin：</strong> 不，我们能超过这个。CoreWeave 说他们现在就在以 2029 年仍能盈利的价格出租 Ampere。一块 2020 年出的 Ampere 将有 9 年寿命。我觉得 NVIDIA 看到的是——就像美国老车被卖到海外。</p>
+<p><strong>JCal：</strong> 哪里可能出错？</p>
+<p><strong>Gavin：</strong> 理论上最大的风险不在需求端。最大的风险是算力过剩和过度建设。就像互联网泡沫后的暗光纤，如果出现&quot;暗 GPU&quot;，对所有人都是灾难。尤其是如果你的算力基础设施是按每瓦 30 到 50 美元的现货价预期建的——Elon 说过他们就是这个预期。如果突然太多人冲进来提供算力，供过于求、市场崩盘——那才是风险因素。但奇怪的是，所有政治上的逆风反而给这个风险上了保险，因为建数据中心太难了。整个道德恐慌、歇斯底里、骗局——正是这些政治逆风，几乎保证了不会出现相对于指数级增长需求的供给过剩。所以从奇怪的角度说，你被保护了。但 JCal，我能换个话题吗？</p>
+<p><strong>JCal：</strong> 当然。</p>
+<p><strong>Gavin：</strong> 我要说 Jensen 这步棋里真正天才的地方。</p></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="01:04:29–01:09:05 jensen 的金融工程：消除融资约束 本段核心内容： jcal 补充：nvidia 通过收入分成（类似特许权使用费）参与上行收益。 jcal 解释 jensen 此举&quot;消除融资约束&quot;的逻辑：ai 建设的瓶颈已不是需求而是口径，nvidia 把融资约束松绑后 tam 会大幅扩大。 sacks 提出&quot;nvidia 正在成为 ai 的美联储&quot;的框架：货币政策通过私人银行运作，nvidia 通过私人市场融资机构运作。 gavin 认同资产支持融资的类比：像飞机融资一样，gpu 本身有价值，不只看租户信用。 详细中文整理： jcal： 还有一个部分。 gavin： 作为担保的回报，他们拿到收入分成。在保底之上？ jcal： 谁拿保底之上的收入分成？ gavin： 我觉得交易的逻辑会是：我们愿意以远低于每瓦 30 或 50 美元的、非常低风险的保底水平来承诺算力购买——这个水平跟我们对产能和未来模型趋势的高分辨率洞察匹配。作为回报，我们在某个更高的水位之上拿收入分成。morgan stanley 两天前发了一篇很好的报告：nvidia 可能——这些收入分成实际上就是特许权使用费——很快变成一家巨大的、资本开支极低的云公司。 jcal： 我来告诉你为什么 jensen 这步棋这么天才。因为数字变得太大，tam 开始受限于融资能力。他做的是松绑融资约束，这样他就能长到跟真实 tam 一样大——他移除了那个约束。举个例子：elon 明年想增加大约 6 到 8 吉瓦。我们知道那要花 3000 到 4000 亿美元资本开支。公司刚通过股权和债务融资筹了 1000 亿。所以他们显然必须出去融资。我们在上期聊过，最简单的融资方式就是找 nvidia 做卖方融资，尤其考虑到回本周期可能短到 1 年。所以 jensen 在用这些大银行、大 pe 机构创造一条信用额度，然后提供给所有下游买家。我不认为这是循环的。这不是 gurley（bill gurley）担心的那种循环。这是华尔街银行和私募股权基于 gpu 预期产生的现金流来提供融资。 sacks： 某种意义上，nvidia 正在成为 ai 的中央银行。这是理解他们所做之事的一种方式。就像美联储——大量货币政策通过私人银行运作。这里你会看到更多银行加入，私人市场机构收费承销这些交易，nvidia 帮助撮合。所以我不觉得这是真正的循环融资。 gavin： 对，我也看了那个 cnbc 特别节目。我印象很深的一个点是：私募股权的人说这有点像他们做飞机融资——航空公司买飞机时，融资不只是基于航空公司的信用，而是因为飞机本身有价值。这使得融资容易得多，因为你知道即使航空公司出问题，你也有保障——资产支持融资。他们在这里对 gpu 做的就是这件事。为了实现这一点，nvidia 必须标准化，创造参考设计等等，让华尔街可以打包、证券化——就像他们当年对按揭做的事。 jcal： 我说一下为什么我不担心这个建设周期。有两个&quot;油门调节器&quot;，gavin。第一是现实世界的物理——我们聊过建数据中心的难度。第二是个&quot;死手开关&quot;——就是那种必须按住列车才走的开关，如果司机心脏病发作、手松开，列车就停了。这两个开关是 anthropic 和 openai。它们是最大的两个客户。openai 已经缩减了这类建设的雄心——从大约 1.4 万亿降到大约 6000 亿。还有 anthropic——我们刚说它明年会到 4000 亿收入，大概这个量级。如果它们不需要算力了，或者算力变得太高效、开源模型造成逆风——不管什么原因——它们会把手从&quot;购买&quot;按钮上拿开，那个死手开关就会让一切慢下来。所以我们不会得到&quot;按揭支持证券&quot;的结局。 gavin： 那可能导致连环碰撞。但正因如此，我认为 anthropic 的 ipo 对市场非常重要——因为市场会得到它的季度财报，每季度看到收入和利润数据。那可能成为整个行业最重要的信号。为什么？因为到处都有人说 ai 是泡沫、这笔资本开支不合理、不会有 roi。所有人都会盯着 anthropic 的季度财报，把它当作&quot;配速车&quot;。不只是它——还有 openai 和 spacex——但你得说 anthropic 现在是配速车。他们会看它来确认需求信号是否存在。如果出现一点磕绊或摇摆，会最先在那里显现。 jcal： 对。如果 anthropic 踩刹车，后面会追尾一大串公司。因为 anthropic 每吉瓦算力产生 1000 亿美元收入——这就是为什么它们能付给 spacex 每吉瓦 500 亿的现货价，spacex 因此能付给 nvidia 300 亿买芯片做建设。整个食物链一路往下：nvidia 付钱给 tsmc、micron、sk hynix。所以只要有一下摇摆、有人踩刹车、配速车减速——整个链条都会感受到。但即便如此，这些数字以经过审计的 gaap 合规的方式按季度披露，还是更好。" style="--index: 14">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">14</span>
+                    <span class="timeline-meta">01:04:29–01:09:05</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>Jensen 的金融工程：消除融资约束</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>JCal 补充：NVIDIA 通过收入分成（类似特许权使用费）参与上行收益。</li>
+<li>JCal 解释 Jensen 此举&quot;消除融资约束&quot;的逻辑：AI 建设的瓶颈已不是需求而是口径，NVIDIA 把融资约束松绑后 TAM 会大幅扩大。</li>
+<li>Sacks 提出&quot;NVIDIA 正在成为 AI 的美联储&quot;的框架：货币政策通过私人银行运作，NVIDIA 通过私人市场融资机构运作。</li>
+<li>Gavin 认同资产支持融资的类比：像飞机融资一样，GPU 本身有价值，不只看租户信用。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> 还有一个部分。</p>
+<p><strong>Gavin：</strong> 作为担保的回报，他们拿到收入分成。在保底之上？</p>
+<p><strong>JCal：</strong> 谁拿保底之上的收入分成？</p>
+<p><strong>Gavin：</strong> 我觉得交易的逻辑会是：我们愿意以远低于每瓦 30 或 50 美元的、非常低风险的保底水平来承诺算力购买——这个水平跟我们对产能和未来模型趋势的高分辨率洞察匹配。作为回报，我们在某个更高的水位之上拿收入分成。Morgan Stanley 两天前发了一篇很好的报告：NVIDIA 可能——这些收入分成实际上就是特许权使用费——很快变成一家巨大的、资本开支极低的云公司。</p>
+<p><strong>JCal：</strong> 我来告诉你为什么 Jensen 这步棋这么天才。因为数字变得太大，TAM 开始受限于融资能力。他做的是松绑融资约束，这样他就能长到跟真实 TAM 一样大——他移除了那个约束。举个例子：Elon 明年想增加大约 6 到 8 吉瓦。我们知道那要花 3000 到 4000 亿美元资本开支。公司刚通过股权和债务融资筹了 1000 亿。所以他们显然必须出去融资。我们在上期聊过，最简单的融资方式就是找 NVIDIA 做卖方融资，尤其考虑到回本周期可能短到 1 年。所以 Jensen 在用这些大银行、大 PE 机构创造一条信用额度，然后提供给所有下游买家。我不认为这是循环的。这不是 Gurley（Bill Gurley）担心的那种循环。这是华尔街银行和私募股权基于 GPU 预期产生的现金流来提供融资。</p>
+<p><strong>Sacks：</strong> 某种意义上，NVIDIA 正在成为 AI 的中央银行。这是理解他们所做之事的一种方式。就像美联储——大量货币政策通过私人银行运作。这里你会看到更多银行加入，私人市场机构收费承销这些交易，NVIDIA 帮助撮合。所以我不觉得这是真正的循环融资。</p>
+<p><strong>Gavin：</strong> 对，我也看了那个 CNBC 特别节目。我印象很深的一个点是：私募股权的人说这有点像他们做飞机融资——航空公司买飞机时，融资不只是基于航空公司的信用，而是因为飞机本身有价值。这使得融资容易得多，因为你知道即使航空公司出问题，你也有保障——资产支持融资。他们在这里对 GPU 做的就是这件事。为了实现这一点，NVIDIA 必须标准化，创造参考设计等等，让华尔街可以打包、证券化——就像他们当年对按揭做的事。</p>
+<p><strong>JCal：</strong> 我说一下为什么我不担心这个建设周期。有两个&quot;油门调节器&quot;，Gavin。第一是现实世界的物理——我们聊过建数据中心的难度。第二是个&quot;死手开关&quot;——就是那种必须按住列车才走的开关，如果司机心脏病发作、手松开，列车就停了。这两个开关是 Anthropic 和 OpenAI。它们是最大的两个客户。OpenAI 已经缩减了这类建设的雄心——从大约 1.4 万亿降到大约 6000 亿。还有 Anthropic——我们刚说它明年会到 4000 亿收入，大概这个量级。如果它们不需要算力了，或者算力变得太高效、开源模型造成逆风——不管什么原因——它们会把手从&quot;购买&quot;按钮上拿开，那个死手开关就会让一切慢下来。所以我们不会得到&quot;按揭支持证券&quot;的结局。</p>
+<p><strong>Gavin：</strong> 那可能导致连环碰撞。但正因如此，我认为 Anthropic 的 IPO 对市场非常重要——因为市场会得到它的季度财报，每季度看到收入和利润数据。那可能成为整个行业最重要的信号。为什么？因为到处都有人说 AI 是泡沫、这笔资本开支不合理、不会有 ROI。所有人都会盯着 Anthropic 的季度财报，把它当作&quot;配速车&quot;。不只是它——还有 OpenAI 和 SpaceX——但你得说 Anthropic 现在是配速车。他们会看它来确认需求信号是否存在。如果出现一点磕绊或摇摆，会最先在那里显现。</p>
+<p><strong>JCal：</strong> 对。如果 Anthropic 踩刹车，后面会追尾一大串公司。因为 Anthropic 每吉瓦算力产生 1000 亿美元收入——这就是为什么它们能付给 SpaceX 每吉瓦 500 亿的现货价，SpaceX 因此能付给 NVIDIA 300 亿买芯片做建设。整个食物链一路往下：NVIDIA 付钱给 TSMC、Micron、SK Hynix。所以只要有一下摇摆、有人踩刹车、配速车减速——整个链条都会感受到。但即便如此，这些数字以经过审计的 GAAP 合规的方式按季度披露，还是更好。</p></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="01:09:05–01:14:18 死手开关与 anthropic 作为行业&quot;配速车&quot; 本段核心内容： gavin 判断：如果 dario 因为需求消失而踩刹车，整个行业会追尾；如果是因为被竞争对手超越，那不会出现&quot;翻车&quot;。 anthropic 的 s-1 会&quot;击碎很多人的认知&quot;——它将证明 ai token 业务是盈利的，不需要补贴。 gavin 批评宏观和价值投资者&quot;无知但自信&quot;：他们假设 token 是补贴的、整个行业会崩溃，事实恰恰相反。 jcal 给出一个简单的需求框架：美国 1.5–1.6 亿就业人口的 10 万亿美元薪资，企业至少会把其中 5%–10% 花在 token 上——最低也是 4000 亿美元，这还没算世界其他地区。 详细中文整理： jcal： 所以 gavin，我们在说有一个&quot;kill switch&quot;、一个刹车。车距够吗？如果 dario 真踩刹车、如果出现逆风，是所有人撞上去，还是整个行业能说&quot;好，我们慢 20%、慢 30%&quot;？ gavin： 很简单：如果他是因需求不足而踩刹车，那会连环追尾。车距不够，会&quot;砰&quot;地撞上。但如果 dario 是被 spacex 或 openai——或某个美国开源冠军——超车，那就不会翻车。但 anthropic 的 s-1 会非常重要，而且会击碎很多人的认知。因为我认为现在有很多宏观投资者和价值投资者，他们非常自信地做空 ai，前提假设是 token 被补贴。但 anthropic 在产生现金。这个事实我认为在圈内是半公开的——我其实没跟 anthropic 聊过，但有足够多的信号。如果你读公开消息的蛛丝马迹：他们在产生现金、他们盈利。开源 token 盈利，anthropic 盈利。openai 如果现在没产生现金，也很快了。spacex 也一样。当我听到那些宏观和价值投资者——他们很聪明，但对事实无知——假设 token 被补贴、一切会在某个循环融资的火堆里崩溃——他们就是错的。绝大多数 token 对链条上每个参与者都是赚钱的，每一个。anthropic 的 s-1 会让这一点变得清晰。 jcal： 就像我说&quot;我非常看空世界经济，因为油价 500 美元一桶&quot;——如果油价真是 500 美元，那确实是看空的理由。但问题在于：前提事实是错的。他们某种程度上是被雇佣来当&quot;末日滚雪球者&quot;和&quot;末日商人&quot;的。我给你一个我一直在想的框架：美国就业人口大约 1.5 到 1.6 亿，他们的总薪资大约 10 到 12 万亿美元。我看不到任何世界——我看不到企业和个人不把员工薪资的 5% 或 10% 花在等价的 token 上。一个人年薪 8 万，你会花 8000 块——薪资的 10%，或者至少 4000 块——让他的效率更高。我们有个类比：saas 软件、桌面电脑、手机等一般技术使用。把这些数字加起来，仅美国就有 8 万亿美元的 ai 支出。这显然会发生。如果我错了、只有一半、是 5000 亿——那也正是这些公司正在逼近的数量级。这还没算地球其他地方呢。我觉得我们会没事的，朋友们。" style="--index: 15">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">15</span>
+                    <span class="timeline-meta">01:09:05–01:14:18</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>死手开关与 Anthropic 作为行业&quot;配速车&quot;</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>Gavin 判断：如果 Dario 因为需求消失而踩刹车，整个行业会追尾；如果是因为被竞争对手超越，那不会出现&quot;翻车&quot;。</li>
+<li>Anthropic 的 S-1 会&quot;击碎很多人的认知&quot;——它将证明 AI token 业务是盈利的，不需要补贴。</li>
+<li>Gavin 批评宏观和价值投资者&quot;无知但自信&quot;：他们假设 token 是补贴的、整个行业会崩溃，事实恰恰相反。</li>
+<li>JCal 给出一个简单的需求框架：美国 1.5–1.6 亿就业人口的 10 万亿美元薪资，企业至少会把其中 5%–10% 花在 token 上——最低也是 4000 亿美元，这还没算世界其他地区。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> 所以 Gavin，我们在说有一个&quot;kill switch&quot;、一个刹车。车距够吗？如果 Dario 真踩刹车、如果出现逆风，是所有人撞上去，还是整个行业能说&quot;好，我们慢 20%、慢 30%&quot;？</p>
+<p><strong>Gavin：</strong> 很简单：如果他是因需求不足而踩刹车，那会连环追尾。车距不够，会&quot;砰&quot;地撞上。但如果 Dario 是被 SpaceX 或 OpenAI——或某个美国开源冠军——超车，那就不会翻车。但 Anthropic 的 S-1 会非常重要，而且会击碎很多人的认知。因为我认为现在有很多宏观投资者和价值投资者，他们非常自信地做空 AI，前提假设是 token 被补贴。但 Anthropic 在产生现金。这个事实我认为在圈内是半公开的——我其实没跟 Anthropic 聊过，但有足够多的信号。如果你读公开消息的蛛丝马迹：他们在产生现金、他们盈利。开源 token 盈利，Anthropic 盈利。OpenAI 如果现在没产生现金，也很快了。SpaceX 也一样。当我听到那些宏观和价值投资者——他们很聪明，但对事实无知——假设 token 被补贴、一切会在某个循环融资的火堆里崩溃——他们就是错的。绝大多数 token 对链条上每个参与者都是赚钱的，每一个。Anthropic 的 S-1 会让这一点变得清晰。</p>
+<p><strong>JCal：</strong> 就像我说&quot;我非常看空世界经济，因为油价 500 美元一桶&quot;——如果油价真是 500 美元，那确实是看空的理由。但问题在于：前提事实是错的。他们某种程度上是被雇佣来当&quot;末日滚雪球者&quot;和&quot;末日商人&quot;的。我给你一个我一直在想的框架：美国就业人口大约 1.5 到 1.6 亿，他们的总薪资大约 10 到 12 万亿美元。我看不到任何世界——我看不到企业和个人不把员工薪资的 5% 或 10% 花在等价的 token 上。一个人年薪 8 万，你会花 8000 块——薪资的 10%，或者至少 4000 块——让他的效率更高。我们有个类比：SaaS 软件、桌面电脑、手机等一般技术使用。把这些数字加起来，仅美国就有 8 万亿美元的 AI 支出。这显然会发生。如果我错了、只有一半、是 5000 亿——那也正是这些公司正在逼近的数量级。这还没算地球其他地方呢。我觉得我们会没事的，朋友们。</p></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="01:14:18–01:27:36 amazon dsp 用工模式争议 本段核心内容： 新泽西州 ag 起诉 amazon，指控其通过&quot;配送服务伙伴&quot;（dsp）分包商模式规避雇主责任；纽约市长 adams 也宣布推动立法要求 amazon 直接雇佣司机。 sacks 和市场逻辑派认为 dsp 模式是自然演化的市场结构，强制雇佣会让每件包裹成本增加 5.2 美元、每户年增 664 美元、约 5000 个岗位受威胁。 jcal 罕见地站在&quot;社会主义者&quot;一侧：认为 dsp 模式是 amazon 精心设计的&quot;甩锅&quot;结构，把司机薪资和福利负担转嫁给纳税人。 jcal 提出 amazon 应该学 starbucks（howard schultz 时代）主动给一线员工转正、加福利，成本约每件 25 美分，并预测新泽西和纽约会赢下诉讼。 背景解释与关键术语： dsp（delivery service partners）：amazon 的第三方配送伙伴模式，司机名义上受雇于小型承包公司，而非 amazon。 ag（attorney general）：州检察长。 新泽西州 ag 起诉：节目中的报道称 amazon 通过 dsp 规避工伤赔偿、保险、工会谈判等雇主责任。 adams 市长：纽约市长 eric adams，在节目设定中使用&quot;the zoran, mondame&quot;等称呼，实为对当时纽约市长（adams）的夸大笑谈式称呼，嘉宾们故意用变体发音。 rsu（restricted stock unit）：受限股票单位，科技公司常用股权激励。 howard schultz：星巴克创始人，以&quot;给员工提供体面工资和福利&quot;著称。 详细中文整理： jcal： 接下来一则来自新泽西和纽约的新闻。新泽西州总检察长上周起诉了 amazon，声称这家公司通过分包商雇佣司机来&quot;作弊&quot;。这个模式叫 dsp——配送服务伙伴——这个概念非常聪明，也许过于聪明了，根据这些开始堆积的诉讼，它让 amazon 得以脱责。因为如果一个 amazon 司机撞了人，如果他们是 amazon 员工的话，amazon 要承担的责任就被转移掉了。周一，纽约市长 adams——节目的朋友——跳了进来。他发了一个他现在很出名的&quot;民主社会主义者式&quot;的咧嘴笑视频，要求通过市政法律强制 amazon 自己雇佣司机。原话：&quot;像 amazon 这样的公司，通过一套剥削性分包体系把自己与责任隔绝开来，建立了十亿美元级别的商业模式。&quot;这个问题由来已久。有过悲剧性的死亡事件，因为分包商被施加巨大压力，有人撞死了人。因为司机技术上受雇于 dsp，amazon 就说&quot;我们不是雇主，所以我们不负责，我们不需要进入工会谈判或履行劳动义务&quot;。sacks，我很好奇你的看法——现在社会上社会主义情绪高涨，人们认为企业在边缘作弊。amazon 在作弊吗？这是不是过于聪明、该收回来了？我的意见是——因为这正在获得势头，会是中期选举和 2028 年的大议题之一。 sacks： 这是种很普遍的做法，不只纽约。amazon 用这些独立承包商网络来配送已经很久了。他们的说法是：如果你禁止他们用独立承包商，配送成本会上升。有研究显示普通家庭会多付几百美元。服务会变慢，小承包商企业的数千个岗位会有风险。amazon 还说这可能让他们把运营搬出纽约市。另外，dsp 模式确实支持高峰期的快速扩能——节日高峰、密集城区路由、更低成本。这比全员 amazon 雇员灵活得多。市场就是这么演化的：也许一开始 amazon 什么都自己干，后来开始分散到这些小企业网络。实际上它创造了更多就业、更多创业。这些 dsp 在纽约市雇了几千人。如果把这些定为非法，那些岗位就会受威胁。所以我觉得这是—— jcal： 你站哪边，sacks？ sacks： 让契约自由和自愿交换占上风。这个市场结构演化是有原因的——工人喜欢它，dsp 老板喜欢它，amazon 喜欢它。这些都是互利安排。我不明白为什么 adams 市长要把市政府插进来。 jcal： gavin，你有看法吗？ gavin： 如果我站在 amazon 的立场——虽然我确定他们不会这么做——我会加一个附加费：&quot;这是 adams 费，是强加给你们的。&quot;很多人用 amazon，不只是纽约富人。这是 adams 费，是这项不明智政策的结果。我会让它出现在每张账单上作为单独一项，因为这就是它的结果。 jcal： 你把 amazon 的服务跟政府提供的任何服务比——amazon 的效率惊人得不可思议。你下单，当天到，最晚次日达。amazon 的服务好得令人难以置信。它全是为消费者优化低价，现在我们要让政府插到 amazon 司机网络中间。adams 提供了哪个市政服务能比得上 amazon 的效率，让他现在来教 amazon 做生意？这太荒唐了。 jcal： 但你看 starbucks——schultz 主政时，他给了人们一份值得拥有的工作，他自豪于给组织里收入最低的人提供生活工资。那个生活工资在那些城市大约是 20 到 22 美元。这些 dsp 司机其实收入不错，18、19、20 美元。但这个模式——如你所说，sacks——不是自由市场里自然产生的人人都想要的东西。不是。这个模式是被创造出来明确地让 amazon 受益，把这些员工的负担转嫁给美国纳税人。新泽西和纽约因此点名批评它，是理所应当的。而且——我是 amazon 长期客户，从最开始就是 prime 会员——让他们把这些员工变成全职员工，成本是微乎其微的。你仍然可以保留一些 dsp 来应对高峰扩缩。但这给了他们一个机会，让一线工人成为 amazon 大家庭的一部分。在纽约，把他们从 18、19 美元变成 21、22 美元并给福利，每件配送只增加 25 美分成本。这是件容易的事。我们这行有个疯狂的盲点：他们追求效率。amazon 是世界上最高效的公司，高效到对最脆弱的社会成员近乎虐待，高效到违背了资本主义的团队精神。这种程度的资本主义需要自我纠正。政府在这里有非常有力的论点。我认为 amazon 走在这事前面会非常好，因为这会成为民主社会主义者——在我看来也是共产主义者——手里一个有效的论点。这个东西会打动那些认为这群人被占了便宜、而且我们完全付得起每件包裹多 25 美分的美国人。saks，你说得对，结果可能是每户多花 100 美元。 sacks： 那为什么不也要求 uber 这么做？jcal，uber 当年因为同样的事被狠狠批过——用独立承包商而不是正式雇员。 jcal： 你提 uber 很好，但这不一样：uber 实际上有巨额的保险敞口、有大量诉讼要应对，都是因为那些司机的行为。所以这明显不同，而且 uber 已经经历过这个了。我不是社会主义的拥护者，但我确实认为 amazon 有个机会——它反正会一路自动化——在它出色的生意上稍微让一点利，然后站在历史的正确一边，而不是把员工福利、失业保险、食品券、医保这些转嫁给公众。这些社会主义者在接下来两个选举周期里会把这点讲到荒谬的程度，而且它会奏效。社会主义正在推进，正在侵蚀人们的脑子。资本家的责任是说：我们不需要那么残酷、不需要那么聪明。这就是我作为一个 amazon 长期股东想说的话。我头寸很大，每年都在加仓。他们应该做正确的事，走在这事前面，这样他们可以说&quot;我们是了不起的雇主&quot;，而不是&quot;我们在隐藏和转移开支&quot;。就这个观点。我不是社会主义者，不是软蛋，我没兴趣搞乱资本主义。我只是觉得他们在这里有点太聪明了。他们应该做正确的事，善待最脆弱、最底层的员工。 sacks： 我知道这议题是我放进 docket 的——不，我现在知道你为什么放这个议题了，为了能上你的肥皂盒。 jcal： 不不，我放进来因为它是最大新闻之一，而且因为我们每周都谈社会主义、谈资本主义的美德——而资本主义确实有缺点，那就是有时我们会太聪明、然后试图占便宜。 sacks： 我们在这个话题上花太多时间了。但让我问你一个问题。你说想让 amazon 雇佣所有这些司机——顺便说，不是全部—— jcal： 我认为他们应该雇佣—— sacks： 你说想让其中一部分继续留在 dsp—— jcal： 我认为 dsp 可以保留。 sacks： 那你如何决定哪些转正、哪些不转正？ jcal： 我觉得他们可以主动去做。好问题。andy jassy 可以像 schultz 一样主动决定。 sacks： 但 adams 想消灭 dsp，让他们全部成为雇员。 jcal： 这里有个折中方案：保留 dsp 用于节日等高峰期扩能。这看起来是个好主意。但我认为他应该主动走在前头。 sacks： 一旦你承认 dsp 更好是因为它们提供了人们想要的更灵活的工作安排——那你为什么要干预这个安排？ jcal： 这实际上不是真的。在 dsp 工作的人——那些 dsp 本身，那些拥有这些零碎、极小公司的人（这种公司一遇事故就破产以保护 amazon）——这些员工非常想要 amazon 股权。他们很想要 rsu，想要医疗和福利。有些司机经常同时给 uber 开。 sacks： 他们喜欢灵活的工作安排。你的信息有误。 jcal： 你不对。这些人上全班——8 到 12 小时的班，我认为是 10 到 12 小时。他们完全——我觉得你不能替所有这些工人说话。他们可以自己说话，而且他们在组织起来。amazon 一直在试图打破他们的组织努力、当他们试图成立工会时。强制他们留在 dsp 就是用来打击工会的工具。这才是场上的真实游戏，sacks。 sacks： 你已经承认 dsp 应该留下来。所以那不是—— jcal： 我认为一部分应该留下来。我认为 andy jassy 和 amazon 团队应该主动走在前头，因为观感不好。这么残酷不符合资本主义的最佳利益。我觉得他应该主动做，而不是被迫做。这是我的个人信念。就像 schultz 说的：这里有个机会，让咖啡师获得生活工资和福利。那是 starbucks 做过最好的事情之一。资本主义应该开始思考：我们的角色是什么？我们在推动年轻人走向社会主义这件事中扮演什么角色？这就是人们开始相信社会主义的原因之一——他们相信像 amazon 这样的公司在边缘作弊，试图把该自己承担的开支转嫁给纳税人。而且你等着看，mondami 和新泽西会赢下这些诉讼。我现在就预测。 sacks： jcal，这听起来很好，我跟你一样想拯救资本主义。如果 amazon 那么做真的能拯救资本主义，那我愿意。但我不确定它能。我们确定的是：它会把每件包裹成本提高大约 5.2 美元，每年每户多花 664 美元，大约 5000 个岗位面临风险。所以按你说的方式做是有真实成本的。人们戴&quot;选民&quot;帽子时会上社会主义的当，但戴&quot;消费者&quot;帽子时，他们只是想让包裹便宜。他们会痛恨包裹贵 5 美元。而且像 gavin 说的，他们应该把&quot;adams 附加费&quot;列在每笔订单上——不是 25 美分，是 5 美元、每件 5.2 美元、纽约每户每年 664 美元。这太疯狂了，这是真实成本。还说什么生活成本调整——这就是一个巨大的生活成本调整。 （jcal 因网络问题离线。） jcal： 好的，jake 网络有点问题，我们继续。gavin，最后一个议题：你怎么看 grokbot？" style="--index: 16">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">16</span>
+                    <span class="timeline-meta">01:14:18–01:27:36</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>Amazon DSP 用工模式争议</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>新泽西州 AG 起诉 Amazon，指控其通过&quot;配送服务伙伴&quot;（DSP）分包商模式规避雇主责任；纽约市长 Adams 也宣布推动立法要求 Amazon 直接雇佣司机。</li>
+<li>Sacks 和市场逻辑派认为 DSP 模式是自然演化的市场结构，强制雇佣会让每件包裹成本增加 5.2 美元、每户年增 664 美元、约 5000 个岗位受威胁。</li>
+<li>JCal 罕见地站在&quot;社会主义者&quot;一侧：认为 DSP 模式是 Amazon 精心设计的&quot;甩锅&quot;结构，把司机薪资和福利负担转嫁给纳税人。</li>
+<li>JCal 提出 Amazon 应该学 Starbucks（Howard Schultz 时代）主动给一线员工转正、加福利，成本约每件 25 美分，并预测新泽西和纽约会赢下诉讼。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>DSP（Delivery Service Partners）：Amazon 的第三方配送伙伴模式，司机名义上受雇于小型承包公司，而非 Amazon。</li>
+<li>AG（Attorney General）：州检察长。</li>
+<li>新泽西州 AG 起诉：节目中的报道称 Amazon 通过 DSP 规避工伤赔偿、保险、工会谈判等雇主责任。</li>
+<li>Adams 市长：纽约市长 Eric Adams，在节目设定中使用&quot;the Zoran, Mondame&quot;等称呼，实为对当时纽约市长（Adams）的夸大笑谈式称呼，嘉宾们故意用变体发音。</li>
+<li>RSU（Restricted Stock Unit）：受限股票单位，科技公司常用股权激励。</li>
+<li>Howard Schultz：星巴克创始人，以&quot;给员工提供体面工资和福利&quot;著称。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> 接下来一则来自新泽西和纽约的新闻。新泽西州总检察长上周起诉了 Amazon，声称这家公司通过分包商雇佣司机来&quot;作弊&quot;。这个模式叫 DSP——配送服务伙伴——这个概念非常聪明，也许过于聪明了，根据这些开始堆积的诉讼，它让 Amazon 得以脱责。因为如果一个 Amazon 司机撞了人，如果他们是 Amazon 员工的话，Amazon 要承担的责任就被转移掉了。周一，纽约市长 Adams——节目的朋友——跳了进来。他发了一个他现在很出名的&quot;民主社会主义者式&quot;的咧嘴笑视频，要求通过市政法律强制 Amazon 自己雇佣司机。原话：&quot;像 Amazon 这样的公司，通过一套剥削性分包体系把自己与责任隔绝开来，建立了十亿美元级别的商业模式。&quot;这个问题由来已久。有过悲剧性的死亡事件，因为分包商被施加巨大压力，有人撞死了人。因为司机技术上受雇于 DSP，Amazon 就说&quot;我们不是雇主，所以我们不负责，我们不需要进入工会谈判或履行劳动义务&quot;。Sacks，我很好奇你的看法——现在社会上社会主义情绪高涨，人们认为企业在边缘作弊。Amazon 在作弊吗？这是不是过于聪明、该收回来了？我的意见是——因为这正在获得势头，会是中期选举和 2028 年的大议题之一。</p>
+<p><strong>Sacks：</strong> 这是种很普遍的做法，不只纽约。Amazon 用这些独立承包商网络来配送已经很久了。他们的说法是：如果你禁止他们用独立承包商，配送成本会上升。有研究显示普通家庭会多付几百美元。服务会变慢，小承包商企业的数千个岗位会有风险。Amazon 还说这可能让他们把运营搬出纽约市。另外，DSP 模式确实支持高峰期的快速扩能——节日高峰、密集城区路由、更低成本。这比全员 Amazon 雇员灵活得多。市场就是这么演化的：也许一开始 Amazon 什么都自己干，后来开始分散到这些小企业网络。实际上它创造了更多就业、更多创业。这些 DSP 在纽约市雇了几千人。如果把这些定为非法，那些岗位就会受威胁。所以我觉得这是——</p>
+<p><strong>JCal：</strong> 你站哪边，Sacks？</p>
+<p><strong>Sacks：</strong> 让契约自由和自愿交换占上风。这个市场结构演化是有原因的——工人喜欢它，DSP 老板喜欢它，Amazon 喜欢它。这些都是互利安排。我不明白为什么 Adams 市长要把市政府插进来。</p>
+<p><strong>JCal：</strong> Gavin，你有看法吗？</p>
+<p><strong>Gavin：</strong> 如果我站在 Amazon 的立场——虽然我确定他们不会这么做——我会加一个附加费：&quot;这是 Adams 费，是强加给你们的。&quot;很多人用 Amazon，不只是纽约富人。这是 Adams 费，是这项不明智政策的结果。我会让它出现在每张账单上作为单独一项，因为这就是它的结果。</p>
+<p><strong>JCal：</strong> 你把 Amazon 的服务跟政府提供的任何服务比——Amazon 的效率惊人得不可思议。你下单，当天到，最晚次日达。Amazon 的服务好得令人难以置信。它全是为消费者优化低价，现在我们要让政府插到 Amazon 司机网络中间。Adams 提供了哪个市政服务能比得上 Amazon 的效率，让他现在来教 Amazon 做生意？这太荒唐了。</p>
+<p><strong>JCal：</strong> 但你看 Starbucks——Schultz 主政时，他给了人们一份值得拥有的工作，他自豪于给组织里收入最低的人提供生活工资。那个生活工资在那些城市大约是 20 到 22 美元。这些 DSP 司机其实收入不错，18、19、20 美元。但这个模式——如你所说，Sacks——不是自由市场里自然产生的人人都想要的东西。不是。这个模式是被创造出来明确地让 Amazon 受益，把这些员工的负担转嫁给美国纳税人。新泽西和纽约因此点名批评它，是理所应当的。而且——我是 Amazon 长期客户，从最开始就是 Prime 会员——让他们把这些员工变成全职员工，成本是微乎其微的。你仍然可以保留一些 DSP 来应对高峰扩缩。但这给了他们一个机会，让一线工人成为 Amazon 大家庭的一部分。在纽约，把他们从 18、19 美元变成 21、22 美元并给福利，每件配送只增加 25 美分成本。这是件容易的事。我们这行有个疯狂的盲点：他们追求效率。Amazon 是世界上最高效的公司，高效到对最脆弱的社会成员近乎虐待，高效到违背了资本主义的团队精神。这种程度的资本主义需要自我纠正。政府在这里有非常有力的论点。我认为 Amazon 走在这事前面会非常好，因为这会成为民主社会主义者——在我看来也是共产主义者——手里一个有效的论点。这个东西会打动那些认为这群人被占了便宜、而且我们完全付得起每件包裹多 25 美分的美国人。Saks，你说得对，结果可能是每户多花 100 美元。</p>
+<p><strong>Sacks：</strong> 那为什么不也要求 Uber 这么做？JCal，Uber 当年因为同样的事被狠狠批过——用独立承包商而不是正式雇员。</p>
+<p><strong>JCal：</strong> 你提 Uber 很好，但这不一样：Uber 实际上有巨额的保险敞口、有大量诉讼要应对，都是因为那些司机的行为。所以这明显不同，而且 Uber 已经经历过这个了。我不是社会主义的拥护者，但我确实认为 Amazon 有个机会——它反正会一路自动化——在它出色的生意上稍微让一点利，然后站在历史的正确一边，而不是把员工福利、失业保险、食品券、医保这些转嫁给公众。这些社会主义者在接下来两个选举周期里会把这点讲到荒谬的程度，而且它会奏效。社会主义正在推进，正在侵蚀人们的脑子。资本家的责任是说：我们不需要那么残酷、不需要那么聪明。这就是我作为一个 Amazon 长期股东想说的话。我头寸很大，每年都在加仓。他们应该做正确的事，走在这事前面，这样他们可以说&quot;我们是了不起的雇主&quot;，而不是&quot;我们在隐藏和转移开支&quot;。就这个观点。我不是社会主义者，不是软蛋，我没兴趣搞乱资本主义。我只是觉得他们在这里有点太聪明了。他们应该做正确的事，善待最脆弱、最底层的员工。</p>
+<p><strong>Sacks：</strong> 我知道这议题是我放进 docket 的——不，我现在知道你为什么放这个议题了，为了能上你的肥皂盒。</p>
+<p><strong>JCal：</strong> 不不，我放进来因为它是最大新闻之一，而且因为我们每周都谈社会主义、谈资本主义的美德——而资本主义确实有缺点，那就是有时我们会太聪明、然后试图占便宜。</p>
+<p><strong>Sacks：</strong> 我们在这个话题上花太多时间了。但让我问你一个问题。你说想让 Amazon 雇佣所有这些司机——顺便说，不是全部——</p>
+<p><strong>JCal：</strong> 我认为他们应该雇佣——</p>
+<p><strong>Sacks：</strong> 你说想让其中一部分继续留在 DSP——</p>
+<p><strong>JCal：</strong> 我认为 DSP 可以保留。</p>
+<p><strong>Sacks：</strong> 那你如何决定哪些转正、哪些不转正？</p>
+<p><strong>JCal：</strong> 我觉得他们可以主动去做。好问题。Andy Jassy 可以像 Schultz 一样主动决定。</p>
+<p><strong>Sacks：</strong> 但 Adams 想消灭 DSP，让他们全部成为雇员。</p>
+<p><strong>JCal：</strong> 这里有个折中方案：保留 DSP 用于节日等高峰期扩能。这看起来是个好主意。但我认为他应该主动走在前头。</p>
+<p><strong>Sacks：</strong> 一旦你承认 DSP 更好是因为它们提供了人们想要的更灵活的工作安排——那你为什么要干预这个安排？</p>
+<p><strong>JCal：</strong> 这实际上不是真的。在 DSP 工作的人——那些 DSP 本身，那些拥有这些零碎、极小公司的人（这种公司一遇事故就破产以保护 Amazon）——这些员工非常想要 Amazon 股权。他们很想要 RSU，想要医疗和福利。有些司机经常同时给 Uber 开。</p>
+<p><strong>Sacks：</strong> 他们喜欢灵活的工作安排。你的信息有误。</p>
+<p><strong>JCal：</strong> 你不对。这些人上全班——8 到 12 小时的班，我认为是 10 到 12 小时。他们完全——我觉得你不能替所有这些工人说话。他们可以自己说话，而且他们在组织起来。Amazon 一直在试图打破他们的组织努力、当他们试图成立工会时。强制他们留在 DSP 就是用来打击工会的工具。这才是场上的真实游戏，Sacks。</p>
+<p><strong>Sacks：</strong> 你已经承认 DSP 应该留下来。所以那不是——</p>
+<p><strong>JCal：</strong> 我认为一部分应该留下来。我认为 Andy Jassy 和 Amazon 团队应该主动走在前头，因为观感不好。这么残酷不符合资本主义的最佳利益。我觉得他应该主动做，而不是被迫做。这是我的个人信念。就像 Schultz 说的：这里有个机会，让咖啡师获得生活工资和福利。那是 Starbucks 做过最好的事情之一。资本主义应该开始思考：我们的角色是什么？我们在推动年轻人走向社会主义这件事中扮演什么角色？这就是人们开始相信社会主义的原因之一——他们相信像 Amazon 这样的公司在边缘作弊，试图把该自己承担的开支转嫁给纳税人。而且你等着看，Mondami 和新泽西会赢下这些诉讼。我现在就预测。</p>
+<p><strong>Sacks：</strong> JCal，这听起来很好，我跟你一样想拯救资本主义。如果 Amazon 那么做真的能拯救资本主义，那我愿意。但我不确定它能。我们确定的是：它会把每件包裹成本提高大约 5.2 美元，每年每户多花 664 美元，大约 5000 个岗位面临风险。所以按你说的方式做是有真实成本的。人们戴&quot;选民&quot;帽子时会上社会主义的当，但戴&quot;消费者&quot;帽子时，他们只是想让包裹便宜。他们会痛恨包裹贵 5 美元。而且像 Gavin 说的，他们应该把&quot;Adams 附加费&quot;列在每笔订单上——不是 25 美分，是 5 美元、每件 5.2 美元、纽约每户每年 664 美元。这太疯狂了，这是真实成本。还说什么生活成本调整——这就是一个巨大的生活成本调整。</p>
+<p>（JCal 因网络问题离线。）</p>
+<p><strong>JCal：</strong> 好的，Jake 网络有点问题，我们继续。Gavin，最后一个议题：你怎么看 Grokbot？</p></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="01:27:36–01:35:01 grok 4.6 的逆袭：elon 的 6 个月追赶 本段核心内容： gavin 承认自己上一集还坚持&quot;前沿实验室双寡头&quot;（anthropic + openai）的判断，grok 4.6 让他改口：这是第三个玩家。 cursorbench 帕累托前沿图显示 grok 4.6 在接近前沿能力的同时价格极具破坏性。 elon 追赶成功的两个原因：收购 cursor 团队 + 从 spacex 调来管理骨干重组 xai。 gavin 指出一个市场盲点：投资者讨论 spacex 时几乎不提 grok 的估值贡献。 sacks 的期权框架：elon 建超大算力集群，训练成功是&quot;看涨期权&quot;（成为前沿实验室），失败则有&quot;看跌期权&quot;（把算力卖给前沿实验室）。 背景解释与关键术语： cursorbench：编程能力评测基准。 帕累托前沿（pareto frontier）：在质量和成本两维上无法同时改进的边界线，越靠外越好。 fable：节目设定中的前沿模型基准（可能是虚构或更名），被视为&quot;金标准&quot;。 dhh（david heinemeier hansson）：ruby on rails 和 basecamp/37signals 创始人，开发效率意见领袖。 databricks：数据/ai 公司，节目设定中以 1900 亿美元估值融资。 openclaw：开源 ai agent 项目（原型为 claude 的计算机使用能力）。 hermes：高端 ai agent 产品，节目中用来做价格类比。 详细中文整理： jcal： 上周之前我一直坚持的说法是：前沿实验室只剩 anthropic 和 openai 的双寡头。我错了吗？grok 是第三极吗？它比我以为的更灵活、更流畅？ gavin： 对，我认为是的。能展示一下那个帕累托前沿图吗？这相当惊人。左边这一块展示的是质量/智能（y 轴）和成本（x 轴）。你想落在右上象限——或者说你想到这条线外面。你可以看到 grok 4.6 的定价有多具破坏性。 jcal： 所以 x 轴往右是更便宜，y 轴往上更强大。他们翻转了 x 轴，所以越往右上越好。 gavin： 对。这是 cursorbench 上的结果。xai——spacex 几乎确定有权收购 cursor，他们在跟 cursor 合作——所以这可能是&quot;自己出题自己考&quot;。右边这个来自 databricks——刚以 1900 亿美元估值融资的非常真实的公司、非常专业——即使在这上面，你也明显领先 fable 5，而我认为大多数人会同意 fable 5 是金标准。你的质量更高、价格还略低。所以 grok 4.6 的数据就是这些。在 x 上我们发了数据，大家还得等等看真实反馈，但我觉得挺有意思。dhh——david heinemeier hansson，ruby on rails、37signals、basecamp 那位——他发了些非常正面的东西。你看到了 databricks 的评测、我们 merkur 的评测，早期反馈真的很好，这些基准分数在真实世界里被验证了。 jcal： 换句话说，elon 追上了。如果归因，有两个原因：第一，他收购了 cursor，那个团队非常专注；第二，他重组了 xai 的管理层，把 spacex 的精锐调了过来。 gavin： 对，gavin，就是这两个。他把 spacex 的王牌、cursor 的王牌和一些新人带来了。 jcal： 而且只用了短短 6 个月，gavin。永远不要低估 elon。他经常迟到，但从不犯错，而且他一旦交付往往会超额交付。他自己也承认：&quot;我总是迟到，但最终我们会做对。&quot; gavin： 绝对。而且这仍然是个相对小的模型，1.5 万亿参数。更大的 grok 4.7 应该会显著更强，几周后就出。grokbot 看起来同样重要。这有点像 ai 的另一个 openclaw 时刻——ai 个性化、民主化——zuckerberg 在他的宣言里说的也是同一件事。 jcal： 他想为每个人创造 bot。claude cowork 和 claude tag 也做得非常好，还有 hermes、perplexity computer。我自己承认——我努力保持技术性——grokbot 用起来容易得多。openclaw 和 hermes 需要你是……hermes 就像奢侈品。就像你老婆偶尔买个香奈儿，贵到肉疼。 jcal： 但 6 个月就追上了，非常惊人。但 sacks，这制造了张力——他一边给 anthropic 提供算力托管，一边又在追 anthropic。你怎么看这个张力？ sacks： 我越来越喜欢的一点是：他在建超大规模算力集群。这给了他训练大模型、潜在前沿模型的能力。你可以把这想成一个看涨期权：追赶上来，成为真正的 frontier lab。但如果他失败了，他还有看跌期权：把算力卖给出价不错的前沿实验室。 jcal： 而且他有权利——sacks，他有权利从 anthropic 那里把算力拿回来。据报道，他在 anthropic 交易里放了那个条款。如果他想，可以把算力收回。 sacks： 对。双方都有 90 天取消权。这意味着如果算力现货价格上涨，他受益；如果下跌，可能伤到他——因为任何一方都可以在 90 天内重新谈判。基本上 elon 可以按&quot;现货减 90 天&quot;来收费。但这一切都回到我们之前说的：你认为明后年算力会不会供给紧张？如果是，那对 elon 非常有利，因为他接近按真实现货价收费，而且如果他能领先，还可以把算力转给自己用。 gavin： 我能说个有意思的吗？我跟很多投资者聊过 spacex。让我惊讶的是：每个人对 starlink 有细致观点，对 starlink direct-to-cell 可能存疑，对轨道计算有看法，对地面计算有看法——但很少有投资者提到 grok。而 grok 在很多指标上是帕累托最优的。我们已有存在性证明：anthropic 从不知道多少亿快速涨到 500 亿。如果 anthropic 值 2 万亿——按 ft——或 3 到 4 万亿——按你之前说的—— jcal： 我说的是那是市场出清价格，不是我认为它值多少。 gavin： 对——也许人们在思考 spacex 时应该开始考虑 grok。 jcal： spacex 有太多赢的方式，我觉得这才是高阶思维所在——显然我们都在谈自己的持仓。这个播客的参与者是 spacex 最早期的投资者之一。 gavin： 我参与了第二轮 100 亿美元融资的一小部分主导。" style="--index: 17">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">17</span>
+                    <span class="timeline-meta">01:27:36–01:35:01</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>Grok 4.6 的逆袭：Elon 的 6 个月追赶</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>Gavin 承认自己上一集还坚持&quot;前沿实验室双寡头&quot;（Anthropic + OpenAI）的判断，Grok 4.6 让他改口：这是第三个玩家。</li>
+<li>CursorBench 帕累托前沿图显示 Grok 4.6 在接近前沿能力的同时价格极具破坏性。</li>
+<li>Elon 追赶成功的两个原因：收购 Cursor 团队 + 从 SpaceX 调来管理骨干重组 xAI。</li>
+<li>Gavin 指出一个市场盲点：投资者讨论 SpaceX 时几乎不提 Grok 的估值贡献。</li>
+<li>Sacks 的期权框架：Elon 建超大算力集群，训练成功是&quot;看涨期权&quot;（成为前沿实验室），失败则有&quot;看跌期权&quot;（把算力卖给前沿实验室）。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>CursorBench：编程能力评测基准。</li>
+<li>帕累托前沿（Pareto Frontier）：在质量和成本两维上无法同时改进的边界线，越靠外越好。</li>
+<li>Fable：节目设定中的前沿模型基准（可能是虚构或更名），被视为&quot;金标准&quot;。</li>
+<li>DHH（David Heinemeier Hansson）：Ruby on Rails 和 Basecamp/37signals 创始人，开发效率意见领袖。</li>
+<li>Databricks：数据/AI 公司，节目设定中以 1900 亿美元估值融资。</li>
+<li>OpenClaw：开源 AI agent 项目（原型为 Claude 的计算机使用能力）。</li>
+<li>Hermes：高端 AI agent 产品，节目中用来做价格类比。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> 上周之前我一直坚持的说法是：前沿实验室只剩 Anthropic 和 OpenAI 的双寡头。我错了吗？Grok 是第三极吗？它比我以为的更灵活、更流畅？</p>
+<p><strong>Gavin：</strong> 对，我认为是的。能展示一下那个帕累托前沿图吗？这相当惊人。左边这一块展示的是质量/智能（y 轴）和成本（x 轴）。你想落在右上象限——或者说你想到这条线外面。你可以看到 Grok 4.6 的定价有多具破坏性。</p>
+<p><strong>JCal：</strong> 所以 x 轴往右是更便宜，y 轴往上更强大。他们翻转了 x 轴，所以越往右上越好。</p>
+<p><strong>Gavin：</strong> 对。这是 CursorBench 上的结果。xAI——SpaceX 几乎确定有权收购 Cursor，他们在跟 Cursor 合作——所以这可能是&quot;自己出题自己考&quot;。右边这个来自 Databricks——刚以 1900 亿美元估值融资的非常真实的公司、非常专业——即使在这上面，你也明显领先 Fable 5，而我认为大多数人会同意 Fable 5 是金标准。你的质量更高、价格还略低。所以 Grok 4.6 的数据就是这些。在 X 上我们发了数据，大家还得等等看真实反馈，但我觉得挺有意思。DHH——David Heinemeier Hansson，Ruby on Rails、37signals、Basecamp 那位——他发了些非常正面的东西。你看到了 Databricks 的评测、我们 Merkur 的评测，早期反馈真的很好，这些基准分数在真实世界里被验证了。</p>
+<p><strong>JCal：</strong> 换句话说，Elon 追上了。如果归因，有两个原因：第一，他收购了 Cursor，那个团队非常专注；第二，他重组了 xAI 的管理层，把 SpaceX 的精锐调了过来。</p>
+<p><strong>Gavin：</strong> 对，Gavin，就是这两个。他把 SpaceX 的王牌、Cursor 的王牌和一些新人带来了。</p>
+<p><strong>JCal：</strong> 而且只用了短短 6 个月，Gavin。永远不要低估 Elon。他经常迟到，但从不犯错，而且他一旦交付往往会超额交付。他自己也承认：&quot;我总是迟到，但最终我们会做对。&quot;</p>
+<p><strong>Gavin：</strong> 绝对。而且这仍然是个相对小的模型，1.5 万亿参数。更大的 Grok 4.7 应该会显著更强，几周后就出。Grokbot 看起来同样重要。这有点像 AI 的另一个 OpenClaw 时刻——AI 个性化、民主化——Zuckerberg 在他的宣言里说的也是同一件事。</p>
+<p><strong>JCal：</strong> 他想为每个人创造 bot。Claude Cowork 和 Claude Tag 也做得非常好，还有 Hermes、Perplexity Computer。我自己承认——我努力保持技术性——Grokbot 用起来容易得多。OpenClaw 和 Hermes 需要你是……Hermes 就像奢侈品。就像你老婆偶尔买个香奈儿，贵到肉疼。</p>
+<p><strong>JCal：</strong> 但 6 个月就追上了，非常惊人。但 Sacks，这制造了张力——他一边给 Anthropic 提供算力托管，一边又在追 Anthropic。你怎么看这个张力？</p>
+<p><strong>Sacks：</strong> 我越来越喜欢的一点是：他在建超大规模算力集群。这给了他训练大模型、潜在前沿模型的能力。你可以把这想成一个看涨期权：追赶上来，成为真正的 frontier lab。但如果他失败了，他还有看跌期权：把算力卖给出价不错的前沿实验室。</p>
+<p><strong>JCal：</strong> 而且他有权利——Sacks，他有权利从 Anthropic 那里把算力拿回来。据报道，他在 Anthropic 交易里放了那个条款。如果他想，可以把算力收回。</p>
+<p><strong>Sacks：</strong> 对。双方都有 90 天取消权。这意味着如果算力现货价格上涨，他受益；如果下跌，可能伤到他——因为任何一方都可以在 90 天内重新谈判。基本上 Elon 可以按&quot;现货减 90 天&quot;来收费。但这一切都回到我们之前说的：你认为明后年算力会不会供给紧张？如果是，那对 Elon 非常有利，因为他接近按真实现货价收费，而且如果他能领先，还可以把算力转给自己用。</p>
+<p><strong>Gavin：</strong> 我能说个有意思的吗？我跟很多投资者聊过 SpaceX。让我惊讶的是：每个人对 Starlink 有细致观点，对 Starlink Direct-to-Cell 可能存疑，对轨道计算有看法，对地面计算有看法——但很少有投资者提到 Grok。而 Grok 在很多指标上是帕累托最优的。我们已有存在性证明：Anthropic 从不知道多少亿快速涨到 500 亿。如果 Anthropic 值 2 万亿——按 FT——或 3 到 4 万亿——按你之前说的——</p>
+<p><strong>JCal：</strong> 我说的是那是市场出清价格，不是我认为它值多少。</p>
+<p><strong>Gavin：</strong> 对——也许人们在思考 SpaceX 时应该开始考虑 Grok。</p>
+<p><strong>JCal：</strong> SpaceX 有太多赢的方式，我觉得这才是高阶思维所在——显然我们都在谈自己的持仓。这个播客的参与者是 SpaceX 最早期的投资者之一。</p>
+<p><strong>Gavin：</strong> 我参与了第二轮 100 亿美元融资的一小部分主导。</p></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="01:35:01–01:38:59 silver lake 收购 workday 与软件行业回暖 本段核心内容： 节目进行中传来消息：silver lake 可能收购 workday，盘后涨 17%。 这是软件行业从长达 12–18 个月&quot;死亡螺旋&quot;中回暖的潜在信号。 sacks 认为开源模型的崛起是美国软件行业的&quot;救星&quot;：1、2、3 家前沿模型主导的世界对软件公司很残酷，而开源让软件公司重新有了议价空间。 背景解释与关键术语： silver lake：银湖资本，知名的科技领域私募股权机构。 workday：企业人力资源和财务软件公司。 bending spoons：意大利应用公司，以收购成熟 app 后大幅裁员、用 ai 提效闻名。 死亡螺旋：指软件股估值持续下滑、公开市场失去兴趣的恶性循环。 详细中文整理： jcal： 节目进行中有一条我们应该聊的新闻：silver lake 可能要收购 workday。workday 涨了 17%。如果这是真的，我觉得对股市是个重要时刻。软件行业经历了一段&quot;死亡螺旋&quot;——大概三四个月前见底，但之前的 12 到 15、18 个月里非常难受。私募股权重新对软件出手，会改变投资格局。我不知道这些潜在的 workday 买家在想什么，但我知道：开源的崛起和开源竞争力增强，对美国软件行业来说简直是天赐之物。 sacks： 绝对的。你如果看 workday 五年走势图就明白了。但在一个只有一两个或三个主导性前沿模型的世界里——anthropic、openai，也许 spacex——它们垄断模型层，那对软件公司是艰难的世界。如果我要猜为什么 pe 对软件的兴趣回来了，是因为他们看到了开源正在发生的事。 jcal： 太惊人了。这就是那个&quot;后盾&quot;，对吧，sacks？我们聊过：如果公开市场没人想拥有这些公司，而私募股权看到了路——上周我们聊了 bending spoons 一整集。现在出现了一群——我不想叫它们&quot;抄底的&quot;——但你会叫它们什么，gavin？锐利的、收购印钞机生意然后榨取更多收入的买家？ gavin： 绝对。silver lake 在说：它们被超卖了。 jcal： 被超卖了。对。所以它们来了。那里面一定有价值。如果你用 ai 运营这些公司——bending spoons 做得特别好——砍掉 80% 的员工，剩下 20% 变成 ai-first 员工，然后从所有这些惊人的收入里榨出更多利润。 jcal： 这就是你的突发新闻，gavin baker。太棒了。顺便告诉你，我录之前看了数据：你现在跟 brad gerstner 评分并列，并列第五好基友。这意味着如果继续下去，你们其中一个会掉到第六。brad 下周可能来，我们看哪个好基友拿下第五位。david sacks，很高兴见到你。也许待会儿我们可以搞块牛排。我周四晚上有空，拿了放行条。 sacks： 好的，也许我们可以去吃块牛排。 jcal： 这是 8 月 14 日的 all-in 播客。下次见。拜拜。" style="--index: 18">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">18</span>
+                    <span class="timeline-meta">01:35:01–01:38:59</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>Silver Lake 收购 Workday 与软件行业回暖</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>节目进行中传来消息：Silver Lake 可能收购 Workday，盘后涨 17%。</li>
+<li>这是软件行业从长达 12–18 个月&quot;死亡螺旋&quot;中回暖的潜在信号。</li>
+<li>Sacks 认为开源模型的崛起是美国软件行业的&quot;救星&quot;：1、2、3 家前沿模型主导的世界对软件公司很残酷，而开源让软件公司重新有了议价空间。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>Silver Lake：银湖资本，知名的科技领域私募股权机构。</li>
+<li>Workday：企业人力资源和财务软件公司。</li>
+<li>Bending Spoons：意大利应用公司，以收购成熟 app 后大幅裁员、用 AI 提效闻名。</li>
+<li>死亡螺旋：指软件股估值持续下滑、公开市场失去兴趣的恶性循环。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> 节目进行中有一条我们应该聊的新闻：Silver Lake 可能要收购 Workday。Workday 涨了 17%。如果这是真的，我觉得对股市是个重要时刻。软件行业经历了一段&quot;死亡螺旋&quot;——大概三四个月前见底，但之前的 12 到 15、18 个月里非常难受。私募股权重新对软件出手，会改变投资格局。我不知道这些潜在的 Workday 买家在想什么，但我知道：开源的崛起和开源竞争力增强，对美国软件行业来说简直是天赐之物。</p>
+<p><strong>Sacks：</strong> 绝对的。你如果看 Workday 五年走势图就明白了。但在一个只有一两个或三个主导性前沿模型的世界里——Anthropic、OpenAI，也许 SpaceX——它们垄断模型层，那对软件公司是艰难的世界。如果我要猜为什么 PE 对软件的兴趣回来了，是因为他们看到了开源正在发生的事。</p>
+<p><strong>JCal：</strong> 太惊人了。这就是那个&quot;后盾&quot;，对吧，Sacks？我们聊过：如果公开市场没人想拥有这些公司，而私募股权看到了路——上周我们聊了 Bending Spoons 一整集。现在出现了一群——我不想叫它们&quot;抄底的&quot;——但你会叫它们什么，Gavin？锐利的、收购印钞机生意然后榨取更多收入的买家？</p>
+<p><strong>Gavin：</strong> 绝对。Silver Lake 在说：它们被超卖了。</p>
+<p><strong>JCal：</strong> 被超卖了。对。所以它们来了。那里面一定有价值。如果你用 AI 运营这些公司——Bending Spoons 做得特别好——砍掉 80% 的员工，剩下 20% 变成 AI-first 员工，然后从所有这些惊人的收入里榨出更多利润。</p>
+<p><strong>JCal：</strong> 这就是你的突发新闻，Gavin Baker。太棒了。顺便告诉你，我录之前看了数据：你现在跟 Brad Gerstner 评分并列，并列第五好基友。这意味着如果继续下去，你们其中一个会掉到第六。Brad 下周可能来，我们看哪个好基友拿下第五位。David Sacks，很高兴见到你。也许待会儿我们可以搞块牛排。我周四晚上有空，拿了放行条。</p>
+<p><strong>Sacks：</strong> 好的，也许我们可以去吃块牛排。</p>
+<p><strong>JCal：</strong> 这是 8 月 14 日的 All-In 播客。下次见。拜拜。</p></div>
+                  </div>
+                </article></div>
+            <p class="empty search-empty" data-search-empty hidden>没有匹配的时间线段落。</p>
+          </section>
+
+          <section id="speakers">
+            <div class="section-head">
+              <h2>人物观点对照</h2>
+              <p>比较嘉宾立场</p>
+            </div>
+            <div class="speaker-grid"><article class="speaker-card" style="--index: 1">
+                  <p class="speaker-kicker">嘉宾 01</p>
+                  <h3>Jason Calacanis（JCal）</h3>
+                  <div><p>JCal 本集的核心立场是&quot;AI 是消费级技术，开源和去中心化是正确方向&quot;。他对 Anthropic 的营收数字感到震撼（用&quot;40 倍&quot;反复强调），但坚持认为开源模型（如 GLM）会让 Anthropic 增速从 10 倍降到 2–3 倍。他在 Amazon DSP 议题上罕见地站在劳工一侧，认为 Amazon &quot;太聪明了&quot;、把成本转嫁给纳税人，并预测新泽西和纽约会赢下诉讼。他对 Zuckerberg 的宣言总体赞赏，但尖锐地指出其&quot;索引全世界数据 vs 起诉社媒抓取者&quot;的双标。他也反复强调&quot;CEO 必须在 X 上有自己的声音&quot;。</p></div>
+                </article>
+<article class="speaker-card" style="--index: 2">
+                  <p class="speaker-kicker">嘉宾 02</p>
+                  <h3>Chamath Palihapitiya</h3>
+                  <div><p>本集未出场（录制时为三人阵容：JCal、Sacks、Gavin Baker）。</p></div>
+                </article>
+<article class="speaker-card" style="--index: 3">
+                  <p class="speaker-kicker">嘉宾 03</p>
+                  <h3>David Sacks</h3>
+                  <div><p>Sacks 本集最重要的贡献是把 AI 辩论重新定义为&quot;集中 vs 分散&quot;的路线之争。他批评 EA/Anthropic 的&quot;受膏者&quot;心态，用 Thomas Sowell 的分析框架指出知识分子精英控制社会的企图总是失败。他坚定主张契约自由——在 Amazon DSP 议题上反对政府干预，并给出每件包裹 5.2 美元、每户 664 美元的具体成本估算。他提出&quot;NVIDIA 是 AI 的美联储&quot;这一分析框架，并把 Grok 4.6 的崛起总结为 Elon 的&quot;看涨期权 + 看跌期权&quot;结构。</p></div>
+                </article>
+<article class="speaker-card" style="--index: 4">
+                  <p class="speaker-kicker">嘉宾 04</p>
+                  <h3>David Friedberg</h3>
+                  <div><p>本集未出场。</p></div>
+                </article>
+<article class="speaker-card" style="--index: 5">
+                  <p class="speaker-kicker">嘉宾 05</p>
+                  <h3>Gavin Baker（本期特邀嘉宾）</h3>
+                  <div><p>Gavin 是本期最有&quot;内部视角&quot;的嘉宾。他透露了 Anthropic 内部的极端自信（Dario 说要做&quot;全球唯一私营公司&quot;），但认为这是狂妄的信号。他给出了本集最被广泛引用的框架：&quot;Anthropic 认为技术太危险不能分发，Zuck/Elon/Jensen 认为太危险不能集中&quot;——并断言历史站在后者一边。他作为 SpaceX 投资人解释了与 Anthropic 的&quot;和解&quot;（Elon 认可 Dario 的人品），并对 2 万亿 IPO 定价表示怀疑，认为那是落选投行的放风压价。在 NVIDIA 议题上，他为残值担保机制提供了专业解读，并强调&quot;绝大多数 token 在链条上每个环节都是盈利的&quot;。</p></div>
+                </article></div>
+          </section>
+
+          <section id="quotes">
+            <div class="section-head">
+              <h2>值得引用的原话</h2>
+              <p>保留关键表达</p>
+            </div>
+            <div class="panel"><h4>1.</h4>
+<blockquote>&quot;Anthropic and people in the effective altruism movement believe that this technology is too dangerous to distribute. And what Mark Zuckerberg, and I think Elon and Jensen, believe is that this technology is too dangerous to centralize. And history has spoken, and when given the choice, it is always better to distribute and decentralize.&quot;</blockquote>
+<blockquote>&quot;Anthropic 和有效利他主义运动的人相信这项技术太危险了，不能分发。而 Mark Zuckerberg，我认为 Elon 和 Jensen 也相信：这项技术太危险了，不能集中。历史已经给出了答案——当面临选择时，分发和去中心化永远是更好的。&quot;</blockquote>
+<p>*说明：本集最核心的思想框架，将 AI 路线之争从&quot;开放 vs 封闭&quot;提升为&quot;集中 vs 分散&quot;的文明选择。*</p>
+<h4>2.</h4>
+<blockquote>&quot;You do not want one, two, or three dominant models. And that&#x27;s why... Elon will— history will judge Elon kindly for having Grok dedicated towards the pursuit of objective truth.&quot;</blockquote>
+<blockquote>&quot;我们不想要一两个或三个主导模型垄断一切。这也是为什么……历史会善待 Elon——因为他让 Grok 致力于追求客观真理。&quot;</blockquote>
+<p>*说明：Gavin 对模型多样性价值的直接陈述，也是他作为 SpaceX 投资人罕见地在公开节目上为 Grok 站台。*</p>
+<h4>3.</h4>
+<blockquote>&quot;The data center panic is a testament to the power of the media to create hoaxes and hysteria over literally nothing. Every single aspect of the data center story is wrong. It&#x27;s a lie.&quot;</blockquote>
+<blockquote>&quot;数据中心恐慌证明了媒体有能力凭空制造骗局和歇斯底里。数据中心故事里的每一个细节都是错的。它是个谎言。&quot;</blockquote>
+<p>*说明：Sacks 对&quot;反数据中心&quot;媒体叙事的总攻，为后续讨论奠定了&quot;真相 vs 谎言&quot;的框架。*</p>
+<h4>4.</h4>
+<blockquote>&quot;I do not want Dario Amodei or Anthropic deciding what&#x27;s in my best interests. I just fundamentally don&#x27;t want that.&quot;</blockquote>
+<blockquote>&quot;我根本不想让 Dario Amodei 或 Anthropic 决定什么对我最好。我根本无法接受这件事。&quot;</blockquote>
+<p>*说明：Sacks 对&quot;集中化 AI 治理&quot;路线的根本性拒绝，代表了自由主义右派对 Anthropic/EA 路线的核心不满。*</p>
+<h4>5.</h4>
+<blockquote>&quot;You&#x27;re only as good as your last investment in our business, I guess.&quot;</blockquote>
+<blockquote>&quot;在咱们这行，你只取决于你最后一笔投资。&quot;</blockquote>
+<p>*说明：Gavin 在谈到 SpaceX 巨大成功后、面对 Anthropic 传闻时的自嘲式职业态度，也点出了 VC 行业的残酷本质。*</p>
+<h4>6.</h4>
+<blockquote>&quot;If you&#x27;re an American patriot, you should be for the distribution, democratization, decentralization, individualization of this technology.&quot;</blockquote>
+<blockquote>&quot;如果你是爱国者，你应该支持这项技术的分发、民主化、去中心化、个体化。&quot;</blockquote>
+<p>*说明：JCal 将开源 AI 与美国国家竞争力绑定，是&quot;让美国赢&quot;叙事的典型表达。*</p>
+<h4>7.</h4>
+<blockquote>&quot;NVIDIA is kind of becoming the central bank of AI, the Federal Reserve of AI.&quot;</blockquote>
+<blockquote>&quot;NVIDIA 正在成为 AI 的中央银行、AI 的美联储。&quot;</blockquote>
+<p>*说明：Sacks 对 NVIDIA 5000 亿美元算力融资计划的定性——它不只是在卖芯片，而是在创造整个金融基础设施。*</p>
+<h4>8.</h4>
+<blockquote>&quot;It&#x27;s atoms, not bits.&quot;</blockquote>
+<blockquote>&quot;这是原子，不是比特。&quot;</blockquote>
+<p>*说明：JCal 对 AI 算力瓶颈的精准概括——AI 行业的真正约束不是代码，而是物理世界里的能源、土地和供应链。*</p></div>
+          </section>
+        </div>
+      </div>
+    </main>
+  </div>
+  <script>
+    const progress = document.querySelector("[data-progress]");
+    const searchBox = document.querySelector("[data-search-box]");
+    const topButton = document.querySelector("[data-scroll-top]");
+    const cards = Array.from(document.querySelectorAll("[data-timeline-card]"));
+    const searchEmpty = document.querySelector("[data-search-empty]");
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    function updateProgress() {
+      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      const ratio = scrollable > 0 ? window.scrollY / scrollable : 0;
+      if (progress) {
+        progress.style.width = `${Math.max(0, Math.min(1, ratio)) * 100}%`;
+      }
+    }
+
+    function applySearch() {
+      const query = searchBox.value.trim().toLowerCase();
+      let visibleCount = 0;
+      cards.forEach((card) => {
+        const text = card.getAttribute("data-search") || "";
+        const isVisible = !query || text.includes(query);
+        card.hidden = !isVisible;
+        if (isVisible) {
+          visibleCount += 1;
+        }
+      });
+      if (searchEmpty) {
+        searchEmpty.hidden = !query || visibleCount > 0;
+      }
+    }
+
+    window.addEventListener("scroll", updateProgress, { passive: true });
+    window.addEventListener("resize", updateProgress);
+    if (searchBox) {
+      searchBox.addEventListener("input", applySearch);
+    }
+    if (topButton) {
+      topButton.addEventListener("click", () => {
+        window.scrollTo({
+          top: 0,
+          behavior: prefersReducedMotion.matches ? "auto" : "smooth"
+        });
+      });
+    }
+    updateProgress();
+  </script>
+</body>
+</html>
