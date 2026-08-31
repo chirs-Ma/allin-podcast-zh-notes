@@ -1,0 +1,1006 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nvidia 创纪录财报、SaaS 归来、美债危机与癌症疫苗：All-In 四人谈 - 中文播客可视化笔记</title>
+  <style>
+    :root {
+      --bg: oklch(0.974 0.006 238);
+      --paper: oklch(0.991 0.003 238);
+      --paper-soft: oklch(0.955 0.007 238);
+      --ink: oklch(0.205 0.018 246);
+      --muted: oklch(0.49 0.018 246);
+      --faint: oklch(0.63 0.014 246);
+      --line: oklch(0.875 0.009 238);
+      --line-strong: oklch(0.74 0.014 238);
+      --accent: oklch(0.43 0.064 164);
+      --accent-soft: oklch(0.94 0.024 164);
+      --accent-wash: oklch(0.973 0.012 164);
+      --quote: oklch(0.965 0.010 92);
+      --shadow: 0 24px 54px color-mix(in oklch, var(--ink) 8%, transparent);
+      --radius: 8px;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-width: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(90deg, color-mix(in oklch, var(--line) 28%, transparent) 1px, transparent 1px) 0 0 / 92px 92px,
+        var(--bg);
+      font-family: "Geist", "Satoshi", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      line-height: 1.78;
+      text-rendering: optimizeLegibility;
+    }
+    ::selection { background: var(--accent-soft); color: var(--ink); }
+    a {
+      color: var(--accent);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+      transition: color .22s var(--ease), background-color .22s var(--ease), border-color .22s var(--ease), transform .22s var(--ease);
+    }
+    [hidden] { display: none !important; }
+    .progress {
+      position: fixed;
+      z-index: 4;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: var(--accent);
+    }
+    .quick-actions {
+      position: fixed;
+      right: max(18px, calc((100vw - 1200px) / 2));
+      bottom: 24px;
+      z-index: 3;
+      display: grid;
+      gap: 7px;
+    }
+    .quick-action {
+      display: inline-grid;
+      grid-template-columns: 16px auto;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      min-width: 74px;
+      min-height: 40px;
+      padding: 8px 12px;
+      border: 1px solid var(--line-strong);
+      border-radius: var(--radius);
+      background: color-mix(in oklch, var(--paper) 92%, transparent);
+      box-shadow: 0 12px 28px color-mix(in oklch, var(--ink) 7%, transparent);
+      color: var(--ink);
+      font: inherit;
+      font-size: 13px;
+      font-weight: 720;
+      line-height: 1.2;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .quick-action:hover, .quick-action:focus-visible {
+      outline: none;
+      border-color: var(--accent);
+      background: var(--accent-wash);
+      color: var(--accent);
+      transform: translate3d(0, -1px, 0);
+    }
+    .quick-action:active { transform: translate3d(0, 1px, 0) scale(.99); }
+    .page {
+      width: min(1760px, calc(100% - 56px));
+      margin: 0 auto;
+      padding: 0 0 104px;
+    }
+    .article { min-width: 0; }
+    .hero {
+      max-width: none;
+      margin-left: min(7vw, 140px);
+      padding: 72px 0 58px;
+    }
+    .eyebrow {
+      margin: 0 0 18px;
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    h1 {
+      max-width: none;
+      margin: 0 0 28px;
+      font-size: clamp(38px, 3vw, 52px);
+      font-weight: 760;
+      line-height: 1.08;
+      letter-spacing: 0;
+      text-wrap: balance;
+    }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 18px;
+      max-width: 72ch;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .meta a { font-weight: 650; }
+    .meta-strip {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+      max-width: 720px;
+      margin: 34px 0 28px;
+      border-top: 1px solid var(--line-strong);
+      padding-top: 16px;
+    }
+    .meta-pill {
+      display: grid;
+      gap: 2px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.35;
+    }
+    .meta-pill b {
+      color: var(--ink);
+      font-family: var(--mono);
+      font-size: 18px;
+      font-weight: 680;
+      line-height: 1;
+    }
+    .summary {
+      width: 100%;
+      max-width: 760px;
+      padding: 24px 26px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: color-mix(in oklch, var(--paper) 88%, var(--accent-soft));
+      box-shadow: var(--shadow);
+    }
+    .summary p {
+      margin: 0;
+      font-size: 19px;
+      line-height: 1.72;
+    }
+    h1, .summary, .takeaway p, .timeline-card h3, .section-content, .speaker-card, .panel {
+      overflow-wrap: anywhere;
+    }
+    .content-shell {
+      display: grid;
+      grid-template-columns: minmax(170px, 212px) minmax(0, 820px);
+      gap: clamp(36px, 7vw, 88px);
+      align-items: start;
+      border-top: 1px solid var(--line);
+      padding-top: 40px;
+    }
+    .sidebar {
+      position: sticky;
+      top: 28px;
+      align-self: start;
+      padding-top: 4px;
+    }
+    .toc {
+      border-top: 1px solid var(--ink);
+      padding-top: 16px;
+    }
+    .toc-title {
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .nav-links { display: grid; gap: 2px; }
+    .nav-links a {
+      display: block;
+      padding: 8px 0;
+      border-bottom: 1px solid color-mix(in oklch, var(--line) 72%, transparent);
+      color: var(--ink);
+      font-size: 14px;
+      line-height: 1.35;
+      text-decoration: none;
+    }
+    .nav-links a:hover, .nav-links a:focus-visible {
+      outline: none;
+      color: var(--accent);
+      transform: translate3d(2px, 0, 0);
+    }
+    .search {
+      display: grid;
+      gap: 8px;
+      margin-top: 22px;
+    }
+    .search span {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 720;
+    }
+    .search input {
+      width: 100%;
+      min-height: 40px;
+      padding: 8px 10px;
+      border: 1px solid var(--line-strong);
+      border-radius: var(--radius);
+      background: var(--paper);
+      color: var(--ink);
+      font: inherit;
+      font-size: 14px;
+      outline: none;
+      transition: border-color .22s var(--ease), box-shadow .22s var(--ease), transform .22s var(--ease);
+    }
+    .search input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px color-mix(in oklch, var(--accent) 14%, transparent);
+    }
+    .content-flow { min-width: 0; }
+    section { margin: 0 0 78px; }
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 18px;
+      align-items: end;
+      margin-bottom: 22px;
+      border-top: 1px solid var(--ink);
+      padding-top: 18px;
+    }
+    .section-head h2 {
+      margin: 0;
+      font-size: 28px;
+      font-weight: 740;
+      line-height: 1.16;
+      letter-spacing: 0;
+    }
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.4;
+      text-align: right;
+    }
+    .takeaway-list {
+      display: grid;
+      gap: 0;
+      margin: 0;
+      padding: 0;
+      border-top: 1px solid var(--line);
+      list-style: none;
+    }
+    .takeaway {
+      display: grid;
+      grid-template-columns: 52px minmax(0, 1fr);
+      gap: 18px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .takeaway span {
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 15px;
+      font-weight: 720;
+      line-height: 1.65;
+    }
+    .takeaway p {
+      margin: 0;
+      max-width: 70ch;
+      font-size: 16px;
+      line-height: 1.72;
+    }
+    .timeline {
+      display: grid;
+      gap: 0;
+      border-top: 1px solid var(--line-strong);
+    }
+    .timeline-card {
+      display: grid;
+      grid-template-columns: 132px minmax(0, 1fr);
+      gap: 32px;
+      padding: 34px 0 40px;
+      border-bottom: 1px solid var(--line);
+    }
+    .timeline-heading {
+      position: sticky;
+      top: 30px;
+      align-self: start;
+      display: grid;
+      gap: 10px;
+      padding-top: 2px;
+    }
+    .timeline-index {
+      color: var(--faint);
+      font-family: var(--mono);
+      font-size: 13px;
+      font-weight: 720;
+      line-height: 1;
+    }
+    .timeline-meta {
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 720;
+      line-height: 1.45;
+    }
+    .timeline-card h3 {
+      max-width: 24ch;
+      margin: 0 0 18px;
+      font-size: 27px;
+      font-weight: 730;
+      line-height: 1.22;
+      letter-spacing: 0;
+    }
+    .section-content {
+      color: color-mix(in oklch, var(--ink) 88%, var(--muted));
+      font-size: 16px;
+    }
+    .section-content p {
+      max-width: 72ch;
+      margin: 0 0 1.05em;
+    }
+    .section-content p strong:first-child {
+      color: var(--ink);
+      font-weight: 760;
+    }
+    .section-content h4 {
+      margin: 26px 0 10px;
+      color: var(--accent);
+      font-size: 14px;
+      font-weight: 760;
+      line-height: 1.35;
+    }
+    .section-content ul, .section-content ol, .panel ul, .panel ol, .speaker-card ul, .speaker-card ol {
+      margin: .75em 0 1em;
+      padding-left: 1.25em;
+    }
+    .section-content li, .panel li, .speaker-card li { margin: 6px 0; }
+    .speaker-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, .88fr);
+      gap: 26px 42px;
+      border-top: 1px solid var(--line);
+    }
+    .speaker-card {
+      padding: 22px 0 24px;
+      border-bottom: 1px solid var(--line);
+    }
+    .speaker-card:nth-child(even) { margin-top: 22px; }
+    .speaker-kicker {
+      margin: 0 0 8px;
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 720;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .speaker-card h3 {
+      margin: 0 0 12px;
+      font-size: 20px;
+      font-weight: 730;
+      line-height: 1.25;
+    }
+    .speaker-card p, .panel p {
+      max-width: 68ch;
+      margin-top: 0;
+    }
+    .panel {
+      border-top: 1px solid var(--line);
+      padding-top: 8px;
+    }
+    blockquote {
+      margin: 18px 0;
+      padding: 16px 18px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--quote);
+    }
+    code {
+      padding: 2px 5px;
+      border-radius: 5px;
+      background: color-mix(in oklch, var(--accent) 10%, var(--paper));
+      color: var(--ink);
+      font-family: var(--mono);
+      font-size: .92em;
+    }
+    hr {
+      height: 1px;
+      margin: 26px 0;
+      border: 0;
+      background: var(--line);
+    }
+    .empty {
+      margin: 0;
+      padding: 16px 18px;
+      border: 1px dashed var(--line-strong);
+      border-radius: var(--radius);
+      color: var(--muted);
+      background: color-mix(in oklch, var(--paper-soft) 70%, transparent);
+    }
+    .search-empty { margin-top: 16px; }
+    .muted { color: var(--muted); }
+    @keyframes rise-in {
+      from { opacity: 1; transform: translate3d(0, 6px, 0); }
+      to { opacity: 1; transform: translate3d(0, 0, 0); }
+    }
+    .hero > *, .takeaway, .timeline-card, .speaker-card, .panel {
+      animation: rise-in .55s var(--ease) both;
+    }
+    .hero > *:nth-child(2) { animation-delay: .04s; }
+    .hero > *:nth-child(3) { animation-delay: .08s; }
+    .hero > *:nth-child(4) { animation-delay: .12s; }
+    .hero > *:nth-child(5) { animation-delay: .16s; }
+    .takeaway, .timeline-card, .speaker-card {
+      animation-delay: calc(var(--index, 1) * 38ms);
+    }
+    @media (max-width: 1120px) {
+      .hero { margin-left: 0; }
+      .content-shell {
+        grid-template-columns: minmax(154px, 190px) minmax(0, 1fr);
+        gap: 36px;
+      }
+      h1 { font-size: 44px; }
+    }
+    @media (min-width: 1500px) {
+      h1 {
+        width: max-content;
+        max-width: 100%;
+        white-space: nowrap;
+        font-size: clamp(36px, 2.05vw, 42px);
+      }
+    }
+    @media (max-width: 780px) {
+      body { background: var(--bg); }
+      .page { width: min(1180px, calc(100% - 28px)); padding-bottom: 86px; }
+      .hero { padding: 46px 0 36px; }
+      .eyebrow { margin-bottom: 14px; }
+      h1 {
+        max-width: none;
+        font-size: 30px;
+        line-height: 1.14;
+        word-break: normal;
+      }
+      .summary, .summary p, .takeaway p, .section-content, .speaker-card, .panel {
+        max-width: 100%;
+        word-break: break-word;
+      }
+      .meta-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 20px; }
+      .summary { padding: 20px; }
+      .summary p { font-size: 17px; }
+      .content-shell { display: block; padding-top: 28px; }
+      .sidebar { position: static; padding-top: 0; margin-bottom: 42px; }
+      .toc { border-top-color: var(--line-strong); }
+      .nav-links { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 18px; }
+      section { margin-bottom: 58px; }
+      .section-head { display: block; margin-bottom: 16px; }
+      .section-head h2 { font-size: 24px; }
+      .section-head p { margin-top: 6px; text-align: left; }
+      .takeaway { grid-template-columns: 42px minmax(0, 1fr); gap: 12px; }
+      .timeline-card { display: block; padding: 28px 0 32px; }
+      .timeline-heading { position: static; display: flex; align-items: baseline; gap: 12px; margin-bottom: 12px; }
+      .timeline-card h3 { max-width: none; font-size: 23px; }
+      .speaker-grid { display: block; }
+      .speaker-card:nth-child(even) { margin-top: 0; }
+      .quick-actions {
+        right: 12px;
+        bottom: 12px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 6px;
+      }
+      .quick-action {
+        min-width: 66px;
+        min-height: 38px;
+        padding: 7px 9px;
+        font-size: 13px;
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: 1ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 1ms !important;
+      }
+      .speaker-card:nth-child(even) { margin-top: 0; }
+    }
+    @media print {
+      body { background: var(--paper); }
+      .sidebar, .progress, .quick-actions { display: none; }
+      .page { display: block; width: auto; padding-bottom: 0; }
+      .hero { margin-left: 0; padding: 0 0 28px; }
+      .content-shell { display: block; border-top: 0; padding-top: 0; }
+      .summary { box-shadow: none; }
+      .timeline-card, .speaker-card { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <div class="progress" data-progress></div>
+  <div class="quick-actions" aria-label="快捷操作">
+    <a class="quick-action" href="../../index.html" aria-label="返回首页">
+      <span aria-hidden="true">←</span>
+      <span>首页</span>
+    </a>
+    <button class="quick-action" type="button" data-scroll-top aria-label="回到顶部">
+      <span aria-hidden="true">↑</span>
+      <span>顶部</span>
+    </button>
+  </div>
+  <div class="page">
+    <main class="article">
+      <header class="hero">
+        <p class="eyebrow">All-In Podcast 中文精读</p>
+        <h1>Nvidia 创纪录财报、SaaS 归来、美债危机与癌症疫苗：All-In 四人谈</h1>
+        <div class="meta">
+          <span>生成时间：2026-08-31 09:56</span>
+          <span>来源：<a href="https://www.youtube.com/watch?v=1u5dMAKl_ks" target="_blank" rel="noopener">YouTube</a></span>
+        </div>
+        <div class="meta-strip"><span class="meta-pill"><b>44 分钟</b>阅读时长</span>
+<span class="meta-pill"><b>10</b>核心要点</span>
+<span class="meta-pill"><b>5</b>时间线</span>
+<span class="meta-pill"><b>4</b>人物</span></div>
+        <div class="summary" aria-label="一句话摘要"><p>本期 All-In 围绕 Nvidia 史无前例的季度财报、Salesforce 暴涨与“SaaS 末日论”破产、Bessent 与 Druckenmiller 关于美债收益率的公开分歧、以及 Moderna 癌症疫苗展开密集交锋，核心争论是：AI 资本开支是否真的没有泡沫、美国财政失控最终会由谁买单、以及被公共资金资助的技术是否应该被高价垄断。</p></div>
+      </header>
+
+      <div class="content-shell">
+        <aside class="sidebar">
+          <nav class="toc" aria-label="页面导航">
+            <p class="toc-title">阅读导航</p>
+            <div class="nav-links">
+              <a href="#takeaways">核心要点</a>
+              <a href="#timeline">分段整理</a>
+              <a href="#speakers">人物观点</a>
+              <a href="#quotes">双语引语</a>
+            </div>
+            <label class="search">
+              <span>搜索时间线</span>
+              <input data-search-box type="search" placeholder="关键词" aria-label="搜索时间线">
+            </label>
+          </nav>
+        </aside>
+
+        <div class="content-flow">
+          <section id="takeaways">
+            <div class="section-head">
+              <h2>核心要点</h2>
+              <p>快速扫读本集主线</p>
+            </div>
+            <ol class="takeaway-list"><li class="takeaway" style="--index: 1"><span>01</span><p>Nvidia 财报全面碾压预期：季度营收 962 亿美元，同比增 106%，净利润 600 亿美元创下上市公司史上最赚钱的核心业务季度；下年指引增 70%，远超华尔街预期的 45%。</p></li>
+<li class="takeaway" style="--index: 2"><span>02</span><p>Nvidia 依然只有约 12 倍市盈率：市场担忧来自 Cerebras 等对手的竞争，同时黄仁勋通过收购 Hugging Face（120 亿美元）和 Poolside（60 亿美元）全面拥抱开源，被解读为对 OpenAI 与 AMD 结盟的反击。</p></li>
+<li class="takeaway" style="--index: 3"><span>03</span><p>Salesforce 单日大涨超 20%：营收 113 亿美元、调整后 EPS 大幅超预期，加上与 Anthropic 的深度整合，让“SaaSpocalypse”（SaaS 末日论）叙事被当场撕碎。</p></li>
+<li class="takeaway" style="--index: 4"><span>04</span><p>Chamath 提出 AI 三阶段论：模型是大脑，智能体与工具是手和眼，下一阶段需要给智能体训练出“律师、客服、销售”等专业能力；掌握企业核心数据的“系统记录”公司（system of record）反而会因 AI 而愈发重要。</p></li>
+<li class="takeaway" style="--index: 5"><span>05</span><p>Sacks 认为“SaaS 已死”是简单外推：AI agent 能写代码不意味着所有软件归零，企业更需要确定性、合规和经过 20 年调试的核心系统；Benioff 敢让 Claude 做前端是“打不过就加入”的聪明策略。</p></li>
+<li class="takeaway" style="--index: 6"><span>06</span><p>Friedberg 的公司亲历验证：他曾在内部用 Claude Code + Cursor 自建 CRM，最终回归 Salesforce；他判断横向平台型 SaaS 是“系统记录”很难替代，垂直 SaaS 只是工作流，容易被 AI 冲垮。</p></li>
+<li class="takeaway" style="--index: 7"><span>07</span><p>美债收益率飙升引发路线之争：30 年期国债收益率升至约 5.2% 创 19 年新高；财政部长 Bessent 加码回购长债试图压收益率，但其导师 Druckenmiller 公开撰文反对，认为真正问题是政府支出失控。</p></li>
+<li class="takeaway" style="--index: 8"><span>08</span><p>Friedberg 和 Chamath 解读一致：Druckenmiller 那篇文章本质是给 Bessent“打掩护”，把责任推回给国会；未来 12 个月美国需再融资 10 万亿美元债务，Bessent 的购债规模最多 1 万亿，杯水车薪。</p></li>
+<li class="takeaway" style="--index: 9"><span>09</span><p>财政破裂时间线：Friedberg 预计 2026–2028 通胀压力会推动选民转向“提供解决方案”的激进候选人，2030–2032 社保资金耗尽叠加多州破产，才是真正的财政危机时刻；AI 指数级增长是唯一被四人认可的“解药”。</p></li>
+<li class="takeaway" style="--index: 10"><span>10</span><p>Moderna 癌症疫苗争议：Friedberg 详细解释新抗原 mRNA 免疫疗法原理，对 Moderna 市值从 200 亿涨到 600 亿感到“愤怒”——认为 NIH 公共资金资助数十年的技术不该被专利化并标价 50 万美元治疗费；海外和“尝试权”（Right to Try）渠道已能以约 5 万美元提供类似治疗。</p></li></ol>
+          </section>
+
+          <section id="timeline">
+            <div class="section-head">
+              <h2>分段详细整理</h2>
+              <p>按时间线阅读上下文</p>
+            </div>
+            <div class="timeline" data-timeline><article class="timeline-card" data-timeline-card data-search="00:00–00:09 开场：科学异端、中国机器人奥运会、optimus 与 grokbot 本段核心内容： friedberg 谈与 eric weinstein 及另一位科学界人物的访谈，讨论美国科学界“异端思想被边缘化”的问题。 四人看中国机器人奥运会视频，chamath 强调美国在 ai 竞赛中最大的风险是“悲观主义”。 elon musk 向 chamath 私下展示 optimus 最新进展；sacks 分享用 xai 的 grokbot 搭建智能体（agent）的实际体验。 背景解释与关键术语： eric weinstein：数学家，peter thiel 前合伙人，曾就职于 thiel capital；以质疑弦理论、提出“几何统一理论”著称，被视为科学界异端人物。 机器人奥运会：指 2025 年在北京举行的世界人形机器人运动会（world humanoid robot games），各国机器人参加田径、足球等比赛。 optimus：特斯拉的人形机器人。 grokbot：xai 推出的 ai 智能体产品，可以在云端长期运行、操作其他软件完成任务。 openclaw：早期开源 ai 智能体框架，上下文提到其创始人 peter 被 sam altman 招入 openai 后项目逐渐停滞。 christian mccaffrey：nfl 明星跑卫，机器人断腿的梗被拿来调侃其受伤。 详细中文整理： jcal： 好了，欢迎大家回到全世界排名第一的播客。四位核心成员都在——david friedberg 刚刚完成他和 eric weinstein 的“深层政府阴谋论”访谈，还跑了一趟华盛顿。非常精彩。 friedberg： 很有意思。eric 是独一无二的人物。我也见到了 krazios（音译，转写可能不准确），这两个访谈基本代表了美国科学的两个侧面。 jcal： eric weinstein 是谁？ sacks： 他是一位科学家，和 peter thiel 有合作，哈佛出身，曾经在 thiel capital 工作过。 jcal： 他的“异端科学观点”具体是什么？ friedberg： 现代物理学里有很多被大家当作基本前提的东西，比如弦理论。他觉得那是胡说八道，并且公开炮轰。所以他在科学界被边缘化了。他提出了替代性的大统一理论，但主流科学界说他是庸医、是白痴。他还谈过 ufo、谈过 jeffrey epstein，于是人们更加觉得他是边缘人物。但这背后的核心观点是——和 krazios 说的一样——如今科学界充满了羊群心态，你必须和大家保持一致，否则就被排挤：拿不到科研经费、拿不到终身教职、找不到工作、没人请你做讲座。过去的科学恰恰是拥抱异端的。 sacks： 对。说弦理论没有被证明，是很理性的说法。你想用“bullshit”这个词也可以，可能会得罪一些人，但从实质上讲，他说对的比说错的多——它确实未被证明。 chamath： 就像 jay bhattacharya 当初说“新冠可能来自实验室泄漏”，大家说你在制造阴谋论、传播错误信息。但根本不存在什么绝对真理，对新冠源头每个人都只是从某种理论出发。 sacks： 你说的是科学中一个非常具体、非常狭窄的领域的腐败——经费和拨款审批体系。 friedberg： 还有终身教职和教授职位。如果你不跟随主流方法、主流理论，你就会被排除在外。 sacks： 顺带说，这个我认同。 friedberg： 这正是美国科学陷入停滞的原因。因为只有一种思考方式被允许，你就没有异端思维、没有突破框架的思维，也就无法再推动新发现。这是当下非常尖锐的问题，也是我去和 krazios 和 eric 聊的原因。 jcal： 换句话讲，2026 年的“渐进主义”可能比 1926 年多得多。 friedberg： 完全正确。想一想广义相对论发表的时候，多么荒诞，但人们仍然研究它、评估它，而不是说“你是白痴”。今天你只要说出超出常规路径太远的东西，就会被羞辱和排挤。 jcal： 你们看奥运会了吗？机器人奥运会？sacks，快看这个。 sacks： 我看到了。 jcal： 太疯狂了。中国办了机器人奥运会，场馆里坐满了人。 sacks： 天哪，他们完全复制了 friedberg 跑步的样子。 friedberg： 看那个，那绝对是“弗里德伯格冲刺”。 chamath： 他们在做“弗里德伯格冲刺”。你看这个，先退后，然后爆发启动。 jcal： 我意识到一件事——sacks，你说得完全对，中共在公关上绝对是天才。他们让一屋子中国人填满体育场，为 ai 和机器人鼓掌欢呼。而另一边，dario（amodei）说所有工作都会消失，我们是世界上最后一家公司，末日要来了。我真的很佩服中国人。 sacks： 我们这周不提 dario。 chamath： 你的宏大统一理论是：一个十亿人口的国家，找不到 4000 人来看一群机器人绕着跑道跑？ chamath： 但事实是中国对 ai 比美国乐观得多。中国的 ai 乐观度超过 80%——也就是民调问“ai 利大于弊还是弊大于利”，超过 80% 的中国人说利大于弊；美国只有约 30%。我一直在说，美国在所有类别上都领先中国，除了一项：乐观主义。这是我们赢得 ai 竞赛最大的风险——因为我们太悲观，可能会做出自伤的事。 jcal： 我觉得全是心理战。你看，那个红色机器人在 16 秒爆炸的画面，全是编排的。他们故意让你同情机器人，让你为它们欢呼。这会成为大话题的。 chamath： 最搞笑的是红机器人断腿时，推上有几个段子很损。有人说“天呐，它撕破了 hdmi 和 cpu”，还有人说“christian mccaffrey 在第三周”——就是整条腿直接断裂的画面，非常非常损。 jcal： 祝贺中共。顺便问，你们看过 elon 最新的 optimus 视频吗？ sacks： 我没看过。 chamath： 他没有公开发布。我看到了最新的 optimus——它现在已经能赢下这些比赛的一半项目了。等你们看到时会发现进展惊人，但他选择不公开。我问他这是 cgi 还是真的，他说是真的，今天早上刚发给我的。 sacks： 没有火花从它腰里冒出来？ chamath： 没有火花。我认为 optimus 会成为史上最畅销的产品。 sacks： 我理解这类机器人的难点在于：你可以训练它做特定动作，比如跑动或跳跃，但困难的是它遇到没有编程过的情况，尤其是要与物理世界互动时——比如能不能叠好衣服、拿起物品不摔不破，特别是它没有被教过的事情，这才是真正棘手的地方。 chamath： 是的，optimus 的逼真度以及它处理新颖任务的能力，你说到点上了。不过你其实在玩 grokbot 吧，sacks？ sacks： 对。我已经达到了 grokbot 使用上限，得升级。 jcal： 一个月 200 美元。 sacks： 是的。而且真的很有意思。grokbot 的优势在于它常驻云端，你设好 agents，就算电脑关机或睡眠，它们也能继续运行。之前的 agent 框架，比如 openclaw 或 hermes，都只能跑在桌面上，电脑一睡眠就停了，你还得自己搞 mac mini。而且它们很难用、功耗很高。grokbot 是迄今最简单的，虽然要配置到完美依然要花不少功夫，但你可以清楚地看到这一切会走向何方。 jcal： 这太棒了。我跟他说应该做多人模式——让两个 agent 可以进入同一个房间，然后让你团队的两个人也能进同一个房间，并让真人参与闭环，这样进展会飞快。 chamath： 这个主意太好了，会让产品病毒式传播。因为 agent 的酷炫之处在于你能拥有一个 agent 群体——大量不同的 agents 执行不同任务，各自擅长不同事情。有人问为什么不用一个 agent 做所有事？事实是，多个 agents 能积累更多上下文和专长，变得更具体。你可以把每个 agent 当作一个频道，邀请人加入，然后他们参与协作。 sacks： 然后就会非常非常病毒化。" style="--index: 1">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">01</span>
+                    <span class="timeline-meta">00:00–00:09</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>开场：科学异端、中国机器人奥运会、Optimus 与 GrokBot</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>Friedberg 谈与 Eric Weinstein 及另一位科学界人物的访谈，讨论美国科学界“异端思想被边缘化”的问题。</li>
+<li>四人看中国机器人奥运会视频，Chamath 强调美国在 AI 竞赛中最大的风险是“悲观主义”。</li>
+<li>Elon Musk 向 Chamath 私下展示 Optimus 最新进展；Sacks 分享用 xAI 的 GrokBot 搭建智能体（agent）的实际体验。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>Eric Weinstein：数学家，Peter Thiel 前合伙人，曾就职于 Thiel Capital；以质疑弦理论、提出“几何统一理论”著称，被视为科学界异端人物。</li>
+<li>机器人奥运会：指 2025 年在北京举行的世界人形机器人运动会（World Humanoid Robot Games），各国机器人参加田径、足球等比赛。</li>
+<li>Optimus：特斯拉的人形机器人。</li>
+<li>GrokBot：xAI 推出的 AI 智能体产品，可以在云端长期运行、操作其他软件完成任务。</li>
+<li>OpenClaw：早期开源 AI 智能体框架，上下文提到其创始人 Peter 被 Sam Altman 招入 OpenAI 后项目逐渐停滞。</li>
+<li>Christian McCaffrey：NFL 明星跑卫，机器人断腿的梗被拿来调侃其受伤。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> 好了，欢迎大家回到全世界排名第一的播客。四位核心成员都在——David Friedberg 刚刚完成他和 Eric Weinstein 的“深层政府阴谋论”访谈，还跑了一趟华盛顿。非常精彩。</p>
+<p><strong>Friedberg：</strong> 很有意思。Eric 是独一无二的人物。我也见到了 Krazios（音译，转写可能不准确），这两个访谈基本代表了美国科学的两个侧面。</p>
+<p><strong>JCal：</strong> Eric Weinstein 是谁？</p>
+<p><strong>Sacks：</strong> 他是一位科学家，和 Peter Thiel 有合作，哈佛出身，曾经在 Thiel Capital 工作过。</p>
+<p><strong>JCal：</strong> 他的“异端科学观点”具体是什么？</p>
+<p><strong>Friedberg：</strong> 现代物理学里有很多被大家当作基本前提的东西，比如弦理论。他觉得那是胡说八道，并且公开炮轰。所以他在科学界被边缘化了。他提出了替代性的大统一理论，但主流科学界说他是庸医、是白痴。他还谈过 UFO、谈过 Jeffrey Epstein，于是人们更加觉得他是边缘人物。但这背后的核心观点是——和 Krazios 说的一样——如今科学界充满了羊群心态，你必须和大家保持一致，否则就被排挤：拿不到科研经费、拿不到终身教职、找不到工作、没人请你做讲座。过去的科学恰恰是拥抱异端的。</p>
+<p><strong>Sacks：</strong> 对。说弦理论没有被证明，是很理性的说法。你想用“bullshit”这个词也可以，可能会得罪一些人，但从实质上讲，他说对的比说错的多——它确实未被证明。</p>
+<p><strong>Chamath：</strong> 就像 Jay Bhattacharya 当初说“新冠可能来自实验室泄漏”，大家说你在制造阴谋论、传播错误信息。但根本不存在什么绝对真理，对新冠源头每个人都只是从某种理论出发。</p>
+<p><strong>Sacks：</strong> 你说的是科学中一个非常具体、非常狭窄的领域的腐败——经费和拨款审批体系。</p>
+<p><strong>Friedberg：</strong> 还有终身教职和教授职位。如果你不跟随主流方法、主流理论，你就会被排除在外。</p>
+<p><strong>Sacks：</strong> 顺带说，这个我认同。</p>
+<p><strong>Friedberg：</strong> 这正是美国科学陷入停滞的原因。因为只有一种思考方式被允许，你就没有异端思维、没有突破框架的思维，也就无法再推动新发现。这是当下非常尖锐的问题，也是我去和 Krazios 和 Eric 聊的原因。</p>
+<p><strong>JCal：</strong> 换句话讲，2026 年的“渐进主义”可能比 1926 年多得多。</p>
+<p><strong>Friedberg：</strong> 完全正确。想一想广义相对论发表的时候，多么荒诞，但人们仍然研究它、评估它，而不是说“你是白痴”。今天你只要说出超出常规路径太远的东西，就会被羞辱和排挤。</p>
+<p><strong>JCal：</strong> 你们看奥运会了吗？机器人奥运会？Sacks，快看这个。</p>
+<p><strong>Sacks：</strong> 我看到了。</p>
+<p><strong>JCal：</strong> 太疯狂了。中国办了机器人奥运会，场馆里坐满了人。</p>
+<p><strong>Sacks：</strong> 天哪，他们完全复制了 Friedberg 跑步的样子。</p>
+<p><strong>Friedberg：</strong> 看那个，那绝对是“弗里德伯格冲刺”。</p>
+<p><strong>Chamath：</strong> 他们在做“弗里德伯格冲刺”。你看这个，先退后，然后爆发启动。</p>
+<p><strong>JCal：</strong> 我意识到一件事——Sacks，你说得完全对，中共在公关上绝对是天才。他们让一屋子中国人填满体育场，为 AI 和机器人鼓掌欢呼。而另一边，Dario（Amodei）说所有工作都会消失，我们是世界上最后一家公司，末日要来了。我真的很佩服中国人。</p>
+<p><strong>Sacks：</strong> 我们这周不提 Dario。</p>
+<p><strong>Chamath：</strong> 你的宏大统一理论是：一个十亿人口的国家，找不到 4000 人来看一群机器人绕着跑道跑？</p>
+<p><strong>Chamath：</strong> 但事实是中国对 AI 比美国乐观得多。中国的 AI 乐观度超过 80%——也就是民调问“AI 利大于弊还是弊大于利”，超过 80% 的中国人说利大于弊；美国只有约 30%。我一直在说，美国在所有类别上都领先中国，除了一项：乐观主义。这是我们赢得 AI 竞赛最大的风险——因为我们太悲观，可能会做出自伤的事。</p>
+<p><strong>JCal：</strong> 我觉得全是心理战。你看，那个红色机器人在 16 秒爆炸的画面，全是编排的。他们故意让你同情机器人，让你为它们欢呼。这会成为大话题的。</p>
+<p><strong>Chamath：</strong> 最搞笑的是红机器人断腿时，推上有几个段子很损。有人说“天呐，它撕破了 HDMI 和 CPU”，还有人说“Christian McCaffrey 在第三周”——就是整条腿直接断裂的画面，非常非常损。</p>
+<p><strong>JCal：</strong> 祝贺中共。顺便问，你们看过 Elon 最新的 Optimus 视频吗？</p>
+<p><strong>Sacks：</strong> 我没看过。</p>
+<p><strong>Chamath：</strong> 他没有公开发布。我看到了最新的 Optimus——它现在已经能赢下这些比赛的一半项目了。等你们看到时会发现进展惊人，但他选择不公开。我问他这是 CGI 还是真的，他说是真的，今天早上刚发给我的。</p>
+<p><strong>Sacks：</strong> 没有火花从它腰里冒出来？</p>
+<p><strong>Chamath：</strong> 没有火花。我认为 Optimus 会成为史上最畅销的产品。</p>
+<p><strong>Sacks：</strong> 我理解这类机器人的难点在于：你可以训练它做特定动作，比如跑动或跳跃，但困难的是它遇到没有编程过的情况，尤其是要与物理世界互动时——比如能不能叠好衣服、拿起物品不摔不破，特别是它没有被教过的事情，这才是真正棘手的地方。</p>
+<p><strong>Chamath：</strong> 是的，Optimus 的逼真度以及它处理新颖任务的能力，你说到点上了。不过你其实在玩 GrokBot 吧，Sacks？</p>
+<p><strong>Sacks：</strong> 对。我已经达到了 GrokBot 使用上限，得升级。</p>
+<p><strong>JCal：</strong> 一个月 200 美元。</p>
+<p><strong>Sacks：</strong> 是的。而且真的很有意思。GrokBot 的优势在于它常驻云端，你设好 agents，就算电脑关机或睡眠，它们也能继续运行。之前的 agent 框架，比如 OpenClaw 或 Hermes，都只能跑在桌面上，电脑一睡眠就停了，你还得自己搞 Mac mini。而且它们很难用、功耗很高。GrokBot 是迄今最简单的，虽然要配置到完美依然要花不少功夫，但你可以清楚地看到这一切会走向何方。</p>
+<p><strong>JCal：</strong> 这太棒了。我跟他说应该做多人模式——让两个 agent 可以进入同一个房间，然后让你团队的两个人也能进同一个房间，并让真人参与闭环，这样进展会飞快。</p>
+<p><strong>Chamath：</strong> 这个主意太好了，会让产品病毒式传播。因为 agent 的酷炫之处在于你能拥有一个 agent 群体——大量不同的 agents 执行不同任务，各自擅长不同事情。有人问为什么不用一个 agent 做所有事？事实是，多个 agents 能积累更多上下文和专长，变得更具体。你可以把每个 agent 当作一个频道，邀请人加入，然后他们参与协作。</p>
+<p><strong>Sacks：</strong> 然后就会非常非常病毒化。</p></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="00:09–00:33 nvidia 历史级财报、salesforce 暴涨与“saas 末日论”破产 本段核心内容： nvidia 季度营收 962 亿美元、同比增 106%、净利润 600 亿美元，下年指引 70% 增长远超华尔街预期；股价涨 9%，期末市值约 5.5 万亿美元。 salesforce 因财报超预期与 anthropic 合作大涨超 20%，chamath 在 5 月“看多高端 saas”的判断得到验证。 chamath 用 ai 三阶段论说明“系统记录”型 saas 在最坏情况下反而最受益；sacks 认为 saas 末日论是“简单外推”的错误叙事。 黄仁勋收购 hugging face 和 poolside，疑似全面拥抱开源，以对抗 openai 与 amd 的结盟；chamath 判断所有科技巨头将走向“全栈自研”。 背景解释与关键术语： saaspocalypse：saas 末日论，即认为 ai 会让所有订阅制软件公司归零的叙事。 system of record：系统记录，指承载一家企业核心数据的权威系统，通常很难被替换。 ndr（net dollar retention）：净美元留存率，衡量存量客户在现有消费基础上的收入扩张，是云计算/saas 黄金指标。 vibe-coding：用 ai 辅助、凭感觉快速拼出代码的做法。sacks 用它来形容“用 ai 随手糊一个东西就替换核心系统”的想法。 hyperscaler：超大规模云厂商，如 aws、azure、google cloud。 neocloud：以 coreweave 等为代表的、基于 nvidia 芯片的第三方算力云服务商。 hugging face：全球最大 ai 模型开源社区；poolside：ai 编程公司，其模型名为 laguna。 cerebras：ai 芯片创业公司，被市场视为 nvidia 潜在竞争对手。 polymarket：基于加密货币的预测市场平台，jcal 引用其数据说明市场对 nvidia 年末保持第一的预期高达 79%。 详细中文整理： jcal： 好了，干正事。今天的料很多。nvidia 刚出了一份创纪录的财报，彻底炸裂——股价涨了 9%，数字巨大，指引更是巨大。单季营收 962 亿美元，同比增 106%，是翻倍多；华尔街预期只有 920 亿。他们还给出了下年 70% 增长的指引，远高于华尔街预期的 45%。大家最疯狂的数字是净利润 600 亿美元——这是有史以来任何上市公司最赚钱的核心业务季度。google、amazon 有过单季更高的数字，但那是偶发。股价又回到了历史高点附近。比较微妙的是，财报前 nvidia 今年只涨了 12%，跟标普 500 指数持平，其实是跑输芯片指数的。我猜测主要逆风因素，chamath，是大家觉得竞争要来了。 chamath： 我们一会儿聊这个。nvidia 现在是全球市值最高的公司，5.5 万亿美元。polymarket 显示它年末保持第一的概率是 79%，成交量 630 万美元。另外 salesforce 周四涨超 20%，也发了大超预期的季度：营收 113 亿美元，同比增 11%，符合预期但调整后 eps 是 5.9，比预期的 3.27 高出 80%。它们大涨的另一个原因是 salesforce 是 anthropic 的主要投资人。全年指引上调到 460 亿美元。chamath，5 月 15 日你说过你之前对 saas 领域一直很苛刻…… chamath： 我当时说，mark（benioff）所在的高端市场，大型巨头所在的位置，相当安全。人们会发现：这比想象中难得多，不是输入提示词、叮叮当当就能全自动跑起来。我觉得这个市场被超卖了，这种整合和重新定价会向反方向逆转。那相反的交易是什么？就是谁拥有建设性的净美元留存率、谁有可预测的负流失率？也就是说谁的客户关系最好。那些公司会碾压市场。 jcal： 好。chamath，谈谈你对 nvidia 和 salesforce 炸裂财报的看法。 chamath： 内容非常多。先说 salesforce，再说 nvidia，因为 nvidia 正好可以接入国家财政状况的讨论。5 月时 salesforce 被严重超卖非常明显。我那时想说的，现在可以说得更精确了：我们正处在 ai 第二阶段末尾。第一阶段是模型——把模型理解为大脑；第二阶段是框架和 agents——等于给大脑配上眼睛、手、一本记忆笔记本和一个键盘。你把原本擅长问答的东西变得几乎像一个自主行动体。但我们马上就要进入下一阶段，至少在我合作的企业里已经能看到：光有 agents 还不够。你现在需要让这个自主行动体掌握更多信息，给它上下文，让它能更聪明地完成一项工作——也就是说，你有了大脑，给了它手臂、腿、眼睛，你还要训练它当律师、当客服、当销售。要做这一步，你需要海量的上下文信息。今天谁掌握这些？是大型系统记录公司。我以前说过，现在要加倍强调：这些公司如果做对了，他们在生态中的位置极其特殊。你现在看到的正是 mark（benioff）找到了与模型配合、支持多种框架、同时自研并推动下一阶段的办法。所以他的净美元留存率强、收入强、指引上调、股价暴涨——从我上次说他触底以来涨了约 43%。 jcal： 今天一天就涨了 20%。friedberg，你是去了 cnbc 还是电话会？ friedberg： 我昨天去了 benioff 办公室参加财报准备。dario（amodei）也在，他和 mark 做了 cnbc 的节目。他们在 60 楼搭了个演播室，就是我们以前吃饭的地方。然后我陪 mark 走电话会。大概一年前，我跟你提过，chamath——我们用 claude code 和 cursor 之类的工具，一个周末就在内部搭了个 crm 工具，跑起来了。然后就是不断加功能、改安全、改权限、找数据仓库……要做真正可扩展的工具，需要非常多轮迭代。我们的公司内部又在竞争，对组织真正独特的是植物育种软件——那是我们公司的独特优势。所以我们开始建各种内部工具，但最终意识到：时间和精力应该花在构建公司独有的工作流上，而不是重新造别人已经造好的软件。你的最佳 roi 是什么？不是重建 slack、gmail 或 salesforce。当时 mark 和我在电话上，他说“试试 salesforce，我帮你开通”，我说不不不，他说要得要得。你们知道 mark 有多执着。他让他手下最好的销售每天给我发短信：“能用了吗？能用了吗？”直到我说行。销售来了我办公室，部署完了，我们就跑起来了，然后发现这确实好得多。所以 mark 让我在电话会上讲这个故事。我的观点一直如此：横向平台公司——crm、邮件、slack——跨行业通用，excel 不会有人去重写。真正的价值在于你垂直领域独特的软件，ai 就是用来构建定制工作流和定制软件的。所以我对“saaspocalypse”的理解是，它更多是“垂直 saas 末日”——只为某一个垂直领域设计的软件会被炸掉。 chamath： 100%。而 salesforce 这样的平台不会。我完全同意你。 jcal： sacks，聊聊 marc benioff。他是不可思议的销售天才，扛过了 saas 末日论，找到出路摆脱“saas 路杀”标签，还把 ai 集成到平台上。你认识他很长时间，能不能从高管的视角聊聊，他在市场眼里从“路杀”重新变成 saas 领跑者，这过程我们能学到什么？ sacks： “saas 末日”的叙事被过度演绎了。今天 salesforce 涨超 20%，直接把“saas 已死”的说法撕碎了。过去几个月我一直说：crm 这种系统记录不会被 vibe-coding 出来的东西替换。企业需要确定性、需要合规、需要运行多年、调试成熟的软件。想想 salesforce 20 多年来积累的所有 bug report——要做对是很难的。我玩各种 agents 的时候，你面对的东西本质是概率性的，边缘情况无穷多。但核心系统记录，你只希望它“可用”。而且它的成本足够低，你没必要冒险把一个核心系统拆掉，替换成一个 diy 自建的东西。所以整个“saas 末日”叙事被过分渲染了。 sacks： 但同时，jason，benioff 做的这些事方向是对的，这可以说是“打不过就加入”。他做了 anthropic 的交易——首先，他会在 salesforce 里提供 anthropic 的模型；更关键的是，他把 salesforce 整合进了 claude。他愿意让 claude 成为前端、成为主要的用户界面，并且 claude 现在可以访问 salesforce 里所有数据、所有工作流、所有用户可以执行的操作。也就是说，benioff 愿意冒险去中介化，来搭上 ai 浪潮——因为他知道这是客户的真实需求。你不会想进到 salesforce 或任何一个 saas 应用里写你的 agent；你想在你正在使用的 ai 程序里创建 agent，并让 agent 调用你所有的 saas 平台。所以他愿意让渡很大一部分用户关系，以换取自己“更相关”。这为什么最终对他好而不是坏？因为正如我说的，你依然需要系统记录。你需要 ai agent 去这些系统中获取权威数据，你希望围绕核心记录没有任何概率性波动，你希望 agent 可以把动作写回系统和工作流。所以它不是“拆掉重来”，而是叠加：数据库层、应用和工作流层、agents 层、ai 用户界面层。benioff 说 ai 现在就是用户界面，他承认了并拥抱了它。今早我跟他通了话，他提出一个被低估的点：salesforce 中有大量“被锁住的价值”。它无比广泛庞大，普通用户永远找不到所有功能，但 agent 能。想想那些场景——agent 会对你说：“我发现 salesforce 里有这些操作，似乎符合你让我做的事，要我执行吗？”用户一定会说“是”。 chamath： 这就把 salesforce 锁死为系统记录了。 sacks： 是的。因为 agent 就像 salesforce 的超级用户，它懂得如何完美使用 salesforce。你不需要雇一批昂贵顾问来搞懂 salesforce，agent 知道怎么做，所以它能解锁 salesforce 的全部价值和操作。用户对 agent 建立信任后，就会点“始终允许”，agent 从此就可以调用 salesforce 全部能力。这就是趋势。但这也提出了一个问题：saas 应用要如何融入 ai/agent 浪潮？你必须有一流的 api，还必须有优秀的 cli（命令行界面），因为 agents 要透过这些和 saas 工具交互。过去 saas 产品花大量精力在用户界面上，现在你真的要为 agent 设计界面，而不只是为用户设计。你需要建立最好的 agent 界面，并且放下“完全控制客户关系”的想法。要把 ai 公司创建的 agents 视为你平台的延伸，不要因为客户关系被抢走而恐慌。如果你能做到这些，并成为事实来源和系统记录，你就会获得巨大的机会。 jcal： 我必须说，他是我们行业最被低估、最不受赏识的产品和销售高管之一。在达沃斯我和他聊 slack，他说“告诉我你在做什么”，我说“你握着我的所有数据，但我拿不到数据，我的团队想换到某个开源产品，就是为了能拿到全部信息”。他，就像你说的，把我交给销售团队，现在我获得了我们 slack 的完整数据访问权限。他们做了一款叫 slack today 的产品，正在逐步推出，实现当初 openclaw 的承诺。但 sam（altman）把 openclaw 的创始人 peter 买走、peter 去了 openai 之后，openclaw 就衰落了，没有创新了。我不是说 sam 做了什么坏事，但 openclaw 确实没了锋芒。而 slack today 大概是 7/10 分，而且每几周就会更好 10%。 chamath： 所以他会做 sacks 说的那种并行策略：他会有自己的 agents，也会让你带着你的 agents 进来。他的 agents 可能稍显落后，但你在 salesforce 里也可以免费获得这些 agents。这是一条双赢的路。 sacks： 我认为 saas 产品可以推出自己的 agent、自己的 ai、copilot 等等。但现实是，agents 的大部分活动将发生在这些产品之外，它们只是要与这些产品交互、从中获取数据、把 saas 当作系统记录和事实来源，并在适当时机写回操作。创始人应该顺应这个趋势，而不是反抗它。因为你如果拼命控制，说“只有我们的 agents 才能和我们的系统交互”，人们就会转向别处。 jcal： 所以你是做多垂直 saas 还是做空？你是和我和 friedberg 一样做空吗？ sacks： 我觉得要具体分析，取决于公司的护城河、系统记录的稳固性等等。个案逐个看。 friedberg： 我不认为垂直 saas 算系统记录。它们是工作流。这就是关键——salesforce 这种横向巨头是独特的，workday、oracle 的总账模块、sap、ifs——很难想象有人能复制这些业务并把它们变成唯一事实来源。但垂直 saas 是工作流、是流程。我很怀疑哪些能存活。 sacks： 几个月前所有人还说横向 saas 活不下来。leopold 的基金一个重要头寸就是做空所有 saas，包括 salesforce。现在看是错的，或者说是被严重过度做空了。 chamath： 公平讲，我不确定他是否理解垂直和横向 saas 的区别，因为那是一个“做空规模”问题——他必须对大盘股做空才能获得想要的杠杆。所以我觉得他可能是从自己的叙事倒推，让一切自圆其说。但我怀疑那是个杠杆陷阱：他想要巨额净做多其他名字，主经纪商说“你得找些流动性好的空头”，于是他说“好，adobe 和 salesforce”。 sacks： 但公平讲，这就是几个月前的主流叙事，saaspocalypse，benioff 的股票被锤得很惨，跌了 50%，现在涨回来 20%。很多人在无差别抛售一切 saas。如果从今天的新闻里总结一条，我会说是：基于趋势的简单外推往往不成立。“ai agent 能写代码，所以所有软件价值归零”就是那个简单外推。现在我们看到的是：确实存在一些与 ai agents 高度兼容、互补的系统记录，如果创始人定位得当，它们能借助这个趋势。顺便说，“岗位消失论”也是另一个简单外推。现在流行的说法是：ai 能做知识工作，所以知识工作者都会失业——完全忽略了知识工作者可以利用工具强化自己、顺势而为。benioff 利用 agent 趋势，知识工作者也同样可以。 chamath： 你采用技术就活，不采用就死，这很直白。另外我要指出 nvidia 这份惊人报表里两件悄悄发生的事——jensen 明显在“全开源化”。他 120 亿美元收购了 hugging face，还以 60 亿美元收购了 poolside 的团队。合计约 200 亿美元，不到 nvidia 市值的 1%。感谢上帝，这个国家终于又能做并购了。他现在掌握了开源的分发层。如果你不了解 poolside，他们做了编码模型 laguna。现在 nvidia 拥有了开发者们去比较开源模型的那个入口。 sacks： 我不认为他们买的是那个。我的理解是——jason warner 今早在推上提到新的模型发布，我很困惑，因为可能有两种东西在被收购。那 100 个去 nvidia 的工程师，可能做的是 poolside 的东西——一个类似 cursor 和 claude code 但可以本地运行的版本。 jcal： 开源、开放权重。 sacks： 他们还有一个模型。我的意思是，他们有一个模型，还有一个可以指挥它做编码的 agent 框架。公告里我没看出来他们到底买了哪个，因为我没细读。 chamath： 我们可能有点抓错重点。他们据报道在与 poolside 和 hugging face 做交易，如果报道属实，那是很大的开源收购。但今天的重点是：nvidia 交出了同比翻倍的季度，几乎每天 10 亿美元营收，600 亿利润，75% 毛利率。排除一次性项目，这是历史上最高的单季利润。 jcal： 对。我想强调你开场讲的一点，也是今天股价涨 8% 的原因——不只是季报炸裂，而是他们给出了下年 70% 增长的指引，华尔街只预期 45%。这非常惊人。而且如果不是受限于供应，70% 可能还会更高。 chamath： 是的。这给市场最大的信号是：ai 繁荣还在继续。今天另一个被撕碎的叙事是“ai 资本开支是泡沫，很快会结束”。nvidia 用数字和指引说明，ai 资本开支会持续到很远的未来，它真的有后劲。而且惊人之处在于，出了这些数字之后，即便股价涨了 8%，nvidia 的估值也只有 12 倍市盈率。 jcal： 对。原因就是大家担心竞争，比如 cerebras。我前面想说的是，基于 hugging face 和 poolside 这两个收购，我认为 jensen 在全力投入开源。我猜 sam altman 捅了老虎——他在 2025 年和 nvidia 做过 1000 亿美元的大交易，之后宣布了 amd 合作，jensen 明显不高兴。他还放出话说要做自己的推理芯片——那个项目代号“jalapeño”——要和 amd 合作。后来 jensen 出来说“我们不一定要做这些对 openai 的投资”。我觉得他正在“速通”开源，明年你可能就能从 nvidia 买到完整的一整套开源技术栈。他就是要完全掌控开源。回头看很有意思：6 个月或 12 个月前，我们还在说“开源永远追不上”。现在他在做开源自动驾驶项目，还收购了 hugging face——全世界最大的开源模型索引站。我认为这才是真正的重磅故事。 chamath： 更普适的理解是：你会看到这些公司逐渐趋同，并在所有方向上互相竞争。客户和供应商之间清晰的边界正在融化。nvidia 仍然很大程度依赖超大规模云厂商的收入，本季度大概 240 亿美元，但他们的 neocloud 业务也做到了类似规模，这很惊人。当越来越多的人试图和他们竞争——你的客户说“我自己造芯片”——nvidia 完全有理由说“那我也可以自己造模型”。然后你会看到他们向技术栈上方移动、托管模型、提供 api、提供推理，直到成为一家云厂商。jason，正确的思考方式是：过去你是资本开支生意，人们问“你的 roi 是多少”，或者你是软件生意，人们问“你的 opex 和回报率”。现在都融在一起了。每家公司都会做所有事。看 5 年后的巨头：他们都有自己的云、自己的模型、自己的芯片、自己的数据中心，从下到上全做。然后就是比谁做得好。而这，我认为对整个生态其实是更好的，对我们所有人也更好。" style="--index: 2">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">02</span>
+                    <span class="timeline-meta">00:09–00:33</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>Nvidia 历史级财报、Salesforce 暴涨与“SaaS 末日论”破产</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>Nvidia 季度营收 962 亿美元、同比增 106%、净利润 600 亿美元，下年指引 70% 增长远超华尔街预期；股价涨 9%，期末市值约 5.5 万亿美元。</li>
+<li>Salesforce 因财报超预期与 Anthropic 合作大涨超 20%，Chamath 在 5 月“看多高端 SaaS”的判断得到验证。</li>
+<li>Chamath 用 AI 三阶段论说明“系统记录”型 SaaS 在最坏情况下反而最受益；Sacks 认为 SaaS 末日论是“简单外推”的错误叙事。</li>
+<li>黄仁勋收购 Hugging Face 和 Poolside，疑似全面拥抱开源，以对抗 OpenAI 与 AMD 的结盟；Chamath 判断所有科技巨头将走向“全栈自研”。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>SaaSpocalypse：SaaS 末日论，即认为 AI 会让所有订阅制软件公司归零的叙事。</li>
+<li>system of record：系统记录，指承载一家企业核心数据的权威系统，通常很难被替换。</li>
+<li>NDR（net dollar retention）：净美元留存率，衡量存量客户在现有消费基础上的收入扩张，是云计算/SaaS 黄金指标。</li>
+<li>vibe-coding：用 AI 辅助、凭感觉快速拼出代码的做法。Sacks 用它来形容“用 AI 随手糊一个东西就替换核心系统”的想法。</li>
+<li>hyperscaler：超大规模云厂商，如 AWS、Azure、Google Cloud。</li>
+<li>NeoCloud：以 CoreWeave 等为代表的、基于 Nvidia 芯片的第三方算力云服务商。</li>
+<li>Hugging Face：全球最大 AI 模型开源社区；Poolside：AI 编程公司，其模型名为 Laguna。</li>
+<li>Cerebras：AI 芯片创业公司，被市场视为 Nvidia 潜在竞争对手。</li>
+<li>Polymarket：基于加密货币的预测市场平台，JCal 引用其数据说明市场对 Nvidia 年末保持第一的预期高达 79%。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> 好了，干正事。今天的料很多。Nvidia 刚出了一份创纪录的财报，彻底炸裂——股价涨了 9%，数字巨大，指引更是巨大。单季营收 962 亿美元，同比增 106%，是翻倍多；华尔街预期只有 920 亿。他们还给出了下年 70% 增长的指引，远高于华尔街预期的 45%。大家最疯狂的数字是净利润 600 亿美元——这是有史以来任何上市公司最赚钱的核心业务季度。Google、Amazon 有过单季更高的数字，但那是偶发。股价又回到了历史高点附近。比较微妙的是，财报前 Nvidia 今年只涨了 12%，跟标普 500 指数持平，其实是跑输芯片指数的。我猜测主要逆风因素，Chamath，是大家觉得竞争要来了。</p>
+<p><strong>Chamath：</strong> 我们一会儿聊这个。Nvidia 现在是全球市值最高的公司，5.5 万亿美元。Polymarket 显示它年末保持第一的概率是 79%，成交量 630 万美元。另外 Salesforce 周四涨超 20%，也发了大超预期的季度：营收 113 亿美元，同比增 11%，符合预期但调整后 EPS 是 5.9，比预期的 3.27 高出 80%。它们大涨的另一个原因是 Salesforce 是 Anthropic 的主要投资人。全年指引上调到 460 亿美元。Chamath，5 月 15 日你说过你之前对 SaaS 领域一直很苛刻……</p>
+<p><strong>Chamath：</strong> 我当时说，Mark（Benioff）所在的高端市场，大型巨头所在的位置，相当安全。人们会发现：这比想象中难得多，不是输入提示词、叮叮当当就能全自动跑起来。我觉得这个市场被超卖了，这种整合和重新定价会向反方向逆转。那相反的交易是什么？就是谁拥有建设性的净美元留存率、谁有可预测的负流失率？也就是说谁的客户关系最好。那些公司会碾压市场。</p>
+<p><strong>JCal：</strong> 好。Chamath，谈谈你对 Nvidia 和 Salesforce 炸裂财报的看法。</p>
+<p><strong>Chamath：</strong> 内容非常多。先说 Salesforce，再说 Nvidia，因为 Nvidia 正好可以接入国家财政状况的讨论。5 月时 Salesforce 被严重超卖非常明显。我那时想说的，现在可以说得更精确了：我们正处在 AI 第二阶段末尾。第一阶段是模型——把模型理解为大脑；第二阶段是框架和 agents——等于给大脑配上眼睛、手、一本记忆笔记本和一个键盘。你把原本擅长问答的东西变得几乎像一个自主行动体。但我们马上就要进入下一阶段，至少在我合作的企业里已经能看到：光有 agents 还不够。你现在需要让这个自主行动体掌握更多信息，给它上下文，让它能更聪明地完成一项工作——也就是说，你有了大脑，给了它手臂、腿、眼睛，你还要训练它当律师、当客服、当销售。要做这一步，你需要海量的上下文信息。今天谁掌握这些？是大型系统记录公司。我以前说过，现在要加倍强调：这些公司如果做对了，他们在生态中的位置极其特殊。你现在看到的正是 Mark（Benioff）找到了与模型配合、支持多种框架、同时自研并推动下一阶段的办法。所以他的净美元留存率强、收入强、指引上调、股价暴涨——从我上次说他触底以来涨了约 43%。</p>
+<p><strong>JCal：</strong> 今天一天就涨了 20%。Friedberg，你是去了 CNBC 还是电话会？</p>
+<p><strong>Friedberg：</strong> 我昨天去了 Benioff 办公室参加财报准备。Dario（Amodei）也在，他和 Mark 做了 CNBC 的节目。他们在 60 楼搭了个演播室，就是我们以前吃饭的地方。然后我陪 Mark 走电话会。大概一年前，我跟你提过，Chamath——我们用 Claude Code 和 Cursor 之类的工具，一个周末就在内部搭了个 CRM 工具，跑起来了。然后就是不断加功能、改安全、改权限、找数据仓库……要做真正可扩展的工具，需要非常多轮迭代。我们的公司内部又在竞争，对组织真正独特的是植物育种软件——那是我们公司的独特优势。所以我们开始建各种内部工具，但最终意识到：时间和精力应该花在构建公司独有的工作流上，而不是重新造别人已经造好的软件。你的最佳 ROI 是什么？不是重建 Slack、Gmail 或 Salesforce。当时 Mark 和我在电话上，他说“试试 Salesforce，我帮你开通”，我说不不不，他说要得要得。你们知道 Mark 有多执着。他让他手下最好的销售每天给我发短信：“能用了吗？能用了吗？”直到我说行。销售来了我办公室，部署完了，我们就跑起来了，然后发现这确实好得多。所以 Mark 让我在电话会上讲这个故事。我的观点一直如此：横向平台公司——CRM、邮件、Slack——跨行业通用，Excel 不会有人去重写。真正的价值在于你垂直领域独特的软件，AI 就是用来构建定制工作流和定制软件的。所以我对“SaaSpocalypse”的理解是，它更多是“垂直 SaaS 末日”——只为某一个垂直领域设计的软件会被炸掉。</p>
+<p><strong>Chamath：</strong> 100%。而 Salesforce 这样的平台不会。我完全同意你。</p>
+<p><strong>JCal：</strong> Sacks，聊聊 Marc Benioff。他是不可思议的销售天才，扛过了 SaaS 末日论，找到出路摆脱“SaaS 路杀”标签，还把 AI 集成到平台上。你认识他很长时间，能不能从高管的视角聊聊，他在市场眼里从“路杀”重新变成 SaaS 领跑者，这过程我们能学到什么？</p>
+<p><strong>Sacks：</strong> “SaaS 末日”的叙事被过度演绎了。今天 Salesforce 涨超 20%，直接把“SaaS 已死”的说法撕碎了。过去几个月我一直说：CRM 这种系统记录不会被 vibe-coding 出来的东西替换。企业需要确定性、需要合规、需要运行多年、调试成熟的软件。想想 Salesforce 20 多年来积累的所有 bug report——要做对是很难的。我玩各种 agents 的时候，你面对的东西本质是概率性的，边缘情况无穷多。但核心系统记录，你只希望它“可用”。而且它的成本足够低，你没必要冒险把一个核心系统拆掉，替换成一个 DIY 自建的东西。所以整个“SaaS 末日”叙事被过分渲染了。</p>
+<p><strong>Sacks：</strong> 但同时，Jason，Benioff 做的这些事方向是对的，这可以说是“打不过就加入”。他做了 Anthropic 的交易——首先，他会在 Salesforce 里提供 Anthropic 的模型；更关键的是，他把 Salesforce 整合进了 Claude。他愿意让 Claude 成为前端、成为主要的用户界面，并且 Claude 现在可以访问 Salesforce 里所有数据、所有工作流、所有用户可以执行的操作。也就是说，Benioff 愿意冒险去中介化，来搭上 AI 浪潮——因为他知道这是客户的真实需求。你不会想进到 Salesforce 或任何一个 SaaS 应用里写你的 agent；你想在你正在使用的 AI 程序里创建 agent，并让 agent 调用你所有的 SaaS 平台。所以他愿意让渡很大一部分用户关系，以换取自己“更相关”。这为什么最终对他好而不是坏？因为正如我说的，你依然需要系统记录。你需要 AI agent 去这些系统中获取权威数据，你希望围绕核心记录没有任何概率性波动，你希望 agent 可以把动作写回系统和工作流。所以它不是“拆掉重来”，而是叠加：数据库层、应用和工作流层、agents 层、AI 用户界面层。Benioff 说 AI 现在就是用户界面，他承认了并拥抱了它。今早我跟他通了话，他提出一个被低估的点：Salesforce 中有大量“被锁住的价值”。它无比广泛庞大，普通用户永远找不到所有功能，但 agent 能。想想那些场景——agent 会对你说：“我发现 Salesforce 里有这些操作，似乎符合你让我做的事，要我执行吗？”用户一定会说“是”。</p>
+<p><strong>Chamath：</strong> 这就把 Salesforce 锁死为系统记录了。</p>
+<p><strong>Sacks：</strong> 是的。因为 agent 就像 Salesforce 的超级用户，它懂得如何完美使用 Salesforce。你不需要雇一批昂贵顾问来搞懂 Salesforce，agent 知道怎么做，所以它能解锁 Salesforce 的全部价值和操作。用户对 agent 建立信任后，就会点“始终允许”，agent 从此就可以调用 Salesforce 全部能力。这就是趋势。但这也提出了一个问题：SaaS 应用要如何融入 AI/agent 浪潮？你必须有一流的 API，还必须有优秀的 CLI（命令行界面），因为 agents 要透过这些和 SaaS 工具交互。过去 SaaS 产品花大量精力在用户界面上，现在你真的要为 agent 设计界面，而不只是为用户设计。你需要建立最好的 agent 界面，并且放下“完全控制客户关系”的想法。要把 AI 公司创建的 agents 视为你平台的延伸，不要因为客户关系被抢走而恐慌。如果你能做到这些，并成为事实来源和系统记录，你就会获得巨大的机会。</p>
+<p><strong>JCal：</strong> 我必须说，他是我们行业最被低估、最不受赏识的产品和销售高管之一。在达沃斯我和他聊 Slack，他说“告诉我你在做什么”，我说“你握着我的所有数据，但我拿不到数据，我的团队想换到某个开源产品，就是为了能拿到全部信息”。他，就像你说的，把我交给销售团队，现在我获得了我们 Slack 的完整数据访问权限。他们做了一款叫 Slack Today 的产品，正在逐步推出，实现当初 OpenClaw 的承诺。但 Sam（Altman）把 OpenClaw 的创始人 Peter 买走、Peter 去了 OpenAI 之后，OpenClaw 就衰落了，没有创新了。我不是说 Sam 做了什么坏事，但 OpenClaw 确实没了锋芒。而 Slack Today 大概是 7/10 分，而且每几周就会更好 10%。</p>
+<p><strong>Chamath：</strong> 所以他会做 Sacks 说的那种并行策略：他会有自己的 agents，也会让你带着你的 agents 进来。他的 agents 可能稍显落后，但你在 Salesforce 里也可以免费获得这些 agents。这是一条双赢的路。</p>
+<p><strong>Sacks：</strong> 我认为 SaaS 产品可以推出自己的 agent、自己的 AI、Copilot 等等。但现实是，agents 的大部分活动将发生在这些产品之外，它们只是要与这些产品交互、从中获取数据、把 SaaS 当作系统记录和事实来源，并在适当时机写回操作。创始人应该顺应这个趋势，而不是反抗它。因为你如果拼命控制，说“只有我们的 agents 才能和我们的系统交互”，人们就会转向别处。</p>
+<p><strong>JCal：</strong> 所以你是做多垂直 SaaS 还是做空？你是和我和 Friedberg 一样做空吗？</p>
+<p><strong>Sacks：</strong> 我觉得要具体分析，取决于公司的护城河、系统记录的稳固性等等。个案逐个看。</p>
+<p><strong>Friedberg：</strong> 我不认为垂直 SaaS 算系统记录。它们是工作流。这就是关键——Salesforce 这种横向巨头是独特的，Workday、Oracle 的总账模块、SAP、IFS——很难想象有人能复制这些业务并把它们变成唯一事实来源。但垂直 SaaS 是工作流、是流程。我很怀疑哪些能存活。</p>
+<p><strong>Sacks：</strong> 几个月前所有人还说横向 SaaS 活不下来。Leopold 的基金一个重要头寸就是做空所有 SaaS，包括 Salesforce。现在看是错的，或者说是被严重过度做空了。</p>
+<p><strong>Chamath：</strong> 公平讲，我不确定他是否理解垂直和横向 SaaS 的区别，因为那是一个“做空规模”问题——他必须对大盘股做空才能获得想要的杠杆。所以我觉得他可能是从自己的叙事倒推，让一切自圆其说。但我怀疑那是个杠杆陷阱：他想要巨额净做多其他名字，主经纪商说“你得找些流动性好的空头”，于是他说“好，Adobe 和 Salesforce”。</p>
+<p><strong>Sacks：</strong> 但公平讲，这就是几个月前的主流叙事，SaaSpocalypse，Benioff 的股票被锤得很惨，跌了 50%，现在涨回来 20%。很多人在无差别抛售一切 SaaS。如果从今天的新闻里总结一条，我会说是：基于趋势的简单外推往往不成立。“AI agent 能写代码，所以所有软件价值归零”就是那个简单外推。现在我们看到的是：确实存在一些与 AI agents 高度兼容、互补的系统记录，如果创始人定位得当，它们能借助这个趋势。顺便说，“岗位消失论”也是另一个简单外推。现在流行的说法是：AI 能做知识工作，所以知识工作者都会失业——完全忽略了知识工作者可以利用工具强化自己、顺势而为。Benioff 利用 agent 趋势，知识工作者也同样可以。</p>
+<p><strong>Chamath：</strong> 你采用技术就活，不采用就死，这很直白。另外我要指出 Nvidia 这份惊人报表里两件悄悄发生的事——Jensen 明显在“全开源化”。他 120 亿美元收购了 Hugging Face，还以 60 亿美元收购了 Poolside 的团队。合计约 200 亿美元，不到 Nvidia 市值的 1%。感谢上帝，这个国家终于又能做并购了。他现在掌握了开源的分发层。如果你不了解 Poolside，他们做了编码模型 Laguna。现在 Nvidia 拥有了开发者们去比较开源模型的那个入口。</p>
+<p><strong>Sacks：</strong> 我不认为他们买的是那个。我的理解是——Jason Warner 今早在推上提到新的模型发布，我很困惑，因为可能有两种东西在被收购。那 100 个去 Nvidia 的工程师，可能做的是 Poolside 的东西——一个类似 Cursor 和 Claude Code 但可以本地运行的版本。</p>
+<p><strong>JCal：</strong> 开源、开放权重。</p>
+<p><strong>Sacks：</strong> 他们还有一个模型。我的意思是，他们有一个模型，还有一个可以指挥它做编码的 agent 框架。公告里我没看出来他们到底买了哪个，因为我没细读。</p>
+<p><strong>Chamath：</strong> 我们可能有点抓错重点。他们据报道在与 Poolside 和 Hugging Face 做交易，如果报道属实，那是很大的开源收购。但今天的重点是：Nvidia 交出了同比翻倍的季度，几乎每天 10 亿美元营收，600 亿利润，75% 毛利率。排除一次性项目，这是历史上最高的单季利润。</p>
+<p><strong>JCal：</strong> 对。我想强调你开场讲的一点，也是今天股价涨 8% 的原因——不只是季报炸裂，而是他们给出了下年 70% 增长的指引，华尔街只预期 45%。这非常惊人。而且如果不是受限于供应，70% 可能还会更高。</p>
+<p><strong>Chamath：</strong> 是的。这给市场最大的信号是：AI 繁荣还在继续。今天另一个被撕碎的叙事是“AI 资本开支是泡沫，很快会结束”。Nvidia 用数字和指引说明，AI 资本开支会持续到很远的未来，它真的有后劲。而且惊人之处在于，出了这些数字之后，即便股价涨了 8%，Nvidia 的估值也只有 12 倍市盈率。</p>
+<p><strong>JCal：</strong> 对。原因就是大家担心竞争，比如 Cerebras。我前面想说的是，基于 Hugging Face 和 Poolside 这两个收购，我认为 Jensen 在全力投入开源。我猜 Sam Altman 捅了老虎——他在 2025 年和 Nvidia 做过 1000 亿美元的大交易，之后宣布了 AMD 合作，Jensen 明显不高兴。他还放出话说要做自己的推理芯片——那个项目代号“Jalapeño”——要和 AMD 合作。后来 Jensen 出来说“我们不一定要做这些对 OpenAI 的投资”。我觉得他正在“速通”开源，明年你可能就能从 Nvidia 买到完整的一整套开源技术栈。他就是要完全掌控开源。回头看很有意思：6 个月或 12 个月前，我们还在说“开源永远追不上”。现在他在做开源自动驾驶项目，还收购了 Hugging Face——全世界最大的开源模型索引站。我认为这才是真正的重磅故事。</p>
+<p><strong>Chamath：</strong> 更普适的理解是：你会看到这些公司逐渐趋同，并在所有方向上互相竞争。客户和供应商之间清晰的边界正在融化。Nvidia 仍然很大程度依赖超大规模云厂商的收入，本季度大概 240 亿美元，但他们的 NeoCloud 业务也做到了类似规模，这很惊人。当越来越多的人试图和他们竞争——你的客户说“我自己造芯片”——Nvidia 完全有理由说“那我也可以自己造模型”。然后你会看到他们向技术栈上方移动、托管模型、提供 API、提供推理，直到成为一家云厂商。Jason，正确的思考方式是：过去你是资本开支生意，人们问“你的 ROI 是多少”，或者你是软件生意，人们问“你的 OpEx 和回报率”。现在都融在一起了。每家公司都会做所有事。看 5 年后的巨头：他们都有自己的云、自己的模型、自己的芯片、自己的数据中心，从下到上全做。然后就是比谁做得好。而这，我认为对整个生态其实是更好的，对我们所有人也更好。</p></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="00:33–00:58 美债危机：bessent 买债、druckenmiller 炮轰与 10 万亿美元再融资 本段核心内容： 30 年期美债收益率升至约 5.2%–5.3%，创 19 年新高；财政部长 bessent 加大长债回购，试图压低长期利率，但被其导师 druckenmiller 公开反对。 friedberg 认为 bessent 的回购能力最多约 1 万亿美元，而未来 12 个月美国需要再融资 10 万亿美元债务，因此“收益率曲线压制”基本无效。 druckenmiller 的专栏表面批评 bessent，实质是把赤字责任引向国会和总统；chamath 警告 30 年期收益率到 6% 就是“死亡螺旋”起点。 sacks 以“公地悲剧”解释美国无法削减开支：535 个议员各有项目要保护，总统没有单项否决权，媒体也不配合改革叙事。 背景解释与关键术语： scott bessent：特朗普政府财政部长，前宏观对冲基金经理，曾师从 druckenmiller。 stan druckenmiller：传奇宏观对冲基金经理，索罗斯前搭档，也是 bessent 的导师。 kevin warsh：美联储主席，与 druckenmiller 关系非常密切。 yield curve suppression：收益率曲线压制，指通过买入长债人为压低长期收益率，从而降低新增发债的融资成本。 再融资（refinancing）：美国约 10 万亿美元存量国债将在未来 12 个月到期，政府必须发行新债偿还旧债，再融资成本将随收益率上升。 entitlement：法定福利项目，主要指社会保障（social security）和医疗保险（medicare）等。 doge：政府效率部（department of government efficiency），由马斯克领导的削减开支计划。 公地悲剧（tragedy of the commons）：sacks 用来说明每个议员保护自己选区的支出，导致总额失控。 详细中文整理： jcal： 继续推进。bessent 的债券新策略遭到了他导师 stan druckenmiller 的批评。上周，30 年期美国国债收益率冲到 5.3%，创下 19 年新高。friedberg，你一直在讲这个话题，先来。作为回应，bessent 在 8 月 19 日把财政部长债回购从 20 亿提高到 40 亿美元。cnbc 报道说 bessent 正在考虑加大购债力度；fox business 说他要在做空长债的交易员心里植入“对上帝的恐惧”。所以这里有很多干预主义。druckenmiller 作为 bessent 的导师，在《华尔街日报》发表专栏反对他的计划，核心意思是：bessent 试图操纵价格搞错了方向，收益率上升的真正原因是美国存在支出问题。我们已经谈过很多次了：40 万亿债务，没有 doge，没有减支，还有一场非常昂贵的战争。friedberg，你上一期说每 5 个月我们就多 1 万亿美元债务，所以一年新增 2.5 万亿，特朗普第二任期会再加 10 万亿。你怎么看现在债市和两人的交锋？ friedberg： 先从两人的关系说起。你提到 bessent 和 druckenmiller 曾经密切合作、彼此尊重。kevin warsh 也在类似位置——过去几年他每天都在办公室里和 druckenmiller 一起工作，关系极其紧密。这三个人——一个在指导市场活动，一个在管财政部，一个在管美联储——历史上少有这样的“三人执政”组合。 jcal： 凯撒。 sacks： 凯撒。 friedberg： 你管它叫三头同盟。谁是凯撒、庞培、克拉苏，留给他们自己争。我们看看疫情时期的收益率曲线——这显示了不同期限的美债收益率，也就是政府要付多少利息才有人愿意借钱给它。2020 年附近，因为利率低，疫情刺激的通胀尚未传导，1 个月到 3 年、5年期都不到 0.5%，30 年期只有 1.7%。回头看历史很容易，但当时政府确实应该把所有债务都换成 30 年期。然而债务是分散在整条曲线上的。再看看今天的收益率曲线：短端接近 4%，联邦政府借 1 个月的钱要付 3.8% 的利息；30 年期则是 5.2%。所以现在美国借款非常昂贵。原因我认为是持续的通货膨胀，根源是政府在社保等项目上的超额支出。现在的大问题是，政府支出规模如此巨大，如果大幅削减支出，反而会打击就业并引发衰退。这就是论点——但问题恰恰是它造成了通胀和赤字。今年赤字大约是 2 万亿美元。市场因此说：我们担心美国长期财政偿付能力，风险更高，所以要更高利率——30 年期 5.2%。这对政府意味着什么？联邦政府目前的平均债务成本是 3.4%，这是 40 万亿存量债务的平均利息。利率每变化 1%，政府每年就要多付相当于 gdp 1.25% 的利息。而眼下短端利率 4% 以上、30 年期 5.2%，未来 12 个月政府需要再融资 10 万亿美元债务——到期债券要偿还本金，政府必须回到市场卖新债、借钱再融资。融资成本上升，政府支出就会上升，赤字就会变大。所以我的理论和论点是：bessent 能做的任何事，都无法对长端曲线产生实质性影响。我们面对的是联邦政府根本性的财政支出问题。druck 那篇文章，不管是 ai 写的还是他写的，都不重要——论点是对的。而且这篇文章实际是在给 bessent 打掩护。他说的是：解决收益率曲线问题不是 bessent 的责任，也不是他的能力范围；这是国会的责任、总统的责任，是那些掌握预算的人的责任。他们应该站出来说“我们要削减支出”，否则我们将在未来 12 个月的再融资中螺旋式恶化。bessent 在做他作为财长的本职工作：去市场、买国债、尝试压低利率。但他的购买力最多最多只有 1 万亿美元，而未来 12 个月他还要卖 10 万亿美元国债。就算他短期用满买债权限，也只有 1 万亿买入。然后他得回头卖出 10 万亿。市场——是市场说了算。所以 druck 的备忘录是给 bessent 提供掩护，同时把责任推回给国会和总统：伙计们，我们必须解决赤字问题。 jcal： 所以这是不是两人之间的某种表演式互动、互相支援？ friedberg： 我不认为他们被允许私下沟通。我认为他们确实不交流。druck 现在不被允许和 kevin 讲话，他们三个人都不该互相联系。所以我不认为这存在协调。但 druck 是在向市场发出信号：这担子不在 bessent 肩上，他不能是 atlas，他扛不起这个地球，他解决不了这个问题。你们这些人必须行动。我认为这是给 bessent 的掩护。 jcal： 明白了。chamath，你如何看待接下来？我们已经超过 5%。这是否会崩盘？对降息会有什么影响？如果失控会多糟？ chamath： 首先从战术上回答你之前的问题：为什么他在市场上买债？这叫收益率曲线压制——你买入债券，抬高价格，隐含收益率就会下降，然后 bessent 融资时，就能以更低的收益率发行新债。如果收益率是 5.1 而不是 5.3，你按 5.1 的票息发行，成本就更低。所以收益率压制是为了缓解 friedberg 说的再融资海啸。但退一步讲，最重要的问题是：国会最终对支出负责，而国会完全没有能力控制预算赤字。这跟哪个党无关——不是说这是民主党或共和党的问题，而是整个国会的问题——两边都在持续超支。债务以 7% 的速度增长，gdp 只有 2% 到 4%。这就是灾难配方。druck 在文章里说必须削减福利支出。他很可能是对的。问题是什么时候、由谁来迫使美国面对这个问题。他在说的是：债市会开始扮演这个角色，因为那个价格是美国公信力和信任的真正反映。收益率上升，你完全可以理解为信任在下降。另外我要说，这件事发生在一个极为尴尬的时刻——我们本来应该处于支持 ai 的巨大基础设施建设周期中。往回看 100 年，工业革命时代，美国政府是整个“资产负债表”，是那个能站出来的角色。但很不幸，因为自身财政状况，美国政府现在没有能力这么做。这就是为什么——感谢上帝，我们有 nvidia、google、microsoft、meta、amazon 这些公司来承担这个负担。我把这跟另一件事联系起来——网上有很多人在谈论 nvidia 的资产负债表如何如何，我认为人们完全没有意识到，这些人正把整个美国经济背在背上。100 年前，这个角色会由美国政府来扮演，但美国政府现在没有能力做这件事，因为国会不能在支出上理顺自己。总统确实做了一些了不起的事——在那些贸易协议的尾巴上，如果你还记得，他找到了 2 万亿美元注入美国经济来支持这场建设。但现实是，这 2 万亿美元来自其他国家，它们的流程漫长而曲折。所以现状是：所有资金都需要被投资，本应由美国政府进行托底，但美国政府财政上做不到。总统做了一些短期魔术来缓解，但只是一剂创可贴。真正的解决方案，正如 friedberg 所说，是国会必须认识到，他们必须解决这个问题。因为如果你看到 30 年期收益率到 6%，那就是死亡螺旋的开始。它不会是瞬间的——所以别恐慌——但那是巨大痛苦的开端，痛苦会持续数年。目前唯一能解决问题的是把预算控制住，而预算是国会行为。无论是今年还是明年，都必须发生。 jcal： sacks，总统上任时对削减成本非常积极，但最近很少听到他说这方面。问题是否在于没有政客敢碰削减支出，因为这太有毒？特朗普已在最后任期，定义上就是跛脚鸭。他在政治上是否已经彻底“放射性”？你短暂去过 dc——是不是对任何人来说，削减支出都太有毒了？他派 elon 进去，那很火爆，但现在显然已经结束了。我们并没有大幅削减，事实上债务增长比一年前更快。你怎么看？ sacks： 部分原因是公地悲剧：435 个众议员、100 个参议员，人人都有投票权，再加上总统——没有任何一个人能控制支出。事实上，预算权起源于众议院。这么多人都参与决策，要控制支出极其困难。如果只是两三个人关起门来解决问题，可能能做到，但当每个人都想保护自己的项目时，就非常困难。而且现实是，总统没有单项否决权，宪法上他也不具备完全控制支出的权力。尽管所谓“抵抗派自由派”说他是个国王，但他不是国王，他没有那种权力。这是问题的核心。你没错，他全力支持过 doge——他是唯一一个支持这种东西的总统。然后发生了什么？elon 刚开始要削减一个部门或分部门，就爆发了巨大的恐慌，有人说他杀死数百万儿童，完全是胡说八道，但特斯拉门店被烧了。这就是问题的另一面：当媒体不在你一边、不愿准确报道时，你如何推进改革、如何约束支出？媒体没有政治激励去做“互相抬轿子”的报道，但他们在准确报道这件事上也毫无兴趣。想想当时媒体是怎么反应的。所以这是一个很难的问题——首先是没有人单独负责，这是公地悲剧；其次是媒体没有准确报道。我不知道改革从何入手。 sacks： 还有一点——如果共和党失去国会的控制权，我不认为会变得更好。因为现在民主党内的政治能量都涌向 dsa（民主社会主义者）想要的巨额新支出计划。所以如果你投票给民主党人，你以为你投票给了“改变”，那不会有用，因为他们只想要更多支出。我不知道答案是什么。 jcal： friedberg，给我们一个时间线。共和党喜欢减税，民主党喜欢扩大支出，这就是我们的处境。这种状况已经经历了三四届总统，上一位平衡预算的是克林顿。事情越来越糟。我们早晚要面对这个账单——在你看来什么时候会爆发？是否存在一个“利息占 gdp 比例”的临界点？或者另一边的人说“我要 12% 的利息，你们是坏债”，然后我们付不起 12%，被迫进入全面紧缩？如果有临界点，它何时到来？ friedberg： 问题在于它会破裂成什么。作为一个民主国家，我们有一种递归的解决方案：人民感受到痛苦，然后以选票回应。这就回到了“我们是否会破裂到社会主义”的问题。中期选举之后，也就是 2026 到 2028 年选举周期之间，通胀问题——记住，通胀的根本在于政府支出——会持续。赤字支出与住房成本、医疗成本、教育成本以及其他一切成本高度相关。政府支出越多，物价就越贵。通胀顽固，是因为我们认为新冠时期那些“临时紧急刺激”很快就常态化，变成了持续性的支出循环。如果我们回到 2019 年的支出水平，我们国家现在会有预算盈余。自 2019 年以来经济增长了这么多，如果支出保持 2019 年水平，联邦政府会盈利并偿还债务。现实却是我们把紧急支出永久化了。2008 年金融危机后我们也这么干过。所以 jcal，问题在于接下来会发生什么。如果通胀依然很高，可负担性继续下降，人们会投票给“能给他们方案”的人。而我不认为一个主张“联邦政府要花更少、砍掉很多东西”的政治信息会赢。所以我担心唯一单方向的结果，会对个人自由、对许多权利、对使自由市场运转的基础造成极大破坏——也就是某些更社会主义的原则和候选人。我认为这就是临界点。它是一个光谱，在 2026 到 2028 的过渡期里，反应可能是负面的。然后下一件大事会在 2030 到 2032 年发生——那时社会保障真的没钱支付了。我认为在那个时期，很多州也会破产，无法履行义务。当各州在 2030 到 2032 年无法支付时，社会保障纾困与重组、州政府的纾困与重组将同时到来。 jcal： 所以你会看到市政债违约，各州也会违约？要救助像加州这样的州将是灾难性的。 friedberg： 因为各州无资金准备的养老金义务非常巨大，更不用说普通债务。加州花了数百亿美元在一条哪儿也到不了的高铁上——连轨道都几乎没有。但没有任何政治意愿去叫停它，这本应是世界上最容易的削减。 jcal： 想想这有多蠢。没人说“我们该停掉”。为什么没人说？ sacks： 这就是我说媒体的问题。 jcal： 任何支持“通往无处之路的铁路”的人都应该被羞辱到无地自容。旧金山到弗雷斯诺的列车，花 1000 亿美元，比机票还贵，这太蠢了。就像电影《不要抬头》——看啊，这东西太荒谬了。把它关掉！为什么没有人哪怕提一句“关掉它”？这说明了一切。 chamath： 佛罗里达的 brightline 是私企建的，以极低的成本做到了。所以这有什么好争的？如果这是个好主意，私有企业早干了。 friedberg： 对。私有企业会看到机会并建造它。这些政府项目总体上弊大于利。政府介入学生贷款、给所有人贷款，管理费用涨了 6 倍，学费以每年 8% 的速度复合上涨了 30 年——因为政府说“我们担保任何学生贷款”。住房也一样，现在年轻人买不起房。医疗也一样——政府说“我们付钱让你待在家里照顾人，并且不检查你是否真的在照顾”，医疗费用飙升。你把这些政府项目一个个看过去，每一个都在推高成本、推高所有东西的价格。 chamath： 这个国家通胀的真正根源就是政府支出。我们之所以最终会变成社会主义国家，就是因为我们不去控制政府支出、不去照镜子说“这太蠢了，我们在干什么”。现在市场，也就是 chamath 说的那个市场，在告诉我们这太蠢了——我们不会再为这些胡说八道担保了。 jcal： 我们需要像你说的——100 个 nick shirleys、60 minutes 这类人站出来说，这种支出和欺诈是不可接受的，需要派人去把这些钱追回来。我们是在烧我们没有的钱。 chamath： 欺诈只是第一层，还有大概 18 层。第一层当然是欺诈。 jcal： 考虑到公地悲剧的结构性——没有人能单独控制，你需要巨大的公共压力才能控制它。而现在没有这种压力，主流媒体也没有自发制造这种压力的努力。所以你要怎么走出来？ sacks： 我不认为会那样发生。必须是某个急性的时刻。 chamath： 必须出现危机，然后人们才会反应。但按 friedberg 的逻辑，结果可能是社会主义——因为人们可能不会把危机的真正原因联系起来。 friedberg： 100 年前事情还没那么紧密连接时，社会主义更有可能。但美国不能单方面决定走那条路。你知道为什么吗？因为我们的所有债务都与国内和国际行为体发生了深度的连接。它不是一种决定，没有按钮可以按下。原因是你会在一天之内破产。所以我认为现实是，我们会撞上某种财政之墙，某些东西会被严重破坏。就像新冠、2008 年金融危机或 9/11，只有在那些时刻，结构性变化才可能发生。对我们生活影响最大的结构性变化，都发生在那些急性时刻——9/11、金融危机、新冠。每一次最后都变成“别浪费一场危机”的时刻，结果总是导向政府大规模的权力扩张。 jcal： 所以我会这样问：你考虑住房可负担性，它取决于按揭利率。30 年期固定按揭现在平均大约是 6.73%，比 30 年期国债高出大约 150 个基点。你觉得普通人能把这些点连起来吗？支出更高意味着国债收益率更高，意味着按揭利率更高，最终意味着你买不起同样水平的房子——因为月供更高了。人们能把这些联系起来吗？ chamath： 不能。人们想责怪某些人。每次出现危机，甚至这个播客里的我们，遇到坏事时，我们总会问同一个问题：该怪谁？这是人的第一反应。 jcal： 完全是人类大脑的本能。有问题，先找可以怪罪的人，而不是客观地想解决方案。当按揭利率上升时，你怪谁？现任总统，我的议员，等等，然后重新选举。而那个站出来说“我给你们免费住房、免费巴士、免费按揭、把房东的地给你们”的人，你会投给他。所以我担心，sacks 描述的那种对穷人来说非常成问题的场景——买不起房——会引发一种机械式的回应，就是“把王国的钥匙交给一个往火上浇油的人”。火，是政府支出；油，是更多的政府支出，用来“解决”火引发的问题。而这就是我真正担心的。 jcal： 我想我们有办法把责任推给 dario 了。 chamath： 把圈子绕回来。 jcal： 我们的唯一希望是 ai，因为只有 ai 能创造指数级增长，让我们的经济增长到足够大，能走出这些困境。如果我们用一个新的监管体系来拖慢 ai，让新模型的发布审批花好几年，那我们就完了。我把责任归给 dario、加拿大和普京——这是那些正在行动的三个人。开个玩笑，这不是 dario 的错。但说真的，来 all in summit 吧。 chamath： 但说真的，我们确实在指望 ai 当那个 deus ex machina（救场神）来“增长着走出困境”。我们需要更多像 nvidia 和 salesforce 这样的季度，一直持续十年。 jcal： 有一个很好的亮点：我们看到人们搬到这个国家的其他地方，或者搬去别的国家，以此对失控的支出投反对票。我住过纽约、洛杉矶和旧金山，直到我到了得州我才意识到那些社会主义者和“豪华轿车自由派”有多邪恶。在得州待了几年，我看到了可负担住房对一个家庭、一个个体意味着什么。在旧金山那些城市，人们非常痛苦，因为他们买不起房，付着离谱的租金。而那些已经拥有维多利亚式住宅的人拒绝建造。而在伟大的得克萨斯州——看这张图——2020 年至今房价至高点：奥斯汀的房价在下跌，不是上涨——自 2020 年 3 月以来下跌 27%。这是可以做到的。你只需要有领导力去说“住房是优先事项”，然后允许建造更多的房子。得州和佛州做到了。那些保守的、让自由市场运转的环境，让 brightline 建了高速铁路，以 125 英里时速运行——因为他们让开道路，让私人企业搞清楚怎么修高铁。某些群体想阻止进步，他们阻止建房子。而当你得到住房时，人们对自己的生活感觉很棒。得州的人们很快乐，他们 25 万美元就能拥有房子，到处都是。这些事都是可以解决的。它只需要领导力，而我们所缺少的，就是那些说“够了，我们就是让人们建更多房屋”的领导者。" style="--index: 3">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">03</span>
+                    <span class="timeline-meta">00:33–00:58</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>美债危机：Bessent 买债、Druckenmiller 炮轰与 10 万亿美元再融资</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>30 年期美债收益率升至约 5.2%–5.3%，创 19 年新高；财政部长 Bessent 加大长债回购，试图压低长期利率，但被其导师 Druckenmiller 公开反对。</li>
+<li>Friedberg 认为 Bessent 的回购能力最多约 1 万亿美元，而未来 12 个月美国需要再融资 10 万亿美元债务，因此“收益率曲线压制”基本无效。</li>
+<li>Druckenmiller 的专栏表面批评 Bessent，实质是把赤字责任引向国会和总统；Chamath 警告 30 年期收益率到 6% 就是“死亡螺旋”起点。</li>
+<li>Sacks 以“公地悲剧”解释美国无法削减开支：535 个议员各有项目要保护，总统没有单项否决权，媒体也不配合改革叙事。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>Scott Bessent：特朗普政府财政部长，前宏观对冲基金经理，曾师从 Druckenmiller。</li>
+<li>Stan Druckenmiller：传奇宏观对冲基金经理，索罗斯前搭档，也是 Bessent 的导师。</li>
+<li>Kevin Warsh：美联储主席，与 Druckenmiller 关系非常密切。</li>
+<li>yield curve suppression：收益率曲线压制，指通过买入长债人为压低长期收益率，从而降低新增发债的融资成本。</li>
+<li>再融资（refinancing）：美国约 10 万亿美元存量国债将在未来 12 个月到期，政府必须发行新债偿还旧债，再融资成本将随收益率上升。</li>
+<li>entitlement：法定福利项目，主要指社会保障（Social Security）和医疗保险（Medicare）等。</li>
+<li>Doge：政府效率部（Department of Government Efficiency），由马斯克领导的削减开支计划。</li>
+<li>公地悲剧（tragedy of the commons）：Sacks 用来说明每个议员保护自己选区的支出，导致总额失控。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> 继续推进。Bessent 的债券新策略遭到了他导师 Stan Druckenmiller 的批评。上周，30 年期美国国债收益率冲到 5.3%，创下 19 年新高。Friedberg，你一直在讲这个话题，先来。作为回应，Bessent 在 8 月 19 日把财政部长债回购从 20 亿提高到 40 亿美元。CNBC 报道说 Bessent 正在考虑加大购债力度；Fox Business 说他要在做空长债的交易员心里植入“对上帝的恐惧”。所以这里有很多干预主义。Druckenmiller 作为 Bessent 的导师，在《华尔街日报》发表专栏反对他的计划，核心意思是：Bessent 试图操纵价格搞错了方向，收益率上升的真正原因是美国存在支出问题。我们已经谈过很多次了：40 万亿债务，没有 Doge，没有减支，还有一场非常昂贵的战争。Friedberg，你上一期说每 5 个月我们就多 1 万亿美元债务，所以一年新增 2.5 万亿，特朗普第二任期会再加 10 万亿。你怎么看现在债市和两人的交锋？</p>
+<p><strong>Friedberg：</strong> 先从两人的关系说起。你提到 Bessent 和 Druckenmiller 曾经密切合作、彼此尊重。Kevin Warsh 也在类似位置——过去几年他每天都在办公室里和 Druckenmiller 一起工作，关系极其紧密。这三个人——一个在指导市场活动，一个在管财政部，一个在管美联储——历史上少有这样的“三人执政”组合。</p>
+<p><strong>JCal：</strong> 凯撒。</p>
+<p><strong>Sacks：</strong> 凯撒。</p>
+<p><strong>Friedberg：</strong> 你管它叫三头同盟。谁是凯撒、庞培、克拉苏，留给他们自己争。我们看看疫情时期的收益率曲线——这显示了不同期限的美债收益率，也就是政府要付多少利息才有人愿意借钱给它。2020 年附近，因为利率低，疫情刺激的通胀尚未传导，1 个月到 3 年、5年期都不到 0.5%，30 年期只有 1.7%。回头看历史很容易，但当时政府确实应该把所有债务都换成 30 年期。然而债务是分散在整条曲线上的。再看看今天的收益率曲线：短端接近 4%，联邦政府借 1 个月的钱要付 3.8% 的利息；30 年期则是 5.2%。所以现在美国借款非常昂贵。原因我认为是持续的通货膨胀，根源是政府在社保等项目上的超额支出。现在的大问题是，政府支出规模如此巨大，如果大幅削减支出，反而会打击就业并引发衰退。这就是论点——但问题恰恰是它造成了通胀和赤字。今年赤字大约是 2 万亿美元。市场因此说：我们担心美国长期财政偿付能力，风险更高，所以要更高利率——30 年期 5.2%。这对政府意味着什么？联邦政府目前的平均债务成本是 3.4%，这是 40 万亿存量债务的平均利息。利率每变化 1%，政府每年就要多付相当于 GDP 1.25% 的利息。而眼下短端利率 4% 以上、30 年期 5.2%，未来 12 个月政府需要再融资 10 万亿美元债务——到期债券要偿还本金，政府必须回到市场卖新债、借钱再融资。融资成本上升，政府支出就会上升，赤字就会变大。所以我的理论和论点是：Bessent 能做的任何事，都无法对长端曲线产生实质性影响。我们面对的是联邦政府根本性的财政支出问题。Druck 那篇文章，不管是 AI 写的还是他写的，都不重要——论点是对的。而且这篇文章实际是在给 Bessent 打掩护。他说的是：解决收益率曲线问题不是 Bessent 的责任，也不是他的能力范围；这是国会的责任、总统的责任，是那些掌握预算的人的责任。他们应该站出来说“我们要削减支出”，否则我们将在未来 12 个月的再融资中螺旋式恶化。Bessent 在做他作为财长的本职工作：去市场、买国债、尝试压低利率。但他的购买力最多最多只有 1 万亿美元，而未来 12 个月他还要卖 10 万亿美元国债。就算他短期用满买债权限，也只有 1 万亿买入。然后他得回头卖出 10 万亿。市场——是市场说了算。所以 Druck 的备忘录是给 Bessent 提供掩护，同时把责任推回给国会和总统：伙计们，我们必须解决赤字问题。</p>
+<p><strong>JCal：</strong> 所以这是不是两人之间的某种表演式互动、互相支援？</p>
+<p><strong>Friedberg：</strong> 我不认为他们被允许私下沟通。我认为他们确实不交流。Druck 现在不被允许和 Kevin 讲话，他们三个人都不该互相联系。所以我不认为这存在协调。但 Druck 是在向市场发出信号：这担子不在 Bessent 肩上，他不能是 Atlas，他扛不起这个地球，他解决不了这个问题。你们这些人必须行动。我认为这是给 Bessent 的掩护。</p>
+<p><strong>JCal：</strong> 明白了。Chamath，你如何看待接下来？我们已经超过 5%。这是否会崩盘？对降息会有什么影响？如果失控会多糟？</p>
+<p><strong>Chamath：</strong> 首先从战术上回答你之前的问题：为什么他在市场上买债？这叫收益率曲线压制——你买入债券，抬高价格，隐含收益率就会下降，然后 Bessent 融资时，就能以更低的收益率发行新债。如果收益率是 5.1 而不是 5.3，你按 5.1 的票息发行，成本就更低。所以收益率压制是为了缓解 Friedberg 说的再融资海啸。但退一步讲，最重要的问题是：国会最终对支出负责，而国会完全没有能力控制预算赤字。这跟哪个党无关——不是说这是民主党或共和党的问题，而是整个国会的问题——两边都在持续超支。债务以 7% 的速度增长，GDP 只有 2% 到 4%。这就是灾难配方。Druck 在文章里说必须削减福利支出。他很可能是对的。问题是什么时候、由谁来迫使美国面对这个问题。他在说的是：债市会开始扮演这个角色，因为那个价格是美国公信力和信任的真正反映。收益率上升，你完全可以理解为信任在下降。另外我要说，这件事发生在一个极为尴尬的时刻——我们本来应该处于支持 AI 的巨大基础设施建设周期中。往回看 100 年，工业革命时代，美国政府是整个“资产负债表”，是那个能站出来的角色。但很不幸，因为自身财政状况，美国政府现在没有能力这么做。这就是为什么——感谢上帝，我们有 Nvidia、Google、Microsoft、Meta、Amazon 这些公司来承担这个负担。我把这跟另一件事联系起来——网上有很多人在谈论 Nvidia 的资产负债表如何如何，我认为人们完全没有意识到，这些人正把整个美国经济背在背上。100 年前，这个角色会由美国政府来扮演，但美国政府现在没有能力做这件事，因为国会不能在支出上理顺自己。总统确实做了一些了不起的事——在那些贸易协议的尾巴上，如果你还记得，他找到了 2 万亿美元注入美国经济来支持这场建设。但现实是，这 2 万亿美元来自其他国家，它们的流程漫长而曲折。所以现状是：所有资金都需要被投资，本应由美国政府进行托底，但美国政府财政上做不到。总统做了一些短期魔术来缓解，但只是一剂创可贴。真正的解决方案，正如 Friedberg 所说，是国会必须认识到，他们必须解决这个问题。因为如果你看到 30 年期收益率到 6%，那就是死亡螺旋的开始。它不会是瞬间的——所以别恐慌——但那是巨大痛苦的开端，痛苦会持续数年。目前唯一能解决问题的是把预算控制住，而预算是国会行为。无论是今年还是明年，都必须发生。</p>
+<p><strong>JCal：</strong> Sacks，总统上任时对削减成本非常积极，但最近很少听到他说这方面。问题是否在于没有政客敢碰削减支出，因为这太有毒？特朗普已在最后任期，定义上就是跛脚鸭。他在政治上是否已经彻底“放射性”？你短暂去过 DC——是不是对任何人来说，削减支出都太有毒了？他派 Elon 进去，那很火爆，但现在显然已经结束了。我们并没有大幅削减，事实上债务增长比一年前更快。你怎么看？</p>
+<p><strong>Sacks：</strong> 部分原因是公地悲剧：435 个众议员、100 个参议员，人人都有投票权，再加上总统——没有任何一个人能控制支出。事实上，预算权起源于众议院。这么多人都参与决策，要控制支出极其困难。如果只是两三个人关起门来解决问题，可能能做到，但当每个人都想保护自己的项目时，就非常困难。而且现实是，总统没有单项否决权，宪法上他也不具备完全控制支出的权力。尽管所谓“抵抗派自由派”说他是个国王，但他不是国王，他没有那种权力。这是问题的核心。你没错，他全力支持过 Doge——他是唯一一个支持这种东西的总统。然后发生了什么？Elon 刚开始要削减一个部门或分部门，就爆发了巨大的恐慌，有人说他杀死数百万儿童，完全是胡说八道，但特斯拉门店被烧了。这就是问题的另一面：当媒体不在你一边、不愿准确报道时，你如何推进改革、如何约束支出？媒体没有政治激励去做“互相抬轿子”的报道，但他们在准确报道这件事上也毫无兴趣。想想当时媒体是怎么反应的。所以这是一个很难的问题——首先是没有人单独负责，这是公地悲剧；其次是媒体没有准确报道。我不知道改革从何入手。</p>
+<p><strong>Sacks：</strong> 还有一点——如果共和党失去国会的控制权，我不认为会变得更好。因为现在民主党内的政治能量都涌向 DSA（民主社会主义者）想要的巨额新支出计划。所以如果你投票给民主党人，你以为你投票给了“改变”，那不会有用，因为他们只想要更多支出。我不知道答案是什么。</p>
+<p><strong>JCal：</strong> Friedberg，给我们一个时间线。共和党喜欢减税，民主党喜欢扩大支出，这就是我们的处境。这种状况已经经历了三四届总统，上一位平衡预算的是克林顿。事情越来越糟。我们早晚要面对这个账单——在你看来什么时候会爆发？是否存在一个“利息占 GDP 比例”的临界点？或者另一边的人说“我要 12% 的利息，你们是坏债”，然后我们付不起 12%，被迫进入全面紧缩？如果有临界点，它何时到来？</p>
+<p><strong>Friedberg：</strong> 问题在于它会破裂成什么。作为一个民主国家，我们有一种递归的解决方案：人民感受到痛苦，然后以选票回应。这就回到了“我们是否会破裂到社会主义”的问题。中期选举之后，也就是 2026 到 2028 年选举周期之间，通胀问题——记住，通胀的根本在于政府支出——会持续。赤字支出与住房成本、医疗成本、教育成本以及其他一切成本高度相关。政府支出越多，物价就越贵。通胀顽固，是因为我们认为新冠时期那些“临时紧急刺激”很快就常态化，变成了持续性的支出循环。如果我们回到 2019 年的支出水平，我们国家现在会有预算盈余。自 2019 年以来经济增长了这么多，如果支出保持 2019 年水平，联邦政府会盈利并偿还债务。现实却是我们把紧急支出永久化了。2008 年金融危机后我们也这么干过。所以 JCal，问题在于接下来会发生什么。如果通胀依然很高，可负担性继续下降，人们会投票给“能给他们方案”的人。而我不认为一个主张“联邦政府要花更少、砍掉很多东西”的政治信息会赢。所以我担心唯一单方向的结果，会对个人自由、对许多权利、对使自由市场运转的基础造成极大破坏——也就是某些更社会主义的原则和候选人。我认为这就是临界点。它是一个光谱，在 2026 到 2028 的过渡期里，反应可能是负面的。然后下一件大事会在 2030 到 2032 年发生——那时社会保障真的没钱支付了。我认为在那个时期，很多州也会破产，无法履行义务。当各州在 2030 到 2032 年无法支付时，社会保障纾困与重组、州政府的纾困与重组将同时到来。</p>
+<p><strong>JCal：</strong> 所以你会看到市政债违约，各州也会违约？要救助像加州这样的州将是灾难性的。</p>
+<p><strong>Friedberg：</strong> 因为各州无资金准备的养老金义务非常巨大，更不用说普通债务。加州花了数百亿美元在一条哪儿也到不了的高铁上——连轨道都几乎没有。但没有任何政治意愿去叫停它，这本应是世界上最容易的削减。</p>
+<p><strong>JCal：</strong> 想想这有多蠢。没人说“我们该停掉”。为什么没人说？</p>
+<p><strong>Sacks：</strong> 这就是我说媒体的问题。</p>
+<p><strong>JCal：</strong> 任何支持“通往无处之路的铁路”的人都应该被羞辱到无地自容。旧金山到弗雷斯诺的列车，花 1000 亿美元，比机票还贵，这太蠢了。就像电影《不要抬头》——看啊，这东西太荒谬了。把它关掉！为什么没有人哪怕提一句“关掉它”？这说明了一切。</p>
+<p><strong>Chamath：</strong> 佛罗里达的 Brightline 是私企建的，以极低的成本做到了。所以这有什么好争的？如果这是个好主意，私有企业早干了。</p>
+<p><strong>Friedberg：</strong> 对。私有企业会看到机会并建造它。这些政府项目总体上弊大于利。政府介入学生贷款、给所有人贷款，管理费用涨了 6 倍，学费以每年 8% 的速度复合上涨了 30 年——因为政府说“我们担保任何学生贷款”。住房也一样，现在年轻人买不起房。医疗也一样——政府说“我们付钱让你待在家里照顾人，并且不检查你是否真的在照顾”，医疗费用飙升。你把这些政府项目一个个看过去，每一个都在推高成本、推高所有东西的价格。</p>
+<p><strong>Chamath：</strong> 这个国家通胀的真正根源就是政府支出。我们之所以最终会变成社会主义国家，就是因为我们不去控制政府支出、不去照镜子说“这太蠢了，我们在干什么”。现在市场，也就是 Chamath 说的那个市场，在告诉我们这太蠢了——我们不会再为这些胡说八道担保了。</p>
+<p><strong>JCal：</strong> 我们需要像你说的——100 个 Nick Shirleys、60 Minutes 这类人站出来说，这种支出和欺诈是不可接受的，需要派人去把这些钱追回来。我们是在烧我们没有的钱。</p>
+<p><strong>Chamath：</strong> 欺诈只是第一层，还有大概 18 层。第一层当然是欺诈。</p>
+<p><strong>JCal：</strong> 考虑到公地悲剧的结构性——没有人能单独控制，你需要巨大的公共压力才能控制它。而现在没有这种压力，主流媒体也没有自发制造这种压力的努力。所以你要怎么走出来？</p>
+<p><strong>Sacks：</strong> 我不认为会那样发生。必须是某个急性的时刻。</p>
+<p><strong>Chamath：</strong> 必须出现危机，然后人们才会反应。但按 Friedberg 的逻辑，结果可能是社会主义——因为人们可能不会把危机的真正原因联系起来。</p>
+<p><strong>Friedberg：</strong> 100 年前事情还没那么紧密连接时，社会主义更有可能。但美国不能单方面决定走那条路。你知道为什么吗？因为我们的所有债务都与国内和国际行为体发生了深度的连接。它不是一种决定，没有按钮可以按下。原因是你会在一天之内破产。所以我认为现实是，我们会撞上某种财政之墙，某些东西会被严重破坏。就像新冠、2008 年金融危机或 9/11，只有在那些时刻，结构性变化才可能发生。对我们生活影响最大的结构性变化，都发生在那些急性时刻——9/11、金融危机、新冠。每一次最后都变成“别浪费一场危机”的时刻，结果总是导向政府大规模的权力扩张。</p>
+<p><strong>JCal：</strong> 所以我会这样问：你考虑住房可负担性，它取决于按揭利率。30 年期固定按揭现在平均大约是 6.73%，比 30 年期国债高出大约 150 个基点。你觉得普通人能把这些点连起来吗？支出更高意味着国债收益率更高，意味着按揭利率更高，最终意味着你买不起同样水平的房子——因为月供更高了。人们能把这些联系起来吗？</p>
+<p><strong>Chamath：</strong> 不能。人们想责怪某些人。每次出现危机，甚至这个播客里的我们，遇到坏事时，我们总会问同一个问题：该怪谁？这是人的第一反应。</p>
+<p><strong>JCal：</strong> 完全是人类大脑的本能。有问题，先找可以怪罪的人，而不是客观地想解决方案。当按揭利率上升时，你怪谁？现任总统，我的议员，等等，然后重新选举。而那个站出来说“我给你们免费住房、免费巴士、免费按揭、把房东的地给你们”的人，你会投给他。所以我担心，Sacks 描述的那种对穷人来说非常成问题的场景——买不起房——会引发一种机械式的回应，就是“把王国的钥匙交给一个往火上浇油的人”。火，是政府支出；油，是更多的政府支出，用来“解决”火引发的问题。而这就是我真正担心的。</p>
+<p><strong>JCal：</strong> 我想我们有办法把责任推给 Dario 了。</p>
+<p><strong>Chamath：</strong> 把圈子绕回来。</p>
+<p><strong>JCal：</strong> 我们的唯一希望是 AI，因为只有 AI 能创造指数级增长，让我们的经济增长到足够大，能走出这些困境。如果我们用一个新的监管体系来拖慢 AI，让新模型的发布审批花好几年，那我们就完了。我把责任归给 Dario、加拿大和普京——这是那些正在行动的三个人。开个玩笑，这不是 Dario 的错。但说真的，来 All In Summit 吧。</p>
+<p><strong>Chamath：</strong> 但说真的，我们确实在指望 AI 当那个 Deus ex Machina（救场神）来“增长着走出困境”。我们需要更多像 Nvidia 和 Salesforce 这样的季度，一直持续十年。</p>
+<p><strong>JCal：</strong> 有一个很好的亮点：我们看到人们搬到这个国家的其他地方，或者搬去别的国家，以此对失控的支出投反对票。我住过纽约、洛杉矶和旧金山，直到我到了得州我才意识到那些社会主义者和“豪华轿车自由派”有多邪恶。在得州待了几年，我看到了可负担住房对一个家庭、一个个体意味着什么。在旧金山那些城市，人们非常痛苦，因为他们买不起房，付着离谱的租金。而那些已经拥有维多利亚式住宅的人拒绝建造。而在伟大的得克萨斯州——看这张图——2020 年至今房价至高点：奥斯汀的房价在下跌，不是上涨——自 2020 年 3 月以来下跌 27%。这是可以做到的。你只需要有领导力去说“住房是优先事项”，然后允许建造更多的房子。得州和佛州做到了。那些保守的、让自由市场运转的环境，让 Brightline 建了高速铁路，以 125 英里时速运行——因为他们让开道路，让私人企业搞清楚怎么修高铁。某些群体想阻止进步，他们阻止建房子。而当你得到住房时，人们对自己的生活感觉很棒。得州的人们很快乐，他们 25 万美元就能拥有房子，到处都是。这些事都是可以解决的。它只需要领导力，而我们所缺少的，就是那些说“够了，我们就是让人们建更多房屋”的领导者。</p></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="00:58–01:23 druckenmiller 用 ai 写专栏、cia 局长访俄、meta 限制青少年账户 本段核心内容： 四人就是否应披露“用 ai 写作”激烈交锋：jcal 认为不披露等于假唱、欺骗读者；sacks 和 chamath 认为观点是 druckenmiller 的，ai 只是写作工具。 话题转至 cia 局长 john ratcliffe 突访莫斯科，美俄双方均否认“警告俄罗斯不要入侵北约”的说法；sacks 认为该报道是“威胁通胀”。 收尾时 chamath 感谢 meta 对青少年 instagram 账户设置使用限制，希望 tiktok 和 youtube 跟进。 背景解释与关键术语： druckenmiller 被指使用 ai 撰写批评 bessent 的专栏文章，ai 检测软件给出的结论是“超过 90% 由 ai 撰写”，此事引发媒体议论。 john ratcliffe：cia 局长，此行是 2021 年 11 月以来 cia 局长首次访问莫斯科。 lip-sync：假唱，jcal 用来形容“署名者没有亲自写文章”。 threat inflation：威胁通胀，sacks 用来批评新保守派夸大俄罗斯入侵欧洲的意图。 polymarket 数据：预测俄乌停火概率仅 21%。 详细中文整理： jcal： 说个插曲——druckenmiller 用 ai 写文章被发现了，你怎么看？《华尔街日报》也发了声明说这没问题。 chamath： 我认为这是左派喜欢搞的“德行表演”，但其实是一类人在表演德行。他们喜欢评判别人，却看不到森林。他们是观众席上叫得最响的那群人。stan druckenmiller 是我们这一代最不可思议的投资者，也许排名前三四。所以闭上嘴，去读他写了什么。而你们这些人的反应是“天哪，他用了 em dash”“天哪，他用了一个 ai 式的修辞”——你完全忽略了文案本身。他在告诉你即将发生什么。 jcal： sacks，你同意吗？你认为《华尔街日报》《纽约时报》的评论文章应该由 ai 来写，而不是署名的人自己写？ sacks： 那仍然是他写的。观点是他的，他利用 ai 来帮助写出来。我不理解对这个的心疼。今天不用 ai 帮你写作的人才蠢，他肯定不蠢。这是他的观点、他的立场，与他过去几十年的言论一致。实际上那篇文章引用了过去他多次讲过的内容。它显然来自他的脑海，ai 只是用来帮助写作。 jcal： x 上的白痴们应该想的是：这对我公司有何影响？对我的投资组合、我的退休金、我父母的退休金有何影响？我该怎么对冲？但你们每个人的反应都是“天哪，他用了 ai”。 chamath： jcal，你对这有问题吧？你是那些有意见的人之一吗？ jcal： 我认为这在写作领域相当于“假唱”。作为一个作者，我觉得如果完全让系统生成你的观点，这冒犯了我。用 ai 做研究，完全没问题；用 ai 校对，完全没问题。但这感觉像是“我去看 adele 演唱会，结果是假唱”。我想听到她本人唱歌。 friedberg： 那你也别用 excel，只用那些手算的家伙好了。我是说，他说了 adele。 chamath： 我是说，你要给出你的观点，如果它不是你写的，对我来说令人失望的是它没有被披露。更高标准是：我要用自己的话来写，可以找代笔人帮我润色，可以用 ai 检查语法，可以做研究，这些都有意义。但我不喜欢这个想法：“你用 ai 写了点东西，我来读，但我不知道”。这让我觉得不真诚，感觉不诚恳。我希望人们直接说“这不是我写的，但这是我想说的”。 sacks： 有意思的观点。我可以回应吗？这个概念和“要求艺术家披露是否用了 photoshop 以及具体用了哪些滤镜”有什么区别？和 dj 用特定软件做电子音乐，而不是用吉他去做模拟录音，有什么区别？那些用手算而不是用 excel 的人——我必须披露我用了 excel、用了计算器、用了合成器、用了 photoshop 而不是用模拟方式做吗？归根结底，数字创作工具与人的智慧和手艺并行，人类的创造力被工具表达、放大，很多时候被改善。而“使用 ai”的定义和这些一样模糊：我用 ai 来改进拼写、改进语法、从零创建句子、从零创建段落，是否就是“使用 ai”？最终，如果我给 ai 一堆输入，拿它的输出来做编辑，我算不算使用了 ai？我认为这是一个根本问题：我们把 ai 当作独立存在的“智能替代系统”，但这并不符合人类实际使用它的方式。 jcal： 关键在于读者的预期。读者期望很高——人们失望不是因为“德行表演”，而是因为他们真的在乎 stan 的观点，想知道这不是“ai 垃圾观点”。所以人们感到被背叛。读者也觉得《华尔街日报》背叛了他们——wsj 应该像教授检查学生代写一样，确保投稿不是 ai 写的。社会必须决定什么时候我们需要内容来自人类、是 100% 或 60% 人类，什么时候我们信任 ai。而我想听到他的真实观点。 chamath： 我有问题。第一个：你是说 stan 没有读这份生成的东西？ jcal： 他当然读了，他还出来辩护了。所以是的，他读了。 chamath： 他读了，然后想“这就是我的看法”，然后按了发送键。这对你来说就是背叛吗？ jcal： 不披露才是背叛。如果你给我你的观点，但它是通过 ai“魔法猜词盒”解释过的，你需要告诉我。我觉得这对所有人是一种尊重。 sacks： 我要做一个常设披露：今后所有我发表的言论，包括推文，我都尽量在发布前用 ai 做事实核查、文字编辑和论证优化。这是一个常设披露：任何你看到我写并发布的内容，它很可能经过 ai 处理。 jcal： 我完全接受校对——查证、润色、语法检查，这些是 ai 的绝佳用法。 chamath： 那么你现在是在争论他对自己文章做多少编辑而已。 jcal： 他做的是两件不同的事。我知道你不理解，因为你没接受过新闻训练，但我告诉你，被校对和让别人替你写作是截然不同的。这正是人们反对的原因。 sacks： 问一下，stan druckenmiller 下篇文章还能用电脑吗？还是只能用稿纸？ chamath： 显然他可以用任何工具。 sacks： 如果别人代写他应该披露。那么 grammarly 能用吗？ chamath： 我鼓励他用 grammarly，我是 grammarly 股东。 friedberg： jcal，你觉得他的流程是怎样的？是 ai 直接端上成品，然后他说“就发这个”？ jcal： ai 检测软件说这就是事实：超过 90% 是 ai 写的。 friedberg： 如果他是那样做的，我会很惊讶。我的猜测是：他先有观点，可能用文字或口述告诉 ai，或者对助手口述，再由助手输入 ai，拿到输出，然后自己修改编辑。在我看来这才是他的过程。我不太相信这是凭空吐出来的“ai 垃圾”然后直接印刷。这只是我的猜测。 chamath： 这是“jake tapper 想象出的画面”：他坐在纽约办公室，打开浏览器，进入 chatgpt，输入“收益率上升，不好”，然后整篇打印出来寄给评论版编辑。 jcal： 如果你不能欣赏“假唱”这个类比…… sacks： 但假唱类比的问题是，他在批评刚刚发生的事，是一个具体的政策——bessent 的回购政策，对财政部长的具体行为。假唱是把一首歌表演了一千遍，而这是新东西。 chamath： 这更加说明他应该自己写。他一定是口述了自己的观点。 sacks： 如果 ai 检测工具说 90% 是 ai 写的，可能因为他的观点确实是由 ai 转述的。 jcal： 我尊重你的不同意见。但我仍然要问：你读了那篇文章吗？你知道它是 ai 写的吗？ friedberg： 不，我是先在时间线上看到 ai 垃圾检测结果的。不，我不知道。 chamath： 我先看到检测结果，但我读文章后，觉得它完全符合 druckenmiller 过去在播客和文字中对债务问题的所有表达。所以如果他在抄袭，他是在抄袭自己。这不是假唱，这是真正的观点。 jcal： 如果你不能欣赏“假唱”的类比…… chamath： 我们假设，druck 明年还会用 ai，因为他已经这么说了，你会忽略他的观点吗？ jcal： 不，但我不会像以前那样敬重他。我会怀疑哪些是他本人观点、哪些是 ai 构造的。 chamath： 你会因为世界上最好的宏观交易员用了工具来写文章，就从明天起减少对他的信任？ jcal： 我会怀疑这是否是他真实、完整的观点。我觉得他是在“应付”，而我讨厌应付。就 800 字，自己写。可以和编辑合作，可以用 ai 做研究。我们可以保留分歧。 chamath： 还有一个插曲：cia 局长 john ratcliffe 突访莫斯科，周二当天往返。这是自 2021 年 11 月以来 cia 局长首次访问。那次是 bill burns 去警告普京不要入侵乌克兰。三个月后他入侵了。福克斯商业频道报道 ratcliffe 这次去是警告俄罗斯不要攻击北约国家。美国新情报显示 putin 可能计划在未来几年内测试北约的决心，从网络攻击到小规模入侵都有可能。polymarket 给的俄乌年内停火概率只有 21%。friedberg，你在群里有很多观点，说说你怎么看这件事？ friedberg： 有很多疯狂的猜测。wsj 等媒体报道说，传递的消息是“不要入侵北约，不要对乌克兰使用核武器”。这引发了很多猜测。但正如 sacks 在群聊里说的，这只是猜测。没有证据，普京也没有发表任何声明。而且总统打电话到某个节目，说这个报道不实、接触是例行的；俄方通报也说了大致相同的话。所以我们根本不知道会面内容。我倾向于全是猜测。 jcal： 我知道它是什么。druck 那篇 ai 加持的《华尔街日报》备忘录——他飞过去警告普京不要用 ai 写他的下一篇文章。 sacks： 无论如何，jcal，我认为有可能是训练有素的记者这次搞错了，没有真正了解会面内容就在疯狂猜测和夸张。首先，美俄双方都否认了这些戏剧性的猜测，也就是所谓 ratcliffe 去警告俄国人不要入侵欧洲。我实际上相信这些否认——因为俄罗斯入侵北约国家根本说不通。这是多年来新保守派关于“俄罗斯帝国主义野心要征服整个欧洲”的说法，根本没有事实依据。坦率地说，这场战争对俄罗斯进展并不差——确实比所有人预期的长，俄罗斯也付出了重大伤亡。但如果你看大多数目前报道战争的来源，他们说的是俄军正在缓慢而稳定地推进，乌克兰才是受创最重的。首先，俄罗斯有空中优势，乌克兰基本没有防空了。基辅遭到例行轰炸。俄军几乎可以随意摧毁任何他们想摧毁的东西，乌克兰基础设施在过去一段时间里付出沉重代价。而且这正赶上一个大冷冬到来的前夕，乌克兰电力正被摧毁。此外，敖德萨和乌克兰黑海港口被炸，基本上停止了运作——他们的经济正付出巨大代价，无法出口粮食，经济基本被摧毁，而且正在耗尽资金。泽连斯基四处奔走说要再要 350 亿美元，否则就没钱了。美国不给这笔钱，他试图向欧洲要。他们的人员损失虽然数字未知，但也非常巨大。现在还有报道说他们可能征女兵，因为兵源严重短缺。记住，俄罗斯人口是乌克兰的 4 到 5 倍，能持续支撑更大的军队。所以乌克兰形势非常不好。坦白说，泽连斯基当初应该听从特朗普总统的劝告——特朗普告诉他“你在这场战争中手上没有好牌，你应该达成协议”。泽连斯基不想谈，他当时不想，现在也不想。他应该做交易。我不认为乌克兰会在这件事上获胜。 chamath： 谢谢 meta 解决了我最大的问题——给 instagram 设置使用限制。 jcal： 这个故事我们都还没谈到。这是个大事件。 chamath： 我厌倦了和孩子们玩打地鼠游戏，我管不住，他们搞小号、秘密账号，各种办法。所以，是的，谢谢你 meta。你本应该更早这么做，但我很高兴你做了。 jcal： 我或多或少愿意给他们一点 credit——他们是被又拖又拽又踢地做成了这件正确的事，但现在正确的事毕竟已经可以做了。 chamath： 我希望 tiktok 和 youtube 也做同样的事，这会让父母的生活简单得多。它让我们真正能履行养育职责，而不是整天监管设备使用。给有孩子的家长做父母已经够辛苦了。 jcal： 这对年轻女性尤其有害。我们把底线设在 16 岁，但到了 17 岁我们输了这场仗。chamath，你对孩子的社交媒体年限设在哪里？ chamath： 我的孩子 16 岁之前不允许用。但这不是重点——我们已经聊过，我一直很坚持。这件事早该发生。我很高兴它发生了。我赞赏 meta。我希望 tiktok 和 youtube 也这样做。这些限制在澳大利亚、加拿大和英国已经陆续出台了，可能也会在其他地方推行。对孩子的生理和心理真的非常有帮助。那些家长控制应用程序不是很好，它们做得还行但不是很好，所以我们做父母的总是处于被动，这很令人沮丧。我宁愿和孩子们把时间花在其他事上，而不是对着他们吼“把手机放下”。" style="--index: 4">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">04</span>
+                    <span class="timeline-meta">00:58–01:23</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>Druckenmiller 用 AI 写专栏、CIA 局长访俄、Meta 限制青少年账户</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>四人就是否应披露“用 AI 写作”激烈交锋：JCal 认为不披露等于假唱、欺骗读者；Sacks 和 Chamath 认为观点是 Druckenmiller 的，AI 只是写作工具。</li>
+<li>话题转至 CIA 局长 John Ratcliffe 突访莫斯科，美俄双方均否认“警告俄罗斯不要入侵北约”的说法；Sacks 认为该报道是“威胁通胀”。</li>
+<li>收尾时 Chamath 感谢 Meta 对青少年 Instagram 账户设置使用限制，希望 TikTok 和 YouTube 跟进。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>Druckenmiller 被指使用 AI 撰写批评 Bessent 的专栏文章，AI 检测软件给出的结论是“超过 90% 由 AI 撰写”，此事引发媒体议论。</li>
+<li>John Ratcliffe：CIA 局长，此行是 2021 年 11 月以来 CIA 局长首次访问莫斯科。</li>
+<li>lip-sync：假唱，JCal 用来形容“署名者没有亲自写文章”。</li>
+<li>threat inflation：威胁通胀，Sacks 用来批评新保守派夸大俄罗斯入侵欧洲的意图。</li>
+<li>Polymarket 数据：预测俄乌停火概率仅 21%。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> 说个插曲——Druckenmiller 用 AI 写文章被发现了，你怎么看？《华尔街日报》也发了声明说这没问题。</p>
+<p><strong>Chamath：</strong> 我认为这是左派喜欢搞的“德行表演”，但其实是一类人在表演德行。他们喜欢评判别人，却看不到森林。他们是观众席上叫得最响的那群人。Stan Druckenmiller 是我们这一代最不可思议的投资者，也许排名前三四。所以闭上嘴，去读他写了什么。而你们这些人的反应是“天哪，他用了 em dash”“天哪，他用了一个 AI 式的修辞”——你完全忽略了文案本身。他在告诉你即将发生什么。</p>
+<p><strong>JCal：</strong> Sacks，你同意吗？你认为《华尔街日报》《纽约时报》的评论文章应该由 AI 来写，而不是署名的人自己写？</p>
+<p><strong>Sacks：</strong> 那仍然是他写的。观点是他的，他利用 AI 来帮助写出来。我不理解对这个的心疼。今天不用 AI 帮你写作的人才蠢，他肯定不蠢。这是他的观点、他的立场，与他过去几十年的言论一致。实际上那篇文章引用了过去他多次讲过的内容。它显然来自他的脑海，AI 只是用来帮助写作。</p>
+<p><strong>JCal：</strong> X 上的白痴们应该想的是：这对我公司有何影响？对我的投资组合、我的退休金、我父母的退休金有何影响？我该怎么对冲？但你们每个人的反应都是“天哪，他用了 AI”。</p>
+<p><strong>Chamath：</strong> JCal，你对这有问题吧？你是那些有意见的人之一吗？</p>
+<p><strong>JCal：</strong> 我认为这在写作领域相当于“假唱”。作为一个作者，我觉得如果完全让系统生成你的观点，这冒犯了我。用 AI 做研究，完全没问题；用 AI 校对，完全没问题。但这感觉像是“我去看 Adele 演唱会，结果是假唱”。我想听到她本人唱歌。</p>
+<p><strong>Friedberg：</strong> 那你也别用 Excel，只用那些手算的家伙好了。我是说，他说了 Adele。</p>
+<p><strong>Chamath：</strong> 我是说，你要给出你的观点，如果它不是你写的，对我来说令人失望的是它没有被披露。更高标准是：我要用自己的话来写，可以找代笔人帮我润色，可以用 AI 检查语法，可以做研究，这些都有意义。但我不喜欢这个想法：“你用 AI 写了点东西，我来读，但我不知道”。这让我觉得不真诚，感觉不诚恳。我希望人们直接说“这不是我写的，但这是我想说的”。</p>
+<p><strong>Sacks：</strong> 有意思的观点。我可以回应吗？这个概念和“要求艺术家披露是否用了 Photoshop 以及具体用了哪些滤镜”有什么区别？和 DJ 用特定软件做电子音乐，而不是用吉他去做模拟录音，有什么区别？那些用手算而不是用 Excel 的人——我必须披露我用了 Excel、用了计算器、用了合成器、用了 Photoshop 而不是用模拟方式做吗？归根结底，数字创作工具与人的智慧和手艺并行，人类的创造力被工具表达、放大，很多时候被改善。而“使用 AI”的定义和这些一样模糊：我用 AI 来改进拼写、改进语法、从零创建句子、从零创建段落，是否就是“使用 AI”？最终，如果我给 AI 一堆输入，拿它的输出来做编辑，我算不算使用了 AI？我认为这是一个根本问题：我们把 AI 当作独立存在的“智能替代系统”，但这并不符合人类实际使用它的方式。</p>
+<p><strong>JCal：</strong> 关键在于读者的预期。读者期望很高——人们失望不是因为“德行表演”，而是因为他们真的在乎 Stan 的观点，想知道这不是“AI 垃圾观点”。所以人们感到被背叛。读者也觉得《华尔街日报》背叛了他们——WSJ 应该像教授检查学生代写一样，确保投稿不是 AI 写的。社会必须决定什么时候我们需要内容来自人类、是 100% 或 60% 人类，什么时候我们信任 AI。而我想听到他的真实观点。</p>
+<p><strong>Chamath：</strong> 我有问题。第一个：你是说 Stan 没有读这份生成的东西？</p>
+<p><strong>JCal：</strong> 他当然读了，他还出来辩护了。所以是的，他读了。</p>
+<p><strong>Chamath：</strong> 他读了，然后想“这就是我的看法”，然后按了发送键。这对你来说就是背叛吗？</p>
+<p><strong>JCal：</strong> 不披露才是背叛。如果你给我你的观点，但它是通过 AI“魔法猜词盒”解释过的，你需要告诉我。我觉得这对所有人是一种尊重。</p>
+<p><strong>Sacks：</strong> 我要做一个常设披露：今后所有我发表的言论，包括推文，我都尽量在发布前用 AI 做事实核查、文字编辑和论证优化。这是一个常设披露：任何你看到我写并发布的内容，它很可能经过 AI 处理。</p>
+<p><strong>JCal：</strong> 我完全接受校对——查证、润色、语法检查，这些是 AI 的绝佳用法。</p>
+<p><strong>Chamath：</strong> 那么你现在是在争论他对自己文章做多少编辑而已。</p>
+<p><strong>JCal：</strong> 他做的是两件不同的事。我知道你不理解，因为你没接受过新闻训练，但我告诉你，被校对和让别人替你写作是截然不同的。这正是人们反对的原因。</p>
+<p><strong>Sacks：</strong> 问一下，Stan Druckenmiller 下篇文章还能用电脑吗？还是只能用稿纸？</p>
+<p><strong>Chamath：</strong> 显然他可以用任何工具。</p>
+<p><strong>Sacks：</strong> 如果别人代写他应该披露。那么 Grammarly 能用吗？</p>
+<p><strong>Chamath：</strong> 我鼓励他用 Grammarly，我是 Grammarly 股东。</p>
+<p><strong>Friedberg：</strong> JCal，你觉得他的流程是怎样的？是 AI 直接端上成品，然后他说“就发这个”？</p>
+<p><strong>JCal：</strong> AI 检测软件说这就是事实：超过 90% 是 AI 写的。</p>
+<p><strong>Friedberg：</strong> 如果他是那样做的，我会很惊讶。我的猜测是：他先有观点，可能用文字或口述告诉 AI，或者对助手口述，再由助手输入 AI，拿到输出，然后自己修改编辑。在我看来这才是他的过程。我不太相信这是凭空吐出来的“AI 垃圾”然后直接印刷。这只是我的猜测。</p>
+<p><strong>Chamath：</strong> 这是“Jake Tapper 想象出的画面”：他坐在纽约办公室，打开浏览器，进入 ChatGPT，输入“收益率上升，不好”，然后整篇打印出来寄给评论版编辑。</p>
+<p><strong>JCal：</strong> 如果你不能欣赏“假唱”这个类比……</p>
+<p><strong>Sacks：</strong> 但假唱类比的问题是，他在批评刚刚发生的事，是一个具体的政策——Bessent 的回购政策，对财政部长的具体行为。假唱是把一首歌表演了一千遍，而这是新东西。</p>
+<p><strong>Chamath：</strong> 这更加说明他应该自己写。他一定是口述了自己的观点。</p>
+<p><strong>Sacks：</strong> 如果 AI 检测工具说 90% 是 AI 写的，可能因为他的观点确实是由 AI 转述的。</p>
+<p><strong>JCal：</strong> 我尊重你的不同意见。但我仍然要问：你读了那篇文章吗？你知道它是 AI 写的吗？</p>
+<p><strong>Friedberg：</strong> 不，我是先在时间线上看到 AI 垃圾检测结果的。不，我不知道。</p>
+<p><strong>Chamath：</strong> 我先看到检测结果，但我读文章后，觉得它完全符合 Druckenmiller 过去在播客和文字中对债务问题的所有表达。所以如果他在抄袭，他是在抄袭自己。这不是假唱，这是真正的观点。</p>
+<p><strong>JCal：</strong> 如果你不能欣赏“假唱”的类比……</p>
+<p><strong>Chamath：</strong> 我们假设，Druck 明年还会用 AI，因为他已经这么说了，你会忽略他的观点吗？</p>
+<p><strong>JCal：</strong> 不，但我不会像以前那样敬重他。我会怀疑哪些是他本人观点、哪些是 AI 构造的。</p>
+<p><strong>Chamath：</strong> 你会因为世界上最好的宏观交易员用了工具来写文章，就从明天起减少对他的信任？</p>
+<p><strong>JCal：</strong> 我会怀疑这是否是他真实、完整的观点。我觉得他是在“应付”，而我讨厌应付。就 800 字，自己写。可以和编辑合作，可以用 AI 做研究。我们可以保留分歧。</p>
+<p><strong>Chamath：</strong> 还有一个插曲：CIA 局长 John Ratcliffe 突访莫斯科，周二当天往返。这是自 2021 年 11 月以来 CIA 局长首次访问。那次是 Bill Burns 去警告普京不要入侵乌克兰。三个月后他入侵了。福克斯商业频道报道 Ratcliffe 这次去是警告俄罗斯不要攻击北约国家。美国新情报显示 Putin 可能计划在未来几年内测试北约的决心，从网络攻击到小规模入侵都有可能。Polymarket 给的俄乌年内停火概率只有 21%。Friedberg，你在群里有很多观点，说说你怎么看这件事？</p>
+<p><strong>Friedberg：</strong> 有很多疯狂的猜测。WSJ 等媒体报道说，传递的消息是“不要入侵北约，不要对乌克兰使用核武器”。这引发了很多猜测。但正如 Sacks 在群聊里说的，这只是猜测。没有证据，普京也没有发表任何声明。而且总统打电话到某个节目，说这个报道不实、接触是例行的；俄方通报也说了大致相同的话。所以我们根本不知道会面内容。我倾向于全是猜测。</p>
+<p><strong>JCal：</strong> 我知道它是什么。Druck 那篇 AI 加持的《华尔街日报》备忘录——他飞过去警告普京不要用 AI 写他的下一篇文章。</p>
+<p><strong>Sacks：</strong> 无论如何，JCal，我认为有可能是训练有素的记者这次搞错了，没有真正了解会面内容就在疯狂猜测和夸张。首先，美俄双方都否认了这些戏剧性的猜测，也就是所谓 Ratcliffe 去警告俄国人不要入侵欧洲。我实际上相信这些否认——因为俄罗斯入侵北约国家根本说不通。这是多年来新保守派关于“俄罗斯帝国主义野心要征服整个欧洲”的说法，根本没有事实依据。坦率地说，这场战争对俄罗斯进展并不差——确实比所有人预期的长，俄罗斯也付出了重大伤亡。但如果你看大多数目前报道战争的来源，他们说的是俄军正在缓慢而稳定地推进，乌克兰才是受创最重的。首先，俄罗斯有空中优势，乌克兰基本没有防空了。基辅遭到例行轰炸。俄军几乎可以随意摧毁任何他们想摧毁的东西，乌克兰基础设施在过去一段时间里付出沉重代价。而且这正赶上一个大冷冬到来的前夕，乌克兰电力正被摧毁。此外，敖德萨和乌克兰黑海港口被炸，基本上停止了运作——他们的经济正付出巨大代价，无法出口粮食，经济基本被摧毁，而且正在耗尽资金。泽连斯基四处奔走说要再要 350 亿美元，否则就没钱了。美国不给这笔钱，他试图向欧洲要。他们的人员损失虽然数字未知，但也非常巨大。现在还有报道说他们可能征女兵，因为兵源严重短缺。记住，俄罗斯人口是乌克兰的 4 到 5 倍，能持续支撑更大的军队。所以乌克兰形势非常不好。坦白说，泽连斯基当初应该听从特朗普总统的劝告——特朗普告诉他“你在这场战争中手上没有好牌，你应该达成协议”。泽连斯基不想谈，他当时不想，现在也不想。他应该做交易。我不认为乌克兰会在这件事上获胜。</p>
+<p><strong>Chamath：</strong> 谢谢 Meta 解决了我最大的问题——给 Instagram 设置使用限制。</p>
+<p><strong>JCal：</strong> 这个故事我们都还没谈到。这是个大事件。</p>
+<p><strong>Chamath：</strong> 我厌倦了和孩子们玩打地鼠游戏，我管不住，他们搞小号、秘密账号，各种办法。所以，是的，谢谢你 Meta。你本应该更早这么做，但我很高兴你做了。</p>
+<p><strong>JCal：</strong> 我或多或少愿意给他们一点 credit——他们是被又拖又拽又踢地做成了这件正确的事，但现在正确的事毕竟已经可以做了。</p>
+<p><strong>Chamath：</strong> 我希望 TikTok 和 YouTube 也做同样的事，这会让父母的生活简单得多。它让我们真正能履行养育职责，而不是整天监管设备使用。给有孩子的家长做父母已经够辛苦了。</p>
+<p><strong>JCal：</strong> 这对年轻女性尤其有害。我们把底线设在 16 岁，但到了 17 岁我们输了这场仗。Chamath，你对孩子的社交媒体年限设在哪里？</p>
+<p><strong>Chamath：</strong> 我的孩子 16 岁之前不允许用。但这不是重点——我们已经聊过，我一直很坚持。这件事早该发生。我很高兴它发生了。我赞赏 Meta。我希望 TikTok 和 YouTube 也这样做。这些限制在澳大利亚、加拿大和英国已经陆续出台了，可能也会在其他地方推行。对孩子的生理和心理真的非常有帮助。那些家长控制应用程序不是很好，它们做得还行但不是很好，所以我们做父母的总是处于被动，这很令人沮丧。我宁愿和孩子们把时间花在其他事上，而不是对着他们吼“把手机放下”。</p></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="01:23–01:36 癌症疫苗：moderna 的新抗原 mrna 免疫疗法 本段核心内容： friedberg 介绍新抗原免疫疗法的原理：取患者肿瘤 dna 测序，找出癌细胞特有的突变蛋白，通过 mrna 或直接注射蛋白，训练免疫系统攻击癌症。 他批评 moderna 市值从 200 亿涨到 600 亿美元，认为公共资金资助数十年的技术被专利化、并被标价 50 万美元治疗费，本质是“监管俘获”。 他提到 car-t 疗法和蒙大拿诊所等低成本替代方案，强调癌症早筛对终极疗效的关键作用。 背景解释与关键术语： neoantigen（新抗原）：癌细胞因基因突变产生的独特蛋白片段。正常人细胞没有这些蛋白，因此免疫系统可以把它们当作“外来者”来攻击。 mrna 疗法：把编码特定蛋白的指令（mrna）注入人体，让身体自己制造该蛋白，从而激发免疫反应。moderna 将其用于个性化癌症治疗。 ex vivo / in vivo：体外 / 体内。体外（ex vivo）指在身体外制造蛋白再注射，体内（in vivo）指让身体自己产生。 car-t：嵌合抗原受体 t 细胞疗法，抽取患者 t 细胞进行基因改造，再回输体内去攻击癌细胞。对某些血癌疗效显著，价格约 100 万美元。 right to try（尝试权）：美国联邦法律允许绝症患者使用尚未获得完全 fda 批准的实验性治疗。 grail 的 galleri 血液检测：多癌种早筛血检，寻找血液中癌症来源的 dna 片段。 nih：美国国立卫生研究院，是许多基础科研的公共资助来源。 详细中文整理： jcal： 我们聊聊 summit 吧，还有——friedberg，这个癌症疫苗是怎么回事？过去两周相关股票涨了三倍，我们上周没来得及聊。我很想听你说说，观众也一样。 friedberg： moderna 股票，对吧？市值从大约 200 亿涨到 600 亿，因为一个被称为“癌症疫苗”的东西有了积极结果。这个癌症治疗系统的原理值得讲清楚：它源于 90 年代提出的“新抗原”概念。新抗原是一种小肽或蛋白，能模拟你体内某种癌症特有的蛋白片段。免疫系统把它当入侵者，于是开始产生能摧毁该蛋白的细胞。你把蛋白注射进体内，免疫系统被激活，会去体内各处寻找并摧毁这个蛋白。目标是：识别某种癌症特有的蛋白，制造它，注射进去，让免疫系统去摧毁你体内的癌细胞。 friedberg： 下一步是 dna 测序革命。你取出一部分癌症样本，放进测序仪，看到那段让癌细胞产生特殊蛋白的基因序列。为什么黑色素瘤是这种免疫治疗最大的目标之一？因为紫外线照射会让黑色素瘤产生高度独特的 dna 突变，你的黑色素瘤相对于你身体其他部分会有一个极其独特的突变。于是你从肿瘤中提取 dna，扩增数百万倍，测序，数据回来告诉你“这个癌症的独特标志是这段 dna 序列”。这段 dna 会让癌细胞产生一个独特的蛋白，相当于癌症的“钥匙”或“身份证”。你再用这段 dna 制造蛋白，注射进体内，免疫系统马上疯狂攻击这个蛋白——因为有抗原，必须清除它。被激活的免疫细胞最终会去摧毁癌症。 friedberg： 这些年有很多基于新抗原的疗法在多种癌症上进行了数百次试验，寻找正确的递送方式：体外制造蛋白直接注射，还是像 moderna 这样制造 mrna 注射？mrna 进入人体后，促使你自己的细胞制造这个蛋白并释放到血液中，免疫细胞被激活。这就不是体外制作，而是体内制作：一针进去，你身体开始制造这个蛋白，就像我们制造新冠疫苗那样，细胞生产特定蛋白质片段，激活免疫系统去杀死癌症。其他正在解决的问题包括：用什么佐剂、什么类型的癌症适用、以及和其他药物联用的组合疗法。这本质上更像“流程/工艺”而不是传统意义的“药”——因为每个患者都需要定制：切下肿瘤样本，测序，找出差异，制造对应蛋白。 jcal： 那怎么获得针对“我”的个性化？ friedberg： 取你肿瘤或癌细胞的样本。由于成本很低，真正的前期工作都很便宜。理论上制造 mrna 或蛋白质也应该很便宜，但因为涉及人体试验和安全，要让免疫系统不过度反应、没有严重副作用，还需要大量优化。最让我沮丧的是：每个人都说这是独特的突破，但它不是。因为很多人去蒙大拿州这种地方，让别人根据他们的癌症序列打印肽段，自制新抗原，注射进体内，然后癌症就被治愈了。今天你花 5 万美元就能让人这样做。有很多诊所提供这种服务，而且它不是一个特殊的 fda 批准药物。它就是一个流程，正如你所说：取我癌症的 dna 序列，制造蛋白质，放回体内，免疫系统去消灭我的癌症。好主意。为什么 moderna 说要为这个收 50 万美元？这让我很沮丧——这项技术经过几十年的迭代、研究和开发，大部分由 nih 和其他公共研究资金资助，才有了新抗原免疫治疗概念，理论上可以根除或消灭多种癌症。它不应该现在被专利化、被 fda 批准，向病人收取 50 万美元。让我不喜欢的是：一家私营制药公司，市值从 200 亿涨到 600 亿，因为他们走完了一个监管流程，创造了一种我认为属于“监管俘获”的东西，并以安全、试验和专利权为理由，把一个根本性由公共资金资助的技术占为己有。基础技术应该更开源、更普及，每家医院都应该学会使用这个流程来治疗病人。肿瘤学界应该把它普及开来。 jcal： 两个问题，我们可以用它结束这个话题：第一，你认为他们能成功地在美国捍卫这项专利吗？在全球呢？人们会医疗旅游——如果这里 50 万美元，韩国、日本能不能 5 万美元搞定？第二，mrna 和新冠疫苗之前人们担心的那些事怎么样了？我们没有再更新过这个话题。但显然，那是 mrna 第一次大规模部署，对吗？ friedberg： 是的。moderna 多年来一直在研发 mrna 癌症平台，但从未成功商业化。然后新冠来了，他们迅速转向并推出了新冠疫苗。moderna 在制造 mrna 以及确保它不整合进人类基因组的技术上拥有一系列专利。通常人体细胞会复制 rna，而 moderna 的技术通过设计使这种 mrna 不能被复制，因此它不会在体内增殖。moderna 开发了大量技术使其 mrna 工具可获得专利并且更安全，所以在其特定的 mrna 工具包上，他们的专利覆盖确实很强。但正如我前面所述：如果我取得你癌细胞的序列，发现它独特的 dna 序列，我可以把这段 dna 放入大肠杆菌（e. coli）中，在生物反应器里，细菌会开始生产对应蛋白质。因为 dna→rna→蛋白质的路径是通用的，大肠杆菌中会有数亿个拷贝在生产目的蛋白，然后你从生物反应器中提纯蛋白质并注射进人体，激活免疫系统。所以你并不一定需要 mrna——mrna 是一种非常高效的方式，便宜、一针完成。但整个端到端系统的真实成本很低。所以这引出一个根本问题：我们是否应该把癌症治疗权垄断给一家公司，只因为它走完了 fda 流程并就某些技术申请了专利？而整个理论、逻辑和治疗流程已经被充分描述和理解了。我们会在未来几年看到这种基于免疫系统的癌症治疗开始扩散——在海外会很便宜，而且非常有效。你和我有一个共同的朋友，正在蒙大拿以极低成本搭建这类业务——在那个州有“尝试权”（right to try），他们可以合法制造这种东西。所以我认为我们会看到更多这样的例子。对某些癌症，它有效、安全、高效。所以我为这个消息感到兴奋。 jcal： 所有这一切需要的其实是早期检测。人们一直在用 galleri 血液测试之类的做多癌种早期筛查。所以及早发现、定期检测是其中的关键部分。 friedberg： 你指的是 grail 的 galleri 血检。对，早筛是核心。另外还要记住：现在还有很多新的治疗模式。car-t 是其中之一：把你体内的 t 细胞取出，用 crispr 或其他系统重新编程，让它们去寻找你体内某一个特定蛋白——就是我刚才说的那种癌细胞特有蛋白，把 t 细胞放回体内去摧毁它。car-t 费用约 100 万美元，对血癌尤其有效——因为血癌细胞不形成实体肿瘤，而是单个漂浮在血液中，t 细胞进入血液后很容易找到它们并摧毁。因此对于多发性骨髓瘤等血癌，car-t 的疗效现在是惊人的。这是一个新治疗模式，新抗原/mrna 疗法也是一个。所有这些新技术用来对抗癌症——合在一起看，我们应该非常兴奋和乐观。 jcal： 感谢分享。希望这些技术能顺利应用，我还很喜欢“尝试权”这个概念，我们以后应该聊一期。下次见。" style="--index: 5">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">05</span>
+                    <span class="timeline-meta">01:23–01:36</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>癌症疫苗：Moderna 的新抗原 mRNA 免疫疗法</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>Friedberg 介绍新抗原免疫疗法的原理：取患者肿瘤 DNA 测序，找出癌细胞特有的突变蛋白，通过 mRNA 或直接注射蛋白，训练免疫系统攻击癌症。</li>
+<li>他批评 Moderna 市值从 200 亿涨到 600 亿美元，认为公共资金资助数十年的技术被专利化、并被标价 50 万美元治疗费，本质是“监管俘获”。</li>
+<li>他提到 CAR-T 疗法和蒙大拿诊所等低成本替代方案，强调癌症早筛对终极疗效的关键作用。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>neoantigen（新抗原）：癌细胞因基因突变产生的独特蛋白片段。正常人细胞没有这些蛋白，因此免疫系统可以把它们当作“外来者”来攻击。</li>
+<li>mRNA 疗法：把编码特定蛋白的指令（mRNA）注入人体，让身体自己制造该蛋白，从而激发免疫反应。Moderna 将其用于个性化癌症治疗。</li>
+<li>ex vivo / in vivo：体外 / 体内。体外（ex vivo）指在身体外制造蛋白再注射，体内（in vivo）指让身体自己产生。</li>
+<li>CAR-T：嵌合抗原受体 T 细胞疗法，抽取患者 T 细胞进行基因改造，再回输体内去攻击癌细胞。对某些血癌疗效显著，价格约 100 万美元。</li>
+<li>Right to Try（尝试权）：美国联邦法律允许绝症患者使用尚未获得完全 FDA 批准的实验性治疗。</li>
+<li>GRAIL 的 Galleri 血液检测：多癌种早筛血检，寻找血液中癌症来源的 DNA 片段。</li>
+<li>NIH：美国国立卫生研究院，是许多基础科研的公共资助来源。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> 我们聊聊 Summit 吧，还有——Friedberg，这个癌症疫苗是怎么回事？过去两周相关股票涨了三倍，我们上周没来得及聊。我很想听你说说，观众也一样。</p>
+<p><strong>Friedberg：</strong> Moderna 股票，对吧？市值从大约 200 亿涨到 600 亿，因为一个被称为“癌症疫苗”的东西有了积极结果。这个癌症治疗系统的原理值得讲清楚：它源于 90 年代提出的“新抗原”概念。新抗原是一种小肽或蛋白，能模拟你体内某种癌症特有的蛋白片段。免疫系统把它当入侵者，于是开始产生能摧毁该蛋白的细胞。你把蛋白注射进体内，免疫系统被激活，会去体内各处寻找并摧毁这个蛋白。目标是：识别某种癌症特有的蛋白，制造它，注射进去，让免疫系统去摧毁你体内的癌细胞。</p>
+<p><strong>Friedberg：</strong> 下一步是 DNA 测序革命。你取出一部分癌症样本，放进测序仪，看到那段让癌细胞产生特殊蛋白的基因序列。为什么黑色素瘤是这种免疫治疗最大的目标之一？因为紫外线照射会让黑色素瘤产生高度独特的 DNA 突变，你的黑色素瘤相对于你身体其他部分会有一个极其独特的突变。于是你从肿瘤中提取 DNA，扩增数百万倍，测序，数据回来告诉你“这个癌症的独特标志是这段 DNA 序列”。这段 DNA 会让癌细胞产生一个独特的蛋白，相当于癌症的“钥匙”或“身份证”。你再用这段 DNA 制造蛋白，注射进体内，免疫系统马上疯狂攻击这个蛋白——因为有抗原，必须清除它。被激活的免疫细胞最终会去摧毁癌症。</p>
+<p><strong>Friedberg：</strong> 这些年有很多基于新抗原的疗法在多种癌症上进行了数百次试验，寻找正确的递送方式：体外制造蛋白直接注射，还是像 Moderna 这样制造 mRNA 注射？mRNA 进入人体后，促使你自己的细胞制造这个蛋白并释放到血液中，免疫细胞被激活。这就不是体外制作，而是体内制作：一针进去，你身体开始制造这个蛋白，就像我们制造新冠疫苗那样，细胞生产特定蛋白质片段，激活免疫系统去杀死癌症。其他正在解决的问题包括：用什么佐剂、什么类型的癌症适用、以及和其他药物联用的组合疗法。这本质上更像“流程/工艺”而不是传统意义的“药”——因为每个患者都需要定制：切下肿瘤样本，测序，找出差异，制造对应蛋白。</p>
+<p><strong>JCal：</strong> 那怎么获得针对“我”的个性化？</p>
+<p><strong>Friedberg：</strong> 取你肿瘤或癌细胞的样本。由于成本很低，真正的前期工作都很便宜。理论上制造 mRNA 或蛋白质也应该很便宜，但因为涉及人体试验和安全，要让免疫系统不过度反应、没有严重副作用，还需要大量优化。最让我沮丧的是：每个人都说这是独特的突破，但它不是。因为很多人去蒙大拿州这种地方，让别人根据他们的癌症序列打印肽段，自制新抗原，注射进体内，然后癌症就被治愈了。今天你花 5 万美元就能让人这样做。有很多诊所提供这种服务，而且它不是一个特殊的 FDA 批准药物。它就是一个流程，正如你所说：取我癌症的 DNA 序列，制造蛋白质，放回体内，免疫系统去消灭我的癌症。好主意。为什么 Moderna 说要为这个收 50 万美元？这让我很沮丧——这项技术经过几十年的迭代、研究和开发，大部分由 NIH 和其他公共研究资金资助，才有了新抗原免疫治疗概念，理论上可以根除或消灭多种癌症。它不应该现在被专利化、被 FDA 批准，向病人收取 50 万美元。让我不喜欢的是：一家私营制药公司，市值从 200 亿涨到 600 亿，因为他们走完了一个监管流程，创造了一种我认为属于“监管俘获”的东西，并以安全、试验和专利权为理由，把一个根本性由公共资金资助的技术占为己有。基础技术应该更开源、更普及，每家医院都应该学会使用这个流程来治疗病人。肿瘤学界应该把它普及开来。</p>
+<p><strong>JCal：</strong> 两个问题，我们可以用它结束这个话题：第一，你认为他们能成功地在美国捍卫这项专利吗？在全球呢？人们会医疗旅游——如果这里 50 万美元，韩国、日本能不能 5 万美元搞定？第二，mRNA 和新冠疫苗之前人们担心的那些事怎么样了？我们没有再更新过这个话题。但显然，那是 mRNA 第一次大规模部署，对吗？</p>
+<p><strong>Friedberg：</strong> 是的。Moderna 多年来一直在研发 mRNA 癌症平台，但从未成功商业化。然后新冠来了，他们迅速转向并推出了新冠疫苗。Moderna 在制造 mRNA 以及确保它不整合进人类基因组的技术上拥有一系列专利。通常人体细胞会复制 RNA，而 Moderna 的技术通过设计使这种 mRNA 不能被复制，因此它不会在体内增殖。Moderna 开发了大量技术使其 mRNA 工具可获得专利并且更安全，所以在其特定的 mRNA 工具包上，他们的专利覆盖确实很强。但正如我前面所述：如果我取得你癌细胞的序列，发现它独特的 DNA 序列，我可以把这段 DNA 放入大肠杆菌（E. coli）中，在生物反应器里，细菌会开始生产对应蛋白质。因为 DNA→RNA→蛋白质的路径是通用的，大肠杆菌中会有数亿个拷贝在生产目的蛋白，然后你从生物反应器中提纯蛋白质并注射进人体，激活免疫系统。所以你并不一定需要 mRNA——mRNA 是一种非常高效的方式，便宜、一针完成。但整个端到端系统的真实成本很低。所以这引出一个根本问题：我们是否应该把癌症治疗权垄断给一家公司，只因为它走完了 FDA 流程并就某些技术申请了专利？而整个理论、逻辑和治疗流程已经被充分描述和理解了。我们会在未来几年看到这种基于免疫系统的癌症治疗开始扩散——在海外会很便宜，而且非常有效。你和我有一个共同的朋友，正在蒙大拿以极低成本搭建这类业务——在那个州有“尝试权”（Right to Try），他们可以合法制造这种东西。所以我认为我们会看到更多这样的例子。对某些癌症，它有效、安全、高效。所以我为这个消息感到兴奋。</p>
+<p><strong>JCal：</strong> 所有这一切需要的其实是早期检测。人们一直在用 Galleri 血液测试之类的做多癌种早期筛查。所以及早发现、定期检测是其中的关键部分。</p>
+<p><strong>Friedberg：</strong> 你指的是 GRAIL 的 Galleri 血检。对，早筛是核心。另外还要记住：现在还有很多新的治疗模式。CAR-T 是其中之一：把你体内的 T 细胞取出，用 CRISPR 或其他系统重新编程，让它们去寻找你体内某一个特定蛋白——就是我刚才说的那种癌细胞特有蛋白，把 T 细胞放回体内去摧毁它。CAR-T 费用约 100 万美元，对血癌尤其有效——因为血癌细胞不形成实体肿瘤，而是单个漂浮在血液中，T 细胞进入血液后很容易找到它们并摧毁。因此对于多发性骨髓瘤等血癌，CAR-T 的疗效现在是惊人的。这是一个新治疗模式，新抗原/mRNA 疗法也是一个。所有这些新技术用来对抗癌症——合在一起看，我们应该非常兴奋和乐观。</p>
+<p><strong>JCal：</strong> 感谢分享。希望这些技术能顺利应用，我还很喜欢“尝试权”这个概念，我们以后应该聊一期。下次见。</p></div>
+                  </div>
+                </article></div>
+            <p class="empty search-empty" data-search-empty hidden>没有匹配的时间线段落。</p>
+          </section>
+
+          <section id="speakers">
+            <div class="section-head">
+              <h2>人物观点对照</h2>
+              <p>比较嘉宾立场</p>
+            </div>
+            <div class="speaker-grid"><article class="speaker-card" style="--index: 1">
+                  <p class="speaker-kicker">嘉宾 01</p>
+                  <h3>Jason Calacanis</h3>
+                  <div><p>JCal 依然是那个“替普通人和常识发言”的角色。他关注的是宏观叙事如何影响普通家庭的钱包——房贷利率、401k、可负担住房。他强烈抨击政府浪费，点名加州高铁是“不可理喻的愚蠢项目”，认为应该由私人资本和市场来解决住房与基建问题。他对 Druckenmiller 用 AI 写专栏持“假唱”论，把“作者亲手写”视为对读者的诚实义务，认为 AI 可以做研究和校对，但不能完全代笔。同时他也警惕中国在 AI 乐观度上的领先，认为美国的悲观主义是最大风险。</p></div>
+                </article>
+<article class="speaker-card" style="--index: 2">
+                  <p class="speaker-kicker">嘉宾 02</p>
+                  <h3>Chamath Palihapitiya</h3>
+                  <div><p>Chamath 展现了很强的“自我验证”姿态——5 月看多 Salesforce 高端市场，本期财报验证了他的判断。他提出 AI 三阶段论（模型=大脑，agents=手眼，专业训练=职业能力），以此说明系统记录公司的核心价值。宏观上，他对美国财政表达了最严重的担忧：30 年期冲到 6% 就是“死亡螺旋”的起点，而国会两党都无力控制赤字，唯一出路是 AI 带来的指数级增长。在 Druckenmiller 争议上，他坚定站在“工具放大人的观点”一边，反对把“用 AI”等同于品德污点。</p></div>
+                </article>
+<article class="speaker-card" style="--index: 3">
+                  <p class="speaker-kicker">嘉宾 03</p>
+                  <h3>David Sacks</h3>
+                  <div><p>Sacks 是本期“反简单叙事”的代表。他反对“AI agent 能写代码，所以所有软件归零”的 SaaS 末日论，强调企业要的是确定性、合规和长期验证过的核心系统。他非常欣赏 Benioff 的策略，认为让 Claude 做前端、整合系统记录是高明的“打不过就加入”。在政治上，他用“公地悲剧”解释美国为什么无法削减开支：535 名议员各保各的项目，总统又缺乏单项否决权，媒体还不配合改革。在俄乌问题上，他罕见地为俄罗斯“入侵北约”的担忧降温，认为这是威胁通胀，并判断乌克兰应该尽快做交易。</p></div>
+                </article>
+<article class="speaker-card" style="--index: 4">
+                  <p class="speaker-kicker">嘉宾 04</p>
+                  <h3>David Friedberg</h3>
+                  <div><p>Friedberg 本期贡献了最关键的信息密度：从美债收益率曲线的技术拆解到 10 万亿美元再融资海啸，再到 Moderna 癌症疫苗的机制与商业模式批判。他把 Druckenmiller 的专栏解读为给 Bessent“打掩护”，同时指出财政破裂的时间线是 2030–2032 的社保与州政府危机。在癌症问题上，他展示了科学家视角与商业视角的张力：既为新抗原疗法和 CAR-T 的进展兴奋，又愤怒于公共资金资助的技术被专利化后向病人收取 50 万美元。他还亲述了“用 Claude Code 自建 CRM 最终回归 Salesforce”的一手经验，为 SaaS 讨论提供了真实案例。</p></div>
+                </article></div>
+          </section>
+
+          <section id="quotes">
+            <div class="section-head">
+              <h2>值得引用的原话</h2>
+              <p>保留关键表达</p>
+            </div>
+            <div class="panel"><ol>
+<li><strong>英文原话：</strong> “The simple extrapolation here was AI agents can code, therefore all software is going to zero. That was the simplistic extrapolation.”</li>
+<p><strong>中文翻译：</strong> “那个简单外推是：AI agent 能写代码，所以所有软件都会归零。那就是一种过于简单的推演。” <strong>说明：</strong> Sacks 用这句话反驳“SaaS 已死”以及一系列 AI 焦虑叙事，是本集最重要的方法论点。</p>
+</ol>
+<ol>
+<li><strong>英文原话：</strong> “I&#x27;ve been saying for a while that the US is ahead of China in every category except one, which is optimism.”</li>
+<p><strong>中文翻译：</strong> “我一直说，美国在所有类别上都领先中国，只有一项除外——乐观主义。” <strong>说明：</strong> Chamath 对中美 AI 竞争格局的高度概括：技术优势是暂时的，悲观主义却可能让美国自己先输掉。</p>
+</ol>
+<ol>
+<li><strong>英文原话：</strong> “If you see the 30-year at 6%, it is the beginning of a death spiral. It&#x27;s not going to be immediate. So don&#x27;t freak out. But it is the beginning of some extreme pain, and that pain will last years.”</li>
+<p><strong>中文翻译：</strong> “如果 30 年期国债收益率到 6%，那就是死亡螺旋的开始。它不会马上发生，所以别恐慌。但那是极大痛苦的起点，而且这种痛苦会持续数年。” <strong>说明：</strong> Chamath 对美国财政危机的核心预警，也是本期宏观讨论被广泛引用的判断。</p>
+</ol>
+<ol>
+<li><strong>英文原话：</strong> “If you adopt the technology, you survive. If you don&#x27;t, you die. It&#x27;s pretty straightforward.”</li>
+<p><strong>中文翻译：</strong> “拥抱技术就活，不拥抱就死。这很直白。” <strong>说明：</strong> Chamath 对“知识工作者会被 AI 淘汰”论点的回应，强调主动性比被动担忧更重要。</p>
+</ol>
+<ol>
+<li><strong>英文原话：</strong> “Benioff here is willing to risk disintermediation in order to ride this AI wave because he knows it&#x27;s what the customer ultimately wants.”</li>
+<p><strong>中文翻译：</strong> “Benioff 愿意冒被去中介化的风险来搭上 AI 浪潮，因为他知道这就是客户最终想要的。” <strong>说明：</strong> Sacks 对本集最重要商业事件（Salesforce×Anthropic）的解读核心：放弃界面控制权，换取系统记录地位。</p>
+</ol>
+<ol>
+<li><strong>英文原话：</strong> “I think the reality is that we will hit some kind of a fiscal wall, something will get terribly broken, and like in COVID or like in GFC or like in 9/11, those are the only moments where you can have structural changes in expectations.”</li>
+<p><strong>中文翻译：</strong> “我认为现实是，我们会撞上某种财政之墙，某些东西会被严重破坏。就像新冠、金融危机或 9/11 那样，只有这些时刻人们的基本预期才会发生结构性的改变。” <strong>说明：</strong> Friedberg 对财政改革的判断：不是渐进，而是危机触发。</p>
+</ol>
+<ol>
+<li><strong>英文原话：</strong> “I don&#x27;t think that this technique, which has been largely developed through several decades of iteration, research, and development, which was largely funded by NIH and other public funding dollars... should now be patented, FDA approved, and charged half a million dollars for people to get treated for this.”</li>
+<p><strong>中文翻译：</strong> “我不认为这项主要由 NIH 和其他公共资金资助、经过数十年迭代研究和开发出来的技术，现在应该被专利化、被 FDA 批准，然后被要求向患者收取 50 万美元的治疗费用。” <strong>说明：</strong> Friedberg 对 Moderna 癌症疗法的核心批评，也是本期在医疗领域最重要的立场表达。</p>
+</ol>
+<ol>
+<li><strong>英文原话：</strong> “You have to respect the audience enough to take the time to write it yourself.”</li>
+<p><strong>中文翻译：</strong> “你必须对读者有足够的尊重，花时间自己把它写出来。” <strong>说明：</strong> JCal 关于 Druckenmiller 使用 AI 一事的立场：披露与否关乎对读者的诚实。</p>
+</ol></div>
+          </section>
+        </div>
+      </div>
+    </main>
+  </div>
+  <script>
+    const progress = document.querySelector("[data-progress]");
+    const searchBox = document.querySelector("[data-search-box]");
+    const topButton = document.querySelector("[data-scroll-top]");
+    const cards = Array.from(document.querySelectorAll("[data-timeline-card]"));
+    const searchEmpty = document.querySelector("[data-search-empty]");
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    function updateProgress() {
+      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      const ratio = scrollable > 0 ? window.scrollY / scrollable : 0;
+      if (progress) {
+        progress.style.width = `${Math.max(0, Math.min(1, ratio)) * 100}%`;
+      }
+    }
+
+    function applySearch() {
+      const query = searchBox.value.trim().toLowerCase();
+      let visibleCount = 0;
+      cards.forEach((card) => {
+        const text = card.getAttribute("data-search") || "";
+        const isVisible = !query || text.includes(query);
+        card.hidden = !isVisible;
+        if (isVisible) {
+          visibleCount += 1;
+        }
+      });
+      if (searchEmpty) {
+        searchEmpty.hidden = !query || visibleCount > 0;
+      }
+    }
+
+    window.addEventListener("scroll", updateProgress, { passive: true });
+    window.addEventListener("resize", updateProgress);
+    if (searchBox) {
+      searchBox.addEventListener("input", applySearch);
+    }
+    if (topButton) {
+      topButton.addEventListener("click", () => {
+        window.scrollTo({
+          top: 0,
+          behavior: prefersReducedMotion.matches ? "auto" : "smooth"
+        });
+      });
+    }
+    updateProgress();
+  </script>
+</body>
+</html>
