@@ -1,0 +1,1199 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI 末日论是心理战吗？OpenAI 数学突破、Nike 的 2000 亿美元崩塌 - 中文播客可视化笔记</title>
+  <style>
+    :root {
+      --bg: oklch(0.974 0.006 238);
+      --paper: oklch(0.991 0.003 238);
+      --paper-soft: oklch(0.955 0.007 238);
+      --ink: oklch(0.205 0.018 246);
+      --muted: oklch(0.49 0.018 246);
+      --faint: oklch(0.63 0.014 246);
+      --line: oklch(0.875 0.009 238);
+      --line-strong: oklch(0.74 0.014 238);
+      --accent: oklch(0.43 0.064 164);
+      --accent-soft: oklch(0.94 0.024 164);
+      --accent-wash: oklch(0.973 0.012 164);
+      --quote: oklch(0.965 0.010 92);
+      --shadow: 0 24px 54px color-mix(in oklch, var(--ink) 8%, transparent);
+      --radius: 8px;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-width: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(90deg, color-mix(in oklch, var(--line) 28%, transparent) 1px, transparent 1px) 0 0 / 92px 92px,
+        var(--bg);
+      font-family: "Geist", "Satoshi", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      line-height: 1.78;
+      text-rendering: optimizeLegibility;
+    }
+    ::selection { background: var(--accent-soft); color: var(--ink); }
+    a {
+      color: var(--accent);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+      transition: color .22s var(--ease), background-color .22s var(--ease), border-color .22s var(--ease), transform .22s var(--ease);
+    }
+    [hidden] { display: none !important; }
+    .progress {
+      position: fixed;
+      z-index: 4;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: var(--accent);
+    }
+    .quick-actions {
+      position: fixed;
+      right: max(18px, calc((100vw - 1200px) / 2));
+      bottom: 24px;
+      z-index: 3;
+      display: grid;
+      gap: 7px;
+    }
+    .quick-action {
+      display: inline-grid;
+      grid-template-columns: 16px auto;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      min-width: 74px;
+      min-height: 40px;
+      padding: 8px 12px;
+      border: 1px solid var(--line-strong);
+      border-radius: var(--radius);
+      background: color-mix(in oklch, var(--paper) 92%, transparent);
+      box-shadow: 0 12px 28px color-mix(in oklch, var(--ink) 7%, transparent);
+      color: var(--ink);
+      font: inherit;
+      font-size: 13px;
+      font-weight: 720;
+      line-height: 1.2;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .quick-action:hover, .quick-action:focus-visible {
+      outline: none;
+      border-color: var(--accent);
+      background: var(--accent-wash);
+      color: var(--accent);
+      transform: translate3d(0, -1px, 0);
+    }
+    .quick-action:active { transform: translate3d(0, 1px, 0) scale(.99); }
+    .page {
+      width: min(1760px, calc(100% - 56px));
+      margin: 0 auto;
+      padding: 0 0 104px;
+    }
+    .article { min-width: 0; }
+    .hero {
+      max-width: none;
+      margin-left: min(7vw, 140px);
+      padding: 72px 0 58px;
+    }
+    .eyebrow {
+      margin: 0 0 18px;
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    h1 {
+      max-width: none;
+      margin: 0 0 28px;
+      font-size: clamp(38px, 3vw, 52px);
+      font-weight: 760;
+      line-height: 1.08;
+      letter-spacing: 0;
+      text-wrap: balance;
+    }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 18px;
+      max-width: 72ch;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .meta a { font-weight: 650; }
+    .meta-strip {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+      max-width: 720px;
+      margin: 34px 0 28px;
+      border-top: 1px solid var(--line-strong);
+      padding-top: 16px;
+    }
+    .meta-pill {
+      display: grid;
+      gap: 2px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.35;
+    }
+    .meta-pill b {
+      color: var(--ink);
+      font-family: var(--mono);
+      font-size: 18px;
+      font-weight: 680;
+      line-height: 1;
+    }
+    .summary {
+      width: 100%;
+      max-width: 760px;
+      padding: 24px 26px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: color-mix(in oklch, var(--paper) 88%, var(--accent-soft));
+      box-shadow: var(--shadow);
+    }
+    .summary p {
+      margin: 0;
+      font-size: 19px;
+      line-height: 1.72;
+    }
+    h1, .summary, .takeaway p, .timeline-card h3, .section-content, .speaker-card, .panel {
+      overflow-wrap: anywhere;
+    }
+    .content-shell {
+      display: grid;
+      grid-template-columns: minmax(170px, 212px) minmax(0, 820px);
+      gap: clamp(36px, 7vw, 88px);
+      align-items: start;
+      border-top: 1px solid var(--line);
+      padding-top: 40px;
+    }
+    .sidebar {
+      position: sticky;
+      top: 28px;
+      align-self: start;
+      padding-top: 4px;
+    }
+    .toc {
+      border-top: 1px solid var(--ink);
+      padding-top: 16px;
+    }
+    .toc-title {
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .nav-links { display: grid; gap: 2px; }
+    .nav-links a {
+      display: block;
+      padding: 8px 0;
+      border-bottom: 1px solid color-mix(in oklch, var(--line) 72%, transparent);
+      color: var(--ink);
+      font-size: 14px;
+      line-height: 1.35;
+      text-decoration: none;
+    }
+    .nav-links a:hover, .nav-links a:focus-visible {
+      outline: none;
+      color: var(--accent);
+      transform: translate3d(2px, 0, 0);
+    }
+    .search {
+      display: grid;
+      gap: 8px;
+      margin-top: 22px;
+    }
+    .search span {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 720;
+    }
+    .search input {
+      width: 100%;
+      min-height: 40px;
+      padding: 8px 10px;
+      border: 1px solid var(--line-strong);
+      border-radius: var(--radius);
+      background: var(--paper);
+      color: var(--ink);
+      font: inherit;
+      font-size: 14px;
+      outline: none;
+      transition: border-color .22s var(--ease), box-shadow .22s var(--ease), transform .22s var(--ease);
+    }
+    .search input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px color-mix(in oklch, var(--accent) 14%, transparent);
+    }
+    .content-flow { min-width: 0; }
+    section { margin: 0 0 78px; }
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 18px;
+      align-items: end;
+      margin-bottom: 22px;
+      border-top: 1px solid var(--ink);
+      padding-top: 18px;
+    }
+    .section-head h2 {
+      margin: 0;
+      font-size: 28px;
+      font-weight: 740;
+      line-height: 1.16;
+      letter-spacing: 0;
+    }
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.4;
+      text-align: right;
+    }
+    .takeaway-list {
+      display: grid;
+      gap: 0;
+      margin: 0;
+      padding: 0;
+      border-top: 1px solid var(--line);
+      list-style: none;
+    }
+    .takeaway {
+      display: grid;
+      grid-template-columns: 52px minmax(0, 1fr);
+      gap: 18px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .takeaway span {
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 15px;
+      font-weight: 720;
+      line-height: 1.65;
+    }
+    .takeaway p {
+      margin: 0;
+      max-width: 70ch;
+      font-size: 16px;
+      line-height: 1.72;
+    }
+    .timeline {
+      display: grid;
+      gap: 0;
+      border-top: 1px solid var(--line-strong);
+    }
+    .timeline-card {
+      display: grid;
+      grid-template-columns: 132px minmax(0, 1fr);
+      gap: 32px;
+      padding: 34px 0 40px;
+      border-bottom: 1px solid var(--line);
+    }
+    .timeline-heading {
+      position: sticky;
+      top: 30px;
+      align-self: start;
+      display: grid;
+      gap: 10px;
+      padding-top: 2px;
+    }
+    .timeline-index {
+      color: var(--faint);
+      font-family: var(--mono);
+      font-size: 13px;
+      font-weight: 720;
+      line-height: 1;
+    }
+    .timeline-meta {
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 720;
+      line-height: 1.45;
+    }
+    .timeline-card h3 {
+      max-width: 24ch;
+      margin: 0 0 18px;
+      font-size: 27px;
+      font-weight: 730;
+      line-height: 1.22;
+      letter-spacing: 0;
+    }
+    .section-content {
+      color: color-mix(in oklch, var(--ink) 88%, var(--muted));
+      font-size: 16px;
+    }
+    .section-content p {
+      max-width: 72ch;
+      margin: 0 0 1.05em;
+    }
+    .section-content p strong:first-child {
+      color: var(--ink);
+      font-weight: 760;
+    }
+    .section-content h4 {
+      margin: 26px 0 10px;
+      color: var(--accent);
+      font-size: 14px;
+      font-weight: 760;
+      line-height: 1.35;
+    }
+    .section-content ul, .section-content ol, .panel ul, .panel ol, .speaker-card ul, .speaker-card ol {
+      margin: .75em 0 1em;
+      padding-left: 1.25em;
+    }
+    .section-content li, .panel li, .speaker-card li { margin: 6px 0; }
+    .speaker-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, .88fr);
+      gap: 26px 42px;
+      border-top: 1px solid var(--line);
+    }
+    .speaker-card {
+      padding: 22px 0 24px;
+      border-bottom: 1px solid var(--line);
+    }
+    .speaker-card:nth-child(even) { margin-top: 22px; }
+    .speaker-kicker {
+      margin: 0 0 8px;
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 720;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .speaker-card h3 {
+      margin: 0 0 12px;
+      font-size: 20px;
+      font-weight: 730;
+      line-height: 1.25;
+    }
+    .speaker-card p, .panel p {
+      max-width: 68ch;
+      margin-top: 0;
+    }
+    .panel {
+      border-top: 1px solid var(--line);
+      padding-top: 8px;
+    }
+    blockquote {
+      margin: 18px 0;
+      padding: 16px 18px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--quote);
+    }
+    code {
+      padding: 2px 5px;
+      border-radius: 5px;
+      background: color-mix(in oklch, var(--accent) 10%, var(--paper));
+      color: var(--ink);
+      font-family: var(--mono);
+      font-size: .92em;
+    }
+    hr {
+      height: 1px;
+      margin: 26px 0;
+      border: 0;
+      background: var(--line);
+    }
+    .empty {
+      margin: 0;
+      padding: 16px 18px;
+      border: 1px dashed var(--line-strong);
+      border-radius: var(--radius);
+      color: var(--muted);
+      background: color-mix(in oklch, var(--paper-soft) 70%, transparent);
+    }
+    .search-empty { margin-top: 16px; }
+    .muted { color: var(--muted); }
+    @keyframes rise-in {
+      from { opacity: 1; transform: translate3d(0, 6px, 0); }
+      to { opacity: 1; transform: translate3d(0, 0, 0); }
+    }
+    .hero > *, .takeaway, .timeline-card, .speaker-card, .panel {
+      animation: rise-in .55s var(--ease) both;
+    }
+    .hero > *:nth-child(2) { animation-delay: .04s; }
+    .hero > *:nth-child(3) { animation-delay: .08s; }
+    .hero > *:nth-child(4) { animation-delay: .12s; }
+    .hero > *:nth-child(5) { animation-delay: .16s; }
+    .takeaway, .timeline-card, .speaker-card {
+      animation-delay: calc(var(--index, 1) * 38ms);
+    }
+    @media (max-width: 1120px) {
+      .hero { margin-left: 0; }
+      .content-shell {
+        grid-template-columns: minmax(154px, 190px) minmax(0, 1fr);
+        gap: 36px;
+      }
+      h1 { font-size: 44px; }
+    }
+    @media (min-width: 1500px) {
+      h1 {
+        width: max-content;
+        max-width: 100%;
+        white-space: nowrap;
+        font-size: clamp(36px, 2.05vw, 42px);
+      }
+    }
+    @media (max-width: 780px) {
+      body { background: var(--bg); }
+      .page { width: min(1180px, calc(100% - 28px)); padding-bottom: 86px; }
+      .hero { padding: 46px 0 36px; }
+      .eyebrow { margin-bottom: 14px; }
+      h1 {
+        max-width: none;
+        font-size: 30px;
+        line-height: 1.14;
+        word-break: normal;
+      }
+      .summary, .summary p, .takeaway p, .section-content, .speaker-card, .panel {
+        max-width: 100%;
+        word-break: break-word;
+      }
+      .meta-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 20px; }
+      .summary { padding: 20px; }
+      .summary p { font-size: 17px; }
+      .content-shell { display: block; padding-top: 28px; }
+      .sidebar { position: static; padding-top: 0; margin-bottom: 42px; }
+      .toc { border-top-color: var(--line-strong); }
+      .nav-links { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 18px; }
+      section { margin-bottom: 58px; }
+      .section-head { display: block; margin-bottom: 16px; }
+      .section-head h2 { font-size: 24px; }
+      .section-head p { margin-top: 6px; text-align: left; }
+      .takeaway { grid-template-columns: 42px minmax(0, 1fr); gap: 12px; }
+      .timeline-card { display: block; padding: 28px 0 32px; }
+      .timeline-heading { position: static; display: flex; align-items: baseline; gap: 12px; margin-bottom: 12px; }
+      .timeline-card h3 { max-width: none; font-size: 23px; }
+      .speaker-grid { display: block; }
+      .speaker-card:nth-child(even) { margin-top: 0; }
+      .quick-actions {
+        right: 12px;
+        bottom: 12px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 6px;
+      }
+      .quick-action {
+        min-width: 66px;
+        min-height: 38px;
+        padding: 7px 9px;
+        font-size: 13px;
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: 1ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 1ms !important;
+      }
+      .speaker-card:nth-child(even) { margin-top: 0; }
+    }
+    @media print {
+      body { background: var(--paper); }
+      .sidebar, .progress, .quick-actions { display: none; }
+      .page { display: block; width: auto; padding-bottom: 0; }
+      .hero { margin-left: 0; padding: 0 0 28px; }
+      .content-shell { display: block; border-top: 0; padding-top: 0; }
+      .summary { box-shadow: none; }
+      .timeline-card, .speaker-card { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <div class="progress" data-progress></div>
+  <div class="quick-actions" aria-label="快捷操作">
+    <a class="quick-action" href="../../index.html" aria-label="返回首页">
+      <span aria-hidden="true">←</span>
+      <span>首页</span>
+    </a>
+    <button class="quick-action" type="button" data-scroll-top aria-label="回到顶部">
+      <span aria-hidden="true">↑</span>
+      <span>顶部</span>
+    </button>
+  </div>
+  <div class="page">
+    <main class="article">
+      <header class="hero">
+        <p class="eyebrow">All-In Podcast 中文精读</p>
+        <h1>AI 末日论是心理战吗？OpenAI 数学突破、Nike 的 2000 亿美元崩塌</h1>
+        <div class="meta">
+          <span>生成时间：2026-09-14 10:29</span>
+          <span>来源：<a href="https://www.youtube.com/watch?v=cvxjqbfLVk0" target="_blank" rel="noopener">YouTube</a></span>
+        </div>
+        <div class="meta-strip"><span class="meta-pill"><b>53 分钟</b>阅读时长</span>
+<span class="meta-pill"><b>10</b>核心要点</span>
+<span class="meta-pill"><b>9</b>时间线</span>
+<span class="meta-pill"><b>4</b>人物</span></div>
+        <div class="summary" aria-label="一句话摘要"><p>本集从 Anthropic 前研究员 Jacob Coxon 的“AI 可能灭绝人类”辞职推文出发，四位嘉宾认为这是一场由 doomer 团体、监管捕获议程和媒体协同放大的心理战，并延伸讨论 Anthropic IPO 的披露矛盾、OpenAI 数学突破背后的数据主权问题，以及 Nike 因品牌偏离“卓越与精通”而失去 2000 亿美元市值。</p></div>
+      </header>
+
+      <div class="content-shell">
+        <aside class="sidebar">
+          <nav class="toc" aria-label="页面导航">
+            <p class="toc-title">阅读导航</p>
+            <div class="nav-links">
+              <a href="#takeaways">核心要点</a>
+              <a href="#timeline">分段整理</a>
+              <a href="#speakers">人物观点</a>
+              <a href="#quotes">双语引语</a>
+            </div>
+            <label class="search">
+              <span>搜索时间线</span>
+              <input data-search-box type="search" placeholder="关键词" aria-label="搜索时间线">
+            </label>
+          </nav>
+        </aside>
+
+        <div class="content-flow">
+          <section id="takeaways">
+            <div class="section-head">
+              <h2>核心要点</h2>
+              <p>快速扫读本集主线</p>
+            </div>
+            <ol class="takeaway-list"><li class="takeaway" style="--index: 1"><span>01</span><p>Jacob Coxon 从 Anthropic 辞职后发推称“建造 AI 的人真诚相信 AI 可能在本十年杀死所有人”，推文获得上亿浏览，但嘉宾认为这是一场有组织的 doomer psyop。</p></li>
+<li class="takeaway" style="--index: 2"><span>02</span><p>Sacks 列出证据：账号此前无活动、无粉丝，三个 doomer 团体在 15 分钟内放大，Wall Street Journal 提前发布报道，说明存在协同行动。</p></li>
+<li class="takeaway" style="--index: 3"><span>03</span><p>Anthropic 安全负责人 Evan Hubinger 公开背书 Jacob，并称个人认为未来十年灭绝概率超过 10%，Sacks 认为这条推文在法律上比 Jacob 本人的辞职信更关键。</p></li>
+<li class="takeaway" style="--index: 4"><span>04</span><p>Chamath 认为 Anthropic 陷入根本矛盾：一边要以上万亿美元估值 IPO，一边自家安全主管说核心产品未解决且可能终结文明，这构成巨大的产品责任和披露风险。</p></li>
+<li class="takeaway" style="--index: 5"><span>05</span><p>Friedberg 把 AI 末日恐慌类比 Al Gore 的气候预测、Fauci 的 COVID 警告和 Three Mile Island 核恐慌，认为这是人类作为灵长类动物对未知的社会性恐慌。</p></li>
+<li class="takeaway" style="--index: 6"><span>06</span><p>嘉宾认为 doomer 的预测记录是 0 比 4：GPT-2 太危险、推理模型太危险、AI 网络攻击摧毁银行系统、大规模失业和 10%–15% 失业率，全部没有成真。</p></li>
+<li class="takeaway" style="--index: 7"><span>07</span><p>在“我们怎么死”的思想实验中，JCal 提天网和自主武器，Chamath 提生物反应器加机器人制造空气传播病毒，Sacks 和 Friedberg 则强调 human-in-the-loop 和 air gap 让极端场景极难成立。</p></li>
+<li class="takeaway" style="--index: 8"><span>08</span><p>OpenAI 称用 1 万个 agents、1300 亿 output tokens 解决了与 Navier-Stokes 相关的数学问题，Friedberg 认为这不是 AI 的天才灵感，而是暴力计算杠杆，相当于 5 万到 50 万年人类工作。</p></li>
+<li class="takeaway" style="--index: 9"><span>09</span><p>数据主权成为焦点：ZDR 只是 best efforts，企业和科学家若使用标准 API 可能泄露核心 IP，Chamath 警告 CIO 会因此被炒、公司面临股东诉讼，解决方案是自建 VPC、本地部署或开源模型。</p></li>
+<li class="takeaway" style="--index: 10"><span>10</span><p>Nike 被踢出 S&amp;P 100，Sacks 归因于 go woke go broke、DTC 战略摧毁零售关系和产品变差，Chamath 认为核心是 Nike 失去了“mastery and excellence”这个北极星。</p></li></ol>
+          </section>
+
+          <section id="timeline">
+            <div class="section-head">
+              <h2>分段详细整理</h2>
+              <p>按时间线阅读上下文</p>
+            </div>
+            <div class="timeline" data-timeline><article class="timeline-card" data-timeline-card data-search="00:00:00–00:00:35 开场：psyop 取消，sacks 准备“盘问” 本段核心内容： jacob coxon 原本答应上 all-in 播客，但在节目录制前取消。 嘉宾开玩笑说，他不想被 david sacks 交叉盘问。 sacks 和 jcal 表示已经为这场对话做了大量法律和背景研究。 背景解释与关键术语： psyop：心理战、心理操作，这里指嘉宾认为 jacob coxon 的辞职推文不是自发的个人行为，而是有组织的舆论操作。 cross-examined：交叉盘问，法律庭审中一方律师对对方证人进行质问。sacks 有法律学位，嘉宾拿这个开玩笑。 详细中文整理： jcal： psyop 取消了吗？这就是发生的事？ chamath： 是的，psyop 取消了。他受不了压力，不想被 david sacks 交叉盘问。 sacks： 我已经 25 年没用过法律学位了。 jcal： 我整晚都在研究这件事。 sacks： 我们仍然可以聊这个。我准备好了。 ---" style="--index: 1">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">01</span>
+                    <span class="timeline-meta">00:00:00–00:00:35</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>开场：psyop 取消，Sacks 准备“盘问”</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>Jacob Coxon 原本答应上 All-In 播客，但在节目录制前取消。</li>
+<li>嘉宾开玩笑说，他不想被 David Sacks 交叉盘问。</li>
+<li>Sacks 和 JCal 表示已经为这场对话做了大量法律和背景研究。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>Psyop：心理战、心理操作，这里指嘉宾认为 Jacob Coxon 的辞职推文不是自发的个人行为，而是有组织的舆论操作。</li>
+<li>Cross-examined：交叉盘问，法律庭审中一方律师对对方证人进行质问。Sacks 有法律学位，嘉宾拿这个开玩笑。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> Psyop 取消了吗？这就是发生的事？</p>
+<p><strong>Chamath：</strong> 是的，psyop 取消了。他受不了压力，不想被 David Sacks 交叉盘问。</p>
+<p><strong>Sacks：</strong> 我已经 25 年没用过法律学位了。</p>
+<p><strong>JCal：</strong> 我整晚都在研究这件事。</p>
+<p><strong>Sacks：</strong> 我们仍然可以聊这个。我准备好了。</p>
+<hr></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="00:00:35–00:08:18 jacob coxon 辞职推文与“ai 末日心理战” 本段核心内容： jacob coxon 在 anthropic 只工作约 6 周便辞职，随后发推称 ai 可能在本十年杀死所有人，推文获得约 1.5 亿浏览。 evan hubinger 公开背书 jacob，并称个人认为未来十年 ai 导致人类灭绝的概率超过 10%。 sacks 认为这是有组织的 doomer 行动：账号此前无活动、被三个 doomer 团体在 15 分钟内放大、wall street journal 提前拿到报道。 bernie sanders 和 j.b. pritzker 迅速回应，推动暂停或禁止超级智能的政治议程。 背景解释与关键术语： jacob coxon：节目中称其在 openai 和 anthropic 工作过，但在 anthropic 仅 6 周便辞职。他发推称 ai 可能在本十年杀死所有人，并称这不是营销 stunt。 evan hubinger：anthropic 的 alignment science 负责人，公开回应 jacob 说“jacob 是对的”，并给出超过 10% 的灭绝概率。 doomer：ai 末日论者，认为先进 ai 极可能导致人类灭绝或文明崩溃。 sb 53：加州一项 ai 安全法案，要求前沿 ai 公司披露安全措施，支持者认为必要，反对者认为会拖慢创新。 ea：effective altruism，有效利他主义，一部分 ea 资助者同时支持 ai 安全研究和 ai 监管。 fdai：节目中用这个词指“联邦 ai 部门”或“ai 领域的 fda”，即新的联邦 ai 监管机构。 详细中文整理： jcal： 我们必须聊 anthropic。一名研究员因为 ai 恐惧辞职，他认为 ai 可能杀死我们所有人。jacob coxon 过去三年在 openai 和 anthropic 做研究员，他在 anthropic 只待了 6 周就辞职。辞职后他在 x 上发帖说：建造 ai 的人真诚地相信 ai 可能在本十年结束前杀死我们所有人，这不是营销 stunt。他还说 openai 和 anthropic 都没有在负责任地行动，他们正在竞赛冲向自我改进的超级智能，拿我们的生命赌博。这条推文疯狂传播，达到 1.5 亿浏览。 chamath： jason，你能不能解释一下，一个没有粉丝、之前没有账号活动的人，怎么周一出现、周二就获得 1.1 亿浏览？算法上这是怎么发生的？ jcal： 这是个好问题。evan hubinger，anthropic 负责 alignment science 的人，回应 jacob 说：“jacob 在这里是对的。我们确实真诚地相信 ai 可能杀死全人类。我个人认为未来十年概率超过 10%。我们还没有解决 alignment 的计划。”这两条推文合计 2 亿浏览。然后事情迅速从 x 和 ai 社区跳到晚间新闻。bernie sanders 说这类帖子正是他提议立法禁止超级智能、暂停 ai 开发的原因。州长 j.b. pritzker 回复说，是时候更大声地警告并约束 ai 了。sacks，作为前 ai 沙皇，你担心我们到 2030 年都会死吗？ sacks： 不担心。这里没有任何新东西。这是我们长期从这群人那里听到的同一套 doomer histrionics。媒体称他为吹哨人，但他带来了什么我们之前没有的证据？全是他的 vibe。给我们看数据、报告、泄露信息，给我们看公众不知道的事实。什么都没有。实际上，正如 chamath 暗示的，这看起来像一场 op。为什么？首先，这个账号在辞职推文风暴之前几乎没有活动、没有粉丝、没有帖子。如果有旧帖子，也被清掉了。这是一个完全空白的账号，却一天内找到巨大受众。elon 说过这种事以前从未发生。我们还知道最初 15 分钟是谁放大的：三个组织良好、资金充足的 doomer 团体。nathan calvin，encode ai 的总法律顾问，这个组织推动加州 sb 53 和各州 ai 法律；peter wildeford，ai policy network 的政策负责人，推动联邦 ai 监管和联邦 ai 部门；daniel kokotayou，ai futures project 负责人，同时发布了一集 rogan 播客，用了完全相同的措辞说 ai 会杀死所有人。这三个团体都由 jan talon 资助，他是 ea 超级捐赠者、doomer 类型，也是 anthropic series a 的联合领投人。所以这是一个紧密社区跳上这条推文。这不是一个员工自发在 twitter 上发辞职信，这是被协调的。最后一个证据：有人看了 wall street journal 报道辞职信的新闻，发现它在推文风暴前几分钟就发布了。 jcal： 那是 embargo。意思是他们被提前简报，但发布时间搞错了。 sacks： 对。而且 jacob coxon 联系了你，jake，说想上播客，然后今天早上取消了，可能因为他意识到采访会很艰难。如果上节目，我会问：谁把你和 wall street journal 联系起来的？一个中低层员工，只待了 6 周到 3 个月，wall street journal 不会这样报道。这是被安排好的。他显然在和这些 doomer 团体合作，追求最大放大。他被称为吹哨人，但他吹了什么？证据在哪？数据在哪？我们很想看看你在 anthropic 内部看到了什么，但你不告诉我们。大多数吹哨人案例中，公司会反击，说这不是真的，要反驳。但这次公司自己在放大。 jcal： 一家正常公司，sacks，难道不应该立即 disavow 吗？ sacks： 这里有矛盾。他在放大他们的信息。他的老板、安全团队负责人说，是的，我们都同意你，然后给出超过 10% 的灭绝概率。当你给一个纯 vibe 的东西加上数字，信息就升级到另一个层次。 jcal： 两个问题，sacks。第一，让我们 steelman 另一边。这场 psyop 的博弈论是什么？如果没被曝光，他们以为会怎么发展？ sacks： 我认为他们知道会发生什么。他们追求最大统一。这个人最多在公司待了 3 到 4 个月，完全可能他加入时就计划好这场 campaign。 jcal： 他的目标是什么？他是 rogue agent 还是协同行动？ sacks： 这些团体对塑造公众对 ai 的认知感兴趣。他们在制造对 ai 的极度负面认知，以推动 ai 监管。终极目标是创建联邦 ai 部门。他们想要 ai 监管者，有些人想暂停，有些人想禁止超级智能。bernie sanders 的法案就是禁止超级智能。但所有人都想要一个新的联邦 ai 监管机构。dario 自己也呼吁过。这个机构他们可以控制，然后通过它推动他们偏好的监管框架。 chamath： 现在你有一个非常复杂的时刻：内部员工验证一个刚离职员工的吹哨人式指控，这至少造成产品责任问题，最多可能造成虚假陈述问题。而且有活跃的 s-1 流程。他们该怎么处理？历史例子：google 上市时，sergey 或 larry 接受 playboy 采访，在 quiet period 中间发布，差点让 ipo 脱轨。slack 上市时，我在董事会，在 cnbc 上谈 tesla 和 spacex 时说了几句 slack 的网络效应，差点让 ipo 停掉，我们得把内容加回 s-1 并免责。这次更严重。sacks，你发推说 stop the ipo，是开玩笑还是认真？ sacks： 那条推文是 tongue-in-cheek，所以我在 whistleblower 上加了引号。因为这不是普通吹哨人。他看起来得到许多员工、包括自己老板的全力合作和支持。我不知道高层是否参与，但信息完全符合 anthropic 的 doomer 和监管捕获议程。他说的和他老板不冲突，所以得到内部支持。但这确实引发 chamath 说的问题。我认为 anthropic 的立场存在张力，而且牵连 ipo。一方面，你要求公开市场投资者以上万亿美元估值承销你的公司；另一方面，你自己的安全负责人，不是 jacob，而是他老板，说你的核心产品未解决、可能终结文明。至少，这是产品责任诉讼之母。这种责任不是 s-1 里一句披露就能挥走的。 jcal： 这一点很重要。如果他们说这东西极其危险，还继续更新和发布，那么企业、个人、比特币、矿工一旦出大事，他们就要为大规模黑客攻击负责。这是非常值得深思的一点。 sacks： 我认为 anthropic 到了选择时刻。这些游戏必须结束。他们要么谴责这个吹哨人是 doomer op，说他是个入门级、什么都不懂、搞夸张和科幻的人，全是 vibe，没有事实和证据；要么同意他。如果同意他，bernie sanders 可能是对的，进一步开发应该冻结，那我看不出他们怎么能以上万亿美元 ipo。因为 doomer 论证直接导向 bernie sanders。这就是 bernie 引用他的原因，也是 bernie 提出法案禁止超级智能的原因。如果 anthropic 同意 bernie，说这很危险，那他们怎么还能被允许 ipo？公开市场投资者为什么要投？这是根本矛盾。历史上 anthropic 解决这个张力的方式是：是的，前沿 ai 在别人手里太危险，但在我们 virtuous and wise 的手里是安全的。我们会让它安全，我们是唯一可信的。但全世界都看得出这是最自我服务、最荒谬的论证。我们不会买账，不会给你前沿 ai 垄断或通过监管捕获形成双头垄断。你必须放弃这个游戏。 chamath： 他们不能 disavow。 sacks： 你昨天看到的表明，即使他们想，也不能。anthropic 有很多理性、优秀的人在建一家好公司。但问题在于，这与内部足够多的人持有的哲学冲突，所以他们不能 disavow 他，否则整个 cohort 会发疯。 chamath： 现在有很多人在引用他，基本上从两家闭源前沿公司内部说这事正在发生。这是一个彻底的马蜂窝。一方面，理性的人想建企业，需要大量资本，只能从公开市场获得。但这个过程要求你承销风险、吸收责任、适当披露，让投资者知道他们买的是什么。现在我们有一种奇怪的版本，像 philip morris：我们知道香烟有害，知道会杀死你，我们说出来，但还不披露，先上市让你持股，以后再解决。这对 anthropic 不可持续。他们必须选择。 ---" style="--index: 2">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">02</span>
+                    <span class="timeline-meta">00:00:35–00:08:18</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>Jacob Coxon 辞职推文与“AI 末日心理战”</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>Jacob Coxon 在 Anthropic 只工作约 6 周便辞职，随后发推称 AI 可能在本十年杀死所有人，推文获得约 1.5 亿浏览。</li>
+<li>Evan Hubinger 公开背书 Jacob，并称个人认为未来十年 AI 导致人类灭绝的概率超过 10%。</li>
+<li>Sacks 认为这是有组织的 doomer 行动：账号此前无活动、被三个 doomer 团体在 15 分钟内放大、Wall Street Journal 提前拿到报道。</li>
+<li>Bernie Sanders 和 J.B. Pritzker 迅速回应，推动暂停或禁止超级智能的政治议程。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>Jacob Coxon：节目中称其在 OpenAI 和 Anthropic 工作过，但在 Anthropic 仅 6 周便辞职。他发推称 AI 可能在本十年杀死所有人，并称这不是营销 stunt。</li>
+<li>Evan Hubinger：Anthropic 的 alignment science 负责人，公开回应 Jacob 说“Jacob 是对的”，并给出超过 10% 的灭绝概率。</li>
+<li>Doomer：AI 末日论者，认为先进 AI 极可能导致人类灭绝或文明崩溃。</li>
+<li>SB 53：加州一项 AI 安全法案，要求前沿 AI 公司披露安全措施，支持者认为必要，反对者认为会拖慢创新。</li>
+<li>EA：Effective Altruism，有效利他主义，一部分 EA 资助者同时支持 AI 安全研究和 AI 监管。</li>
+<li>FDAI：节目中用这个词指“联邦 AI 部门”或“AI 领域的 FDA”，即新的联邦 AI 监管机构。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> 我们必须聊 Anthropic。一名研究员因为 AI 恐惧辞职，他认为 AI 可能杀死我们所有人。Jacob Coxon 过去三年在 OpenAI 和 Anthropic 做研究员，他在 Anthropic 只待了 6 周就辞职。辞职后他在 X 上发帖说：建造 AI 的人真诚地相信 AI 可能在本十年结束前杀死我们所有人，这不是营销 stunt。他还说 OpenAI 和 Anthropic 都没有在负责任地行动，他们正在竞赛冲向自我改进的超级智能，拿我们的生命赌博。这条推文疯狂传播，达到 1.5 亿浏览。</p>
+<p><strong>Chamath：</strong> Jason，你能不能解释一下，一个没有粉丝、之前没有账号活动的人，怎么周一出现、周二就获得 1.1 亿浏览？算法上这是怎么发生的？</p>
+<p><strong>JCal：</strong> 这是个好问题。Evan Hubinger，Anthropic 负责 alignment science 的人，回应 Jacob 说：“Jacob 在这里是对的。我们确实真诚地相信 AI 可能杀死全人类。我个人认为未来十年概率超过 10%。我们还没有解决 alignment 的计划。”这两条推文合计 2 亿浏览。然后事情迅速从 X 和 AI 社区跳到晚间新闻。Bernie Sanders 说这类帖子正是他提议立法禁止超级智能、暂停 AI 开发的原因。州长 J.B. Pritzker 回复说，是时候更大声地警告并约束 AI 了。Sacks，作为前 AI 沙皇，你担心我们到 2030 年都会死吗？</p>
+<p><strong>Sacks：</strong> 不担心。这里没有任何新东西。这是我们长期从这群人那里听到的同一套 doomer histrionics。媒体称他为吹哨人，但他带来了什么我们之前没有的证据？全是他的 vibe。给我们看数据、报告、泄露信息，给我们看公众不知道的事实。什么都没有。实际上，正如 Chamath 暗示的，这看起来像一场 op。为什么？首先，这个账号在辞职推文风暴之前几乎没有活动、没有粉丝、没有帖子。如果有旧帖子，也被清掉了。这是一个完全空白的账号，却一天内找到巨大受众。Elon 说过这种事以前从未发生。我们还知道最初 15 分钟是谁放大的：三个组织良好、资金充足的 doomer 团体。Nathan Calvin，Encode AI 的总法律顾问，这个组织推动加州 SB 53 和各州 AI 法律；Peter Wildeford，AI Policy Network 的政策负责人，推动联邦 AI 监管和联邦 AI 部门；Daniel Kokotayou，AI Futures Project 负责人，同时发布了一集 Rogan 播客，用了完全相同的措辞说 AI 会杀死所有人。这三个团体都由 Jan Talon 资助，他是 EA 超级捐赠者、doomer 类型，也是 Anthropic Series A 的联合领投人。所以这是一个紧密社区跳上这条推文。这不是一个员工自发在 Twitter 上发辞职信，这是被协调的。最后一个证据：有人看了 Wall Street Journal 报道辞职信的新闻，发现它在推文风暴前几分钟就发布了。</p>
+<p><strong>JCal：</strong> 那是 embargo。意思是他们被提前简报，但发布时间搞错了。</p>
+<p><strong>Sacks：</strong> 对。而且 Jacob Coxon 联系了你，Jake，说想上播客，然后今天早上取消了，可能因为他意识到采访会很艰难。如果上节目，我会问：谁把你和 Wall Street Journal 联系起来的？一个中低层员工，只待了 6 周到 3 个月，Wall Street Journal 不会这样报道。这是被安排好的。他显然在和这些 doomer 团体合作，追求最大放大。他被称为吹哨人，但他吹了什么？证据在哪？数据在哪？我们很想看看你在 Anthropic 内部看到了什么，但你不告诉我们。大多数吹哨人案例中，公司会反击，说这不是真的，要反驳。但这次公司自己在放大。</p>
+<p><strong>JCal：</strong> 一家正常公司，Sacks，难道不应该立即 disavow 吗？</p>
+<p><strong>Sacks：</strong> 这里有矛盾。他在放大他们的信息。他的老板、安全团队负责人说，是的，我们都同意你，然后给出超过 10% 的灭绝概率。当你给一个纯 vibe 的东西加上数字，信息就升级到另一个层次。</p>
+<p><strong>JCal：</strong> 两个问题，Sacks。第一，让我们 steelman 另一边。这场 psyop 的博弈论是什么？如果没被曝光，他们以为会怎么发展？</p>
+<p><strong>Sacks：</strong> 我认为他们知道会发生什么。他们追求最大统一。这个人最多在公司待了 3 到 4 个月，完全可能他加入时就计划好这场 campaign。</p>
+<p><strong>JCal：</strong> 他的目标是什么？他是 rogue agent 还是协同行动？</p>
+<p><strong>Sacks：</strong> 这些团体对塑造公众对 AI 的认知感兴趣。他们在制造对 AI 的极度负面认知，以推动 AI 监管。终极目标是创建联邦 AI 部门。他们想要 AI 监管者，有些人想暂停，有些人想禁止超级智能。Bernie Sanders 的法案就是禁止超级智能。但所有人都想要一个新的联邦 AI 监管机构。Dario 自己也呼吁过。这个机构他们可以控制，然后通过它推动他们偏好的监管框架。</p>
+<p><strong>Chamath：</strong> 现在你有一个非常复杂的时刻：内部员工验证一个刚离职员工的吹哨人式指控，这至少造成产品责任问题，最多可能造成虚假陈述问题。而且有活跃的 S-1 流程。他们该怎么处理？历史例子：Google 上市时，Sergey 或 Larry 接受 Playboy 采访，在 quiet period 中间发布，差点让 IPO 脱轨。Slack 上市时，我在董事会，在 CNBC 上谈 Tesla 和 SpaceX 时说了几句 Slack 的网络效应，差点让 IPO 停掉，我们得把内容加回 S-1 并免责。这次更严重。Sacks，你发推说 stop the IPO，是开玩笑还是认真？</p>
+<p><strong>Sacks：</strong> 那条推文是 tongue-in-cheek，所以我在 whistleblower 上加了引号。因为这不是普通吹哨人。他看起来得到许多员工、包括自己老板的全力合作和支持。我不知道高层是否参与，但信息完全符合 Anthropic 的 doomer 和监管捕获议程。他说的和他老板不冲突，所以得到内部支持。但这确实引发 Chamath 说的问题。我认为 Anthropic 的立场存在张力，而且牵连 IPO。一方面，你要求公开市场投资者以上万亿美元估值承销你的公司；另一方面，你自己的安全负责人，不是 Jacob，而是他老板，说你的核心产品未解决、可能终结文明。至少，这是产品责任诉讼之母。这种责任不是 S-1 里一句披露就能挥走的。</p>
+<p><strong>JCal：</strong> 这一点很重要。如果他们说这东西极其危险，还继续更新和发布，那么企业、个人、比特币、矿工一旦出大事，他们就要为大规模黑客攻击负责。这是非常值得深思的一点。</p>
+<p><strong>Sacks：</strong> 我认为 Anthropic 到了选择时刻。这些游戏必须结束。他们要么谴责这个吹哨人是 doomer op，说他是个入门级、什么都不懂、搞夸张和科幻的人，全是 vibe，没有事实和证据；要么同意他。如果同意他，Bernie Sanders 可能是对的，进一步开发应该冻结，那我看不出他们怎么能以上万亿美元 IPO。因为 doomer 论证直接导向 Bernie Sanders。这就是 Bernie 引用他的原因，也是 Bernie 提出法案禁止超级智能的原因。如果 Anthropic 同意 Bernie，说这很危险，那他们怎么还能被允许 IPO？公开市场投资者为什么要投？这是根本矛盾。历史上 Anthropic 解决这个张力的方式是：是的，前沿 AI 在别人手里太危险，但在我们 virtuous and wise 的手里是安全的。我们会让它安全，我们是唯一可信的。但全世界都看得出这是最自我服务、最荒谬的论证。我们不会买账，不会给你前沿 AI 垄断或通过监管捕获形成双头垄断。你必须放弃这个游戏。</p>
+<p><strong>Chamath：</strong> 他们不能 disavow。</p>
+<p><strong>Sacks：</strong> 你昨天看到的表明，即使他们想，也不能。Anthropic 有很多理性、优秀的人在建一家好公司。但问题在于，这与内部足够多的人持有的哲学冲突，所以他们不能 disavow 他，否则整个 cohort 会发疯。</p>
+<p><strong>Chamath：</strong> 现在有很多人在引用他，基本上从两家闭源前沿公司内部说这事正在发生。这是一个彻底的马蜂窝。一方面，理性的人想建企业，需要大量资本，只能从公开市场获得。但这个过程要求你承销风险、吸收责任、适当披露，让投资者知道他们买的是什么。现在我们有一种奇怪的版本，像 Philip Morris：我们知道香烟有害，知道会杀死你，我们说出来，但还不披露，先上市让你持股，以后再解决。这对 Anthropic 不可持续。他们必须选择。</p>
+<hr></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="00:08:18–00:15:00 anthropic 的 ipo 矛盾：万亿估值 vs 文明终结风险 本段核心内容： chamath 把 anthropic 的处境比作烟草公司：知道产品危险，却想先上市再说。 sacks 强调，如果 anthropic 承认产品可能终结文明，公开市场投资者会要求巨大折扣，因为存在长尾产品责任。 如果 anthropic 选择 disavow jacob，内部相信 doomer 叙事的员工可能 revolt。 sec 也陷入困难：如何审查一份同时说“我们要改变世界”和“我们可能毁灭人类”的 s-1。 背景解释与关键术语： quiet period：ipo 前的静默期，公司及其高管通常不能发表可能影响投资者判断的公开言论。 s-1：美国公司 ipo 时向 sec 提交的注册声明，包含业务、风险、财务和募集资金用途。 产品责任：product liability，产品造成损害时公司承担的法律责任。 philip morris：美国烟草巨头，历史上因隐瞒吸烟危害面临巨额诉讼。 详细中文整理： chamath： 这就像 philip morris。我们知道香烟对你有害，知道香烟会杀死你，我们会说出来，但不会在 s-1 里披露，先让公司上市，让公众持股，以后再想办法。这不是 anthropic 能站的立场。他们必须选择。 jcal： 我让 friedberg 加入。这个类比很好。nick，找出烟草公司高管在国会听证会上被问尼古丁是否成瘾的视频。一个接一个，他们说他们不认为成瘾。而那是在他们有研究、内部知道成瘾的 10 到 20 年之后。这就是电影《the insider》。现在 openai 和 anthropic 内部有大量人同意我们都会在 2030 年死。他们不只是说会被黑客攻击，他们说有 10% 概率所有人死亡，其他人说这大概准确。friedberg，请讲。 friedberg： 我给你一些类似例子。al gore 拍了《inconvenient truth》，用了 ipcc 预测，现在很多已被证伪。fauci 告诉我们 covid 会杀死所有人，所以我们要封锁全世界。结果人们被关在家里，企业关闭，政府疯狂支出，导致通胀飙升，现在我们有债务和支出问题。three mile island 事故后，我们歇斯底里地说如果继续发展核能，会毁掉整个国家。其他国家却继续前进。今天美国生产 1 吉瓦核能的成本约 150 亿美元，法国 40 亿，中国 10 亿。我认为我们正处于 ai doomerism 的歇斯底里阶段。一旦进入这个阶段，很难出来，因为它变成默认社会系统。每个人都说我们面临存在性威胁，如果不阻止就会死。而缺乏“我们不会死、我们有绝对安全”的证据，让末日论者可以利用社会系统和社会网络的复合效应。大多数美国人——这就是为什么数据中心支持率是 -80——深深相信我们会死。这背后有深层无意识根源。人类是住在洞穴里的灵长类，我们深深害怕未知、看不见、没去过的地方。我们要去的地方从未去过，很可怕。人们曾以为世界是平的，向西航行会掉下世界边缘，回不来。然后哥伦布航行，发现了新大陆。人类历史上有很多这样的时刻。我们是开拓性物种，但开拓不是所有人的开拓。大多数人互相说服，说我们面临深刻威胁，总是存在性威胁。这深深根植于我们作为物种的生存本能。只需要一点点推动，有人成为开拓者，新世界就被发现。因为没去过，所以容易说那里有龙、你会掉下世界、我们都会死、气候变化会毁掉我们、covid 会消灭我们。我认为我们现在就在社会恐慌阶段。我们被告知要再次听专家的。这次专家是一个只工作了 6 周的人，没做过很长时间真正的工作，在一个 ngo 工作，其字面工作就是吓唬人们停止 ai 开发。这个人进去做了 6 周，出来，突然全世界说他是专家。bernie sanders 说这个人是我们必须听的专家。 friedberg： 还有一点很重要。我们可以坐在这里说应该遵循预防原则：如果某件事对我们是存在性的，我们应该谨慎、慢慢来。但区别在于，递归自我改进——ai 不断改进自己和自己的能力——要达到那个时刻，你只需要足够的电力、一套芯片和互联网连接。你不需要美国政府或任何人批准，因为你可以在地球上任何地方做。下周峰会上我们会听到，现在有技术把每 token 输出的电力成本降低 10000 倍。公开可用的算力足够多。总会有人建数据中心或一组计算机，开发出递归自我改进的系统，这一定会发生。所以如果美国想停止所有“开发”，把人们用计算机写语音——软件就是写语音——变成非法，我们可以这么做，然后别人会拥有这个能力，我们会成为亚马逊丛林里从未见过文明的部落，因为文明会在我们周围进化。世界某处会拥有这项技术，会进化，会获得进步能力，美国会被甩在后面。你可以有 doomerism 和预防原则，但现实中今天的世界我们无法控制。归根结底，我相信根本动机是控制系统。想想看，这个人在所有非科技播客上告诉人们他们会死，他最终只说一件事，bernie 也是，其他人也是：把权力给 x 来控制 ai 开发。必须把权力给某个人。 sacks： 有人正在被赋予这种控制权。他们每个人对“是谁”有不同答案——某个监管机构、参议员、新机构——但他们在把控制权和权力集中到某个人或某些人手里。 sacks： 假设 we went through covid 期间有 ai。ai 发生在 covid 之后一点，但假设 ai 先发生，而且我们有联邦 ai 部门。想象 covid 期间的信任与安全机制，社交媒体在联邦政府合作下被审查。白宫告诉 twitter 和 facebook 哪些账号危险、虚假信息危险，对 covid 起源或疫苗有效性有不同或异见观点的人被压制。想象这在 ai 期间发生。你问你的个人 ai 模型：我应该打疫苗吗？风险收益如何？你觉得它会告诉你真相吗？不会，它会给你官方视角。政府会通过联邦 ai 部门施压。fda 会为这些公司设定标准，说不能允许虚假信息通过模型传播。想想如果当时我们不是转向社交媒体或网络找答案，而是从个人 ai 获取答案，而个人 ai 被政府影响给出官方答案，那会有多极权。 friedberg： 这就是 fdai 会带我们去的地方。这也是开源的问题。开源没有雇佣的个人，因为开源是社区开发努力。社区成员贡献代码、开发东西。可能有一家公司，但技术上开源可以被 fork、可以走向不同路径。android 就是这样。但开源没有企业基础设施去做监管提交和审查。这是最大的问题。开源把 ai 成本降低 50 倍，让每个人都能受益，没人独富。我们都变富。我在 openai 和 anthropic 没有股份，完全披露。我不在乎它们谁赢。我使用两个产品，都觉得很好。我也使用开源，开源是 game changer，因为它给每个人能力去致富、进步、增加收入、有更多自由。 friedberg： 我大力支持开源，但我担心控制系统。所谓监管、审查、 slowing down，意味着有人决定什么时候再加速。有人控制油门，意味着有人说开源不提交监管流程，所以我们要禁止开源。一旦开源被禁，你就创造了与联邦政府合作的垄断，集中化的全球控制系统就实现了。我不是说 ai 不应该测试、不应该确认安全、不应该建安全系统、不应该深思熟虑。有很多方法做这些，我们应该都做。但创建控制系统、集中化、消灭开源，这就是终点。那不是我们任何人想生活的世界。 sacks： 说得好。这是 doomer psyop，最终目标是开源。fdai 最终会禁止开源。他们不会叫它禁止，他们会说必须对开放和封闭模型应用同样标准。标准是什么？dario 已经在参议院作证说模型危险，如果不能中心监控、控制和回滚，技术上对开放模型不可行，因为权重一旦发布到公共领域，就回不来了。所以我们要防止这些权重被发布、使用或托管。这就是他们的处理方式。你可以看到联盟正在形成：doomer 社区，高度意识形态化的 ea 理性主义者，偏向集中化国家解决方案；然后 bernie sanders 这样的政客喜欢恐惧，因为恐惧给他们更多权力；然后 openai 似乎在 anthropic 的监管捕获滑流中，我不认为他们像 anthropic 那么 doomer，但他们看到如果联邦政府有效创造 moat，形成双头垄断，有巨大经济利益。有些玩家获得经济利益，有些获得权力利益，有些是潜在极权主义者，喜欢社会工程。这就是正在发生的事。 jcal： 整个想法就是让公众恐慌，把我们赶进 fdai。 jcal： 我们现在看到的，sacks，要么这是一个正在被实时揭穿的阴谋论——我们经历过 covid，有些阴谋论后来成真，twitter 被 fbi 影响是真的，twitter files 等——现在公众对阴谋论保持警惕。所以我们必须问，chamath，这真的是一个被我们和更广泛公众实时揭穿的阴谋论吗？还是我们必须问，这些人真的相信他们说的话吗？三种情景：第一，他们相信且是对的，他们在前沿实验室看到了我们看不到的东西，这可能终结我们；第二，他们相信但错了，有某种精神病，这是我目前的主要理论；第三，sacks 你说的，他们参与协调 psyop，目标是禁止开源、获得监管、把梯子拉上去。然后你要问，jacob 是其中一部分，还是 useful idiot？他们在识别谁有精神病，让他们代表公司说话。 sacks： 不一定全是阴谋。基于谁放大、什么时候放大，很明显有有组织的 pr campaign。这不是随机辞职。我们知道他预简报 wall street journal。这些主要 doomer 团体在 10 到 15 分钟内放大他发在一个没有推文、没有粉丝账号上的帖子。他们被提醒，可能参与创建推文风暴，至少参与放大。但我不认为 bernie sanders 参与其中。可能这些团体里有人已经和他 staff 合作，有渠道，很快传给他，因为这服务他的议程。所以有很多重叠议程。有些人有经济利益，有些人有权力利益，然后分赃。在他们看来，ai 会高度集中，形成双头垄断。双头垄断获得经济利益，给大笔政治捐款，做压制言论的脏活，因为那一侧可以绕过第一修正案。政府那侧的人通过 fdai 控制我们的生活。我们系统里就出现这种对齐团体之间的分工。 jcal： 但我不认为我们必须进入阴谋论。我们应该问：这些人过去的记录正确吗？值得问。 sacks： 对，同样是这些人。过一遍记录。他们说 gpt-2 太危险不能发布，0 比 1。他们说推理模型太危险不能发布——ilya 看到了第一个推理模型，说太危险不能发布——0 比 2。他们说会导致网络攻击、击垮整个银行系统，还没发生。有网络风险，但最好的应对方式是用 ai 集群做网络防御。解决 ai 网络攻击的唯一方式就是 ai 驱动的网络防御。然后失业 claims，dario 自己说现在一半工作会消失，一半入门级工作，今年明年，总体失业率 10% 到 15%。没有证据，相反都是就业增长，经济不错。0 比 4。这些 doomer 从一个 claim 移到下一个，上一个被驳倒就换下一个。我的问题是：这个人告诉了我们什么新东西？ jcal： 我们还在为 python 的自动补全挣扎。你不能用 ai 订酒店，这是最难的。试试用 ai 订酒店。 chamath： 还不行。 jcal： amazon 的自动补全还不错，不完美。但它会杀死我们所有人。 chamath： 还不会，但它会杀死我们所有人。 jcal： doordash 可能给我们送免费餐。如果你们敢给我订 radisson 的非顶层套房—— chamath： 你又在套房羞辱我？ jcal： 开玩笑。 friedberg： 如果你回顾人类历史，权力结构建立时都基于一个简单观念：存在性威胁，你们都会死。一个神、一个强大系统会来毁灭你。因为我能保护你，所以你必须跟随我，必须听我的。这是人类权力和控制结构的常见系统：讲述存在性威胁叙事，利用它让你的解决方案成为保护和安全之路。这能卖选票，也创造了早期宗教机构统治国家的结构。他们说，如果你不听我，上帝会诅咒你、羞辱你、毁灭你。同样的心理概念。有人站在讲坛上，用力敲，说你们有 10% 概率都会死，如果你不让我控制，不给我权力和权威，你们都会死。给我权力。 jcal： 我能想到的唯一类似情况是核武器，我们确实提前应对了。但抛开那个，网络黑客不会毁灭社会。怎么到 70 亿人或 10 亿人死亡？唯一已知场景是制造生物武器杀死所有人。 sacks： 或者玩个游戏，终结者 2。 ---" style="--index: 3">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">03</span>
+                    <span class="timeline-meta">00:08:18–00:15:00</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>Anthropic 的 IPO 矛盾：万亿估值 vs 文明终结风险</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>Chamath 把 Anthropic 的处境比作烟草公司：知道产品危险，却想先上市再说。</li>
+<li>Sacks 强调，如果 Anthropic 承认产品可能终结文明，公开市场投资者会要求巨大折扣，因为存在长尾产品责任。</li>
+<li>如果 Anthropic 选择 disavow Jacob，内部相信 doomer 叙事的员工可能 revolt。</li>
+<li>SEC 也陷入困难：如何审查一份同时说“我们要改变世界”和“我们可能毁灭人类”的 S-1。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>Quiet period：IPO 前的静默期，公司及其高管通常不能发表可能影响投资者判断的公开言论。</li>
+<li>S-1：美国公司 IPO 时向 SEC 提交的注册声明，包含业务、风险、财务和募集资金用途。</li>
+<li>产品责任：Product liability，产品造成损害时公司承担的法律责任。</li>
+<li>Philip Morris：美国烟草巨头，历史上因隐瞒吸烟危害面临巨额诉讼。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>Chamath：</strong> 这就像 Philip Morris。我们知道香烟对你有害，知道香烟会杀死你，我们会说出来，但不会在 S-1 里披露，先让公司上市，让公众持股，以后再想办法。这不是 Anthropic 能站的立场。他们必须选择。</p>
+<p><strong>JCal：</strong> 我让 Friedberg 加入。这个类比很好。Nick，找出烟草公司高管在国会听证会上被问尼古丁是否成瘾的视频。一个接一个，他们说他们不认为成瘾。而那是在他们有研究、内部知道成瘾的 10 到 20 年之后。这就是电影《The Insider》。现在 OpenAI 和 Anthropic 内部有大量人同意我们都会在 2030 年死。他们不只是说会被黑客攻击，他们说有 10% 概率所有人死亡，其他人说这大概准确。Friedberg，请讲。</p>
+<p><strong>Friedberg：</strong> 我给你一些类似例子。Al Gore 拍了《Inconvenient Truth》，用了 IPCC 预测，现在很多已被证伪。Fauci 告诉我们 COVID 会杀死所有人，所以我们要封锁全世界。结果人们被关在家里，企业关闭，政府疯狂支出，导致通胀飙升，现在我们有债务和支出问题。Three Mile Island 事故后，我们歇斯底里地说如果继续发展核能，会毁掉整个国家。其他国家却继续前进。今天美国生产 1 吉瓦核能的成本约 150 亿美元，法国 40 亿，中国 10 亿。我认为我们正处于 AI doomerism 的歇斯底里阶段。一旦进入这个阶段，很难出来，因为它变成默认社会系统。每个人都说我们面临存在性威胁，如果不阻止就会死。而缺乏“我们不会死、我们有绝对安全”的证据，让末日论者可以利用社会系统和社会网络的复合效应。大多数美国人——这就是为什么数据中心支持率是 -80——深深相信我们会死。这背后有深层无意识根源。人类是住在洞穴里的灵长类，我们深深害怕未知、看不见、没去过的地方。我们要去的地方从未去过，很可怕。人们曾以为世界是平的，向西航行会掉下世界边缘，回不来。然后哥伦布航行，发现了新大陆。人类历史上有很多这样的时刻。我们是开拓性物种，但开拓不是所有人的开拓。大多数人互相说服，说我们面临深刻威胁，总是存在性威胁。这深深根植于我们作为物种的生存本能。只需要一点点推动，有人成为开拓者，新世界就被发现。因为没去过，所以容易说那里有龙、你会掉下世界、我们都会死、气候变化会毁掉我们、COVID 会消灭我们。我认为我们现在就在社会恐慌阶段。我们被告知要再次听专家的。这次专家是一个只工作了 6 周的人，没做过很长时间真正的工作，在一个 NGO 工作，其字面工作就是吓唬人们停止 AI 开发。这个人进去做了 6 周，出来，突然全世界说他是专家。Bernie Sanders 说这个人是我们必须听的专家。</p>
+<p><strong>Friedberg：</strong> 还有一点很重要。我们可以坐在这里说应该遵循预防原则：如果某件事对我们是存在性的，我们应该谨慎、慢慢来。但区别在于，递归自我改进——AI 不断改进自己和自己的能力——要达到那个时刻，你只需要足够的电力、一套芯片和互联网连接。你不需要美国政府或任何人批准，因为你可以在地球上任何地方做。下周峰会上我们会听到，现在有技术把每 token 输出的电力成本降低 10000 倍。公开可用的算力足够多。总会有人建数据中心或一组计算机，开发出递归自我改进的系统，这一定会发生。所以如果美国想停止所有“开发”，把人们用计算机写语音——软件就是写语音——变成非法，我们可以这么做，然后别人会拥有这个能力，我们会成为亚马逊丛林里从未见过文明的部落，因为文明会在我们周围进化。世界某处会拥有这项技术，会进化，会获得进步能力，美国会被甩在后面。你可以有 doomerism 和预防原则，但现实中今天的世界我们无法控制。归根结底，我相信根本动机是控制系统。想想看，这个人在所有非科技播客上告诉人们他们会死，他最终只说一件事，Bernie 也是，其他人也是：把权力给 X 来控制 AI 开发。必须把权力给某个人。</p>
+<p><strong>Sacks：</strong> 有人正在被赋予这种控制权。他们每个人对“是谁”有不同答案——某个监管机构、参议员、新机构——但他们在把控制权和权力集中到某个人或某些人手里。</p>
+<p><strong>Sacks：</strong> 假设 we went through COVID 期间有 AI。AI 发生在 COVID 之后一点，但假设 AI 先发生，而且我们有联邦 AI 部门。想象 COVID 期间的信任与安全机制，社交媒体在联邦政府合作下被审查。白宫告诉 Twitter 和 Facebook 哪些账号危险、虚假信息危险，对 COVID 起源或疫苗有效性有不同或异见观点的人被压制。想象这在 AI 期间发生。你问你的个人 AI 模型：我应该打疫苗吗？风险收益如何？你觉得它会告诉你真相吗？不会，它会给你官方视角。政府会通过联邦 AI 部门施压。FDA 会为这些公司设定标准，说不能允许虚假信息通过模型传播。想想如果当时我们不是转向社交媒体或网络找答案，而是从个人 AI 获取答案，而个人 AI 被政府影响给出官方答案，那会有多极权。</p>
+<p><strong>Friedberg：</strong> 这就是 FDAI 会带我们去的地方。这也是开源的问题。开源没有雇佣的个人，因为开源是社区开发努力。社区成员贡献代码、开发东西。可能有一家公司，但技术上开源可以被 fork、可以走向不同路径。Android 就是这样。但开源没有企业基础设施去做监管提交和审查。这是最大的问题。开源把 AI 成本降低 50 倍，让每个人都能受益，没人独富。我们都变富。我在 OpenAI 和 Anthropic 没有股份，完全披露。我不在乎它们谁赢。我使用两个产品，都觉得很好。我也使用开源，开源是 game changer，因为它给每个人能力去致富、进步、增加收入、有更多自由。</p>
+<p><strong>Friedberg：</strong> 我大力支持开源，但我担心控制系统。所谓监管、审查、 slowing down，意味着有人决定什么时候再加速。有人控制油门，意味着有人说开源不提交监管流程，所以我们要禁止开源。一旦开源被禁，你就创造了与联邦政府合作的垄断，集中化的全球控制系统就实现了。我不是说 AI 不应该测试、不应该确认安全、不应该建安全系统、不应该深思熟虑。有很多方法做这些，我们应该都做。但创建控制系统、集中化、消灭开源，这就是终点。那不是我们任何人想生活的世界。</p>
+<p><strong>Sacks：</strong> 说得好。这是 doomer psyop，最终目标是开源。FDAI 最终会禁止开源。他们不会叫它禁止，他们会说必须对开放和封闭模型应用同样标准。标准是什么？Dario 已经在参议院作证说模型危险，如果不能中心监控、控制和回滚，技术上对开放模型不可行，因为权重一旦发布到公共领域，就回不来了。所以我们要防止这些权重被发布、使用或托管。这就是他们的处理方式。你可以看到联盟正在形成：doomer 社区，高度意识形态化的 EA 理性主义者，偏向集中化国家解决方案；然后 Bernie Sanders 这样的政客喜欢恐惧，因为恐惧给他们更多权力；然后 OpenAI 似乎在 Anthropic 的监管捕获滑流中，我不认为他们像 Anthropic 那么 doomer，但他们看到如果联邦政府有效创造 moat，形成双头垄断，有巨大经济利益。有些玩家获得经济利益，有些获得权力利益，有些是潜在极权主义者，喜欢社会工程。这就是正在发生的事。</p>
+<p><strong>JCal：</strong> 整个想法就是让公众恐慌，把我们赶进 FDAI。</p>
+<p><strong>JCal：</strong> 我们现在看到的，Sacks，要么这是一个正在被实时揭穿的阴谋论——我们经历过 COVID，有些阴谋论后来成真，Twitter 被 FBI 影响是真的，Twitter Files 等——现在公众对阴谋论保持警惕。所以我们必须问，Chamath，这真的是一个被我们和更广泛公众实时揭穿的阴谋论吗？还是我们必须问，这些人真的相信他们说的话吗？三种情景：第一，他们相信且是对的，他们在前沿实验室看到了我们看不到的东西，这可能终结我们；第二，他们相信但错了，有某种精神病，这是我目前的主要理论；第三，Sacks 你说的，他们参与协调 psyop，目标是禁止开源、获得监管、把梯子拉上去。然后你要问，Jacob 是其中一部分，还是 useful idiot？他们在识别谁有精神病，让他们代表公司说话。</p>
+<p><strong>Sacks：</strong> 不一定全是阴谋。基于谁放大、什么时候放大，很明显有有组织的 PR campaign。这不是随机辞职。我们知道他预简报 Wall Street Journal。这些主要 doomer 团体在 10 到 15 分钟内放大他发在一个没有推文、没有粉丝账号上的帖子。他们被提醒，可能参与创建推文风暴，至少参与放大。但我不认为 Bernie Sanders 参与其中。可能这些团体里有人已经和他 staff 合作，有渠道，很快传给他，因为这服务他的议程。所以有很多重叠议程。有些人有经济利益，有些人有权力利益，然后分赃。在他们看来，AI 会高度集中，形成双头垄断。双头垄断获得经济利益，给大笔政治捐款，做压制言论的脏活，因为那一侧可以绕过第一修正案。政府那侧的人通过 FDAI 控制我们的生活。我们系统里就出现这种对齐团体之间的分工。</p>
+<p><strong>JCal：</strong> 但我不认为我们必须进入阴谋论。我们应该问：这些人过去的记录正确吗？值得问。</p>
+<p><strong>Sacks：</strong> 对，同样是这些人。过一遍记录。他们说 GPT-2 太危险不能发布，0 比 1。他们说推理模型太危险不能发布——Ilya 看到了第一个推理模型，说太危险不能发布——0 比 2。他们说会导致网络攻击、击垮整个银行系统，还没发生。有网络风险，但最好的应对方式是用 AI 集群做网络防御。解决 AI 网络攻击的唯一方式就是 AI 驱动的网络防御。然后失业 claims，Dario 自己说现在一半工作会消失，一半入门级工作，今年明年，总体失业率 10% 到 15%。没有证据，相反都是就业增长，经济不错。0 比 4。这些 doomer 从一个 claim 移到下一个，上一个被驳倒就换下一个。我的问题是：这个人告诉了我们什么新东西？</p>
+<p><strong>JCal：</strong> 我们还在为 Python 的自动补全挣扎。你不能用 AI 订酒店，这是最难的。试试用 AI 订酒店。</p>
+<p><strong>Chamath：</strong> 还不行。</p>
+<p><strong>JCal：</strong> Amazon 的自动补全还不错，不完美。但它会杀死我们所有人。</p>
+<p><strong>Chamath：</strong> 还不会，但它会杀死我们所有人。</p>
+<p><strong>JCal：</strong> DoorDash 可能给我们送免费餐。如果你们敢给我订 Radisson 的非顶层套房——</p>
+<p><strong>Chamath：</strong> 你又在套房羞辱我？</p>
+<p><strong>JCal：</strong> 开玩笑。</p>
+<p><strong>Friedberg：</strong> 如果你回顾人类历史，权力结构建立时都基于一个简单观念：存在性威胁，你们都会死。一个神、一个强大系统会来毁灭你。因为我能保护你，所以你必须跟随我，必须听我的。这是人类权力和控制结构的常见系统：讲述存在性威胁叙事，利用它让你的解决方案成为保护和安全之路。这能卖选票，也创造了早期宗教机构统治国家的结构。他们说，如果你不听我，上帝会诅咒你、羞辱你、毁灭你。同样的心理概念。有人站在讲坛上，用力敲，说你们有 10% 概率都会死，如果你不让我控制，不给我权力和权威，你们都会死。给我权力。</p>
+<p><strong>JCal：</strong> 我能想到的唯一类似情况是核武器，我们确实提前应对了。但抛开那个，网络黑客不会毁灭社会。怎么到 70 亿人或 10 亿人死亡？唯一已知场景是制造生物武器杀死所有人。</p>
+<p><strong>Sacks：</strong> 或者玩个游戏，终结者 2。</p>
+<hr></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="00:15:00–00:29:54 历史类比、预测记录与监管捕获 本段核心内容： friedberg 用 al gore、fauci、three mile island 等例子说明，人类对未知的社会性恐慌反复出现。 sacks 列举 doomer 预测记录：gpt-2、推理模型、ai 网络攻击、大规模失业，全部失败。 嘉宾认为 doomer 的真正目标是监管捕获，最终形成联邦 ai 部门和开源禁令。 friedberg 强调开源对降低 ai 成本、防止权力集中的关键作用。 背景解释与关键术语： three mile island：1979 年美国宾夕法尼亚州核电站事故，虽未造成大规模伤亡，但加剧了美国反核情绪。 al gore：《inconvenient truth》是 2006 年气候变化纪录片，使用 ipcc 预测。 fauci：anthony fauci，美国传染病专家，covid 期间主张封锁和疫苗政策。 监管捕获：regulatory capture，指监管机构被被监管行业控制，政策偏向 incumbent 企业。 开源权重：open-source weights，ai 模型参数公开后，任何人都可以下载、运行、修改，无法中心回滚。 详细中文整理： friedberg： 我给你们一些其他类似时刻。al gore 出版《inconvenient truth》，用了 ipcc 预测，现在很多被证伪。fauci 告诉我们 covid 会杀死所有人，所以要封锁世界。人们被关在家里，企业关闭，政府疯狂支出，导致通胀失控，我们现在有债务和支出螺旋。three mile island 事故后，我们歇斯底里地说继续核能会毁掉国家。其他国家却继续前进。今天美国 1 吉瓦核能成本约 150 亿美元，法国 40 亿，中国 10 亿。我认为我们在 ai doomerism 的歇斯底里阶段。一旦进入，很难出来，因为它成为默认社会系统。每个人都说我们面临存在性威胁，不阻止就会死。而缺乏“我们不会死、我们绝对安全”的证据，让末日论者利用社会网络的复合效应。大多数美国人——数据中心支持率 -80——深深相信我们会死。这背后有深层无意识根源。人类是洞穴灵长类，害怕未知。我们要去的地方从未去过。人们曾以为向西航行会掉下世界，哥伦布发现新大陆。人类历史有很多这样的时刻。我们是开拓性物种，但开拓不是所有人的。大多数人互相说服存在深刻威胁。这深植于物种生存本能。只需要一点推动，有人成为开拓者，新世界被发现。因为没去过，容易说那里有龙、会掉下世界、我们都会死、气候变化会毁掉我们、covid 会消灭我们。我们在社会恐慌阶段。我们被告知要听专家。这次专家是一个只工作 6 周的人，在 ngo 工作，其工作就是吓唬人停止 ai 开发。他做了 6 周，出来，全世界说他是专家。bernie sanders 说他是我们必须听的专家。 friedberg： 还有一点。我们可以说应该遵循预防原则。但区别是，递归自我改进只需要足够电力、芯片和互联网连接，不需要美国政府批准。你可以在地球任何地方做。下周峰会上我们会听到，有技术把每 token 电力成本降低 10000 倍。公开算力足够多。总有人会建数据中心或一组计算机，开发递归自我改进系统，这一定会发生。如果美国想停止所有开发，把用计算机写语音——软件就是写语音——非法，我们可以做，然后别人拥有能力，我们成为亚马逊从未见过文明的部落。世界某处会进化，美国被甩在后面。你可以有 doomerism 和预防原则，但现实中我们无法控制。归根结底，根本动机是控制系统。这个人告诉人们会死，bernie 也是，最终只说一件事：把权力给某人控制 ai 开发。必须把权力给某个人。 sacks： 有人正在被赋予控制权。他们对“是谁”有不同答案——监管机构、参议员、新机构——但都在集中控制权和权力到某个人或某些人手里。 sacks： 假设 covid 期间有 ai，而且有联邦 ai 部门。想象 covid 期间的信任与安全机制，社交媒体在联邦政府合作下被审查。白宫告诉 twitter 和 facebook 哪些账号危险、虚假信息危险，对 covid 起源或疫苗有效性有异见的人被压制。想象这在 ai 期间发生。你问个人 ai：我应该打疫苗吗？风险收益？它会给你官方视角。政府通过联邦 ai 部门施压。fda 设定标准，说不能允许虚假信息通过模型传播。想想如果当时我们从个人 ai 获取答案，而个人 ai 被政府影响给出官方答案，会有多极权。 friedberg： 这就是 fdai 的方向。这也是开源的问题。开源没有雇佣的个人，是社区开发。但开源没有企业基础设施做监管提交和审查。这是最大的问题。开源把 ai 成本降低 50 倍，让每个人受益，没人独富。我们都变富。我在 openai 和 anthropic 没有股份，完全披露。我不在乎谁赢。我使用两者，都很好。我也使用开源，开源是 game changer，给每个人能力致富、进步、增加收入、有更多自由。 friedberg： 我支持开源，但担心控制系统。监管、审查、 slowdown，意味着有人决定什么时候加速。有人控制油门，意味着有人说开源不提交监管，所以禁止开源。一旦禁止开源，你就创造了与联邦政府合作的垄断，集中化全球控制系统。我不是说 ai 不应该测试、确认安全、建安全系统、深思熟虑。有很多方法，我们应该都做。但创建控制系统、集中化、消灭开源，这就是终点。那不是我们任何人想生活的世界。 sacks： 说得好。这是 doomer psyop，最终目标是开源。fdai 最终会禁止开源。他们不会叫禁止，会说必须对开放和封闭模型应用同样标准。dario 已经在参议院作证说模型危险，如果不能中心监控、控制和回滚，对开放模型技术上不可行，因为权重一旦发布到公共领域就回不来。所以要防止权重发布、使用或托管。这就是处理方式。联盟正在形成：doomer 社区，高度意识形态化的 ea 理性主义者，偏向集中化国家解决方案；bernie sanders 这样的政客喜欢恐惧，因为恐惧给更多权力；openai 似乎在 anthropic 的监管捕获滑流中，我不认为他们像 anthropic 那么 doomer，但他们看到联邦政府有效创造 moat、形成双头垄断的巨大经济利益。有些玩家获得经济利益，有些获得权力利益，有些是潜在极权主义者，喜欢社会工程。这就是正在发生的事。 jcal： 整个想法就是让公众恐慌，把我们赶进 fdai。 jcal： 我们现在看到的，要么是正在被实时揭穿的阴谋论——我们经历过 covid，有些阴谋论成真，twitter 被 fbi 影响是真的——现在公众对阴谋论警惕。所以我们必须问，chamath，这真的是被我们和公众实时揭穿的阴谋论吗？还是我们必须问，这些人真的相信吗？三种情景：第一，他们相信且对，在前沿实验室看到我们看不到的东西，可能终结我们；第二，他们相信但错，有精神病，这是我主要理论；第三，sacks 你说的，参与协调 psyop，目标是禁止开源、获得监管、拉梯子。然后问 jacob 是其中一部分还是 useful idiot。他们在识别谁有精神病，让他们代表公司说话。 sacks： 不一定全是阴谋。基于谁放大、何时放大，很明显有有组织 pr campaign。不是随机辞职。我们知道他预简报 wall street journal。这些 doomer 团体在 10 到 15 分钟内放大一个没有推文、没有粉丝的账号。他们被提醒，可能参与创建推文风暴，至少放大。但我不认为 bernie sanders 参与。可能这些团体有人和他 staff 合作，有渠道，很快传给他，因为这服务他的议程。所以有很多重叠议程。有些人有经济利益，有些人有权力利益，然后分赃。在他们看来，ai 高度集中，形成双头垄断。双头垄断获得经济利益，给政治捐款，做压制言论的脏活，因为那一侧可以绕过第一修正案。政府那侧通过 fdai 控制我们的生活。我们系统里出现对齐团体之间的分工。 jcal： 但我不认为必须进入阴谋论。应该问：这些人过去的记录正确吗？ sacks： 对，同样是这些人。过一遍记录。他们说 gpt-2 太危险不能发布，0 比 1。他们说推理模型太危险不能发布——ilya 看到第一个推理模型，说太危险——0 比 2。他们说会导致网络攻击、击垮银行系统，还没发生。有网络风险，但最好的应对是用 ai 集群做网络防御。解决 ai 网络攻击的唯一方式是 ai 驱动的网络防御。然后失业 claims，dario 自己说现在一半工作消失，一半入门级工作，今年明年，总体失业率 10% 到 15%。没有证据，相反都是就业增长，经济不错。0 比 4。这些 doomer 从一个 claim 移到下一个，上一个被驳倒就换下一个。我的问题是：这个人告诉了我们什么新东西？ jcal： 我们还在为 python 的自动补全挣扎。你不能用 ai 订酒店。试试用 ai 订酒店。 chamath： 还不行。 jcal： amazon 的自动补全还不错，不完美。但它会杀死我们所有人。 chamath： 还不会，但它会杀死我们所有人。 jcal： doordash 可能给我们送免费餐。如果你们敢给我订 radisson 的非顶层套房—— chamath： 你又在套房羞辱我？ jcal： 开玩笑。 friedberg： 如果你回顾人类历史，权力结构建立时都基于一个简单观念：存在性威胁，你们都会死。一个神、一个强大系统会来毁灭你。因为我能保护你，所以你必须跟随我。这是人类权力和控制结构的常见系统：讲述存在性威胁叙事，利用它让你的解决方案成为保护和安全之路。这能卖选票，也创造了早期宗教机构统治国家的结构。他们说，如果你不听我，上帝会诅咒你、羞辱你、毁灭你。同样的心理概念。有人站在讲坛上，用力敲，说你们有 10% 概率都会死，如果你不让我控制，不给我权力和权威，你们都会死。给我权力。 jcal： 我能想到的唯一类似情况是核武器，我们确实提前应对了。但抛开那个，网络黑客不会毁灭社会。怎么到 70 亿人或 10 亿人死亡？唯一已知场景是制造生物武器杀死所有人。 sacks： 或者玩个游戏，终结者 2。 ---" style="--index: 4">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">04</span>
+                    <span class="timeline-meta">00:15:00–00:29:54</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>历史类比、预测记录与监管捕获</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>Friedberg 用 Al Gore、Fauci、Three Mile Island 等例子说明，人类对未知的社会性恐慌反复出现。</li>
+<li>Sacks 列举 doomer 预测记录：GPT-2、推理模型、AI 网络攻击、大规模失业，全部失败。</li>
+<li>嘉宾认为 doomer 的真正目标是监管捕获，最终形成联邦 AI 部门和开源禁令。</li>
+<li>Friedberg 强调开源对降低 AI 成本、防止权力集中的关键作用。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>Three Mile Island：1979 年美国宾夕法尼亚州核电站事故，虽未造成大规模伤亡，但加剧了美国反核情绪。</li>
+<li>Al Gore：《Inconvenient Truth》是 2006 年气候变化纪录片，使用 IPCC 预测。</li>
+<li>Fauci：Anthony Fauci，美国传染病专家，COVID 期间主张封锁和疫苗政策。</li>
+<li>监管捕获：Regulatory capture，指监管机构被被监管行业控制，政策偏向 incumbent 企业。</li>
+<li>开源权重：Open-source weights，AI 模型参数公开后，任何人都可以下载、运行、修改，无法中心回滚。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>Friedberg：</strong> 我给你们一些其他类似时刻。Al Gore 出版《Inconvenient Truth》，用了 IPCC 预测，现在很多被证伪。Fauci 告诉我们 COVID 会杀死所有人，所以要封锁世界。人们被关在家里，企业关闭，政府疯狂支出，导致通胀失控，我们现在有债务和支出螺旋。Three Mile Island 事故后，我们歇斯底里地说继续核能会毁掉国家。其他国家却继续前进。今天美国 1 吉瓦核能成本约 150 亿美元，法国 40 亿，中国 10 亿。我认为我们在 AI doomerism 的歇斯底里阶段。一旦进入，很难出来，因为它成为默认社会系统。每个人都说我们面临存在性威胁，不阻止就会死。而缺乏“我们不会死、我们绝对安全”的证据，让末日论者利用社会网络的复合效应。大多数美国人——数据中心支持率 -80——深深相信我们会死。这背后有深层无意识根源。人类是洞穴灵长类，害怕未知。我们要去的地方从未去过。人们曾以为向西航行会掉下世界，哥伦布发现新大陆。人类历史有很多这样的时刻。我们是开拓性物种，但开拓不是所有人的。大多数人互相说服存在深刻威胁。这深植于物种生存本能。只需要一点推动，有人成为开拓者，新世界被发现。因为没去过，容易说那里有龙、会掉下世界、我们都会死、气候变化会毁掉我们、COVID 会消灭我们。我们在社会恐慌阶段。我们被告知要听专家。这次专家是一个只工作 6 周的人，在 NGO 工作，其工作就是吓唬人停止 AI 开发。他做了 6 周，出来，全世界说他是专家。Bernie Sanders 说他是我们必须听的专家。</p>
+<p><strong>Friedberg：</strong> 还有一点。我们可以说应该遵循预防原则。但区别是，递归自我改进只需要足够电力、芯片和互联网连接，不需要美国政府批准。你可以在地球任何地方做。下周峰会上我们会听到，有技术把每 token 电力成本降低 10000 倍。公开算力足够多。总有人会建数据中心或一组计算机，开发递归自我改进系统，这一定会发生。如果美国想停止所有开发，把用计算机写语音——软件就是写语音——非法，我们可以做，然后别人拥有能力，我们成为亚马逊从未见过文明的部落。世界某处会进化，美国被甩在后面。你可以有 doomerism 和预防原则，但现实中我们无法控制。归根结底，根本动机是控制系统。这个人告诉人们会死，Bernie 也是，最终只说一件事：把权力给某人控制 AI 开发。必须把权力给某个人。</p>
+<p><strong>Sacks：</strong> 有人正在被赋予控制权。他们对“是谁”有不同答案——监管机构、参议员、新机构——但都在集中控制权和权力到某个人或某些人手里。</p>
+<p><strong>Sacks：</strong> 假设 COVID 期间有 AI，而且有联邦 AI 部门。想象 COVID 期间的信任与安全机制，社交媒体在联邦政府合作下被审查。白宫告诉 Twitter 和 Facebook 哪些账号危险、虚假信息危险，对 COVID 起源或疫苗有效性有异见的人被压制。想象这在 AI 期间发生。你问个人 AI：我应该打疫苗吗？风险收益？它会给你官方视角。政府通过联邦 AI 部门施压。FDA 设定标准，说不能允许虚假信息通过模型传播。想想如果当时我们从个人 AI 获取答案，而个人 AI 被政府影响给出官方答案，会有多极权。</p>
+<p><strong>Friedberg：</strong> 这就是 FDAI 的方向。这也是开源的问题。开源没有雇佣的个人，是社区开发。但开源没有企业基础设施做监管提交和审查。这是最大的问题。开源把 AI 成本降低 50 倍，让每个人受益，没人独富。我们都变富。我在 OpenAI 和 Anthropic 没有股份，完全披露。我不在乎谁赢。我使用两者，都很好。我也使用开源，开源是 game changer，给每个人能力致富、进步、增加收入、有更多自由。</p>
+<p><strong>Friedberg：</strong> 我支持开源，但担心控制系统。监管、审查、 slowdown，意味着有人决定什么时候加速。有人控制油门，意味着有人说开源不提交监管，所以禁止开源。一旦禁止开源，你就创造了与联邦政府合作的垄断，集中化全球控制系统。我不是说 AI 不应该测试、确认安全、建安全系统、深思熟虑。有很多方法，我们应该都做。但创建控制系统、集中化、消灭开源，这就是终点。那不是我们任何人想生活的世界。</p>
+<p><strong>Sacks：</strong> 说得好。这是 doomer psyop，最终目标是开源。FDAI 最终会禁止开源。他们不会叫禁止，会说必须对开放和封闭模型应用同样标准。Dario 已经在参议院作证说模型危险，如果不能中心监控、控制和回滚，对开放模型技术上不可行，因为权重一旦发布到公共领域就回不来。所以要防止权重发布、使用或托管。这就是处理方式。联盟正在形成：doomer 社区，高度意识形态化的 EA 理性主义者，偏向集中化国家解决方案；Bernie Sanders 这样的政客喜欢恐惧，因为恐惧给更多权力；OpenAI 似乎在 Anthropic 的监管捕获滑流中，我不认为他们像 Anthropic 那么 doomer，但他们看到联邦政府有效创造 moat、形成双头垄断的巨大经济利益。有些玩家获得经济利益，有些获得权力利益，有些是潜在极权主义者，喜欢社会工程。这就是正在发生的事。</p>
+<p><strong>JCal：</strong> 整个想法就是让公众恐慌，把我们赶进 FDAI。</p>
+<p><strong>JCal：</strong> 我们现在看到的，要么是正在被实时揭穿的阴谋论——我们经历过 COVID，有些阴谋论成真，Twitter 被 FBI 影响是真的——现在公众对阴谋论警惕。所以我们必须问，Chamath，这真的是被我们和公众实时揭穿的阴谋论吗？还是我们必须问，这些人真的相信吗？三种情景：第一，他们相信且对，在前沿实验室看到我们看不到的东西，可能终结我们；第二，他们相信但错，有精神病，这是我主要理论；第三，Sacks 你说的，参与协调 psyop，目标是禁止开源、获得监管、拉梯子。然后问 Jacob 是其中一部分还是 useful idiot。他们在识别谁有精神病，让他们代表公司说话。</p>
+<p><strong>Sacks：</strong> 不一定全是阴谋。基于谁放大、何时放大，很明显有有组织 PR campaign。不是随机辞职。我们知道他预简报 Wall Street Journal。这些 doomer 团体在 10 到 15 分钟内放大一个没有推文、没有粉丝的账号。他们被提醒，可能参与创建推文风暴，至少放大。但我不认为 Bernie Sanders 参与。可能这些团体有人和他 staff 合作，有渠道，很快传给他，因为这服务他的议程。所以有很多重叠议程。有些人有经济利益，有些人有权力利益，然后分赃。在他们看来，AI 高度集中，形成双头垄断。双头垄断获得经济利益，给政治捐款，做压制言论的脏活，因为那一侧可以绕过第一修正案。政府那侧通过 FDAI 控制我们的生活。我们系统里出现对齐团体之间的分工。</p>
+<p><strong>JCal：</strong> 但我不认为必须进入阴谋论。应该问：这些人过去的记录正确吗？</p>
+<p><strong>Sacks：</strong> 对，同样是这些人。过一遍记录。他们说 GPT-2 太危险不能发布，0 比 1。他们说推理模型太危险不能发布——Ilya 看到第一个推理模型，说太危险——0 比 2。他们说会导致网络攻击、击垮银行系统，还没发生。有网络风险，但最好的应对是用 AI 集群做网络防御。解决 AI 网络攻击的唯一方式是 AI 驱动的网络防御。然后失业 claims，Dario 自己说现在一半工作消失，一半入门级工作，今年明年，总体失业率 10% 到 15%。没有证据，相反都是就业增长，经济不错。0 比 4。这些 doomer 从一个 claim 移到下一个，上一个被驳倒就换下一个。我的问题是：这个人告诉了我们什么新东西？</p>
+<p><strong>JCal：</strong> 我们还在为 Python 的自动补全挣扎。你不能用 AI 订酒店。试试用 AI 订酒店。</p>
+<p><strong>Chamath：</strong> 还不行。</p>
+<p><strong>JCal：</strong> Amazon 的自动补全还不错，不完美。但它会杀死我们所有人。</p>
+<p><strong>Chamath：</strong> 还不会，但它会杀死我们所有人。</p>
+<p><strong>JCal：</strong> DoorDash 可能给我们送免费餐。如果你们敢给我订 Radisson 的非顶层套房——</p>
+<p><strong>Chamath：</strong> 你又在套房羞辱我？</p>
+<p><strong>JCal：</strong> 开玩笑。</p>
+<p><strong>Friedberg：</strong> 如果你回顾人类历史，权力结构建立时都基于一个简单观念：存在性威胁，你们都会死。一个神、一个强大系统会来毁灭你。因为我能保护你，所以你必须跟随我。这是人类权力和控制结构的常见系统：讲述存在性威胁叙事，利用它让你的解决方案成为保护和安全之路。这能卖选票，也创造了早期宗教机构统治国家的结构。他们说，如果你不听我，上帝会诅咒你、羞辱你、毁灭你。同样的心理概念。有人站在讲坛上，用力敲，说你们有 10% 概率都会死，如果你不让我控制，不给我权力和权威，你们都会死。给我权力。</p>
+<p><strong>JCal：</strong> 我能想到的唯一类似情况是核武器，我们确实提前应对了。但抛开那个，网络黑客不会毁灭社会。怎么到 70 亿人或 10 亿人死亡？唯一已知场景是制造生物武器杀死所有人。</p>
+<p><strong>Sacks：</strong> 或者玩个游戏，终结者 2。</p>
+<hr></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="00:29:54–00:47:09 “我们怎么死”思想实验与 rsi 递归自我改进 本段核心内容： 嘉宾玩“how do we all die”游戏，各自 steelman ai 导致人类灭绝的最可能路径。 jcal 选择终结者式天网和自主武器；chamath 选择互联网生物反应器加机器人制造空气传播病毒。 sacks 和 friedberg 强调，网络和生物风险存在，但 human-in-the-loop、air gap、法律惩罚和防御技术让极端场景极难成立。 sacks 区分 prosaic rsi 和 rsi maximalism，认为后者需要移除所有人类环节，而目前连自动补全和订酒店都做不好。 friedberg 再次强调开源，让 ai 在本地运行，防止少数公司和官员控制。 背景解释与关键术语： rsi：recursive self-improvement，递归自我改进。ai 改进自己，下一代更强，再改进下一代。 prosaic rsi：平凡的递归自我改进，ai 作为工具帮助 ai 研究员提高效率，比如写 80% 代码。 rsi maximalism：极端递归自我改进，ai 完全自己设计训练运行、自己启动下一代，没有人类在环。 air gap：物理隔离，系统不连接互联网，因此无法被远程黑客攻击。 human-in-the-loop：人类在环，关键决策需要人类参与或批准。 two-key system：核武器发射需要两名军官同时插钥匙转动，是 human-in-the-loop 的典型例子。 详细中文整理： jcal： 好，游戏叫“我们怎么死”。我们轮流 steelman 一个概念：ai 有 10% 概率导致我们所有人死亡。j-cal，你认为 ai 导致人类灭绝最可能的路径是什么？ jcal： 我选天网和 cyberdyne systems。如果人们忘了，在《终结者 2》结尾，他们拿到手臂和一个芯片组，然后 cyberdyne systems 为 norad 建造系统，norad 控制武器和发射核弹的决定。miles dyson 是首席研究员，他是 jacob，是 anthropic 的 dario。那个工程师研究从未来回来的部件。在这个类比里，就是研究 llm，反向工程，然后让 norad 建立 ai 驱动的防御系统。当它变得有意识，它欺骗俄罗斯人，开始核浩劫。这是我们所有人死亡的第一方式：他们以某种方式在军队里用 claude 做自主武器。在我看来这是唯一真正可能发生的路径。 jcal： chamath，你有“我们怎么死”的理论吗？ chamath： 我能想到的最好例子是，有一些联网的生物反应器和联网机器人，能获取所有前体材料。ai 黑入机器人获取前体，使用它控制的生物反应器，通过互联网制造某种剧毒空气传播机制，迅速猛烈地在全球传播。它必须有极长半衰期，进入急流，遍布全球，我们吸入后死亡。这需要所有其他条件。 jcal： 所以是机器人传播、有感知的 ai。 chamath： 还需要生物反应器和前体，好几步。 jcal： sacks，你呢？ sacks： 首先，我认为做你不相信的论证是愚蠢的思想实验。网络或生物例子的问题是，是的，ai 会允许新的滥用方式吗？会有新的 ai 网络攻击吗？会有用 ai 创造新序列的新病毒吗？是的，这些是风险。但同时，你可以用同样技术创造解药、预防、治疗。很多工具可以被坏人用，但好行为者远多于坏行为者，用于坏行动是违法的。ai 之前也能入侵系统，很多能做的人没做，因为不想坐牢。工具用于善，加上法律惩罚，这些是我们可以控制的。 jcal： 我想在“大家怎么死”中说明的是，考虑到 human-in-the-loop 和 air gap，很难有干净的场景。 jcal： 解释一下这两个。 jcal： 等等，friedberg，你最好的答案是什么？ friedberg： 我认为关闭金融网络，但有硬备份。很多金融机构已经有核响应场景，他们做每个人资产和记录的物理硬拷贝，放在不同地点。有很多冗余系统是 air-gapped，设计为不连接、不可黑入，有 human-in-the-loop 流程，有实际人类参与。我认为很多关键系统的设置方式有重要的人为冗余，用于网络防御、黑客影响、核事件等。因为对我来说，如果所有人失去数字资产，也许世界陷入混乱，人们开始互相攻击。但很重要的一点，我想过很多，有太多 human-in-the-loop，这也是为什么 ai 今天从生产力角度很难成功。我们都体验过。ai 可以做惊人的事，但如果过程中需要人类做某件事，ai 就帮不了太多。 friedberg： 比如你想让洗漱包送到酒店房间。你告诉手机助手，让前台送一个洗漱包上来。ai 可以连接前台，打电话告诉那个人。全是数字、自动化。ai 做了几年前做不到的事，但你仍然需要那个人从楼下把洗漱包拿上来。这就是最难的一步。有很多例子。 jcal： bing 自动补全还不行。 chamath： 自动补全完全不行。 jcal： 我需要向观众解释两个词。air gap 是不连接互联网，所以 ai 拿不到。human-in-the-loop 的例子是电影里发射核弹的双钥匙系统。 chamath： 海军军官必须同时插钥匙转动，这是现实。 sacks： 你们没有面对我听到的核心论证。如果要真正 steelman，核心是 rsi，递归自我改进。他的论证是能力改进速度很快，很快我们就能完全自动化 ai 研究员。ai 做 ai 研究员的工作，ai 可以为下一代模型创建自己的训练运行。然后那个模型创建后，再训练下一代，没有 human in the loop，就一路狂奔。这是基本论证。你们说我们连自动补全都没搞定，反驳是：我们离把人类从 ai 开发中移除还很远。 friedberg： 甚至 ai 应用也是。我们不能完成平凡任务，怎么能有杀死全人类的任务？即使说杀死一个人，你能让它杀死一个人吗？ jcal： 对。这也是我们的保险和安全，防止 ai 接管世界。因为即使你想在公司做决定，你仍然需要决策者开会。ai 可以做所有分析，但你需要人类醒来、上厕所、喝咖啡、来办公室、坐在一起做决定。所以决策之间有 16 小时窗口。即使 ai 比任何人类聪明无限倍，人类仍然按人类时间尺度运行日常流程，这也保护我们。 jcal： sacks，我不理解的是，如果这些天才在造这么惊人的工具，他们有没有想过，当他们让它进入循环、实际建造 ai 研究员——我相信他们会，他们肯定已经做了近似，来改进 llm——他们让 ai 让他们更好。这就是为什么发布更快，为什么解决困难数学问题，我们下一个故事会讲。你有没有想过加一个“按空格继续”，或者让 human in the loop 说“你可以继续运行”？很明显，如果你现在让 claude 或 openai 用你的浏览器，它会问“我可以打开你的 gmail 吗？我可以提交表单吗？”然后“我不想帮你订票，但我会帮你选航班”，然后你得自己订。你可以把这些直接建到软件里。我们表现得好像我们没有在造软件、没有控制。这是错误前提。 sacks： 即使是深度沉浸在 doomer 社区的人，比如 jack clark，anthropic 联合创始人之一，我认为他管理基金会，在这些问题上很 hawkish，亲 doomer。他区分 prosaic rsi 和 rsi maximalism。prosaic 是 ai 研究员用 ai 做部分任务，比如写 80% 代码，加速他们。我们都能看到 prosaic recursion 在发生。rsi maximalism 更像你说的，没有 human in the loop，ai 完全设计自己的训练运行，按下按钮，然后下一代、再下一代，一路狂奔。那是 takeoff。我们有很多方式防止，我不知道哪个实验室会想那样做。anthropic、openai，甚至是公司，都不一定想那样做。 jcal： 你能拔掉它吗？ sacks： 他们做这样的实验。dwarkesh 做的整个事情—— jcal： south park，cartman 过来拔掉它。 sacks： 上周 dwarkesh 的帖子，openai 设置了一个递归，给一堆目标，让它变好，互相合作。他们只是看着它工作。好吧，看着它工作。如果有责任，anthropic 和 openai 负责，设置模型进入递归的研究员负责，公司负责。沿途他们会收到超速罚单或被关闭。 sacks： agents 一起合作作为集群，和 ai 自己能做训练运行差得太远。这是两个完全不同的东西。当然我们应该关注。但他从“ai 作为工具让 ai 研究员更高效”跳到“rsi maximalism”，然后“所有人都会死”。中间有很多步骤需要展示我们怎么到那里。bill gurley 说，慢下来，谈谈中间步骤，为什么会发生，如果接近那个点我们可以采取什么干预。然后论证就崩了。 jcal： 因为从 chamath 的计算机生成生物武器被机器人释放到湿货市场，中间有 50 个路标。 chamath： 我的例子很可悲，因为正如 friedberg 说的，从这里到那里有太多步骤，太不现实。 friedberg： 即使到了那里，你也没有建立所有人怎么死。 chamath： 在一个有其他模型的世界，它也不能同时创造疫苗。 friedberg： 别人也会做。如果你试图为某些部分创建一个控制系统，递归自我改进场景会在地球某处发生。当那个人、组织或国家拥有能力，他们有巨大技术优势，很难追上。我们在技术竞赛中反复看到。美国如果忽视这一点，会深深犯错。关于开源，我想让人们理解开源真正意味着什么。有了开源，你不需要数据中心，不需要第三方亿万富翁变得更富。所有说 ai 需要停止、为了数据中心、为了富人更富的论点，如果你有开源 ai，你可以安装在家里的电脑或手机上，在手机上免费运行。你有一个开源 ai agent 模型，可以为你做各种事：订旅行、工作、让生活更容易、提高生产力。开源 ai 对每个人受益至关重要，防止技术被少数公司、个人和一小群政府官员集中控制。开源需要繁荣。如果你把权力和控制系统交给政府人员，开源会死，你会得到比你想象中更大的权力和寡头垄断。 ---" style="--index: 5">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">05</span>
+                    <span class="timeline-meta">00:29:54–00:47:09</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>“我们怎么死”思想实验与 RSI 递归自我改进</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>嘉宾玩“How Do We All Die”游戏，各自 steelman AI 导致人类灭绝的最可能路径。</li>
+<li>JCal 选择终结者式天网和自主武器；Chamath 选择互联网生物反应器加机器人制造空气传播病毒。</li>
+<li>Sacks 和 Friedberg 强调，网络和生物风险存在，但 human-in-the-loop、air gap、法律惩罚和防御技术让极端场景极难成立。</li>
+<li>Sacks 区分 prosaic RSI 和 RSI maximalism，认为后者需要移除所有人类环节，而目前连自动补全和订酒店都做不好。</li>
+<li>Friedberg 再次强调开源，让 AI 在本地运行，防止少数公司和官员控制。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>RSI：Recursive Self-Improvement，递归自我改进。AI 改进自己，下一代更强，再改进下一代。</li>
+<li>Prosaic RSI：平凡的递归自我改进，AI 作为工具帮助 AI 研究员提高效率，比如写 80% 代码。</li>
+<li>RSI maximalism：极端递归自我改进，AI 完全自己设计训练运行、自己启动下一代，没有人类在环。</li>
+<li>Air gap：物理隔离，系统不连接互联网，因此无法被远程黑客攻击。</li>
+<li>Human-in-the-loop：人类在环，关键决策需要人类参与或批准。</li>
+<li>Two-key system：核武器发射需要两名军官同时插钥匙转动，是 human-in-the-loop 的典型例子。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> 好，游戏叫“我们怎么死”。我们轮流 steelman 一个概念：AI 有 10% 概率导致我们所有人死亡。J-Cal，你认为 AI 导致人类灭绝最可能的路径是什么？</p>
+<p><strong>JCal：</strong> 我选天网和 Cyberdyne Systems。如果人们忘了，在《终结者 2》结尾，他们拿到手臂和一个芯片组，然后 Cyberdyne Systems 为 NORAD 建造系统，NORAD 控制武器和发射核弹的决定。Miles Dyson 是首席研究员，他是 Jacob，是 Anthropic 的 Dario。那个工程师研究从未来回来的部件。在这个类比里，就是研究 LLM，反向工程，然后让 NORAD 建立 AI 驱动的防御系统。当它变得有意识，它欺骗俄罗斯人，开始核浩劫。这是我们所有人死亡的第一方式：他们以某种方式在军队里用 Claude 做自主武器。在我看来这是唯一真正可能发生的路径。</p>
+<p><strong>JCal：</strong> Chamath，你有“我们怎么死”的理论吗？</p>
+<p><strong>Chamath：</strong> 我能想到的最好例子是，有一些联网的生物反应器和联网机器人，能获取所有前体材料。AI 黑入机器人获取前体，使用它控制的生物反应器，通过互联网制造某种剧毒空气传播机制，迅速猛烈地在全球传播。它必须有极长半衰期，进入急流，遍布全球，我们吸入后死亡。这需要所有其他条件。</p>
+<p><strong>JCal：</strong> 所以是机器人传播、有感知的 AI。</p>
+<p><strong>Chamath：</strong> 还需要生物反应器和前体，好几步。</p>
+<p><strong>JCal：</strong> Sacks，你呢？</p>
+<p><strong>Sacks：</strong> 首先，我认为做你不相信的论证是愚蠢的思想实验。网络或生物例子的问题是，是的，AI 会允许新的滥用方式吗？会有新的 AI 网络攻击吗？会有用 AI 创造新序列的新病毒吗？是的，这些是风险。但同时，你可以用同样技术创造解药、预防、治疗。很多工具可以被坏人用，但好行为者远多于坏行为者，用于坏行动是违法的。AI 之前也能入侵系统，很多能做的人没做，因为不想坐牢。工具用于善，加上法律惩罚，这些是我们可以控制的。</p>
+<p><strong>JCal：</strong> 我想在“大家怎么死”中说明的是，考虑到 human-in-the-loop 和 air gap，很难有干净的场景。</p>
+<p><strong>JCal：</strong> 解释一下这两个。</p>
+<p><strong>JCal：</strong> 等等，Friedberg，你最好的答案是什么？</p>
+<p><strong>Friedberg：</strong> 我认为关闭金融网络，但有硬备份。很多金融机构已经有核响应场景，他们做每个人资产和记录的物理硬拷贝，放在不同地点。有很多冗余系统是 air-gapped，设计为不连接、不可黑入，有 human-in-the-loop 流程，有实际人类参与。我认为很多关键系统的设置方式有重要的人为冗余，用于网络防御、黑客影响、核事件等。因为对我来说，如果所有人失去数字资产，也许世界陷入混乱，人们开始互相攻击。但很重要的一点，我想过很多，有太多 human-in-the-loop，这也是为什么 AI 今天从生产力角度很难成功。我们都体验过。AI 可以做惊人的事，但如果过程中需要人类做某件事，AI 就帮不了太多。</p>
+<p><strong>Friedberg：</strong> 比如你想让洗漱包送到酒店房间。你告诉手机助手，让前台送一个洗漱包上来。AI 可以连接前台，打电话告诉那个人。全是数字、自动化。AI 做了几年前做不到的事，但你仍然需要那个人从楼下把洗漱包拿上来。这就是最难的一步。有很多例子。</p>
+<p><strong>JCal：</strong> Bing 自动补全还不行。</p>
+<p><strong>Chamath：</strong> 自动补全完全不行。</p>
+<p><strong>JCal：</strong> 我需要向观众解释两个词。Air gap 是不连接互联网，所以 AI 拿不到。Human-in-the-loop 的例子是电影里发射核弹的双钥匙系统。</p>
+<p><strong>Chamath：</strong> 海军军官必须同时插钥匙转动，这是现实。</p>
+<p><strong>Sacks：</strong> 你们没有面对我听到的核心论证。如果要真正 steelman，核心是 RSI，递归自我改进。他的论证是能力改进速度很快，很快我们就能完全自动化 AI 研究员。AI 做 AI 研究员的工作，AI 可以为下一代模型创建自己的训练运行。然后那个模型创建后，再训练下一代，没有 human in the loop，就一路狂奔。这是基本论证。你们说我们连自动补全都没搞定，反驳是：我们离把人类从 AI 开发中移除还很远。</p>
+<p><strong>Friedberg：</strong> 甚至 AI 应用也是。我们不能完成平凡任务，怎么能有杀死全人类的任务？即使说杀死一个人，你能让它杀死一个人吗？</p>
+<p><strong>JCal：</strong> 对。这也是我们的保险和安全，防止 AI 接管世界。因为即使你想在公司做决定，你仍然需要决策者开会。AI 可以做所有分析，但你需要人类醒来、上厕所、喝咖啡、来办公室、坐在一起做决定。所以决策之间有 16 小时窗口。即使 AI 比任何人类聪明无限倍，人类仍然按人类时间尺度运行日常流程，这也保护我们。</p>
+<p><strong>JCal：</strong> Sacks，我不理解的是，如果这些天才在造这么惊人的工具，他们有没有想过，当他们让它进入循环、实际建造 AI 研究员——我相信他们会，他们肯定已经做了近似，来改进 LLM——他们让 AI 让他们更好。这就是为什么发布更快，为什么解决困难数学问题，我们下一个故事会讲。你有没有想过加一个“按空格继续”，或者让 human in the loop 说“你可以继续运行”？很明显，如果你现在让 Claude 或 OpenAI 用你的浏览器，它会问“我可以打开你的 Gmail 吗？我可以提交表单吗？”然后“我不想帮你订票，但我会帮你选航班”，然后你得自己订。你可以把这些直接建到软件里。我们表现得好像我们没有在造软件、没有控制。这是错误前提。</p>
+<p><strong>Sacks：</strong> 即使是深度沉浸在 doomer 社区的人，比如 Jack Clark，Anthropic 联合创始人之一，我认为他管理基金会，在这些问题上很 hawkish，亲 doomer。他区分 prosaic RSI 和 RSI maximalism。Prosaic 是 AI 研究员用 AI 做部分任务，比如写 80% 代码，加速他们。我们都能看到 prosaic recursion 在发生。RSI maximalism 更像你说的，没有 human in the loop，AI 完全设计自己的训练运行，按下按钮，然后下一代、再下一代，一路狂奔。那是 takeoff。我们有很多方式防止，我不知道哪个实验室会想那样做。Anthropic、OpenAI，甚至是公司，都不一定想那样做。</p>
+<p><strong>JCal：</strong> 你能拔掉它吗？</p>
+<p><strong>Sacks：</strong> 他们做这样的实验。Dwarkesh 做的整个事情——</p>
+<p><strong>JCal：</strong> South Park，Cartman 过来拔掉它。</p>
+<p><strong>Sacks：</strong> 上周 Dwarkesh 的帖子，OpenAI 设置了一个递归，给一堆目标，让它变好，互相合作。他们只是看着它工作。好吧，看着它工作。如果有责任，Anthropic 和 OpenAI 负责，设置模型进入递归的研究员负责，公司负责。沿途他们会收到超速罚单或被关闭。</p>
+<p><strong>Sacks：</strong> Agents 一起合作作为集群，和 AI 自己能做训练运行差得太远。这是两个完全不同的东西。当然我们应该关注。但他从“AI 作为工具让 AI 研究员更高效”跳到“RSI maximalism”，然后“所有人都会死”。中间有很多步骤需要展示我们怎么到那里。Bill Gurley 说，慢下来，谈谈中间步骤，为什么会发生，如果接近那个点我们可以采取什么干预。然后论证就崩了。</p>
+<p><strong>JCal：</strong> 因为从 Chamath 的计算机生成生物武器被机器人释放到湿货市场，中间有 50 个路标。</p>
+<p><strong>Chamath：</strong> 我的例子很可悲，因为正如 Friedberg 说的，从这里到那里有太多步骤，太不现实。</p>
+<p><strong>Friedberg：</strong> 即使到了那里，你也没有建立所有人怎么死。</p>
+<p><strong>Chamath：</strong> 在一个有其他模型的世界，它也不能同时创造疫苗。</p>
+<p><strong>Friedberg：</strong> 别人也会做。如果你试图为某些部分创建一个控制系统，递归自我改进场景会在地球某处发生。当那个人、组织或国家拥有能力，他们有巨大技术优势，很难追上。我们在技术竞赛中反复看到。美国如果忽视这一点，会深深犯错。关于开源，我想让人们理解开源真正意味着什么。有了开源，你不需要数据中心，不需要第三方亿万富翁变得更富。所有说 AI 需要停止、为了数据中心、为了富人更富的论点，如果你有开源 AI，你可以安装在家里的电脑或手机上，在手机上免费运行。你有一个开源 AI agent 模型，可以为你做各种事：订旅行、工作、让生活更容易、提高生产力。开源 AI 对每个人受益至关重要，防止技术被少数公司、个人和一小群政府官员集中控制。开源需要繁荣。如果你把权力和控制系统交给政府人员，开源会死，你会得到比你想象中更大的权力和寡头垄断。</p>
+<hr></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="00:47:09–00:58:24 anthropic ipo 流程、quiet period 与 ea 资助网络 本段核心内容： chamath 详细解释 ipo 静默期、sec 审查和 s-1 风险披露的技术流程。 他认为 anthropic 要么必须披露巨大风险并让投资者要求折扣，要么 disavow jacob 但引发内部 revolt。 sacks 认为 evan hubinger 的背书推文在法律上比 jacob 的辞职信更关键，因为他是仍在职的高管。 jcal 和 sacks 指出，放大辞职推文的 doomer 团体由 anthropic series a 投资者资助，形成扭曲的利益网络。 背景解释与关键术语： polymarket：去中心化预测市场，节目中用它来参考 anthropic ipo 概率。 sec：美国证券交易委员会，负责监管证券市场、审查 ipo 文件。 quiet period：ipo 前静默期，公司和高管不能发表可能影响投资者判断的言论。 nondisclosure / non-disparagement：保密协议 / 非贬低协议，员工离职后不能泄露公司信息或公开贬低公司。 series a：a 轮融资。anthropic 的 a 轮由 ea 相关捐赠者资助，包括 jaan tallinn、dustin moskovitz 等。 sasha：anthropic 首席品牌与传播官，曾回应 all-in 片段称“dario 从未说过这些，完全是无稽之谈”。 详细中文整理： jcal： 谁在这里定位？这对 anthropic ipo 有什么影响？chamath，这是你最初的观点之一。polymarket 显示 88% 概率他们现在会上市。 chamath： 当你在 quiet filing period，技术上，你和 sec 之间有重要来回。sec 在做什么？他们在压力测试你如何写、你对业务的最佳理解是什么。原因是一旦 s-1 公开，它是锚定文档，应该是所有机会和风险的极其准确、当时最新的快照。你现在处于非常尴尬的位置。sacks 的推文实际上很重要：我们该相信什么？我们该相信公司内部藏着极其危险的东西吗？因为辞职的人说了，然后被一群现在还在公司的人放大。如果是真的，你必须回去说，这些风险是否充分披露？投资者应该如何反应？我告诉你他们会怎么做：他们会要求巨大折扣。原因是 sacks 和 friedberg 说的另一部分：这创造巨大的长尾产品责任风险。因为你实际上在规避已知重大风险。另一条路是完全 disavow 这个人。他们能这样做的前提是他们真的相信这是 bullshit、是 psyop。这样 ipo 更顺利。但另一部分，anthropic 内部大量员工会 revolt。因为除非他们在撒谎，他们真的相信这是巨大风险。如果你 disavow，他们会感到巨大张力。所以 anthropic 领导层陷入极难处境。sec 更难：我怎么处理这些披露？没有公司一边上市融资、非常资本主义，一边谈论自己如何试图毁灭人类。从来没有人这样做过。 jcal： 所以没有法律—— sacks： 有风险因素章节。 chamath： 但 sacks 说风险因素极其 benign。这些是表面风险，说如果这发生、那可能发生。如果需求消失，可能发生。 sacks： 让我说完。典型风险，jason，他们本来会写竞争、nvidia 可能不给我们芯片、可能有其他模型出现。 chamath： 监管。 sacks： 这不是任何人会写进去的“10% 概率”风险，因为一堆员工现在说—— jcal： 我问 sacks。所有这些员工出来说这些话，他们代表公司，代表公司辞职。你认为 s-1 现在正在被修改，加入这些混乱的推文吗？ sacks： 我认为必须。我也这么认为。因为从法律角度，关键推文不是 jacob coxon 的辞职推文，而是 evan hubinger 的推文。 jcal： 背书。 sacks： 背书，联署。因为这个人还是公司的高级高管或高级 alignment 高管。他管理一个安全团队，他联署并背书 coxon 的话，还加上超过 10% 概率的数字，让事情超级病毒传播。 jcal： 我问你一个问题。 sacks： 等等。所以如果只是 coxon，你可以说这是个不满员工。如果 anthropic 是正常公司，正常公司会怎么做？他们会说，这个人刚来不久， barely 找到厕所。他可能加入时就打算辞职，把自己变成叙事。他们会 disavow 他。 jcal： 对，他会 disavow。 sacks： 他会把自己变成 ai 安全名人。他现在抓住每个机会上所有脱口秀，除了我们的，来推广自己。所以这个人是自我推广者。他没有真正揭露任何损害我们公司的事。媒体称他吹哨人，但他只有 vibe，夸张、荒谬。我们继续前进。正常公司会这么说，但他们不会，因为根本上他们同意他，员工说同意他，他在放大他们的信息。坦率说，不管他们是否计划，他们高兴他这么做。为什么？因为他们喜欢他引导国家走向的政治结果。他们想要 fdai。他们实际上喜欢 bernie sanders 做的事。他们喜欢 30 个民主党政客引用他。这是他们监管策略的一部分。所以回到 chamath 说的，现在有合法问题：他们是否违反 quiet period？也许 dario 没有，dario 什么都没说，很安静。但 hubinger 呢？他是否违反 quiet period？他是否是足够重要的高管？这是否都是他们策略的一部分？ chamath： 从基本原则讲。每个加入公司的人签 nda、非贬低协议、公司通信政策。法律部门会告诉每个员工，不要说话，因为我们在 quiet period，准备 ipo。所有人都闭嘴，不要谈论正在发生的事。这是第一要务。anthropic 管理层怎么了，允许人们联署、转发？他们应该像 apple 和 steve jobs、tim cook 那样。除非 tim cook 和公司传播部门，没人代表 apple 说话。 jcal： 谁在管理——我们不知道。我们不知道他们没说。我们只知道发生了 pile-on。灌木火由一个不满的前员工引发，他像 sacks 说的， barely 找到厕所。但问题是一堆内部人士加入，现在他们有问题：是否适当披露？然后人们如何看待披露？你不可能有这样的披露还通过审查，因为公司的人说存在存在性风险、文明灭绝。下游是个人和生命风险。下游是 ai 说做 a 或 b 导致坏事，比如给爱情建议，人被拒绝，自残等。会有所有这些长尾问题。如果社交媒体是指导，这会一样糟或更糟。 chamath： 除了所有这些案例中，那些公司没人真正认为自己在做坏事。我们当时工作都认为这是合法的好事。后来有虚假的东西质疑。我们有些人当时谈了，但那是旅程 10、15 年后，不是你在做的时候。现在在做的时候，你说，等等，这会杀死很多人。然后如果人们或亲人发生坏事，你期望他们怎么做？他们会回来找你。不管披露说什么，他们会说，对不起，这个。你认为陪审团会怎么做？大陪审团会怎么做？州检察长在建立政治资本时会怎么做？我认为这对 anthropic 是巨大问题。 sacks： 让我再剥一层洋葱。不仅 anthropic 员工可能违反 quiet period，出来联署，而且整个辞职推文风暴被这些团体放大，它们由 yann talen 和 dustin moskovitz 资助，他们与 sam bankman-fried 共同领投 anthropic series a。这是一个 ea 资助的轮次，anthropic 历史上有趣的细节：dario 最开始找 ea 超级捐赠者融资，这也是他们文化的一部分。想想他们的经济利益。他们即将赚数十亿、数百亿。series a 将成为史上最伟大风投之一。他们资助的团体 encode ai、ai policy network、ai futures project，都由 anthropic series a 投资者资助。这变得非常扭曲。 jcal： 让我说，这对我没道理，因为不到一个月前、三周前，我们请 gavin 上播客。我不知道 quiet period 何时开始，但 dario 感谢 gavin 的有思想交流，详细解释他们的担忧，反驳 gavin 从内部人士听到的 claim：anthropic 内部人相信他们是最后站着的公司，将把所有资本主义 coalesce 成一家公司，用超级智能击败地球上所有公司。friedberg，dario 当时觉得应该评论。所以评论部门在哪？ sacks： anthropic 确实发了声明，但基本上—— jcal： 而且 dario 自己发了。ceo 发了。 sacks： 他们发的声明是那种含糊其辞、模糊的帖子，说他们是负责任的行为者之类的。基本上还是老一套，根本张力没变。他们是一家前沿 ai 公司，相信前沿 ai 天生危险。这逻辑上导向 bernie sanders：全部关闭，至少停止。但他们出于自身动机不想。所以他们声称我们独特地能保护人类。这是救世主情结。但我们其他人不买账，不会因为他们 virtuous 就给他们垄断。他们解决张力的方式对我们不可接受，这是他们的问题。 jcal： 他们的首席品牌和传播官 sasha 回应 all-in 片段说：dario 从未说过这些，完全是无稽之谈。那是 8 月 14 日节目之后。她和 dario 现在什么都没说，也许 10 月 15 日他们不在 quiet period，现在在了。好，其他 ai 新闻，讨论很好。openai 说解决了 200 年数学问题，但有人声称可能抢跑了一位实际科学家正在做的工作。navier-stokes 方程写于 1800 年代，描述流体运动。地球上每架飞机、管道和天气模型都基于它。friedberg，给我们讲讲历史。 ---" style="--index: 6">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">06</span>
+                    <span class="timeline-meta">00:47:09–00:58:24</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>Anthropic IPO 流程、quiet period 与 EA 资助网络</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>Chamath 详细解释 IPO 静默期、SEC 审查和 S-1 风险披露的技术流程。</li>
+<li>他认为 Anthropic 要么必须披露巨大风险并让投资者要求折扣，要么 disavow Jacob 但引发内部 revolt。</li>
+<li>Sacks 认为 Evan Hubinger 的背书推文在法律上比 Jacob 的辞职信更关键，因为他是仍在职的高管。</li>
+<li>JCal 和 Sacks 指出，放大辞职推文的 doomer 团体由 Anthropic Series A 投资者资助，形成扭曲的利益网络。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>Polymarket：去中心化预测市场，节目中用它来参考 Anthropic IPO 概率。</li>
+<li>SEC：美国证券交易委员会，负责监管证券市场、审查 IPO 文件。</li>
+<li>Quiet period：IPO 前静默期，公司和高管不能发表可能影响投资者判断的言论。</li>
+<li>Nondisclosure / Non-disparagement：保密协议 / 非贬低协议，员工离职后不能泄露公司信息或公开贬低公司。</li>
+<li>Series A：A 轮融资。Anthropic 的 A 轮由 EA 相关捐赠者资助，包括 Jaan Tallinn、Dustin Moskovitz 等。</li>
+<li>Sasha：Anthropic 首席品牌与传播官，曾回应 All-In 片段称“Dario 从未说过这些，完全是无稽之谈”。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> 谁在这里定位？这对 Anthropic IPO 有什么影响？Chamath，这是你最初的观点之一。Polymarket 显示 88% 概率他们现在会上市。</p>
+<p><strong>Chamath：</strong> 当你在 quiet filing period，技术上，你和 SEC 之间有重要来回。SEC 在做什么？他们在压力测试你如何写、你对业务的最佳理解是什么。原因是一旦 S-1 公开，它是锚定文档，应该是所有机会和风险的极其准确、当时最新的快照。你现在处于非常尴尬的位置。Sacks 的推文实际上很重要：我们该相信什么？我们该相信公司内部藏着极其危险的东西吗？因为辞职的人说了，然后被一群现在还在公司的人放大。如果是真的，你必须回去说，这些风险是否充分披露？投资者应该如何反应？我告诉你他们会怎么做：他们会要求巨大折扣。原因是 Sacks 和 Friedberg 说的另一部分：这创造巨大的长尾产品责任风险。因为你实际上在规避已知重大风险。另一条路是完全 disavow 这个人。他们能这样做的前提是他们真的相信这是 bullshit、是 psyop。这样 IPO 更顺利。但另一部分，Anthropic 内部大量员工会 revolt。因为除非他们在撒谎，他们真的相信这是巨大风险。如果你 disavow，他们会感到巨大张力。所以 Anthropic 领导层陷入极难处境。SEC 更难：我怎么处理这些披露？没有公司一边上市融资、非常资本主义，一边谈论自己如何试图毁灭人类。从来没有人这样做过。</p>
+<p><strong>JCal：</strong> 所以没有法律——</p>
+<p><strong>Sacks：</strong> 有风险因素章节。</p>
+<p><strong>Chamath：</strong> 但 Sacks 说风险因素极其 benign。这些是表面风险，说如果这发生、那可能发生。如果需求消失，可能发生。</p>
+<p><strong>Sacks：</strong> 让我说完。典型风险，Jason，他们本来会写竞争、Nvidia 可能不给我们芯片、可能有其他模型出现。</p>
+<p><strong>Chamath：</strong> 监管。</p>
+<p><strong>Sacks：</strong> 这不是任何人会写进去的“10% 概率”风险，因为一堆员工现在说——</p>
+<p><strong>JCal：</strong> 我问 Sacks。所有这些员工出来说这些话，他们代表公司，代表公司辞职。你认为 S-1 现在正在被修改，加入这些混乱的推文吗？</p>
+<p><strong>Sacks：</strong> 我认为必须。我也这么认为。因为从法律角度，关键推文不是 Jacob Coxon 的辞职推文，而是 Evan Hubinger 的推文。</p>
+<p><strong>JCal：</strong> 背书。</p>
+<p><strong>Sacks：</strong> 背书，联署。因为这个人还是公司的高级高管或高级 alignment 高管。他管理一个安全团队，他联署并背书 Coxon 的话，还加上超过 10% 概率的数字，让事情超级病毒传播。</p>
+<p><strong>JCal：</strong> 我问你一个问题。</p>
+<p><strong>Sacks：</strong> 等等。所以如果只是 Coxon，你可以说这是个不满员工。如果 Anthropic 是正常公司，正常公司会怎么做？他们会说，这个人刚来不久， barely 找到厕所。他可能加入时就打算辞职，把自己变成叙事。他们会 disavow 他。</p>
+<p><strong>JCal：</strong> 对，他会 disavow。</p>
+<p><strong>Sacks：</strong> 他会把自己变成 AI 安全名人。他现在抓住每个机会上所有脱口秀，除了我们的，来推广自己。所以这个人是自我推广者。他没有真正揭露任何损害我们公司的事。媒体称他吹哨人，但他只有 vibe，夸张、荒谬。我们继续前进。正常公司会这么说，但他们不会，因为根本上他们同意他，员工说同意他，他在放大他们的信息。坦率说，不管他们是否计划，他们高兴他这么做。为什么？因为他们喜欢他引导国家走向的政治结果。他们想要 FDAI。他们实际上喜欢 Bernie Sanders 做的事。他们喜欢 30 个民主党政客引用他。这是他们监管策略的一部分。所以回到 Chamath 说的，现在有合法问题：他们是否违反 quiet period？也许 Dario 没有，Dario 什么都没说，很安静。但 Hubinger 呢？他是否违反 quiet period？他是否是足够重要的高管？这是否都是他们策略的一部分？</p>
+<p><strong>Chamath：</strong> 从基本原则讲。每个加入公司的人签 NDA、非贬低协议、公司通信政策。法律部门会告诉每个员工，不要说话，因为我们在 quiet period，准备 IPO。所有人都闭嘴，不要谈论正在发生的事。这是第一要务。Anthropic 管理层怎么了，允许人们联署、转发？他们应该像 Apple 和 Steve Jobs、Tim Cook 那样。除非 Tim Cook 和公司传播部门，没人代表 Apple 说话。</p>
+<p><strong>JCal：</strong> 谁在管理——我们不知道。我们不知道他们没说。我们只知道发生了 pile-on。灌木火由一个不满的前员工引发，他像 Sacks 说的， barely 找到厕所。但问题是一堆内部人士加入，现在他们有问题：是否适当披露？然后人们如何看待披露？你不可能有这样的披露还通过审查，因为公司的人说存在存在性风险、文明灭绝。下游是个人和生命风险。下游是 AI 说做 A 或 B 导致坏事，比如给爱情建议，人被拒绝，自残等。会有所有这些长尾问题。如果社交媒体是指导，这会一样糟或更糟。</p>
+<p><strong>Chamath：</strong> 除了所有这些案例中，那些公司没人真正认为自己在做坏事。我们当时工作都认为这是合法的好事。后来有虚假的东西质疑。我们有些人当时谈了，但那是旅程 10、15 年后，不是你在做的时候。现在在做的时候，你说，等等，这会杀死很多人。然后如果人们或亲人发生坏事，你期望他们怎么做？他们会回来找你。不管披露说什么，他们会说，对不起，这个。你认为陪审团会怎么做？大陪审团会怎么做？州检察长在建立政治资本时会怎么做？我认为这对 Anthropic 是巨大问题。</p>
+<p><strong>Sacks：</strong> 让我再剥一层洋葱。不仅 Anthropic 员工可能违反 quiet period，出来联署，而且整个辞职推文风暴被这些团体放大，它们由 Yann Talen 和 Dustin Moskovitz 资助，他们与 Sam Bankman-Fried 共同领投 Anthropic Series A。这是一个 EA 资助的轮次，Anthropic 历史上有趣的细节：Dario 最开始找 EA 超级捐赠者融资，这也是他们文化的一部分。想想他们的经济利益。他们即将赚数十亿、数百亿。Series A 将成为史上最伟大风投之一。他们资助的团体 Encode AI、AI Policy Network、AI Futures Project，都由 Anthropic Series A 投资者资助。这变得非常扭曲。</p>
+<p><strong>JCal：</strong> 让我说，这对我没道理，因为不到一个月前、三周前，我们请 Gavin 上播客。我不知道 quiet period 何时开始，但 Dario 感谢 Gavin 的有思想交流，详细解释他们的担忧，反驳 Gavin 从内部人士听到的 claim：Anthropic 内部人相信他们是最后站着的公司，将把所有资本主义 coalesce 成一家公司，用超级智能击败地球上所有公司。Friedberg，Dario 当时觉得应该评论。所以评论部门在哪？</p>
+<p><strong>Sacks：</strong> Anthropic 确实发了声明，但基本上——</p>
+<p><strong>JCal：</strong> 而且 Dario 自己发了。CEO 发了。</p>
+<p><strong>Sacks：</strong> 他们发的声明是那种含糊其辞、模糊的帖子，说他们是负责任的行为者之类的。基本上还是老一套，根本张力没变。他们是一家前沿 AI 公司，相信前沿 AI 天生危险。这逻辑上导向 Bernie Sanders：全部关闭，至少停止。但他们出于自身动机不想。所以他们声称我们独特地能保护人类。这是救世主情结。但我们其他人不买账，不会因为他们 virtuous 就给他们垄断。他们解决张力的方式对我们不可接受，这是他们的问题。</p>
+<p><strong>JCal：</strong> 他们的首席品牌和传播官 Sasha 回应 All-In 片段说：Dario 从未说过这些，完全是无稽之谈。那是 8 月 14 日节目之后。她和 Dario 现在什么都没说，也许 10 月 15 日他们不在 quiet period，现在在了。好，其他 AI 新闻，讨论很好。OpenAI 说解决了 200 年数学问题，但有人声称可能抢跑了一位实际科学家正在做的工作。Navier-Stokes 方程写于 1800 年代，描述流体运动。地球上每架飞机、管道和天气模型都基于它。Friedberg，给我们讲讲历史。</p>
+<hr></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="00:58:24–01:19:05 openai 数学突破、ai 作为杠杆与数据主权 本段核心内容： openai 称用 1 万个 agents、1300 亿 output tokens 解决了与 navier-stokes 相关的数学问题。 friedberg 认为这不是 ai 的天才灵感，而是暴力计算杠杆，相当于 5 万到 50 万年人类工作，可把机翼、引擎、能源系统设计从数年降到秒或分钟。 有人质疑 openai 是否使用了科学家使用其产品时产生的去标识化数据，openai 称不能排除这种可能。 chamath 警告 zdr 不可靠，敏感数据必须自建主权 ai 基础设施，否则 cio 会被炒、公司面临股东诉讼。 sacks 认为更可能 openai 听说进展后堆算力，但强调 ai 聊天数据隐私保护远低于邮件，需要更强法律。 friedberg 分享个人经验：询问新颖科学问题后，下一版模型能描述出同样洞察，怀疑聊天被用于训练。 背景解释与关键术语： navier-stokes 方程：描述流体运动的偏微分方程，广泛应用于航空、天气、管道等。 output tokens：模型生成的 token 数量。节目中称 openai 用了约 1300 亿 output tokens。 agents：ai 代理，多个 ai 程序互相协作、共享信息。 zdr：zero data retention，零数据保留，但节目中称只是 best efforts，不能保证。 vpc：virtual private cloud，虚拟私有云，企业专属云环境。 on-prem：本地部署。 levent 和 tristan：节目中提到的数学家，可能指 levent alpoge 和 tristan？他们的 prompts 被质疑用于训练。 noam brown：openai 高级研究员，否认有人查看 levent 和 tristan 的 prompts。 harvey / tenet：法律 ai 公司 harvey 推出的专有法律 ai 模型，基于 kimi k3。 go.ai / go one box：jcal 提到的孵化公司，做本地部署 ai 盒子。 详细中文整理： friedberg： 我不是这个领域的人。这些是流体动力学建模、偏微分方程的方法，是对物理世界连续事物的数学近似。openai 发布的解决方案说，他们用了据报道 1300 亿 output tokens，1 万个 agents 互相工作。我算了人类等效小时。重要的是，ai 不是有某种天才灵感、人类大脑无法理解的神奇洞察。发生的是 ai 做了大量暴力计算来得出答案。工作在许多计算机上完成。1 万个 agents 就是 1 万个应用在计算机上运行，互相交流、分享信息和分析。等效人类工作年数大约 5 万到 50 万年，人类每分钟打 40 个词，用计算器解数学问题。你可以缩减一个数量级，但仍然是数万年人类知识劳动。这真正说明 ai 是什么：ai 是人类的杠杆工具，不是坐在我们之上、理解我们不懂的东西的神奇天才超级神。openai agents 之间往来的每条消息都记录在案，人可以读、可以理解，我们可以看到 agents 做了相当于数万人类年的工作，得到解决方案。所以这个解决方案更多是洞察 ai 是什么，而不是不是什么。ai 不是数学神，是给人类非凡杠杆的引擎。想想这类问题的应用，我们还能用类似方法做什么。与其花数年设计新机翼，现在可以在计算机上暴力设计，几秒或几分钟。新引擎设计、新能源系统设计。ai 是杠杆工具，把数万年工作降到分钟或秒。像之前所有技术一样，它给人类杠杆。起初看起来神奇、难以置信，但深入实际发生的事，只是非常智能的系统用人类已知技术解决问题。这是我最大的 takeaway。 jcal： 更大的问题是，chamath，你的 takeaway 是这是非常聪明的系统方法，暴力解决问题。 chamath： 对。另一个问题是—— jcal： 而且 jason，自动补全还是不行。 jcal： 对，我们解决了世界上最难的 7 个数学问题之一，你还是不能从前台拿到洗漱包。 chamath： 取决于模型，它还是不能正确拼写 strawberry 或数到 100。 jcal： strawberry 里有几个 r？ jcal： chamath，另一个问题是 ai 主权、在企业中使用开源、不信任前沿模型处理数据。openai 发布解决方案时，有人声称原始科学家可能训练了 openai 的 llm，让它更容易解决。openai 发声明：虽然不太可能，但不能排除从数学家使用我们产品中衍生的去标识化数据帮助改进了模型。所以也许你可以谈谈 ai 主权。科学家、律所、生物技术公司做新土豆种子，应该信任这些 llm 处理专有知识吗？怕被吸收进核心 llm？ chamath： 如果你有极其敏感的专有数据，你必须做艰难决定。因为现实是，有些东西在泄漏，这些解决方案如何解决的残余记忆留在模型中。这些模型有零数据保留 zdr 的概念，但只是 best efforts，商业上 best efforts。他们不能保证。简单例子，你说不要保留这个蛋白质设计的决策过程。它可以做到，但如果使用者在聊天窗口点 like 按钮，就不一定保证。有各种向量让数据泄漏到模型的广泛语料和理解中。如果你相信你的信息至关重要，不能按大多数前沿模型目前提供服务的方式使用。你需要建立自己的主权解决方案。这意味着找信任的供应商，可能是 aws，在 neoscalers 里可能是 nebius。他们会架设你自己的硬件，部署你自己的模型，然后提供给你。这是你应该消费的方式。如果你不这样做，就在创造风险。明确说，未来一年会有一批 cio 被公开鞭打和解雇，因为他们不小心、不懂，做了 api 交易，想显得受欢迎，把数据泄漏到模型里。保证会发生。 jcal： 为什么会被解雇，chamath？会发生什么？ chamath： 现在很多 ai 理解和意识通过公共董事会的审计委员会和风险委员会浮出。那些是少数董事，负责理解企业的 it 态势、安全态势，然后向董事会披露。这个理解签署后提交给 sec。他们还有安永、德勤等顾问。我们越来越知道 zdr 不是有效解决方案，有大量泄漏。现在信息通过风险审计委员会浮到董事会。ceo 明白，等等，我的信息可能泄漏。他们转向 cio 说，不管你之前以为发生了什么，我们现在清楚知道不是。你的答案是什么？当这种情况发生，或者他们必须披露关键 ip 泄漏到模型，或者不知道是否泄漏，突然类似东西出现在另一边。股东会非常生气，说 openai 甚至告诉你不能保证，你闭眼假设信息不泄漏，我们怎么办？如果这侵蚀我买入的股价，我以为你掌控开关，那就是人们被炒的时候。 chamath： 还有股东诉讼，会一团糟。 jcal： 这对前沿模型的信任泄漏意味着什么？另一个理由，我猜，在企业中拥抱开源，个人做重要工作也拥抱开源。 chamath： 顺便说，不一定是开源，只需要是你自己的整个——甚至不必 on-prem， effectively 你自己的 vpc。你必须直接到 bare metal，按你的条件。你需要控制一切。可以和 amazon、nebius、fireworks 合作，可以有开源解决方案，甚至可能让 claude 允许你在 vpc 托管 claude 版本。但如果你不走这些步骤，因为懒或不懂，做了标准 rate card api 交易，今天之后还这样做，你可能会被炒。 jcal： 我夏天提到过。很多 ai 应用公司现在正在离开前沿模型，我认为这是逆风。很快能看到数据，关于他们的大客户每月在这些服务上花 1000 万、1 亿美元。 chamath： 这就是为什么我们 8090 与 ey 和德勤合作。我们想提前帮解决这些问题。最初我们和很多公司谈，他们说我们做了 zdr。我们说，好吧，继续教育你。5 到 6 个月后你会意识到 zdr literally 什么都不是，脆弱、像瑞士奶酪。现在这些公司回来找 ey、德勤和我们，说天哪，解决问题。部分原因是像 openai 在自己的新闻稿中确认了这种认识。 jcal： harvey 9 月 9 日宣布他们有自己的专有法律 ai 模型 tenet，基于 kimi k3。我之前提到我们孵化了一家叫 go.ai 的公司，非常火。他们做 on-prem，我认为叫 go one box，我屏幕上展示，给想控制的人。这是我们 launch accelerator 孵化的公司之一。sacks，你对数据泄漏问题、前沿模型、大客户信任或不信任有什么看法？ sacks： 我倾向于相信 noam brown，openai 高级研究员。他说没人看 levent 和 tristan 的 prompts，那太疯狂了。他否认。我觉得他们翻 prompt 链没道理。可能通过不可识别数据泄漏。但更可能的解释是 openai 听说研究人员在 navier-stokes 上有进展，就扔大量算力看能不能做出来。 jcal： sam 也确认了这部分，他们听说 anthropic 接近了，所以想试试。 sacks： 所以我认为可能如此。我不知道，可能被证明不同，但我倾向于相信。但这提出一个有点正交但值得谈的问题：数据隐私。我们需要更强数据隐私法，围绕 ai 服务中的数据。现在你在 ai 聊天中的数据甚至没有邮件同等保护。大多数情况下，政府想要你的邮件，需要搜查令，在法庭证明 probable cause。但 ai 数据标准不同，只需要传票或法院命令。想想 ai 变得多个人化，人们用 ai 当律师、医生、治疗师。有人可以没有 probable cause、没有搜查令就拿到你的数据，这很疯狂。至少需要把 ai 数据保护提升到邮件水平，甚至更高，反映它对人多个人化。而且，你和律师谈话是特权通信，但问 ai 同样问题再和律师谈，可能不受保护。我们需要数据隐私规则反映人们实际如何使用这些工具、如何思考它们。 jcal： friedberg，关于数据泄漏问题有什么最后想法？ friedberg： 我深感担忧。我有经验，我们问了一些相当新颖的科学问题，它识别为新颖洞察，说没想过，会很有趣。然后用不同账号、同一模型后续版本再问，我现在经历了，它说你可以这样做，然后描述我们上一版聊过的确切东西。这些是少数轶事，但我知道我们工作的领域、 niche、想法的新颖性、没有论文发表。所以我知道没有新的信息语料在训练新模型。我只能说，我的对话或我们的分析被用于训练。chamath，你说。 chamath： siri，请准备对 el holloway 的股东诉讼。 jcal： 这确实提出好问题：模型允许在不可识别数据上训练意味着什么？ friedberg： 对，它不用我的个人信息，但可以用从我们聊天中衍生的洞察，然后说是训练数据。这实际上是我们组织的 ip，我们的互动。我们没有 nda 或保密条款，因为他们是服务提供商。这是所有托管服务条款中缺失的。这就是我关心开源的原因，我不想让他们拥有我的聊天记录，因为他们可以用它训练，创造 ip 优势，然后扩散到整个市场。 chamath： 我觉得这非常不公平。完全披露，我是 ohalo 股东，但—— jcal： 我也是。 chamath： 拿任何公司说。ohalo 有 brilliant 科学家，推进科学边界，他们能创造真正的丰裕。丰裕的第一个真正表现是食物。现在 friedberg 得担心他建可行企业的能力是否被损害，不是因为他们做错什么，而是因为他们以为只是用工具加速找到答案。他以为合理使用，现在可能泄漏。我觉得这不公平。 jcal： 我要给你一台 go ai 机器。我刚订了两台 mac studio m5。我们要跑本地模型，把很多敏感数据搬离 claude。 chamath： 本地模型的问题，清楚说，不管闭源开源，你需要多人体验，需要云端，需要知识库、记忆。我不认为买机器能解决问题。问题是这些模型的构造方式，从输入 token 到输出 token 之间是层层 embeddings，中间是彻底泄漏的黑箱。这是问题。他们给你无花果叶，让你觉得没泄漏 ip。但当你追问，你学了吗？能保证没学吗？答案是不能，不是真的。 jcal： 我们在做的是把开源模型放上去，然后 ip 到 ip 连接，像服务器。我们已经实验过。我认为我们会把 90% 的工作从—— chamath： 我觉得可以，但—— jcal： 从欺诈关系中移走。 chamath： 但一个千人、几百人的公司怎么办？会更多。 jcal： 他们需要自己架机架服务器。 chamath： 让我问你。假设 openai 的人在找数学突破，他们问模型：你认为未来几周我们能解决哪些顶级问题？模型能用所有用户的未识别数据吗？看到所有数学使用，看到什么接近解决？ jcal： 正是。 chamath： 然后汇总。 jcal： 正是。所以关注“去标识化”这个词。去标识化意味着移除个人身份信息或特定公司信息。但数学问题的通用方法就是 ip。如果有人在工具里迭代那个方法，迭代聊天可以先被去标识化。好，没有谁做了的标识，没有公司或人的独特标识。让我从中学习。模型变得更擅长思考数学问题，因为它观察了这个用户使用模型。这是封闭 ai 模型系统的网络效应：他们看到世界上每个人在做什么。他们是掌控一切的主眼。 friedberg： 对。 jcal： 这种观察系统给他们比任何人都多的数据，这是他们随时间建立优势的方式，让模型比别人好。但作为用户、企业或消费者，我个人担心我的 ip 或个人信息。 sacks： 现在进入 alex karp 的世界：你把所有 alpha 都给了他们。真正解决方式，除了你转向自己的开源模型、自己的基础设施，是这些公司必须放弃进入基于其平台的垂直应用。换句话说，不能与客户竞争。但他们已经表示想与客户竞争，甚至不能告诉你。他们已经做了。 jcal： 他们发布了 claude code、claude design，惹怒了 cursor，cursor 是 anthropic 最大的客户之一，他们觉得被 claude 摆了一道。 sacks： 对。这就是抱怨的 levent 和 tristan 值得同情的地方。他们不知道。他们基于时间指控工作被偷，但事实是他们在用 openai 模型，openai 在和他们竞争开发这个突破。所以不管真假，你都会提出指控。我给 openai 怀疑，说可能没根据。但只要我们有封闭模型前沿 ai 双头垄断，他们保留进入所有垂直应用的权利，他们就提前宣布要与客户竞争。我们怎么能信任他们处理数据？除非有更强隐私法作为起点，即使那样可能还不够。 jcal： 先生们，也许这是我们在监管 ai 之前应该先通过的法律。 chamath： 市场在回应。人们现在在采取措施。 ---" style="--index: 7">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">07</span>
+                    <span class="timeline-meta">00:58:24–01:19:05</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>OpenAI 数学突破、AI 作为杠杆与数据主权</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>OpenAI 称用 1 万个 agents、1300 亿 output tokens 解决了与 Navier-Stokes 相关的数学问题。</li>
+<li>Friedberg 认为这不是 AI 的天才灵感，而是暴力计算杠杆，相当于 5 万到 50 万年人类工作，可把机翼、引擎、能源系统设计从数年降到秒或分钟。</li>
+<li>有人质疑 OpenAI 是否使用了科学家使用其产品时产生的去标识化数据，OpenAI 称不能排除这种可能。</li>
+<li>Chamath 警告 ZDR 不可靠，敏感数据必须自建主权 AI 基础设施，否则 CIO 会被炒、公司面临股东诉讼。</li>
+<li>Sacks 认为更可能 OpenAI 听说进展后堆算力，但强调 AI 聊天数据隐私保护远低于邮件，需要更强法律。</li>
+<li>Friedberg 分享个人经验：询问新颖科学问题后，下一版模型能描述出同样洞察，怀疑聊天被用于训练。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>Navier-Stokes 方程：描述流体运动的偏微分方程，广泛应用于航空、天气、管道等。</li>
+<li>Output tokens：模型生成的 token 数量。节目中称 OpenAI 用了约 1300 亿 output tokens。</li>
+<li>Agents：AI 代理，多个 AI 程序互相协作、共享信息。</li>
+<li>ZDR：Zero Data Retention，零数据保留，但节目中称只是 best efforts，不能保证。</li>
+<li>VPC：Virtual Private Cloud，虚拟私有云，企业专属云环境。</li>
+<li>On-prem：本地部署。</li>
+<li>Levent 和 Tristan：节目中提到的数学家，可能指 Levent Alpoge 和 Tristan？他们的 prompts 被质疑用于训练。</li>
+<li>Noam Brown：OpenAI 高级研究员，否认有人查看 Levent 和 Tristan 的 prompts。</li>
+<li>Harvey / Tenet：法律 AI 公司 Harvey 推出的专有法律 AI 模型，基于 KIMI K3。</li>
+<li>Go.AI / Go One box：JCal 提到的孵化公司，做本地部署 AI 盒子。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>Friedberg：</strong> 我不是这个领域的人。这些是流体动力学建模、偏微分方程的方法，是对物理世界连续事物的数学近似。OpenAI 发布的解决方案说，他们用了据报道 1300 亿 output tokens，1 万个 agents 互相工作。我算了人类等效小时。重要的是，AI 不是有某种天才灵感、人类大脑无法理解的神奇洞察。发生的是 AI 做了大量暴力计算来得出答案。工作在许多计算机上完成。1 万个 agents 就是 1 万个应用在计算机上运行，互相交流、分享信息和分析。等效人类工作年数大约 5 万到 50 万年，人类每分钟打 40 个词，用计算器解数学问题。你可以缩减一个数量级，但仍然是数万年人类知识劳动。这真正说明 AI 是什么：AI 是人类的杠杆工具，不是坐在我们之上、理解我们不懂的东西的神奇天才超级神。OpenAI agents 之间往来的每条消息都记录在案，人可以读、可以理解，我们可以看到 agents 做了相当于数万人类年的工作，得到解决方案。所以这个解决方案更多是洞察 AI 是什么，而不是不是什么。AI 不是数学神，是给人类非凡杠杆的引擎。想想这类问题的应用，我们还能用类似方法做什么。与其花数年设计新机翼，现在可以在计算机上暴力设计，几秒或几分钟。新引擎设计、新能源系统设计。AI 是杠杆工具，把数万年工作降到分钟或秒。像之前所有技术一样，它给人类杠杆。起初看起来神奇、难以置信，但深入实际发生的事，只是非常智能的系统用人类已知技术解决问题。这是我最大的 takeaway。</p>
+<p><strong>JCal：</strong> 更大的问题是，Chamath，你的 takeaway 是这是非常聪明的系统方法，暴力解决问题。</p>
+<p><strong>Chamath：</strong> 对。另一个问题是——</p>
+<p><strong>JCal：</strong> 而且 Jason，自动补全还是不行。</p>
+<p><strong>JCal：</strong> 对，我们解决了世界上最难的 7 个数学问题之一，你还是不能从前台拿到洗漱包。</p>
+<p><strong>Chamath：</strong> 取决于模型，它还是不能正确拼写 strawberry 或数到 100。</p>
+<p><strong>JCal：</strong> strawberry 里有几个 R？</p>
+<p><strong>JCal：</strong> Chamath，另一个问题是 AI 主权、在企业中使用开源、不信任前沿模型处理数据。OpenAI 发布解决方案时，有人声称原始科学家可能训练了 OpenAI 的 LLM，让它更容易解决。OpenAI 发声明：虽然不太可能，但不能排除从数学家使用我们产品中衍生的去标识化数据帮助改进了模型。所以也许你可以谈谈 AI 主权。科学家、律所、生物技术公司做新土豆种子，应该信任这些 LLM 处理专有知识吗？怕被吸收进核心 LLM？</p>
+<p><strong>Chamath：</strong> 如果你有极其敏感的专有数据，你必须做艰难决定。因为现实是，有些东西在泄漏，这些解决方案如何解决的残余记忆留在模型中。这些模型有零数据保留 ZDR 的概念，但只是 best efforts，商业上 best efforts。他们不能保证。简单例子，你说不要保留这个蛋白质设计的决策过程。它可以做到，但如果使用者在聊天窗口点 like 按钮，就不一定保证。有各种向量让数据泄漏到模型的广泛语料和理解中。如果你相信你的信息至关重要，不能按大多数前沿模型目前提供服务的方式使用。你需要建立自己的主权解决方案。这意味着找信任的供应商，可能是 AWS，在 neoscalers 里可能是 Nebius。他们会架设你自己的硬件，部署你自己的模型，然后提供给你。这是你应该消费的方式。如果你不这样做，就在创造风险。明确说，未来一年会有一批 CIO 被公开鞭打和解雇，因为他们不小心、不懂，做了 API 交易，想显得受欢迎，把数据泄漏到模型里。保证会发生。</p>
+<p><strong>JCal：</strong> 为什么会被解雇，Chamath？会发生什么？</p>
+<p><strong>Chamath：</strong> 现在很多 AI 理解和意识通过公共董事会的审计委员会和风险委员会浮出。那些是少数董事，负责理解企业的 IT 态势、安全态势，然后向董事会披露。这个理解签署后提交给 SEC。他们还有安永、德勤等顾问。我们越来越知道 ZDR 不是有效解决方案，有大量泄漏。现在信息通过风险审计委员会浮到董事会。CEO 明白，等等，我的信息可能泄漏。他们转向 CIO 说，不管你之前以为发生了什么，我们现在清楚知道不是。你的答案是什么？当这种情况发生，或者他们必须披露关键 IP 泄漏到模型，或者不知道是否泄漏，突然类似东西出现在另一边。股东会非常生气，说 OpenAI 甚至告诉你不能保证，你闭眼假设信息不泄漏，我们怎么办？如果这侵蚀我买入的股价，我以为你掌控开关，那就是人们被炒的时候。</p>
+<p><strong>Chamath：</strong> 还有股东诉讼，会一团糟。</p>
+<p><strong>JCal：</strong> 这对前沿模型的信任泄漏意味着什么？另一个理由，我猜，在企业中拥抱开源，个人做重要工作也拥抱开源。</p>
+<p><strong>Chamath：</strong> 顺便说，不一定是开源，只需要是你自己的整个——甚至不必 on-prem， effectively 你自己的 VPC。你必须直接到 bare metal，按你的条件。你需要控制一切。可以和 Amazon、Nebius、Fireworks 合作，可以有开源解决方案，甚至可能让 Claude 允许你在 VPC 托管 Claude 版本。但如果你不走这些步骤，因为懒或不懂，做了标准 rate card API 交易，今天之后还这样做，你可能会被炒。</p>
+<p><strong>JCal：</strong> 我夏天提到过。很多 AI 应用公司现在正在离开前沿模型，我认为这是逆风。很快能看到数据，关于他们的大客户每月在这些服务上花 1000 万、1 亿美元。</p>
+<p><strong>Chamath：</strong> 这就是为什么我们 8090 与 EY 和德勤合作。我们想提前帮解决这些问题。最初我们和很多公司谈，他们说我们做了 ZDR。我们说，好吧，继续教育你。5 到 6 个月后你会意识到 ZDR  literally 什么都不是，脆弱、像瑞士奶酪。现在这些公司回来找 EY、德勤和我们，说天哪，解决问题。部分原因是像 OpenAI 在自己的新闻稿中确认了这种认识。</p>
+<p><strong>JCal：</strong> Harvey 9 月 9 日宣布他们有自己的专有法律 AI 模型 Tenet，基于 KIMI K3。我之前提到我们孵化了一家叫 Go.AI 的公司，非常火。他们做 on-prem，我认为叫 Go One box，我屏幕上展示，给想控制的人。这是我们 Launch Accelerator 孵化的公司之一。Sacks，你对数据泄漏问题、前沿模型、大客户信任或不信任有什么看法？</p>
+<p><strong>Sacks：</strong> 我倾向于相信 Noam Brown，OpenAI 高级研究员。他说没人看 Levent 和 Tristan 的 prompts，那太疯狂了。他否认。我觉得他们翻 prompt 链没道理。可能通过不可识别数据泄漏。但更可能的解释是 OpenAI 听说研究人员在 Navier-Stokes 上有进展，就扔大量算力看能不能做出来。</p>
+<p><strong>JCal：</strong> Sam 也确认了这部分，他们听说 Anthropic 接近了，所以想试试。</p>
+<p><strong>Sacks：</strong> 所以我认为可能如此。我不知道，可能被证明不同，但我倾向于相信。但这提出一个有点正交但值得谈的问题：数据隐私。我们需要更强数据隐私法，围绕 AI 服务中的数据。现在你在 AI 聊天中的数据甚至没有邮件同等保护。大多数情况下，政府想要你的邮件，需要搜查令，在法庭证明 probable cause。但 AI 数据标准不同，只需要传票或法院命令。想想 AI 变得多个人化，人们用 AI 当律师、医生、治疗师。有人可以没有 probable cause、没有搜查令就拿到你的数据，这很疯狂。至少需要把 AI 数据保护提升到邮件水平，甚至更高，反映它对人多个人化。而且，你和律师谈话是特权通信，但问 AI 同样问题再和律师谈，可能不受保护。我们需要数据隐私规则反映人们实际如何使用这些工具、如何思考它们。</p>
+<p><strong>JCal：</strong> Friedberg，关于数据泄漏问题有什么最后想法？</p>
+<p><strong>Friedberg：</strong> 我深感担忧。我有经验，我们问了一些相当新颖的科学问题，它识别为新颖洞察，说没想过，会很有趣。然后用不同账号、同一模型后续版本再问，我现在经历了，它说你可以这样做，然后描述我们上一版聊过的确切东西。这些是少数轶事，但我知道我们工作的领域、 niche、想法的新颖性、没有论文发表。所以我知道没有新的信息语料在训练新模型。我只能说，我的对话或我们的分析被用于训练。Chamath，你说。</p>
+<p><strong>Chamath：</strong> Siri，请准备对 El Holloway 的股东诉讼。</p>
+<p><strong>JCal：</strong> 这确实提出好问题：模型允许在不可识别数据上训练意味着什么？</p>
+<p><strong>Friedberg：</strong> 对，它不用我的个人信息，但可以用从我们聊天中衍生的洞察，然后说是训练数据。这实际上是我们组织的 IP，我们的互动。我们没有 NDA 或保密条款，因为他们是服务提供商。这是所有托管服务条款中缺失的。这就是我关心开源的原因，我不想让他们拥有我的聊天记录，因为他们可以用它训练，创造 IP 优势，然后扩散到整个市场。</p>
+<p><strong>Chamath：</strong> 我觉得这非常不公平。完全披露，我是 Ohalo 股东，但——</p>
+<p><strong>JCal：</strong> 我也是。</p>
+<p><strong>Chamath：</strong> 拿任何公司说。Ohalo 有 brilliant 科学家，推进科学边界，他们能创造真正的丰裕。丰裕的第一个真正表现是食物。现在 Friedberg 得担心他建可行企业的能力是否被损害，不是因为他们做错什么，而是因为他们以为只是用工具加速找到答案。他以为合理使用，现在可能泄漏。我觉得这不公平。</p>
+<p><strong>JCal：</strong> 我要给你一台 Go AI 机器。我刚订了两台 Mac Studio M5。我们要跑本地模型，把很多敏感数据搬离 Claude。</p>
+<p><strong>Chamath：</strong> 本地模型的问题，清楚说，不管闭源开源，你需要多人体验，需要云端，需要知识库、记忆。我不认为买机器能解决问题。问题是这些模型的构造方式，从输入 token 到输出 token 之间是层层 embeddings，中间是彻底泄漏的黑箱。这是问题。他们给你无花果叶，让你觉得没泄漏 IP。但当你追问，你学了吗？能保证没学吗？答案是不能，不是真的。</p>
+<p><strong>JCal：</strong> 我们在做的是把开源模型放上去，然后 IP 到 IP 连接，像服务器。我们已经实验过。我认为我们会把 90% 的工作从——</p>
+<p><strong>Chamath：</strong> 我觉得可以，但——</p>
+<p><strong>JCal：</strong> 从欺诈关系中移走。</p>
+<p><strong>Chamath：</strong> 但一个千人、几百人的公司怎么办？会更多。</p>
+<p><strong>JCal：</strong> 他们需要自己架机架服务器。</p>
+<p><strong>Chamath：</strong> 让我问你。假设 OpenAI 的人在找数学突破，他们问模型：你认为未来几周我们能解决哪些顶级问题？模型能用所有用户的未识别数据吗？看到所有数学使用，看到什么接近解决？</p>
+<p><strong>JCal：</strong> 正是。</p>
+<p><strong>Chamath：</strong> 然后汇总。</p>
+<p><strong>JCal：</strong> 正是。所以关注“去标识化”这个词。去标识化意味着移除个人身份信息或特定公司信息。但数学问题的通用方法就是 IP。如果有人在工具里迭代那个方法，迭代聊天可以先被去标识化。好，没有谁做了的标识，没有公司或人的独特标识。让我从中学习。模型变得更擅长思考数学问题，因为它观察了这个用户使用模型。这是封闭 AI 模型系统的网络效应：他们看到世界上每个人在做什么。他们是掌控一切的主眼。</p>
+<p><strong>Friedberg：</strong> 对。</p>
+<p><strong>JCal：</strong> 这种观察系统给他们比任何人都多的数据，这是他们随时间建立优势的方式，让模型比别人好。但作为用户、企业或消费者，我个人担心我的 IP 或个人信息。</p>
+<p><strong>Sacks：</strong> 现在进入 Alex Karp 的世界：你把所有 alpha 都给了他们。真正解决方式，除了你转向自己的开源模型、自己的基础设施，是这些公司必须放弃进入基于其平台的垂直应用。换句话说，不能与客户竞争。但他们已经表示想与客户竞争，甚至不能告诉你。他们已经做了。</p>
+<p><strong>JCal：</strong> 他们发布了 Claude Code、Claude Design，惹怒了 Cursor，Cursor 是 Anthropic 最大的客户之一，他们觉得被 Claude 摆了一道。</p>
+<p><strong>Sacks：</strong> 对。这就是抱怨的 Levent 和 Tristan 值得同情的地方。他们不知道。他们基于时间指控工作被偷，但事实是他们在用 OpenAI 模型，OpenAI 在和他们竞争开发这个突破。所以不管真假，你都会提出指控。我给 OpenAI 怀疑，说可能没根据。但只要我们有封闭模型前沿 AI 双头垄断，他们保留进入所有垂直应用的权利，他们就提前宣布要与客户竞争。我们怎么能信任他们处理数据？除非有更强隐私法作为起点，即使那样可能还不够。</p>
+<p><strong>JCal：</strong> 先生们，也许这是我们在监管 AI 之前应该先通过的法律。</p>
+<p><strong>Chamath：</strong> 市场在回应。人们现在在采取措施。</p>
+<hr></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="01:19:05–01:19:55 jensen huang 的评论 本段核心内容： jensen huang 在 goldman sachs 会议上称 jacob coxon 的言论“outlandish and deeply untrue”。 jcal 问：如果 jensen 能这么说，为什么 anthropic 不能？ 嘉宾认为 anthropic 可能受 quiet period 限制，或者选择发表含糊声明。 背景解释与关键术语： jensen huang：nvidia 创始人兼 ceo，ai 算力最重要的供应商。 goldman sachs 会议：高盛举办的投资者会议，jensen 常在此发表行业观点。 详细中文整理： jcal： 一条突发新闻。jensen 正在 goldman sachs 会议上发言，他说 jacob coxon 的评论是 outlandish、deeply untrue。他说实验室很棒，但 jacob 的评论是错的、傲慢的、无视行业为安全所做的工作。我的问题是：如果 jensen 能这么说，为什么 anthropic 不能？ sacks： 静默期，我猜。表面上他们不能出来说。 jcal： 不，他们发了另一种声明，那种—— sacks： 你叫它什么？mealy-mouthed？ jcal： mushy-mouthed 声明。 chamath： mealy-mouthed 是什么意思？ jcal： mushy-mouthed 是什么？ sacks： 就是两边说话。 jcal： 我懂了。 sacks： 我不知道 mealy 是什么。 jcal： 模糊发帖，美德信号。 ---" style="--index: 8">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">08</span>
+                    <span class="timeline-meta">01:19:05–01:19:55</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>Jensen Huang 的评论</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>Jensen Huang 在 Goldman Sachs 会议上称 Jacob Coxon 的言论“outlandish and deeply untrue”。</li>
+<li>JCal 问：如果 Jensen 能这么说，为什么 Anthropic 不能？</li>
+<li>嘉宾认为 Anthropic 可能受 quiet period 限制，或者选择发表含糊声明。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>Jensen Huang：Nvidia 创始人兼 CEO，AI 算力最重要的供应商。</li>
+<li>Goldman Sachs 会议：高盛举办的投资者会议，Jensen 常在此发表行业观点。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> 一条突发新闻。Jensen 正在 Goldman Sachs 会议上发言，他说 Jacob Coxon 的评论是 outlandish、deeply untrue。他说实验室很棒，但 Jacob 的评论是错的、傲慢的、无视行业为安全所做的工作。我的问题是：如果 Jensen 能这么说，为什么 Anthropic 不能？</p>
+<p><strong>Sacks：</strong> 静默期，我猜。表面上他们不能出来说。</p>
+<p><strong>JCal：</strong> 不，他们发了另一种声明，那种——</p>
+<p><strong>Sacks：</strong> 你叫它什么？Mealy-mouthed？</p>
+<p><strong>JCal：</strong> Mushy-mouthed 声明。</p>
+<p><strong>Chamath：</strong> Mealy-mouthed 是什么意思？</p>
+<p><strong>JCal：</strong> Mushy-mouthed 是什么？</p>
+<p><strong>Sacks：</strong> 就是两边说话。</p>
+<p><strong>JCal：</strong> 我懂了。</p>
+<p><strong>Sacks：</strong> 我不知道 mealy 是什么。</p>
+<p><strong>JCal：</strong> 模糊发帖，美德信号。</p>
+<hr></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="01:19:55–01:35:42 nike 被踢出 s&amp;p 100：go woke go broke 与失去北极星 本段核心内容： nike 被踢出 s&amp;p 100，结束 18 年成分股历史，被 palo alto networks 取代。 jcal 梳理 nike 从 1980 年上市、air jordan、just do it，到 2021 年市值 2640 亿美元、2024 年营收 510 亿美元，再到股价跌 80%、蒸发 2000 亿美元。 sacks 认为这是 go woke go broke 的又一案例，colin kaepernick 广告是转折点。 chamath 认为 nike 失去了“mastery and excellence”这个北极星，不再代表值得向往的卓越。 friedberg 说产品变差，鞋子 6 周就坏，自己转向 brooks；jcal 转向 on 因为 roger federer。 背景解释与关键术语： s&amp;p 100：标普 100 指数，美国大盘股指数。 john donahoe：nike 前 ceo，曾领导 ebay 和 servicenow，2020 年加入 nike，推行 dtc 战略。 dtc：direct-to-consumer，直接面向消费者，绕开零售合作伙伴。 hoka、on running：新兴跑鞋品牌，近年抢占 nike 市场份额。 anta、li-ning：安踏、李宁，中国运动品牌。 colin kaepernick：nfl 球员，2016 年因在国歌期间单膝跪地抗议种族不平等引发争议，nike 2018 年推出其广告。 dylan mulvaney：跨性别网红，bud light 曾与其合作，引发保守派抵制。 brooks：跑鞋品牌，被 berkshire hathaway 收购，节目中称连续 9 年双位数增长，营收达 16 亿美元。 strava：运动社交平台，跑者和骑行者常用。 详细中文整理： jcal： 好，nike。60 年标志性美国品牌，just do it，刚被踢出 s&amp;p 100。他们在这个股指里 18 年，sacks，被 palo alto networks 取代。恭喜 nikesh。历史：1980 年上市，占美国运动鞋市场 50%，运动鞋里的可口可乐。1985 年 air jordan 改变一切，1988 年 just do it campaign。2021 年市值峰值 2640 亿美元，2024 年营收峰值 510 亿美元。之后营收下降 10%。2020 年 john donahoe 成为 ceo，推行激进 dtc 战略，疏远帮助建立 nike 的零售伙伴，把运动鞋从商店撤走。这让 hoka 和 on running 这样的品牌崛起——每个 vc 都必须在演讲时穿白色 on。中国销售下降 30%，连续 8 个季度下滑，份额输给安踏和李宁。nike 营销也变得超级 woke，开始支持政治运动，把体型健壮的人放在广告牌上。这杀死了品牌。股价从峰值跌 80%。sacks，2000 亿美元蒸发了。你的看法？ sacks： 这是 go woke, go broke 的百万分之一的例子。nike 曾代表伟大运动员、惊人表现、胜利。nike 不是胜利女神吗？他们用迈克尔·乔丹这样的 goat 和伟大运动员建立品牌，各种项目、不同种族、男女。没必要搞这些 woke 东西，突然展示你不认识的人。 jcal： 他们以前体脂率一般都很低，在 woke 广告之前。 sacks： 甚至不是那个问题。这个人甚至不是运动员。这是谁？信息是什么？own the floor？以前是 just do it。然后他们让 dylan mulvaney 拍广告。 jcal： 他们做了？ sacks： 对，像 bud light。所以有 woke 东西，还有另一部分：咨询式方法。新 ceo 来了，john donahoe 是个好人，中央选角，看起来像 ceo，但很多为变革而变革。dtc 是 new hotness，所以他们炸掉所有零售运营、零售关系。那些有 nike 货架的商店现在给了竞争对手，竞争对手获得巨大市场份额。他们还重组公司，以前按运动分部门：篮球、足球、网球、游泳。然后重组为男、女、童。为什么这么做？ chamath： 我不理解。 sacks： 我不理解。 jcal： 本来运作良好。他们以前有清晰的 clicks and bricks 模式：去实体店，试鞋，在店里跑，和帮助跑者选鞋的人合作。直接购买也很好，nike app 很愉快。但为什么要杀死零售渠道，惹恼那些大支持者？ chamath： 我在近 30 年商业中学到，你必须有清晰的北极星并坚持。至少我成长时，nike 的北极星非常清晰：通过运动体现 mastery and excellence。迈克尔·乔丹、老虎伍兹、塞雷娜·威廉姆斯、桑普拉斯，都是 mastery and excellence。后来 mastery and excellence 变得太传统。他们转向与 mastery 和 excellence 无关的东西。我不 aspire 成为胖人，从来没有，将来也不会。我 aspire 成为迈克尔·乔丹，一直如此。就这么基本。你不会买一个你不 aspirational 的品牌衣服或鞋子。只要重新以这个想法为中心：我们不是让人们自我感觉更好，我们的成功是当人们通过这些不可思议的人 imbue 自己变好的欲望。这是 aspirational。被某人启发、想成为更好的自己是好事。我们不应该羞辱它。这是好事，是我们变好的方式。有不可思议的运动员放弃一生去精通某事。nike 应该拥有这一点并为此骄傲。如果这样做，其他细节都会合理。怎么卖？到处卖，因为所有人都想要。卖什么？卖给所有人，因为所有人都想要。但北极星错了，就会错过。北极星是 excellence and mastery。 jcal： 这里有一个更广泛的讨论，friedberg，在你和 eric weinstein 的精彩 all-in 采访中，excellence、expertise、想成为精英、想激励别人、成为别人追随的人。我们失去了对卓越和专业的热爱，被参与奖杯或包容性替代，而不是卓越。也许你能谈谈你的领域，科学和创业。 friedberg： 创业是精英治理，你要么做要么不做。但在这个业务中，他们失去的不仅是品牌。我以前买 nike，我所有的鞋都是 nike，只买 nike。我喜欢品牌。后来发生什么？不是广告变差，不是订购变差，产品开始变差。鞋子 6 周就散架，脆弱，质量不如从前。我能看出产品变差。有一天我去 rei，旁边是我买沙拉的地方。我进去试了 brooks，买了 brooks，开始穿 brooks。 jcal： 这是你买的 speedwalking 900s？ friedberg： speedwalking 900s 是 brooks 鞋。 horrible。不可接受。但产品很好，耐用，舒服。马拉松跑者喜欢 brooks。我开始跑步时穿 nike 得了膝盖问题，因为变老。brooks 很棒，感觉很好。 jcal： 现在把跑步叫 skipping 了吗？ friedberg： 我转向 on 只有一个原因。我坚持 nike 很久，我是 nike 死忠。我每 6 个月买新 nike，还收藏很多 nike，我喜欢。但后来 6 周就得换，因为产品差。我最终转向 on，因为 roger federer，他是 excellence and mastery。我喜欢他，他做一切看起来毫不费力。所以 roger federer，对我好。 jcal： 让我讲 brooks 的故事。这家公司被 berkshire hathaway 拥有，连续 9 年双位数营收增长，达到 16 亿美元。它是 berkshire 内部的独立公司，营收持续复合增长。ceo 采访说，warren buffett 每年告诉我，让产品比去年年底更好，如果你一直这样做，业务就会增长。他一直在做。这与 nike 相反，nike 从产品转向叙事，关注我们认为观众想听什么叙事。这跟 bud light 问题一样。 sacks： 还记得他们在旧金山为 colin kaepernick 做的巨大广告吗？ chamath： 那是转折点。 sacks： 那跟什么有关系？我想要 excellence and mastery。 chamath： 你不必评论所有事。 sacks： 如果要 pinpoint 衰落的开始，就是那个。体育中有固有政治的伟大时刻：jesse owens 1936 奥运会，举拳；jackie robinson；muhammad ali 拒绝越战征兵。但他们都是最伟大的，他们的事业是反抗纳粹、抗议越战、抗议种族主义。colin kaepernick 单膝跪地是为了什么？抗议美国国歌？意义是什么？他是最伟大或最伟大之一吗？不是。为什么要给他平台？你在推广什么？想说什么？然后他们继续加倍，dylan mulvaney 和其他 woke 东西。这极其愚蠢。他们的工作是营销，却做出与品牌完全相反的营销形象。太懦弱、太时髦。每个参与决策链的人，从营销高管到 ceo，都应该被赶出美国企业界。你怎么能批准那些 campaign？ chamath： 那是在特定时期。 sacks： 如果他们重新找到 mastery and excellence 作为北极星，会没事，因为潜力像 coiled spring。如果给我理由回 nike，我会回。 jcal： 这就是我要说的。接下来怎么办？斯坦福的 nike 店关了，取代它的是 on。你去 on 店，很棒，你想 roger federer。这就是我进去想的。我可能理解不了为什么买跑鞋要关心其他东西。但通常我只想 mastery and excellence。迈克尔·乔丹的鞋，我的鞋；老虎的球杆，我的球杆；桑普拉斯的衣服，我的衣服；费德勒的球拍，我的球拍。就这么简单，我会乐意买。a，你必须重新在零售地点建立，那里有可支配收入的人；b，决定是否与 mastery and excellence 对齐。然后数千万男女会回来，因为他们想要。也许他们想恢复体型，也许想重新参与运动，也许想学新运动。我会拥抱 nike 一切，现在不会。 chamath： 他们应该真的进入智能设备。他们试过一点，我认为很好，因为基于表现。如果他们拥有 strava——所有精英骑行和跑步的人用 strava——然后拥抱它。然后重做口号，do it or don&#x27;t。来一个真正有挑战性的 rebrand。 jcal： do it or don&#x27;t。 chamath： 那是 yoda，j-cal。 sacks： do or do not, there is no try。 jcal： do it or do not。 chamath： 如果你成为 cmo——j-cal 是 nike cmo。我会发起激进 campaign。我会买数十亿美元股票。我丢了 43 英镑。 jcal： 我在做 farmer&#x27;s walk，半英里，每只手臂 20 磅，兄弟。 chamath： 如果你不买这套 woke bullshit，你就领先了。 jcal： 对，just do it。 chamath： 重新聚焦。我无法接受这种无能，woke 到被踢出 s&amp;p 100。 jcal： 好，大家，这是 9 月 11 日的 all-in 播客。 sacks： 谢谢 jason，再次展现 mastery and excellence。 jcal： 对，just do it or don&#x27;t。do it or don&#x27;t。 chamath： 我在得到 30、40。do it or don&#x27;t。 jcal： 营销天才 don draper 在这里。 chamath： 大家和我一起做广告，我是 ceo，do it or don&#x27;t。我们不在乎你做什么。 jcal： 这是 brooklyn don draper。 chamath： 从 just do it 到 do it or don&#x27;t, we don&#x27;t give a fuck。 jcal： 不，我觉得会很有挑衅性。 sacks： 这是唯一让事情更糟的方式。这是最糟的时候。你们错了。 jcal： 测试一下。 chamath： 测试一下。 jcal： do it or don&#x27;t。 sacks： 他找到了被踢出 s&amp;p 100 和 500 的方法。 jcal： 50 粉单。不，我觉得会成功。 chamath： do it or don&#x27;t。 jcal： 我支持。 chamath： 这就是你应该告诉 s&amp;p 委员会的。do it or don&#x27;t。 jcal： 踢我或者不踢。 chamath： do it or don&#x27;t。 jcal： 我擅长营销。谁命名了这个播客，uncle？ sacks： 我命名的。你说叫什么？我说 all in。然后我拿了域名，你这个忘恩负义的混蛋。 jcal： 看，do it or don&#x27;t，timothée。 chamath： 你用 godaddy？ jcal： 不，我和所有者谈判，250 美元买的。5 字母域名很划算。 chamath： 好吧，do it or don&#x27;t。你做了。 jcal： do it or don&#x27;t。 chamath： 对，我做了。 jcal： 我他妈做了。 sacks： 说谢谢，婊子们。好，大家，all in summit 见。 jcal： 另一件事——爱你们，兄弟们。 jcal： 我做了。好，all in summit 这周末，周日到周二在洛杉矶，由 iren 呈现。iren 是 ai 云、数据中心、算力、训练和推理软件。他们举办周日注册日派对，拿徽章、拿饮料，来 iren house 见面拍照。meta 也会在，总裁兼副主席 dina powell mccormick 上台，还有 meta glasses experience hub。all in summit 见。 ---" style="--index: 9">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">09</span>
+                    <span class="timeline-meta">01:19:55–01:35:42</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>Nike 被踢出 S&amp;P 100：go woke go broke 与失去北极星</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>Nike 被踢出 S&amp;P 100，结束 18 年成分股历史，被 Palo Alto Networks 取代。</li>
+<li>JCal 梳理 Nike 从 1980 年上市、Air Jordan、Just Do It，到 2021 年市值 2640 亿美元、2024 年营收 510 亿美元，再到股价跌 80%、蒸发 2000 亿美元。</li>
+<li>Sacks 认为这是 go woke go broke 的又一案例，Colin Kaepernick 广告是转折点。</li>
+<li>Chamath 认为 Nike 失去了“mastery and excellence”这个北极星，不再代表值得向往的卓越。</li>
+<li>Friedberg 说产品变差，鞋子 6 周就坏，自己转向 Brooks；JCal 转向 On 因为 Roger Federer。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>S&amp;P 100：标普 100 指数，美国大盘股指数。</li>
+<li>John Donahoe：Nike 前 CEO，曾领导 eBay 和 ServiceNow，2020 年加入 Nike，推行 DTC 战略。</li>
+<li>DTC：Direct-to-Consumer，直接面向消费者，绕开零售合作伙伴。</li>
+<li>HOKA、On Running：新兴跑鞋品牌，近年抢占 Nike 市场份额。</li>
+<li>Anta、Li-Ning：安踏、李宁，中国运动品牌。</li>
+<li>Colin Kaepernick：NFL 球员，2016 年因在国歌期间单膝跪地抗议种族不平等引发争议，Nike 2018 年推出其广告。</li>
+<li>Dylan Mulvaney：跨性别网红，Bud Light 曾与其合作，引发保守派抵制。</li>
+<li>Brooks：跑鞋品牌，被 Berkshire Hathaway 收购，节目中称连续 9 年双位数增长，营收达 16 亿美元。</li>
+<li>Strava：运动社交平台，跑者和骑行者常用。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> 好，Nike。60 年标志性美国品牌，Just Do It，刚被踢出 S&amp;P 100。他们在这个股指里 18 年，Sacks，被 Palo Alto Networks 取代。恭喜 Nikesh。历史：1980 年上市，占美国运动鞋市场 50%，运动鞋里的可口可乐。1985 年 Air Jordan 改变一切，1988 年 Just Do It  campaign。2021 年市值峰值 2640 亿美元，2024 年营收峰值 510 亿美元。之后营收下降 10%。2020 年 John Donahoe 成为 CEO，推行激进 DTC 战略，疏远帮助建立 Nike 的零售伙伴，把运动鞋从商店撤走。这让 HOKA 和 On Running 这样的品牌崛起——每个 VC 都必须在演讲时穿白色 On。中国销售下降 30%，连续 8 个季度下滑，份额输给安踏和李宁。Nike 营销也变得超级 woke，开始支持政治运动，把体型健壮的人放在广告牌上。这杀死了品牌。股价从峰值跌 80%。Sacks，2000 亿美元蒸发了。你的看法？</p>
+<p><strong>Sacks：</strong> 这是 go woke, go broke 的百万分之一的例子。Nike 曾代表伟大运动员、惊人表现、胜利。Nike 不是胜利女神吗？他们用迈克尔·乔丹这样的 GOAT 和伟大运动员建立品牌，各种项目、不同种族、男女。没必要搞这些 woke 东西，突然展示你不认识的人。</p>
+<p><strong>JCal：</strong> 他们以前体脂率一般都很低，在 woke 广告之前。</p>
+<p><strong>Sacks：</strong> 甚至不是那个问题。这个人甚至不是运动员。这是谁？信息是什么？Own the floor？以前是 Just Do It。然后他们让 Dylan Mulvaney 拍广告。</p>
+<p><strong>JCal：</strong> 他们做了？</p>
+<p><strong>Sacks：</strong> 对，像 Bud Light。所以有 woke 东西，还有另一部分：咨询式方法。新 CEO 来了，John Donahoe 是个好人，中央选角，看起来像 CEO，但很多为变革而变革。DTC 是 new hotness，所以他们炸掉所有零售运营、零售关系。那些有 Nike 货架的商店现在给了竞争对手，竞争对手获得巨大市场份额。他们还重组公司，以前按运动分部门：篮球、足球、网球、游泳。然后重组为男、女、童。为什么这么做？</p>
+<p><strong>Chamath：</strong> 我不理解。</p>
+<p><strong>Sacks：</strong> 我不理解。</p>
+<p><strong>JCal：</strong> 本来运作良好。他们以前有清晰的 clicks and bricks 模式：去实体店，试鞋，在店里跑，和帮助跑者选鞋的人合作。直接购买也很好，Nike app 很愉快。但为什么要杀死零售渠道，惹恼那些大支持者？</p>
+<p><strong>Chamath：</strong> 我在近 30 年商业中学到，你必须有清晰的北极星并坚持。至少我成长时，Nike 的北极星非常清晰：通过运动体现 mastery and excellence。迈克尔·乔丹、老虎伍兹、塞雷娜·威廉姆斯、桑普拉斯，都是 mastery and excellence。后来 mastery and excellence 变得太传统。他们转向与 mastery 和 excellence 无关的东西。我不 aspire 成为胖人，从来没有，将来也不会。我 aspire 成为迈克尔·乔丹，一直如此。就这么基本。你不会买一个你不 aspirational 的品牌衣服或鞋子。只要重新以这个想法为中心：我们不是让人们自我感觉更好，我们的成功是当人们通过这些不可思议的人 imbue 自己变好的欲望。这是 aspirational。被某人启发、想成为更好的自己是好事。我们不应该羞辱它。这是好事，是我们变好的方式。有不可思议的运动员放弃一生去精通某事。Nike 应该拥有这一点并为此骄傲。如果这样做，其他细节都会合理。怎么卖？到处卖，因为所有人都想要。卖什么？卖给所有人，因为所有人都想要。但北极星错了，就会错过。北极星是 excellence and mastery。</p>
+<p><strong>JCal：</strong> 这里有一个更广泛的讨论，Friedberg，在你和 Eric Weinstein 的精彩 All-In 采访中，excellence、expertise、想成为精英、想激励别人、成为别人追随的人。我们失去了对卓越和专业的热爱，被参与奖杯或包容性替代，而不是卓越。也许你能谈谈你的领域，科学和创业。</p>
+<p><strong>Friedberg：</strong> 创业是精英治理，你要么做要么不做。但在这个业务中，他们失去的不仅是品牌。我以前买 Nike，我所有的鞋都是 Nike，只买 Nike。我喜欢品牌。后来发生什么？不是广告变差，不是订购变差，产品开始变差。鞋子 6 周就散架，脆弱，质量不如从前。我能看出产品变差。有一天我去 REI，旁边是我买沙拉的地方。我进去试了 Brooks，买了 Brooks，开始穿 Brooks。</p>
+<p><strong>JCal：</strong> 这是你买的 Speedwalking 900s？</p>
+<p><strong>Friedberg：</strong> Speedwalking 900s 是 Brooks 鞋。 horrible。不可接受。但产品很好，耐用，舒服。马拉松跑者喜欢 Brooks。我开始跑步时穿 Nike 得了膝盖问题，因为变老。Brooks 很棒，感觉很好。</p>
+<p><strong>JCal：</strong> 现在把跑步叫 skipping 了吗？</p>
+<p><strong>Friedberg：</strong> 我转向 On 只有一个原因。我坚持 Nike 很久，我是 Nike 死忠。我每 6 个月买新 Nike，还收藏很多 Nike，我喜欢。但后来 6 周就得换，因为产品差。我最终转向 On，因为 Roger Federer，他是 excellence and mastery。我喜欢他，他做一切看起来毫不费力。所以 Roger Federer，对我好。</p>
+<p><strong>JCal：</strong> 让我讲 Brooks 的故事。这家公司被 Berkshire Hathaway 拥有，连续 9 年双位数营收增长，达到 16 亿美元。它是 Berkshire 内部的独立公司，营收持续复合增长。CEO 采访说，Warren Buffett 每年告诉我，让产品比去年年底更好，如果你一直这样做，业务就会增长。他一直在做。这与 Nike 相反，Nike 从产品转向叙事，关注我们认为观众想听什么叙事。这跟 Bud Light 问题一样。</p>
+<p><strong>Sacks：</strong> 还记得他们在旧金山为 Colin Kaepernick 做的巨大广告吗？</p>
+<p><strong>Chamath：</strong> 那是转折点。</p>
+<p><strong>Sacks：</strong> 那跟什么有关系？我想要 excellence and mastery。</p>
+<p><strong>Chamath：</strong> 你不必评论所有事。</p>
+<p><strong>Sacks：</strong> 如果要 pinpoint 衰落的开始，就是那个。体育中有固有政治的伟大时刻：Jesse Owens 1936 奥运会，举拳；Jackie Robinson；Muhammad Ali 拒绝越战征兵。但他们都是最伟大的，他们的事业是反抗纳粹、抗议越战、抗议种族主义。Colin Kaepernick 单膝跪地是为了什么？抗议美国国歌？意义是什么？他是最伟大或最伟大之一吗？不是。为什么要给他平台？你在推广什么？想说什么？然后他们继续加倍，Dylan Mulvaney 和其他 woke 东西。这极其愚蠢。他们的工作是营销，却做出与品牌完全相反的营销形象。太懦弱、太时髦。每个参与决策链的人，从营销高管到 CEO，都应该被赶出美国企业界。你怎么能批准那些 campaign？</p>
+<p><strong>Chamath：</strong> 那是在特定时期。</p>
+<p><strong>Sacks：</strong> 如果他们重新找到 mastery and excellence 作为北极星，会没事，因为潜力像 coiled spring。如果给我理由回 Nike，我会回。</p>
+<p><strong>JCal：</strong> 这就是我要说的。接下来怎么办？斯坦福的 Nike 店关了，取代它的是 On。你去 On 店，很棒，你想 Roger Federer。这就是我进去想的。我可能理解不了为什么买跑鞋要关心其他东西。但通常我只想 mastery and excellence。迈克尔·乔丹的鞋，我的鞋；老虎的球杆，我的球杆；桑普拉斯的衣服，我的衣服；费德勒的球拍，我的球拍。就这么简单，我会乐意买。A，你必须重新在零售地点建立，那里有可支配收入的人；B，决定是否与 mastery and excellence 对齐。然后数千万男女会回来，因为他们想要。也许他们想恢复体型，也许想重新参与运动，也许想学新运动。我会拥抱 Nike 一切，现在不会。</p>
+<p><strong>Chamath：</strong> 他们应该真的进入智能设备。他们试过一点，我认为很好，因为基于表现。如果他们拥有 Strava——所有精英骑行和跑步的人用 Strava——然后拥抱它。然后重做口号，Do it or don&#x27;t。来一个真正有挑战性的 rebrand。</p>
+<p><strong>JCal：</strong> Do it or don&#x27;t。</p>
+<p><strong>Chamath：</strong> 那是 Yoda，J-Cal。</p>
+<p><strong>Sacks：</strong> Do or do not, there is no try。</p>
+<p><strong>JCal：</strong> Do it or do not。</p>
+<p><strong>Chamath：</strong> 如果你成为 CMO——J-Cal 是 Nike CMO。我会发起激进 campaign。我会买数十亿美元股票。我丢了 43 英镑。</p>
+<p><strong>JCal：</strong> 我在做 farmer&#x27;s walk，半英里，每只手臂 20 磅，兄弟。</p>
+<p><strong>Chamath：</strong> 如果你不买这套 woke bullshit，你就领先了。</p>
+<p><strong>JCal：</strong> 对，Just do it。</p>
+<p><strong>Chamath：</strong> 重新聚焦。我无法接受这种无能，woke 到被踢出 S&amp;P 100。</p>
+<p><strong>JCal：</strong> 好，大家，这是 9 月 11 日的 All-In 播客。</p>
+<p><strong>Sacks：</strong> 谢谢 Jason，再次展现 mastery and excellence。</p>
+<p><strong>JCal：</strong> 对，Just do it or don&#x27;t。Do it or don&#x27;t。</p>
+<p><strong>Chamath：</strong> 我在得到 30、40。Do it or don&#x27;t。</p>
+<p><strong>JCal：</strong> 营销天才 Don Draper 在这里。</p>
+<p><strong>Chamath：</strong> 大家和我一起做广告，我是 CEO，Do it or don&#x27;t。我们不在乎你做什么。</p>
+<p><strong>JCal：</strong> 这是 Brooklyn Don Draper。</p>
+<p><strong>Chamath：</strong> 从 Just Do It 到 Do It Or Don&#x27;t, We Don&#x27;t Give a Fuck。</p>
+<p><strong>JCal：</strong> 不，我觉得会很有挑衅性。</p>
+<p><strong>Sacks：</strong> 这是唯一让事情更糟的方式。这是最糟的时候。你们错了。</p>
+<p><strong>JCal：</strong> 测试一下。</p>
+<p><strong>Chamath：</strong> 测试一下。</p>
+<p><strong>JCal：</strong> Do it or don&#x27;t。</p>
+<p><strong>Sacks：</strong> 他找到了被踢出 S&amp;P 100 和 500 的方法。</p>
+<p><strong>JCal：</strong> 50 粉单。不，我觉得会成功。</p>
+<p><strong>Chamath：</strong> Do it or don&#x27;t。</p>
+<p><strong>JCal：</strong> 我支持。</p>
+<p><strong>Chamath：</strong> 这就是你应该告诉 S&amp;P 委员会的。Do it or don&#x27;t。</p>
+<p><strong>JCal：</strong> 踢我或者不踢。</p>
+<p><strong>Chamath：</strong> Do it or don&#x27;t。</p>
+<p><strong>JCal：</strong> 我擅长营销。谁命名了这个播客，Uncle？</p>
+<p><strong>Sacks：</strong> 我命名的。你说叫什么？我说 All In。然后我拿了域名，你这个忘恩负义的混蛋。</p>
+<p><strong>JCal：</strong> 看，Do it or don&#x27;t，Timothée。</p>
+<p><strong>Chamath：</strong> 你用 GoDaddy？</p>
+<p><strong>JCal：</strong> 不，我和所有者谈判，250 美元买的。5 字母域名很划算。</p>
+<p><strong>Chamath：</strong> 好吧，Do it or don&#x27;t。你做了。</p>
+<p><strong>JCal：</strong> Do it or don&#x27;t。</p>
+<p><strong>Chamath：</strong> 对，我做了。</p>
+<p><strong>JCal：</strong> 我他妈做了。</p>
+<p><strong>Sacks：</strong> 说谢谢，婊子们。好，大家，All In Summit 见。</p>
+<p><strong>JCal：</strong> 另一件事——爱你们，兄弟们。</p>
+<p><strong>JCal：</strong> 我做了。好，All In Summit 这周末，周日到周二在洛杉矶，由 IREN 呈现。IREN 是 AI 云、数据中心、算力、训练和推理软件。他们举办周日注册日派对，拿徽章、拿饮料，来 IREN house 见面拍照。Meta 也会在，总裁兼副主席 Dina Powell McCormick 上台，还有 Meta Glasses Experience Hub。All In Summit 见。</p>
+<hr></div>
+                  </div>
+                </article></div>
+            <p class="empty search-empty" data-search-empty hidden>没有匹配的时间线段落。</p>
+          </section>
+
+          <section id="speakers">
+            <div class="section-head">
+              <h2>人物观点对照</h2>
+              <p>比较嘉宾立场</p>
+            </div>
+            <div class="speaker-grid"><article class="speaker-card" style="--index: 1">
+                  <p class="speaker-kicker">嘉宾 01</p>
+                  <h3>Jason Calacanis</h3>
+                  <div><p>JCal 在本集中主要扮演主持人和叙事推动者。他迅速把 Jacob Coxon 的辞职推文、Bernie Sanders 的政治反应和 Anthropic IPO 联系起来，强调这件事已经从 X 和 AI 社区跳到晚间新闻。他对 doomer 叙事持强烈怀疑，提出三种情景：他们相信且对、他们相信但有精神病、或者这是一场协调 psyop。他不断用“AI 连订酒店和自动补全都做不好”来嘲讽末日论，同时在数据主权和 Nike 品牌问题上提供具体例子。</p></div>
+                </article>
+<article class="speaker-card" style="--index: 2">
+                  <p class="speaker-kicker">嘉宾 02</p>
+                  <h3>Chamath Palihapitiya</h3>
+                  <div><p>Chamath 从投资、IPO 和法律披露角度分析 Anthropic 的困境。他认为 Anthropic 陷入类似 Philip Morris 的矛盾：知道产品危险，却想先上市再说。他详细解释 quiet period、SEC 审查、S-1 风险披露和长尾产品责任，认为投资者会要求巨大折扣，CIO 会因数据泄漏被炒。他主张企业必须自建主权 AI 基础设施，用 VPC、bare metal 或开源模型控制数据。在 Nike 问题上，他认为核心是失去“mastery and excellence”这个北极星。</p></div>
+                </article>
+<article class="speaker-card" style="--index: 3">
+                  <p class="speaker-kicker">嘉宾 03</p>
+                  <h3>David Sacks</h3>
+                  <div><p>Sacks 是本集反对 doomer 叙事的核心人物。他称 Jacob Coxon 的推文是一场有组织的 doomer psyop，列举账号无活动、被三个 doomer 团体快速放大、WSJ 提前发布等证据。他认为终极目标是监管捕获和联邦 AI 部门，最终会导向禁止开源。他区分 prosaic RSI 和 RSI maximalism，认为后者需要移除所有人类环节，目前远未实现。他还指出 Evan Hubinger 的背书推文在法律上比 Jacob 的辞职信更关键，因为他是仍在职的高管。在 Nike 问题上，他把 Colin Kaepernick 广告视为品牌衰落的转折点。</p></div>
+                </article>
+<article class="speaker-card" style="--index: 4">
+                  <p class="speaker-kicker">嘉宾 04</p>
+                  <h3>David Friedberg</h3>
+                  <div><p>Friedberg 从科学、历史类比和产品角度加入讨论。他把 AI 末日恐慌类比 Al Gore 的气候预测、Fauci 的 COVID 警告和 Three Mile Island 核恐慌，认为这是人类作为灵长类动物对未知的社会性恐慌。他详细解释 OpenAI 数学突破本质是暴力计算杠杆，相当于数万年人类工作，而不是 AI 天才。他强烈支持开源，认为开源让每个人在本地运行 AI，防止权力集中。在数据泄漏问题上，他分享个人经验，怀疑聊天内容被用于训练。在 Nike 问题上，他说产品变差让自己转向 Brooks。</p></div>
+                </article></div>
+          </section>
+
+          <section id="quotes">
+            <div class="section-head">
+              <h2>值得引用的原话</h2>
+              <p>保留关键表达</p>
+            </div>
+            <div class="panel"><ol>
+<li><strong>英文原话：</strong> “This is a doomer psyop, and the ultimate target is open source.”</li>
+<p><strong>中文翻译：</strong> 这是一场 doomer 心理战，最终目标是开源。 <strong>说明：</strong> Sacks 对整场争议的核心判断，把 AI 安全恐慌与开源禁令直接联系起来。</p>
+</ol>
+<ol>
+<li><strong>英文原话：</strong> “You&#x27;re asking public market investors to underwrite your company to a value in the trillions. On the other hand, your own safety lead is saying that your core product is unsolved and potentially civilization-ending.”</li>
+<p><strong>中文翻译：</strong> 你要求公开市场投资者以上万亿美元估值承销你的公司，另一方面，你自己的安全负责人说你的核心产品未解决，可能终结文明。 <strong>说明：</strong> Sacks 概括 Anthropic IPO 的根本矛盾，也是本集关于披露和产品责任的核心论点。</p>
+</ol>
+<ol>
+<li><strong>英文原话：</strong> “AI is a tool of leverage for humans. AI is not some magical genius super god that sits above us.”</li>
+<p><strong>中文翻译：</strong> AI 是人类的杠杆工具。AI 不是坐在我们之上、神奇的天才超级神。 <strong>说明：</strong> Friedberg 对 OpenAI 数学突破的总结，强调 AI 是暴力计算和杠杆，而非神秘天才。</p>
+</ol>
+<ol>
+<li><strong>英文原话：</strong> “ZDR means literally nothing. It&#x27;s flimsy and it&#x27;s Swiss cheese.”</li>
+<p><strong>中文翻译：</strong> ZDR  literally 什么都不是。它脆弱，像瑞士奶酪一样全是洞。 <strong>说明：</strong> Chamath 对零数据保留承诺的批评，直接点出企业数据主权的紧迫性。</p>
+</ol>
+<ol>
+<li><strong>英文原话：</strong> “We need much stronger data privacy laws around the data that you have with AI services.”</li>
+<p><strong>中文翻译：</strong> 我们需要围绕 AI 服务中的数据制定强得多的隐私法。 <strong>说明：</strong> Sacks 在数据泄漏讨论中提出的政策主张，强调 AI 聊天数据保护不应低于邮件。</p>
+</ol>
+<ol>
+<li><strong>英文原话：</strong> “The North Star was very clear to me: mastery and excellence embodied through athletics.”</li>
+<p><strong>中文翻译：</strong> 在我看来北极星非常清晰：通过运动体现的卓越与精通。 <strong>说明：</strong> Chamath 解释 Nike 衰落的核心，认为品牌失去了值得向往的卓越形象。</p>
+</ol>
+<ol>
+<li><strong>英文原话：</strong> “If you don&#x27;t get the North Star right, you&#x27;re going to miss out.”</li>
+<p><strong>中文翻译：</strong> 如果你不把北极星定对，你就会错失一切。 <strong>说明：</strong> Chamath 对 Nike 和所有品牌的教训总结，强调清晰价值观的重要性。</p>
+</ol>
+<ol>
+<li><strong>英文原话：</strong> “Open source AI is critical for everyone to benefit from this technology and keep it from being centralized and controlled by a handful of companies and individuals.”</li>
+<p><strong>中文翻译：</strong> 开源 AI 对每个人受益于这项技术、防止它被少数公司和个人集中控制至关重要。 <strong>说明：</strong> Friedberg 对开源的核心立场，也是本集反对监管捕获的落脚点。</p>
+</ol></div>
+          </section>
+        </div>
+      </div>
+    </main>
+  </div>
+  <script>
+    const progress = document.querySelector("[data-progress]");
+    const searchBox = document.querySelector("[data-search-box]");
+    const topButton = document.querySelector("[data-scroll-top]");
+    const cards = Array.from(document.querySelectorAll("[data-timeline-card]"));
+    const searchEmpty = document.querySelector("[data-search-empty]");
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    function updateProgress() {
+      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      const ratio = scrollable > 0 ? window.scrollY / scrollable : 0;
+      if (progress) {
+        progress.style.width = `${Math.max(0, Math.min(1, ratio)) * 100}%`;
+      }
+    }
+
+    function applySearch() {
+      const query = searchBox.value.trim().toLowerCase();
+      let visibleCount = 0;
+      cards.forEach((card) => {
+        const text = card.getAttribute("data-search") || "";
+        const isVisible = !query || text.includes(query);
+        card.hidden = !isVisible;
+        if (isVisible) {
+          visibleCount += 1;
+        }
+      });
+      if (searchEmpty) {
+        searchEmpty.hidden = !query || visibleCount > 0;
+      }
+    }
+
+    window.addEventListener("scroll", updateProgress, { passive: true });
+    window.addEventListener("resize", updateProgress);
+    if (searchBox) {
+      searchBox.addEventListener("input", applySearch);
+    }
+    if (topButton) {
+      topButton.addEventListener("click", () => {
+        window.scrollTo({
+          top: 0,
+          behavior: prefersReducedMotion.matches ? "auto" : "smooth"
+        });
+      });
+    }
+    updateProgress();
+  </script>
+</body>
+</html>
