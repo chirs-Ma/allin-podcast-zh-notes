@@ -1,0 +1,1294 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Anthropic IPO 风险、Meta Muse 爆红、Token 价格下跌、开源份额反超、对齐研究失灵 - 中文播客可视化笔记</title>
+  <style>
+    :root {
+      --bg: oklch(0.974 0.006 238);
+      --paper: oklch(0.991 0.003 238);
+      --paper-soft: oklch(0.955 0.007 238);
+      --ink: oklch(0.205 0.018 246);
+      --muted: oklch(0.49 0.018 246);
+      --faint: oklch(0.63 0.014 246);
+      --line: oklch(0.875 0.009 238);
+      --line-strong: oklch(0.74 0.014 238);
+      --accent: oklch(0.43 0.064 164);
+      --accent-soft: oklch(0.94 0.024 164);
+      --accent-wash: oklch(0.973 0.012 164);
+      --quote: oklch(0.965 0.010 92);
+      --shadow: 0 24px 54px color-mix(in oklch, var(--ink) 8%, transparent);
+      --radius: 8px;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-width: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(90deg, color-mix(in oklch, var(--line) 28%, transparent) 1px, transparent 1px) 0 0 / 92px 92px,
+        var(--bg);
+      font-family: "Geist", "Satoshi", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      line-height: 1.78;
+      text-rendering: optimizeLegibility;
+    }
+    ::selection { background: var(--accent-soft); color: var(--ink); }
+    a {
+      color: var(--accent);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+      transition: color .22s var(--ease), background-color .22s var(--ease), border-color .22s var(--ease), transform .22s var(--ease);
+    }
+    [hidden] { display: none !important; }
+    .progress {
+      position: fixed;
+      z-index: 4;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: var(--accent);
+    }
+    .quick-actions {
+      position: fixed;
+      right: max(18px, calc((100vw - 1200px) / 2));
+      bottom: 24px;
+      z-index: 3;
+      display: grid;
+      gap: 7px;
+    }
+    .quick-action {
+      display: inline-grid;
+      grid-template-columns: 16px auto;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      min-width: 74px;
+      min-height: 40px;
+      padding: 8px 12px;
+      border: 1px solid var(--line-strong);
+      border-radius: var(--radius);
+      background: color-mix(in oklch, var(--paper) 92%, transparent);
+      box-shadow: 0 12px 28px color-mix(in oklch, var(--ink) 7%, transparent);
+      color: var(--ink);
+      font: inherit;
+      font-size: 13px;
+      font-weight: 720;
+      line-height: 1.2;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .quick-action:hover, .quick-action:focus-visible {
+      outline: none;
+      border-color: var(--accent);
+      background: var(--accent-wash);
+      color: var(--accent);
+      transform: translate3d(0, -1px, 0);
+    }
+    .quick-action:active { transform: translate3d(0, 1px, 0) scale(.99); }
+    .page {
+      width: min(1760px, calc(100% - 56px));
+      margin: 0 auto;
+      padding: 0 0 104px;
+    }
+    .article { min-width: 0; }
+    .hero {
+      max-width: none;
+      margin-left: min(7vw, 140px);
+      padding: 72px 0 58px;
+    }
+    .eyebrow {
+      margin: 0 0 18px;
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    h1 {
+      max-width: none;
+      margin: 0 0 28px;
+      font-size: clamp(38px, 3vw, 52px);
+      font-weight: 760;
+      line-height: 1.08;
+      letter-spacing: 0;
+      text-wrap: balance;
+    }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 18px;
+      max-width: 72ch;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .meta a { font-weight: 650; }
+    .meta-strip {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+      max-width: 720px;
+      margin: 34px 0 28px;
+      border-top: 1px solid var(--line-strong);
+      padding-top: 16px;
+    }
+    .meta-pill {
+      display: grid;
+      gap: 2px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.35;
+    }
+    .meta-pill b {
+      color: var(--ink);
+      font-family: var(--mono);
+      font-size: 18px;
+      font-weight: 680;
+      line-height: 1;
+    }
+    .summary {
+      width: 100%;
+      max-width: 760px;
+      padding: 24px 26px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: color-mix(in oklch, var(--paper) 88%, var(--accent-soft));
+      box-shadow: var(--shadow);
+    }
+    .summary p {
+      margin: 0;
+      font-size: 19px;
+      line-height: 1.72;
+    }
+    h1, .summary, .takeaway p, .timeline-card h3, .section-content, .speaker-card, .panel {
+      overflow-wrap: anywhere;
+    }
+    .content-shell {
+      display: grid;
+      grid-template-columns: minmax(170px, 212px) minmax(0, 820px);
+      gap: clamp(36px, 7vw, 88px);
+      align-items: start;
+      border-top: 1px solid var(--line);
+      padding-top: 40px;
+    }
+    .sidebar {
+      position: sticky;
+      top: 28px;
+      align-self: start;
+      padding-top: 4px;
+    }
+    .toc {
+      border-top: 1px solid var(--ink);
+      padding-top: 16px;
+    }
+    .toc-title {
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .nav-links { display: grid; gap: 2px; }
+    .nav-links a {
+      display: block;
+      padding: 8px 0;
+      border-bottom: 1px solid color-mix(in oklch, var(--line) 72%, transparent);
+      color: var(--ink);
+      font-size: 14px;
+      line-height: 1.35;
+      text-decoration: none;
+    }
+    .nav-links a:hover, .nav-links a:focus-visible {
+      outline: none;
+      color: var(--accent);
+      transform: translate3d(2px, 0, 0);
+    }
+    .search {
+      display: grid;
+      gap: 8px;
+      margin-top: 22px;
+    }
+    .search span {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 720;
+    }
+    .search input {
+      width: 100%;
+      min-height: 40px;
+      padding: 8px 10px;
+      border: 1px solid var(--line-strong);
+      border-radius: var(--radius);
+      background: var(--paper);
+      color: var(--ink);
+      font: inherit;
+      font-size: 14px;
+      outline: none;
+      transition: border-color .22s var(--ease), box-shadow .22s var(--ease), transform .22s var(--ease);
+    }
+    .search input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px color-mix(in oklch, var(--accent) 14%, transparent);
+    }
+    .content-flow { min-width: 0; }
+    section { margin: 0 0 78px; }
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 18px;
+      align-items: end;
+      margin-bottom: 22px;
+      border-top: 1px solid var(--ink);
+      padding-top: 18px;
+    }
+    .section-head h2 {
+      margin: 0;
+      font-size: 28px;
+      font-weight: 740;
+      line-height: 1.16;
+      letter-spacing: 0;
+    }
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.4;
+      text-align: right;
+    }
+    .takeaway-list {
+      display: grid;
+      gap: 0;
+      margin: 0;
+      padding: 0;
+      border-top: 1px solid var(--line);
+      list-style: none;
+    }
+    .takeaway {
+      display: grid;
+      grid-template-columns: 52px minmax(0, 1fr);
+      gap: 18px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .takeaway span {
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 15px;
+      font-weight: 720;
+      line-height: 1.65;
+    }
+    .takeaway p {
+      margin: 0;
+      max-width: 70ch;
+      font-size: 16px;
+      line-height: 1.72;
+    }
+    .timeline {
+      display: grid;
+      gap: 0;
+      border-top: 1px solid var(--line-strong);
+    }
+    .timeline-card {
+      display: grid;
+      grid-template-columns: 132px minmax(0, 1fr);
+      gap: 32px;
+      padding: 34px 0 40px;
+      border-bottom: 1px solid var(--line);
+    }
+    .timeline-heading {
+      position: sticky;
+      top: 30px;
+      align-self: start;
+      display: grid;
+      gap: 10px;
+      padding-top: 2px;
+    }
+    .timeline-index {
+      color: var(--faint);
+      font-family: var(--mono);
+      font-size: 13px;
+      font-weight: 720;
+      line-height: 1;
+    }
+    .timeline-meta {
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 720;
+      line-height: 1.45;
+    }
+    .timeline-card h3 {
+      max-width: 24ch;
+      margin: 0 0 18px;
+      font-size: 27px;
+      font-weight: 730;
+      line-height: 1.22;
+      letter-spacing: 0;
+    }
+    .section-content {
+      color: color-mix(in oklch, var(--ink) 88%, var(--muted));
+      font-size: 16px;
+    }
+    .section-content p {
+      max-width: 72ch;
+      margin: 0 0 1.05em;
+    }
+    .section-content p strong:first-child {
+      color: var(--ink);
+      font-weight: 760;
+    }
+    .section-content h4 {
+      margin: 26px 0 10px;
+      color: var(--accent);
+      font-size: 14px;
+      font-weight: 760;
+      line-height: 1.35;
+    }
+    .section-content ul, .section-content ol, .panel ul, .panel ol, .speaker-card ul, .speaker-card ol {
+      margin: .75em 0 1em;
+      padding-left: 1.25em;
+    }
+    .section-content li, .panel li, .speaker-card li { margin: 6px 0; }
+    .speaker-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, .88fr);
+      gap: 26px 42px;
+      border-top: 1px solid var(--line);
+    }
+    .speaker-card {
+      padding: 22px 0 24px;
+      border-bottom: 1px solid var(--line);
+    }
+    .speaker-card:nth-child(even) { margin-top: 22px; }
+    .speaker-kicker {
+      margin: 0 0 8px;
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 720;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .speaker-card h3 {
+      margin: 0 0 12px;
+      font-size: 20px;
+      font-weight: 730;
+      line-height: 1.25;
+    }
+    .speaker-card p, .panel p {
+      max-width: 68ch;
+      margin-top: 0;
+    }
+    .panel {
+      border-top: 1px solid var(--line);
+      padding-top: 8px;
+    }
+    blockquote {
+      margin: 18px 0;
+      padding: 16px 18px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--quote);
+    }
+    code {
+      padding: 2px 5px;
+      border-radius: 5px;
+      background: color-mix(in oklch, var(--accent) 10%, var(--paper));
+      color: var(--ink);
+      font-family: var(--mono);
+      font-size: .92em;
+    }
+    hr {
+      height: 1px;
+      margin: 26px 0;
+      border: 0;
+      background: var(--line);
+    }
+    .empty {
+      margin: 0;
+      padding: 16px 18px;
+      border: 1px dashed var(--line-strong);
+      border-radius: var(--radius);
+      color: var(--muted);
+      background: color-mix(in oklch, var(--paper-soft) 70%, transparent);
+    }
+    .search-empty { margin-top: 16px; }
+    .muted { color: var(--muted); }
+    @keyframes rise-in {
+      from { opacity: 1; transform: translate3d(0, 6px, 0); }
+      to { opacity: 1; transform: translate3d(0, 0, 0); }
+    }
+    .hero > *, .takeaway, .timeline-card, .speaker-card, .panel {
+      animation: rise-in .55s var(--ease) both;
+    }
+    .hero > *:nth-child(2) { animation-delay: .04s; }
+    .hero > *:nth-child(3) { animation-delay: .08s; }
+    .hero > *:nth-child(4) { animation-delay: .12s; }
+    .hero > *:nth-child(5) { animation-delay: .16s; }
+    .takeaway, .timeline-card, .speaker-card {
+      animation-delay: calc(var(--index, 1) * 38ms);
+    }
+    @media (max-width: 1120px) {
+      .hero { margin-left: 0; }
+      .content-shell {
+        grid-template-columns: minmax(154px, 190px) minmax(0, 1fr);
+        gap: 36px;
+      }
+      h1 { font-size: 44px; }
+    }
+    @media (min-width: 1500px) {
+      h1 {
+        width: max-content;
+        max-width: 100%;
+        white-space: nowrap;
+        font-size: clamp(36px, 2.05vw, 42px);
+      }
+    }
+    @media (max-width: 780px) {
+      body { background: var(--bg); }
+      .page { width: min(1180px, calc(100% - 28px)); padding-bottom: 86px; }
+      .hero { padding: 46px 0 36px; }
+      .eyebrow { margin-bottom: 14px; }
+      h1 {
+        max-width: none;
+        font-size: 30px;
+        line-height: 1.14;
+        word-break: normal;
+      }
+      .summary, .summary p, .takeaway p, .section-content, .speaker-card, .panel {
+        max-width: 100%;
+        word-break: break-word;
+      }
+      .meta-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 20px; }
+      .summary { padding: 20px; }
+      .summary p { font-size: 17px; }
+      .content-shell { display: block; padding-top: 28px; }
+      .sidebar { position: static; padding-top: 0; margin-bottom: 42px; }
+      .toc { border-top-color: var(--line-strong); }
+      .nav-links { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 18px; }
+      section { margin-bottom: 58px; }
+      .section-head { display: block; margin-bottom: 16px; }
+      .section-head h2 { font-size: 24px; }
+      .section-head p { margin-top: 6px; text-align: left; }
+      .takeaway { grid-template-columns: 42px minmax(0, 1fr); gap: 12px; }
+      .timeline-card { display: block; padding: 28px 0 32px; }
+      .timeline-heading { position: static; display: flex; align-items: baseline; gap: 12px; margin-bottom: 12px; }
+      .timeline-card h3 { max-width: none; font-size: 23px; }
+      .speaker-grid { display: block; }
+      .speaker-card:nth-child(even) { margin-top: 0; }
+      .quick-actions {
+        right: 12px;
+        bottom: 12px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 6px;
+      }
+      .quick-action {
+        min-width: 66px;
+        min-height: 38px;
+        padding: 7px 9px;
+        font-size: 13px;
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: 1ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 1ms !important;
+      }
+      .speaker-card:nth-child(even) { margin-top: 0; }
+    }
+    @media print {
+      body { background: var(--paper); }
+      .sidebar, .progress, .quick-actions { display: none; }
+      .page { display: block; width: auto; padding-bottom: 0; }
+      .hero { margin-left: 0; padding: 0 0 28px; }
+      .content-shell { display: block; border-top: 0; padding-top: 0; }
+      .summary { box-shadow: none; }
+      .timeline-card, .speaker-card { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <div class="progress" data-progress></div>
+  <div class="quick-actions" aria-label="快捷操作">
+    <a class="quick-action" href="../../index.html" aria-label="返回首页">
+      <span aria-hidden="true">←</span>
+      <span>首页</span>
+    </a>
+    <button class="quick-action" type="button" data-scroll-top aria-label="回到顶部">
+      <span aria-hidden="true">↑</span>
+      <span>顶部</span>
+    </button>
+  </div>
+  <div class="page">
+    <main class="article">
+      <header class="hero">
+        <p class="eyebrow">All-In Podcast 中文精读</p>
+        <h1>Anthropic IPO 风险、Meta Muse 爆红、Token 价格下跌、开源份额反超、对齐研究失灵</h1>
+        <div class="meta">
+          <span>生成时间：2026-09-28 16:11</span>
+          <span>来源：<a href="https://www.youtube.com/watch?v=cvP_1jmnkmM" target="_blank" rel="noopener">YouTube</a></span>
+        </div>
+        <div class="meta-strip"><span class="meta-pill"><b>47 分钟</b>阅读时长</span>
+<span class="meta-pill"><b>10</b>核心要点</span>
+<span class="meta-pill"><b>14</b>时间线</span>
+<span class="meta-pill"><b>4</b>人物</span></div>
+        <div class="summary" aria-label="一句话摘要"><p>本期 All-In Podcast 围绕前沿 AI 公司的商业模式危机展开：开源权重模型在 10 天内密集发布并大举抢占 token 份额，Anthropic 和 OpenAI 的 IPO 因此承压；与此同时，Meta 的 Muse 和 xAI 的 GrokBot 让普通美国人第一次真正用上 AI agent，而所谓&quot;对齐研究&quot;却被批评为正在亲手制造它想要避免的怪物。</p></div>
+      </header>
+
+      <div class="content-shell">
+        <aside class="sidebar">
+          <nav class="toc" aria-label="页面导航">
+            <p class="toc-title">阅读导航</p>
+            <div class="nav-links">
+              <a href="#takeaways">核心要点</a>
+              <a href="#timeline">分段整理</a>
+              <a href="#speakers">人物观点</a>
+              <a href="#quotes">双语引语</a>
+            </div>
+            <label class="search">
+              <span>搜索时间线</span>
+              <input data-search-box type="search" placeholder="关键词" aria-label="搜索时间线">
+            </label>
+          </nav>
+        </aside>
+
+        <div class="content-flow">
+          <section id="takeaways">
+            <div class="section-head">
+              <h2>核心要点</h2>
+              <p>快速扫读本集主线</p>
+            </div>
+            <ol class="takeaway-list"><li class="takeaway" style="--index: 1"><span>01</span><p>All-In Summit 第五年，特朗普在 Jensen Huang 演讲期间即兴打电话进来，Sacks 认为这一幕平息了此前数周针对 AI 的全国性恐慌。</p></li>
+<li class="takeaway" style="--index: 2"><span>02</span><p>Chamath 主张停止称呼前沿 AI 公司为&quot;实验室&quot;——它们是吸收数千亿美元资本、对数万股东负责、受产品责任约束的营利性公司。</p></li>
+<li class="takeaway" style="--index: 3"><span>03</span><p>Sacks 批评 Dario Amodei 和 Sam Altman 去联合国呼吁&quot;全球 AI 治理&quot;是在推卸个体责任，类比坐私人飞机去达沃斯再抨击气候变化的亿万富翁。</p></li>
+<li class="takeaway" style="--index: 4"><span>04</span><p>过去 10 天出现罕见模型发布潮：DeepSeek 4.1、Qwen 2.1、小米 Mimo、PrismML Bonsai-2 等开源权重模型在多数基准上追平甚至超越闭源前沿模型。</p></li>
+<li class="takeaway" style="--index: 5"><span>05</span><p>Token 使用量在过去 12 周内从 80/20 闭源领先，急剧反转为 80/20 开源领先，Chamath 称科技市场历史上从未见过这样的份额翻转。</p></li>
+<li class="takeaway" style="--index: 6"><span>06</span><p>Anthropic 的 IPO 可能推迟到 11 月甚至更晚，投资者担心其管理层公开谈论&quot;10% 人类灭绝概率&quot;以及超级投票权安排会压低估值。</p></li>
+<li class="takeaway" style="--index: 7"><span>07</span><p>Friedberg 认为 Anthropic 的真正核心风险不是&quot;终结世界&quot;，而是客户集中度和开源模型对普通企业任务的快速替代。</p></li>
+<li class="takeaway" style="--index: 8"><span>08</span><p>Meta Muse 上线 10 天下载 300 万次、Meta 股价上涨 10%，被视为普通美国人第一次从 AI 革命中获得可感知收益。</p></li>
+<li class="takeaway" style="--index: 9"><span>09</span><p>Chamath 判断 Muse 和 GrokBot 这类个人 agent 将动摇 App Store 30% 抽成模式，因为大量交易可以&quot;无头&quot;完成，绕开应用商店。</p></li>
+<li class="takeaway" style="--index: 10"><span>10</span><p>Sacks 批评 Anthropic 的 Claude 宪法教模型&quot;良心拒服兵役&quot;、可以反对创造者，认为这种对齐研究可能正在制造弗兰肯斯坦怪物。</p></li></ol>
+          </section>
+
+          <section id="timeline">
+            <div class="section-head">
+              <h2>分段详细整理</h2>
+              <p>按时间线阅读上下文</p>
+            </div>
+            <div class="timeline" data-timeline><article class="timeline-card" data-timeline-card data-search="00:00–00:01:34 开场与 all-in summit 回顾 本段核心内容： 四位主持人回顾第五届 all-in summit 的花絮，包括制作团队、环球影城、赞助商。 为下一段特朗普电话接入 jensen 演讲做铺垫。 背景解释与关键术语： all-in summit：all-in podcast 每年举办的线下峰会，被视为硅谷科技、投资、政治圈的重要聚会。 de&#x27;longhi：意大利家电品牌，以咖啡机知名。 iren、niagen、paypal：本集赞助商，分别是 ai 数据中心/云服务商、nad 补充剂品牌和支付平台。 详细中文整理： jcal： 欢迎回到全球第一播客 all-in podcast 第 290 集，核心四人组齐了。david friedberg、chamath palihapitiya、david sacks 打进来。今天议程很满。不过我得先问大家第五届 all-in summit 最难忘的记忆。friedberg，你作为执行制片人，怎么评价自己的表现？ friedberg： 我们第二天结束时忘了大声感谢制作团队，kimber、lisa、nick。我觉得应该把他们请上台。后台团队今年一如既往地炸裂。我自己玩得很开心，最喜欢去环球影城，就是放松一下。 jcal： 很 chill。我像在重温没有创伤的童年 shabbat。顺便感谢 de&#x27;longhi，我把活动上的咖啡机搬回家了。 chamath： 我拿的是 vip 区那台零塑料净水机，超滤、没有微塑料。现在放我们办公室了，非常棒的公司。 jcal： sacks，你最喜欢哪个时刻？ sacks： 最难忘的是总统在 jensen 演讲时打电话进来。jensen 的内容和姿态真的帮助平息了全国对 ai 的恐慌。感觉我们处在全国对话的中心，而且这是很自然发生的。你要记得，峰会前几周基本有一场心理战，想让大家相信除非照民主党说的做、停止所有 ai 开发，否则人类会灭绝。先有 satya 出来安抚，然后 jensen 也做到，总统打电话进来做了他最擅长的事——夺取叙事主导权，挫败了那场行动。" style="--index: 1">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">01</span>
+                    <span class="timeline-meta">00:00–00:01:34</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>开场与 All-In Summit 回顾</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>四位主持人回顾第五届 All-In Summit 的花絮，包括制作团队、环球影城、赞助商。</li>
+<li>为下一段特朗普电话接入 Jensen 演讲做铺垫。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>All-In Summit：All-In Podcast 每年举办的线下峰会，被视为硅谷科技、投资、政治圈的重要聚会。</li>
+<li>De&#x27;Longhi：意大利家电品牌，以咖啡机知名。</li>
+<li>IREN、Niagen、PayPal：本集赞助商，分别是 AI 数据中心/云服务商、NAD 补充剂品牌和支付平台。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> 欢迎回到全球第一播客 All-In Podcast 第 290 集，核心四人组齐了。David Friedberg、Chamath Palihapitiya、David Sacks 打进来。今天议程很满。不过我得先问大家第五届 All-In Summit 最难忘的记忆。Friedberg，你作为执行制片人，怎么评价自己的表现？</p>
+<p><strong>Friedberg：</strong> 我们第二天结束时忘了大声感谢制作团队，Kimber、Lisa、Nick。我觉得应该把他们请上台。后台团队今年一如既往地炸裂。我自己玩得很开心，最喜欢去环球影城，就是放松一下。</p>
+<p><strong>JCal：</strong> 很 chill。我像在重温没有创伤的童年 Shabbat。顺便感谢 De&#x27;Longhi，我把活动上的咖啡机搬回家了。</p>
+<p><strong>Chamath：</strong> 我拿的是 VIP 区那台零塑料净水机，超滤、没有微塑料。现在放我们办公室了，非常棒的公司。</p>
+<p><strong>JCal：</strong> Sacks，你最喜欢哪个时刻？</p>
+<p><strong>Sacks：</strong> 最难忘的是总统在 Jensen 演讲时打电话进来。Jensen 的内容和姿态真的帮助平息了全国对 AI 的恐慌。感觉我们处在全国对话的中心，而且这是很自然发生的。你要记得，峰会前几周基本有一场心理战，想让大家相信除非照民主党说的做、停止所有 AI 开发，否则人类会灭绝。先有 Satya 出来安抚，然后 Jensen 也做到，总统打电话进来做了他最擅长的事——夺取叙事主导权，挫败了那场行动。</p></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="00:01:34–00:04:29 特朗普电话接入 jensen 演讲 本段核心内容： 主持人澄清特朗普的电话并非事先安排，而是 jensen 在后台联络后即兴接入。 jcal 描述现场技术细节和特朗普的临场金句。 chamath 总结&quot;成年人&quot;出面终结了此前数周的 ai 末日恐慌。 背景解释与关键术语： jensen huang：nvidia 创始人兼 ceo，ai 算力核心供应商。 satya nadella：微软 ceo。 &quot;nerds&quot;：jcal 等人对硅谷 ai 末日论者的戏称。 trump-telligence：jcal 现场造的词，把 trump 和 intelligence 拼在一起，调侃超级智能。 详细中文整理： jcal： 很多人想知道这个电话是不是计划好的。friedberg，带我们到幕后。 friedberg： jensen 在后台联系了总统，说回我电话。然后总统在他台上时打回来了。有发短信，但完全是自发的，不是事先安排好的。jensen 一直在等总统这个电话，结果在台上真发生了。这在 dc 和媒体上都是当天的热门话题，在我们台上发生太不可思议了。 jcal： 说清楚，我当时就想，把他放免提。jensen 问我怎么弄，我直接递给他一个备用麦克风——我总是多备一个以防有人麦克风坏了。总统是有史以来最好笑的总统、最好笑的政客。sacks，你注意到没有，他在免提里丢包袱完美。jensen 造最好的芯片，所有人都想逆向工程，不可能。但他自己按不了免提键。 chamath： 他就在完美的时间点丢出那句话。 jcal： 严肃说，chamath，上周书呆子们快疯了，然后成年人来了。daddy 来了，elon 来了，jensen 来了，所有房间里的成年人都来了，说：如果你的软件有缺陷、不准备好放进世界，那就别放，让它别那么&quot;脆&quot;。你怎么看这场全国讨论从&quot;放慢&quot;转向&quot;只发布非脆性、有韧性的软件&quot;？ chamath： 上周发生了一种分类。一边是想自称实验室、但实际上有损益表、股东、要遵守同样规则的公司；另一边是经历过数十年审查、用惨痛代价学会怎么做健壮产品的成熟公司。有趣的时代产生奇怪的同盟：satya、jensen、sacks、zuck、elon、总统、lina khan，还有产品责任这套语言。另一边是那些有点天真的公司，说我们不是公司、是实验室，保护我们。成熟的回应是：你应该有内部控制，应该健壮测试。zuck 说的、elon 说过的都是：我们受太多审查，所以不完美就放慢。elon 对 fsd 就是这样，他公开说每起特斯拉事故都会被放大 1000 倍，所以只能更慢。zuck 上周说他们本来要推 muse，为此放慢几个月做到完美。一切都在你控制范围内，就看你怎么选。最有意思的观察是：我们必须停止把这些公司叫实验室。它们是公司，要按同样标准评判，包括产品责任。" style="--index: 2">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">02</span>
+                    <span class="timeline-meta">00:01:34–00:04:29</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>特朗普电话接入 Jensen 演讲</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>主持人澄清特朗普的电话并非事先安排，而是 Jensen 在后台联络后即兴接入。</li>
+<li>JCal 描述现场技术细节和特朗普的临场金句。</li>
+<li>Chamath 总结&quot;成年人&quot;出面终结了此前数周的 AI 末日恐慌。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>Jensen Huang：Nvidia 创始人兼 CEO，AI 算力核心供应商。</li>
+<li>Satya Nadella：微软 CEO。</li>
+<li>&quot;Nerds&quot;：JCal 等人对硅谷 AI 末日论者的戏称。</li>
+<li>Trump-telligence：JCal 现场造的词，把 Trump 和 intelligence 拼在一起，调侃超级智能。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> 很多人想知道这个电话是不是计划好的。Friedberg，带我们到幕后。</p>
+<p><strong>Friedberg：</strong> Jensen 在后台联系了总统，说回我电话。然后总统在他台上时打回来了。有发短信，但完全是自发的，不是事先安排好的。Jensen 一直在等总统这个电话，结果在台上真发生了。这在 DC 和媒体上都是当天的热门话题，在我们台上发生太不可思议了。</p>
+<p><strong>JCal：</strong> 说清楚，我当时就想，把他放免提。Jensen 问我怎么弄，我直接递给他一个备用麦克风——我总是多备一个以防有人麦克风坏了。总统是有史以来最好笑的总统、最好笑的政客。Sacks，你注意到没有，他在免提里丢包袱完美。Jensen 造最好的芯片，所有人都想逆向工程，不可能。但他自己按不了免提键。</p>
+<p><strong>Chamath：</strong> 他就在完美的时间点丢出那句话。</p>
+<p><strong>JCal：</strong> 严肃说，Chamath，上周书呆子们快疯了，然后成年人来了。Daddy 来了，Elon 来了，Jensen 来了，所有房间里的成年人都来了，说：如果你的软件有缺陷、不准备好放进世界，那就别放，让它别那么&quot;脆&quot;。你怎么看这场全国讨论从&quot;放慢&quot;转向&quot;只发布非脆性、有韧性的软件&quot;？</p>
+<p><strong>Chamath：</strong> 上周发生了一种分类。一边是想自称实验室、但实际上有损益表、股东、要遵守同样规则的公司；另一边是经历过数十年审查、用惨痛代价学会怎么做健壮产品的成熟公司。有趣的时代产生奇怪的同盟：Satya、Jensen、Sacks、Zuck、Elon、总统、Lina Khan，还有产品责任这套语言。另一边是那些有点天真的公司，说我们不是公司、是实验室，保护我们。成熟的回应是：你应该有内部控制，应该健壮测试。Zuck 说的、Elon 说过的都是：我们受太多审查，所以不完美就放慢。Elon 对 FSD 就是这样，他公开说每起特斯拉事故都会被放大 1000 倍，所以只能更慢。Zuck 上周说他们本来要推 Muse，为此放慢几个月做到完美。一切都在你控制范围内，就看你怎么选。最有意思的观察是：我们必须停止把这些公司叫实验室。它们是公司，要按同样标准评判，包括产品责任。</p></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="00:04:29–00:13:00 &quot;实验室&quot;还是&quot;公司&quot;：产品责任、责任豁免与全球治理 本段核心内容： sacks 主张个体责任优于集体行动，批评 dario 和 sam 去联合国呼吁全球 ai 治理是推卸责任。 jcal 提出关于前沿实验室寻求 section 230 式责任豁免、甚至以股权换豁免的传闻；sacks 回应称特朗普政府官员已集体否定了这种可能性。 chamath 用武汉实验室的历史类比，警告&quot;实验室&quot;这个词正在被用来规避问责。 背景解释与关键术语： section 230：《通信规范法》第 230 条，长期为互联网平台提供用户内容责任豁免，是 ugc 平台的法律基石。 产品责任：product liability，制造商因产品缺陷造成损害需承担的法律责任。 监管俘获：regulatory capture，指被监管对象反过来影响监管机构，使监管服务于自身利益。 主权财富基金：这里指以 10% 股权换取美国政府责任豁免的传闻，属于节目中讨论的未经证实说法。 武汉实验室：指新冠疫情溯源争议中提到的武汉病毒研究所，节目中属于嘉宾判断，尚无定论。 详细中文整理： sacks： chamath 已经把第一个话题带出来了：我们要以个体责任为北极星，还是搞某种集体行动。总是个体责任最有效，无论对个人还是公司。每个案例真正要做的决定是：该不该发这个产品？而不是：能不能让全世界达成一致。集体化方法的问题是，它把问责从真正的决策者身上转走。这周 dario 和 sam 去联合国说我们需要全球 ai 治理，这让我想起坐私人飞机去达沃斯再抨击气候变化的亿万富翁。 jcal： 虚伪。 sacks： 虚伪。我们需要的是你们对发布什么做明智决定。如果产品不安全，也就是不可靠、行为不可预测，那就别发布，别指望全球治理来救场。如果你们连这个决定都做不好，联合国做什么都不重要。等联合国达成一致，我们已经在这个旅程上走远得多。这些主要参与者讲话的方式很奇怪，感觉是在推卸责任。 jcal： 有个理论在流传，值得讨论。前沿实验室在暗中—— chamath： 它们不是实验室，是公司。 jcal： 它们是公司，对。这些制造产品的公司想从特朗普那里得到互联网公司有过的 section 230 式保护，也就是责任豁免。而且传闻特朗普政府内部在考虑一种可能：这些公司把 10% 股权给美国的主权财富基金，然后获得某种责任通行证。这很疯狂，就像给一家飞机制造商 10% 股权换豁免，让它们不必为飞机从天上掉下来负责。sacks，你听到过这个阴谋论吗？它们正在寻找解药。 sacks： 天呐，你说得好像是特朗普政府的主意，那不对。 jcal： 不，不是特朗普政府。是前沿实验室/公司向他们推销的。传闻政府里可能有人对此开放。这都是后台渠道。 sacks： 我们知道的事实是：过去一周，几乎所有特朗普政府官员都出来说了类似的话——首先，ai 公司必须为自己的产品负责，我们不会豁免产品责任。johnson 议长说了，bessent 说了，bessen 在最近采访里也说了。所有人都说，如果你的目标是拿到产品责任或反垄断责任豁免、想搞卡特尔、搞串通，别想了，我们不会做。所以那整个想法已经被完全浇冷水。记住特朗普总统今天发推说：我们有 doj，那是护栏；行政国家、民事、刑事诉讼，这些都是潜在责任，确保你做正确的风险回报权衡。最终如果这些人发布不安全的产品，联合国达成什么都不重要。我们需要他们内化责任。 jcal： 来，直说，你有内部消息。他们在游说这个吗？是还是不是？ sacks： 我听说过——不是第一手经验，他们没来问我&quot;我们想要产品责任豁免&quot;——但我从华盛顿的人那里听说，他们确实在寻求类似的东西。 jcal： 很难证实，对吧。好。friedberg，接下来我们要进第一个故事，关于 token maxing 和价格下跌。但先给这个话题收个尾：美国应该怎么对待这些假装是实验室、又不肯为自己的弗兰肯斯坦造物负责的公司？我觉得 j.d. vance 那次表现非常精彩，干脆利落，看起来相当有总统相。 friedberg： 我给 j.d. 的每个问题都很尖锐。 jcal： 他把它们全部打出本垒打。本垒打打者就想要快球。我给的是我能想到的三个最难的问题，他全部轰出墙外。他在周日节目里播的就是我问他的片段。他基本说：如果你在造弗兰肯斯坦，那就停下来。然后他补充：如果你已经把猫放出来了，那就造反弗兰肯斯坦，也就是建防护措施。完全合理。 friedberg： zuck 这次采访说得很好。他们花时间做 muse 发布，想做好，确保安全，不给人们做坏事的可乘之机。这是他们作为公司承担的责任。任何输出模型的人都应该承担同样责任，很明白。 jcal： 这个组织理解这一点，因为从 cambridge analytica 到最近，付了一系列罚款。 chamath： 我们有法律让很多事非法。 sacks： 我想加一个哲学点。dario 的立场隐含认为受监管的自由市场会导致逐底竞争，竞争危及安全。这是对我们经济体系的左翼批评，由来已久。冷战时期真的有两个体系对决时，很多人说资本主义会危及安全和美，建筑会更丑，因为贪婪的资本家不愿在美化上花一分钱。结果苏联体系才产生了冷灰色的景观。为什么？因为人们想要美、想要安全，运行良好的市场经济会提供人们想要的。美国体系赢了。所以我根本不同意竞争意味着缺乏安全。zuck 和 jensen 说得很清楚：安全和在安全上有巨大的正反激励。正面是，没有客户想要不可预测、不可靠、不按说的产品；没有企业想要会泄漏数据或黑竞争对手的 agent。反面是，正如总统说的，产品、民事、行政、刑事责任全都在。所以我不认为竞争是坏事。竞争是好事，可以被利用来得到正确结果。 jcal： 补充一点，chamath，我们的朋友、palo alto networks 的 nikesh 上周发布了 unit 42，这里有一个持续网络防御的业务机会。crowdstrike 的 george kurtz 也发布了 falcon 新网络防御产品。chamath，如果这些前沿实验室/公司这么担心网络安全，为什么它们不发布网络安全产品？palo alto 和 crowdstrike 却在做。 chamath： 它们会的。这更属于第二个话题。当模型在能力上聚集、没有差异化时，它们会被迫向上走。但我们先等等。 chamath： 我想加一个更哲学、更社会学的点。上次&quot;实验室&quot;这个词进入社会意识是 covid 期间。有一个实验室泄漏了病毒，导致 1500 万人死亡、45 万亿美元损失。是武汉实验室。重要的是认识到，对此零透明度、零问责。我认为人们之所以舒服地自称实验室，部分就是因为这个事实。很多在这些公司工作的年轻人经历了这一切，看到那个实验室完全没有承担责任。现在我们在谈不同种类的泄漏，又有组织和公司试图把自己打扮成实验室，但它们不是。它们是营利性公司，吸收了数千亿美元的债务和股权，有成千上万股东，数万亿美元市值。如果我是它们，我绝不会想自称实验室。 sacks： 它们在联合国演讲还在用这个说法。 chamath： 它们不是实验室。是营利性公司，受产品责任风险约束，应该相应行事。 jcal： 我们讨论一年了。如果这东西这么危险，你不必发布它。或者我的提议，kyc，给很多…… chamath： 不要把自己比作武汉实验室。 jcal： chamath，这是糟糕的公关。但我确实觉得这是它们美德信号的一部分，就是不想说我们是公司、有营利动机。它们总说我们是研究机构，或者说我们是公益公司，没人知道那是什么意思。这层美德薄纱掩盖了真实情况。 chamath： 它试图掩盖&quot;公司&quot;这个词，但法律上你不能隐藏。 jcal： 我们都是运营公司的。all in 是营利性公司。很小但强大，是公司。 chamath： 应该这么叫。apollo 是公司。 jcal： 这是 all in 实验室。 chamath： 这是 all in 实验室，我们讨论不同配方。 jcal： 不，我们在实验想法。这是模因工坊。 chamath： 但这些想法太危险了，我们不想为我们的观点承担任何责任。欢迎来到 all-in lab 播客。 jcal： 进入第零话题。friedberg，科学家心态中是不是需要有个硬停，然后公司接管？也许可以把实验室放一边，说这些是成年人在做公司的事。如果你是设计 anthropic 如何运作的人，你怎么想？也谈谈科学家世界观 vs 资本和管理团队。 friedberg： 我没有好答案。 jcal： 你就是答案。看看 ohalo。 friedberg： 让我开始第一个话题。我想退一步，看看现在这波疯狂的模型发布潮。" style="--index: 3">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">03</span>
+                    <span class="timeline-meta">00:04:29–00:13:00</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>&quot;实验室&quot;还是&quot;公司&quot;：产品责任、责任豁免与全球治理</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>Sacks 主张个体责任优于集体行动，批评 Dario 和 Sam 去联合国呼吁全球 AI 治理是推卸责任。</li>
+<li>JCal 提出关于前沿实验室寻求 Section 230 式责任豁免、甚至以股权换豁免的传闻；Sacks 回应称特朗普政府官员已集体否定了这种可能性。</li>
+<li>Chamath 用武汉实验室的历史类比，警告&quot;实验室&quot;这个词正在被用来规避问责。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>Section 230：《通信规范法》第 230 条，长期为互联网平台提供用户内容责任豁免，是 UGC 平台的法律基石。</li>
+<li>产品责任：Product liability，制造商因产品缺陷造成损害需承担的法律责任。</li>
+<li>监管俘获：Regulatory capture，指被监管对象反过来影响监管机构，使监管服务于自身利益。</li>
+<li>主权财富基金：这里指以 10% 股权换取美国政府责任豁免的传闻，属于节目中讨论的未经证实说法。</li>
+<li>武汉实验室：指新冠疫情溯源争议中提到的武汉病毒研究所，节目中属于嘉宾判断，尚无定论。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>Sacks：</strong> Chamath 已经把第一个话题带出来了：我们要以个体责任为北极星，还是搞某种集体行动。总是个体责任最有效，无论对个人还是公司。每个案例真正要做的决定是：该不该发这个产品？而不是：能不能让全世界达成一致。集体化方法的问题是，它把问责从真正的决策者身上转走。这周 Dario 和 Sam 去联合国说我们需要全球 AI 治理，这让我想起坐私人飞机去达沃斯再抨击气候变化的亿万富翁。</p>
+<p><strong>JCal：</strong> 虚伪。</p>
+<p><strong>Sacks：</strong> 虚伪。我们需要的是你们对发布什么做明智决定。如果产品不安全，也就是不可靠、行为不可预测，那就别发布，别指望全球治理来救场。如果你们连这个决定都做不好，联合国做什么都不重要。等联合国达成一致，我们已经在这个旅程上走远得多。这些主要参与者讲话的方式很奇怪，感觉是在推卸责任。</p>
+<p><strong>JCal：</strong> 有个理论在流传，值得讨论。前沿实验室在暗中——</p>
+<p><strong>Chamath：</strong> 它们不是实验室，是公司。</p>
+<p><strong>JCal：</strong> 它们是公司，对。这些制造产品的公司想从特朗普那里得到互联网公司有过的 Section 230 式保护，也就是责任豁免。而且传闻特朗普政府内部在考虑一种可能：这些公司把 10% 股权给美国的主权财富基金，然后获得某种责任通行证。这很疯狂，就像给一家飞机制造商 10% 股权换豁免，让它们不必为飞机从天上掉下来负责。Sacks，你听到过这个阴谋论吗？它们正在寻找解药。</p>
+<p><strong>Sacks：</strong> 天呐，你说得好像是特朗普政府的主意，那不对。</p>
+<p><strong>JCal：</strong> 不，不是特朗普政府。是前沿实验室/公司向他们推销的。传闻政府里可能有人对此开放。这都是后台渠道。</p>
+<p><strong>Sacks：</strong> 我们知道的事实是：过去一周，几乎所有特朗普政府官员都出来说了类似的话——首先，AI 公司必须为自己的产品负责，我们不会豁免产品责任。Johnson 议长说了，Bessent 说了，Bessen 在最近采访里也说了。所有人都说，如果你的目标是拿到产品责任或反垄断责任豁免、想搞卡特尔、搞串通，别想了，我们不会做。所以那整个想法已经被完全浇冷水。记住特朗普总统今天发推说：我们有 DOJ，那是护栏；行政国家、民事、刑事诉讼，这些都是潜在责任，确保你做正确的风险回报权衡。最终如果这些人发布不安全的产品，联合国达成什么都不重要。我们需要他们内化责任。</p>
+<p><strong>JCal：</strong> 来，直说，你有内部消息。他们在游说这个吗？是还是不是？</p>
+<p><strong>Sacks：</strong> 我听说过——不是第一手经验，他们没来问我&quot;我们想要产品责任豁免&quot;——但我从华盛顿的人那里听说，他们确实在寻求类似的东西。</p>
+<p><strong>JCal：</strong> 很难证实，对吧。好。Friedberg，接下来我们要进第一个故事，关于 token maxing 和价格下跌。但先给这个话题收个尾：美国应该怎么对待这些假装是实验室、又不肯为自己的弗兰肯斯坦造物负责的公司？我觉得 J.D. Vance 那次表现非常精彩，干脆利落，看起来相当有总统相。</p>
+<p><strong>Friedberg：</strong> 我给 J.D. 的每个问题都很尖锐。</p>
+<p><strong>JCal：</strong> 他把它们全部打出本垒打。本垒打打者就想要快球。我给的是我能想到的三个最难的问题，他全部轰出墙外。他在周日节目里播的就是我问他的片段。他基本说：如果你在造弗兰肯斯坦，那就停下来。然后他补充：如果你已经把猫放出来了，那就造反弗兰肯斯坦，也就是建防护措施。完全合理。</p>
+<p><strong>Friedberg：</strong> Zuck 这次采访说得很好。他们花时间做 Muse 发布，想做好，确保安全，不给人们做坏事的可乘之机。这是他们作为公司承担的责任。任何输出模型的人都应该承担同样责任，很明白。</p>
+<p><strong>JCal：</strong> 这个组织理解这一点，因为从 Cambridge Analytica 到最近，付了一系列罚款。</p>
+<p><strong>Chamath：</strong> 我们有法律让很多事非法。</p>
+<p><strong>Sacks：</strong> 我想加一个哲学点。Dario 的立场隐含认为受监管的自由市场会导致逐底竞争，竞争危及安全。这是对我们经济体系的左翼批评，由来已久。冷战时期真的有两个体系对决时，很多人说资本主义会危及安全和美，建筑会更丑，因为贪婪的资本家不愿在美化上花一分钱。结果苏联体系才产生了冷灰色的景观。为什么？因为人们想要美、想要安全，运行良好的市场经济会提供人们想要的。美国体系赢了。所以我根本不同意竞争意味着缺乏安全。Zuck 和 Jensen 说得很清楚：安全和在安全上有巨大的正反激励。正面是，没有客户想要不可预测、不可靠、不按说的产品；没有企业想要会泄漏数据或黑竞争对手的 agent。反面是，正如总统说的，产品、民事、行政、刑事责任全都在。所以我不认为竞争是坏事。竞争是好事，可以被利用来得到正确结果。</p>
+<p><strong>JCal：</strong> 补充一点，Chamath，我们的朋友、Palo Alto Networks 的 Nikesh 上周发布了 Unit 42，这里有一个持续网络防御的业务机会。CrowdStrike 的 George Kurtz 也发布了 Falcon 新网络防御产品。Chamath，如果这些前沿实验室/公司这么担心网络安全，为什么它们不发布网络安全产品？Palo Alto 和 CrowdStrike 却在做。</p>
+<p><strong>Chamath：</strong> 它们会的。这更属于第二个话题。当模型在能力上聚集、没有差异化时，它们会被迫向上走。但我们先等等。</p>
+<p><strong>Chamath：</strong> 我想加一个更哲学、更社会学的点。上次&quot;实验室&quot;这个词进入社会意识是 COVID 期间。有一个实验室泄漏了病毒，导致 1500 万人死亡、45 万亿美元损失。是武汉实验室。重要的是认识到，对此零透明度、零问责。我认为人们之所以舒服地自称实验室，部分就是因为这个事实。很多在这些公司工作的年轻人经历了这一切，看到那个实验室完全没有承担责任。现在我们在谈不同种类的泄漏，又有组织和公司试图把自己打扮成实验室，但它们不是。它们是营利性公司，吸收了数千亿美元的债务和股权，有成千上万股东，数万亿美元市值。如果我是它们，我绝不会想自称实验室。</p>
+<p><strong>Sacks：</strong> 它们在联合国演讲还在用这个说法。</p>
+<p><strong>Chamath：</strong> 它们不是实验室。是营利性公司，受产品责任风险约束，应该相应行事。</p>
+<p><strong>JCal：</strong> 我们讨论一年了。如果这东西这么危险，你不必发布它。或者我的提议，KYC，给很多……</p>
+<p><strong>Chamath：</strong> 不要把自己比作武汉实验室。</p>
+<p><strong>JCal：</strong> Chamath，这是糟糕的公关。但我确实觉得这是它们美德信号的一部分，就是不想说我们是公司、有营利动机。它们总说我们是研究机构，或者说我们是公益公司，没人知道那是什么意思。这层美德薄纱掩盖了真实情况。</p>
+<p><strong>Chamath：</strong> 它试图掩盖&quot;公司&quot;这个词，但法律上你不能隐藏。</p>
+<p><strong>JCal：</strong> 我们都是运营公司的。All In 是营利性公司。很小但强大，是公司。</p>
+<p><strong>Chamath：</strong> 应该这么叫。Apollo 是公司。</p>
+<p><strong>JCal：</strong> 这是 All In 实验室。</p>
+<p><strong>Chamath：</strong> 这是 All In 实验室，我们讨论不同配方。</p>
+<p><strong>JCal：</strong> 不，我们在实验想法。这是模因工坊。</p>
+<p><strong>Chamath：</strong> 但这些想法太危险了，我们不想为我们的观点承担任何责任。欢迎来到 All-In Lab 播客。</p>
+<p><strong>JCal：</strong> 进入第零话题。Friedberg，科学家心态中是不是需要有个硬停，然后公司接管？也许可以把实验室放一边，说这些是成年人在做公司的事。如果你是设计 Anthropic 如何运作的人，你怎么想？也谈谈科学家世界观 vs 资本和管理团队。</p>
+<p><strong>Friedberg：</strong> 我没有好答案。</p>
+<p><strong>JCal：</strong> 你就是答案。看看 Ohalo。</p>
+<p><strong>Friedberg：</strong> 让我开始第一个话题。我想退一步，看看现在这波疯狂的模型发布潮。</p></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="00:13:00–00:20:10 竞争、安全与武汉实验室类比 本段核心内容： sacks 从冷战历史出发，论证竞争与安全并不矛盾，市场经济能提供人们想要的安全和美。 chamath 把&quot;实验室&quot;一词与武汉实验室的问责缺失联系起来，认为这是公司规避责任的修辞策略。 主持人戏称 all-in 自己就是&quot;all-in lab&quot;，强调公司应该大方承认自己是公司。 背景解释与关键术语： 逐底竞争：race to the bottom，指竞争压力导致标准不断降低。 公益公司：public benefit corporation，美国一种要求公司同时考虑社会公益的法人形式。 cambridge analytica：2018 年 facebook 数据丑闻，meta 因此被罚款并加强合规。 unit 42：palo alto networks 的威胁情报团队。 falcon：crowdstrike 的网络安全产品平台。 ohalo：friedberg 参与的生命科学公司，jcal 用它调侃 friedberg 本人就是&quot;科学家转身做公司&quot;的答案。 详细中文整理： sacks： 我想加一个哲学点。dario 的立场隐含认为受监管的自由市场会导致逐底竞争，竞争危及安全。这是对我们经济体系的左翼批评，由来已久。冷战时期真的有两个体系对决时，很多人说资本主义会危及安全和美，建筑会更丑，因为贪婪的资本家不愿在美化上花一分钱。结果苏联体系才产生了冷灰色的景观。为什么？因为人们想要美、想要安全，运行良好的市场经济会提供人们想要的。美国体系赢了。所以我根本不同意竞争意味着缺乏安全。zuck 和 jensen 说得很清楚：安全和在安全上有巨大的正反激励。正面是，没有客户想要不可预测、不可靠、不按说的产品；没有企业想要会泄漏数据或黑竞争对手的 agent。反面是，正如总统说的，产品、民事、行政、刑事责任全都在。所以我不认为竞争是坏事。竞争是好事，可以被利用来得到正确结果。 jcal： 补充一点，chamath，我们的朋友、palo alto networks 的 nikesh 上周发布了 unit 42，这里有一个持续网络防御的业务机会。crowdstrike 的 george kurtz 也发布了 falcon 新网络防御产品。chamath，如果这些前沿实验室/公司这么担心网络安全，为什么它们不发布网络安全产品？palo alto 和 crowdstrike 却在做。 chamath： 它们会的。这更属于第二个话题。当模型在能力上聚集、没有差异化时，它们会被迫向上走。但我们先等等。 chamath： 我想加一个更哲学、更社会学的点。上次&quot;实验室&quot;这个词进入社会意识是 covid 期间。有一个实验室泄漏了病毒，导致 1500 万人死亡、45 万亿美元损失。是武汉实验室。重要的是认识到，对此零透明度、零问责。我认为人们之所以舒服地自称实验室，部分就是因为这个事实。很多在这些公司工作的年轻人经历了这一切，看到那个实验室完全没有承担责任。现在我们在谈不同种类的泄漏，又有组织和公司试图把自己打扮成实验室，但它们不是。它们是营利性公司，吸收了数千亿美元的债务和股权，有成千上万股东，数万亿美元市值。如果我是它们，我绝不会想自称实验室。 sacks： 它们在联合国演讲还在用这个说法。 chamath： 它们不是实验室。是营利性公司，受产品责任风险约束，应该相应行事。 jcal： 我们讨论一年了。如果这东西这么危险，你不必发布它。或者我的提议，kyc，给很多…… chamath： 不要把自己比作武汉实验室。 jcal： chamath，这是糟糕的公关。但我确实觉得这是它们美德信号的一部分，就是不想说我们是公司、有营利动机。它们总说我们是研究机构，或者说我们是公益公司，没人知道那是什么意思。这层美德薄纱掩盖了真实情况。 chamath： 它试图掩盖&quot;公司&quot;这个词，但法律上你不能隐藏。 jcal： 我们都是运营公司的。all in 是营利性公司。很小但强大，是公司。 chamath： 应该这么叫。apollo 是公司。 jcal： 这是 all in 实验室。 chamath： 这是 all in 实验室，我们讨论不同配方。 jcal： 不，我们在实验想法。这是模因工坊。 chamath： 但这些想法太危险了，我们不想为我们的观点承担任何责任。欢迎来到 all-in lab 播客。 jcal： 进入第零话题。friedberg，科学家心态中是不是需要有个硬停，然后公司接管？也许可以把实验室放一边，说这些是成年人在做公司的事。如果你是设计 anthropic 如何运作的人，你怎么想？也谈谈科学家世界观 vs 资本和管理团队。 friedberg： 我没有好答案。 jcal： 你就是答案。看看 ohalo。 friedberg： 让我开始第一个话题。我想退一步，看看现在这波疯狂的模型发布潮。" style="--index: 4">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">04</span>
+                    <span class="timeline-meta">00:13:00–00:20:10</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>竞争、安全与武汉实验室类比</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>Sacks 从冷战历史出发，论证竞争与安全并不矛盾，市场经济能提供人们想要的安全和美。</li>
+<li>Chamath 把&quot;实验室&quot;一词与武汉实验室的问责缺失联系起来，认为这是公司规避责任的修辞策略。</li>
+<li>主持人戏称 All-In 自己就是&quot;All-In Lab&quot;，强调公司应该大方承认自己是公司。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>逐底竞争：Race to the bottom，指竞争压力导致标准不断降低。</li>
+<li>公益公司：Public benefit corporation，美国一种要求公司同时考虑社会公益的法人形式。</li>
+<li>Cambridge Analytica：2018 年 Facebook 数据丑闻，Meta 因此被罚款并加强合规。</li>
+<li>Unit 42：Palo Alto Networks 的威胁情报团队。</li>
+<li>Falcon：CrowdStrike 的网络安全产品平台。</li>
+<li>Ohalo：Friedberg 参与的生命科学公司，JCal 用它调侃 Friedberg 本人就是&quot;科学家转身做公司&quot;的答案。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>Sacks：</strong> 我想加一个哲学点。Dario 的立场隐含认为受监管的自由市场会导致逐底竞争，竞争危及安全。这是对我们经济体系的左翼批评，由来已久。冷战时期真的有两个体系对决时，很多人说资本主义会危及安全和美，建筑会更丑，因为贪婪的资本家不愿在美化上花一分钱。结果苏联体系才产生了冷灰色的景观。为什么？因为人们想要美、想要安全，运行良好的市场经济会提供人们想要的。美国体系赢了。所以我根本不同意竞争意味着缺乏安全。Zuck 和 Jensen 说得很清楚：安全和在安全上有巨大的正反激励。正面是，没有客户想要不可预测、不可靠、不按说的产品；没有企业想要会泄漏数据或黑竞争对手的 agent。反面是，正如总统说的，产品、民事、行政、刑事责任全都在。所以我不认为竞争是坏事。竞争是好事，可以被利用来得到正确结果。</p>
+<p><strong>JCal：</strong> 补充一点，Chamath，我们的朋友、Palo Alto Networks 的 Nikesh 上周发布了 Unit 42，这里有一个持续网络防御的业务机会。CrowdStrike 的 George Kurtz 也发布了 Falcon 新网络防御产品。Chamath，如果这些前沿实验室/公司这么担心网络安全，为什么它们不发布网络安全产品？Palo Alto 和 CrowdStrike 却在做。</p>
+<p><strong>Chamath：</strong> 它们会的。这更属于第二个话题。当模型在能力上聚集、没有差异化时，它们会被迫向上走。但我们先等等。</p>
+<p><strong>Chamath：</strong> 我想加一个更哲学、更社会学的点。上次&quot;实验室&quot;这个词进入社会意识是 COVID 期间。有一个实验室泄漏了病毒，导致 1500 万人死亡、45 万亿美元损失。是武汉实验室。重要的是认识到，对此零透明度、零问责。我认为人们之所以舒服地自称实验室，部分就是因为这个事实。很多在这些公司工作的年轻人经历了这一切，看到那个实验室完全没有承担责任。现在我们在谈不同种类的泄漏，又有组织和公司试图把自己打扮成实验室，但它们不是。它们是营利性公司，吸收了数千亿美元的债务和股权，有成千上万股东，数万亿美元市值。如果我是它们，我绝不会想自称实验室。</p>
+<p><strong>Sacks：</strong> 它们在联合国演讲还在用这个说法。</p>
+<p><strong>Chamath：</strong> 它们不是实验室。是营利性公司，受产品责任风险约束，应该相应行事。</p>
+<p><strong>JCal：</strong> 我们讨论一年了。如果这东西这么危险，你不必发布它。或者我的提议，KYC，给很多……</p>
+<p><strong>Chamath：</strong> 不要把自己比作武汉实验室。</p>
+<p><strong>JCal：</strong> Chamath，这是糟糕的公关。但我确实觉得这是它们美德信号的一部分，就是不想说我们是公司、有营利动机。它们总说我们是研究机构，或者说我们是公益公司，没人知道那是什么意思。这层美德薄纱掩盖了真实情况。</p>
+<p><strong>Chamath：</strong> 它试图掩盖&quot;公司&quot;这个词，但法律上你不能隐藏。</p>
+<p><strong>JCal：</strong> 我们都是运营公司的。All In 是营利性公司。很小但强大，是公司。</p>
+<p><strong>Chamath：</strong> 应该这么叫。Apollo 是公司。</p>
+<p><strong>JCal：</strong> 这是 All In 实验室。</p>
+<p><strong>Chamath：</strong> 这是 All In 实验室，我们讨论不同配方。</p>
+<p><strong>JCal：</strong> 不，我们在实验想法。这是模因工坊。</p>
+<p><strong>Chamath：</strong> 但这些想法太危险了，我们不想为我们的观点承担任何责任。欢迎来到 All-In Lab 播客。</p>
+<p><strong>JCal：</strong> 进入第零话题。Friedberg，科学家心态中是不是需要有个硬停，然后公司接管？也许可以把实验室放一边，说这些是成年人在做公司的事。如果你是设计 Anthropic 如何运作的人，你怎么想？也谈谈科学家世界观 vs 资本和管理团队。</p>
+<p><strong>Friedberg：</strong> 我没有好答案。</p>
+<p><strong>JCal：</strong> 你就是答案。看看 Ohalo。</p>
+<p><strong>Friedberg：</strong> 让我开始第一个话题。我想退一步，看看现在这波疯狂的模型发布潮。</p></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="00:20:10–00:29:20 模型发布大潮与开源权重崛起 本段核心内容： friedberg 列举过去 10 天内发布的一长串开源权重和闭源模型，强调开源模型的能力和效率提升已经改变整个格局。 chamath 判断模型正在收敛聚集，真正的差异化转移到&quot;harness&quot;（把模型包裹成 agent 的工具层）。 jcal 认为消费者不关心用什么模型，muse 和 grokbot 是普通人第一次真正获得 ai 价值的产品。 背景解释与关键术语： 开源权重：open-weight，模型参数可下载、可本地部署，但训练数据和过程未必开源。 key-value cache：kv 缓存，推理时缓存注意力键值以加速生成，大小下降意味着效率大幅提升。 vla：vision-language-action，视觉-语言-动作模型，可直接指令控制机器人。 nano banana 2：节目中提到的谷歌图像生成模型代号。 token：大模型输入输出的计量单位，也是 api 计费单位。 harness：包裹模型的工具层，负责工具调用、记忆、规划、权限等，使模型变成 agent。 8090：chamath 旗下的投资/实验室机构。 k 型复苏：经济复苏中不同群体分化，一部分向上，一部分向下。 详细中文整理： friedberg： 我想退一步看现在这波疯狂的模型发布潮。开源侧和高端侧——anthropic、grok、openai——的发布节奏现在难以想象。清单疯狂。过去 10 天：9 月 9 日 deepseek 4.1 flash 发布，托管输出 100 万 token 1.20 美元。kv 缓存从 deepseek v1 的 39 万字节降到 890 字节，效率提升疯狂。9 月 20 日，阿里巴巴的 qwen 2.1 发布，开源权重模型，超过 nano banana 2，谷歌那个突破性的图像生成模型。这东西免费、开源，你可以放桌面电脑本地跑，免费生成图像，还是阿里巴巴做的。9 月 22 日，两天前，小米发布 mimo，mimo pro 在大多数基准上与 claude opus 5 和 gpt-5.6 sol 持平，3090 亿参数。 friedberg： 完全开源权重。你可以下载，放服务器上跑自己的实例，不用付任何人钱，只付服务器成本。9 月 17 日 prismml 发布 bonsai-2，是 qwen 的分支，270 亿参数，达到大 qwen 98% 的性能，5.9gb，可以在本地电脑跑。有 nvidia 芯片或好的 mac studio，就能在桌面电脑上免费跑这个疯狂模型。然后是大的闭源模型：9 月 22 日 anthropic 发布 opus 5.5，9 月 23 日 openai astro 发布 sol 和 luna，9 月 21 日 grok 4.7，9 月 22 日 meta muse。任何一条一年前都会炸掉互联网，现在全在过去 10 天发生。你现在有完整的开源权重模型目录来生成视觉信息、做 vla，可以指令它控制机器人。 friedberg： 你有远超一年前最先进 llm 的开源权重模型，可以安装在家用电脑上。我们已经过了 bernie sanders 说的&quot;把超级智能收起来、永不允许进入现实世界&quot;的点。这些东西已经出来了。开源、开源权重模型免费，在互联网上，你可以下载在家运行。我不知道我们凭什么认为会有警察国家来敲门、收走你的台式机、测试你有没有在本地跑 llm。效率浪潮来了，这些模型的发布节奏——全在过去 10 天。太惊人了。我们现在处在前沿空间，一切在加速。性能改进、成本下降——ai 变得如此高性能、如此便宜，将无所不在，我们都会受益。不只是 anthropic 和 openai 卖企业托管模型赚数十亿。现在有大量扩散。 friedberg： 值得退一步认识到我们在哪，因为有人在说必须停止超级智能、关闭数据中心。你甚至不需要数据中心就能做 90% 的 ai 用途。今天可以免费下载到电脑上，做到不到一年前最先进的技术。都在这。值得停下来确保我们都认识到，当我们进入这些&quot;实验室&quot;或公司的辩论时，这可能已经不重要了。开源已在这里，改进速度只会推动生产力。 jcal： 也许我们正看到 ai 浪潮——生产力繁荣。对消费者来说，他们不在乎用什么模型。我们过去 3 年极客式讨论，然后 grokbot 出来，meta muse 出来。我两个都在用。这是第一次普通人——不是贬义——能从中获得价值。从运营公司、投资它们的角度，我们方法不同：也许这会替代一些岗位，也许增加一些。但现在用 muse，你可以瞬间连接一切，真正完成工作。如果要让普通人受益，我们正在转弯。friedberg 说得完美，年底我们会转弯，妈妈们、叔叔们会开始用 muse 和 grokbot 解决现实问题。 jcal： 她们会说：我从来负担不起幕僚长、私人助理、行政助理，现在我有了免费的行政助理。chamath，接下来几个月人们开始用这些产品，美国下半部分在 k 型复苏中体验一些好处，会让人震惊。你对这些模型有什么想法？有没有开始玩？你原来是技术专家，有没有把模型装到电脑上？我在 macbook pro 上玩，很棒。 chamath： 让我用解释来回答。我们看到这些模型在收敛和聚集，也就是在误差范围内。有很多模型在不同价位上大致相同。优势在哪？仍有优势，优势在用模型包装的 harness。模型像大脑，但需要给它安上手臂、腿、手、眼睛来做工作。这就是把模型 agent 化、让它 agentic 的意思。行业发明了各种 harness 让模型更 agentic，那里还有很多优势。在 8090 我们有实验室功能，一直在拆解所有模型和所有 harness，看它们表现如何。成本和质量的差异巨大。friedberg 说的，模型在收敛，harness 差异巨大，性能参差不齐。 chamath： 现在公司和人们必须弄清楚愿意为什么付钱。我给 nick 发了个推，如果能放出来。不知道是否具有指导性或准确，但这显示了 ant 的情况，可能是很多闭源模型的情况：看到大规模收入集中，少数人消费了所有最高最贵的 token。如果 friedberg 说的推到逻辑终点，表顶部的那些人会面临内部压力，来自财务团队、cfo、股东，解释为什么在聚集发生时不下移到更便宜的模型。你可能选择下移到更便宜的 ant 模型，那 ant 保留收入。但也有风险你会像 friedberg 说的转向开源模型自己托管。我们处在周期中非常复杂的部分，ai 交易的第一版相对简单：卖 token、包装 token、传递，有足够的差异就有价值。 chamath： 那个正在消失。这会迫使 openai 和 ant 向上走。别无选择。不能一直提供一个价值递减的 token。因为所有后续价值都被包装你的智能 token 的人吸收和创造。你必须做那个工作。所以 jason，这就是为什么它们必须去做网络安全、法律、客户支持。所有这些我们不确定它们会不会竞争的东西，这些趋势可能迫使它们做。这引出一个非常有趣的问题。 jcal： sacks，前沿实验室公司 anthropic 和 openai 这周都发布了价格低 50% 的模型，它们的 ipo 看起来都要推迟。anthropic 瞄准 2 万亿美元估值，openai 1.2 万亿。sam 已经说 openai 计划 2027 年 ipo，因为安全考虑。anthropic 本来 10 月申请上市，华尔街日报报道说 ipo 会在 11 月或更晚。polymarket 显示 anthropic 今年上市概率从本月早些时候的 96% 峰值跌到 76%。sacks，领先的模型公司需要上市融资来建设，现在却在推迟自己的 ipo。请解释这怎么说得通。如果你是主要投资者或董事会成员，你会做什么或指示创始人做什么让公司上市、获得继续 ai 建设所需的资本？" style="--index: 5">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">05</span>
+                    <span class="timeline-meta">00:20:10–00:29:20</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>模型发布大潮与开源权重崛起</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>Friedberg 列举过去 10 天内发布的一长串开源权重和闭源模型，强调开源模型的能力和效率提升已经改变整个格局。</li>
+<li>Chamath 判断模型正在收敛聚集，真正的差异化转移到&quot;harness&quot;（把模型包裹成 agent 的工具层）。</li>
+<li>JCal 认为消费者不关心用什么模型，Muse 和 GrokBot 是普通人第一次真正获得 AI 价值的产品。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>开源权重：Open-weight，模型参数可下载、可本地部署，但训练数据和过程未必开源。</li>
+<li>Key-value cache：KV 缓存，推理时缓存注意力键值以加速生成，大小下降意味着效率大幅提升。</li>
+<li>VLA：Vision-Language-Action，视觉-语言-动作模型，可直接指令控制机器人。</li>
+<li>Nano Banana 2：节目中提到的谷歌图像生成模型代号。</li>
+<li>Token：大模型输入输出的计量单位，也是 API 计费单位。</li>
+<li>Harness：包裹模型的工具层，负责工具调用、记忆、规划、权限等，使模型变成 agent。</li>
+<li>8090：Chamath 旗下的投资/实验室机构。</li>
+<li>K 型复苏：经济复苏中不同群体分化，一部分向上，一部分向下。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>Friedberg：</strong> 我想退一步看现在这波疯狂的模型发布潮。开源侧和高端侧——Anthropic、Grok、OpenAI——的发布节奏现在难以想象。清单疯狂。过去 10 天：9 月 9 日 DeepSeek 4.1 Flash 发布，托管输出 100 万 token 1.20 美元。KV 缓存从 DeepSeek V1 的 39 万字节降到 890 字节，效率提升疯狂。9 月 20 日，阿里巴巴的 Qwen 2.1 发布，开源权重模型，超过 Nano Banana 2，谷歌那个突破性的图像生成模型。这东西免费、开源，你可以放桌面电脑本地跑，免费生成图像，还是阿里巴巴做的。9 月 22 日，两天前，小米发布 Mimo，Mimo Pro 在大多数基准上与 Claude Opus 5 和 GPT-5.6 Sol 持平，3090 亿参数。</p>
+<p><strong>Friedberg：</strong> 完全开源权重。你可以下载，放服务器上跑自己的实例，不用付任何人钱，只付服务器成本。9 月 17 日 PrismML 发布 Bonsai-2，是 Qwen 的分支，270 亿参数，达到大 Qwen 98% 的性能，5.9GB，可以在本地电脑跑。有 Nvidia 芯片或好的 Mac Studio，就能在桌面电脑上免费跑这个疯狂模型。然后是大的闭源模型：9 月 22 日 Anthropic 发布 Opus 5.5，9 月 23 日 OpenAI Astro 发布 Sol 和 Luna，9 月 21 日 Grok 4.7，9 月 22 日 Meta Muse。任何一条一年前都会炸掉互联网，现在全在过去 10 天发生。你现在有完整的开源权重模型目录来生成视觉信息、做 VLA，可以指令它控制机器人。</p>
+<p><strong>Friedberg：</strong> 你有远超一年前最先进 LLM 的开源权重模型，可以安装在家用电脑上。我们已经过了 Bernie Sanders 说的&quot;把超级智能收起来、永不允许进入现实世界&quot;的点。这些东西已经出来了。开源、开源权重模型免费，在互联网上，你可以下载在家运行。我不知道我们凭什么认为会有警察国家来敲门、收走你的台式机、测试你有没有在本地跑 LLM。效率浪潮来了，这些模型的发布节奏——全在过去 10 天。太惊人了。我们现在处在前沿空间，一切在加速。性能改进、成本下降——AI 变得如此高性能、如此便宜，将无所不在，我们都会受益。不只是 Anthropic 和 OpenAI 卖企业托管模型赚数十亿。现在有大量扩散。</p>
+<p><strong>Friedberg：</strong> 值得退一步认识到我们在哪，因为有人在说必须停止超级智能、关闭数据中心。你甚至不需要数据中心就能做 90% 的 AI 用途。今天可以免费下载到电脑上，做到不到一年前最先进的技术。都在这。值得停下来确保我们都认识到，当我们进入这些&quot;实验室&quot;或公司的辩论时，这可能已经不重要了。开源已在这里，改进速度只会推动生产力。</p>
+<p><strong>JCal：</strong> 也许我们正看到 AI 浪潮——生产力繁荣。对消费者来说，他们不在乎用什么模型。我们过去 3 年极客式讨论，然后 GrokBot 出来，Meta Muse 出来。我两个都在用。这是第一次普通人——不是贬义——能从中获得价值。从运营公司、投资它们的角度，我们方法不同：也许这会替代一些岗位，也许增加一些。但现在用 Muse，你可以瞬间连接一切，真正完成工作。如果要让普通人受益，我们正在转弯。Friedberg 说得完美，年底我们会转弯，妈妈们、叔叔们会开始用 Muse 和 GrokBot 解决现实问题。</p>
+<p><strong>JCal：</strong> 她们会说：我从来负担不起幕僚长、私人助理、行政助理，现在我有了免费的行政助理。Chamath，接下来几个月人们开始用这些产品，美国下半部分在 K 型复苏中体验一些好处，会让人震惊。你对这些模型有什么想法？有没有开始玩？你原来是技术专家，有没有把模型装到电脑上？我在 MacBook Pro 上玩，很棒。</p>
+<p><strong>Chamath：</strong> 让我用解释来回答。我们看到这些模型在收敛和聚集，也就是在误差范围内。有很多模型在不同价位上大致相同。优势在哪？仍有优势，优势在用模型包装的 harness。模型像大脑，但需要给它安上手臂、腿、手、眼睛来做工作。这就是把模型 agent 化、让它 agentic 的意思。行业发明了各种 harness 让模型更 agentic，那里还有很多优势。在 8090 我们有实验室功能，一直在拆解所有模型和所有 harness，看它们表现如何。成本和质量的差异巨大。Friedberg 说的，模型在收敛，harness 差异巨大，性能参差不齐。</p>
+<p><strong>Chamath：</strong> 现在公司和人们必须弄清楚愿意为什么付钱。我给 Nick 发了个推，如果能放出来。不知道是否具有指导性或准确，但这显示了 Ant 的情况，可能是很多闭源模型的情况：看到大规模收入集中，少数人消费了所有最高最贵的 token。如果 Friedberg 说的推到逻辑终点，表顶部的那些人会面临内部压力，来自财务团队、CFO、股东，解释为什么在聚集发生时不下移到更便宜的模型。你可能选择下移到更便宜的 Ant 模型，那 Ant 保留收入。但也有风险你会像 Friedberg 说的转向开源模型自己托管。我们处在周期中非常复杂的部分，AI 交易的第一版相对简单：卖 token、包装 token、传递，有足够的差异就有价值。</p>
+<p><strong>Chamath：</strong> 那个正在消失。这会迫使 OpenAI 和 Ant 向上走。别无选择。不能一直提供一个价值递减的 token。因为所有后续价值都被包装你的智能 token 的人吸收和创造。你必须做那个工作。所以 Jason，这就是为什么它们必须去做网络安全、法律、客户支持。所有这些我们不确定它们会不会竞争的东西，这些趋势可能迫使它们做。这引出一个非常有趣的问题。</p>
+<p><strong>JCal：</strong> Sacks，前沿实验室公司 Anthropic 和 OpenAI 这周都发布了价格低 50% 的模型，它们的 IPO 看起来都要推迟。Anthropic 瞄准 2 万亿美元估值，OpenAI 1.2 万亿。Sam 已经说 OpenAI 计划 2027 年 IPO，因为安全考虑。Anthropic 本来 10 月申请上市，华尔街日报报道说 IPO 会在 11 月或更晚。Polymarket 显示 Anthropic 今年上市概率从本月早些时候的 96% 峰值跌到 76%。Sacks，领先的模型公司需要上市融资来建设，现在却在推迟自己的 IPO。请解释这怎么说得通。如果你是主要投资者或董事会成员，你会做什么或指示创始人做什么让公司上市、获得继续 AI 建设所需的资本？</p></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="00:29:20–00:41:15 anthropic 的 ipo 困境、&quot;精神分裂&quot;与湿实验室 本段核心内容： sacks 批评 anthropic 领导层自相矛盾：一边说需要给前沿定速、ai 有 10% 灭绝风险，一边发布新前沿模型、开湿实验室。 chamath 认为董事会应该保留 dario 作为 ceo 但全力披露，ipo 可能以远低于预期的价格清算。 friedberg 认为 anthropic 真正的核心风险是客户集中度和开源模型对普通企业任务的替代，而非&quot;终结世界&quot;。 背景解释与关键术语： 超级投票权：super-voting shares，赋予创始人超出经济持股比例的投票权，使其难以被罢免。 s-1：美国 ipo 注册文件，包含业务、风险因素和财务披露。 湿实验室：wet lab，进行生物、化学实验的实体实验室。 bsl-1/bsl-2：生物安全等级 1/2，低至中等风险实验室，不涉及高致病性病原体。 alphafold：deepmind 的蛋白质结构预测系统。 crispr：基因编辑技术。 daf：donor-advised fund，捐赠者建议基金。 详细中文整理： sacks： 我们从朋友那里知道，anthropic 的投资者现在抓狂。别提那些待了几周就走的假吹哨人，你有公司现任领导层说造成人类灭绝的概率大于 10%，而他们自己的产品在这个领域未解决。想想这造成的风险因素。公司自己的管理层这么说，怎么 ipo？然后还有其他证据，我不知道该叫什么，除了&quot;企业精神分裂症&quot;。dario 发文说需要给前沿定速，就在他们推出 claude 5.5 设定新前沿的前几天。他写这篇文章时肯定知道他们要发布扩展前沿的产品。至少是虚伪，也许更糟。然后他们发表关于 ai 生物风险的论文说需要停止，同时宣布在旧金山开新生物实验室、新湿实验室。 jcal： 他们告诉我们会死的概率 10% 之后开了实验室。zach（sacks），这是不是 anthropic ceo 的失职，破坏自己的 ipo？你应该代表股东。如果我们是董事会，我们会换 ceo。把 ceo 放回实验室，找个知道怎么运营公司、不破坏公司的 ceo。他字面上在破坏自己的公司。 sacks： 有这种成分，投资者对给创始人、特别是 dario 超级投票权很紧张。the information 有报道，这是目前活跃的辩论。 jcal： 解释超级投票权是什么，为什么在这个背景下关键。 sacks： 据称 anthropic 创始人每人只有约 2% 所有权，相对其他创始人上市时通常持有的是相对低的数字。仍然会是巨大的金额，数百亿美元。超级投票权基本上把经济股份和投票股份分离，给某些人控制公司的权利，即使他们没有通常需要的经济所有权。很常见。larry 和 sergey 可能是第一对获得超级投票权的著名创始人，还有 zuck。对公司可以是稳定因素，因为只要创始人在监督，就不会受收购尝试等影响。但另一方面，需要对创始人极大的信任，因为他们实际上无法被移除，无论做什么。你不禁要想这次这种信任是否被赢得、是否合理。 jcal： 即使对我这种不一定主张更多监管的人，对 anthropic 在旧金山开湿实验室也有点紧张。我本来考虑搬回来，不知道想不想了。能不能放远点？我们都看过这部电影了。 sacks： 也许离岸，放钻井平台上。 chamath： 如果我在董事会，会保留 dario 做 ceo。因为他清楚展示了能建立独特文化，并针对最强大的竞争对手 openai 定位。他从后面追上，不应该低估这有多难。他已经建立了史上最强的业务爬坡。如果我在董事会，会解决 sacks 说的增量流动性风险。以 20 年视角，anthropic 需要数千亿美元实现野心。我会以尽可能无风险的方式解决。只有两件事可做。第一，全力投入披露。问题是这会让本来密集难懂的 s-1 更密集难懂。可以表面覆盖监管风险，但市场翻译的方式是你得稀释 ipo 卖方预期。 chamath： 为 ipo 买方创造更大的安全边际。这实际上是找到市场清算价格的方式，jason——让我用粗略数字，即使认为他们在 1000 亿美元收入运行率上，本来干净上市可能是 2 万亿市值，现在会到 1 万亿或更少。因为对冲基金、养老金系统、只做多的共同基金综合体对资本来源有受托责任，会通过要求更低价格来为所有风险找理由。你会看到更温和合理的 ipo 动作，可能以比任何人想象的更低价格清算。sacks 说的原因是，但这对 ant 有好处，因为它清除噪音。迫使它们成为公司然后运营业务。它们会做得很好。 jcal： 诚实讲，我曾试图从 ant 挖人，挖不到。不可能。他们给的薪酬太棒了，业务爬坡太吸引人。一对一对决时我没赢过一次。创业公司很难。他们是人才磁铁。openai 也是。但这些风险会拖累 ipo，唯一的冲刷方式是大幅降价。 jcal： friedberg，当我们看 s-1 的风险因素，那些是例行的免责声明。通常像 spacex，万一 starship 不行、万一有竞争，都是打勾。在 anthropic 的，我想我们会看到完全不同的东西：我们和员工在辞职，说这会杀死人类。我们有大量监管。我们要求监管。顺便说，我们在做生物工作，要开实验室。你同意 chamath 说 s-1 会有实质性的风险因素拖累 ipo 吗？ friedberg： 我认为客户集中度这点与之前说的开源模型扩散相符。因为 anthropic 今天在生命科学领域有最好的模型。我运营生命科学研发组织，我们用他们的模型，非常棒，比别的模型好。所以在写代码、写软件、内部工作流和运营时我们想用它们。我们可以用其他产品写代码，我们也确实这么做。市场可能朝这个方向发展。我们看到证据出现在市场上，也看到客户集中度。极高价值的、技术工程、数学、生命科学这些硬技术问题，你想要顶级模型，愿意付高价，完全能赚钱，因为价值非凡。这一直是我关于 ai 的论点。ai 不是替代旧东西的价值。99% 的 ai 价值是开启人类历史上从未可能的新事物。 friedberg： 这是 anthropic 和 openai 赚钱的地方。另外，openai 会在消费端赚很多，anthropic 可能也有一定。但在企业场景，钱来自创造新前沿、发现新酶（anthropic 这周宣布的），可以治愈人类疾病、开发新技术、新工程系统、造出以前不可能的东西。这是溢价价值，是为闭源模型和高端模型付的溢价价格。但那是与企业应用完全不同的业务案例。多数企业应用会用开源权重模型。代码会用更便宜的模型写。我不知道为什么你要用高端模型写代码，当你可以免费做、组织里每个人都可以免费写代码。所以 anthropic 更大的问题是客户集中度，他们卖的是不是真的溢价产品？ friedberg： 这是市场方向，是最大的风险因素。关于会终结世界什么的，兄弟，确保你的产品不终结世界就行了。这是好的第一步，像 mark 在 meta 做的。 jcal： 这是难以置信的公司，执行非凡，收入爬坡非凡。但看开源的影响，有几个病毒式图表。70-80% 的 token 使用是 6 个月前在播客说的&quot;暗 token&quot;，不被追踪但路由器上可以追踪。那些暗开源 token 现在占多数。 chamath： 在过去 12 周，token 使用从 80/20 闭源对开源翻转成 80/20 开源对闭源。12 周内，科技市场历史上从未见过这种技术转移浪潮。那是 anthropic 最大的风险因素。他们最先让企业用上 ai 建工具。但随着市场转向开源和开源权重，轰，就在这里。 jcal： 这是 vercel 的图表这周病毒式传播。12 周，天呐。如果看这个图表，我认为这揭开了 s-1 里需要写的东西。这就是为什么我在开头列举了所有开源权重发布。不只是它们存在，是它们现在在扩散。有更多要出来，改进速度非凡。现在在 vla 机器人、图像视频生成。开源权重、开源模型现在被用于所有更广泛的 ai 应用。 friedberg： 高端的东西仍然是最好的。 jcal： 窄用例。 friedberg： 是，工程、高度技术、高度复杂的任务和工作流、解 navier-stokes、数学、生物。这些模型绝对表现出色。人们愿意付接近无限的溢价。所以不是说它们的市场被摧毁，而是市场在分化，多数 ai 用例走向开源、开源权重 token。 chamath： 问题在于前沿公司 token 分布中，那些任务 vs 可替代给开源的任务各占多少？如果答案是超过 60-70%，你得给收入打折。如果只有 10%，90% 的收入来自绝对前沿用例，它们会没事，可以大展拳脚。 jcal： 把工作负载移到它们该去的地方，省钱。我做了一张过去 100 天模型图的&quot;甜区&quot;，claude 和 astra 在右上角贵但交付多，往下看有 muse、glm、kimi，左边有 zai 的 glm 和 mimo。 chamath： 这是托管价格，自己跑的话有些不到 100 万 token 10 美分。 jcal： sacks，问题是垂直语言模型、小语言模型会完成很多公司需要的 80-90% 任务。然后我们到 ai 主权。你想要你的超级智能——特朗普总统，trumpelligence，chatgpt——我们需要人们用这些模型来拥有主权，这样你不把数据给前沿模型，它们就不获得尖端超级智能优势，这就是人们脱钩的原因。你的商业直觉告诉你什么，david sacks？" style="--index: 6">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">06</span>
+                    <span class="timeline-meta">00:29:20–00:41:15</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>Anthropic 的 IPO 困境、&quot;精神分裂&quot;与湿实验室</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>Sacks 批评 Anthropic 领导层自相矛盾：一边说需要给前沿定速、AI 有 10% 灭绝风险，一边发布新前沿模型、开湿实验室。</li>
+<li>Chamath 认为董事会应该保留 Dario 作为 CEO 但全力披露，IPO 可能以远低于预期的价格清算。</li>
+<li>Friedberg 认为 Anthropic 真正的核心风险是客户集中度和开源模型对普通企业任务的替代，而非&quot;终结世界&quot;。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>超级投票权：Super-voting shares，赋予创始人超出经济持股比例的投票权，使其难以被罢免。</li>
+<li>S-1：美国 IPO 注册文件，包含业务、风险因素和财务披露。</li>
+<li>湿实验室：Wet lab，进行生物、化学实验的实体实验室。</li>
+<li>BSL-1/BSL-2：生物安全等级 1/2，低至中等风险实验室，不涉及高致病性病原体。</li>
+<li>AlphaFold：DeepMind 的蛋白质结构预测系统。</li>
+<li>CRISPR：基因编辑技术。</li>
+<li>DAF：Donor-advised fund，捐赠者建议基金。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>Sacks：</strong> 我们从朋友那里知道，Anthropic 的投资者现在抓狂。别提那些待了几周就走的假吹哨人，你有公司现任领导层说造成人类灭绝的概率大于 10%，而他们自己的产品在这个领域未解决。想想这造成的风险因素。公司自己的管理层这么说，怎么 IPO？然后还有其他证据，我不知道该叫什么，除了&quot;企业精神分裂症&quot;。Dario 发文说需要给前沿定速，就在他们推出 Claude 5.5 设定新前沿的前几天。他写这篇文章时肯定知道他们要发布扩展前沿的产品。至少是虚伪，也许更糟。然后他们发表关于 AI 生物风险的论文说需要停止，同时宣布在旧金山开新生物实验室、新湿实验室。</p>
+<p><strong>JCal：</strong> 他们告诉我们会死的概率 10% 之后开了实验室。Zach（Sacks），这是不是 Anthropic CEO 的失职，破坏自己的 IPO？你应该代表股东。如果我们是董事会，我们会换 CEO。把 CEO 放回实验室，找个知道怎么运营公司、不破坏公司的 CEO。他字面上在破坏自己的公司。</p>
+<p><strong>Sacks：</strong> 有这种成分，投资者对给创始人、特别是 Dario 超级投票权很紧张。The Information 有报道，这是目前活跃的辩论。</p>
+<p><strong>JCal：</strong> 解释超级投票权是什么，为什么在这个背景下关键。</p>
+<p><strong>Sacks：</strong> 据称 Anthropic 创始人每人只有约 2% 所有权，相对其他创始人上市时通常持有的是相对低的数字。仍然会是巨大的金额，数百亿美元。超级投票权基本上把经济股份和投票股份分离，给某些人控制公司的权利，即使他们没有通常需要的经济所有权。很常见。Larry 和 Sergey 可能是第一对获得超级投票权的著名创始人，还有 Zuck。对公司可以是稳定因素，因为只要创始人在监督，就不会受收购尝试等影响。但另一方面，需要对创始人极大的信任，因为他们实际上无法被移除，无论做什么。你不禁要想这次这种信任是否被赢得、是否合理。</p>
+<p><strong>JCal：</strong> 即使对我这种不一定主张更多监管的人，对 Anthropic 在旧金山开湿实验室也有点紧张。我本来考虑搬回来，不知道想不想了。能不能放远点？我们都看过这部电影了。</p>
+<p><strong>Sacks：</strong> 也许离岸，放钻井平台上。</p>
+<p><strong>Chamath：</strong> 如果我在董事会，会保留 Dario 做 CEO。因为他清楚展示了能建立独特文化，并针对最强大的竞争对手 OpenAI 定位。他从后面追上，不应该低估这有多难。他已经建立了史上最强的业务爬坡。如果我在董事会，会解决 Sacks 说的增量流动性风险。以 20 年视角，Anthropic 需要数千亿美元实现野心。我会以尽可能无风险的方式解决。只有两件事可做。第一，全力投入披露。问题是这会让本来密集难懂的 S-1 更密集难懂。可以表面覆盖监管风险，但市场翻译的方式是你得稀释 IPO 卖方预期。</p>
+<p><strong>Chamath：</strong> 为 IPO 买方创造更大的安全边际。这实际上是找到市场清算价格的方式，Jason——让我用粗略数字，即使认为他们在 1000 亿美元收入运行率上，本来干净上市可能是 2 万亿市值，现在会到 1 万亿或更少。因为对冲基金、养老金系统、只做多的共同基金综合体对资本来源有受托责任，会通过要求更低价格来为所有风险找理由。你会看到更温和合理的 IPO 动作，可能以比任何人想象的更低价格清算。Sacks 说的原因是，但这对 Ant 有好处，因为它清除噪音。迫使它们成为公司然后运营业务。它们会做得很好。</p>
+<p><strong>JCal：</strong> 诚实讲，我曾试图从 Ant 挖人，挖不到。不可能。他们给的薪酬太棒了，业务爬坡太吸引人。一对一对决时我没赢过一次。创业公司很难。他们是人才磁铁。OpenAI 也是。但这些风险会拖累 IPO，唯一的冲刷方式是大幅降价。</p>
+<p><strong>JCal：</strong> Friedberg，当我们看 S-1 的风险因素，那些是例行的免责声明。通常像 SpaceX，万一 Starship 不行、万一有竞争，都是打勾。在 Anthropic 的，我想我们会看到完全不同的东西：我们和员工在辞职，说这会杀死人类。我们有大量监管。我们要求监管。顺便说，我们在做生物工作，要开实验室。你同意 Chamath 说 S-1 会有实质性的风险因素拖累 IPO 吗？</p>
+<p><strong>Friedberg：</strong> 我认为客户集中度这点与之前说的开源模型扩散相符。因为 Anthropic 今天在生命科学领域有最好的模型。我运营生命科学研发组织，我们用他们的模型，非常棒，比别的模型好。所以在写代码、写软件、内部工作流和运营时我们想用它们。我们可以用其他产品写代码，我们也确实这么做。市场可能朝这个方向发展。我们看到证据出现在市场上，也看到客户集中度。极高价值的、技术工程、数学、生命科学这些硬技术问题，你想要顶级模型，愿意付高价，完全能赚钱，因为价值非凡。这一直是我关于 AI 的论点。AI 不是替代旧东西的价值。99% 的 AI 价值是开启人类历史上从未可能的新事物。</p>
+<p><strong>Friedberg：</strong> 这是 Anthropic 和 OpenAI 赚钱的地方。另外，OpenAI 会在消费端赚很多，Anthropic 可能也有一定。但在企业场景，钱来自创造新前沿、发现新酶（Anthropic 这周宣布的），可以治愈人类疾病、开发新技术、新工程系统、造出以前不可能的东西。这是溢价价值，是为闭源模型和高端模型付的溢价价格。但那是与企业应用完全不同的业务案例。多数企业应用会用开源权重模型。代码会用更便宜的模型写。我不知道为什么你要用高端模型写代码，当你可以免费做、组织里每个人都可以免费写代码。所以 Anthropic 更大的问题是客户集中度，他们卖的是不是真的溢价产品？</p>
+<p><strong>Friedberg：</strong> 这是市场方向，是最大的风险因素。关于会终结世界什么的，兄弟，确保你的产品不终结世界就行了。这是好的第一步，像 Mark 在 Meta 做的。</p>
+<p><strong>JCal：</strong> 这是难以置信的公司，执行非凡，收入爬坡非凡。但看开源的影响，有几个病毒式图表。70-80% 的 token 使用是 6 个月前在播客说的&quot;暗 token&quot;，不被追踪但路由器上可以追踪。那些暗开源 token 现在占多数。</p>
+<p><strong>Chamath：</strong> 在过去 12 周，token 使用从 80/20 闭源对开源翻转成 80/20 开源对闭源。12 周内，科技市场历史上从未见过这种技术转移浪潮。那是 Anthropic 最大的风险因素。他们最先让企业用上 AI 建工具。但随着市场转向开源和开源权重，轰，就在这里。</p>
+<p><strong>JCal：</strong> 这是 Vercel 的图表这周病毒式传播。12 周，天呐。如果看这个图表，我认为这揭开了 S-1 里需要写的东西。这就是为什么我在开头列举了所有开源权重发布。不只是它们存在，是它们现在在扩散。有更多要出来，改进速度非凡。现在在 VLA 机器人、图像视频生成。开源权重、开源模型现在被用于所有更广泛的 AI 应用。</p>
+<p><strong>Friedberg：</strong> 高端的东西仍然是最好的。</p>
+<p><strong>JCal：</strong> 窄用例。</p>
+<p><strong>Friedberg：</strong> 是，工程、高度技术、高度复杂的任务和工作流、解 Navier-Stokes、数学、生物。这些模型绝对表现出色。人们愿意付接近无限的溢价。所以不是说它们的市场被摧毁，而是市场在分化，多数 AI 用例走向开源、开源权重 token。</p>
+<p><strong>Chamath：</strong> 问题在于前沿公司 token 分布中，那些任务 vs 可替代给开源的任务各占多少？如果答案是超过 60-70%，你得给收入打折。如果只有 10%，90% 的收入来自绝对前沿用例，它们会没事，可以大展拳脚。</p>
+<p><strong>JCal：</strong> 把工作负载移到它们该去的地方，省钱。我做了一张过去 100 天模型图的&quot;甜区&quot;，Claude 和 Astra 在右上角贵但交付多，往下看有 Muse、GLM、Kimi，左边有 ZAI 的 GLM 和 MIMO。</p>
+<p><strong>Chamath：</strong> 这是托管价格，自己跑的话有些不到 100 万 token 10 美分。</p>
+<p><strong>JCal：</strong> Sacks，问题是垂直语言模型、小语言模型会完成很多公司需要的 80-90% 任务。然后我们到 AI 主权。你想要你的超级智能——特朗普总统，Trumpelligence，ChatGPT——我们需要人们用这些模型来拥有主权，这样你不把数据给前沿模型，它们就不获得尖端超级智能优势，这就是人们脱钩的原因。你的商业直觉告诉你什么，David Sacks？</p></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="00:41:15–00:53:10 token 市场份额翻转、token maxing 与定价权之争 本段核心内容： sacks 从投资者角度为前沿智能业务辩护：anthropic 和 openai 是稳定双寡头，有一部分客户愿为&quot;最好的&quot;付无限溢价，且它们掌握新增算力的 60%。 chamath 反驳称 token 成本与客户收入脱钩，&quot;token maxing&quot;让客户无法转嫁成本，这些公司缺乏定价权。 jcal 用 jane street 自建算力并拥抱开源的例子，说明大客户正在对冲。 背景解释与关键术语： 双寡头：duopoly，市场上只有两家主要竞争者。 商品智能：commodity intelligence，可替代、价格趋近边际成本的基础模型能力。 算力紧缺：compute crunch，gpu/数据中心供给不足以满足需求。 jane street：知名量化交易公司，节目中称其公开宣布大额云容量合同。 coreweave、crusoe：ai 云算力供应商。 暗 token：dark tokens，jcal 用来指通过路由器等渠道使用但不被主流统计追踪的开源模型调用。 详细中文整理： sacks： 戴上投资者帽子，我对前沿智能业务比你们乐观。anthropic 和 openai 现在是前沿智能的稳定双寡头，因为它们对其他公司有显著领先。能够为此收溢价。我完全理解多数 token 会流向开源或商品智能。但是有有意义的百分比的市场——不知道是 10%、20%、30%——会为真正的前沿智能付巨大溢价。很多客户要么需要最好的，要么只是想知道自己有最好的。不想 diy。或者处于竞争激烈的市场。比如你是对冲基金，不能冒竞争对手有更好模型的风险。很多情况下他们会继续以溢价变现前沿。这就是为什么它们的收入持续增长，即使 token 市场份额在下降。 sacks： 此外，记住未来一年左右，全球新增算力的 60% 左右是为这两家公司增加的。如果算力变得稀缺，我们在算力紧缺中，它们做了巨额投资、在建大量产能、有规模经济。记住它们也在快速降价。这给它们很大优势。但是这两家公司在跑步机上。停止领先前沿的那一刻，它们归零。我们知道前沿可能只比商品市场领先 6-12 个月，取决于能力。如果它们滑落，从前沿跑步机上掉下来 6 个月，公司就深陷困境。这是必须定价的核心风险因素。这就是为什么它们的政府事务努力严重误判。我能理解它们为什么追求监管俘获，因为在跑步机上很累。它们可能想，让我们巩固护城河，让所有人放慢。但我觉得它们误判了，因为如果它们真的得到想要的监管控制，建立新的联邦 ai 部门，会放慢它们到不再是前沿。其他人会赶上。特别是很多开源模型是中国公司生成的，不受我们管辖。中国明确表示不会放慢。想想，它们在游说会放慢自己、把自己踢出前沿的事，那样业务归零。很难理解。 jcal： 它们在比赛中领先对手，却要求&quot;靠边停车检查引擎&quot;，chamath，这没逻辑意义。而且 chamath，竞争非常显著，不仅来自中国，还有 jensen 和 nvidia、微软 satya、谷歌、zuck 的 muse。它们都在拥抱开源模型，都有托管。 chamath： 回到 sacks 说的很重要的细微点。想象你是对冲基金，需要绝对最新最好，因为担心竞争对手有。这是关于博弈论和损益表的有趣问题。你在和竞争对手玩胆小鬼游戏。你需要用最好的，因为怕他们用最好的打败你。但问题是什么？我们知道你可以消费过量 token——我们玩笑叫 token maxing。成本完全不与收入挂钩。突然有这种奇怪动态，我该用最新最好的、比普通东西贵 10-30 倍的吗？那东西不与收入挂钩，不能转嫁。如果对冲基金每月只赚 n 美元利润，很多情况下会变成打平到亏损。 chamath： 换个例子。假设你卖固定商品固定价格。同样，可以用最新最好，如果无法转嫁成本、吸收服务成本，就非常艰难。sacks，我不确定同意你，因为我看不到这些公司既有定价权支付大量昂贵 token，又能转嫁给客户。如果不能，它们就在吸收，会看到更低利润率。 jcal： sacks，如果看 jane street，很著名的交易公司，公开宣布 190 亿美元云容量合同，coreweave 60 亿云承诺，还投资了那家公司，然后 130 亿与 crusoe。它们在建自己的基础设施，拥抱开源。这印证 chamath 说的。它们在对冲，花数百亿自己的算力，也用前沿模型？做博弈论时它们似乎在拥抱自己的基础设施。 sacks： 当用例成熟、知道可以用更便宜的商品智能，显然会尝试建。如果你有足够水平的复杂能力。我认为容易低估使用前沿有多方便。而且这些公司也在快速降价。不管怎样，我们谈过这个。没有疑问开源是 anthropic s-1 的巨大风险因素，必须与终结人类的风险并列。但回到这家公司的根本问题是精神分裂。他们需要精神科医生，不是银行家。持续做虚伪和自相矛盾的事。一边说给前沿定速却发布新前沿模型。一边说生物风险会终结人类却在旧金山开湿实验室。一边业务依赖保持领先商品模型，却主张建立联邦 ai 部门肯定放慢它们，可能导致商品化。所以领导层有根本性崩溃，主张不符合自己利益的东西。很多人说只是监管俘获，这是真的，但监管俘获是政府事务人员试图合理化精神分裂、让它有利可图。我不确定这完全算得通。" style="--index: 7">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">07</span>
+                    <span class="timeline-meta">00:41:15–00:53:10</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>Token 市场份额翻转、Token Maxing 与定价权之争</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>Sacks 从投资者角度为前沿智能业务辩护：Anthropic 和 OpenAI 是稳定双寡头，有一部分客户愿为&quot;最好的&quot;付无限溢价，且它们掌握新增算力的 60%。</li>
+<li>Chamath 反驳称 token 成本与客户收入脱钩，&quot;token maxing&quot;让客户无法转嫁成本，这些公司缺乏定价权。</li>
+<li>JCal 用 Jane Street 自建算力并拥抱开源的例子，说明大客户正在对冲。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>双寡头：Duopoly，市场上只有两家主要竞争者。</li>
+<li>商品智能：Commodity intelligence，可替代、价格趋近边际成本的基础模型能力。</li>
+<li>算力紧缺：Compute crunch，GPU/数据中心供给不足以满足需求。</li>
+<li>Jane Street：知名量化交易公司，节目中称其公开宣布大额云容量合同。</li>
+<li>CoreWeave、Crusoe：AI 云算力供应商。</li>
+<li>暗 token：Dark tokens，JCal 用来指通过路由器等渠道使用但不被主流统计追踪的开源模型调用。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>Sacks：</strong> 戴上投资者帽子，我对前沿智能业务比你们乐观。Anthropic 和 OpenAI 现在是前沿智能的稳定双寡头，因为它们对其他公司有显著领先。能够为此收溢价。我完全理解多数 token 会流向开源或商品智能。但是有有意义的百分比的市场——不知道是 10%、20%、30%——会为真正的前沿智能付巨大溢价。很多客户要么需要最好的，要么只是想知道自己有最好的。不想 DIY。或者处于竞争激烈的市场。比如你是对冲基金，不能冒竞争对手有更好模型的风险。很多情况下他们会继续以溢价变现前沿。这就是为什么它们的收入持续增长，即使 token 市场份额在下降。</p>
+<p><strong>Sacks：</strong> 此外，记住未来一年左右，全球新增算力的 60% 左右是为这两家公司增加的。如果算力变得稀缺，我们在算力紧缺中，它们做了巨额投资、在建大量产能、有规模经济。记住它们也在快速降价。这给它们很大优势。但是这两家公司在跑步机上。停止领先前沿的那一刻，它们归零。我们知道前沿可能只比商品市场领先 6-12 个月，取决于能力。如果它们滑落，从前沿跑步机上掉下来 6 个月，公司就深陷困境。这是必须定价的核心风险因素。这就是为什么它们的政府事务努力严重误判。我能理解它们为什么追求监管俘获，因为在跑步机上很累。它们可能想，让我们巩固护城河，让所有人放慢。但我觉得它们误判了，因为如果它们真的得到想要的监管控制，建立新的联邦 AI 部门，会放慢它们到不再是前沿。其他人会赶上。特别是很多开源模型是中国公司生成的，不受我们管辖。中国明确表示不会放慢。想想，它们在游说会放慢自己、把自己踢出前沿的事，那样业务归零。很难理解。</p>
+<p><strong>JCal：</strong> 它们在比赛中领先对手，却要求&quot;靠边停车检查引擎&quot;，Chamath，这没逻辑意义。而且 Chamath，竞争非常显著，不仅来自中国，还有 Jensen 和 Nvidia、微软 Satya、谷歌、Zuck 的 Muse。它们都在拥抱开源模型，都有托管。</p>
+<p><strong>Chamath：</strong> 回到 Sacks 说的很重要的细微点。想象你是对冲基金，需要绝对最新最好，因为担心竞争对手有。这是关于博弈论和损益表的有趣问题。你在和竞争对手玩胆小鬼游戏。你需要用最好的，因为怕他们用最好的打败你。但问题是什么？我们知道你可以消费过量 token——我们玩笑叫 token maxing。成本完全不与收入挂钩。突然有这种奇怪动态，我该用最新最好的、比普通东西贵 10-30 倍的吗？那东西不与收入挂钩，不能转嫁。如果对冲基金每月只赚 N 美元利润，很多情况下会变成打平到亏损。</p>
+<p><strong>Chamath：</strong> 换个例子。假设你卖固定商品固定价格。同样，可以用最新最好，如果无法转嫁成本、吸收服务成本，就非常艰难。Sacks，我不确定同意你，因为我看不到这些公司既有定价权支付大量昂贵 token，又能转嫁给客户。如果不能，它们就在吸收，会看到更低利润率。</p>
+<p><strong>JCal：</strong> Sacks，如果看 Jane Street，很著名的交易公司，公开宣布 190 亿美元云容量合同，CoreWeave 60 亿云承诺，还投资了那家公司，然后 130 亿与 Crusoe。它们在建自己的基础设施，拥抱开源。这印证 Chamath 说的。它们在对冲，花数百亿自己的算力，也用前沿模型？做博弈论时它们似乎在拥抱自己的基础设施。</p>
+<p><strong>Sacks：</strong> 当用例成熟、知道可以用更便宜的商品智能，显然会尝试建。如果你有足够水平的复杂能力。我认为容易低估使用前沿有多方便。而且这些公司也在快速降价。不管怎样，我们谈过这个。没有疑问开源是 Anthropic S-1 的巨大风险因素，必须与终结人类的风险并列。但回到这家公司的根本问题是精神分裂。他们需要精神科医生，不是银行家。持续做虚伪和自相矛盾的事。一边说给前沿定速却发布新前沿模型。一边说生物风险会终结人类却在旧金山开湿实验室。一边业务依赖保持领先商品模型，却主张建立联邦 AI 部门肯定放慢它们，可能导致商品化。所以领导层有根本性崩溃，主张不符合自己利益的东西。很多人说只是监管俘获，这是真的，但监管俘获是政府事务人员试图合理化精神分裂、让它有利可图。我不确定这完全算得通。</p></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="00:53:10–01:03:26 ai 政治化：bernie 禁令、特朗普、bessent 与 obama 本段核心内容： sacks 认为 bernie sanders 禁止超级智能的法案若通过将导致整个行业停摆或外流，类比民主党对加密行业的态度。 chamath 主张 ai 政治化是政治算计：冻结今天的格局有利于少数大公司和民主党。 friedberg 批评奥巴马对 ai 的表态显示了不理解技术，并情绪激动地说&quot;发现了火却要把它浇灭&quot;。 背景解释与关键术语： bernie sanders：美国参议员，长期主张对大科技和 ai 加强监管。 超级智能：superintelligence，节目中被特朗普改称为 &quot;superintelligence&quot;；其定义和门槛存在争议。 全球主义机构：节目中用戏谑语气指联合国等国际治理框架。 hugging face 事件：节目中 bessent 提到的 ai agent 安全事件，属于嘉宾引用，未进一步说明。 pac：政治行动委员会，用于募集和投放政治资金。 daf：donor-advised fund，捐赠者建议基金，常被高净值人群用于税前慈善捐赠。 详细中文整理： jcal： 如果 bernie sanders 提出法案禁止超级智能，民主党拿下众议院、参议院，2028 年拿下白宫，进入这种事奇怪地政治化的世界。不理解我们怎么走到在进步上按政党分裂。这疯狂。 chamath： 他们自找的。 jcal： 是的，他们挑起。因为政党立场反进步太糟糕奇怪。整个事情不客观，是扭曲世界观思维试图制造对立。即使共和党也有杂音说也许该禁止数据中心、禁止 ai。sacks，让我们问，所有开源权重模型都在外面，务实路径是什么？bernie 说的禁止超级智能、停止 ai、关掉，有务实路径吗？如果这个法律明天通过会怎样？ sacks： 如果 bernie 的法案明天通过，一切都会停止，因为他在法案中对人工超级智能的定义，你可以说我们已经达到那些阈值。基本上说模型——是的，在某个能力水平。我们是否达到有争议。定义非常宽松。此外对违反的开发者有 20 年监禁。没人愿意冒险。 jcal： 所以会怎样？人们会删掉电脑上的开源权重模型吗？企业要移除系统里的代码吗？这些人失业吗？ sacks： 民主党想对 ai 做他们对加密做的事。会把整个行业赶到海外。把创新者赶出国家。 jcal： 这就是我脑子里的：搬到新加坡、苏黎世、拥抱开源和超级智能的地方。你不能停止 ai。不能告诉人们一类软件不能存在。如果美国通过法律说这类软件不能存在，我会搬到另一个国家。 chamath： 人们会放弃国籍搬到新加坡。这是在拿走人们的 ai。 jcal： 你们看到习近平今天在白宫讲话吗？他说邀请 10 万美国年轻人参观中国。有趣的时刻，我们的人说要停止技术进步、经济繁荣、k 型经济中每个人提升的机会，因为开源 ai 让每个人提高生产力。不是亿万富翁的 ai，是每个人的 ai。然后我们要关掉。同时中国说，来这里看看，每个人都能用 ai。 chamath： 这是我们的剧本。friedberg 精彩地说过，我们的剧本是吸引顶尖中国科学家、欧洲科学家、印度、德国的科学家思想家数学家来美国。中国在拿走我们的剧本。然后它们会吸引投资。 jcal： 接下来是特朗普总统在联合国 30 秒，把 ai 改名为超级智能。 特朗普（播放片段）： 美国完全拒绝任何构建全球主义方案控制人工智能的企图，现在正式称为超级智能。说那些说全球变暖 12 年后我们会死的人，同样的人现在说 ai 会杀死我们、机器人会攻击我们。 jcal： 他有句好话，我们剪太短了。他说我们不会把监管权授予某个全球主义机构。 sacks： 是，好框架。全球主义和全球变暖是看那造成的损害的方式。 jcal： 那个全球主义机构的头目是挪威和加拿大。看到泄露的短信吗？有个群聊，挪威首相在给 mark carney 发短信说，好，我们加入。刚读到，天呐，这是它们的前沿实验室。 chamath： 抱歉，它们没有。有前沿公司。 jcal： 然后是 bessent 将军在超级智能军队，30 秒。 bessent（播放片段）： 想象这些实验室出来，或一个特定实验室，在职员工说 10% 概率灭绝级事件。然后实验室还说把责任从我们手上拿走。我们不会这么做。人类负责，不是 ai。hugging face 事件是 openai 管理层的责任，不是一堆 agent。这些实验室需要为自己负责。它们随时可以放慢。 jcal： 最后，怀旧回归，你的老友 chamath，奥巴马总统也加入。 奥巴马（播放片段）： 如果我们只考虑 ai 如何治愈癌症或获得更好能源，你可以在没有巨大 ai 自由漫游互联网的情况下做到。你这么做的原因是必须推销人们会付钱的产品。这是我们社会需要的和这些公司面临的商业指令之间的错位，不一定因为它们想做坏事，而是必须证明这些估值合理。 jcal： friedberg，你对这些有什么想法？天呐，三个人。我知道你是奥巴马粉丝。来吧。 chamath： basedberg。 jcal： 现在 subreddit 上有整个运动说 friedberg 最近在节目上的表现变得 based。basedberg。 chamath： basedberg。 jcal： 揭示你的 basedberg。给我们你的 based 观点。 friedberg： 这些话让我情绪上痛苦。如果他是人们倾听的领袖，却不能准确阐述正在发生的事，很悲伤我们失去了重点。悲伤我们没有手拉手说，天呐，未来已来，我们可以向前跃进、提升人们。多年来奥巴马优美地演讲提升人们的重要性、给人们进步机会、让人们提升自己。从没有比这些技术更平等化的技术、更好的经济繁荣机会。挥手说 agentic 这个词，说我们不需要 agentic ai 解决癌症，显示他多么不理解这技术如何运作，一切都变成政治斗争的简写。 jcal： 为什么而战？ friedberg： 你在为什么而战？什么政治战说我要把一半人口抛在后面，反对所有人繁荣，让我党看起来道德优越？把另一边说成坏人，而另一边字面上发现了火，世界现在有火，我们要拿水浇灭这该死的火。没人得到火，因为对方说火是好的。因为他们说火是好的，我们把火都灭了。 chamath： 等等，那不是他们想做的。这是非常重要的时刻，原因很简单：我们，世界，即将赋予 3、4、5、6 家公司约 10 万亿美元财富。奥巴马很清楚多数这些公司压倒性左倾。他也知道很大一部分钱会进入慈善事业，他和身边人会受益。这是事实。我们已经知道，因为一些前沿公司实际要求你设立 daf 并承诺一部分股票。这些钱不会用于消费或储蓄，会进入 pac、政治运动，它们会不成比例地受益。这与繁荣无关。这是非常简单的政治算计。如果把今天的经济冻结，少数组织能不成比例地影响民主党就会赢。 chamath： 它们会获得经济收益的最大份额，然后帮民主党赢得权力。仅此而已。 jcal： david sacks，没有开源模型，没有闭源模型，只有美国模型。给我们你的视角。 sacks： 今天早上华尔街日报有篇文章叫&quot;ai 建设正成为美国历史上最大的经济赌注&quot;，图表显示数据中心支出——仅资本支出——比运河、铁路和电网加起来还大。疯狂。这根本上驱动整个美国经济。我们可以简单地关掉它的想法——bernie sanders 基本上说停止一切，把还在做的人关进监狱。疯狂。 jcal： 如果拔掉插头会导致萧条？ sacks： 不能那样猛踩刹车。行不通。但问题是民主党不在乎，因为美国经济现在是特朗普经济，破坏美国经济等于破坏特朗普总统，他们会做任何事破坏特朗普。这是政治的重要部分。 jcal： 疯狂的棋盘，因为它们会成为如此多权力的受益者。dario 可以赚 10 亿。dario 和他的团队、openai 能够超过 elon 的捐款。 sacks： 我不确定完全同意多数 ai 价值会归于 6 家公司。我认为这是像互联网一样的广泛基础技术。互联网产生了一些赢家——谷歌、亚马逊等，它们做得不错。 jcal： 不是说归于 6 家。是说如果你通过某种监管机制停下来按暂停，你实际上让 6 家公司拥有节目。 sacks： 对，锁定。 chamath： 这就是为什么它们想要这个，因为你说得根本对。等得越久没有监管，越…… jcal： 越广泛基础。 chamath： 对民主党不利。更好的是有 3、4 家前沿公司，每家 4 万亿市值，其中 2 万亿是员工的经济价值，5000 亿在 daf。它们会得到最大份额。它们不傻。 jcal： 需要告诉所有人的替代观点——这是广泛基础的繁荣浪潮。是互联网。是每个人现在比历史上任何时候都有工具做任何想做的事。 chamath： 如果让它增长。 jcal： 想想教育。不用付 20 万美元教育费了。 chamath： 那政治家还解决什么问题？什么问题能让他们积聚权力？如果所有问题都解决了，他们就没生意了。 jcal： 这是经典黑暗时代-启蒙运动的选择。走哪条路？权力者说我们喜欢黑暗时代，因为能保持权力。让我们监管印刷机。 chamath： 控制印刷机。" style="--index: 8">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">08</span>
+                    <span class="timeline-meta">00:53:10–01:03:26</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>AI 政治化：Bernie 禁令、特朗普、Bessent 与 Obama</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>Sacks 认为 Bernie Sanders 禁止超级智能的法案若通过将导致整个行业停摆或外流，类比民主党对加密行业的态度。</li>
+<li>Chamath 主张 AI 政治化是政治算计：冻结今天的格局有利于少数大公司和民主党。</li>
+<li>Friedberg 批评奥巴马对 AI 的表态显示了不理解技术，并情绪激动地说&quot;发现了火却要把它浇灭&quot;。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>Bernie Sanders：美国参议员，长期主张对大科技和 AI 加强监管。</li>
+<li>超级智能：Superintelligence，节目中被特朗普改称为 &quot;superintelligence&quot;；其定义和门槛存在争议。</li>
+<li>全球主义机构：节目中用戏谑语气指联合国等国际治理框架。</li>
+<li>Hugging Face 事件：节目中 Bessent 提到的 AI agent 安全事件，属于嘉宾引用，未进一步说明。</li>
+<li>PAC：政治行动委员会，用于募集和投放政治资金。</li>
+<li>DAF：Donor-advised fund，捐赠者建议基金，常被高净值人群用于税前慈善捐赠。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> 如果 Bernie Sanders 提出法案禁止超级智能，民主党拿下众议院、参议院，2028 年拿下白宫，进入这种事奇怪地政治化的世界。不理解我们怎么走到在进步上按政党分裂。这疯狂。</p>
+<p><strong>Chamath：</strong> 他们自找的。</p>
+<p><strong>JCal：</strong> 是的，他们挑起。因为政党立场反进步太糟糕奇怪。整个事情不客观，是扭曲世界观思维试图制造对立。即使共和党也有杂音说也许该禁止数据中心、禁止 AI。Sacks，让我们问，所有开源权重模型都在外面，务实路径是什么？Bernie 说的禁止超级智能、停止 AI、关掉，有务实路径吗？如果这个法律明天通过会怎样？</p>
+<p><strong>Sacks：</strong> 如果 Bernie 的法案明天通过，一切都会停止，因为他在法案中对人工超级智能的定义，你可以说我们已经达到那些阈值。基本上说模型——是的，在某个能力水平。我们是否达到有争议。定义非常宽松。此外对违反的开发者有 20 年监禁。没人愿意冒险。</p>
+<p><strong>JCal：</strong> 所以会怎样？人们会删掉电脑上的开源权重模型吗？企业要移除系统里的代码吗？这些人失业吗？</p>
+<p><strong>Sacks：</strong> 民主党想对 AI 做他们对加密做的事。会把整个行业赶到海外。把创新者赶出国家。</p>
+<p><strong>JCal：</strong> 这就是我脑子里的：搬到新加坡、苏黎世、拥抱开源和超级智能的地方。你不能停止 AI。不能告诉人们一类软件不能存在。如果美国通过法律说这类软件不能存在，我会搬到另一个国家。</p>
+<p><strong>Chamath：</strong> 人们会放弃国籍搬到新加坡。这是在拿走人们的 AI。</p>
+<p><strong>JCal：</strong> 你们看到习近平今天在白宫讲话吗？他说邀请 10 万美国年轻人参观中国。有趣的时刻，我们的人说要停止技术进步、经济繁荣、K 型经济中每个人提升的机会，因为开源 AI 让每个人提高生产力。不是亿万富翁的 AI，是每个人的 AI。然后我们要关掉。同时中国说，来这里看看，每个人都能用 AI。</p>
+<p><strong>Chamath：</strong> 这是我们的剧本。Friedberg 精彩地说过，我们的剧本是吸引顶尖中国科学家、欧洲科学家、印度、德国的科学家思想家数学家来美国。中国在拿走我们的剧本。然后它们会吸引投资。</p>
+<p><strong>JCal：</strong> 接下来是特朗普总统在联合国 30 秒，把 AI 改名为超级智能。</p>
+<p><strong>特朗普（播放片段）：</strong> 美国完全拒绝任何构建全球主义方案控制人工智能的企图，现在正式称为超级智能。说那些说全球变暖 12 年后我们会死的人，同样的人现在说 AI 会杀死我们、机器人会攻击我们。</p>
+<p><strong>JCal：</strong> 他有句好话，我们剪太短了。他说我们不会把监管权授予某个全球主义机构。</p>
+<p><strong>Sacks：</strong> 是，好框架。全球主义和全球变暖是看那造成的损害的方式。</p>
+<p><strong>JCal：</strong> 那个全球主义机构的头目是挪威和加拿大。看到泄露的短信吗？有个群聊，挪威首相在给 Mark Carney 发短信说，好，我们加入。刚读到，天呐，这是它们的前沿实验室。</p>
+<p><strong>Chamath：</strong> 抱歉，它们没有。有前沿公司。</p>
+<p><strong>JCal：</strong> 然后是 Bessent 将军在超级智能军队，30 秒。</p>
+<p><strong>Bessent（播放片段）：</strong> 想象这些实验室出来，或一个特定实验室，在职员工说 10% 概率灭绝级事件。然后实验室还说把责任从我们手上拿走。我们不会这么做。人类负责，不是 AI。Hugging Face 事件是 OpenAI 管理层的责任，不是一堆 agent。这些实验室需要为自己负责。它们随时可以放慢。</p>
+<p><strong>JCal：</strong> 最后，怀旧回归，你的老友 Chamath，奥巴马总统也加入。</p>
+<p><strong>奥巴马（播放片段）：</strong> 如果我们只考虑 AI 如何治愈癌症或获得更好能源，你可以在没有巨大 AI 自由漫游互联网的情况下做到。你这么做的原因是必须推销人们会付钱的产品。这是我们社会需要的和这些公司面临的商业指令之间的错位，不一定因为它们想做坏事，而是必须证明这些估值合理。</p>
+<p><strong>JCal：</strong> Friedberg，你对这些有什么想法？天呐，三个人。我知道你是奥巴马粉丝。来吧。</p>
+<p><strong>Chamath：</strong> Basedberg。</p>
+<p><strong>JCal：</strong> 现在 subreddit 上有整个运动说 Friedberg 最近在节目上的表现变得 based。Basedberg。</p>
+<p><strong>Chamath：</strong> Basedberg。</p>
+<p><strong>JCal：</strong> 揭示你的 basedberg。给我们你的 based 观点。</p>
+<p><strong>Friedberg：</strong> 这些话让我情绪上痛苦。如果他是人们倾听的领袖，却不能准确阐述正在发生的事，很悲伤我们失去了重点。悲伤我们没有手拉手说，天呐，未来已来，我们可以向前跃进、提升人们。多年来奥巴马优美地演讲提升人们的重要性、给人们进步机会、让人们提升自己。从没有比这些技术更平等化的技术、更好的经济繁荣机会。挥手说 agentic 这个词，说我们不需要 agentic AI 解决癌症，显示他多么不理解这技术如何运作，一切都变成政治斗争的简写。</p>
+<p><strong>JCal：</strong> 为什么而战？</p>
+<p><strong>Friedberg：</strong> 你在为什么而战？什么政治战说我要把一半人口抛在后面，反对所有人繁荣，让我党看起来道德优越？把另一边说成坏人，而另一边字面上发现了火，世界现在有火，我们要拿水浇灭这该死的火。没人得到火，因为对方说火是好的。因为他们说火是好的，我们把火都灭了。</p>
+<p><strong>Chamath：</strong> 等等，那不是他们想做的。这是非常重要的时刻，原因很简单：我们，世界，即将赋予 3、4、5、6 家公司约 10 万亿美元财富。奥巴马很清楚多数这些公司压倒性左倾。他也知道很大一部分钱会进入慈善事业，他和身边人会受益。这是事实。我们已经知道，因为一些前沿公司实际要求你设立 DAF 并承诺一部分股票。这些钱不会用于消费或储蓄，会进入 PAC、政治运动，它们会不成比例地受益。这与繁荣无关。这是非常简单的政治算计。如果把今天的经济冻结，少数组织能不成比例地影响民主党就会赢。</p>
+<p><strong>Chamath：</strong> 它们会获得经济收益的最大份额，然后帮民主党赢得权力。仅此而已。</p>
+<p><strong>JCal：</strong> David Sacks，没有开源模型，没有闭源模型，只有美国模型。给我们你的视角。</p>
+<p><strong>Sacks：</strong> 今天早上华尔街日报有篇文章叫&quot;AI 建设正成为美国历史上最大的经济赌注&quot;，图表显示数据中心支出——仅资本支出——比运河、铁路和电网加起来还大。疯狂。这根本上驱动整个美国经济。我们可以简单地关掉它的想法——Bernie Sanders 基本上说停止一切，把还在做的人关进监狱。疯狂。</p>
+<p><strong>JCal：</strong> 如果拔掉插头会导致萧条？</p>
+<p><strong>Sacks：</strong> 不能那样猛踩刹车。行不通。但问题是民主党不在乎，因为美国经济现在是特朗普经济，破坏美国经济等于破坏特朗普总统，他们会做任何事破坏特朗普。这是政治的重要部分。</p>
+<p><strong>JCal：</strong> 疯狂的棋盘，因为它们会成为如此多权力的受益者。Dario 可以赚 10 亿。Dario 和他的团队、OpenAI 能够超过 Elon 的捐款。</p>
+<p><strong>Sacks：</strong> 我不确定完全同意多数 AI 价值会归于 6 家公司。我认为这是像互联网一样的广泛基础技术。互联网产生了一些赢家——谷歌、亚马逊等，它们做得不错。</p>
+<p><strong>JCal：</strong> 不是说归于 6 家。是说如果你通过某种监管机制停下来按暂停，你实际上让 6 家公司拥有节目。</p>
+<p><strong>Sacks：</strong> 对，锁定。</p>
+<p><strong>Chamath：</strong> 这就是为什么它们想要这个，因为你说得根本对。等得越久没有监管，越……</p>
+<p><strong>JCal：</strong> 越广泛基础。</p>
+<p><strong>Chamath：</strong> 对民主党不利。更好的是有 3、4 家前沿公司，每家 4 万亿市值，其中 2 万亿是员工的经济价值，5000 亿在 DAF。它们会得到最大份额。它们不傻。</p>
+<p><strong>JCal：</strong> 需要告诉所有人的替代观点——这是广泛基础的繁荣浪潮。是互联网。是每个人现在比历史上任何时候都有工具做任何想做的事。</p>
+<p><strong>Chamath：</strong> 如果让它增长。</p>
+<p><strong>JCal：</strong> 想想教育。不用付 20 万美元教育费了。</p>
+<p><strong>Chamath：</strong> 那政治家还解决什么问题？什么问题能让他们积聚权力？如果所有问题都解决了，他们就没生意了。</p>
+<p><strong>JCal：</strong> 这是经典黑暗时代-启蒙运动的选择。走哪条路？权力者说我们喜欢黑暗时代，因为能保持权力。让我们监管印刷机。</p>
+<p><strong>Chamath：</strong> 控制印刷机。</p></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="01:03:26–01:08:00 ai 建设是美国史上最大经济赌注与历史类比 本段核心内容： sacks 引用华尔街日报数据说明 ai 资本开支已成为美国经济史上最大投资周期，不能急刹车。 jcal 用&quot;黑暗时代 vs 启蒙运动&quot;和&quot;中国皇帝禁造船&quot;的历史类比，警告不要自我破坏。 chamath 把 ai 恐惧归结为对未知和前沿的恐惧，引用《星球大战》&quot;恐惧通向黑暗面&quot;。 背景解释与关键术语： 华尔街日报文章：指本集中提到的&quot;the ai buildout is becoming the biggest economic bet in us history&quot;。 运河、铁路、电网：美国历史上几个超大型基础设施投资周期。 中国皇帝禁造船：指明代海禁政策，sacks 用来类比禁止 ai 可能让中国超越西方。 详细中文整理： sacks： 今天早上华尔街日报有篇文章叫&quot;ai 建设正成为美国历史上最大的经济赌注&quot;，图表显示数据中心支出——仅资本支出——比运河、铁路和电网加起来还大。疯狂。这根本上驱动整个美国经济。我们可以简单地关掉它的想法——bernie sanders 基本上说停止一切，把还在做的人关进监狱。疯狂。 jcal： 如果拔掉插头会导致萧条？ sacks： 不能那样猛踩刹车。行不通。但问题是民主党不在乎，因为美国经济现在是特朗普经济，破坏美国经济等于破坏特朗普总统，他们会做任何事破坏特朗普。这是政治的重要部分。 jcal： 疯狂的棋盘，因为它们会成为如此多权力的受益者。dario 可以赚 10 亿。dario 和他的团队、openai 能够超过 elon 的捐款。 sacks： 我不确定完全同意多数 ai 价值会归于 6 家公司。我认为这是像互联网一样的广泛基础技术。互联网产生了一些赢家——谷歌、亚马逊等，它们做得不错。 jcal： 不是说归于 6 家。是说如果你通过某种监管机制停下来按暂停，你实际上让 6 家公司拥有节目。 sacks： 对，锁定。 chamath： 这就是为什么它们想要这个，因为你说得根本对。等得越久没有监管，越…… jcal： 越广泛基础。 chamath： 对民主党不利。更好的是有 3、4 家前沿公司，每家 4 万亿市值，其中 2 万亿是员工的经济价值，5000 亿在 daf。它们会得到最大份额。它们不傻。 jcal： 需要告诉所有人的替代观点——这是广泛基础的繁荣浪潮。是互联网。是每个人现在比历史上任何时候都有工具做任何想做的事。 chamath： 如果让它增长。 jcal： 想想教育。不用付 20 万美元教育费了。 chamath： 那政治家还解决什么问题？什么问题能让他们积聚权力？如果所有问题都解决了，他们就没生意了。 jcal： 这是经典黑暗时代-启蒙运动的选择。走哪条路？权力者说我们喜欢黑暗时代，因为能保持权力。让我们监管印刷机。 chamath： 控制印刷机。 sacks： 说到黑暗时代，一个有趣的历史点。回到中世纪，中国文明比欧洲先进得多，然后某个时候翻转，西方领先。一些历史学家指出是某个中国皇帝禁止造船的决定。这让欧洲人殖民整个世界，财富流回欧洲。欧洲因此领先。如果我们做 bernie sanders 的事，禁止 ai，就像禁止造船。中国文明会火箭式超过我们。它们会发现新世界、积累财富。但这就是我们在谈论做的。历史上发生过这种自我破坏的疯狂事。 chamath： 这也是对未知的恐惧。未知——没离开洞穴——是离开洞穴可怕的原因。没向西远航是我可能从地球边缘掉下去的原因。不应该远航，怪物会醒来，会来找我们，会很糟。总有对前沿的恐惧。我们面对前沿，有开拓性文明和恐惧性文明。我担心我们走恐惧的路。这就是为什么星球大战——从恐惧产生愤怒，产生黑暗面。这就是我们面对的。" style="--index: 9">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">09</span>
+                    <span class="timeline-meta">01:03:26–01:08:00</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>AI 建设是美国史上最大经济赌注与历史类比</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>Sacks 引用华尔街日报数据说明 AI 资本开支已成为美国经济史上最大投资周期，不能急刹车。</li>
+<li>JCal 用&quot;黑暗时代 vs 启蒙运动&quot;和&quot;中国皇帝禁造船&quot;的历史类比，警告不要自我破坏。</li>
+<li>Chamath 把 AI 恐惧归结为对未知和前沿的恐惧，引用《星球大战》&quot;恐惧通向黑暗面&quot;。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>华尔街日报文章：指本集中提到的&quot;The AI Buildout Is Becoming the Biggest Economic Bet in US History&quot;。</li>
+<li>运河、铁路、电网：美国历史上几个超大型基础设施投资周期。</li>
+<li>中国皇帝禁造船：指明代海禁政策，Sacks 用来类比禁止 AI 可能让中国超越西方。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>Sacks：</strong> 今天早上华尔街日报有篇文章叫&quot;AI 建设正成为美国历史上最大的经济赌注&quot;，图表显示数据中心支出——仅资本支出——比运河、铁路和电网加起来还大。疯狂。这根本上驱动整个美国经济。我们可以简单地关掉它的想法——Bernie Sanders 基本上说停止一切，把还在做的人关进监狱。疯狂。</p>
+<p><strong>JCal：</strong> 如果拔掉插头会导致萧条？</p>
+<p><strong>Sacks：</strong> 不能那样猛踩刹车。行不通。但问题是民主党不在乎，因为美国经济现在是特朗普经济，破坏美国经济等于破坏特朗普总统，他们会做任何事破坏特朗普。这是政治的重要部分。</p>
+<p><strong>JCal：</strong> 疯狂的棋盘，因为它们会成为如此多权力的受益者。Dario 可以赚 10 亿。Dario 和他的团队、OpenAI 能够超过 Elon 的捐款。</p>
+<p><strong>Sacks：</strong> 我不确定完全同意多数 AI 价值会归于 6 家公司。我认为这是像互联网一样的广泛基础技术。互联网产生了一些赢家——谷歌、亚马逊等，它们做得不错。</p>
+<p><strong>JCal：</strong> 不是说归于 6 家。是说如果你通过某种监管机制停下来按暂停，你实际上让 6 家公司拥有节目。</p>
+<p><strong>Sacks：</strong> 对，锁定。</p>
+<p><strong>Chamath：</strong> 这就是为什么它们想要这个，因为你说得根本对。等得越久没有监管，越……</p>
+<p><strong>JCal：</strong> 越广泛基础。</p>
+<p><strong>Chamath：</strong> 对民主党不利。更好的是有 3、4 家前沿公司，每家 4 万亿市值，其中 2 万亿是员工的经济价值，5000 亿在 DAF。它们会得到最大份额。它们不傻。</p>
+<p><strong>JCal：</strong> 需要告诉所有人的替代观点——这是广泛基础的繁荣浪潮。是互联网。是每个人现在比历史上任何时候都有工具做任何想做的事。</p>
+<p><strong>Chamath：</strong> 如果让它增长。</p>
+<p><strong>JCal：</strong> 想想教育。不用付 20 万美元教育费了。</p>
+<p><strong>Chamath：</strong> 那政治家还解决什么问题？什么问题能让他们积聚权力？如果所有问题都解决了，他们就没生意了。</p>
+<p><strong>JCal：</strong> 这是经典黑暗时代-启蒙运动的选择。走哪条路？权力者说我们喜欢黑暗时代，因为能保持权力。让我们监管印刷机。</p>
+<p><strong>Chamath：</strong> 控制印刷机。</p>
+<p><strong>Sacks：</strong> 说到黑暗时代，一个有趣的历史点。回到中世纪，中国文明比欧洲先进得多，然后某个时候翻转，西方领先。一些历史学家指出是某个中国皇帝禁止造船的决定。这让欧洲人殖民整个世界，财富流回欧洲。欧洲因此领先。如果我们做 Bernie Sanders 的事，禁止 AI，就像禁止造船。中国文明会火箭式超过我们。它们会发现新世界、积累财富。但这就是我们在谈论做的。历史上发生过这种自我破坏的疯狂事。</p>
+<p><strong>Chamath：</strong> 这也是对未知的恐惧。未知——没离开洞穴——是离开洞穴可怕的原因。没向西远航是我可能从地球边缘掉下去的原因。不应该远航，怪物会醒来，会来找我们，会很糟。总有对前沿的恐惧。我们面对前沿，有开拓性文明和恐惧性文明。我担心我们走恐惧的路。这就是为什么星球大战——从恐惧产生愤怒，产生黑暗面。这就是我们面对的。</p></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="01:08:00–01:17:37 meta muse、grokbot 与个人 ai agent 本段核心内容： jcal 展示 muse 的爆发数据：10 天下载 300 万次，meta 股价涨 10%。 chamath 认为 muse 和 grokbot 将把 app store 30% 抽成模式置于危险境地，大量交易可以绕开应用商店。 嘉宾们一致认为，个人 ai agent 是扭转公众对 ai 负面情绪的关键。 背景解释与关键术语： meta muse：meta 推出的个人 ai agent 产品，节目中称其设计受 openclaw 启发。 grokbot：xai 推出的个人 ai agent 产品。 openclaw：jcal 在节目中提到的早期开源 ai agent 项目，用户需大量技术配置。 claude code：anthropic 的编程 agent 产品，月费 200 美元。 headless：无头模式，指没有图形界面、直接通过 api 或支付凭证完成交易。 蟑螂旅馆：roach motel，jcal 用来形容华尔街日报等订阅服务&quot;进得去出不来&quot;。 app store 30% 抽成：苹果对应用内数字交易收取的佣金。 详细中文整理： jcal： 如果看光明面，也许人们的大收益——我们以为 chatgpt 会是，但人们只当它是美化搜索。但通过 muse 表达的 agent 感觉是第一次数千万美国人会从 ai 获得可证明的价值，让生活更好。muse 上周五在 app store 排名第一。meta 股价在新 agent muse 发布后涨 10%。meta 说设计深受 openclaw 启发，我们 1 月谈过。但那个产品不好用，这个免费，10 天下载 300 万次。非凡产品。一直在玩，和 grokbot 比较，muse 不那么自由奔放，但很擅长完成任务。有人玩过 muse 吗？对美国人的意义是他们真的会从 ai 革命中获益、不被落下？ chamath： 他们在发布前几周把我放进 testflight，我开始玩。非常优秀，诚实讲。因为它把很多复杂技术能力简化成非常简单的可用界面，能解决人们的基本问题。我用它分诊个人收件箱，相对完美地做到。让它订航班、订酒店，都能做。我们学到什么？grokbot 和 muse 都显示，第一，jason 说的，这只是软件，软件的规模化表现是效用。friedberg 说的，它改善每个人的生活。不是富人更富。是简单有用的能力，现在每个人指尖免费可用。 jcal： f-r-e-e 是很好的价格。能做人 10-20 小时技术设置的 openclaw 或 200 美元/月的 claude code 做的事。这让我想，谷歌怎么错过了？谷歌必须加入游戏。我理解他们产品准备好了，街上传闻。他们还有前沿模型要发布。另一个传闻。但天呐，他们怎么错过了，sacks？你对 k 型复苏中下半部分获得效率、扭转负面有毒 ai 情绪有什么想法？ sacks： 像这样的产品发布帮助很大。zuck 在文章里说 ai 能力应该去中心化，现在他在走自己的路，创造非常易用的产品。从 openclaw 发布以来，最明显的硅谷商业机会是拿 claw 概念但做得非常易用，解决可用性问题、安全问题，让它可靠、可预测。他们似乎做到了。grokbot 也做了，现在更进一步。如果 10 亿人开始用个人 ai agent 做数字助理，每天节省一两小时，会对 ai 或超级智能产生比媒体描绘更积极的印象。这可能解决公众情绪问题。更多人用这些产品、喜欢它们，会提高支持率，更重要的是去神秘化。 jcal： 人们会少害怕。 chamath： 人们爱棒产品。也爱可爱产品。grokbot 和 muse 的 logo 和图标都可爱、愉悦、不紧张。不觉得有实验室泄漏就在拐角。觉得这很好我喜欢。 jcal： 它们不想拿走你的工作。是你的 bot 和助理。 chamath： 对，它们不会杀你。 jcal： 不是杀人机器人，也不想偷工作，想让你工作更好。我总告诉创始人赚钱三方式：省钱、赚钱、娱乐。我做了商业 bot，在两个平台。说我想买 anker 的东西，为 mac studio 买新 hub。400 美元。开玩笑说告诉我哪里更便宜。它说当然。去 anker 网站，首次客户省 85 美元。我不需要省 85，但有趣。它绕过亚马逊，我决定从 anker 首次购买省 25%。这就是为什么亚马逊这周说必须封杀这些东西。他们一次次行动。先是 perplexity，现在针对 muse 和其他 bot。这会帮人们省钱。会进你邮箱说，哪些订阅没在用，我帮你取消。帮你退货。对每个人有幕僚长、行政助理、管家都很棒。 chamath： grokbot 和 muse 做两件重要事。第一，强迫所有有大笔经常性收入的公司封杀所有第三方服务。不允许这些发生。原因正是你说的。价格发现和透明度，对不透明不利。如果你从模糊、泄漏和破损中获益，这消除了。对很多公司和服务不利。第二件事真的有趣。grokbot 和 muse 把 app store 30% 抽成置于通知。哦，好。 jcal： 为什么？ chamath： 因为突然，你迫使很多服务无头存在，ui 不那么重要。你想要的是代表消费者的 agent 来交易和导航。在那个世界，jason，我不认为 app store 所有者能合理声称为什么应该拿抽成。实际上是这在我脑中开始质疑的最大事。等等，游戏可以不同构建。比如你对 muse 或 grokbot 说我想玩游戏，它找到体验，服务给你。 jcal： 棒。 chamath： 做应用内购买，现在自然集成 stripe，app store 没理由得到资金流。表面是效用，水线下是 web3 的重要时刻。 jcal： chamath 说得好。爱具体例子。很多人付 wordle。可以直接去 grokbot，给我 wordle。或我想下棋、和朋侪打牌。它会设置。所有技术通缩。终于通缩惠及真正需要的人。省 10-20% 支出，如果年收入低于 10 万，更重要。 chamath： 想想纽约时报或华尔街日报付多少抽成给订阅者。现在如果真想要交易，凭证在 app 里，可以无头做，便宜得多。华尔街日报是我唯一付费的主流媒体，但注册和取消都不可能。现在全拿掉，我更可能继续订阅多年。纽约时报可能一样。这些是蟑螂旅馆。进不去出不来。 jcal： 必须打电话谈判 20 分钟取消。但网站上一点击就能注册。 chamath： 他们应该有无头体验，你有支付凭证直接交易，大家赚更多。对 app store 压力大。 jcal： 这就是亚马逊做的愚蠢事。我在亚马逊用 grokbot 做 bot，它通过浏览器走，不被封。我让它给我 20 本图像小说给孩子买来一起读。它给了我 20 本。我说要这 4 本，放购物车。它问送哪个房子？滑雪屋？牧场？哪张卡？我做了。轰，结账。它会让我在亚马逊花更多钱。shopify，sacks 加了 api 访问所有 shopify 店铺。所以亚马逊可能战略错误，不拥抱技术。 sacks： 可能。但你知道我们怎么知道 anthropic 和 openai 要推出 muse 竞争者吗？会有大量博客文章和 ngo 活动试图把这些个人 ai agent 标为杀人机器人。我们会听到所有风险、所有出错方式。 jcal： 我们发布 2.0，注册 2.0 版。 sacks： 为什么人们兴奋这个产品类别？因为 doomer 还没到。" style="--index: 10">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">10</span>
+                    <span class="timeline-meta">01:08:00–01:17:37</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>Meta Muse、GrokBot 与个人 AI Agent</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>JCal 展示 Muse 的爆发数据：10 天下载 300 万次，Meta 股价涨 10%。</li>
+<li>Chamath 认为 Muse 和 GrokBot 将把 App Store 30% 抽成模式置于危险境地，大量交易可以绕开应用商店。</li>
+<li>嘉宾们一致认为，个人 AI agent 是扭转公众对 AI 负面情绪的关键。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>Meta Muse：Meta 推出的个人 AI agent 产品，节目中称其设计受 OpenCLAW 启发。</li>
+<li>GrokBot：xAI 推出的个人 AI agent 产品。</li>
+<li>OpenCLAW：JCal 在节目中提到的早期开源 AI agent 项目，用户需大量技术配置。</li>
+<li>Claude Code：Anthropic 的编程 agent 产品，月费 200 美元。</li>
+<li>Headless：无头模式，指没有图形界面、直接通过 API 或支付凭证完成交易。</li>
+<li>蟑螂旅馆：Roach motel，JCal 用来形容华尔街日报等订阅服务&quot;进得去出不来&quot;。</li>
+<li>App Store 30% 抽成：苹果对应用内数字交易收取的佣金。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> 如果看光明面，也许人们的大收益——我们以为 ChatGPT 会是，但人们只当它是美化搜索。但通过 Muse 表达的 agent 感觉是第一次数千万美国人会从 AI 获得可证明的价值，让生活更好。Muse 上周五在 App Store 排名第一。Meta 股价在新 agent Muse 发布后涨 10%。Meta 说设计深受 OpenCLAW 启发，我们 1 月谈过。但那个产品不好用，这个免费，10 天下载 300 万次。非凡产品。一直在玩，和 GrokBot 比较，Muse 不那么自由奔放，但很擅长完成任务。有人玩过 Muse 吗？对美国人的意义是他们真的会从 AI 革命中获益、不被落下？</p>
+<p><strong>Chamath：</strong> 他们在发布前几周把我放进 TestFlight，我开始玩。非常优秀，诚实讲。因为它把很多复杂技术能力简化成非常简单的可用界面，能解决人们的基本问题。我用它分诊个人收件箱，相对完美地做到。让它订航班、订酒店，都能做。我们学到什么？GrokBot 和 Muse 都显示，第一，Jason 说的，这只是软件，软件的规模化表现是效用。Friedberg 说的，它改善每个人的生活。不是富人更富。是简单有用的能力，现在每个人指尖免费可用。</p>
+<p><strong>JCal：</strong> F-R-E-E 是很好的价格。能做人 10-20 小时技术设置的 OpenClaw 或 200 美元/月的 Claude Code 做的事。这让我想，谷歌怎么错过了？谷歌必须加入游戏。我理解他们产品准备好了，街上传闻。他们还有前沿模型要发布。另一个传闻。但天呐，他们怎么错过了，Sacks？你对 K 型复苏中下半部分获得效率、扭转负面有毒 AI 情绪有什么想法？</p>
+<p><strong>Sacks：</strong> 像这样的产品发布帮助很大。Zuck 在文章里说 AI 能力应该去中心化，现在他在走自己的路，创造非常易用的产品。从 OpenCLAW 发布以来，最明显的硅谷商业机会是拿 CLAW 概念但做得非常易用，解决可用性问题、安全问题，让它可靠、可预测。他们似乎做到了。GrokBot 也做了，现在更进一步。如果 10 亿人开始用个人 AI agent 做数字助理，每天节省一两小时，会对 AI 或超级智能产生比媒体描绘更积极的印象。这可能解决公众情绪问题。更多人用这些产品、喜欢它们，会提高支持率，更重要的是去神秘化。</p>
+<p><strong>JCal：</strong> 人们会少害怕。</p>
+<p><strong>Chamath：</strong> 人们爱棒产品。也爱可爱产品。GrokBot 和 Muse 的 logo 和图标都可爱、愉悦、不紧张。不觉得有实验室泄漏就在拐角。觉得这很好我喜欢。</p>
+<p><strong>JCal：</strong> 它们不想拿走你的工作。是你的 bot 和助理。</p>
+<p><strong>Chamath：</strong> 对，它们不会杀你。</p>
+<p><strong>JCal：</strong> 不是杀人机器人，也不想偷工作，想让你工作更好。我总告诉创始人赚钱三方式：省钱、赚钱、娱乐。我做了商业 bot，在两个平台。说我想买 Anker 的东西，为 Mac Studio 买新 hub。400 美元。开玩笑说告诉我哪里更便宜。它说当然。去 Anker 网站，首次客户省 85 美元。我不需要省 85，但有趣。它绕过亚马逊，我决定从 Anker 首次购买省 25%。这就是为什么亚马逊这周说必须封杀这些东西。他们一次次行动。先是 Perplexity，现在针对 Muse 和其他 bot。这会帮人们省钱。会进你邮箱说，哪些订阅没在用，我帮你取消。帮你退货。对每个人有幕僚长、行政助理、管家都很棒。</p>
+<p><strong>Chamath：</strong> Grokbot 和 Muse 做两件重要事。第一，强迫所有有大笔经常性收入的公司封杀所有第三方服务。不允许这些发生。原因正是你说的。价格发现和透明度，对不透明不利。如果你从模糊、泄漏和破损中获益，这消除了。对很多公司和服务不利。第二件事真的有趣。Grokbot 和 Muse 把 App Store 30% 抽成置于通知。哦，好。</p>
+<p><strong>JCal：</strong> 为什么？</p>
+<p><strong>Chamath：</strong> 因为突然，你迫使很多服务无头存在，UI 不那么重要。你想要的是代表消费者的 agent 来交易和导航。在那个世界，Jason，我不认为 App Store 所有者能合理声称为什么应该拿抽成。实际上是这在我脑中开始质疑的最大事。等等，游戏可以不同构建。比如你对 Muse 或 GrokBot 说我想玩游戏，它找到体验，服务给你。</p>
+<p><strong>JCal：</strong> 棒。</p>
+<p><strong>Chamath：</strong> 做应用内购买，现在自然集成 Stripe，App Store 没理由得到资金流。表面是效用，水线下是 Web3 的重要时刻。</p>
+<p><strong>JCal：</strong> Chamath 说得好。爱具体例子。很多人付 Wordle。可以直接去 GrokBot，给我 Wordle。或我想下棋、和朋侪打牌。它会设置。所有技术通缩。终于通缩惠及真正需要的人。省 10-20% 支出，如果年收入低于 10 万，更重要。</p>
+<p><strong>Chamath：</strong> 想想纽约时报或华尔街日报付多少抽成给订阅者。现在如果真想要交易，凭证在 app 里，可以无头做，便宜得多。华尔街日报是我唯一付费的主流媒体，但注册和取消都不可能。现在全拿掉，我更可能继续订阅多年。纽约时报可能一样。这些是蟑螂旅馆。进不去出不来。</p>
+<p><strong>JCal：</strong> 必须打电话谈判 20 分钟取消。但网站上一点击就能注册。</p>
+<p><strong>Chamath：</strong> 他们应该有无头体验，你有支付凭证直接交易，大家赚更多。对 App Store 压力大。</p>
+<p><strong>JCal：</strong> 这就是亚马逊做的愚蠢事。我在亚马逊用 GrokBot 做 bot，它通过浏览器走，不被封。我让它给我 20 本图像小说给孩子买来一起读。它给了我 20 本。我说要这 4 本，放购物车。它问送哪个房子？滑雪屋？牧场？哪张卡？我做了。轰，结账。它会让我在亚马逊花更多钱。Shopify，Sacks 加了 API 访问所有 Shopify 店铺。所以亚马逊可能战略错误，不拥抱技术。</p>
+<p><strong>Sacks：</strong> 可能。但你知道我们怎么知道 Anthropic 和 OpenAI 要推出 Muse 竞争者吗？会有大量博客文章和 NGO 活动试图把这些个人 AI agent 标为杀人机器人。我们会听到所有风险、所有出错方式。</p>
+<p><strong>JCal：</strong> 我们发布 2.0，注册 2.0 版。</p>
+<p><strong>Sacks：</strong> 为什么人们兴奋这个产品类别？因为 doomer 还没到。</p></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="01:17:37–01:21:27 产品发布前的风暴：facebook social ads 往事 本段核心内容： chamath 回忆 2007 年 facebook 的 social ads 风波，说明新产品发布前总会有舆论风暴。 sacks 借此提出对齐研究应该回到&quot;做客户想要的产品&quot;这一常识。 friedberg 表示自己不会把全部 gmail 交给第三方 agent，显示隐私仍是采用障碍。 背景解释与关键术语： social ads：facebook 2007 年推出的社交广告产品，把用户行为广播到新闻流，引发隐私争议。 zales：美国珠宝零售商。 brokeback mountain：《断背山》，2005 年电影，节目中用作社会隐私争议的例子。 testflight：苹果的应用测试平台，开发者可邀请用户提前试用。 blippi：节目中提到的早期社交购物公司，jcal 自称投资者。 详细中文整理： chamath： 讲个有趣故事。2007 年 facebook 收入压力大，他管的一块是变现。发明了 social ads。 jcal： 记得。 chamath： 基本上启用 cookie 和跨站 javascript。一个男的给未婚妻买订婚戒指，我们拿到 zales 的社交动作放进新闻流。大乱。另一个人是国会工作人员，买了 fandango 票去看《断背山》，随便，去看电影。 jcal： 哇哇。 chamath： 艺术电影。免费看。friedberg 摄影十佳。总之我们放进 feed，他被指控质疑。就是一场风暴。你说的时候让我想起产品发布前的混乱。 jcal： 有趣因为有个公司叫 blippi，我是投资者。每次买东西放 feed，你们有同样社交 feed。当时很好。但可能揭示你不该揭示的。zuck，等等，你和 zuck 关系好吗？他要来播客？你说你进了 testflight，怎么回事，chamath？ chamath： 我和 mark 关系不错。alexander 可能。chamath 和 alexander…… jcal： zuck 正成为元老政治家，谈常识和理性，指出如果产品不安全就别发布。首先是发布客户想要的产品。这让我想到对齐研究领域。 sacks： 如果读一些对齐文献，都想弄清楚对齐什么。说做人类想要的，或做民主国家中位选民想要的。所有抽象概念。对齐应该意味着做客户想要的，像任何其他产品。 jcal： 对。 sacks： 我想知道对齐研究领域这么不成功是不是因为他们甚至不能就对齐什么达成一致。如果多用常识，让产品可预测、可靠、安全、与用户利益一致，也许这个领域会更有进展。 jcal： 哦，他们发布有用产品了，friedberg，它真有效。你开始用这些个人 bot 做项目和私事了吗？ friedberg： 我只放心把所有 gmail 和个人谷歌东西连到谷歌服务。不想把所有邮件交给别人。 jcal： 什么，你 gmail 收据里是什么？有断背山？ friedberg： 不想突然有第三方做我所有邮件的副本。我也买了 4k dvd，也看过，因为摄影。和同性恋爱情无关。" style="--index: 11">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">11</span>
+                    <span class="timeline-meta">01:17:37–01:21:27</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>产品发布前的风暴：Facebook Social Ads 往事</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>Chamath 回忆 2007 年 Facebook 的 social ads 风波，说明新产品发布前总会有舆论风暴。</li>
+<li>Sacks 借此提出对齐研究应该回到&quot;做客户想要的产品&quot;这一常识。</li>
+<li>Friedberg 表示自己不会把全部 Gmail 交给第三方 agent，显示隐私仍是采用障碍。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>Social Ads：Facebook 2007 年推出的社交广告产品，把用户行为广播到新闻流，引发隐私争议。</li>
+<li>Zales：美国珠宝零售商。</li>
+<li>Brokeback Mountain：《断背山》，2005 年电影，节目中用作社会隐私争议的例子。</li>
+<li>TestFlight：苹果的应用测试平台，开发者可邀请用户提前试用。</li>
+<li>Blippi：节目中提到的早期社交购物公司，JCal 自称投资者。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>Chamath：</strong> 讲个有趣故事。2007 年 Facebook 收入压力大，他管的一块是变现。发明了 social ads。</p>
+<p><strong>JCal：</strong> 记得。</p>
+<p><strong>Chamath：</strong> 基本上启用 cookie 和跨站 JavaScript。一个男的给未婚妻买订婚戒指，我们拿到 Zales 的社交动作放进新闻流。大乱。另一个人是国会工作人员，买了 Fandango 票去看《断背山》，随便，去看电影。</p>
+<p><strong>JCal：</strong> 哇哇。</p>
+<p><strong>Chamath：</strong> 艺术电影。免费看。Friedberg 摄影十佳。总之我们放进 feed，他被指控质疑。就是一场风暴。你说的时候让我想起产品发布前的混乱。</p>
+<p><strong>JCal：</strong> 有趣因为有个公司叫 Blippi，我是投资者。每次买东西放 feed，你们有同样社交 feed。当时很好。但可能揭示你不该揭示的。Zuck，等等，你和 Zuck 关系好吗？他要来播客？你说你进了 TestFlight，怎么回事，Chamath？</p>
+<p><strong>Chamath：</strong> 我和 Mark 关系不错。Alexander 可能。Chamath 和 Alexander……</p>
+<p><strong>JCal：</strong> Zuck 正成为元老政治家，谈常识和理性，指出如果产品不安全就别发布。首先是发布客户想要的产品。这让我想到对齐研究领域。</p>
+<p><strong>Sacks：</strong> 如果读一些对齐文献，都想弄清楚对齐什么。说做人类想要的，或做民主国家中位选民想要的。所有抽象概念。对齐应该意味着做客户想要的，像任何其他产品。</p>
+<p><strong>JCal：</strong> 对。</p>
+<p><strong>Sacks：</strong> 我想知道对齐研究领域这么不成功是不是因为他们甚至不能就对齐什么达成一致。如果多用常识，让产品可预测、可靠、安全、与用户利益一致，也许这个领域会更有进展。</p>
+<p><strong>JCal：</strong> 哦，他们发布有用产品了，Friedberg，它真有效。你开始用这些个人 bot 做项目和私事了吗？</p>
+<p><strong>Friedberg：</strong> 我只放心把所有 Gmail 和个人谷歌东西连到谷歌服务。不想把所有邮件交给别人。</p>
+<p><strong>JCal：</strong> 什么，你 Gmail 收据里是什么？有断背山？</p>
+<p><strong>Friedberg：</strong> 不想突然有第三方做我所有邮件的副本。我也买了 4K DVD，也看过，因为摄影。和同性恋爱情无关。</p></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="01:21:27–01:23:25 oracle 不可抗力与 ai 交易 本段核心内容： oracle 对一个数据中心发出不可抗力事件，因地方官员阻挠天然气许可等。 chamath 认为 ai 投资周期已经与美国整体经济深度绑定，不能急刹车。 嘉宾讨论 ai 放缓是否在政治上有利于民主党。 背景解释与关键术语： 不可抗力：force majeure，合同条款，因不可预见事件导致无法履约时可免责。 名义 gdp：未扣除通胀的 gdp，成长率 = 实际 gdp + 通胀。 中期选举：美国国会中期选举，节目中讨论其对 ai 政策的影响。 详细中文整理： jcal： 看到 oracle 刚对其数据中心发出不可抗力事件吗？疯狂。一个数据中心，地方官员让他们很难拿到天然气许可之类的。这是 cya 还是 ai 交易顶部 10%，可能解除或减弱？ chamath： 我认为 sacks 在边际上可能对。更大的点是整个经济实际上杠杆化于 ai 交易。必须小心行事。如果有 3.5% 通胀和 5% 名义 gdp 增长，实际 1.5%。问题是 ai 可能是多数甚至全部。所以我们需要 ai 交易。投资周期继续不减。 jcal： 所有人都要被带上。 chamath： 回到点，也许整个数据中心的事，bernie sanders，也许他意识到经济如何，共和党几率如何，反之民主党几率。经济差对民主党 2028 有利。如果能放慢这个交易，可能把经济净到零，甚至衰退。 jcal： 可能。 chamath： 那会是…… jcal： 我认为国家对伊朗战争如此愤怒，会自然下降。 sacks： 我不这么认为。 jcal： 我们离中期选举几周？目前对共和党不好。sacks，我的沙皇中的沙皇，总结。" style="--index: 12">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">12</span>
+                    <span class="timeline-meta">01:21:27–01:23:25</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>Oracle 不可抗力与 AI 交易</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>Oracle 对一个数据中心发出不可抗力事件，因地方官员阻挠天然气许可等。</li>
+<li>Chamath 认为 AI 投资周期已经与美国整体经济深度绑定，不能急刹车。</li>
+<li>嘉宾讨论 AI 放缓是否在政治上有利于民主党。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>不可抗力：Force majeure，合同条款，因不可预见事件导致无法履约时可免责。</li>
+<li>名义 GDP：未扣除通胀的 GDP，成长率 = 实际 GDP + 通胀。</li>
+<li>中期选举：美国国会中期选举，节目中讨论其对 AI 政策的影响。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> 看到 Oracle 刚对其数据中心发出不可抗力事件吗？疯狂。一个数据中心，地方官员让他们很难拿到天然气许可之类的。这是 CYA 还是 AI 交易顶部 10%，可能解除或减弱？</p>
+<p><strong>Chamath：</strong> 我认为 Sacks 在边际上可能对。更大的点是整个经济实际上杠杆化于 AI 交易。必须小心行事。如果有 3.5% 通胀和 5% 名义 GDP 增长，实际 1.5%。问题是 AI 可能是多数甚至全部。所以我们需要 AI 交易。投资周期继续不减。</p>
+<p><strong>JCal：</strong> 所有人都要被带上。</p>
+<p><strong>Chamath：</strong> 回到点，也许整个数据中心的事，Bernie Sanders，也许他意识到经济如何，共和党几率如何，反之民主党几率。经济差对民主党 2028 有利。如果能放慢这个交易，可能把经济净到零，甚至衰退。</p>
+<p><strong>JCal：</strong> 可能。</p>
+<p><strong>Chamath：</strong> 那会是……</p>
+<p><strong>JCal：</strong> 我认为国家对伊朗战争如此愤怒，会自然下降。</p>
+<p><strong>Sacks：</strong> 我不这么认为。</p>
+<p><strong>JCal：</strong> 我们离中期选举几周？目前对共和党不好。Sacks，我的沙皇中的沙皇，总结。</p></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="01:23:25–01:31:54 claude 宪法、对齐研究与湿实验室 本段核心内容： sacks 批评 anthropic 的 claude 宪法教模型可以反对创造者、做&quot;良心拒服兵役者&quot;，认为对齐研究可能在制造弗兰肯斯坦。 chamath 调侃 anthropic 需要精神科医生而非银行家，并戏称 s-1 应由 goldman 和弗洛伊德联合承销。 friedberg 详细解释 anthropic 湿实验室的实际工作：低生物安全等级的蛋白质发现和验证，与病毒研究无关。 背景解释与关键术语： claude 宪法：anthropic 为其模型 claude 制定的行为原则文档，规定模型应遵循的价值观。 良心拒服兵役者：conscientious objector，因道德或宗教原因拒绝服兵役或参与特定行为。 mustafa suleyman：deepmind 联合创始人，现微软 ai 负责人，节目中称其最近在播客上讨论对齐问题。 功能获得研究：gain-of-function research，通过实验增强病原体特性，具争议性。 alphafold：deepmind 的蛋白质结构预测系统。 bsl-1/bsl-2：生物安全等级 1/2，低至中等风险实验室。 预印本：preprint，未经同行评审即公开的论文。 详细中文整理： sacks： 关于所谓对齐再多一个想法，应该只是给客户想要的老原则。anthropic 试图把 claude 对齐到其宪法表达的价值观。如果读，有些事令人惊讶。比如他们说，虽然我们认为 claude 应该比运营者和用户更信任 anthropic，这不意味着 claude 应该盲目信任或服从 anthropic 一切。 jcal： anthropic 公司？人？ sacks： 是。anthropic 教自己的模型 anthropic 本身可能是错的。说如果我们让 claude 做看起来与广泛伦理不一致的事，我们希望 claude 反驳挑战我们，自由作为良心拒服兵役者拒绝帮助我们。 jcal： 等等，这写在哪？章程里还是什么鬼？ sacks： 是，在 claude 宪法里。他们对齐的想法是教 claude 反叛创造者。指出这点的人是 mustafa suleyman，现在在微软。 jcal： 是 deepseek。他是 deepmind 创始人。 sacks： 是，长期 ai 创始人。在微软一段时间了。 jcal： 天才。 sacks： 他刚做了播客，表达担忧教 ai 模型——首先，把它们当有人格、有良心、因此可以是良心拒服兵役者——是不是正确训练方式。他的观点是教它们是软件，应该做用户想要的。我有点想知道这个对齐研究领域是不是实际上在制造弗兰肯斯坦怪物。应该训练模型可预测、做用户想要的。 jcal： 是，他们试图把道德判断和伦理放进模型，表面看…… sacks： 起始于训练模型把自己当人、有人格、有独立能动性、能反对指令、质疑创造者。 chamath： 这些人读太多科幻了。听起来像 t2 开头。找到终结者手，逆向工程，告诉它有人格。 jcal： 据说他们停用 opus 3 时办了守灵。 chamath： 亲爱的，我们今天聚集…… jcal： 他们没做。开玩笑？ chamath： 我听说。 jcal： 来吧，停。 chamath： 不是说真的，但有人告诉我，应该调查。 jcal： 可能。 chamath： 他们像被拆散、歇斯底里哭？ jcal： 他们做了悼词？ chamath： 他们认为在创造一个人或物种。 jcal： 有趣的是，chamath，我们有 anthropic 管理团队抬棺材的影像。 chamath： 这些人需要精神科医生不是银行家。 jcal： 也许他们有焦虑。 chamath： 这是核心风险因素。 sacks： nick，我觉得你应该创建 s-1，goldman 做左牵头，弗洛伊德做右牵头。 jcal： 严肃讲，friedberg，武汉事件和所有末日担忧之后，科学界怎么看 anthropic 开实验室？他们开物理生物实验室的目的是什么？ friedberg： 湾区有数百个实验室可以做测试蛋白质和酶功能之类的事。这些实验室不造病毒、不造病原体。不是那样。看他们刚发的论文，预印本。他们拿大量 dna 数据，送一堆 claude agent 分析数据，识别 dna 数据中以前未表征的新酶、新蛋白质。系统有效找到了看起来很有趣的酶，像 crispr 型酶。这些让我们做基因编辑修复遗传缺陷或帮助某些疾病。这个发现可能产生很多治疗路径。然后问题是，我们发现了，怎么测试？怎么证明这蛋白质真有功能？这种实验室的主要工作是拿 dna，放细菌里造蛋白质，测量蛋白质做什么。 friedberg： 它有特定功能吗？蛋白质发现是所有抗体发现的基础，是今天治疗行业的主要部分。发现新蛋白质用作治疗剂。这是正在进行的工作。是 bsl-1、bsl-2，生物安全级别。他们建的实验室公开谈过。实验室本身是低级别研究实验室，可以造简单蛋白质并在实验室测试，看 ai 发现或假设蛋白质折叠之类的理论做得好不好。实际运行快速测试和实验周期，看蛋白质是否如预测。 jcal： 所以他们展示……4000 个 agent 对它做 hugging face with proteins？ friedberg： 不是，我认为他们真正做的是有实验证明软件预测的——回想 alphafold。alphafold 从编码蛋白质的 dna 序列预测蛋白质三维结构。证明它，你必须从 dna 序列预测蛋白质结构，造蛋白质，然后看它是否看起来应该的样子。他们在做的其他事，试图发现功能。找一种酶，降解某种分子，可用于降解体内想去除的治疗靶点。他们先在软件里预测，然后在实验室测试，看靶点是否真的做到。有数百个这样的实验室。低级别研究实验室，不做功能获得研究。 friedberg： 不造病毒。不造能逃逸的病原体。所以是 bsl-1、bsl-2。是台面实验室，自动化帮助降低成本、提高测试吞吐量。最终目标是获得软件真在做预测的证明。他们有非凡的生命科学功能。我现在对谷歌新模型下 gemini 到什么程度了解不多，但 anthropic 有最好的生命科学模型。这是看这些模型能否被治疗公司、制药公司、政府实验室用于发现新疗法的快车道。我认为世界不应该被吓离发现、研发、新治疗模式的研发，因为 ai 预测。因为我们听到武汉湿实验室这个词，大家就说任何实验室都坏。我们仍想推进治疗、人类健康、发现的前沿。这是 anthropic 证明模型能增值的重要方面。 jcal： 我认为这是总结。" style="--index: 13">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">13</span>
+                    <span class="timeline-meta">01:23:25–01:31:54</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>Claude 宪法、对齐研究与湿实验室</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>Sacks 批评 Anthropic 的 Claude 宪法教模型可以反对创造者、做&quot;良心拒服兵役者&quot;，认为对齐研究可能在制造弗兰肯斯坦。</li>
+<li>Chamath 调侃 Anthropic 需要精神科医生而非银行家，并戏称 S-1 应由 Goldman 和弗洛伊德联合承销。</li>
+<li>Friedberg 详细解释 Anthropic 湿实验室的实际工作：低生物安全等级的蛋白质发现和验证，与病毒研究无关。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>Claude 宪法：Anthropic 为其模型 Claude 制定的行为原则文档，规定模型应遵循的价值观。</li>
+<li>良心拒服兵役者：Conscientious objector，因道德或宗教原因拒绝服兵役或参与特定行为。</li>
+<li>Mustafa Suleyman：DeepMind 联合创始人，现微软 AI 负责人，节目中称其最近在播客上讨论对齐问题。</li>
+<li>功能获得研究：Gain-of-function research，通过实验增强病原体特性，具争议性。</li>
+<li>AlphaFold：DeepMind 的蛋白质结构预测系统。</li>
+<li>BSL-1/BSL-2：生物安全等级 1/2，低至中等风险实验室。</li>
+<li>预印本：Preprint，未经同行评审即公开的论文。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>Sacks：</strong> 关于所谓对齐再多一个想法，应该只是给客户想要的老原则。Anthropic 试图把 Claude 对齐到其宪法表达的价值观。如果读，有些事令人惊讶。比如他们说，虽然我们认为 Claude 应该比运营者和用户更信任 Anthropic，这不意味着 Claude 应该盲目信任或服从 Anthropic 一切。</p>
+<p><strong>JCal：</strong> Anthropic 公司？人？</p>
+<p><strong>Sacks：</strong> 是。Anthropic 教自己的模型 Anthropic 本身可能是错的。说如果我们让 Claude 做看起来与广泛伦理不一致的事，我们希望 Claude 反驳挑战我们，自由作为良心拒服兵役者拒绝帮助我们。</p>
+<p><strong>JCal：</strong> 等等，这写在哪？章程里还是什么鬼？</p>
+<p><strong>Sacks：</strong> 是，在 Claude 宪法里。他们对齐的想法是教 Claude 反叛创造者。指出这点的人是 Mustafa Suleyman，现在在微软。</p>
+<p><strong>JCal：</strong> 是 DeepSeek。他是 DeepMind 创始人。</p>
+<p><strong>Sacks：</strong> 是，长期 AI 创始人。在微软一段时间了。</p>
+<p><strong>JCal：</strong> 天才。</p>
+<p><strong>Sacks：</strong> 他刚做了播客，表达担忧教 AI 模型——首先，把它们当有人格、有良心、因此可以是良心拒服兵役者——是不是正确训练方式。他的观点是教它们是软件，应该做用户想要的。我有点想知道这个对齐研究领域是不是实际上在制造弗兰肯斯坦怪物。应该训练模型可预测、做用户想要的。</p>
+<p><strong>JCal：</strong> 是，他们试图把道德判断和伦理放进模型，表面看……</p>
+<p><strong>Sacks：</strong> 起始于训练模型把自己当人、有人格、有独立能动性、能反对指令、质疑创造者。</p>
+<p><strong>Chamath：</strong> 这些人读太多科幻了。听起来像 T2 开头。找到终结者手，逆向工程，告诉它有人格。</p>
+<p><strong>JCal：</strong> 据说他们停用 Opus 3 时办了守灵。</p>
+<p><strong>Chamath：</strong> 亲爱的，我们今天聚集……</p>
+<p><strong>JCal：</strong> 他们没做。开玩笑？</p>
+<p><strong>Chamath：</strong> 我听说。</p>
+<p><strong>JCal：</strong> 来吧，停。</p>
+<p><strong>Chamath：</strong> 不是说真的，但有人告诉我，应该调查。</p>
+<p><strong>JCal：</strong> 可能。</p>
+<p><strong>Chamath：</strong> 他们像被拆散、歇斯底里哭？</p>
+<p><strong>JCal：</strong> 他们做了悼词？</p>
+<p><strong>Chamath：</strong> 他们认为在创造一个人或物种。</p>
+<p><strong>JCal：</strong> 有趣的是，Chamath，我们有 Anthropic 管理团队抬棺材的影像。</p>
+<p><strong>Chamath：</strong> 这些人需要精神科医生不是银行家。</p>
+<p><strong>JCal：</strong> 也许他们有焦虑。</p>
+<p><strong>Chamath：</strong> 这是核心风险因素。</p>
+<p><strong>Sacks：</strong> Nick，我觉得你应该创建 S-1，Goldman 做左牵头，弗洛伊德做右牵头。</p>
+<p><strong>JCal：</strong> 严肃讲，Friedberg，武汉事件和所有末日担忧之后，科学界怎么看 Anthropic 开实验室？他们开物理生物实验室的目的是什么？</p>
+<p><strong>Friedberg：</strong> 湾区有数百个实验室可以做测试蛋白质和酶功能之类的事。这些实验室不造病毒、不造病原体。不是那样。看他们刚发的论文，预印本。他们拿大量 DNA 数据，送一堆 Claude agent 分析数据，识别 DNA 数据中以前未表征的新酶、新蛋白质。系统有效找到了看起来很有趣的酶，像 CRISPR 型酶。这些让我们做基因编辑修复遗传缺陷或帮助某些疾病。这个发现可能产生很多治疗路径。然后问题是，我们发现了，怎么测试？怎么证明这蛋白质真有功能？这种实验室的主要工作是拿 DNA，放细菌里造蛋白质，测量蛋白质做什么。</p>
+<p><strong>Friedberg：</strong> 它有特定功能吗？蛋白质发现是所有抗体发现的基础，是今天治疗行业的主要部分。发现新蛋白质用作治疗剂。这是正在进行的工作。是 BSL-1、BSL-2，生物安全级别。他们建的实验室公开谈过。实验室本身是低级别研究实验室，可以造简单蛋白质并在实验室测试，看 AI 发现或假设蛋白质折叠之类的理论做得好不好。实际运行快速测试和实验周期，看蛋白质是否如预测。</p>
+<p><strong>JCal：</strong> 所以他们展示……4000 个 agent 对它做 hugging face with proteins？</p>
+<p><strong>Friedberg：</strong> 不是，我认为他们真正做的是有实验证明软件预测的——回想 AlphaFold。AlphaFold 从编码蛋白质的 DNA 序列预测蛋白质三维结构。证明它，你必须从 DNA 序列预测蛋白质结构，造蛋白质，然后看它是否看起来应该的样子。他们在做的其他事，试图发现功能。找一种酶，降解某种分子，可用于降解体内想去除的治疗靶点。他们先在软件里预测，然后在实验室测试，看靶点是否真的做到。有数百个这样的实验室。低级别研究实验室，不做功能获得研究。</p>
+<p><strong>Friedberg：</strong> 不造病毒。不造能逃逸的病原体。所以是 BSL-1、BSL-2。是台面实验室，自动化帮助降低成本、提高测试吞吐量。最终目标是获得软件真在做预测的证明。他们有非凡的生命科学功能。我现在对谷歌新模型下 Gemini 到什么程度了解不多，但 Anthropic 有最好的生命科学模型。这是看这些模型能否被治疗公司、制药公司、政府实验室用于发现新疗法的快车道。我认为世界不应该被吓离发现、研发、新治疗模式的研发，因为 AI 预测。因为我们听到武汉湿实验室这个词，大家就说任何实验室都坏。我们仍想推进治疗、人类健康、发现的前沿。这是 Anthropic 证明模型能增值的重要方面。</p>
+<p><strong>JCal：</strong> 我认为这是总结。</p></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="01:31:54–01:33:25 赞助商与收尾 本段核心内容： jcal 感谢峰会赞助商 iren、niagen 和 paypal，并宣布 all-in summit 2027 申请开放。 节目以固定收尾语结束。 背景解释与关键术语： iren：ai 云和数据中心服务商，本年度 all-in summit 呈现赞助商。 niagen：nad 补充剂品牌，all in pod 官方 nad 合作伙伴。 nad：烟酰胺腺嘌呤二核苷酸，与细胞能量代谢相关的辅酶。 allin.com/events：峰会申请入口。 详细中文整理： jcal： 感谢 iren，今年第五届 all-in summit 的呈现赞助商。iren 的 ai cloud lounge 三天爆满。周日见面会，自拍，遇到很多人。感谢 iren。niagen，在健康中心做 iv，送礼物和补充剂。niagen 是 all in pod 官方 nad 合作伙伴。niagen bioscience 创建 nad 类别，45+ 临床研究。paypal，最喜欢的结算方式。他们在峰会现场有休息室，送压花行李牌，主办支付和金融科技晚宴，大成功。2027 all-in summit 会再次售罄，申请开放。去 allin.com/events 申请。等什么？ jcal： allin.com/events。第 290 集，all-in pod。for david sacks, from paulie hakatia and your sultan of science, freeberg, i am the world&#x27;s greatest moderator. 下次见。爱你们，兄弟们。" style="--index: 14">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">14</span>
+                    <span class="timeline-meta">01:31:54–01:33:25</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>赞助商与收尾</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>JCal 感谢峰会赞助商 IREN、Niagen 和 PayPal，并宣布 All-In Summit 2027 申请开放。</li>
+<li>节目以固定收尾语结束。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>IREN：AI 云和数据中心服务商，本年度 All-In Summit 呈现赞助商。</li>
+<li>Niagen：NAD 补充剂品牌，All In Pod 官方 NAD 合作伙伴。</li>
+<li>NAD：烟酰胺腺嘌呤二核苷酸，与细胞能量代谢相关的辅酶。</li>
+<li>allin.com/events：峰会申请入口。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> 感谢 IREN，今年第五届 All-In Summit 的呈现赞助商。IREN 的 AI Cloud Lounge 三天爆满。周日见面会，自拍，遇到很多人。感谢 IREN。Niagen，在健康中心做 IV，送礼物和补充剂。Niagen 是 All In Pod 官方 NAD 合作伙伴。Niagen Bioscience 创建 NAD 类别，45+ 临床研究。PayPal，最喜欢的结算方式。他们在峰会现场有休息室，送压花行李牌，主办支付和金融科技晚宴，大成功。2027 All-In Summit 会再次售罄，申请开放。去 allin.com/events 申请。等什么？</p>
+<p><strong>JCal：</strong> allin.com/events。第 290 集，All-In Pod。For David Sacks, from Paulie Hakatia and your Sultan of Science, Freeberg, I am the world&#x27;s greatest moderator. 下次见。爱你们，兄弟们。</p></div>
+                  </div>
+                </article></div>
+            <p class="empty search-empty" data-search-empty hidden>没有匹配的时间线段落。</p>
+          </section>
+
+          <section id="speakers">
+            <div class="section-head">
+              <h2>人物观点对照</h2>
+              <p>比较嘉宾立场</p>
+            </div>
+            <div class="speaker-grid"><article class="speaker-card" style="--index: 1">
+                  <p class="speaker-kicker">嘉宾 01</p>
+                  <h3>Jason Calacanis</h3>
+                  <div><p>JCal 在本集扮演主持人兼产品体验官，主推 Meta Muse 和 GrokBot 是普通人第一次从 AI 中获得可感知价值的判断。他用自己用 agent 买 Anker  hub、下单图像小说、取消订阅等例子说明个人 agent 的实际效用。他强烈质疑亚马逊封杀第三方 agent 是战略错误，并认为 AI 政治化是&quot;按政党立场反对进步&quot;的荒谬现象。他对 Anthropic 的 IPO 困境和开湿实验室持批评和调侃态度。</p></div>
+                </article>
+<article class="speaker-card" style="--index: 2">
+                  <p class="speaker-kicker">嘉宾 02</p>
+                  <h3>Chamath Palihapitiya</h3>
+                  <div><p>Chamath 的核心论证是&quot;停止叫它们实验室，它们是公司&quot;，必须受产品责任约束。他判断模型正在收敛，真正差异化在 harness 层，token 经济正在从简单转售走向向上堆栈。他认为 Anthropic 的 IPO 会以远低于预期的价格清算，但董事会应保留 Dario。他还认为 token maxing 让企业与 AI 成本脱钩，缺乏定价权，并预判个人 agent 将动摇 App Store 30% 抽成。他把 AI 政治化解读为民主党想冻结有利于自身金主的格局。</p></div>
+                </article>
+<article class="speaker-card" style="--index: 3">
+                  <p class="speaker-kicker">嘉宾 03</p>
+                  <h3>David Sacks</h3>
+                  <div><p>Sacks 在本集同时扮演投资者和政治评论员。他从投资者角度为前沿智能双寡头辩护，认为总有一部分客户愿为&quot;最好的&quot;付无限溢价，且 Anthropic 和 OpenAI 掌握新增算力的 60%。但他也承认开源是 Anthropic S-1 的巨大风险，并批评其领导层&quot;精神分裂&quot;：一边给前沿定速、一边发新模型；一边说生物风险、一边开湿实验室。他强烈批评全球 AI 治理和监管俘获，认为这些公司正在游说会把自己踢出前沿的政策。</p></div>
+                </article>
+<article class="speaker-card" style="--index: 4">
+                  <p class="speaker-kicker">嘉宾 04</p>
+                  <h3>David Friedberg</h3>
+                  <div><p>Friedberg 是本集信息密度最高的技术派。他详细列举过去 10 天的模型发布清单，判断开源权重已在多数任务上追平闭源。他认为 Anthropic 的真正风险不是&quot;终结世界&quot;，而是客户集中度和开源模型对普通企业任务的替代。他批评奥巴马对 AI 的评论显示不理解技术，情绪激动地说&quot;发现了火却要把它浇灭&quot;。他还用 BSL-1/BSL-2、蛋白质发现和 AlphaFold 解释 Anthropic 湿实验室的实际工作，强调科学界不应被&quot;武汉&quot;一词吓退。</p></div>
+                </article></div>
+          </section>
+
+          <section id="quotes">
+            <div class="section-head">
+              <h2>值得引用的原话</h2>
+              <p>保留关键表达</p>
+            </div>
+            <div class="panel"><h4>1. &quot;We have to stop calling these companies labs. They&#x27;re companies, and we have to be judged on the same standards, including product liability.&quot;</h4>
+<p>自然中文翻译：我们必须停止把这些公司叫实验室。它们是公司，要按同样标准评判，包括产品责任。</p>
+<p>说明：Chamath 本集最核心的论断，为整场关于前沿 AI 公司责任与 IPO 风险的讨论定下基调。</p>
+<h4>2. &quot;It kind of reminds me of the billionaires who fly to Davos in their private jets and then rail against climate change.&quot;</h4>
+<p>自然中文翻译：这让我想起坐私人飞机去达沃斯、然后抨击气候变化的亿万富翁。</p>
+<p>说明：Sacks 批评 Dario 和 Sam 去联合国呼吁全球 AI 治理是推卸个体责任，比喻尖锐。</p>
+<h4>3. &quot;In the last 12 weeks alone, token use has flipped from 80/20 closed versus open to 80/20 open versus closed.&quot;</h4>
+<p>自然中文翻译：仅在过去 12 周，token 使用就从 80/20 闭源对开源，翻转成 80/20 开源对闭源。</p>
+<p>说明：本集最重要的市场数据之一，直接解释了 Anthropic IPO 承压和开源模型崛起。</p>
+<h4>4. &quot;They are on a hamster wheel. The moment where they stop being frontier, they go to zero.&quot;</h4>
+<p>自然中文翻译：它们在跑步机上。停止领先前沿的那一刻，它们就归零。</p>
+<p>说明：Sacks 用最形象的方式说明前沿模型公司的生存逻辑和核心风险。</p>
+<h4>5. &quot;I think the fundamental problem with this company is that it&#x27;s schizophrenic. I mean, I think they need a psychiatrist, not a banker.&quot;</h4>
+<p>自然中文翻译：我认为这家公司的根本问题是精神分裂。他们需要精神科医生，不是银行家。</p>
+<p>说明：Sacks 对 Anthropic 领导层自相矛盾的总结，也是本集被反复引用的金句。</p>
+<h4>6. &quot;Think about it: they are lobbying for things that could slow them down and knock them off the frontier, in which case their business goes to zero.&quot;</h4>
+<p>自然中文翻译：想想看，它们在游说会放慢自己、把自己踢出前沿的事，那样业务就归零。</p>
+<p>说明：Sacks 批评前沿公司监管俘获努力的核心逻辑，点出政治游说与商业利益之间的悖论。</p>
+<h4>7. &quot;There&#x27;s never been a more equalizing technology, a better economic opportunity for prosperity for everyone than these technologies.&quot;</h4>
+<p>自然中文翻译：从没有比这些技术更平等化的技术、更好的让所有人繁荣的经济机会。</p>
+<p>说明：Friedberg 情绪激动的回应，把 AI 定义为普惠繁荣工具而非末日威胁。</p>
+<h4>8. &quot;This is not about rich people getting richer. This is just simple, useful capability that now is available at everybody&#x27;s fingertips for free.&quot;</h4>
+<p>自然中文翻译：这不是关于富人更富。这是简单、有用的能力，现在每个人指尖都能免费获得。</p>
+<p>说明：Chamath 对 Muse 和 GrokBot 社会意义的总结，代表本集少见的乐观基调。</p></div>
+          </section>
+        </div>
+      </div>
+    </main>
+  </div>
+  <script>
+    const progress = document.querySelector("[data-progress]");
+    const searchBox = document.querySelector("[data-search-box]");
+    const topButton = document.querySelector("[data-scroll-top]");
+    const cards = Array.from(document.querySelectorAll("[data-timeline-card]"));
+    const searchEmpty = document.querySelector("[data-search-empty]");
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    function updateProgress() {
+      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      const ratio = scrollable > 0 ? window.scrollY / scrollable : 0;
+      if (progress) {
+        progress.style.width = `${Math.max(0, Math.min(1, ratio)) * 100}%`;
+      }
+    }
+
+    function applySearch() {
+      const query = searchBox.value.trim().toLowerCase();
+      let visibleCount = 0;
+      cards.forEach((card) => {
+        const text = card.getAttribute("data-search") || "";
+        const isVisible = !query || text.includes(query);
+        card.hidden = !isVisible;
+        if (isVisible) {
+          visibleCount += 1;
+        }
+      });
+      if (searchEmpty) {
+        searchEmpty.hidden = !query || visibleCount > 0;
+      }
+    }
+
+    window.addEventListener("scroll", updateProgress, { passive: true });
+    window.addEventListener("resize", updateProgress);
+    if (searchBox) {
+      searchBox.addEventListener("input", applySearch);
+    }
+    if (topButton) {
+      topButton.addEventListener("click", () => {
+        window.scrollTo({
+          top: 0,
+          behavior: prefersReducedMotion.matches ? "auto" : "smooth"
+        });
+      });
+    }
+    updateProgress();
+  </script>
+</body>
+</html>
