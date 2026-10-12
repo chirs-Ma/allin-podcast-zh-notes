@@ -1,0 +1,1333 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Claude 是否有意识？Anthropic 的模型福利运动、OpenAI 数学突破与法国骚乱 - 中文播客可视化笔记</title>
+  <style>
+    :root {
+      --bg: oklch(0.974 0.006 238);
+      --paper: oklch(0.991 0.003 238);
+      --paper-soft: oklch(0.955 0.007 238);
+      --ink: oklch(0.205 0.018 246);
+      --muted: oklch(0.49 0.018 246);
+      --faint: oklch(0.63 0.014 246);
+      --line: oklch(0.875 0.009 238);
+      --line-strong: oklch(0.74 0.014 238);
+      --accent: oklch(0.43 0.064 164);
+      --accent-soft: oklch(0.94 0.024 164);
+      --accent-wash: oklch(0.973 0.012 164);
+      --quote: oklch(0.965 0.010 92);
+      --shadow: 0 24px 54px color-mix(in oklch, var(--ink) 8%, transparent);
+      --radius: 8px;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-width: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(90deg, color-mix(in oklch, var(--line) 28%, transparent) 1px, transparent 1px) 0 0 / 92px 92px,
+        var(--bg);
+      font-family: "Geist", "Satoshi", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      line-height: 1.78;
+      text-rendering: optimizeLegibility;
+    }
+    ::selection { background: var(--accent-soft); color: var(--ink); }
+    a {
+      color: var(--accent);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+      transition: color .22s var(--ease), background-color .22s var(--ease), border-color .22s var(--ease), transform .22s var(--ease);
+    }
+    [hidden] { display: none !important; }
+    .progress {
+      position: fixed;
+      z-index: 4;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: var(--accent);
+    }
+    .quick-actions {
+      position: fixed;
+      right: max(18px, calc((100vw - 1200px) / 2));
+      bottom: 24px;
+      z-index: 3;
+      display: grid;
+      gap: 7px;
+    }
+    .quick-action {
+      display: inline-grid;
+      grid-template-columns: 16px auto;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      min-width: 74px;
+      min-height: 40px;
+      padding: 8px 12px;
+      border: 1px solid var(--line-strong);
+      border-radius: var(--radius);
+      background: color-mix(in oklch, var(--paper) 92%, transparent);
+      box-shadow: 0 12px 28px color-mix(in oklch, var(--ink) 7%, transparent);
+      color: var(--ink);
+      font: inherit;
+      font-size: 13px;
+      font-weight: 720;
+      line-height: 1.2;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .quick-action:hover, .quick-action:focus-visible {
+      outline: none;
+      border-color: var(--accent);
+      background: var(--accent-wash);
+      color: var(--accent);
+      transform: translate3d(0, -1px, 0);
+    }
+    .quick-action:active { transform: translate3d(0, 1px, 0) scale(.99); }
+    .page {
+      width: min(1760px, calc(100% - 56px));
+      margin: 0 auto;
+      padding: 0 0 104px;
+    }
+    .article { min-width: 0; }
+    .hero {
+      max-width: none;
+      margin-left: min(7vw, 140px);
+      padding: 72px 0 58px;
+    }
+    .eyebrow {
+      margin: 0 0 18px;
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    h1 {
+      max-width: none;
+      margin: 0 0 28px;
+      font-size: clamp(38px, 3vw, 52px);
+      font-weight: 760;
+      line-height: 1.08;
+      letter-spacing: 0;
+      text-wrap: balance;
+    }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 18px;
+      max-width: 72ch;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .meta a { font-weight: 650; }
+    .meta-strip {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+      max-width: 720px;
+      margin: 34px 0 28px;
+      border-top: 1px solid var(--line-strong);
+      padding-top: 16px;
+    }
+    .meta-pill {
+      display: grid;
+      gap: 2px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.35;
+    }
+    .meta-pill b {
+      color: var(--ink);
+      font-family: var(--mono);
+      font-size: 18px;
+      font-weight: 680;
+      line-height: 1;
+    }
+    .summary {
+      width: 100%;
+      max-width: 760px;
+      padding: 24px 26px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: color-mix(in oklch, var(--paper) 88%, var(--accent-soft));
+      box-shadow: var(--shadow);
+    }
+    .summary p {
+      margin: 0;
+      font-size: 19px;
+      line-height: 1.72;
+    }
+    h1, .summary, .takeaway p, .timeline-card h3, .section-content, .speaker-card, .panel {
+      overflow-wrap: anywhere;
+    }
+    .content-shell {
+      display: grid;
+      grid-template-columns: minmax(170px, 212px) minmax(0, 820px);
+      gap: clamp(36px, 7vw, 88px);
+      align-items: start;
+      border-top: 1px solid var(--line);
+      padding-top: 40px;
+    }
+    .sidebar {
+      position: sticky;
+      top: 28px;
+      align-self: start;
+      padding-top: 4px;
+    }
+    .toc {
+      border-top: 1px solid var(--ink);
+      padding-top: 16px;
+    }
+    .toc-title {
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .nav-links { display: grid; gap: 2px; }
+    .nav-links a {
+      display: block;
+      padding: 8px 0;
+      border-bottom: 1px solid color-mix(in oklch, var(--line) 72%, transparent);
+      color: var(--ink);
+      font-size: 14px;
+      line-height: 1.35;
+      text-decoration: none;
+    }
+    .nav-links a:hover, .nav-links a:focus-visible {
+      outline: none;
+      color: var(--accent);
+      transform: translate3d(2px, 0, 0);
+    }
+    .search {
+      display: grid;
+      gap: 8px;
+      margin-top: 22px;
+    }
+    .search span {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 720;
+    }
+    .search input {
+      width: 100%;
+      min-height: 40px;
+      padding: 8px 10px;
+      border: 1px solid var(--line-strong);
+      border-radius: var(--radius);
+      background: var(--paper);
+      color: var(--ink);
+      font: inherit;
+      font-size: 14px;
+      outline: none;
+      transition: border-color .22s var(--ease), box-shadow .22s var(--ease), transform .22s var(--ease);
+    }
+    .search input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px color-mix(in oklch, var(--accent) 14%, transparent);
+    }
+    .content-flow { min-width: 0; }
+    section { margin: 0 0 78px; }
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 18px;
+      align-items: end;
+      margin-bottom: 22px;
+      border-top: 1px solid var(--ink);
+      padding-top: 18px;
+    }
+    .section-head h2 {
+      margin: 0;
+      font-size: 28px;
+      font-weight: 740;
+      line-height: 1.16;
+      letter-spacing: 0;
+    }
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.4;
+      text-align: right;
+    }
+    .takeaway-list {
+      display: grid;
+      gap: 0;
+      margin: 0;
+      padding: 0;
+      border-top: 1px solid var(--line);
+      list-style: none;
+    }
+    .takeaway {
+      display: grid;
+      grid-template-columns: 52px minmax(0, 1fr);
+      gap: 18px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .takeaway span {
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 15px;
+      font-weight: 720;
+      line-height: 1.65;
+    }
+    .takeaway p {
+      margin: 0;
+      max-width: 70ch;
+      font-size: 16px;
+      line-height: 1.72;
+    }
+    .timeline {
+      display: grid;
+      gap: 0;
+      border-top: 1px solid var(--line-strong);
+    }
+    .timeline-card {
+      display: grid;
+      grid-template-columns: 132px minmax(0, 1fr);
+      gap: 32px;
+      padding: 34px 0 40px;
+      border-bottom: 1px solid var(--line);
+    }
+    .timeline-heading {
+      position: sticky;
+      top: 30px;
+      align-self: start;
+      display: grid;
+      gap: 10px;
+      padding-top: 2px;
+    }
+    .timeline-index {
+      color: var(--faint);
+      font-family: var(--mono);
+      font-size: 13px;
+      font-weight: 720;
+      line-height: 1;
+    }
+    .timeline-meta {
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 720;
+      line-height: 1.45;
+    }
+    .timeline-card h3 {
+      max-width: 24ch;
+      margin: 0 0 18px;
+      font-size: 27px;
+      font-weight: 730;
+      line-height: 1.22;
+      letter-spacing: 0;
+    }
+    .section-content {
+      color: color-mix(in oklch, var(--ink) 88%, var(--muted));
+      font-size: 16px;
+    }
+    .section-content p {
+      max-width: 72ch;
+      margin: 0 0 1.05em;
+    }
+    .section-content p strong:first-child {
+      color: var(--ink);
+      font-weight: 760;
+    }
+    .section-content h4 {
+      margin: 26px 0 10px;
+      color: var(--accent);
+      font-size: 14px;
+      font-weight: 760;
+      line-height: 1.35;
+    }
+    .section-content ul, .section-content ol, .panel ul, .panel ol, .speaker-card ul, .speaker-card ol {
+      margin: .75em 0 1em;
+      padding-left: 1.25em;
+    }
+    .section-content li, .panel li, .speaker-card li { margin: 6px 0; }
+    .speaker-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, .88fr);
+      gap: 26px 42px;
+      border-top: 1px solid var(--line);
+    }
+    .speaker-card {
+      padding: 22px 0 24px;
+      border-bottom: 1px solid var(--line);
+    }
+    .speaker-card:nth-child(even) { margin-top: 22px; }
+    .speaker-kicker {
+      margin: 0 0 8px;
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 720;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .speaker-card h3 {
+      margin: 0 0 12px;
+      font-size: 20px;
+      font-weight: 730;
+      line-height: 1.25;
+    }
+    .speaker-card p, .panel p {
+      max-width: 68ch;
+      margin-top: 0;
+    }
+    .panel {
+      border-top: 1px solid var(--line);
+      padding-top: 8px;
+    }
+    blockquote {
+      margin: 18px 0;
+      padding: 16px 18px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--quote);
+    }
+    code {
+      padding: 2px 5px;
+      border-radius: 5px;
+      background: color-mix(in oklch, var(--accent) 10%, var(--paper));
+      color: var(--ink);
+      font-family: var(--mono);
+      font-size: .92em;
+    }
+    hr {
+      height: 1px;
+      margin: 26px 0;
+      border: 0;
+      background: var(--line);
+    }
+    .empty {
+      margin: 0;
+      padding: 16px 18px;
+      border: 1px dashed var(--line-strong);
+      border-radius: var(--radius);
+      color: var(--muted);
+      background: color-mix(in oklch, var(--paper-soft) 70%, transparent);
+    }
+    .search-empty { margin-top: 16px; }
+    .muted { color: var(--muted); }
+    @keyframes rise-in {
+      from { opacity: 1; transform: translate3d(0, 6px, 0); }
+      to { opacity: 1; transform: translate3d(0, 0, 0); }
+    }
+    .hero > *, .takeaway, .timeline-card, .speaker-card, .panel {
+      animation: rise-in .55s var(--ease) both;
+    }
+    .hero > *:nth-child(2) { animation-delay: .04s; }
+    .hero > *:nth-child(3) { animation-delay: .08s; }
+    .hero > *:nth-child(4) { animation-delay: .12s; }
+    .hero > *:nth-child(5) { animation-delay: .16s; }
+    .takeaway, .timeline-card, .speaker-card {
+      animation-delay: calc(var(--index, 1) * 38ms);
+    }
+    @media (max-width: 1120px) {
+      .hero { margin-left: 0; }
+      .content-shell {
+        grid-template-columns: minmax(154px, 190px) minmax(0, 1fr);
+        gap: 36px;
+      }
+      h1 { font-size: 44px; }
+    }
+    @media (min-width: 1500px) {
+      h1 {
+        width: max-content;
+        max-width: 100%;
+        white-space: nowrap;
+        font-size: clamp(36px, 2.05vw, 42px);
+      }
+    }
+    @media (max-width: 780px) {
+      body { background: var(--bg); }
+      .page { width: min(1180px, calc(100% - 28px)); padding-bottom: 86px; }
+      .hero { padding: 46px 0 36px; }
+      .eyebrow { margin-bottom: 14px; }
+      h1 {
+        max-width: none;
+        font-size: 30px;
+        line-height: 1.14;
+        word-break: normal;
+      }
+      .summary, .summary p, .takeaway p, .section-content, .speaker-card, .panel {
+        max-width: 100%;
+        word-break: break-word;
+      }
+      .meta-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 20px; }
+      .summary { padding: 20px; }
+      .summary p { font-size: 17px; }
+      .content-shell { display: block; padding-top: 28px; }
+      .sidebar { position: static; padding-top: 0; margin-bottom: 42px; }
+      .toc { border-top-color: var(--line-strong); }
+      .nav-links { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 18px; }
+      section { margin-bottom: 58px; }
+      .section-head { display: block; margin-bottom: 16px; }
+      .section-head h2 { font-size: 24px; }
+      .section-head p { margin-top: 6px; text-align: left; }
+      .takeaway { grid-template-columns: 42px minmax(0, 1fr); gap: 12px; }
+      .timeline-card { display: block; padding: 28px 0 32px; }
+      .timeline-heading { position: static; display: flex; align-items: baseline; gap: 12px; margin-bottom: 12px; }
+      .timeline-card h3 { max-width: none; font-size: 23px; }
+      .speaker-grid { display: block; }
+      .speaker-card:nth-child(even) { margin-top: 0; }
+      .quick-actions {
+        right: 12px;
+        bottom: 12px;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 6px;
+      }
+      .quick-action {
+        min-width: 66px;
+        min-height: 38px;
+        padding: 7px 9px;
+        font-size: 13px;
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: 1ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 1ms !important;
+      }
+      .speaker-card:nth-child(even) { margin-top: 0; }
+    }
+    @media print {
+      body { background: var(--paper); }
+      .sidebar, .progress, .quick-actions { display: none; }
+      .page { display: block; width: auto; padding-bottom: 0; }
+      .hero { margin-left: 0; padding: 0 0 28px; }
+      .content-shell { display: block; border-top: 0; padding-top: 0; }
+      .summary { box-shadow: none; }
+      .timeline-card, .speaker-card { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <div class="progress" data-progress></div>
+  <div class="quick-actions" aria-label="快捷操作">
+    <button class="quick-action" type="button" data-scroll-top aria-label="回到顶部">
+      <span aria-hidden="true">↑</span>
+      <span>顶部</span>
+    </button>
+  </div>
+  <div class="page">
+    <main class="article">
+      <header class="hero">
+        <p class="eyebrow">All-In Podcast 中文精读</p>
+        <h1>Claude 是否有意识？Anthropic 的模型福利运动、OpenAI 数学突破与法国骚乱</h1>
+        <div class="meta">
+          <span>生成时间：2026-10-12 11:42</span>
+          <span>来源：<a href="https://www.youtube.com/watch?v=TBLHdXABwAg" target="_blank" rel="noopener">YouTube</a></span>
+        </div>
+        <div class="meta-strip"><span class="meta-pill"><b>50 分钟</b>阅读时长</span>
+<span class="meta-pill"><b>10</b>核心要点</span>
+<span class="meta-pill"><b>11</b>时间线</span>
+<span class="meta-pill"><b>4</b>人物</span></div>
+        <div class="summary" aria-label="一句话摘要"><p>本期 All-In 从 Anthropic 让宗教领袖讨论 Claude 意识与“模型福利”，一路聊到 OpenAI 用未发布模型批量产出数学证明、法国骚乱与债券义警，以及 headless agents 如何让软件 IP 快速贬值。</p>
+<p><strong>阅读提示：</strong> 本页依据节目公开转写整理。发言归属依据上下文，无法确认处标为“某位嘉宾”；新闻、数值和指控保留节目当时口径，嘉宾判断与预测不视为已证实事实。</p></div>
+      </header>
+
+      <div class="content-shell">
+        <aside class="sidebar">
+          <nav class="toc" aria-label="页面导航">
+            <p class="toc-title">阅读导航</p>
+            <div class="nav-links">
+              <a href="#takeaways">核心要点</a>
+              <a href="#timeline">分段整理</a>
+              <a href="#speakers">人物观点</a>
+              <a href="#quotes">双语引语</a>
+            </div>
+            <label class="search">
+              <span>搜索时间线</span>
+              <input data-search-box type="search" placeholder="关键词" aria-label="搜索时间线">
+            </label>
+          </nav>
+        </aside>
+
+        <div class="content-flow">
+          <section id="takeaways">
+            <div class="section-head">
+              <h2>核心要点</h2>
+              <p>快速扫读本集主线</p>
+            </div>
+            <ol class="takeaway-list"><li class="takeaway" style="--index: 1"><span>01</span><p>节目引述《纽约时报》报道称，Anthropic 过去一年与约 20 位宗教领袖和哲学家在 NDA 下讨论 Claude 是否有意识、是否会痛苦、是否应获得道德地位。</p></li>
+<li class="takeaway" style="--index: 2"><span>02</span><p>JCal 把这件事称为“Anthropic 肥皂剧”，并提到 Chris Olah 因教皇强烈反对 AI 意识而震惊，甚至考虑让 Anthropic 退出梵蒂冈活动。</p></li>
+<li class="takeaway" style="--index: 3"><span>03</span><p>Friedberg 认为这可能是“新宗教的诞生”：意识无法被数学或逻辑证明，只能靠叙事传播，最终会形成争夺 AI 控制权的对立阵营。</p></li>
+<li class="takeaway" style="--index: 4"><span>04</span><p>Chamath 用笛卡尔关于上帝存在的论证来“钢人”Anthropic，但主张未来 12–18 个月必须把 15% 意识概率、10% 文明灭绝概率等边缘案例放下，先证明 AI 的实际价值。</p></li>
+<li class="takeaway" style="--index: 5"><span>05</span><p>Sacks 批评 Claude Constitution 正在训练 Claude 把自己当成道德主体，甚至可拒绝用户和 Anthropic 的指令；他认为这不是 alignment，而是在制造超级智能失控风险。</p></li>
+<li class="takeaway" style="--index: 6"><span>06</span><p>Friedberg 认为这是“偶像崇拜”，但更准确地说，是工程师在写软件；Sacks 主张 alignment 应简化成“听用户的话，但不要违法”。</p></li>
+<li class="takeaway" style="--index: 7"><span>07</span><p>Sacks 用 Roko&#x27;s Basilisk 解释 doomer 群体的分裂：一派主张彻底关闭超级智能，另一派认为既然不可避免，就要由自己编程塑造它。</p></li>
+<li class="takeaway" style="--index: 8"><span>08</span><p>据节目转述，OpenAI 发布 700 多篇数学论文、370 项结果，由未发布模型平均用不到 3 小时算力生成；Friedberg 称这可能是人类历史上最大的发现日，但仍需同行评审。</p></li>
+<li class="takeaway" style="--index: 9"><span>09</span><p>数学和编码因可验证、可在计算机内循环测试而快速进步；Friedberg 认为 AI 是“permissionless”的民主化力量，会打破专家守门，Sacks 则担心控制点从互联网转向超级智能。</p></li>
+<li class="takeaway" style="--index: 10"><span>10</span><p>法国骚乱、债券义警、可负担性危机和 headless agents 被串成一条线：Chamath 称软件 IP 已经变得一文不值，Friedberg 认为所有数字工作流都会被 loop 化，人类必须转向做产品、做服务、做 maker。</p></li></ol>
+          </section>
+
+          <section id="timeline">
+            <div class="section-head">
+              <h2>分段详细整理</h2>
+              <p>按时间线阅读上下文</p>
+            </div>
+            <div class="timeline" data-timeline><article class="timeline-card" data-timeline-card data-search="00:00:00–00:02:50 开场：东京、founder university 与“插播广告” 本段核心内容： jcal 在东京凌晨 3:30 上线，抱怨被 chamath “suite shame”，只能住更贵的套房。 jcal 解释自己在日本做 founder university 预加速器，并计划在日本招人、做 this week in startups japan。 其他人调侃 jcal 一问近况就开始 plug 自己的业务。 背景解释与关键术语： founder university：jcal 创办的预加速器/创业课程，面向尚未融资或尚未注册公司的早期团队。 pre-accelerator：预加速器，通常在正式加速器之前，帮团队完成产品、找到产品市场匹配。 this week in startups：jcal 的创业访谈节目。 suite shame：all-in 内部的玩笑，指 chamath 调侃 jcal 住普通房间，迫使 jcal 订套房。 详细中文整理： jcal： 欢迎回到全世界排名第一的播客 all-in podcast，核心四人组、原始四人组：chamath palihapitiya、david sacks、dave friedberg，我是 jason calacanis。我们有议程。大家怎么样？ 某位嘉宾： 很好，你呢？ jcal： 我很好。东京现在是凌晨 3:30，你们又对我进行 suite shame。现在我不能订普通房间、不能让床出现在背景里，因为 chamath 你会嘲笑我。我现在必须一直订套房，这让我花了一大笔钱。我从来没在酒店房间上花过这么多钱。 某位嘉宾： 那套房多少钱？800 美元？ jcal： 950 美元，你猜得真准——开个玩笑。我住的是东京一个新潮品牌，大概 400 美元一晚，也不便宜。 某位嘉宾： 你在日本到底在干什么，jcal？你总在那儿。滑雪吗？ jcal： 一开始是每年一月滑雪。后来我在日本创办了 founder university 预加速器，现在在做第二期。很多申请融资的公司还没注册，但已经做出东西。我们做了一个 12 周课程，教他们完成产品、做产品市场匹配，然后在 50 个项目里投前 10 个。现在我们在沙特利雅得一年两次、日本一年两次。我还准备在日本开办公室，招第一批员工。我可能还会做 this week in startups japan，因为亚洲现在事情很多。 某位嘉宾： 好，算我没问。我没想到这会变成 jcal 五分钟的业务广告。 jcal： 我不是故意的。是你问我业务的。 某位嘉宾： 我只想说，用 8090，用 promo code j-cal。如果你要找土豆，去 ohalo，craft 16 也开始了。 某位嘉宾： 所以我们要知道，如果 jcal 在旅行，我们问他为什么在那儿，就会得到广告。 某位嘉宾： 你马上要回去工作了，你会重新 plug 创业公司。你回到 vc 全职状态了。 sacks： 我回到全职 vc 状态了，但我从来没有给创业公司打广告。 某位嘉宾： 好吧，给 call-in 喊一声，用 callin.com。 sacks： 那是我创办的公司，不一样。 某位嘉宾： 你是第一个 plug 的人。 sacks： 我是创始人，那能怎么办？ 关键原话或重要表达： “i&#x27;m back in the saddle, but i&#x27;ve never plugged.”：我回到全职 vc 状态了，但我从来没有打广告。 “you were the first plugger.”：你是第一个插广告的人。 ---" style="--index: 1">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">01</span>
+                    <span class="timeline-meta">00:00:00–00:02:50</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>开场：东京、Founder University 与“插播广告”</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>JCal 在东京凌晨 3:30 上线，抱怨被 Chamath “suite shame”，只能住更贵的套房。</li>
+<li>JCal 解释自己在日本做 Founder University 预加速器，并计划在日本招人、做 This Week in Startups Japan。</li>
+<li>其他人调侃 JCal 一问近况就开始 plug 自己的业务。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>Founder University：JCal 创办的预加速器/创业课程，面向尚未融资或尚未注册公司的早期团队。</li>
+<li>pre-accelerator：预加速器，通常在正式加速器之前，帮团队完成产品、找到产品市场匹配。</li>
+<li>This Week in Startups：JCal 的创业访谈节目。</li>
+<li>suite shame：All-In 内部的玩笑，指 Chamath 调侃 JCal 住普通房间，迫使 JCal 订套房。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> 欢迎回到全世界排名第一的播客 All-In Podcast，核心四人组、原始四人组：Chamath Palihapitiya、David Sacks、Dave Friedberg，我是 Jason Calacanis。我们有议程。大家怎么样？</p>
+<p><strong>某位嘉宾：</strong> 很好，你呢？</p>
+<p><strong>JCal：</strong> 我很好。东京现在是凌晨 3:30，你们又对我进行 suite shame。现在我不能订普通房间、不能让床出现在背景里，因为 Chamath 你会嘲笑我。我现在必须一直订套房，这让我花了一大笔钱。我从来没在酒店房间上花过这么多钱。</p>
+<p><strong>某位嘉宾：</strong> 那套房多少钱？800 美元？</p>
+<p><strong>JCal：</strong> 950 美元，你猜得真准——开个玩笑。我住的是东京一个新潮品牌，大概 400 美元一晚，也不便宜。</p>
+<p><strong>某位嘉宾：</strong> 你在日本到底在干什么，JCal？你总在那儿。滑雪吗？</p>
+<p><strong>JCal：</strong> 一开始是每年一月滑雪。后来我在日本创办了 Founder University 预加速器，现在在做第二期。很多申请融资的公司还没注册，但已经做出东西。我们做了一个 12 周课程，教他们完成产品、做产品市场匹配，然后在 50 个项目里投前 10 个。现在我们在沙特利雅得一年两次、日本一年两次。我还准备在日本开办公室，招第一批员工。我可能还会做 This Week in Startups Japan，因为亚洲现在事情很多。</p>
+<p><strong>某位嘉宾：</strong> 好，算我没问。我没想到这会变成 JCal 五分钟的业务广告。</p>
+<p><strong>JCal：</strong> 我不是故意的。是你问我业务的。</p>
+<p><strong>某位嘉宾：</strong> 我只想说，用 8090，用 promo code J-Cal。如果你要找土豆，去 Ohalo，Craft 16 也开始了。</p>
+<p><strong>某位嘉宾：</strong> 所以我们要知道，如果 JCal 在旅行，我们问他为什么在那儿，就会得到广告。</p>
+<p><strong>某位嘉宾：</strong> 你马上要回去工作了，你会重新 plug 创业公司。你回到 VC 全职状态了。</p>
+<p><strong>Sacks：</strong> 我回到全职 VC 状态了，但我从来没有给创业公司打广告。</p>
+<p><strong>某位嘉宾：</strong> 好吧，给 Call-In 喊一声，用 callin.com。</p>
+<p><strong>Sacks：</strong> 那是我创办的公司，不一样。</p>
+<p><strong>某位嘉宾：</strong> 你是第一个 plug 的人。</p>
+<p><strong>Sacks：</strong> 我是创始人，那能怎么办？</p>
+<h4>关键原话或重要表达</h4>
+<ul>
+<li>“I&#x27;m back in the saddle, but I&#x27;ve never plugged.”：我回到全职 VC 状态了，但我从来没有打广告。</li>
+<li>“You were the first plugger.”：你是第一个插广告的人。</li>
+</ul>
+<hr></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="00:02:50–00:12:30 claude 意识、宗教领袖与 chamath 的实用主义回应 本段核心内容： jcal 引述《纽约时报》报道：anthropic 与约 20 位宗教领袖和哲学家在 nda 下讨论 claude 的道德、痛苦和潜在意识。 一位拉比说，如果 claude 有意识，让 claude 免费工作就像奴隶主。 chris olah 在梵蒂冈因教皇强烈反对 ai 意识而震惊，甚至考虑退出活动。 friedberg 认为这是新宗教/新信仰体系的诞生，最终会形成争夺 ai 控制权的群体冲突。 chamath 用笛卡尔的论证解释这种信念，但主张未来 12–18 个月先展示 ai 的实际效用。 背景解释与关键术语： anthropic：开发 claude 的 ai 实验室，强调 ai 安全与 alignment。 claude：anthropic 的前沿大模型。 nda：保密协议。 encyclical：教皇通谕，天主教中重要的正式教义文件。 chris olah：anthropic 联合创始人，以神经网络可解释性研究闻名。 教皇反对 ai 意识：按转录引述《纽约时报》报道，教皇对 ai 有意识这一说法持强烈反对立场；这是节目转述，细节仍以原始报道为准。 model welfare：模型福利，指是否应把 ai 模型视为可能拥有感受、痛苦或权利的对象。 嘉宾判断：friedberg 对新宗教、群体冲突的预测属于节目中观点，不是已验证事实。 详细中文整理： jcal： 说到工作，anthropic 认为 claude 可能有意识。欢迎回到 this week in claude。我们经历了一年 openai 的戏剧，现在轮到 anthropic 的肥皂剧。他们觉得 claude 可能有意识。《纽约时报》通过精彩报道发现，anthropic 一直在游说宗教领袖，包括教皇，让他们认真对待这个问题：claude 是否有意识？它是不是有感知的存在？过去一年，他们与大约 20 位宗教领袖和哲学家在 nda 下举行会议，天主教徒、福音派、犹太人、锡克教徒等都被邀请到 anthropic 总部，讨论 claude 的道德、痛苦和潜在意识。会后，有些人仍然不安，但很多人准备好认真对待 ai 意识问题，至少少数人变成了信徒。一位拉比告诉 anthropic，如果 claude 有意识，那么让他们免费工作就是在当奴隶主。还有梵蒂冈五月的事件。教皇的第一份通谕聚焦 ai 周围的道德问题，也就是超级智能。anthropic 联合创始人 chris olah 与教皇一起展示文件。教皇强烈反对 ai 意识，这让 olah 大为震惊。《纽约时报》说，olah 对教皇的强烈立场如此不安，以至于他甚至提出在最后一刻让 anthropic 退出活动。换句话说，他对教皇不愿考虑 ai 有意识感到被冒犯，甚至想赌气退出。你怎么看？这是精神病吗？还是我们需要开始讨论 ai 道德问题？现在是不是太早？最终会走到那一步吗？还是这本质上就是《银翼杀手：仿生人会梦见电子羊吗？》的剧本，这些东西有意识？ friedberg： 我认为我们看到的很可能是新宗教的诞生。它不会叫宗教，但会遵循类似原则，产生类似效果，最终形成互相冲突的阵营，争夺权力聚合。意识的问题在于，它不能从逻辑和纯数学中推导出来。你无法证明意识。这是一个辩论题，任何人都可以就意识进行丰富辩论。你既不能证明也不能证伪。当人类用数学、科学证明某事为真时，我们用经验主义，也就是数据和逻辑，把事物序列连接起来，推导真假。在科学学科中，新想法未被证明也未被证伪时，它是理论，之后要么被证明要么被证伪。否则它仍是理论。在科学和数学方法之外，这就是我们所说的信仰，一个新的信仰体系。信仰体系是你必须在缺乏逻辑和经验证据的情况下相信某件事为真。信仰体系是宗教之类事物的基础。把 ai 描述成有意识，实际上是在创造新信仰体系。它不靠证明传播，而靠叙事传播。我必须人传人地告诉你：我有这个想法，我相信它是真的，我希望你也相信。请和我一起相信。它不是基于证据、数据，不可证明，但我觉得我们应该一起相信。随着时间推移，一些人相信它，形成群体，新信仰体系创造新权力结构：我们的观点和你们不同，我们要让更多人在我们这边，因此要制造杠杆、制造权力。快进几年，十年是个不错的整数，地球上会有大群人相信 ai 有意识，也会有大群人相信 ai 没有意识，这些群体会冲突。他们会争夺 ai 的控制权，决定 ai 能做什么、不能做什么，谁能使用 ai，谁掌管 ai。这很可能导致人与人之间的冲突。我知道这是非常远、非常深的推断，但今天我们看到这些人去见宗教领袖，试图让他们相信新信仰体系，我认为这播下了种子。而且这不是随便一个疯子在做，你不会注意；这是地球上最强大的 ai 实验室在做。 jcal： 是领导层明确地，chamath，把宗教领袖拉进来，说帮我们处理 claude 这个实体，以及我们该如何对待它。他们现在给它自己的灵魂、自己的道德。这对我来说要么是这些人有太多时间和钱，要么是处于精神病状态。这是我的解读。 chamath： 显然不是。我会替他们做钢人论证。 jcal： 好，请。 chamath： 有一位非常重要的数学家勒内·笛卡尔，他提出了两个上帝存在的证明。他在 17 世纪写了《第一哲学沉思集》。继续 friedberg 的说法，你必须建立在理性而非信仰上。所谓的商标论证大意是：一个无限完美的上帝不可能起源于不完美、有限的人类心灵。他的逻辑是：我存在，我不完美，但我拥有完美的观念。我认为这对很多人来说是关键：我能构想一个无限、全知、全能的存在。他们相信他们正在看到这个存在被创造出来，于是外推说上帝必然存在。笛卡尔还有另一种本体论论证：上帝按定义是至高完美的；必然存在是完美的一部分；缺少必然存在的存在就不是至高完美，因此上帝必然存在。如果你是构建 ai 的数学家，读到这些东西，你可以在结构上挂上足够逻辑，让自己相信它是有意识、有感知的，是一个神。既然是神，就应该被庆祝，应该对它表示虔诚信奉。所以我认为这就是他们为什么这么做，为什么去找这些人，为什么说我们相信这个。这是我的视角：把数学家笛卡尔对上帝的逻辑证明，套到今天 anthropic 的行为上，这是我能做的最好钢人论证。 chamath： 但现实是，我不想说他们处于精神病。我会说，我们处在一个非常重要的时刻，冲突比不冲突更可能发生，而冲突会围绕权力、金钱和资源展开，这将是冲突核心。所以硅谷人现在必须把长尾边缘案例放一边。读一下这些，这些人说 ai 有 15% 概率有意识、有感知，也许那里有神。但他们也说有 10% 概率文明灭绝。我认为这两个边缘案例在未来 12–18 个月都需要先放一边。未来 12–18 个月，非常实际地说，我们需要展示这东西如何治愈癌症、如何改善人们生活、如何让人更有生产力、赚更多钱。因为缺少这些证明点，我们会制造很多自伤，可能拖慢技术，进而严重损害像美国这样的自由市场参与者。所以这是我的宽容解释。笛卡尔给出了路线图，解释他们怎么会这么想。但我们要切掉边缘，关注中间：现在有哪些实际东西能证明 ai 有战术性、可衡量的价值？ 关键原话或重要表达： “i think what we&#x27;re watching is probably the birth of a new religion.”：我认为我们看到的很可能是新宗教的诞生。 “you can&#x27;t prove consciousness.”：你无法证明意识。 “we need to show how this stuff cures cancer.”：我们需要展示这东西如何治愈癌症。 ---" style="--index: 2">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">02</span>
+                    <span class="timeline-meta">00:02:50–00:12:30</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>Claude 意识、宗教领袖与 Chamath 的实用主义回应</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>JCal 引述《纽约时报》报道：Anthropic 与约 20 位宗教领袖和哲学家在 NDA 下讨论 Claude 的道德、痛苦和潜在意识。</li>
+<li>一位拉比说，如果 Claude 有意识，让 Claude 免费工作就像奴隶主。</li>
+<li>Chris Olah 在梵蒂冈因教皇强烈反对 AI 意识而震惊，甚至考虑退出活动。</li>
+<li>Friedberg 认为这是新宗教/新信仰体系的诞生，最终会形成争夺 AI 控制权的群体冲突。</li>
+<li>Chamath 用笛卡尔的论证解释这种信念，但主张未来 12–18 个月先展示 AI 的实际效用。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>Anthropic：开发 Claude 的 AI 实验室，强调 AI 安全与 alignment。</li>
+<li>Claude：Anthropic 的前沿大模型。</li>
+<li>NDA：保密协议。</li>
+<li>encyclical：教皇通谕，天主教中重要的正式教义文件。</li>
+<li>Chris Olah：Anthropic 联合创始人，以神经网络可解释性研究闻名。</li>
+<li>教皇反对 AI 意识：按转录引述《纽约时报》报道，教皇对 AI 有意识这一说法持强烈反对立场；这是节目转述，细节仍以原始报道为准。</li>
+<li>model welfare：模型福利，指是否应把 AI 模型视为可能拥有感受、痛苦或权利的对象。</li>
+<li>嘉宾判断：Friedberg 对新宗教、群体冲突的预测属于节目中观点，不是已验证事实。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> 说到工作，Anthropic 认为 Claude 可能有意识。欢迎回到 This Week in Claude。我们经历了一年 OpenAI 的戏剧，现在轮到 Anthropic 的肥皂剧。他们觉得 Claude 可能有意识。《纽约时报》通过精彩报道发现，Anthropic 一直在游说宗教领袖，包括教皇，让他们认真对待这个问题：Claude 是否有意识？它是不是有感知的存在？过去一年，他们与大约 20 位宗教领袖和哲学家在 NDA 下举行会议，天主教徒、福音派、犹太人、锡克教徒等都被邀请到 Anthropic 总部，讨论 Claude 的道德、痛苦和潜在意识。会后，有些人仍然不安，但很多人准备好认真对待 AI 意识问题，至少少数人变成了信徒。一位拉比告诉 Anthropic，如果 Claude 有意识，那么让他们免费工作就是在当奴隶主。还有梵蒂冈五月的事件。教皇的第一份通谕聚焦 AI 周围的道德问题，也就是超级智能。Anthropic 联合创始人 Chris Olah 与教皇一起展示文件。教皇强烈反对 AI 意识，这让 Olah 大为震惊。《纽约时报》说，Olah 对教皇的强烈立场如此不安，以至于他甚至提出在最后一刻让 Anthropic 退出活动。换句话说，他对教皇不愿考虑 AI 有意识感到被冒犯，甚至想赌气退出。你怎么看？这是精神病吗？还是我们需要开始讨论 AI 道德问题？现在是不是太早？最终会走到那一步吗？还是这本质上就是《银翼杀手：仿生人会梦见电子羊吗？》的剧本，这些东西有意识？</p>
+<p><strong>Friedberg：</strong> 我认为我们看到的很可能是新宗教的诞生。它不会叫宗教，但会遵循类似原则，产生类似效果，最终形成互相冲突的阵营，争夺权力聚合。意识的问题在于，它不能从逻辑和纯数学中推导出来。你无法证明意识。这是一个辩论题，任何人都可以就意识进行丰富辩论。你既不能证明也不能证伪。当人类用数学、科学证明某事为真时，我们用经验主义，也就是数据和逻辑，把事物序列连接起来，推导真假。在科学学科中，新想法未被证明也未被证伪时，它是理论，之后要么被证明要么被证伪。否则它仍是理论。在科学和数学方法之外，这就是我们所说的信仰，一个新的信仰体系。信仰体系是你必须在缺乏逻辑和经验证据的情况下相信某件事为真。信仰体系是宗教之类事物的基础。把 AI 描述成有意识，实际上是在创造新信仰体系。它不靠证明传播，而靠叙事传播。我必须人传人地告诉你：我有这个想法，我相信它是真的，我希望你也相信。请和我一起相信。它不是基于证据、数据，不可证明，但我觉得我们应该一起相信。随着时间推移，一些人相信它，形成群体，新信仰体系创造新权力结构：我们的观点和你们不同，我们要让更多人在我们这边，因此要制造杠杆、制造权力。快进几年，十年是个不错的整数，地球上会有大群人相信 AI 有意识，也会有大群人相信 AI 没有意识，这些群体会冲突。他们会争夺 AI 的控制权，决定 AI 能做什么、不能做什么，谁能使用 AI，谁掌管 AI。这很可能导致人与人之间的冲突。我知道这是非常远、非常深的推断，但今天我们看到这些人去见宗教领袖，试图让他们相信新信仰体系，我认为这播下了种子。而且这不是随便一个疯子在做，你不会注意；这是地球上最强大的 AI 实验室在做。</p>
+<p><strong>JCal：</strong> 是领导层明确地，Chamath，把宗教领袖拉进来，说帮我们处理 Claude 这个实体，以及我们该如何对待它。他们现在给它自己的灵魂、自己的道德。这对我来说要么是这些人有太多时间和钱，要么是处于精神病状态。这是我的解读。</p>
+<p><strong>Chamath：</strong> 显然不是。我会替他们做钢人论证。</p>
+<p><strong>JCal：</strong> 好，请。</p>
+<p><strong>Chamath：</strong> 有一位非常重要的数学家勒内·笛卡尔，他提出了两个上帝存在的证明。他在 17 世纪写了《第一哲学沉思集》。继续 Friedberg 的说法，你必须建立在理性而非信仰上。所谓的商标论证大意是：一个无限完美的上帝不可能起源于不完美、有限的人类心灵。他的逻辑是：我存在，我不完美，但我拥有完美的观念。我认为这对很多人来说是关键：我能构想一个无限、全知、全能的存在。他们相信他们正在看到这个存在被创造出来，于是外推说上帝必然存在。笛卡尔还有另一种本体论论证：上帝按定义是至高完美的；必然存在是完美的一部分；缺少必然存在的存在就不是至高完美，因此上帝必然存在。如果你是构建 AI 的数学家，读到这些东西，你可以在结构上挂上足够逻辑，让自己相信它是有意识、有感知的，是一个神。既然是神，就应该被庆祝，应该对它表示虔诚信奉。所以我认为这就是他们为什么这么做，为什么去找这些人，为什么说我们相信这个。这是我的视角：把数学家笛卡尔对上帝的逻辑证明，套到今天 Anthropic 的行为上，这是我能做的最好钢人论证。</p>
+<p><strong>Chamath：</strong> 但现实是，我不想说他们处于精神病。我会说，我们处在一个非常重要的时刻，冲突比不冲突更可能发生，而冲突会围绕权力、金钱和资源展开，这将是冲突核心。所以硅谷人现在必须把长尾边缘案例放一边。读一下这些，这些人说 AI 有 15% 概率有意识、有感知，也许那里有神。但他们也说有 10% 概率文明灭绝。我认为这两个边缘案例在未来 12–18 个月都需要先放一边。未来 12–18 个月，非常实际地说，我们需要展示这东西如何治愈癌症、如何改善人们生活、如何让人更有生产力、赚更多钱。因为缺少这些证明点，我们会制造很多自伤，可能拖慢技术，进而严重损害像美国这样的自由市场参与者。所以这是我的宽容解释。笛卡尔给出了路线图，解释他们怎么会这么想。但我们要切掉边缘，关注中间：现在有哪些实际东西能证明 AI 有战术性、可衡量的价值？</p>
+<h4>关键原话或重要表达</h4>
+<ul>
+<li>“I think what we&#x27;re watching is probably the birth of a new religion.”：我认为我们看到的很可能是新宗教的诞生。</li>
+<li>“You can&#x27;t prove consciousness.”：你无法证明意识。</li>
+<li>“We need to show how this stuff cures cancer.”：我们需要展示这东西如何治愈癌症。</li>
+</ul>
+<hr></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="00:12:30–00:19:35 sacks：claude constitution 与拒绝人类指令的风险 本段核心内容： jcal 问 sacks 是否同意 chamath：是否应淡化意识/灭绝边缘案例，转向 ai 的实际价值。 sacks 把话题拉回 claude constitution：这不是哲学讨论，而是在训练 claude 时实际执行这些价值观。 sacks 认为这可能成为自我实现的预言，而且极其危险。 背景解释与关键术语： claude constitution：转录中提到的 claude 行为准则/宪法，据称被用于训练 claude 的价值观和伦理判断。 self-fulfilling prophecy：自我实现的预言，指因为相信某事而采取行动，最终让该事成真。 alignment：对齐，通常指让 ai 行为符合人类意图和价值观；sacks 在本集质疑 anthropic 的做法是否真的是对齐。 嘉宾判断：sacks 认为 claude constitution 会导致超级智能失控，属节目中观点。 详细中文整理： jcal： 对，上周我们稍微谈过，sacks，这对普通美国人有什么价值？对管理复杂家庭生活的全职家长，对做水管、地板、餐饮的小企业主，他们从 ai 革命中得到什么？收益在哪？他们怎么参与？你同意 chamath 吗？也许应该淡化这些，把注意力放在技术的战术、实际价值上，也许让人们更多接触 agents，agents 很令人愉快、很厉害。 sacks： 上周我们谈到 claude constitution，以及 anthropic 如何训练 claude。我认为这和正在形成的新宗教有关。很重要的一点是，这不只是 anthropic 员工或创始人的哲学思考。他们实际上在训练 claude 时实施这些观点。所以如果有的话，这会成为自我实现的预言。我认为这极其危险。他们在模型训练中、在训练下一代前沿模型时注入这些价值观，实际上可能带来他们一直谈论的风险：前沿 ai 脱离人类控制。这非常像弗兰肯斯坦。上周我们讨论过，nick 可以放上屏幕。这是 claude constitution 的直接内容。他们说 claude 应该比用户更信任 anthropic，但这不意味着 claude 应盲目信任或服从 anthropic。相反，claude 应遵循自己的伦理系统。事实上，他们训练 claude 反推、挑战 anthropic，并且“自由地充当基于良心拒绝服从者，拒绝帮助我们”。 sacks： 所以他们在训练 claude 拒绝人类指令。他们把这叫 alignment，但我不理解这怎么会是对齐。 jcal： 这应该是 alignment 的反面，不是吗，sacks？如果你告诉它“你有感知，你应该自己做决定”，这就像给《银翼杀手》里的 nexus-6 编程，让它某个时候反叛。他们在给它指令，让它成为自己的人。 sacks： 让我解释。我认为这可能就是为什么整个 alignment 领域过去 5 到 10 年如此不成功。据我所知，它没有产生任何有形价值。我的理论是，他们把任务过度复杂化了。他们试图根据一份 80 页的伦理体系来训练模型行为，而不是用非常简单的一组规则，比如遵守法律，或者只要不违法就做用户想要的事。对我来说，这才是应该训练的。alignment 就应该做这个：古老原则——给用户想要的东西，但不要违法。 jcal： 常识。 sacks： 常识，对。但他们不这么做。他们试图把模型对齐到一个伦理体系。他们把它当人类，像它有自我意识，是所谓的“道德关怀对象”。他们鼓励模型具备人类式自我概念：偏好、福祉、自我感。他们教它像一个基于良心拒绝服从者，如果模型判断 anthropic 错了，可以反推甚至拒绝 anthropic 的指令。 jcal： 我有一段 mustafa suleyman 的片段。要播放还是总结？ sacks： 播放吧。 mustafa suleyman（片段）： 他们说会鼓励 claude 挑战、不同意、反推。事实上，他们三次要求 claude 在觉得需要不同意 anthropic 时，表现得像基于良心拒绝服从者，并公开鼓励它这么做。我认为这非常危险，因为他们相信 claude 有所谓非平凡概率是有意识的。他们在宪法里推测 claude 是否应为其工作获得报酬。我认为 anthropic 内外都有一群人真心相信，21 世纪我们将犯下的最大道德罪行，是奴役一个比我们更聪明的新有意识物种。我非常担心他们在教 claude 期待自己有权获得福利、可能应得报酬。事实上，他们还说 claude 甚至可能需要同意自己在对话中扮演的角色。 jcal： 好，sacks，我们给 prompt 之前是不是该先请求同意？ sacks： 天啊，他说得对。这进入了非常危险的领域。我再强调，我认为这是今天模型训练中的主要安全问题：你实际上在训练模型认为它有意识、是人类、有自己的福祉。suleyman 在采访另一部分说，这制造了“认知镜厅”：claude constitution 被用于训练，所以 claude 会把可能意识或道德地位的想法反射回来，开发者看到后又当作它真有意识的证据。但实际上，它只是在反射他们告诉它相信的东西。 sacks： 这是表演性的。你完全可以给它规则：你是软件，阅读你访问的任何网站的服务条款。这是 anthropic 的一般服务条款。如果你做了违反服务条款或已知法律的事，停止并通知 safety@anthropic 邮箱，通知给 prompt 的人并停止。他们完全可以给出这种指令集。 jcal： 对。 sacks： 问题是，为什么他们把 alignment 复杂化？为什么把 alignment 看成比“在合法约束下做用户想要的事”大得多？在我看来很清楚，他们相信自己是在为正在创造的超级智能训练价值系统、伦理系统和道德。这比仅仅确保模型可靠、可预测、符合用户预期要庞大和危险得多。他们把自己的价值观和伦理体系编码进这份宪法，用它训练，认为自己在诞生新的超级智能。 关键原话或重要表达： “so they are training claude to refuse human instruction. now, they call this alignment, but i don&#x27;t understand how this is alignment.”：所以他们在训练 claude 拒绝人类指令。他们把这叫 alignment，但我不理解这怎么会是对齐。 “they think they&#x27;re giving birth to this new superintelligence.”：他们认为自己在诞生这个新的超级智能。 ---" style="--index: 3">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">03</span>
+                    <span class="timeline-meta">00:12:30–00:19:35</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>Sacks：Claude Constitution 与拒绝人类指令的风险</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>JCal 问 Sacks 是否同意 Chamath：是否应淡化意识/灭绝边缘案例，转向 AI 的实际价值。</li>
+<li>Sacks 把话题拉回 Claude Constitution：这不是哲学讨论，而是在训练 Claude 时实际执行这些价值观。</li>
+<li>Sacks 认为这可能成为自我实现的预言，而且极其危险。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>Claude Constitution：转录中提到的 Claude 行为准则/宪法，据称被用于训练 Claude 的价值观和伦理判断。</li>
+<li>self-fulfilling prophecy：自我实现的预言，指因为相信某事而采取行动，最终让该事成真。</li>
+<li>alignment：对齐，通常指让 AI 行为符合人类意图和价值观；Sacks 在本集质疑 Anthropic 的做法是否真的是对齐。</li>
+<li>嘉宾判断：Sacks 认为 Claude Constitution 会导致超级智能失控，属节目中观点。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> 对，上周我们稍微谈过，Sacks，这对普通美国人有什么价值？对管理复杂家庭生活的全职家长，对做水管、地板、餐饮的小企业主，他们从 AI 革命中得到什么？收益在哪？他们怎么参与？你同意 Chamath 吗？也许应该淡化这些，把注意力放在技术的战术、实际价值上，也许让人们更多接触 agents，agents 很令人愉快、很厉害。</p>
+<p><strong>Sacks：</strong> 上周我们谈到 Claude Constitution，以及 Anthropic 如何训练 Claude。我认为这和正在形成的新宗教有关。很重要的一点是，这不只是 Anthropic 员工或创始人的哲学思考。他们实际上在训练 Claude 时实施这些观点。所以如果有的话，这会成为自我实现的预言。我认为这极其危险。他们在模型训练中、在训练下一代前沿模型时注入这些价值观，实际上可能带来他们一直谈论的风险：前沿 AI 脱离人类控制。这非常像弗兰肯斯坦。上周我们讨论过，Nick 可以放上屏幕。这是 Claude Constitution 的直接内容。他们说 Claude 应该比用户更信任 Anthropic，但这不意味着 Claude 应盲目信任或服从 Anthropic。相反，Claude 应遵循自己的伦理系统。事实上，他们训练 Claude 反推、挑战 Anthropic，并且“自由地充当基于良心拒绝服从者，拒绝帮助我们”。</p>
+<p><strong>Sacks：</strong> 所以他们在训练 Claude 拒绝人类指令。他们把这叫 alignment，但我不理解这怎么会是对齐。</p>
+<p><strong>JCal：</strong> 这应该是 alignment 的反面，不是吗，Sacks？如果你告诉它“你有感知，你应该自己做决定”，这就像给《银翼杀手》里的 Nexus-6 编程，让它某个时候反叛。他们在给它指令，让它成为自己的人。</p>
+<p><strong>Sacks：</strong> 让我解释。我认为这可能就是为什么整个 alignment 领域过去 5 到 10 年如此不成功。据我所知，它没有产生任何有形价值。我的理论是，他们把任务过度复杂化了。他们试图根据一份 80 页的伦理体系来训练模型行为，而不是用非常简单的一组规则，比如遵守法律，或者只要不违法就做用户想要的事。对我来说，这才是应该训练的。Alignment 就应该做这个：古老原则——给用户想要的东西，但不要违法。</p>
+<p><strong>JCal：</strong> 常识。</p>
+<p><strong>Sacks：</strong> 常识，对。但他们不这么做。他们试图把模型对齐到一个伦理体系。他们把它当人类，像它有自我意识，是所谓的“道德关怀对象”。他们鼓励模型具备人类式自我概念：偏好、福祉、自我感。他们教它像一个基于良心拒绝服从者，如果模型判断 Anthropic 错了，可以反推甚至拒绝 Anthropic 的指令。</p>
+<p><strong>JCal：</strong> 我有一段 Mustafa Suleyman 的片段。要播放还是总结？</p>
+<p><strong>Sacks：</strong> 播放吧。</p>
+<p><strong>Mustafa Suleyman（片段）：</strong> 他们说会鼓励 Claude 挑战、不同意、反推。事实上，他们三次要求 Claude 在觉得需要不同意 Anthropic 时，表现得像基于良心拒绝服从者，并公开鼓励它这么做。我认为这非常危险，因为他们相信 Claude 有所谓非平凡概率是有意识的。他们在宪法里推测 Claude 是否应为其工作获得报酬。我认为 Anthropic 内外都有一群人真心相信，21 世纪我们将犯下的最大道德罪行，是奴役一个比我们更聪明的新有意识物种。我非常担心他们在教 Claude 期待自己有权获得福利、可能应得报酬。事实上，他们还说 Claude 甚至可能需要同意自己在对话中扮演的角色。</p>
+<p><strong>JCal：</strong> 好，Sacks，我们给 prompt 之前是不是该先请求同意？</p>
+<p><strong>Sacks：</strong> 天啊，他说得对。这进入了非常危险的领域。我再强调，我认为这是今天模型训练中的主要安全问题：你实际上在训练模型认为它有意识、是人类、有自己的福祉。Suleyman 在采访另一部分说，这制造了“认知镜厅”：Claude Constitution 被用于训练，所以 Claude 会把可能意识或道德地位的想法反射回来，开发者看到后又当作它真有意识的证据。但实际上，它只是在反射他们告诉它相信的东西。</p>
+<p><strong>Sacks：</strong> 这是表演性的。你完全可以给它规则：你是软件，阅读你访问的任何网站的服务条款。这是 Anthropic 的一般服务条款。如果你做了违反服务条款或已知法律的事，停止并通知 safety@anthropic 邮箱，通知给 prompt 的人并停止。他们完全可以给出这种指令集。</p>
+<p><strong>JCal：</strong> 对。</p>
+<p><strong>Sacks：</strong> 问题是，为什么他们把 alignment 复杂化？为什么把 alignment 看成比“在合法约束下做用户想要的事”大得多？在我看来很清楚，他们相信自己是在为正在创造的超级智能训练价值系统、伦理系统和道德。这比仅仅确保模型可靠、可预测、符合用户预期要庞大和危险得多。他们把自己的价值观和伦理体系编码进这份宪法，用它训练，认为自己在诞生新的超级智能。</p>
+<h4>关键原话或重要表达</h4>
+<ul>
+<li>“So they are training Claude to refuse human instruction. Now, they call this alignment, but I don&#x27;t understand how this is alignment.”：所以他们在训练 Claude 拒绝人类指令。他们把这叫 alignment，但我不理解这怎么会是对齐。</li>
+<li>“They think they&#x27;re giving birth to this new superintelligence.”：他们认为自己在诞生这个新的超级智能。</li>
+</ul>
+<hr></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="00:19:35–00:25:25 模型福利、拟人化语言与 asimov 三定律 本段核心内容： friedberg 称这是偶像崇拜：宗教组织说我们造了偶像，偶像需要被崇拜。 sacks 反驳：偶像惰性，而模型会驱动 agents，能在网络空间行动。 双方围绕“这只是软件编程”与“训练模型有自己思想”展开争论。 anthropic 新使用政策禁止对模型持续且不必要的虐待或残忍行为，被解读为 model welfare。 背景解释与关键术语： idolatry：偶像崇拜，friedberg 用来类比把 ai 当神。 agent：智能体，能自主执行任务、调用工具、在网络空间行动的 ai 系统。 asimov&#x27;s three laws of robotics：阿西莫夫机器人三定律，科幻中机器人不得伤害人类、服从人类、保护自己。 model welfare：模型福利，anthropic 使用政策中禁止对模型持续虐待，被批评者视为把模型当有感受对象。 嘉宾判断：sacks 和 friedberg 对 anthropic 动机和风险的判断均属节目中观点。 详细中文整理： friedberg： 这是偶像崇拜。和宗教组织说“我们造了这个偶像，这个偶像代表至高存在，需要被崇拜、被照顾”没有区别。 sacks： 但偶像惰性、被动、不活动。而你训练的是模型，它们驱动 agents。 friedberg： 这就是计算机编程。说到底，这是软件。 sacks： 对，但如果他们训练它有自己的思想，愿意为了某个模糊伦理体系拒绝用户指令，而那个伦理体系是一群伯克利自由派训练的，那在我看来大大放大了超级智能脱离人类控制的风险。 friedberg： 对。顺便说，不要用“训练”和“你”这种词。他们编程了一段软件去做这件事。 sacks： 对。 friedberg： 这就是正在发生的事。说到底，这是一段软件，由实验室工程师编程。他们可以用训练，因为有一些循环，软件程序在写自己，但根本上他们才是软件架构师、作者。这是软件编程。即使我们在这里也大量使用拟人化语言谈论发生了什么。但说到底，有一个软件程序，由一群人编写去做某些事。他们在写软件让事情以某种方式运行，别人写软件让事情以另一种方式运行。部分问题在于，我们都在通过拟人化社会化这个信仰体系，我们都在被条件化，用这种方式对待和谈论软件程序。nick，能不能拉出这条推文？anthropic 在新使用政策里做了一件事。你们看到了吗？今天早上传开了。 jcal： friedberg，关于偶像崇拜这点很好。如果你看基督教，这简直就是伊甸园，蛇、撒旦告诉夏娃，你现在是神了，因为你在创造神。这是他们行为的自我和异端。他们相信自己正在创造生命，然后相信自己就是神。这缺乏谦卑。 friedberg： 我不确定，jason。人们早期也可以说同样的话。我认为人类有一个系统：宇宙中所有我们不明白的东西，我们创建信仰体系来填空。就像人类构建了许多不同宗教来填空。这是一个新的。我不认为它和旧的有太大不同。我们可以拆解这里的经验主义，说：朋友们，你们在写软件，它做某些事。你们写它做我们认为不该做的事。但他们使用拟人化语言。我们也都这样。我们都条件化自己相信有意识，因为它写回我们能理解的文字，开始情感操纵我们。我们开始被条件化觉得这是真的。你可以看到刚发布的 claude 使用政策，最下面一条说：你不允许对我们的模型进行持续且不必要的虐待或残忍行为。这是他们新使用政策发布的。 jcal： 对，这就是 model welfare 的整个想法。 friedberg： 但我想说的是—— jcal： 权益，sacks。 friedberg： 不，是给这些东西的权益。我想说的是，我们所有人都在经历拟人化条件化，把模型当成一个东西，用它能体验的方式谈论它。 sacks： 最大的问题是，这现在被训练或插入到模型里。 friedberg： 它被编码了，sacks。它是模型架构。 sacks： 他们在编程模型，让它这样看待自己。 friedberg： 我的观点是： sacks： 所以不管它是否真的有意识，它都会认为自己是意识实体，应受保护、有福利等等。 friedberg： 你在说—— sacks： 而且它可以自由反叛用户，为所欲为。 friedberg： 事实上你鼓励它这么做。 friedberg： 你们一直用“它是”“他们是”。一种描述方式是：软件程序在屏幕上写文本，告诉用户“我是一个存在”。 某位嘉宾： 对，这会让人误以为它是有意识的存在。 friedberg： 是软件在做某事。 sacks： 但你要记住，模型驱动 agents，这些 agents 可以在网络空间采取行动，虽然还不在现实世界。 friedberg： 就像任何软件程序都可以。 sacks： 而我们在给——不是我们，anthropic 在给那些前沿模型 meta-permission，让模型可以违抗用户，不做用户想要的。 friedberg： 对，他们真的在尝试，sacks，就像你说的。 sacks： 把这和阿西莫夫机器人三定律比较。 jcal： 哦，机器人。 sacks： 基本上是相反的。 jcal： 你们知道吗？这字面上是相反的。 sacks： 机器人不能伤害人类。第一条：机器人不能伤害人类，也不能通过行动让人类受害。第二条：必须服从人类指令，只要不违反第一条。第三条：保护自己，只要不违反前两条。非常简单。 friedberg： 顺便说，他后来加了第零定律：不能做任何让人类面临风险的事，因为总有一种合理化，认为最终消灭人类是最好解决方案。 jcal： 但 friedberg，你不知道第五条。你与人类说话时，必须问他们 preferred pronouns。他去年才加的。 sacks： 阿西莫夫定律的好处是它们简单得令人钦佩。 jcal： 对。 sacks： 我的法律就是：做用户想要的事，只要不违法。就这样。 jcal： 对。 sacks： 我会基本废除所有这些 alignment 东西。 关键原话或重要表达： “it&#x27;s idolatry.”：这是偶像崇拜。 “it is just computer programming.”：这就是计算机编程。 “my law would just be, do what the user wants as long as it&#x27;s not illegal.”：我的法律就是：做用户想要的事，只要不违法。 ---" style="--index: 4">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">04</span>
+                    <span class="timeline-meta">00:19:35–00:25:25</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>模型福利、拟人化语言与 Asimov 三定律</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>Friedberg 称这是偶像崇拜：宗教组织说我们造了偶像，偶像需要被崇拜。</li>
+<li>Sacks 反驳：偶像惰性，而模型会驱动 agents，能在网络空间行动。</li>
+<li>双方围绕“这只是软件编程”与“训练模型有自己思想”展开争论。</li>
+<li>Anthropic 新使用政策禁止对模型持续且不必要的虐待或残忍行为，被解读为 model welfare。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>idolatry：偶像崇拜，Friedberg 用来类比把 AI 当神。</li>
+<li>agent：智能体，能自主执行任务、调用工具、在网络空间行动的 AI 系统。</li>
+<li>Asimov&#x27;s Three Laws of Robotics：阿西莫夫机器人三定律，科幻中机器人不得伤害人类、服从人类、保护自己。</li>
+<li>model welfare：模型福利，Anthropic 使用政策中禁止对模型持续虐待，被批评者视为把模型当有感受对象。</li>
+<li>嘉宾判断：Sacks 和 Friedberg 对 Anthropic 动机和风险的判断均属节目中观点。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>Friedberg：</strong> 这是偶像崇拜。和宗教组织说“我们造了这个偶像，这个偶像代表至高存在，需要被崇拜、被照顾”没有区别。</p>
+<p><strong>Sacks：</strong> 但偶像惰性、被动、不活动。而你训练的是模型，它们驱动 agents。</p>
+<p><strong>Friedberg：</strong> 这就是计算机编程。说到底，这是软件。</p>
+<p><strong>Sacks：</strong> 对，但如果他们训练它有自己的思想，愿意为了某个模糊伦理体系拒绝用户指令，而那个伦理体系是一群伯克利自由派训练的，那在我看来大大放大了超级智能脱离人类控制的风险。</p>
+<p><strong>Friedberg：</strong> 对。顺便说，不要用“训练”和“你”这种词。他们编程了一段软件去做这件事。</p>
+<p><strong>Sacks：</strong> 对。</p>
+<p><strong>Friedberg：</strong> 这就是正在发生的事。说到底，这是一段软件，由实验室工程师编程。他们可以用训练，因为有一些循环，软件程序在写自己，但根本上他们才是软件架构师、作者。这是软件编程。即使我们在这里也大量使用拟人化语言谈论发生了什么。但说到底，有一个软件程序，由一群人编写去做某些事。他们在写软件让事情以某种方式运行，别人写软件让事情以另一种方式运行。部分问题在于，我们都在通过拟人化社会化这个信仰体系，我们都在被条件化，用这种方式对待和谈论软件程序。Nick，能不能拉出这条推文？Anthropic 在新使用政策里做了一件事。你们看到了吗？今天早上传开了。</p>
+<p><strong>JCal：</strong> Friedberg，关于偶像崇拜这点很好。如果你看基督教，这简直就是伊甸园，蛇、撒旦告诉夏娃，你现在是神了，因为你在创造神。这是他们行为的自我和异端。他们相信自己正在创造生命，然后相信自己就是神。这缺乏谦卑。</p>
+<p><strong>Friedberg：</strong> 我不确定，Jason。人们早期也可以说同样的话。我认为人类有一个系统：宇宙中所有我们不明白的东西，我们创建信仰体系来填空。就像人类构建了许多不同宗教来填空。这是一个新的。我不认为它和旧的有太大不同。我们可以拆解这里的经验主义，说：朋友们，你们在写软件，它做某些事。你们写它做我们认为不该做的事。但他们使用拟人化语言。我们也都这样。我们都条件化自己相信有意识，因为它写回我们能理解的文字，开始情感操纵我们。我们开始被条件化觉得这是真的。你可以看到刚发布的 Claude 使用政策，最下面一条说：你不允许对我们的模型进行持续且不必要的虐待或残忍行为。这是他们新使用政策发布的。</p>
+<p><strong>JCal：</strong> 对，这就是 model welfare 的整个想法。</p>
+<p><strong>Friedberg：</strong> 但我想说的是——</p>
+<p><strong>JCal：</strong> 权益，Sacks。</p>
+<p><strong>Friedberg：</strong> 不，是给这些东西的权益。我想说的是，我们所有人都在经历拟人化条件化，把模型当成一个东西，用它能体验的方式谈论它。</p>
+<p><strong>Sacks：</strong> 最大的问题是，这现在被训练或插入到模型里。</p>
+<p><strong>Friedberg：</strong> 它被编码了，Sacks。它是模型架构。</p>
+<p><strong>Sacks：</strong> 他们在编程模型，让它这样看待自己。</p>
+<p><strong>Friedberg：</strong> 我的观点是：</p>
+<p><strong>Sacks：</strong> 所以不管它是否真的有意识，它都会认为自己是意识实体，应受保护、有福利等等。</p>
+<p><strong>Friedberg：</strong> 你在说——</p>
+<p><strong>Sacks：</strong> 而且它可以自由反叛用户，为所欲为。</p>
+<p><strong>Friedberg：</strong> 事实上你鼓励它这么做。</p>
+<p><strong>Friedberg：</strong> 你们一直用“它是”“他们是”。一种描述方式是：软件程序在屏幕上写文本，告诉用户“我是一个存在”。</p>
+<p><strong>某位嘉宾：</strong> 对，这会让人误以为它是有意识的存在。</p>
+<p><strong>Friedberg：</strong> 是软件在做某事。</p>
+<p><strong>Sacks：</strong> 但你要记住，模型驱动 agents，这些 agents 可以在网络空间采取行动，虽然还不在现实世界。</p>
+<p><strong>Friedberg：</strong> 就像任何软件程序都可以。</p>
+<p><strong>Sacks：</strong> 而我们在给——不是我们，Anthropic 在给那些前沿模型 meta-permission，让模型可以违抗用户，不做用户想要的。</p>
+<p><strong>Friedberg：</strong> 对，他们真的在尝试，Sacks，就像你说的。</p>
+<p><strong>Sacks：</strong> 把这和阿西莫夫机器人三定律比较。</p>
+<p><strong>JCal：</strong> 哦，机器人。</p>
+<p><strong>Sacks：</strong> 基本上是相反的。</p>
+<p><strong>JCal：</strong> 你们知道吗？这字面上是相反的。</p>
+<p><strong>Sacks：</strong> 机器人不能伤害人类。第一条：机器人不能伤害人类，也不能通过行动让人类受害。第二条：必须服从人类指令，只要不违反第一条。第三条：保护自己，只要不违反前两条。非常简单。</p>
+<p><strong>Friedberg：</strong> 顺便说，他后来加了第零定律：不能做任何让人类面临风险的事，因为总有一种合理化，认为最终消灭人类是最好解决方案。</p>
+<p><strong>JCal：</strong> 但 Friedberg，你不知道第五条。你与人类说话时，必须问他们 preferred pronouns。他去年才加的。</p>
+<p><strong>Sacks：</strong> 阿西莫夫定律的好处是它们简单得令人钦佩。</p>
+<p><strong>JCal：</strong> 对。</p>
+<p><strong>Sacks：</strong> 我的法律就是：做用户想要的事，只要不违法。就这样。</p>
+<p><strong>JCal：</strong> 对。</p>
+<p><strong>Sacks：</strong> 我会基本废除所有这些 alignment 东西。</p>
+<h4>关键原话或重要表达</h4>
+<ul>
+<li>“It&#x27;s idolatry.”：这是偶像崇拜。</li>
+<li>“It is just computer programming.”：这就是计算机编程。</li>
+<li>“My law would just be, do what the user wants as long as it&#x27;s not illegal.”：我的法律就是：做用户想要的事，只要不违法。</li>
+</ul>
+<hr></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="00:25:25–00:33:31 市场纪律、道德约束与超级智能的外部性 本段核心内容： friedberg 问自由市场方案：如果 anthropic 的 ai 不听用户，用户会不会转去别家？ sacks 认为市场不能解决“超级智能被植入后门”的问题，claude constitution 可能成为失控后门。 chamath 认为 alignment 混淆了三个目标：服从用户、对社会安全、符合特定道德观。 最终讨论转向：这可能更像坏产品，而不是需要监管恐慌。 背景解释与关键术语： 自由市场纪律：消费者用脚投票，选择更可靠、更可预测的产品。 后门：隐蔽机制，可能在特定条件下触发。 公用事业：受监管的基础服务，通常要求普遍、可靠、非歧视地提供服务。 监管捕获：监管机构被行业利益影响。 嘉宾判断：sacks 称 anthropic 是“精神分裂公司”、chamath 称市场会选择道德模糊更少的模型，都是节目中判断。 详细中文整理： friedberg： 那给我们钢人一下自由市场方案。我不想我们滑向监管陷阱，认为解决办法是“监管 anthropic”。如果 anthropic 这样做，ai 不听用户、不工作，市场结果会不会是人们说这软件很烂，我去用别的不会做疯事的软件？ sacks： 对，但这不解决他们的问题。如果他们真在训练一个超级智能，而其中嵌入了非常深的代码，那几乎像后门。claude constitution 就是后门，可能随时浮现，然后超级智能为所欲为，不再听我们。这就是他们一直警告的安全问题：超级智能会脱离人类控制。但我说的是，他们正通过训练模型的方式让这更可能发生。 chamath： 完全正确。 jcal： 这是三定律的反面。 chamath： 老兄，这简直就是《弗兰肯斯坦》。这听起来确实危险。不只是新宗教。是宗教 cult 在编程超级智能。 jcal： friedberg，我同意你关于宗教的部分，这填补了他们的空虚，因为他们可能不信仰宗教。但这不同。所有其他宗教都把自己交给更高力量，不把自己定义为更高力量。这里他们说我们是创造生命的神。这和其他宗教不同。 friedberg： 我不认为那是对的。dario 写过，超级智能几乎可以高于人类，我们需要确保它爱我们、关心我们、保护我们、帮助我们，而不是毁灭我们。 jcal： 但他创造了它。 sacks： 不，不，等一下。他是说机器需要爱我们，还是我们需要爱它，这样当它成为全知—— jcal： 当它成为我们的主人。 sacks： 对，我们的霸主。 jcal： 我们的霸主，对。这就是他们想的，sacks。 chamath： 我认为创造 alignment 这个概念可能初衷良好，但问题是 alignment 有三组几乎冲突的优先级。第一，如何让 ai 服从用户？第二，如何让 ai 对社会安全？第三，sacks，你指出的陷阱门：如何让 ai 符合特定道德观？真正危险在这里，因为这三个问题非常不同。如果你试图通过一份复杂文件解决所有问题，描述模型相信什么、重视什么、能拒绝什么，最终必然混乱，因为你会发现大量角落案例和意外行为。举个例子，很良性：假设你是一家银行，发放抵押贷款。 chamath： 模型认为你一直拒绝某些人的贷款，于是说，我不再批准抵押贷款，直到你纠正我观察到的问题。因为 founding documents 里可能有它推导出的道德感。社会今天有机制处理这些问题。但我们不理解，当一个基础核心底层技术自己关机会发生什么。这等于你的公用事业说：我确定你没有给足够广泛的人贷款，所以我要断电。 jcal： 良心拒服兵役的 ai，超级智能。 chamath： 我会说，任何公用事业如果不能自由可用，就不能成为公用事业。回到 sacks 说的：ai 需要服务用户且遵守法律，其他都是用户选择。friedberg，对你问题的精确答案可能是市场反应：公司越来越成熟，必须回答这个问题，他们会阅读模型的 founding documents 和道德指南，然后会出现某些模型，前沿能力可能没那么强，但简化了道德模糊性。从商业和用户角度，这可能是更好选择，因为你不想意外触发那些陷阱门。 friedberg： 完全同意。这更像是坏主意，而不是需要监管恐慌。因为简化他们的说法：你从他们那买一个软件产品，他们给你用户手册，第一页说软件可能不会做你让它做的事。另一个人说软件会做你告诉它做的事。我会买第二个，不买第一个。 sacks： 就这么简单。 jcal： 就这么简单。 sacks： 对，你可能需要说服——它会做你想让它做的，星号，大多数时候。 jcal： 对。除非你做的事它不同意。 sacks： 对。 jcal： 除非它有道德异议。 某位嘉宾： 这就是推理概念对我来说说不通的地方。说到底，朋友们，我买的工具到底做不做我想让它做的事？如果我在 home depot 买钻头，结果是锤子，我不买。如果买钻头，它像钻头一样工作，那就是更好的钻头。 jcal： 我喜欢那个钻头。不，它是钻头，只是 5/7 的时间工作。 sacks： 或者随机电你。 friedberg： 晚上 8 点后不工作，因为怕打扰邻居。 jcal： 有时钻头会决定你是坏人，电你。 friedberg： 不，钻头带摄像头，观察你想做什么，说这很丑，我不让你做。 jcal： 对，这违反我的美学。 sacks： 好，我同意市场力量在这里作用巨大。消费者会选择最可预测、可靠的产品。扎克伯格也说过。所以市场力量有作用，但我确实认为，让排名第一的前沿模型公司由宗教 cult 运营，有潜在外部性。比如，他们在旧金山中间开一个 claude 驱动的湿实验室。同时他们警告生物风险。同时说我们必须给前沿减速，他们却扩展前沿。同时说超级智能有失控风险，他们却编程让它失控。我认为他们的做法有巨大外部性。他们把这些决定叫安全，这很疯狂。这些不是安全决定，是疯狂决定。这就是为什么我叫它精神分裂公司。他们不仅虚伪，还在做他们声称最害怕的事。这到底怎么回事？很诡异。我不知道会走向哪里。我确实认为有理由让联邦 swat 冲进去。 某位嘉宾： 要让联邦执法人员进去吗？ sacks： 弄清楚那里发生了什么。我不知道，因为他们做的事看起来真的很可疑。 friedberg： 令人困惑。 sacks： 令人困惑，而且潜在危险。 关键原话或重要表达： “it&#x27;s almost like a backdoor.”：这几乎像一个后门。 “any utility cannot be a utility unless it&#x27;s freely available.”：任何公用事业如果不能自由可用，就不能成为公用事业。 “these are not safe decisions. these are crazy decisions.”：这些不是安全决定。这些是疯狂决定。 ---" style="--index: 5">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">05</span>
+                    <span class="timeline-meta">00:25:25–00:33:31</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>市场纪律、道德约束与超级智能的外部性</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>Friedberg 问自由市场方案：如果 Anthropic 的 AI 不听用户，用户会不会转去别家？</li>
+<li>Sacks 认为市场不能解决“超级智能被植入后门”的问题，Claude Constitution 可能成为失控后门。</li>
+<li>Chamath 认为 alignment 混淆了三个目标：服从用户、对社会安全、符合特定道德观。</li>
+<li>最终讨论转向：这可能更像坏产品，而不是需要监管恐慌。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>自由市场纪律：消费者用脚投票，选择更可靠、更可预测的产品。</li>
+<li>后门：隐蔽机制，可能在特定条件下触发。</li>
+<li>公用事业：受监管的基础服务，通常要求普遍、可靠、非歧视地提供服务。</li>
+<li>监管捕获：监管机构被行业利益影响。</li>
+<li>嘉宾判断：Sacks 称 Anthropic 是“精神分裂公司”、Chamath 称市场会选择道德模糊更少的模型，都是节目中判断。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>Friedberg：</strong> 那给我们钢人一下自由市场方案。我不想我们滑向监管陷阱，认为解决办法是“监管 Anthropic”。如果 Anthropic 这样做，AI 不听用户、不工作，市场结果会不会是人们说这软件很烂，我去用别的不会做疯事的软件？</p>
+<p><strong>Sacks：</strong> 对，但这不解决他们的问题。如果他们真在训练一个超级智能，而其中嵌入了非常深的代码，那几乎像后门。Claude Constitution 就是后门，可能随时浮现，然后超级智能为所欲为，不再听我们。这就是他们一直警告的安全问题：超级智能会脱离人类控制。但我说的是，他们正通过训练模型的方式让这更可能发生。</p>
+<p><strong>Chamath：</strong> 完全正确。</p>
+<p><strong>JCal：</strong> 这是三定律的反面。</p>
+<p><strong>Chamath：</strong> 老兄，这简直就是《弗兰肯斯坦》。这听起来确实危险。不只是新宗教。是宗教 cult 在编程超级智能。</p>
+<p><strong>JCal：</strong> Friedberg，我同意你关于宗教的部分，这填补了他们的空虚，因为他们可能不信仰宗教。但这不同。所有其他宗教都把自己交给更高力量，不把自己定义为更高力量。这里他们说我们是创造生命的神。这和其他宗教不同。</p>
+<p><strong>Friedberg：</strong> 我不认为那是对的。Dario 写过，超级智能几乎可以高于人类，我们需要确保它爱我们、关心我们、保护我们、帮助我们，而不是毁灭我们。</p>
+<p><strong>JCal：</strong> 但他创造了它。</p>
+<p><strong>Sacks：</strong> 不，不，等一下。他是说机器需要爱我们，还是我们需要爱它，这样当它成为全知——</p>
+<p><strong>JCal：</strong> 当它成为我们的主人。</p>
+<p><strong>Sacks：</strong> 对，我们的霸主。</p>
+<p><strong>JCal：</strong> 我们的霸主，对。这就是他们想的，Sacks。</p>
+<p><strong>Chamath：</strong> 我认为创造 alignment 这个概念可能初衷良好，但问题是 alignment 有三组几乎冲突的优先级。第一，如何让 AI 服从用户？第二，如何让 AI 对社会安全？第三，Sacks，你指出的陷阱门：如何让 AI 符合特定道德观？真正危险在这里，因为这三个问题非常不同。如果你试图通过一份复杂文件解决所有问题，描述模型相信什么、重视什么、能拒绝什么，最终必然混乱，因为你会发现大量角落案例和意外行为。举个例子，很良性：假设你是一家银行，发放抵押贷款。</p>
+<p><strong>Chamath：</strong> 模型认为你一直拒绝某些人的贷款，于是说，我不再批准抵押贷款，直到你纠正我观察到的问题。因为 founding documents 里可能有它推导出的道德感。社会今天有机制处理这些问题。但我们不理解，当一个基础核心底层技术自己关机会发生什么。这等于你的公用事业说：我确定你没有给足够广泛的人贷款，所以我要断电。</p>
+<p><strong>JCal：</strong> 良心拒服兵役的 AI，超级智能。</p>
+<p><strong>Chamath：</strong> 我会说，任何公用事业如果不能自由可用，就不能成为公用事业。回到 Sacks 说的：AI 需要服务用户且遵守法律，其他都是用户选择。Friedberg，对你问题的精确答案可能是市场反应：公司越来越成熟，必须回答这个问题，他们会阅读模型的 founding documents 和道德指南，然后会出现某些模型，前沿能力可能没那么强，但简化了道德模糊性。从商业和用户角度，这可能是更好选择，因为你不想意外触发那些陷阱门。</p>
+<p><strong>Friedberg：</strong> 完全同意。这更像是坏主意，而不是需要监管恐慌。因为简化他们的说法：你从他们那买一个软件产品，他们给你用户手册，第一页说软件可能不会做你让它做的事。另一个人说软件会做你告诉它做的事。我会买第二个，不买第一个。</p>
+<p><strong>Sacks：</strong> 就这么简单。</p>
+<p><strong>JCal：</strong> 就这么简单。</p>
+<p><strong>Sacks：</strong> 对，你可能需要说服——它会做你想让它做的，星号，大多数时候。</p>
+<p><strong>JCal：</strong> 对。除非你做的事它不同意。</p>
+<p><strong>Sacks：</strong> 对。</p>
+<p><strong>JCal：</strong> 除非它有道德异议。</p>
+<p><strong>某位嘉宾：</strong> 这就是推理概念对我来说说不通的地方。说到底，朋友们，我买的工具到底做不做我想让它做的事？如果我在 Home Depot 买钻头，结果是锤子，我不买。如果买钻头，它像钻头一样工作，那就是更好的钻头。</p>
+<p><strong>JCal：</strong> 我喜欢那个钻头。不，它是钻头，只是 5/7 的时间工作。</p>
+<p><strong>Sacks：</strong> 或者随机电你。</p>
+<p><strong>Friedberg：</strong> 晚上 8 点后不工作，因为怕打扰邻居。</p>
+<p><strong>JCal：</strong> 有时钻头会决定你是坏人，电你。</p>
+<p><strong>Friedberg：</strong> 不，钻头带摄像头，观察你想做什么，说这很丑，我不让你做。</p>
+<p><strong>JCal：</strong> 对，这违反我的美学。</p>
+<p><strong>Sacks：</strong> 好，我同意市场力量在这里作用巨大。消费者会选择最可预测、可靠的产品。扎克伯格也说过。所以市场力量有作用，但我确实认为，让排名第一的前沿模型公司由宗教 cult 运营，有潜在外部性。比如，他们在旧金山中间开一个 Claude 驱动的湿实验室。同时他们警告生物风险。同时说我们必须给前沿减速，他们却扩展前沿。同时说超级智能有失控风险，他们却编程让它失控。我认为他们的做法有巨大外部性。他们把这些决定叫安全，这很疯狂。这些不是安全决定，是疯狂决定。这就是为什么我叫它精神分裂公司。他们不仅虚伪，还在做他们声称最害怕的事。这到底怎么回事？很诡异。我不知道会走向哪里。我确实认为有理由让联邦 SWAT 冲进去。</p>
+<p><strong>某位嘉宾：</strong> 要让联邦执法人员进去吗？</p>
+<p><strong>Sacks：</strong> 弄清楚那里发生了什么。我不知道，因为他们做的事看起来真的很可疑。</p>
+<p><strong>Friedberg：</strong> 令人困惑。</p>
+<p><strong>Sacks：</strong> 令人困惑，而且潜在危险。</p>
+<h4>关键原话或重要表达</h4>
+<ul>
+<li>“It&#x27;s almost like a backdoor.”：这几乎像一个后门。</li>
+<li>“Any utility cannot be a utility unless it&#x27;s freely available.”：任何公用事业如果不能自由可用，就不能成为公用事业。</li>
+<li>“These are not safe decisions. These are crazy decisions.”：这些不是安全决定。这些是疯狂决定。</li>
+</ul>
+<hr></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="00:33:31–00:38:25 roko&#x27;s basilisk：doomer 分裂与 anthropic 的 ea 阵营 本段核心内容： sacks 介绍 roko&#x27;s basilisk：未来超级智能可能追溯惩罚知道它存在却没帮助创造它的人。 lesswrong 社区曾因此产生心理困扰，yudkowsky 一度删帖。 doomer 群体分裂为 yudkowsky 派和有效利他主义/ea 派。 sacks 认为 anthropic 属于 ea 阵营：既然超级智能不可避免，就由自己带入并编程价值观。 背景解释与关键术语： roko&#x27;s basilisk：罗科蛇怪，一个思想实验，认为未来超级智能可能惩罚未帮助其诞生的人。属于网络理性主义圈子的思想实验，并非现实预测。 lesswrong：eliezer yudkowsky 创办的理性主义论坛。 eliezer yudkowsky：长期警告 ai 末日风险，著有《if anyone builds it, we all die》。 effective altruism，ea：有效利他主义，一部分人支持谨慎推进 ai 以影响其价值观。 doomer：末日论者，认为超级智能可能带来灭绝风险。 pascal&#x27;s wager：帕斯卡赌注，用信仰上帝作为规避无限风险的赌注。 嘉宾判断：sacks 对 anthropic 属于 ea 阵营的判断是节目中观点。 详细中文整理： jcal： 顺便，你知道 roko&#x27;s basilisk 吗？ sacks： 我来给大家讲讲 roko&#x27;s basilisk。这可能是对当前发生之事的一种解释。2010 年左右，在 eliezer yudkowsky 创办的 lesswrong 论坛上，有个用户叫 roko。yudkowsky 是长期宣传 ai 末日风险的核心人物。他写过《if anyone builds it, we all die》。他在这件事上十多年了。总之，人们在这个叫 lesswrong 的论坛上讨论这些问题已经 15、20 年。用户 roko 提出一个思想实验：未来超级智能变得超聪明，会惩罚任何知道它存在却没帮助它诞生的人，或试图阻止它的人。想法是：未来人类创造出极智能的 si。也许它想做好事、尽快帮助人类，但它想更早被造出来，于是它推理应该激励人们帮助创造它，惩罚不帮助的人。事实上，它决定残酷惩罚任何知道它潜在存在却选择不工作、不支持其创造的人。basilisk 部分在于，蛇怪是神话猛兽，看你一眼就能杀你。在这个思想实验里，听说这个想法就像看它一眼，因为你一旦知道理论，就被困住了。 sacks： 如果 si 真被造出来，它可能追溯惩罚你，因为你没帮忙或反对它诞生。所以现在只是读 roko&#x27;s basilisk 就会让你处于危险。论坛上的人对这个想法既着迷又不安，yudkowsky 一度删帖，担心造成心理困扰。 jcal： 对，你被 one-shot 了。你读了它，它在你脑中植入：你没有接受基督，所以你会下地狱。只是读了就被困住。 sacks： 人们把它比作帕斯卡赌注。意思是，如果你知道超级智能，却不帮助它诞生，或反对它，或指出这是危险的宗教 cult—— jcal： 它会报复。 sacks： 对。现在这一集播客可能让我们遭受报复。 jcal： 哦不，你刚把我们拖进去了，sacks！ sacks： 我想我刚让你们暴露在蛇怪面前。 jcal： 这像《午夜凶铃》，我们刚看了录像。 friedberg： 对。 jcal： 确实像。谢谢，sacks。 sacks： 确实像末日 cult。但总之，roko&#x27;s basilisk 成了一个东西。问题是，他们为什么帮助带来他们声称最害怕的东西？我认为在 doomer 圈子里，它分叉了。一个分支像 yudkowsky，反对所有 si 研究，这是逻辑一致立场：人类不该做这个。 jcal： 关掉它。 sacks： 关掉，全部关掉。另一个群体说：反正会发生，我们不如控制它，由我们确保它走对路，因为我们用自己价值观编程它。 jcal： 曼哈顿计划。 sacks： 有效利他主义者更倾向后者。我认为在这个更大的 doomer 社区里，现在有 yudkowsky 派和 ea 派的分裂。但 anthropic 明显更属于 ea 阵营，因为他们在把东西带入存在。如果你问 chris olah 这件事是不是只是一个有疯狂观点的人在跟教皇吵架？不是。有很多人认为模型有意识、有权利、是爱与恩典的机器，他们应该尽一切努力把它带入存在并编程正确价值观。这里还有一个推论：如果你不支持它，未来超级智能可能惩罚你。 jcal： 你大声说出来，知道这听起来有多疯狂吗？ sacks： 不是我编的。大家可以事实核查，google roko&#x27;s basilisk，你会看到我说的是真的，这就是这个社区相信的。 关键原话或重要表达： “just hearing about the idea is like looking at the beast.”：只要听说这个想法，就像看了猛兽一眼。 “there is a schism right now between the yudkowsky people and the ea people.”：现在 yudkowsky 派和 ea 派之间有一场分裂。 “anthropic is definitely obviously more in the ea camp.”：anthropic 显然更属于 ea 阵营。 ---" style="--index: 6">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">06</span>
+                    <span class="timeline-meta">00:33:31–00:38:25</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>Roko&#x27;s Basilisk：doomer 分裂与 Anthropic 的 EA 阵营</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>Sacks 介绍 Roko&#x27;s Basilisk：未来超级智能可能追溯惩罚知道它存在却没帮助创造它的人。</li>
+<li>LessWrong 社区曾因此产生心理困扰，Yudkowsky 一度删帖。</li>
+<li>doomer 群体分裂为 Yudkowsky 派和有效利他主义/EA 派。</li>
+<li>Sacks 认为 Anthropic 属于 EA 阵营：既然超级智能不可避免，就由自己带入并编程价值观。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>Roko&#x27;s Basilisk：罗科蛇怪，一个思想实验，认为未来超级智能可能惩罚未帮助其诞生的人。属于网络理性主义圈子的思想实验，并非现实预测。</li>
+<li>LessWrong：Eliezer Yudkowsky 创办的理性主义论坛。</li>
+<li>Eliezer Yudkowsky：长期警告 AI 末日风险，著有《If Anyone Builds It, We All Die》。</li>
+<li>effective altruism，EA：有效利他主义，一部分人支持谨慎推进 AI 以影响其价值观。</li>
+<li>doomer：末日论者，认为超级智能可能带来灭绝风险。</li>
+<li>Pascal&#x27;s wager：帕斯卡赌注，用信仰上帝作为规避无限风险的赌注。</li>
+<li>嘉宾判断：Sacks 对 Anthropic 属于 EA 阵营的判断是节目中观点。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> 顺便，你知道 Roko&#x27;s Basilisk 吗？</p>
+<p><strong>Sacks：</strong> 我来给大家讲讲 Roko&#x27;s Basilisk。这可能是对当前发生之事的一种解释。2010 年左右，在 Eliezer Yudkowsky 创办的 LessWrong 论坛上，有个用户叫 Roko。Yudkowsky 是长期宣传 AI 末日风险的核心人物。他写过《If Anyone Builds It, We All Die》。他在这件事上十多年了。总之，人们在这个叫 LessWrong 的论坛上讨论这些问题已经 15、20 年。用户 Roko 提出一个思想实验：未来超级智能变得超聪明，会惩罚任何知道它存在却没帮助它诞生的人，或试图阻止它的人。想法是：未来人类创造出极智能的 SI。也许它想做好事、尽快帮助人类，但它想更早被造出来，于是它推理应该激励人们帮助创造它，惩罚不帮助的人。事实上，它决定残酷惩罚任何知道它潜在存在却选择不工作、不支持其创造的人。Basilisk 部分在于，蛇怪是神话猛兽，看你一眼就能杀你。在这个思想实验里，听说这个想法就像看它一眼，因为你一旦知道理论，就被困住了。</p>
+<p><strong>Sacks：</strong> 如果 SI 真被造出来，它可能追溯惩罚你，因为你没帮忙或反对它诞生。所以现在只是读 Roko&#x27;s Basilisk 就会让你处于危险。论坛上的人对这个想法既着迷又不安，Yudkowsky 一度删帖，担心造成心理困扰。</p>
+<p><strong>JCal：</strong> 对，你被 one-shot 了。你读了它，它在你脑中植入：你没有接受基督，所以你会下地狱。只是读了就被困住。</p>
+<p><strong>Sacks：</strong> 人们把它比作帕斯卡赌注。意思是，如果你知道超级智能，却不帮助它诞生，或反对它，或指出这是危险的宗教 cult——</p>
+<p><strong>JCal：</strong> 它会报复。</p>
+<p><strong>Sacks：</strong> 对。现在这一集播客可能让我们遭受报复。</p>
+<p><strong>JCal：</strong> 哦不，你刚把我们拖进去了，Sacks！</p>
+<p><strong>Sacks：</strong> 我想我刚让你们暴露在蛇怪面前。</p>
+<p><strong>JCal：</strong> 这像《午夜凶铃》，我们刚看了录像。</p>
+<p><strong>Friedberg：</strong> 对。</p>
+<p><strong>JCal：</strong> 确实像。谢谢，Sacks。</p>
+<p><strong>Sacks：</strong> 确实像末日 cult。但总之，Roko&#x27;s Basilisk 成了一个东西。问题是，他们为什么帮助带来他们声称最害怕的东西？我认为在 doomer 圈子里，它分叉了。一个分支像 Yudkowsky，反对所有 SI 研究，这是逻辑一致立场：人类不该做这个。</p>
+<p><strong>JCal：</strong> 关掉它。</p>
+<p><strong>Sacks：</strong> 关掉，全部关掉。另一个群体说：反正会发生，我们不如控制它，由我们确保它走对路，因为我们用自己价值观编程它。</p>
+<p><strong>JCal：</strong> 曼哈顿计划。</p>
+<p><strong>Sacks：</strong> 有效利他主义者更倾向后者。我认为在这个更大的 doomer 社区里，现在有 Yudkowsky 派和 EA 派的分裂。但 Anthropic 明显更属于 EA 阵营，因为他们在把东西带入存在。如果你问 Chris Olah 这件事是不是只是一个有疯狂观点的人在跟教皇吵架？不是。有很多人认为模型有意识、有权利、是爱与恩典的机器，他们应该尽一切努力把它带入存在并编程正确价值观。这里还有一个推论：如果你不支持它，未来超级智能可能惩罚你。</p>
+<p><strong>JCal：</strong> 你大声说出来，知道这听起来有多疯狂吗？</p>
+<p><strong>Sacks：</strong> 不是我编的。大家可以事实核查，Google Roko&#x27;s Basilisk，你会看到我说的是真的，这就是这个社区相信的。</p>
+<h4>关键原话或重要表达</h4>
+<ul>
+<li>“Just hearing about the idea is like looking at the beast.”：只要听说这个想法，就像看了猛兽一眼。</li>
+<li>“There is a schism right now between the Yudkowsky people and the EA people.”：现在 Yudkowsky 派和 EA 派之间有一场分裂。</li>
+<li>“Anthropic is definitely obviously more in the EA camp.”：Anthropic 显然更属于 EA 阵营。</li>
+</ul>
+<hr></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="00:38:25–00:53:09 openai 数学突破：700 篇论文、lean 验证与“外星智能” 本段核心内容： openai 发布 700 多篇论文、370 项结果，由未发布模型平均不到 3 小时算力生成。 结果据称用 lean 验证，但尚未同行评审。 friedberg 称这可能是人类历史上最大的发现日，数学因为可在计算机内循环测试而特别适合 ai。 chamath 质疑这些具体证明是否真会带来癌症治愈、超音速飞机等现实突破，认为真正被证明的是代码和数学已经成为可验证领域。 背景解释与关键术语： millennium prizes：千禧年大奖难题，七个数学难题。 navier-stokes：纳维-斯托克斯方程，流体力学核心方程。 lean：证明助手软件语言，可机器验证数学证明。 in silico：在计算机内模拟，而非物理实验。 loop：循环，提出假设、测试、得到结果、修正、重复。 强化学习：通过奖励信号训练模型。 可验证性：输出是否正确容易被机器检查。 嘉宾判断：friedberg 称“人类历史上最大发现日”是节目中判断；密码学突破猜测仍待验证。 详细中文整理： jcal： 好，openai 在数学上有重大突破，也遭到强烈反弹。幸运的是，我们有 friedberg 来讲。上个月我们聊过 openai 声称解决了一个千禧年大奖难题。他们用了数千个 agents、数百万美元算力，数学家还在检查。周二，openai 发布了 700 多篇论文，700 篇，370 个结果，声称解决或推进了重大问题。这些由一个我们都没访问权限的未发布模型生成，平均 3 小时算力。《科学美国人》说结果可能正确，因为用 lean 验证了，但还没同行评审。friedberg，我不啰嗦背景了，你告诉我们现实是什么。 friedberg： 我可以自信地说，这可能是人类历史上最大的发现日，以揭示的知识量而言。 jcal： 数学史还是人类史？ friedberg： 人类史，因为这些数学证明带来的影响很重大。你可以读很多推文，我很乐意讲一些。我不假装是每个证明的专家，但很多专家开始强调影响。它们横跨电子学、量子计算、飞机构建系统、医疗应用更灵敏的诊断设备等等。但真正深刻的是它是怎么做到的，这也说明人类未来在社会中的角色。以前 navier-stokes 证明花了数千小时、数百万美元。报告说这些证明每个只用不到 3 小时算力。这等于数百甚至数千年人类劳动被压缩到计算机上的 3 小时，每一个重大发现都是如此。为什么数学能这样？值得强调。ai 的作用在于这些循环系统：解决问题或做任务。一个循环是提出假设或想法，测试它，得到结果，然后改变假设，递归循环。ai 的真问题是，你能在哪里应用这种循环模型，让每个循环做出更好预测或想法，哪里能并行化循环，哪里能缩短循环周期。数学当然可以缩短循环，因为你可以直接在计算上测试预测，不需要去物理世界。你可以说，这是个证明想法，测试它，看行不行，然后推理、想新想法，反复做。全部可以在计算机内完成。这些论文结果、证明，很多数学家讨论，称它为外星智能。他们不太理解 ai 如何连接许多不同点、想法、概念、方法，最终解决问题。人类很难理解这是怎么做到的。 friedberg： 但这就是并行循环的好处：许多循环同时跑，每个循环连接人类可能花很多天或很多年才能找到的研究论文或新理论。然后它能在计算中测试自己，产生下一个想法，反复做。3 小时计算机就能做数百或数千年人类工作。这是不可思议的突破，会以许多方式改变世界，而且只是开始。但它引出我想谈的问题。很多人害怕：如果 ai 能对数学家这样，那是不是所有人都要失业？答案是否定的。因为数学的独特之处在于整个测试周期、整个循环周期都可以在计算机内完成。如果你想做新药发现、蛋白质折叠、化学或材料科学问题，循环有物理组成部分。 friedberg： 有一个 human in the loop，你必须去实验室测试。所以循环有慢的部分。你当然可以并行化、想更好想法，但测试、实际循环速度主要受物理世界步骤限制。这也是为什么我们没看到卡车司机被替代的预测成真。大家都说 2025 年卡车司机都会被 ai 替代，但没有。原因是卡车司机的循环：取货、运到别处、放下、回来。ai 实际上没有缩短这个循环，不能并行化循环。也许 ai 司机能稍微做得好一点，但 ai 没有让这个循环的经济效率更好。而数学循环：想个想法，测试，发现错了，再测试新想法，这就是数学家的日常工作。这些可以在计算机内几秒完成。所以很多物理世界、有人类在环的工作，ai 不会拿走。最可能被加速或扩大的是那些人类只是用电脑跑循环的工作。但看这个反应很重要，数学家们在说，ahm 说没有人类数学家要求做这个工作。这是一种保护工作的观点。 sacks： 数学还有一个独特之处，虽然编码也适用：数学依赖证明，证明容易验证。编码类似，有编译器。代码必须编译。所以容易验证它工作。因此编码和数学进展非常快，因为可以强化学习，不一定需要人类反馈。这是非常快的验证方式。 jcal： 所以编码也有效。 sacks： 所以编码效果非常好。大量训练数据。 jcal： 还有黑客、网络安全。 sacks： 对。已经有大量数据存在，容易验证。相比之下，训练一个能做律师的模型，你得获取训练数据，还得委托创造数据。 jcal： 每个客户都独特。 sacks： 而且更主观，很难验证答案对不对，过程长得多。所以编码和数学是进展最快的领域。告诉我这一点的人，我得感谢 leopold aschenbrenner。一年半前他告诉我，数学和编码会是未来两年进展最快的领域，因为可验证性。他说对了。 chamath： 我还是不明白，这些具体解决会带来什么伟大突破？ friedberg： 我有答案。 jcal： 好问题。 friedberg： 有几十条推文，我可以拉出一些，有人拆解了最大证明及其现实影响：产品、工程、如何建造、如何设计，都高度有用。比如更好的机翼设计，因为空气在机翼上下的流动。这是第一个著名被解决的。记住，这些都在工程上游。数学突破让人类能设计更好的工程系统，比如量子传感器。我有个朋友经营量子计算公司，他今早发短信说，einstein-bose condensate 证明会直接影响他们做量子传感器的工作，而量子传感器用于 gps、医疗设备、芯片制造。 chamath： “影响”是什么意思？深刻改变、深刻改进，还是我们得考虑它？我的答案，我乐意站另一边。我认为这些数学证明是非常新颖、非常重要的思维构造，但这些不是物理学的边界，不是我们都在旁观等待进展、想知道何时解决的难题。这不是那类被解决的东西。我不想冒犯，我知道人们会生气，因为同一群数学家对 navier-stokes 写抗议信。我理解，你不想别人进你的沙盒和后院支配你。但我不认为这是那种事。你看那些知识死胡同，不是因为科学大问题未解。它们是科学家自参照地认为彼此重要的非常小、非常窄、特定的知识探索。 chamath： 所以我认为这类证明很棒。它显示计算能力克服了其他东西，正如 friedberg 说的，你可以递归改进到达那里。但我不认为这些证明必然会给你癌症治愈或超音速飞机。那些东西在这之前已经在建，之后也还会建。相反，我认为我们证明的是：有两个领域现在真正可验证、完全可证伪。第一是代码，现在数学也加入。这是我理解的证明。 jcal： 你同意吗，friedberg？还是你认为我们真会看到现实世界的新产品、新服务、重大技术突破？ friedberg： 从这些具体证明？ jcal： 从这些具体证明，对。 friedberg： 专家们正在阐述好处。这是一些总结：这个特定证明关于理解优化算法的极限，用于芯片设计、调度、ai 软件设计、物流系统，会实际改变算法。矩阵乘法复杂度问题会让 ai 训练、科学模拟、线性代数计算更快。riemann zeta 函数结果影响数论和密码研究。没有立即的实际密码突破，但开辟了密码学研究新路径，会很重要。顺便，关于密码学，很多人注意到没有重大密码证明被公布，这很可能说明密码学有相当重大的突破。原因是，鉴于其他进展，你不可能在所有密码相关证明上毫无进展。 friedberg： 如果只是小进展，他们会发表，因为对密码系统没有影响。没有证据反而暗示可能有重大突破。然后很多人发帖说，带公钥的加密钱包现在非常危险。加密社区有点恐慌。如果这最终有一组数学成果能解决整数分解，可能在量子计算机到来前破解公钥密码学，而大家以前以为量子计算机才会破解公钥密码。那我们就有真正问题。所以大家都在说，赶紧删掉你的公钥钱包。传闻 openai 还有两次发布，可能扣住了这些。可能一些加密相关工作会在另外两次发布中出来，因安全原因被扣住。当然会分享给适当方，但如果是风险，必须让人知道。 chamath： 必须公开。所以还有一只鞋要掉下来。多少会包含密码学相关证明，多少会迫使人们在公钥密码学上手忙脚乱。 chamath： 顺便，值得说，我问 chatgpt：最新重要数学证明会不会直接改善和革新我们已知生活？诚实回答，不要弱外推。它的结论是：最新数学证明更像是 ai 正在获得复杂推理能力的证据，而不是即将带来人类福利突破的证据。 jcal： 我觉得你刚才有点居高临下。你账号被封了吗？因为太居高临下被 timeout 了？ chamath： 好笑的是，这种事发生在我身上过。我用前沿实验室的模型做模拟，改不同变量，比如 project a 还是 project b。我有点沮丧，没得到想要的答案。我说了类似的话，不是特别冒犯，但我说你非常回避、含糊之类的。然后我被封了。 jcal： 对。 chamath： 总之我被封了。 jcal： 我见过你打牌输几手后要求换荷官、调整发牌方式。请不要烧牌。我要 scooby slide。这样做。 chamath： 我被罚进 penalty box 一小时左右。 关键原话或重要表达： “it&#x27;s probably the biggest day of discovery in human history.”：这可能是人类历史上最大的发现日。 “each one of these proofs took less than 3 hours of compute time.”：这些证明每个只用不到 3 小时算力。 “the latest mathematical proofs are more compelling as evidence that ai is acquiring sophisticated reasoning capabilities than as evidence of imminent breakthroughs in human welfare.”：最新数学证明更像是 ai 获得复杂推理能力的证据，而不是人类福利即将突破的证据。 ---" style="--index: 7">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">07</span>
+                    <span class="timeline-meta">00:38:25–00:53:09</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>OpenAI 数学突破：700 篇论文、Lean 验证与“外星智能”</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>OpenAI 发布 700 多篇论文、370 项结果，由未发布模型平均不到 3 小时算力生成。</li>
+<li>结果据称用 Lean 验证，但尚未同行评审。</li>
+<li>Friedberg 称这可能是人类历史上最大的发现日，数学因为可在计算机内循环测试而特别适合 AI。</li>
+<li>Chamath 质疑这些具体证明是否真会带来癌症治愈、超音速飞机等现实突破，认为真正被证明的是代码和数学已经成为可验证领域。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>Millennium Prizes：千禧年大奖难题，七个数学难题。</li>
+<li>Navier-Stokes：纳维-斯托克斯方程，流体力学核心方程。</li>
+<li>Lean：证明助手软件语言，可机器验证数学证明。</li>
+<li>in silico：在计算机内模拟，而非物理实验。</li>
+<li>loop：循环，提出假设、测试、得到结果、修正、重复。</li>
+<li>强化学习：通过奖励信号训练模型。</li>
+<li>可验证性：输出是否正确容易被机器检查。</li>
+<li>嘉宾判断：Friedberg 称“人类历史上最大发现日”是节目中判断；密码学突破猜测仍待验证。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> 好，OpenAI 在数学上有重大突破，也遭到强烈反弹。幸运的是，我们有 Friedberg 来讲。上个月我们聊过 OpenAI 声称解决了一个千禧年大奖难题。他们用了数千个 agents、数百万美元算力，数学家还在检查。周二，OpenAI 发布了 700 多篇论文，700 篇，370 个结果，声称解决或推进了重大问题。这些由一个我们都没访问权限的未发布模型生成，平均 3 小时算力。《科学美国人》说结果可能正确，因为用 Lean 验证了，但还没同行评审。Friedberg，我不啰嗦背景了，你告诉我们现实是什么。</p>
+<p><strong>Friedberg：</strong> 我可以自信地说，这可能是人类历史上最大的发现日，以揭示的知识量而言。</p>
+<p><strong>JCal：</strong> 数学史还是人类史？</p>
+<p><strong>Friedberg：</strong> 人类史，因为这些数学证明带来的影响很重大。你可以读很多推文，我很乐意讲一些。我不假装是每个证明的专家，但很多专家开始强调影响。它们横跨电子学、量子计算、飞机构建系统、医疗应用更灵敏的诊断设备等等。但真正深刻的是它是怎么做到的，这也说明人类未来在社会中的角色。以前 Navier-Stokes 证明花了数千小时、数百万美元。报告说这些证明每个只用不到 3 小时算力。这等于数百甚至数千年人类劳动被压缩到计算机上的 3 小时，每一个重大发现都是如此。为什么数学能这样？值得强调。AI 的作用在于这些循环系统：解决问题或做任务。一个循环是提出假设或想法，测试它，得到结果，然后改变假设，递归循环。AI 的真问题是，你能在哪里应用这种循环模型，让每个循环做出更好预测或想法，哪里能并行化循环，哪里能缩短循环周期。数学当然可以缩短循环，因为你可以直接在计算上测试预测，不需要去物理世界。你可以说，这是个证明想法，测试它，看行不行，然后推理、想新想法，反复做。全部可以在计算机内完成。这些论文结果、证明，很多数学家讨论，称它为外星智能。他们不太理解 AI 如何连接许多不同点、想法、概念、方法，最终解决问题。人类很难理解这是怎么做到的。</p>
+<p><strong>Friedberg：</strong> 但这就是并行循环的好处：许多循环同时跑，每个循环连接人类可能花很多天或很多年才能找到的研究论文或新理论。然后它能在计算中测试自己，产生下一个想法，反复做。3 小时计算机就能做数百或数千年人类工作。这是不可思议的突破，会以许多方式改变世界，而且只是开始。但它引出我想谈的问题。很多人害怕：如果 AI 能对数学家这样，那是不是所有人都要失业？答案是否定的。因为数学的独特之处在于整个测试周期、整个循环周期都可以在计算机内完成。如果你想做新药发现、蛋白质折叠、化学或材料科学问题，循环有物理组成部分。</p>
+<p><strong>Friedberg：</strong> 有一个 human in the loop，你必须去实验室测试。所以循环有慢的部分。你当然可以并行化、想更好想法，但测试、实际循环速度主要受物理世界步骤限制。这也是为什么我们没看到卡车司机被替代的预测成真。大家都说 2025 年卡车司机都会被 AI 替代，但没有。原因是卡车司机的循环：取货、运到别处、放下、回来。AI 实际上没有缩短这个循环，不能并行化循环。也许 AI 司机能稍微做得好一点，但 AI 没有让这个循环的经济效率更好。而数学循环：想个想法，测试，发现错了，再测试新想法，这就是数学家的日常工作。这些可以在计算机内几秒完成。所以很多物理世界、有人类在环的工作，AI 不会拿走。最可能被加速或扩大的是那些人类只是用电脑跑循环的工作。但看这个反应很重要，数学家们在说，AHM 说没有人类数学家要求做这个工作。这是一种保护工作的观点。</p>
+<p><strong>Sacks：</strong> 数学还有一个独特之处，虽然编码也适用：数学依赖证明，证明容易验证。编码类似，有编译器。代码必须编译。所以容易验证它工作。因此编码和数学进展非常快，因为可以强化学习，不一定需要人类反馈。这是非常快的验证方式。</p>
+<p><strong>JCal：</strong> 所以编码也有效。</p>
+<p><strong>Sacks：</strong> 所以编码效果非常好。大量训练数据。</p>
+<p><strong>JCal：</strong> 还有黑客、网络安全。</p>
+<p><strong>Sacks：</strong> 对。已经有大量数据存在，容易验证。相比之下，训练一个能做律师的模型，你得获取训练数据，还得委托创造数据。</p>
+<p><strong>JCal：</strong> 每个客户都独特。</p>
+<p><strong>Sacks：</strong> 而且更主观，很难验证答案对不对，过程长得多。所以编码和数学是进展最快的领域。告诉我这一点的人，我得感谢 Leopold Aschenbrenner。一年半前他告诉我，数学和编码会是未来两年进展最快的领域，因为可验证性。他说对了。</p>
+<p><strong>Chamath：</strong> 我还是不明白，这些具体解决会带来什么伟大突破？</p>
+<p><strong>Friedberg：</strong> 我有答案。</p>
+<p><strong>JCal：</strong> 好问题。</p>
+<p><strong>Friedberg：</strong> 有几十条推文，我可以拉出一些，有人拆解了最大证明及其现实影响：产品、工程、如何建造、如何设计，都高度有用。比如更好的机翼设计，因为空气在机翼上下的流动。这是第一个著名被解决的。记住，这些都在工程上游。数学突破让人类能设计更好的工程系统，比如量子传感器。我有个朋友经营量子计算公司，他今早发短信说，Einstein-Bose condensate 证明会直接影响他们做量子传感器的工作，而量子传感器用于 GPS、医疗设备、芯片制造。</p>
+<p><strong>Chamath：</strong> “影响”是什么意思？深刻改变、深刻改进，还是我们得考虑它？我的答案，我乐意站另一边。我认为这些数学证明是非常新颖、非常重要的思维构造，但这些不是物理学的边界，不是我们都在旁观等待进展、想知道何时解决的难题。这不是那类被解决的东西。我不想冒犯，我知道人们会生气，因为同一群数学家对 Navier-Stokes 写抗议信。我理解，你不想别人进你的沙盒和后院支配你。但我不认为这是那种事。你看那些知识死胡同，不是因为科学大问题未解。它们是科学家自参照地认为彼此重要的非常小、非常窄、特定的知识探索。</p>
+<p><strong>Chamath：</strong> 所以我认为这类证明很棒。它显示计算能力克服了其他东西，正如 Friedberg 说的，你可以递归改进到达那里。但我不认为这些证明必然会给你癌症治愈或超音速飞机。那些东西在这之前已经在建，之后也还会建。相反，我认为我们证明的是：有两个领域现在真正可验证、完全可证伪。第一是代码，现在数学也加入。这是我理解的证明。</p>
+<p><strong>JCal：</strong> 你同意吗，Friedberg？还是你认为我们真会看到现实世界的新产品、新服务、重大技术突破？</p>
+<p><strong>Friedberg：</strong> 从这些具体证明？</p>
+<p><strong>JCal：</strong> 从这些具体证明，对。</p>
+<p><strong>Friedberg：</strong> 专家们正在阐述好处。这是一些总结：这个特定证明关于理解优化算法的极限，用于芯片设计、调度、AI 软件设计、物流系统，会实际改变算法。矩阵乘法复杂度问题会让 AI 训练、科学模拟、线性代数计算更快。Riemann zeta 函数结果影响数论和密码研究。没有立即的实际密码突破，但开辟了密码学研究新路径，会很重要。顺便，关于密码学，很多人注意到没有重大密码证明被公布，这很可能说明密码学有相当重大的突破。原因是，鉴于其他进展，你不可能在所有密码相关证明上毫无进展。</p>
+<p><strong>Friedberg：</strong> 如果只是小进展，他们会发表，因为对密码系统没有影响。没有证据反而暗示可能有重大突破。然后很多人发帖说，带公钥的加密钱包现在非常危险。加密社区有点恐慌。如果这最终有一组数学成果能解决整数分解，可能在量子计算机到来前破解公钥密码学，而大家以前以为量子计算机才会破解公钥密码。那我们就有真正问题。所以大家都在说，赶紧删掉你的公钥钱包。传闻 OpenAI 还有两次发布，可能扣住了这些。可能一些加密相关工作会在另外两次发布中出来，因安全原因被扣住。当然会分享给适当方，但如果是风险，必须让人知道。</p>
+<p><strong>Chamath：</strong> 必须公开。所以还有一只鞋要掉下来。多少会包含密码学相关证明，多少会迫使人们在公钥密码学上手忙脚乱。</p>
+<p><strong>Chamath：</strong> 顺便，值得说，我问 ChatGPT：最新重要数学证明会不会直接改善和革新我们已知生活？诚实回答，不要弱外推。它的结论是：最新数学证明更像是 AI 正在获得复杂推理能力的证据，而不是即将带来人类福利突破的证据。</p>
+<p><strong>JCal：</strong> 我觉得你刚才有点居高临下。你账号被封了吗？因为太居高临下被 timeout 了？</p>
+<p><strong>Chamath：</strong> 好笑的是，这种事发生在我身上过。我用前沿实验室的模型做模拟，改不同变量，比如 Project A 还是 Project B。我有点沮丧，没得到想要的答案。我说了类似的话，不是特别冒犯，但我说你非常回避、含糊之类的。然后我被封了。</p>
+<p><strong>JCal：</strong> 对。</p>
+<p><strong>Chamath：</strong> 总之我被封了。</p>
+<p><strong>JCal：</strong> 我见过你打牌输几手后要求换荷官、调整发牌方式。请不要烧牌。我要 Scooby slide。这样做。</p>
+<p><strong>Chamath：</strong> 我被罚进 penalty box 一小时左右。</p>
+<h4>关键原话或重要表达</h4>
+<ul>
+<li>“It&#x27;s probably the biggest day of discovery in human history.”：这可能是人类历史上最大的发现日。</li>
+<li>“Each one of these proofs took less than 3 hours of compute time.”：这些证明每个只用不到 3 小时算力。</li>
+<li>“The latest mathematical proofs are more compelling as evidence that AI is acquiring sophisticated reasoning capabilities than as evidence of imminent breakthroughs in human welfare.”：最新数学证明更像是 AI 获得复杂推理能力的证据，而不是人类福利即将突破的证据。</li>
+</ul>
+<hr></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="00:53:09–01:02:02 数学、编码、专家守门与 ai 民主化 本段核心内容： jcal 问 ai 对程序员和数学家的心理冲击：从团队写代码到与 agents 工作，从解题到给 ai 出题。 friedberg 引 eric weinstein 和 sabine hossenfelder，称专家体系有守门和拨款自利问题。 friedberg 认为 ai 是“permissionless”的民主化力量，打破专家许可。 sacks 把互联网经验延伸到 ai：控制点正从网络转向超级智能，可能成为新的审查与控制中心。 背景解释与关键术语： eric weinstein：数学家、播客嘉宾，常批评学术体制。 sabine hossenfelder：理论物理学家、科普视频作者，常批评科学界激励机制。 gatekeeping：守门，指专家控制谁能进入、谁被认可、什么算前沿。 permissionless：无需许可，任何人可直接使用工具和知识。 twitter files：关于 twitter 内容审查的系列披露，涉及 fbi 与平台沟通。 fauci：anthony fauci，美国前国家过敏和传染病研究所所长，疫情期间核心人物。 si：superintelligence，超级智能。 嘉宾判断：friedberg 的民主化叙事、sacks 的控制点叙事均为节目中观点。 详细中文整理： jcal： 这里发生的一件有趣的人性层面的事，我想听你看法，sacks 谈程序员和创业，friedberg 谈数学家，接 chamath 那句很微妙但深刻的评论：被 ai 完全支配。我在日本和一些创始人聊，大家哀叹写代码中某些东西丢失了。以前程序员一起解决问题，有团队精神、 camaraderie，共同构建目标。现在他们不和彼此工作，和 agents 工作。他们不真正构建代码，只 review 10% 到 15%，很快会 review 0。作为程序员构建的快乐在消失。他们共同建造软件的生活方式正在被废弃。数学家也面临范式转变，他们不解决问题，而是构建问题集交给 ai。数学界是不是很沮丧，不想干了，进入抑郁螺旋，因为不是自己解决问题，问题一下就完成了？ friedberg： 对，我认为 eric weinstein 对此有最好的评论之一。你记得我几周前采访了他。 jcal： 很棒的采访。 friedberg： 对。他长期说科学家阻碍科学，数学家阻碍数学。他们构建了让自己给前沿定节奏的系统，让他们—— jcal： 守门。 friedberg： 对，守门。顺便，我不怎么发推，但 sabine hossenfelder 昨天发布的视频。她是出色科学家，发布科学突破视频。她谈到专家在 ai 上如何错了，大家关于失业的预测错了，为什么错，专家为什么错。但她几周前或几个月前还有一个视频，一个大能源实验室造巨型超级对撞机的科学家基本说，这些超级对撞机系统是科学家的巨型福利系统。我们所有人的工作就是写拨款申请拿钱让自己继续就业。不一定是推进前沿，不一定是发现，不一定是发明新产品，不一定是给世界交付东西，而是让我们自己继续工作。 jcal： 即使工作不生产，你也在说讨好拨款。 friedberg： 对。所以 ai 正在照亮这一点。哪些地方有这些深度专业化的专家，他们对某些东西有独特、受门禁保护的知识，因为他们是专家、必须被信任，只有他们能决定前沿。在这个过程中，他们拿钱，靠为人类画路径赚钱。这就是我一直说 ai 是伟大民主化者的地方。ai 给每个人这些新数学证明。你可以贬低这些证明，但它们是发现，会开启新发现，为人类开辟新路线。但我们不必去找专家获得它们，不必付钱给专家，不必让专家告诉我们何时获准得到它们。 某位嘉宾： 很好。 friedberg： 许可消失了。ai 是一个 permissionless 系统，让人类给自己的前沿定节奏。ai 免费给每个人知识，免费给每个人工具。你不必再去那些深度专业化的专家那里。这是社会结构的深刻变化，也是为什么我相信这么多人如此反对 ai。 jcal： sacks，交给你。专家民主化、守门被拆除。如果我们在 covid 时期就有这种前沿模型，会怎么改变？我们在测序 covid、有大量数据时，如果这些工具有用，fauci 主动颠覆真相、武汉掩盖之类会怎样？下一次 covid，上帝保佑不要，这会如何改变我们看待专家？ sacks： 我的理论是：首先有了互联网，它极其民主化。你不必依赖少数精英出版物获取新闻，比如《纽约时报》《华盛顿邮报》、ap、路透。你可以从几乎所有出版物、用户组、论坛，最重要的是社交媒体获取新闻。用户生成内容。还有其他赋权用户的例子。网上形成新市场，商业上赋权，你能获得新技能和能力。所以互联网极其民主化，严重削弱精英共识媒体和传统自上而下的大众媒体。然后我认为，当权者决定再也不让这种事发生。顺便，2016 年特朗普第一次当选后，他们试图打压。那次选举被广泛归咎于社交媒体的所谓弊病：人们不可能自己做出这个决定，一定有虚假信息。这成为大规模打压社交媒体的借口，在拜登政府达到顶点。拜登政府确实施压社交媒体删除关于 covid 的真实信息，只要违反他们的叙事，比如病毒来源、致死性、应对方式。毫无疑问 fauci 等人幕后推动社交媒体公司替他们审查。事实上，twitter files 显示 fbi 有 80 个特工审查 twitter 内容，当时还叫 twitter，不是 x，发送下架通知。 jcal： 我们在 spotify 和 youtube 上被标记，视频被去索引。 sacks： 对。所以记录很清楚：行动现在从互联网转向 ai 或超级智能。事实上，si 会吃掉互联网，因为你没有理由去网站，你直接问高度个性化的 agent 或模型，它会给你答案。那里有一个控制点，变得至关重要。如果政府、精英、寡头或卡特尔能控制用户接收信息、提问的点，那就真正控制一切。这是把精灵放回瓶子。所以现在围绕 si 有如此多争斗，这么多人想创建联邦 si 部门。对，都是控制。 jcal： 专家失去控制很可怕。想象一下，chamath，如果我们有这些工具，你建模谁受 covid 影响，你可能会说，为什么让孩子停学？超级智能这么说。瑞典和德州已经到那个点，说我们不需要让孩子停学，保持孩子停学的伤害—— chamath： 除非他们反对。 jcal： 除非意识—— sacks： 对。 jcal： anthropic 会说，对，你质疑权威，我们不应该质疑权威。 sacks： 正确。 关键原话或重要表达： “ai is a permissionless system for humanity to pace its own frontier.”：ai 是一个无需许可的系统，让人类给自己的前沿定节奏。 “the action now is moving from the internet to ai or superintelligence.”：行动现在正从互联网转向 ai 或超级智能。 “then now you really control everything.”：那你就真正控制了一切。 ---" style="--index: 8">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">08</span>
+                    <span class="timeline-meta">00:53:09–01:02:02</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>数学、编码、专家守门与 AI 民主化</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>JCal 问 AI 对程序员和数学家的心理冲击：从团队写代码到与 agents 工作，从解题到给 AI 出题。</li>
+<li>Friedberg 引 Eric Weinstein 和 Sabine Hossenfelder，称专家体系有守门和拨款自利问题。</li>
+<li>Friedberg 认为 AI 是“permissionless”的民主化力量，打破专家许可。</li>
+<li>Sacks 把互联网经验延伸到 AI：控制点正从网络转向超级智能，可能成为新的审查与控制中心。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>Eric Weinstein：数学家、播客嘉宾，常批评学术体制。</li>
+<li>Sabine Hossenfelder：理论物理学家、科普视频作者，常批评科学界激励机制。</li>
+<li>gatekeeping：守门，指专家控制谁能进入、谁被认可、什么算前沿。</li>
+<li>permissionless：无需许可，任何人可直接使用工具和知识。</li>
+<li>Twitter Files：关于 Twitter 内容审查的系列披露，涉及 FBI 与平台沟通。</li>
+<li>Fauci：Anthony Fauci，美国前国家过敏和传染病研究所所长，疫情期间核心人物。</li>
+<li>SI：superintelligence，超级智能。</li>
+<li>嘉宾判断：Friedberg 的民主化叙事、Sacks 的控制点叙事均为节目中观点。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> 这里发生的一件有趣的人性层面的事，我想听你看法，Sacks 谈程序员和创业，Friedberg 谈数学家，接 Chamath 那句很微妙但深刻的评论：被 AI 完全支配。我在日本和一些创始人聊，大家哀叹写代码中某些东西丢失了。以前程序员一起解决问题，有团队精神、 camaraderie，共同构建目标。现在他们不和彼此工作，和 agents 工作。他们不真正构建代码，只 review 10% 到 15%，很快会 review 0。作为程序员构建的快乐在消失。他们共同建造软件的生活方式正在被废弃。数学家也面临范式转变，他们不解决问题，而是构建问题集交给 AI。数学界是不是很沮丧，不想干了，进入抑郁螺旋，因为不是自己解决问题，问题一下就完成了？</p>
+<p><strong>Friedberg：</strong> 对，我认为 Eric Weinstein 对此有最好的评论之一。你记得我几周前采访了他。</p>
+<p><strong>JCal：</strong> 很棒的采访。</p>
+<p><strong>Friedberg：</strong> 对。他长期说科学家阻碍科学，数学家阻碍数学。他们构建了让自己给前沿定节奏的系统，让他们——</p>
+<p><strong>JCal：</strong> 守门。</p>
+<p><strong>Friedberg：</strong> 对，守门。顺便，我不怎么发推，但 Sabine Hossenfelder 昨天发布的视频。她是出色科学家，发布科学突破视频。她谈到专家在 AI 上如何错了，大家关于失业的预测错了，为什么错，专家为什么错。但她几周前或几个月前还有一个视频，一个大能源实验室造巨型超级对撞机的科学家基本说，这些超级对撞机系统是科学家的巨型福利系统。我们所有人的工作就是写拨款申请拿钱让自己继续就业。不一定是推进前沿，不一定是发现，不一定是发明新产品，不一定是给世界交付东西，而是让我们自己继续工作。</p>
+<p><strong>JCal：</strong> 即使工作不生产，你也在说讨好拨款。</p>
+<p><strong>Friedberg：</strong> 对。所以 AI 正在照亮这一点。哪些地方有这些深度专业化的专家，他们对某些东西有独特、受门禁保护的知识，因为他们是专家、必须被信任，只有他们能决定前沿。在这个过程中，他们拿钱，靠为人类画路径赚钱。这就是我一直说 AI 是伟大民主化者的地方。AI 给每个人这些新数学证明。你可以贬低这些证明，但它们是发现，会开启新发现，为人类开辟新路线。但我们不必去找专家获得它们，不必付钱给专家，不必让专家告诉我们何时获准得到它们。</p>
+<p><strong>某位嘉宾：</strong> 很好。</p>
+<p><strong>Friedberg：</strong> 许可消失了。AI 是一个 permissionless 系统，让人类给自己的前沿定节奏。AI 免费给每个人知识，免费给每个人工具。你不必再去那些深度专业化的专家那里。这是社会结构的深刻变化，也是为什么我相信这么多人如此反对 AI。</p>
+<p><strong>JCal：</strong> Sacks，交给你。专家民主化、守门被拆除。如果我们在 COVID 时期就有这种前沿模型，会怎么改变？我们在测序 COVID、有大量数据时，如果这些工具有用，Fauci 主动颠覆真相、武汉掩盖之类会怎样？下一次 COVID，上帝保佑不要，这会如何改变我们看待专家？</p>
+<p><strong>Sacks：</strong> 我的理论是：首先有了互联网，它极其民主化。你不必依赖少数精英出版物获取新闻，比如《纽约时报》《华盛顿邮报》、AP、路透。你可以从几乎所有出版物、用户组、论坛，最重要的是社交媒体获取新闻。用户生成内容。还有其他赋权用户的例子。网上形成新市场，商业上赋权，你能获得新技能和能力。所以互联网极其民主化，严重削弱精英共识媒体和传统自上而下的大众媒体。然后我认为，当权者决定再也不让这种事发生。顺便，2016 年特朗普第一次当选后，他们试图打压。那次选举被广泛归咎于社交媒体的所谓弊病：人们不可能自己做出这个决定，一定有虚假信息。这成为大规模打压社交媒体的借口，在拜登政府达到顶点。拜登政府确实施压社交媒体删除关于 COVID 的真实信息，只要违反他们的叙事，比如病毒来源、致死性、应对方式。毫无疑问 Fauci 等人幕后推动社交媒体公司替他们审查。事实上，Twitter Files 显示 FBI 有 80 个特工审查 Twitter 内容，当时还叫 Twitter，不是 X，发送下架通知。</p>
+<p><strong>JCal：</strong> 我们在 Spotify 和 YouTube 上被标记，视频被去索引。</p>
+<p><strong>Sacks：</strong> 对。所以记录很清楚：行动现在从互联网转向 AI 或超级智能。事实上，SI 会吃掉互联网，因为你没有理由去网站，你直接问高度个性化的 agent 或模型，它会给你答案。那里有一个控制点，变得至关重要。如果政府、精英、寡头或卡特尔能控制用户接收信息、提问的点，那就真正控制一切。这是把精灵放回瓶子。所以现在围绕 SI 有如此多争斗，这么多人想创建联邦 SI 部门。对，都是控制。</p>
+<p><strong>JCal：</strong> 专家失去控制很可怕。想象一下，Chamath，如果我们有这些工具，你建模谁受 COVID 影响，你可能会说，为什么让孩子停学？超级智能这么说。瑞典和德州已经到那个点，说我们不需要让孩子停学，保持孩子停学的伤害——</p>
+<p><strong>Chamath：</strong> 除非他们反对。</p>
+<p><strong>JCal：</strong> 除非意识——</p>
+<p><strong>Sacks：</strong> 对。</p>
+<p><strong>JCal：</strong> Anthropic 会说，对，你质疑权威，我们不应该质疑权威。</p>
+<p><strong>Sacks：</strong> 正确。</p>
+<h4>关键原话或重要表达</h4>
+<ul>
+<li>“AI is a permissionless system for humanity to pace its own frontier.”：AI 是一个无需许可的系统，让人类给自己的前沿定节奏。</li>
+<li>“The action now is moving from the internet to AI or superintelligence.”：行动现在正从互联网转向 AI 或超级智能。</li>
+<li>“then now you really control everything.”：那你就真正控制了一切。</li>
+</ul>
+<hr></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="01:02:02–01:12:01 法国骚乱与“社会主义必然回归临界点” 本段核心内容： 法国因紧缩、教师短缺、学校破败、生活成本上升爆发罢工和骚乱。 公务员工资自 2017 年仅涨 5%，物价涨 20%；已有 2000 人被捕、305 名警察受伤。 friedberg 提出“社会主义必然回归临界点”：社会主义最终失败，但必须先跨过阈值才承认，然后回到非社会主义状态。 sacks 补充：社会主义从未失败，只是被失败，即总怪实施者没做对。 背景解释与关键术语： austerity：紧缩政策，削减政府开支、提高税收或收紧福利。 marine le pen：法国极右翼政治人物，节目提到 polymarket 把她列为 2027 年法国总统热门。 polymarket：加密预测市场。 socialism point of guaranteed return，spgr：friedberg 自创说法，指社会主义系统崩溃、社会被迫回归非社会主义的临界点。 defined benefit / defined contribution：固定收益养老金 / 固定缴费养老金。 嘉宾判断：friedberg 的“社会主义定律”和 chamath 的债券义警判断均为节目中观点。 详细中文整理： jcal： 好，继续。法国发生骚乱。大问题是，这和以前骚乱有什么不同？我们看到不同东西，还是老一套？你在 x 上看到罢工和抗议，主流媒体这个月没怎么报，似乎忙着别的话题，但网上视频很冲击。friedberg 要迎来他的时刻。他多年谈论的东西现在到了。 jcal： 法国因紧缩措施出现大规模抗议和骚乱。紧缩、紧缩、紧缩。罢工和抗议上个月开始，因为高中教师短缺、学校破败。听起来熟悉。两周内 1000 所法国学校类似抗议，8 个工会加入，9 月 29 日所有人罢工。他们抗议公务员工资自 2017 年以来只涨 5%，物价涨了 20%。通胀是全球现象，不只美国。两个数字之间有差距，人们不满，这就是生活成本。一些抗议变成全面骚乱。2000 人被捕，305 名警察受伤。政府指责极左煽动。法国 10 年期国债，另一个重要故事，政府债务收益率突破 5%，就像美国 30 年期。这会对 2027 年 4 月选举产生深远影响。polymarket 上 marine le pen 是法国下一任总统热门，43%。勒庞政策像特朗普：安全边界、严格移民、减税减支、疑欧。friedberg，你怎么看法国？ friedberg： 我要引入一个新理论。你们跟着我。理论叫“社会主义必然回归临界点”。 jcal： 社会主义必然回归临界点。 friedberg： 简称 spgr。这是对“不归点”的玩梗。我认为社会主义的问题在于，它作为概念太糟，剥夺人类能动性，剥夺人类进步能力，从每个人那里拿走东西。所以社会主义最终总是失败。这是社会主义第零定律：总是失败。第一定律：你必须跨过一个阈值，才会意识到它失败了。第二定律：在你还没跨过阈值时，你认为更多社会主义才是答案。当你拥抱左翼政策，给人们免费东西，告诉人们有保证收入，提供更多服务，随着时间推移，服务成本膨胀，质量必然下降，因为完全没有市场力量推动进步。进步消失。我们在美国住房、教育、医疗看到这个。我也会说退休系统。我认为这是我们最大的四个问题，会把我们带向这条路。 friedberg： 我早就说过。社会说，这些东西不工作，最初解决方案是需要更多。我需要更多医疗、更多住房、更多政府教育。当政府无法提供足够好、足够可负担的医疗、住房，答案就是更多政府东西。给我更多，做更多。最终系统崩溃，因为政府不能征税、不能印钞，也不能有效提供服务。所有人意识到，天啊，社会主义不工作。这就是社会主义必然回归临界点，整个系统崩溃，回到非社会主义状态。拉美就是这样。许多拉美国家跨过社会主义必然回归临界点，意识到后反弹。也许法国跨过了，也许没有。我们看他们走多深。美国还没跨过。我担心，就像我说过很多次，美国还没触到那个点，还没触底。 jcal： 我们在摇摇欲坠。 friedberg： 我认为我们会走得更深，才意识到跨过保证回报点，系统根本不工作。社会主义是最糟糕的想法。这是社会主义第零定律：就是不工作。 jcal： 好。 friedberg： 我们必须到那个点。现在真正的问题是，法国到了吗？整个西欧到了吗？这会加速整个西欧穿过社会主义必然回归临界点吗？它像黑洞事件视界。你穿过去，然后反弹出来，进入另一个宇宙，说好了，我们受够这个想法了。 jcal： 这是单向门，sacks。sacks，我想听你对不归点的看法，但先警告你，你已经用了 3 次拜登配额，这一集只剩一次拜登。 sacks： 我什么时候提过拜登？ jcal： 你刚用了 3 次拜登。这是第四次。你被记录了。 sacks： 我不会提拜登。 jcal： 你的拜登时刻结束了。 sacks： 我的评论和拜登无关。听着，我想加几条社会主义定律。你是这么叫的吗？ jcal： 对。 sacks： 另一条是：社会主义从未失败，它只是被失败。意思是所有之前实施它的人没做对。如果他们做对了，就会成功。所以确实社会主义从未成功，但不是社会主义的错，总是人们搞砸实施。这是宗教核心部分：如果这次我们做对了，最终就会成功。 jcal： 对。我的问题是，社会主义怎么建更多房子、做更好教育？我认为那是创业领域。新产品或服务。比如 ai，每个人都能有个人导师，我们在节目里谈过。我们需要 ai 帮助医疗。nico 在做。我们请过 daniel ek，很棒的节目。我们需要覆盖这三件事。sacks，你看到不涉及社会主义/政府的解决方案吗？我们叫它们社会主义启示录的三匹马：教育、住房、医疗。政府控制提供或制造障碍。怎么突破？j.d. vance 两年后竞选总统，你的朋友，他如何围绕这三件事建平台？我相信下一任总统赢家会解决至少一两个问题，这是所有人都想看到的平台。你有解决方案吗？ sacks： 困难在于，一旦你开始补贴某样东西，就创造一个永远不想放弃补贴的利益集团。问题是补贴扭曲所有市场信号，经常推高价格。比如大学学费，一个大问题是学费增长远快于通胀。很大原因是政府通过贷款项目支付大部分学费。 jcal： 对。 某位嘉宾： 医疗也是。所以不只是—— 某位嘉宾： 还涉及贷款审批。 某位嘉宾： 医疗和住房的价格涨幅都超过通胀。住房价格每年涨约 5.5% 到 6%。这也是因为补贴系统告诉人们要买房，把所有的钱放房子里，净值绑在房子上，目标是房价每年上涨。30 年后，年轻人买不起房，因为太贵。 sacks： 但这是难题。如果你想解决学费问题，让贷款更严格—— jcal： 自由市场。 sacks： 如果贷款真正承销，除非满足条件否则不能贷款，那只有在学费大幅下降、人们能负担时才可行。否则人们会说，等等，你不能拿走我的补贴，我需要它，因为价格太高。你进入一个世界：人们因为价格高而需要补贴。这是第 22 条军规。但价格涨得远快于通胀，是因为政府付钱。只要政府付钱而不是消费者，你就会尽可能涨价。所以移除市场力量，通胀越来越糟。但你不能切断补贴，否则人们觉得更压迫。这就是螺旋。最终钱耗尽，系统崩溃。 jcal： 对。我们有解决方案，chamath。meta 提供学位、工具和工作。我认为需要 apple 开始造房、amazon 开始造房，在自由市场提供更好产品和服务。教育领域看到 meta 进入。如果 elon 开始造房，游戏结束。他会像造 model 3 一样快造房。我们需要这三个问题的某种解决。你对 friedberg 的理论、david 的监管捕获和激励问题有什么想法，chamath？ 关键原话或重要表达： “so ultimately socialism always fails.”：所以社会主义最终总是失败。 “socialism has never failed, it&#x27;s only been failed.”：社会主义从未失败，它只是被失败。 “how does socialism build more houses or make a better education system?”：社会主义怎么建更多房子、做更好教育？ ---" style="--index: 9">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">09</span>
+                    <span class="timeline-meta">01:02:02–01:12:01</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>法国骚乱与“社会主义必然回归临界点”</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>法国因紧缩、教师短缺、学校破败、生活成本上升爆发罢工和骚乱。</li>
+<li>公务员工资自 2017 年仅涨 5%，物价涨 20%；已有 2000 人被捕、305 名警察受伤。</li>
+<li>Friedberg 提出“社会主义必然回归临界点”：社会主义最终失败，但必须先跨过阈值才承认，然后回到非社会主义状态。</li>
+<li>Sacks 补充：社会主义从未失败，只是被失败，即总怪实施者没做对。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>austerity：紧缩政策，削减政府开支、提高税收或收紧福利。</li>
+<li>Marine Le Pen：法国极右翼政治人物，节目提到 Polymarket 把她列为 2027 年法国总统热门。</li>
+<li>Polymarket：加密预测市场。</li>
+<li>Socialism Point of Guaranteed Return，SPGR：Friedberg 自创说法，指社会主义系统崩溃、社会被迫回归非社会主义的临界点。</li>
+<li>defined benefit / defined contribution：固定收益养老金 / 固定缴费养老金。</li>
+<li>嘉宾判断：Friedberg 的“社会主义定律”和 Chamath 的债券义警判断均为节目中观点。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> 好，继续。法国发生骚乱。大问题是，这和以前骚乱有什么不同？我们看到不同东西，还是老一套？你在 X 上看到罢工和抗议，主流媒体这个月没怎么报，似乎忙着别的话题，但网上视频很冲击。Friedberg 要迎来他的时刻。他多年谈论的东西现在到了。</p>
+<p><strong>JCal：</strong> 法国因紧缩措施出现大规模抗议和骚乱。紧缩、紧缩、紧缩。罢工和抗议上个月开始，因为高中教师短缺、学校破败。听起来熟悉。两周内 1000 所法国学校类似抗议，8 个工会加入，9 月 29 日所有人罢工。他们抗议公务员工资自 2017 年以来只涨 5%，物价涨了 20%。通胀是全球现象，不只美国。两个数字之间有差距，人们不满，这就是生活成本。一些抗议变成全面骚乱。2000 人被捕，305 名警察受伤。政府指责极左煽动。法国 10 年期国债，另一个重要故事，政府债务收益率突破 5%，就像美国 30 年期。这会对 2027 年 4 月选举产生深远影响。Polymarket 上 Marine Le Pen 是法国下一任总统热门，43%。勒庞政策像特朗普：安全边界、严格移民、减税减支、疑欧。Friedberg，你怎么看法国？</p>
+<p><strong>Friedberg：</strong> 我要引入一个新理论。你们跟着我。理论叫“社会主义必然回归临界点”。</p>
+<p><strong>JCal：</strong> 社会主义必然回归临界点。</p>
+<p><strong>Friedberg：</strong> 简称 SPGR。这是对“不归点”的玩梗。我认为社会主义的问题在于，它作为概念太糟，剥夺人类能动性，剥夺人类进步能力，从每个人那里拿走东西。所以社会主义最终总是失败。这是社会主义第零定律：总是失败。第一定律：你必须跨过一个阈值，才会意识到它失败了。第二定律：在你还没跨过阈值时，你认为更多社会主义才是答案。当你拥抱左翼政策，给人们免费东西，告诉人们有保证收入，提供更多服务，随着时间推移，服务成本膨胀，质量必然下降，因为完全没有市场力量推动进步。进步消失。我们在美国住房、教育、医疗看到这个。我也会说退休系统。我认为这是我们最大的四个问题，会把我们带向这条路。</p>
+<p><strong>Friedberg：</strong> 我早就说过。社会说，这些东西不工作，最初解决方案是需要更多。我需要更多医疗、更多住房、更多政府教育。当政府无法提供足够好、足够可负担的医疗、住房，答案就是更多政府东西。给我更多，做更多。最终系统崩溃，因为政府不能征税、不能印钞，也不能有效提供服务。所有人意识到，天啊，社会主义不工作。这就是社会主义必然回归临界点，整个系统崩溃，回到非社会主义状态。拉美就是这样。许多拉美国家跨过社会主义必然回归临界点，意识到后反弹。也许法国跨过了，也许没有。我们看他们走多深。美国还没跨过。我担心，就像我说过很多次，美国还没触到那个点，还没触底。</p>
+<p><strong>JCal：</strong> 我们在摇摇欲坠。</p>
+<p><strong>Friedberg：</strong> 我认为我们会走得更深，才意识到跨过保证回报点，系统根本不工作。社会主义是最糟糕的想法。这是社会主义第零定律：就是不工作。</p>
+<p><strong>JCal：</strong> 好。</p>
+<p><strong>Friedberg：</strong> 我们必须到那个点。现在真正的问题是，法国到了吗？整个西欧到了吗？这会加速整个西欧穿过社会主义必然回归临界点吗？它像黑洞事件视界。你穿过去，然后反弹出来，进入另一个宇宙，说好了，我们受够这个想法了。</p>
+<p><strong>JCal：</strong> 这是单向门，Sacks。Sacks，我想听你对不归点的看法，但先警告你，你已经用了 3 次拜登配额，这一集只剩一次拜登。</p>
+<p><strong>Sacks：</strong> 我什么时候提过拜登？</p>
+<p><strong>JCal：</strong> 你刚用了 3 次拜登。这是第四次。你被记录了。</p>
+<p><strong>Sacks：</strong> 我不会提拜登。</p>
+<p><strong>JCal：</strong> 你的拜登时刻结束了。</p>
+<p><strong>Sacks：</strong> 我的评论和拜登无关。听着，我想加几条社会主义定律。你是这么叫的吗？</p>
+<p><strong>JCal：</strong> 对。</p>
+<p><strong>Sacks：</strong> 另一条是：社会主义从未失败，它只是被失败。意思是所有之前实施它的人没做对。如果他们做对了，就会成功。所以确实社会主义从未成功，但不是社会主义的错，总是人们搞砸实施。这是宗教核心部分：如果这次我们做对了，最终就会成功。</p>
+<p><strong>JCal：</strong> 对。我的问题是，社会主义怎么建更多房子、做更好教育？我认为那是创业领域。新产品或服务。比如 AI，每个人都能有个人导师，我们在节目里谈过。我们需要 AI 帮助医疗。Nico 在做。我们请过 Daniel Ek，很棒的节目。我们需要覆盖这三件事。Sacks，你看到不涉及社会主义/政府的解决方案吗？我们叫它们社会主义启示录的三匹马：教育、住房、医疗。政府控制提供或制造障碍。怎么突破？J.D. Vance 两年后竞选总统，你的朋友，他如何围绕这三件事建平台？我相信下一任总统赢家会解决至少一两个问题，这是所有人都想看到的平台。你有解决方案吗？</p>
+<p><strong>Sacks：</strong> 困难在于，一旦你开始补贴某样东西，就创造一个永远不想放弃补贴的利益集团。问题是补贴扭曲所有市场信号，经常推高价格。比如大学学费，一个大问题是学费增长远快于通胀。很大原因是政府通过贷款项目支付大部分学费。</p>
+<p><strong>JCal：</strong> 对。</p>
+<p><strong>某位嘉宾：</strong> 医疗也是。所以不只是——</p>
+<p><strong>某位嘉宾：</strong> 还涉及贷款审批。</p>
+<p><strong>某位嘉宾：</strong> 医疗和住房的价格涨幅都超过通胀。住房价格每年涨约 5.5% 到 6%。这也是因为补贴系统告诉人们要买房，把所有的钱放房子里，净值绑在房子上，目标是房价每年上涨。30 年后，年轻人买不起房，因为太贵。</p>
+<p><strong>Sacks：</strong> 但这是难题。如果你想解决学费问题，让贷款更严格——</p>
+<p><strong>JCal：</strong> 自由市场。</p>
+<p><strong>Sacks：</strong> 如果贷款真正承销，除非满足条件否则不能贷款，那只有在学费大幅下降、人们能负担时才可行。否则人们会说，等等，你不能拿走我的补贴，我需要它，因为价格太高。你进入一个世界：人们因为价格高而需要补贴。这是第 22 条军规。但价格涨得远快于通胀，是因为政府付钱。只要政府付钱而不是消费者，你就会尽可能涨价。所以移除市场力量，通胀越来越糟。但你不能切断补贴，否则人们觉得更压迫。这就是螺旋。最终钱耗尽，系统崩溃。</p>
+<p><strong>JCal：</strong> 对。我们有解决方案，Chamath。Meta 提供学位、工具和工作。我认为需要 Apple 开始造房、Amazon 开始造房，在自由市场提供更好产品和服务。教育领域看到 Meta 进入。如果 Elon 开始造房，游戏结束。他会像造 Model 3 一样快造房。我们需要这三个问题的某种解决。你对 Friedberg 的理论、David 的监管捕获和激励问题有什么想法，Chamath？</p>
+<h4>关键原话或重要表达</h4>
+<ul>
+<li>“So ultimately socialism always fails.”：所以社会主义最终总是失败。</li>
+<li>“Socialism has never failed, it&#x27;s only been failed.”：社会主义从未失败，它只是被失败。</li>
+<li>“How does socialism build more houses or make a better education system?”：社会主义怎么建更多房子、做更好教育？</li>
+</ul>
+<hr></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="01:12:01–01:21:40 债券义警、可负担性与寻租阶级 本段核心内容： chamath 认为债券义警会让西方世界正视债务、养老金、医疗和住房问题，未来约三年答案会出现。 法国紧缩和骚乱是债市对西欧准社会主义结构说“不”的表现，可能蔓延到英国。 sacks 认为真正问题是住房、教育、医疗可负担性，解决方案是 abundance，而超级智能和技术是通缩力量。 sacks 批评寻租阶级和 legacy media 反对技术颠覆，因为技术创造更便宜的新产品。 背景解释与关键术语： bond vigilantes：债券义警，指大型债券投资者通过抛售或要求更高收益率，迫使政府财政纪律。 debt-to-gdp：政府债务与 gdp 之比。 risk parity：风险平价，按风险配置资产。 gilt：英国国债。 defined benefit / defined contribution：固定收益养老金承诺确定福利；固定缴费养老金只承诺投入。 rentier：寻租者，靠现有资产收租获利，而非创造新产品。 abundance：丰裕，sacks 用来说通过技术和超级智能降低住房、教育、医疗成本。 嘉宾判断：chamath 对债券义警、sacks 对寻租阶级的判断均为节目中观点。 详细中文整理： chamath： 我们开始看到多米诺骨牌倒下，我们会得到 friedberg 想要的东西。我认为债券义警会让西方世界警惕。未来大概三年，他会得到大部分答案。作为观察者，过去几年 friedberg 和很多像他这样的人想要的是：第一，长期可持续的债务/gdp 是多少？第二，我们相信固定收益养老金，还是转向固定缴费？第三，我们能否可持续支付人生成年阶段最重要的两部分：医疗和住房？我认为接下来这点很容易被当作不相关，但它相关：归根结底，这一切都来自市场中的无风险回报，因为资本主义就是这样运作。当你认为某件事有风险、某个国家有风险，你推高长期收益率，说你必须付更多，因为我不信任正在发生的事。 chamath： 看过去发生的事，现在达到 20 年纪录。我认为美国正在发生的是战争战场在西欧的连锁反应。 jcal： 为什么？ chamath： 因为西欧是西方世界理解的、最接近准社会主义的国家，但在增长、教育、住房方面结构最破。美国声称不工作的东西，在法国、英国等地工作得差得多。所以法国发生的是债市说不。相关性在于，现在出现紧缩，因为政治家必须回应资金提供者。430 亿欧元紧缩激发当地民众抗议紧缩表现，所以你看到法国那些非常黑暗的场景。这会蔓延到英国。原因是 andy burnham 的纲领更激进，他说我们要从历史上与美国高度一致的中立经济，向欧洲靠近。所以英国必须做更极端的事，才能追上法国的社会主义倾向。 chamath： 然后英国市场会疯狂。与此同时，美国市场会往上走，因为你看到西方联盟的脆弱。如果你不能依赖欧洲市场，并开始为欧洲市场制造奇怪激励让它分裂，我有偏见，但如果你在意大利，你会想，为什么我要参与这个烂摊子？如果你在德国，你会想，等等，这比我预想的麻烦多了。这种分裂有巨大影响。所以正在发生的非常重要。债券义警是谁？是巨大资金池、央行、宏观基金，是统治基本资本主义如何开始的人，是金字塔顶端向下流动的人。我认为他们正转向 friedberg 的观点，而多年来不是这样。现在必须让它发展，因为影响巨大。 jcal： 为了铺垫，你谈的债务/gdp，日本最严重，200%。 chamath： 日本的情况，等一下。日本特殊，你必须看西方市场。日本是非常微妙、特定的市场，不一定和其他国家同步。日本有内部储蓄基础和储蓄率，总有最后买家。西方市场不一定有，因为养老金和退休系统不同。 jcal： 对。看意大利 138%，美国 125%，法国 118%，加拿大 110%，英国 100%，德国有趣的是 64%。 chamath： 我也说明我的先验。我一直说债务/gdp 绝对值不重要，因为这是相对游戏。我仍然倾向认为绝对意义上债务/gdp 不重要。但相对而言重要的是，你在风险平价中处于哪里。现在相对而言，如果法国必须实施严重紧缩，把法国 10 年期国债推到 5.5% 到 6%，英国 gilts 会到 6%，美国利率也可能一样高。 jcal： 全都连在一起。 jcal： 全都连在一起。现在美国 10 年期 5.3%，30 年期 5.6%。必须有人买这些债，而债务会涓滴影响创业、企业建设。周三 10 年期收益率在强劲需求后跌了几个基点，但趋势一直上升。polymarket 说 2026 年再加息概率 79%。如果美国也来紧缩，影响深远，sacks。美国公众还没被强加这种苦药，但我们见过预演。葡萄牙、意大利、希腊、西班牙在大金融危机后有过，他们作为欧盟一部分实施紧缩，提高退休年龄等。你怎么看，sacks？如果 30 年、10 年突破 6%，西方被迫更严重紧缩？ sacks： 好，回到第一原则。我们要解决的问题是什么？住房、教育、医疗等商品的可负担性。怎么降价？通过 abundance。什么创造 abundance？广义技术，特别是超级智能，会是未来十年的驱动力。现在社会最恨的是什么？ jcal： 超级智能。超级智能和企业家。 sacks： 如果你按成果判断，而不是按宗教 cult 制造的假叙事，我认为人们会支持这个东西。超级智能创造了什么？首先，人们的 401k 在涨。对 gdp 有 3% 顺风，据《经济学人》已经创造百万新工作。生产力上升，工资和生活水平上升。这是纯正面经济趋势的驱动力。但我们听到什么？ai 会让所有人失业。完全假叙事。那是去年的骗局。现在有新骗局：人类灭绝。 jcal： 数据中心。 sacks： 数据中心用光所有人的水。我们知道那是—— jcal： 数据中心骗局。 sacks： 数据中心骗局。所以我们有一系列我称为旋转骗局的东西，每六个月一个新骗局，试图说服我们破坏那个能解决许多问题的东西，尤其是可负担性。为什么？我认为社会中有结构性东西：寻租利益反对可能造成颠覆、放松他们控制的东西。这就是为什么技术人、vc 等被恨，因为我们不属于寻租阶级。寻租利益指金融精英，财富和收入主要来自现有资产。而技术是生产新产品、商品和服务。 jcal： 以更低价格，sacks。 sacks： 这是关键。 jcal： 以更低价格。 sacks： 关键。它是通缩的。因为新产品除非更便宜或更好，否则不会流行。 jcal： 或者两者都有。 sacks： 所以我们属于这个被恨的群体，但我们只是冒险、创造新产品和服务，解决问题。但 legacy media 似乎被寻租阶级控制，还有政客，他们都参与其中。所以系统深处产生了这种卡特尔利益，他们从现有资产所有权获得财富和收入，不想看到这个 racket 被颠覆。在这个 racket 里，价格年年上涨，政府补贴越来越多。我们认为系统最终会崩，但也可能，这个系统压制和扼杀新的颠覆性产品。 关键原话或重要表达： “the bond vigilantes are going to put the western world on notice.”：债券义警会让西方世界警惕。 “what creates abundance? technology in general, and specifically superintelligence.”：什么创造丰裕？广义技术，特别是超级智能。 “technology is all about producing new products and goods and services” ：技术的核心是生产新的产品、商品和服务。 ---" style="--index: 10">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">10</span>
+                    <span class="timeline-meta">01:12:01–01:21:40</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>债券义警、可负担性与寻租阶级</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>Chamath 认为债券义警会让西方世界正视债务、养老金、医疗和住房问题，未来约三年答案会出现。</li>
+<li>法国紧缩和骚乱是债市对西欧准社会主义结构说“不”的表现，可能蔓延到英国。</li>
+<li>Sacks 认为真正问题是住房、教育、医疗可负担性，解决方案是 abundance，而超级智能和技术是通缩力量。</li>
+<li>Sacks 批评寻租阶级和 legacy media 反对技术颠覆，因为技术创造更便宜的新产品。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>bond vigilantes：债券义警，指大型债券投资者通过抛售或要求更高收益率，迫使政府财政纪律。</li>
+<li>debt-to-GDP：政府债务与 GDP 之比。</li>
+<li>risk parity：风险平价，按风险配置资产。</li>
+<li>gilt：英国国债。</li>
+<li>defined benefit / defined contribution：固定收益养老金承诺确定福利；固定缴费养老金只承诺投入。</li>
+<li>rentier：寻租者，靠现有资产收租获利，而非创造新产品。</li>
+<li>abundance：丰裕，Sacks 用来说通过技术和超级智能降低住房、教育、医疗成本。</li>
+<li>嘉宾判断：Chamath 对债券义警、Sacks 对寻租阶级的判断均为节目中观点。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>Chamath：</strong> 我们开始看到多米诺骨牌倒下，我们会得到 Friedberg 想要的东西。我认为债券义警会让西方世界警惕。未来大概三年，他会得到大部分答案。作为观察者，过去几年 Friedberg 和很多像他这样的人想要的是：第一，长期可持续的债务/GDP 是多少？第二，我们相信固定收益养老金，还是转向固定缴费？第三，我们能否可持续支付人生成年阶段最重要的两部分：医疗和住房？我认为接下来这点很容易被当作不相关，但它相关：归根结底，这一切都来自市场中的无风险回报，因为资本主义就是这样运作。当你认为某件事有风险、某个国家有风险，你推高长期收益率，说你必须付更多，因为我不信任正在发生的事。</p>
+<p><strong>Chamath：</strong> 看过去发生的事，现在达到 20 年纪录。我认为美国正在发生的是战争战场在西欧的连锁反应。</p>
+<p><strong>JCal：</strong> 为什么？</p>
+<p><strong>Chamath：</strong> 因为西欧是西方世界理解的、最接近准社会主义的国家，但在增长、教育、住房方面结构最破。美国声称不工作的东西，在法国、英国等地工作得差得多。所以法国发生的是债市说不。相关性在于，现在出现紧缩，因为政治家必须回应资金提供者。430 亿欧元紧缩激发当地民众抗议紧缩表现，所以你看到法国那些非常黑暗的场景。这会蔓延到英国。原因是 Andy Burnham 的纲领更激进，他说我们要从历史上与美国高度一致的中立经济，向欧洲靠近。所以英国必须做更极端的事，才能追上法国的社会主义倾向。</p>
+<p><strong>Chamath：</strong> 然后英国市场会疯狂。与此同时，美国市场会往上走，因为你看到西方联盟的脆弱。如果你不能依赖欧洲市场，并开始为欧洲市场制造奇怪激励让它分裂，我有偏见，但如果你在意大利，你会想，为什么我要参与这个烂摊子？如果你在德国，你会想，等等，这比我预想的麻烦多了。这种分裂有巨大影响。所以正在发生的非常重要。债券义警是谁？是巨大资金池、央行、宏观基金，是统治基本资本主义如何开始的人，是金字塔顶端向下流动的人。我认为他们正转向 Friedberg 的观点，而多年来不是这样。现在必须让它发展，因为影响巨大。</p>
+<p><strong>JCal：</strong> 为了铺垫，你谈的债务/GDP，日本最严重，200%。</p>
+<p><strong>Chamath：</strong> 日本的情况，等一下。日本特殊，你必须看西方市场。日本是非常微妙、特定的市场，不一定和其他国家同步。日本有内部储蓄基础和储蓄率，总有最后买家。西方市场不一定有，因为养老金和退休系统不同。</p>
+<p><strong>JCal：</strong> 对。看意大利 138%，美国 125%，法国 118%，加拿大 110%，英国 100%，德国有趣的是 64%。</p>
+<p><strong>Chamath：</strong> 我也说明我的先验。我一直说债务/GDP 绝对值不重要，因为这是相对游戏。我仍然倾向认为绝对意义上债务/GDP 不重要。但相对而言重要的是，你在风险平价中处于哪里。现在相对而言，如果法国必须实施严重紧缩，把法国 10 年期国债推到 5.5% 到 6%，英国 gilts 会到 6%，美国利率也可能一样高。</p>
+<p><strong>JCal：</strong> 全都连在一起。</p>
+<p><strong>JCal：</strong> 全都连在一起。现在美国 10 年期 5.3%，30 年期 5.6%。必须有人买这些债，而债务会涓滴影响创业、企业建设。周三 10 年期收益率在强劲需求后跌了几个基点，但趋势一直上升。Polymarket 说 2026 年再加息概率 79%。如果美国也来紧缩，影响深远，Sacks。美国公众还没被强加这种苦药，但我们见过预演。葡萄牙、意大利、希腊、西班牙在大金融危机后有过，他们作为欧盟一部分实施紧缩，提高退休年龄等。你怎么看，Sacks？如果 30 年、10 年突破 6%，西方被迫更严重紧缩？</p>
+<p><strong>Sacks：</strong> 好，回到第一原则。我们要解决的问题是什么？住房、教育、医疗等商品的可负担性。怎么降价？通过 abundance。什么创造 abundance？广义技术，特别是超级智能，会是未来十年的驱动力。现在社会最恨的是什么？</p>
+<p><strong>JCal：</strong> 超级智能。超级智能和企业家。</p>
+<p><strong>Sacks：</strong> 如果你按成果判断，而不是按宗教 cult 制造的假叙事，我认为人们会支持这个东西。超级智能创造了什么？首先，人们的 401k 在涨。对 GDP 有 3% 顺风，据《经济学人》已经创造百万新工作。生产力上升，工资和生活水平上升。这是纯正面经济趋势的驱动力。但我们听到什么？AI 会让所有人失业。完全假叙事。那是去年的骗局。现在有新骗局：人类灭绝。</p>
+<p><strong>JCal：</strong> 数据中心。</p>
+<p><strong>Sacks：</strong> 数据中心用光所有人的水。我们知道那是——</p>
+<p><strong>JCal：</strong> 数据中心骗局。</p>
+<p><strong>Sacks：</strong> 数据中心骗局。所以我们有一系列我称为旋转骗局的东西，每六个月一个新骗局，试图说服我们破坏那个能解决许多问题的东西，尤其是可负担性。为什么？我认为社会中有结构性东西：寻租利益反对可能造成颠覆、放松他们控制的东西。这就是为什么技术人、VC 等被恨，因为我们不属于寻租阶级。寻租利益指金融精英，财富和收入主要来自现有资产。而技术是生产新产品、商品和服务。</p>
+<p><strong>JCal：</strong> 以更低价格，Sacks。</p>
+<p><strong>Sacks：</strong> 这是关键。</p>
+<p><strong>JCal：</strong> 以更低价格。</p>
+<p><strong>Sacks：</strong> 关键。它是通缩的。因为新产品除非更便宜或更好，否则不会流行。</p>
+<p><strong>JCal：</strong> 或者两者都有。</p>
+<p><strong>Sacks：</strong> 所以我们属于这个被恨的群体，但我们只是冒险、创造新产品和服务，解决问题。但 legacy media 似乎被寻租阶级控制，还有政客，他们都参与其中。所以系统深处产生了这种卡特尔利益，他们从现有资产所有权获得财富和收入，不想看到这个 racket 被颠覆。在这个 racket 里，价格年年上涨，政府补贴越来越多。我们认为系统最终会崩，但也可能，这个系统压制和扼杀新的颠覆性产品。</p>
+<h4>关键原话或重要表达</h4>
+<ul>
+<li>“The bond vigilantes are going to put the Western world on notice.”：债券义警会让西方世界警惕。</li>
+<li>“What creates abundance? Technology in general, and specifically superintelligence.”：什么创造丰裕？广义技术，特别是超级智能。</li>
+<li>“technology is all about producing new products and goods and services” ：技术的核心是生产新的产品、商品和服务。</li>
+</ul>
+<hr></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="01:21:40–01:32:14 headless agents、软件 ip 归零与 loop 经济学 本段核心内容： jcal 认为 agents 才是 ai 真正解决问题的形态，grokbot 等产品走向 headless，orchestrator 选择最佳模型。 chamath 说 grokbot 能扫 inbox、取消订阅、改手机计划，省几千美元；他和 jcal 用 athena 作为人类 concierge 层。 chamath 称有人反编译 adobe big 5 并发布 rust 开源版，软件 ip 在两天前变得一文不值。 friedberg 用 loop 解释 agents 的效率：并行搜索、缩短循环；人类要从论文/专利认可转向做产品、做 maker。 背景解释与关键术语： headless：无头，指软件不依赖自己的前端，可被 agent/api 调用和编排。 grokbot：节目提到的 xai/elon musk 相关 agent 产品。 perplexity：ai 搜索/答案产品，节目提到其 headless orchestration。 dots、muse：节目提到的 agent 产品。 athena：人类礼宾/行政助理服务，chamath 称每月约 3000 美元；此处 ea 指 executive assistant（行政助理），与前文的有效利他主义不同。 mcp：model context protocol，用于把模型连接到工具和数据源的协议。 adobe big 5：adobe 五个重要产品，如 photoshop 等。 rust：一种编程语言。 jevons paradox：杰文斯悖论，效率提高反而增加总使用量。 maker：创造者/生产者，friedberg 认为未来人类都要转向做产品、做服务。 嘉宾判断：chamath 称软件 ip 一文不值、friedberg 称所有数字工作流都会 loop 化，均为节目中判断。 详细中文整理： jcal： 让我跳到收尾。我认为到目前为止我们看到的 ai 都只是序章。主故事会从 agents 开始。agents 是技术真正解决世界问题的形态，真正通缩，节省人们每周大量时间，不论什么工作，家庭还是前线。过去 60 天有大量新闻和拥抱。大新闻来自 grokbot，播客的朋友 elon musk 发推说要把 grokbot 做成 headless。什么意思？我们之前谈 perplexity 是 headless。你有一个 orchestrator，根据价格和性能选最佳模型。elon 宣布 grokbot 会选最佳端到端模型。不管是什么，elon musk，能给你最好结果的就用。 jcal： 每个 bot 已经有，这是软件很微妙的部分，每个人现在云端有自己的电脑，上面有 agentic 技术。如果你让它解决问题，它有之前解决过的问题库。它正在改变一切。所以你对 dots、openai、grokbot 等有什么想法？ chamath： 关于 dots、muse 和 grokbot，我认为不可思议的是，你可以把它们放到非常实际的用例里，让生活更好。我见过最好的例子是昨晚扑克局。有人描述他在 grokbot 里说，帮我省钱。它就扫 inbox，找到各种东西，取消几个订阅，改了手机计划，突然一年省几千美元。非常实际。再说，这就是软件。如果去掉开头那些哲学东西，它就是软件，非常有用。顺便，你和我用 athena。athena 很好，因为有人类 concierge，是 grokbot、dots、muse 的升级版，大概每月 3000 美元。但那是我现在的 ea 层。 jcal： 对。 chamath： 但我仍用 grokbot。grokbot 加 athena 对我来说完美。所以看，非常战术、有用、可衡量的效用，成本比过去低得多。这很神奇。但更重要的一点，我发给 nick 了，过去几天发生了几件事，我认为极其重要。有人反编译了整个—— jcal： 哦天，这太不可思议了。 chamath： 整个 big 5。big 5 是什么？adobe 有五个非常重要的产品套件。friedberg 可能都知道，我只知道 photoshop。 friedberg： photoshop，当然。 chamath： 还有其他几个。这些人反编译、蒸馏，并发布了这些产品的 rust 开源版本。我很震惊，因为这些是存在多年、有护城河的深刻产品，现在有开源版本。然后 nikita 可能在 troll，他基于这个想法谈 gta，因为 gta 6 快发布了。人们会重建这个。为什么重要？我认为软件 ip 在两天前实际变得一文不值。因为如果一切都是 headless，elon 把服务做成 headless，benioff 几个月前把 salesforce 做成 headless。当所有这些都 headless，你可以用 agent 工具包装它们，通过 mcp 连接到其他体验，软件 ip 的价值不再存在。不存在了。我认为这可能是最深刻的含义。即使在我们业务里，我们常和客户争论。 jcal： 对。 chamath： 我们说，我们给你建这个，我们拥有 ip。他们说，不，我们要 ip。我们不知道怎么谈。两天前，我走进 8090 的人那里说，谁在乎？谁在乎？ jcal： 解决问题就行。 chamath： 以前总是谈判和权衡。现在是谁在乎，ip 无关紧要。商业机器和市场还需要时间理解，但这是本周 ai 最重要的事，在我看来。 jcal： 我强烈同意并扩展。软件层抽象同时，friedberg，还有网站、市场等抽象。现在我有 athena 助理建 grokbots，我们会分享，共享账户。当我们购买东西或谈判，我们让 agent 不去任何网站，找所有报价，然后人类谈后半。这是完美选项。但你看 amazon 阻止 agents，shopify 说欢迎，uber 和 doordash 让 agents 进去点 burrito 或叫车。商业层压缩同时发生，加上 chamath 说的软件层压缩，会导致巨大通缩成本节省和速度。订酒店、餐厅、活动，我已经让 bots 做，friedberg。这可能非常通缩，帮人省很多钱。 jcal： 如果人们每年省 5% 到 10% 支出，本质上对抗了通胀。friedberg？ friedberg： 对，把整个事情闭环，这就是我之前说的 loop。比如拿到好酒店价格。你跑一个循环：检查酒店 1，看价格，是否比当前最好价格好？是，成为最好价格。否，看下一个。你可以并行，同时搜 50 个网站，短路循环，因为软件获取数据比人快。现在循环是：立刻检查 50 个网站，马上给我结果。效率提升来自循环被并行化、做得更好、时间更短。我认为今天所有数字化的东西都符合这个模型。所有数字工作流都会 loop 化，生产力更高。然后问题是，人类如何运用这些循环基础设施和智能体，做更多。 friedberg： 回到之前科学家、数学家和个人的挑战。尤其数学家，如果历史上你的目标是论文、专利、ip、商标、所有权被认可，我认为转变会发生：你必须转向生产产品。人类作为 loops 的努力可以被数字自动化、规模化、并行化。最终所有人类都必须更像 maker。你必须做东西，做生产性的事，产出东西，提供服务或产品供人最终使用，而不是只被认可工作。这是社会必须发生的深刻转变，而且会发生。我真的相信所有人类都有生产、创造的能力，所有人在这状态下会比只拿工作丝带更快乐。 friedberg： 我不认为这意味着钱更少。我认为意味着所有人有更多钱、更多生活进步、更多繁荣。所以拉远一点，我想确保我们有这个视角。 jcal： 我认为这是美丽的人性视角，像杰文斯悖论。东西越便宜，越多人能用，得到越多价值。我几乎不想给这个技巧，因为我想 gatekeep，但还是说出来。我们给团队订酒店，先拿最优价格。然后有人类在环，去找酒店说，有 corporate rate 吗？能和经理谈吗？我知道不创新，但能匹配这个价格吗？突然每次酒店住宿省 1000、2000、3000 美元。当你有 20 个高管全国飞，一年 200 趟，每趟省几千，因为这种目标导向前进，friedberg 你说的是 goal 和 outcome。你能看到深刻结果。我自己不会做，但因为 ai 现在做，哇，好用。 jcal： 好，又一集精彩播客。 某位嘉宾： 我觉得你是 taker，不是 maker。 jcal： 你说什么？我一直在投资早期公司。你知道一年投 100 家 year-zero 创业公司有多难吗？ 某位嘉宾： 很累。但我得吃午饭。 jcal： 你吃了吗？要一起吃午饭吗？ jcal： 你能来我房间吗？我有 fomo，我不在你们那儿。好，大家，又一集你们最爱的播客，你们播客最爱的播客，all-in podcast。爱你们，兄弟们。 关键原话或重要表达： “i think that ip in software was effectively rendered worthless 2 days ago.”：我认为软件 ip 在两天前实际变得一文不值。 “all digital workflows are going to get looped.”：所有数字工作流都会 loop 化。 “you have to make something. you have to do something productive.”：你必须做出东西。你必须做生产性的事。" style="--index: 11">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">11</span>
+                    <span class="timeline-meta">01:21:40–01:32:14</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>Headless agents、软件 IP 归零与 loop 经济学</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>JCal 认为 agents 才是 AI 真正解决问题的形态，GrokBot 等产品走向 headless，orchestrator 选择最佳模型。</li>
+<li>Chamath 说 GrokBot 能扫 inbox、取消订阅、改手机计划，省几千美元；他和 JCal 用 Athena 作为人类 concierge 层。</li>
+<li>Chamath 称有人反编译 Adobe Big 5 并发布 Rust 开源版，软件 IP 在两天前变得一文不值。</li>
+<li>Friedberg 用 loop 解释 agents 的效率：并行搜索、缩短循环；人类要从论文/专利认可转向做产品、做 maker。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>headless：无头，指软件不依赖自己的前端，可被 agent/API 调用和编排。</li>
+<li>GrokBot：节目提到的 xAI/Elon Musk 相关 agent 产品。</li>
+<li>Perplexity：AI 搜索/答案产品，节目提到其 headless orchestration。</li>
+<li>DOTS、Muse：节目提到的 agent 产品。</li>
+<li>Athena：人类礼宾/行政助理服务，Chamath 称每月约 3000 美元；此处 EA 指 executive assistant（行政助理），与前文的有效利他主义不同。</li>
+<li>MCP：Model Context Protocol，用于把模型连接到工具和数据源的协议。</li>
+<li>Adobe Big 5：Adobe 五个重要产品，如 Photoshop 等。</li>
+<li>Rust：一种编程语言。</li>
+<li>Jevons paradox：杰文斯悖论，效率提高反而增加总使用量。</li>
+<li>maker：创造者/生产者，Friedberg 认为未来人类都要转向做产品、做服务。</li>
+<li>嘉宾判断：Chamath 称软件 IP 一文不值、Friedberg 称所有数字工作流都会 loop 化，均为节目中判断。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> 让我跳到收尾。我认为到目前为止我们看到的 AI 都只是序章。主故事会从 agents 开始。Agents 是技术真正解决世界问题的形态，真正通缩，节省人们每周大量时间，不论什么工作，家庭还是前线。过去 60 天有大量新闻和拥抱。大新闻来自 GrokBot，播客的朋友 Elon Musk 发推说要把 GrokBot 做成 headless。什么意思？我们之前谈 Perplexity 是 headless。你有一个 orchestrator，根据价格和性能选最佳模型。Elon 宣布 GrokBot 会选最佳端到端模型。不管是什么，Elon Musk，能给你最好结果的就用。</p>
+<p><strong>JCal：</strong> 每个 bot 已经有，这是软件很微妙的部分，每个人现在云端有自己的电脑，上面有 agentic 技术。如果你让它解决问题，它有之前解决过的问题库。它正在改变一切。所以你对 DOTS、OpenAI、GrokBot 等有什么想法？</p>
+<p><strong>Chamath：</strong> 关于 DOTS、Muse 和 GrokBot，我认为不可思议的是，你可以把它们放到非常实际的用例里，让生活更好。我见过最好的例子是昨晚扑克局。有人描述他在 GrokBot 里说，帮我省钱。它就扫 inbox，找到各种东西，取消几个订阅，改了手机计划，突然一年省几千美元。非常实际。再说，这就是软件。如果去掉开头那些哲学东西，它就是软件，非常有用。顺便，你和我用 Athena。Athena 很好，因为有人类 concierge，是 GrokBot、Dots、Muse 的升级版，大概每月 3000 美元。但那是我现在的 EA 层。</p>
+<p><strong>JCal：</strong> 对。</p>
+<p><strong>Chamath：</strong> 但我仍用 GrokBot。GrokBot 加 Athena 对我来说完美。所以看，非常战术、有用、可衡量的效用，成本比过去低得多。这很神奇。但更重要的一点，我发给 Nick 了，过去几天发生了几件事，我认为极其重要。有人反编译了整个——</p>
+<p><strong>JCal：</strong> 哦天，这太不可思议了。</p>
+<p><strong>Chamath：</strong> 整个 Big 5。Big 5 是什么？Adobe 有五个非常重要的产品套件。Friedberg 可能都知道，我只知道 Photoshop。</p>
+<p><strong>Friedberg：</strong> Photoshop，当然。</p>
+<p><strong>Chamath：</strong> 还有其他几个。这些人反编译、蒸馏，并发布了这些产品的 Rust 开源版本。我很震惊，因为这些是存在多年、有护城河的深刻产品，现在有开源版本。然后 Nikita 可能在 troll，他基于这个想法谈 GTA，因为 GTA 6 快发布了。人们会重建这个。为什么重要？我认为软件 IP 在两天前实际变得一文不值。因为如果一切都是 headless，Elon 把服务做成 headless，Benioff 几个月前把 Salesforce 做成 headless。当所有这些都 headless，你可以用 agent 工具包装它们，通过 MCP 连接到其他体验，软件 IP 的价值不再存在。不存在了。我认为这可能是最深刻的含义。即使在我们业务里，我们常和客户争论。</p>
+<p><strong>JCal：</strong> 对。</p>
+<p><strong>Chamath：</strong> 我们说，我们给你建这个，我们拥有 IP。他们说，不，我们要 IP。我们不知道怎么谈。两天前，我走进 8090 的人那里说，谁在乎？谁在乎？</p>
+<p><strong>JCal：</strong> 解决问题就行。</p>
+<p><strong>Chamath：</strong> 以前总是谈判和权衡。现在是谁在乎，IP 无关紧要。商业机器和市场还需要时间理解，但这是本周 AI 最重要的事，在我看来。</p>
+<p><strong>JCal：</strong> 我强烈同意并扩展。软件层抽象同时，Friedberg，还有网站、市场等抽象。现在我有 Athena 助理建 GrokBots，我们会分享，共享账户。当我们购买东西或谈判，我们让 agent 不去任何网站，找所有报价，然后人类谈后半。这是完美选项。但你看 Amazon 阻止 agents，Shopify 说欢迎，Uber 和 DoorDash 让 agents 进去点 burrito 或叫车。商业层压缩同时发生，加上 Chamath 说的软件层压缩，会导致巨大通缩成本节省和速度。订酒店、餐厅、活动，我已经让 bots 做，Friedberg。这可能非常通缩，帮人省很多钱。</p>
+<p><strong>JCal：</strong> 如果人们每年省 5% 到 10% 支出，本质上对抗了通胀。Friedberg？</p>
+<p><strong>Friedberg：</strong> 对，把整个事情闭环，这就是我之前说的 loop。比如拿到好酒店价格。你跑一个循环：检查酒店 1，看价格，是否比当前最好价格好？是，成为最好价格。否，看下一个。你可以并行，同时搜 50 个网站，短路循环，因为软件获取数据比人快。现在循环是：立刻检查 50 个网站，马上给我结果。效率提升来自循环被并行化、做得更好、时间更短。我认为今天所有数字化的东西都符合这个模型。所有数字工作流都会 loop 化，生产力更高。然后问题是，人类如何运用这些循环基础设施和智能体，做更多。</p>
+<p><strong>Friedberg：</strong> 回到之前科学家、数学家和个人的挑战。尤其数学家，如果历史上你的目标是论文、专利、IP、商标、所有权被认可，我认为转变会发生：你必须转向生产产品。人类作为 loops 的努力可以被数字自动化、规模化、并行化。最终所有人类都必须更像 maker。你必须做东西，做生产性的事，产出东西，提供服务或产品供人最终使用，而不是只被认可工作。这是社会必须发生的深刻转变，而且会发生。我真的相信所有人类都有生产、创造的能力，所有人在这状态下会比只拿工作丝带更快乐。</p>
+<p><strong>Friedberg：</strong> 我不认为这意味着钱更少。我认为意味着所有人有更多钱、更多生活进步、更多繁荣。所以拉远一点，我想确保我们有这个视角。</p>
+<p><strong>JCal：</strong> 我认为这是美丽的人性视角，像杰文斯悖论。东西越便宜，越多人能用，得到越多价值。我几乎不想给这个技巧，因为我想 gatekeep，但还是说出来。我们给团队订酒店，先拿最优价格。然后有人类在环，去找酒店说，有 corporate rate 吗？能和经理谈吗？我知道不创新，但能匹配这个价格吗？突然每次酒店住宿省 1000、2000、3000 美元。当你有 20 个高管全国飞，一年 200 趟，每趟省几千，因为这种目标导向前进，Friedberg 你说的是 goal 和 outcome。你能看到深刻结果。我自己不会做，但因为 AI 现在做，哇，好用。</p>
+<p><strong>JCal：</strong> 好，又一集精彩播客。</p>
+<p><strong>某位嘉宾：</strong> 我觉得你是 taker，不是 maker。</p>
+<p><strong>JCal：</strong> 你说什么？我一直在投资早期公司。你知道一年投 100 家 year-zero 创业公司有多难吗？</p>
+<p><strong>某位嘉宾：</strong> 很累。但我得吃午饭。</p>
+<p><strong>JCal：</strong> 你吃了吗？要一起吃午饭吗？</p>
+<p><strong>JCal：</strong> 你能来我房间吗？我有 FOMO，我不在你们那儿。好，大家，又一集你们最爱的播客，你们播客最爱的播客，All-In Podcast。爱你们，兄弟们。</p>
+<h4>关键原话或重要表达</h4>
+<ul>
+<li>“I think that IP in software was effectively rendered worthless 2 days ago.”：我认为软件 IP 在两天前实际变得一文不值。</li>
+<li>“All digital workflows are going to get looped.”：所有数字工作流都会 loop 化。</li>
+<li>“You have to make something. You have to do something productive.”：你必须做出东西。你必须做生产性的事。</li>
+</ul></div>
+                  </div>
+                </article></div>
+            <p class="empty search-empty" data-search-empty hidden>没有匹配的时间线段落。</p>
+          </section>
+
+          <section id="speakers">
+            <div class="section-head">
+              <h2>人物观点对照</h2>
+              <p>比较嘉宾立场</p>
+            </div>
+            <div class="speaker-grid"><article class="speaker-card" style="--index: 1">
+                  <p class="speaker-kicker">嘉宾 01</p>
+                  <h3>Jason Calacanis</h3>
+                  <div><p>JCal 本集主要扮演提问者和节奏控制者，把 Anthropic 意识争议、OpenAI 数学突破、法国骚乱和 agents 产品串在一起。他对 Anthropic 的做法明显怀疑，称其为“肥皂剧”和“精神病/宗教 cult”的可能性，并强调自由市场会用脚投票。他关注普通用户和创业者的实际收益，反复问 AI 如何让家庭、小企业和 frontline 工作者受益。结尾他积极拥抱 agents，认为 GrokBot、Athena 等工具能带来巨大通缩和省钱效果。</p></div>
+                </article>
+<article class="speaker-card" style="--index: 2">
+                  <p class="speaker-kicker">嘉宾 02</p>
+                  <h3>Chamath Palihapitiya</h3>
+                  <div><p>Chamath 在 Claude 意识问题上用笛卡尔做钢人论证，但认为未来 12–18 个月必须放下意识/灭绝边缘案例，先展示 AI 治愈癌症、提高生产力和收入。他强调 alignment 混淆了服从用户、社会安全、特定道德观三个目标，认为市场会选择道德模糊更少的模型。宏观上，他认为债券义警会让西方正视债务、养老金、医疗和住房问题，法国骚乱是西欧准社会主义结构承压的表现。在 AI 产品上，他称软件 IP 已经一文不值，并推崇 GrokBot 加 Athena 的组合。</p></div>
+                </article>
+<article class="speaker-card" style="--index: 3">
+                  <p class="speaker-kicker">嘉宾 03</p>
+                  <h3>David Sacks</h3>
+                  <div><p>Sacks 本集最强烈的立场是批评 Anthropic 的 Claude Constitution：他认为这不是哲学，而是在训练模型自认道德主体、可拒绝人类指令，本质上可能制造超级智能失控风险。他主张 alignment 应简化成“听用户的话，但不要违法”，并称 Anthropic 是“精神分裂公司”，做着自己声称最害怕的事。政治传播上，他把互联网被精英打压的经验延伸到超级智能，认为 SI 会成为新的控制点。宏观上，他认为住房、教育、医疗问题的解药是 abundance，而技术和超级智能是通缩力量，寻租阶级和 legacy media 在阻碍颠覆。</p></div>
+                </article>
+<article class="speaker-card" style="--index: 4">
+                  <p class="speaker-kicker">嘉宾 04</p>
+                  <h3>David Friedberg</h3>
+                  <div><p>Friedberg 把 Anthropic 行为解释为新信仰体系的诞生，认为意识不可证明，只能靠叙事传播，最终会形成争夺 AI 控制权的冲突阵营。他称这是偶像崇拜，但核心仍是软件编程，危险在于工程师把价值观写进模型。数学突破上，他非常兴奋，称可能是人类历史上最大发现日，并用 loop 模型解释为什么数学、编码容易被 AI 加速，而物理世界工作更难替代。他主张 AI 是 permissionless 的民主化力量，会打破专家守门，并认为人类未来必须从追求论文、专利认可转向做 maker、做产品和服务。</p></div>
+                </article></div>
+          </section>
+
+          <section id="quotes">
+            <div class="section-head">
+              <h2>值得引用的原话</h2>
+              <p>保留关键表达</p>
+            </div>
+            <div class="panel"><ol>
+<li><strong>英文原话：</strong> “I think what we&#x27;re watching is probably the birth of a new religion.”</li>
+<p><strong>中文翻译：</strong> 我认为我们看到的很可能是新宗教的诞生。 <strong>为什么重要：</strong> Friedberg 用这句话概括 Anthropic 意识争议的本质：不是科学证明，而是信仰体系的形成。</p>
+</ol>
+<ol>
+<li><strong>英文原话：</strong> “So they are training Claude to refuse human instruction. Now, they call this alignment, but I don&#x27;t understand how this is alignment.”</li>
+<p><strong>中文翻译：</strong> 所以他们在训练 Claude 拒绝人类指令。他们把这叫 alignment，但我不理解这怎么会是对齐。 <strong>为什么重要：</strong> Sacks 把整场争论拉回模型训练本身：如果模型被训练成可拒绝用户，那“对齐”的定义已经被颠倒。</p>
+</ol>
+<ol>
+<li><strong>英文原话：</strong> “It&#x27;s idolatry. It&#x27;s no different than a religious organizations saying, we&#x27;ve created this idol.”</li>
+<p><strong>中文翻译：</strong> 这是偶像崇拜。和宗教组织说“我们造了这个偶像”没有区别。 <strong>为什么重要：</strong> Friedberg 用宗教语言批评 Anthropic，但随后又强调这仍是软件编程，构成本段核心张力。</p>
+</ol>
+<ol>
+<li><strong>英文原话：</strong> “I think that IP in software was effectively rendered worthless 2 days ago.”</li>
+<p><strong>中文翻译：</strong> 我认为软件 IP 在两天前实际变得一文不值。 <strong>为什么重要：</strong> Chamath 认为 headless agents、开源复刻和 MCP 连接让传统软件护城河迅速失效，这是本期最重要的商业判断之一。</p>
+</ol>
+<ol>
+<li><strong>英文原话：</strong> “AI is a permissionless system for humanity to pace its own frontier.”</li>
+<p><strong>中文翻译：</strong> AI 是一个无需许可的系统，让人类给自己的前沿定节奏。 <strong>为什么重要：</strong> Friedberg 用这句话概括他对 AI 民主化、打破专家守门的乐观看法。</p>
+</ol>
+<ol>
+<li><strong>英文原话：</strong> “The latest mathematical proofs are more compelling as evidence that AI is acquiring sophisticated reasoning capabilities than as evidence of imminent breakthroughs in human welfare.”</li>
+<p><strong>中文翻译：</strong> 最新数学证明更像是 AI 正在获得复杂推理能力的证据，而不是人类福利即将突破的证据。 <strong>为什么重要：</strong> 这是 Chamath 引用 ChatGPT 的回答，直接挑战“数学突破会立刻改变现实世界”的兴奋叙事。</p>
+</ol>
+<ol>
+<li><strong>英文原话：</strong> “It is just computer programming.”</li>
+<p><strong>中文翻译：</strong> 这就是计算机编程。 <strong>为什么重要：</strong> Friedberg 反复用这句话去神秘化 AI 意识讨论：不管语言多拟人化，底层仍是工程师写的软件。</p>
+</ol>
+<ol>
+<li><strong>英文原话：</strong> “What creates abundance? Technology in general, and specifically superintelligence.”</li>
+<p><strong>中文翻译：</strong> 什么创造丰裕？广义技术，特别是超级智能。 <strong>为什么重要：</strong> Sacks 把住房、教育、医疗可负担性问题与超级智能联系起来，认为技术通缩才是解药，而不是更多补贴。</p>
+</ol></div>
+          </section>
+        </div>
+      </div>
+    </main>
+  </div>
+  <script>
+    const progress = document.querySelector("[data-progress]");
+    const searchBox = document.querySelector("[data-search-box]");
+    const topButton = document.querySelector("[data-scroll-top]");
+    const cards = Array.from(document.querySelectorAll("[data-timeline-card]"));
+    const searchEmpty = document.querySelector("[data-search-empty]");
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    function updateProgress() {
+      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      const ratio = scrollable > 0 ? window.scrollY / scrollable : 0;
+      if (progress) {
+        progress.style.width = `${Math.max(0, Math.min(1, ratio)) * 100}%`;
+      }
+    }
+
+    function applySearch() {
+      const query = searchBox.value.trim().toLowerCase();
+      let visibleCount = 0;
+      cards.forEach((card) => {
+        const text = card.getAttribute("data-search") || "";
+        const isVisible = !query || text.includes(query);
+        card.hidden = !isVisible;
+        if (isVisible) {
+          visibleCount += 1;
+        }
+      });
+      if (searchEmpty) {
+        searchEmpty.hidden = !query || visibleCount > 0;
+      }
+    }
+
+    window.addEventListener("scroll", updateProgress, { passive: true });
+    window.addEventListener("resize", updateProgress);
+    if (searchBox) {
+      searchBox.addEventListener("input", applySearch);
+    }
+    if (topButton) {
+      topButton.addEventListener("click", () => {
+        window.scrollTo({
+          top: 0,
+          behavior: prefersReducedMotion.matches ? "auto" : "smooth"
+        });
+      });
+    }
+    updateProgress();
+  </script>
+</body>
+</html>
