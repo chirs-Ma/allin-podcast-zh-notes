@@ -1,0 +1,1151 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CoreWeave 债券警报、AI 交易裂缝、Anthropic IPO 隐忧与“末日论”政治 - 中文播客可视化笔记</title>
+  <style>
+    :root {
+      --bg: oklch(0.974 0.006 238);
+      --paper: oklch(0.991 0.003 238);
+      --paper-soft: oklch(0.955 0.007 238);
+      --ink: oklch(0.205 0.018 246);
+      --muted: oklch(0.49 0.018 246);
+      --faint: oklch(0.63 0.014 246);
+      --line: oklch(0.875 0.009 238);
+      --line-strong: oklch(0.74 0.014 238);
+      --accent: oklch(0.43 0.064 164);
+      --accent-soft: oklch(0.94 0.024 164);
+      --accent-wash: oklch(0.973 0.012 164);
+      --quote: oklch(0.965 0.010 92);
+      --shadow: 0 24px 54px color-mix(in oklch, var(--ink) 8%, transparent);
+      --radius: 8px;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-width: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(90deg, color-mix(in oklch, var(--line) 28%, transparent) 1px, transparent 1px) 0 0 / 92px 92px,
+        var(--bg);
+      font-family: "Geist", "Satoshi", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      line-height: 1.78;
+      text-rendering: optimizeLegibility;
+    }
+    ::selection { background: var(--accent-soft); color: var(--ink); }
+    a {
+      color: var(--accent);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+      transition: color .22s var(--ease), background-color .22s var(--ease), border-color .22s var(--ease), transform .22s var(--ease);
+    }
+    [hidden] { display: none !important; }
+    .progress {
+      position: fixed;
+      z-index: 4;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: var(--accent);
+    }
+    .quick-actions {
+      position: fixed;
+      right: max(18px, calc((100vw - 1200px) / 2));
+      bottom: 24px;
+      z-index: 3;
+      display: grid;
+      gap: 7px;
+    }
+    .quick-action {
+      display: inline-grid;
+      grid-template-columns: 16px auto;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      min-width: 74px;
+      min-height: 40px;
+      padding: 8px 12px;
+      border: 1px solid var(--line-strong);
+      border-radius: var(--radius);
+      background: color-mix(in oklch, var(--paper) 92%, transparent);
+      box-shadow: 0 12px 28px color-mix(in oklch, var(--ink) 7%, transparent);
+      color: var(--ink);
+      font: inherit;
+      font-size: 13px;
+      font-weight: 720;
+      line-height: 1.2;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .quick-action:hover, .quick-action:focus-visible {
+      outline: none;
+      border-color: var(--accent);
+      background: var(--accent-wash);
+      color: var(--accent);
+      transform: translate3d(0, -1px, 0);
+    }
+    .quick-action:active { transform: translate3d(0, 1px, 0) scale(.99); }
+    .page {
+      width: min(1760px, calc(100% - 56px));
+      margin: 0 auto;
+      padding: 0 0 104px;
+    }
+    .article { min-width: 0; }
+    .hero {
+      max-width: none;
+      margin-left: min(7vw, 140px);
+      padding: 72px 0 58px;
+    }
+    .eyebrow {
+      margin: 0 0 18px;
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    h1 {
+      max-width: none;
+      margin: 0 0 28px;
+      font-size: clamp(38px, 3vw, 52px);
+      font-weight: 760;
+      line-height: 1.08;
+      letter-spacing: 0;
+      text-wrap: balance;
+    }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 18px;
+      max-width: 72ch;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .meta a { font-weight: 650; }
+    .meta-strip {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+      max-width: 720px;
+      margin: 34px 0 28px;
+      border-top: 1px solid var(--line-strong);
+      padding-top: 16px;
+    }
+    .meta-pill {
+      display: grid;
+      gap: 2px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.35;
+    }
+    .meta-pill b {
+      color: var(--ink);
+      font-family: var(--mono);
+      font-size: 18px;
+      font-weight: 680;
+      line-height: 1;
+    }
+    .summary {
+      width: 100%;
+      max-width: 760px;
+      padding: 24px 26px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: color-mix(in oklch, var(--paper) 88%, var(--accent-soft));
+      box-shadow: var(--shadow);
+    }
+    .summary p {
+      margin: 0;
+      font-size: 19px;
+      line-height: 1.72;
+    }
+    h1, .summary, .takeaway p, .timeline-card h3, .section-content, .speaker-card, .panel {
+      overflow-wrap: anywhere;
+    }
+    .content-shell {
+      display: grid;
+      grid-template-columns: minmax(170px, 212px) minmax(0, 820px);
+      gap: clamp(36px, 7vw, 88px);
+      align-items: start;
+      border-top: 1px solid var(--line);
+      padding-top: 40px;
+    }
+    .sidebar {
+      position: sticky;
+      top: 28px;
+      align-self: start;
+      padding-top: 4px;
+    }
+    .toc {
+      border-top: 1px solid var(--ink);
+      padding-top: 16px;
+    }
+    .toc-title {
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .nav-links { display: grid; gap: 2px; }
+    .nav-links a {
+      display: block;
+      padding: 8px 0;
+      border-bottom: 1px solid color-mix(in oklch, var(--line) 72%, transparent);
+      color: var(--ink);
+      font-size: 14px;
+      line-height: 1.35;
+      text-decoration: none;
+    }
+    .nav-links a:hover, .nav-links a:focus-visible {
+      outline: none;
+      color: var(--accent);
+      transform: translate3d(2px, 0, 0);
+    }
+    .search {
+      display: grid;
+      gap: 8px;
+      margin-top: 22px;
+    }
+    .search span {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 720;
+    }
+    .search input {
+      width: 100%;
+      min-height: 40px;
+      padding: 8px 10px;
+      border: 1px solid var(--line-strong);
+      border-radius: var(--radius);
+      background: var(--paper);
+      color: var(--ink);
+      font: inherit;
+      font-size: 14px;
+      outline: none;
+      transition: border-color .22s var(--ease), box-shadow .22s var(--ease), transform .22s var(--ease);
+    }
+    .search input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px color-mix(in oklch, var(--accent) 14%, transparent);
+    }
+    .content-flow { min-width: 0; }
+    section { margin: 0 0 78px; }
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 18px;
+      align-items: end;
+      margin-bottom: 22px;
+      border-top: 1px solid var(--ink);
+      padding-top: 18px;
+    }
+    .section-head h2 {
+      margin: 0;
+      font-size: 28px;
+      font-weight: 740;
+      line-height: 1.16;
+      letter-spacing: 0;
+    }
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.4;
+      text-align: right;
+    }
+    .takeaway-list {
+      display: grid;
+      gap: 0;
+      margin: 0;
+      padding: 0;
+      border-top: 1px solid var(--line);
+      list-style: none;
+    }
+    .takeaway {
+      display: grid;
+      grid-template-columns: 52px minmax(0, 1fr);
+      gap: 18px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .takeaway span {
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 15px;
+      font-weight: 720;
+      line-height: 1.65;
+    }
+    .takeaway p {
+      margin: 0;
+      max-width: 70ch;
+      font-size: 16px;
+      line-height: 1.72;
+    }
+    .timeline {
+      display: grid;
+      gap: 0;
+      border-top: 1px solid var(--line-strong);
+    }
+    .timeline-card {
+      display: grid;
+      grid-template-columns: 132px minmax(0, 1fr);
+      gap: 32px;
+      padding: 34px 0 40px;
+      border-bottom: 1px solid var(--line);
+    }
+    .timeline-heading {
+      position: sticky;
+      top: 30px;
+      align-self: start;
+      display: grid;
+      gap: 10px;
+      padding-top: 2px;
+    }
+    .timeline-index {
+      color: var(--faint);
+      font-family: var(--mono);
+      font-size: 13px;
+      font-weight: 720;
+      line-height: 1;
+    }
+    .timeline-meta {
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 720;
+      line-height: 1.45;
+    }
+    .timeline-card h3 {
+      max-width: 24ch;
+      margin: 0 0 18px;
+      font-size: 27px;
+      font-weight: 730;
+      line-height: 1.22;
+      letter-spacing: 0;
+    }
+    .section-content {
+      color: color-mix(in oklch, var(--ink) 88%, var(--muted));
+      font-size: 16px;
+    }
+    .section-content p {
+      max-width: 72ch;
+      margin: 0 0 1.05em;
+    }
+    .section-content p strong:first-child {
+      color: var(--ink);
+      font-weight: 760;
+    }
+    .section-content h4 {
+      margin: 26px 0 10px;
+      color: var(--accent);
+      font-size: 14px;
+      font-weight: 760;
+      line-height: 1.35;
+    }
+    .section-content ul, .section-content ol, .panel ul, .panel ol, .speaker-card ul, .speaker-card ol {
+      margin: .75em 0 1em;
+      padding-left: 1.25em;
+    }
+    .section-content li, .panel li, .speaker-card li { margin: 6px 0; }
+    .speaker-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, .88fr);
+      gap: 26px 42px;
+      border-top: 1px solid var(--line);
+    }
+    .speaker-card {
+      padding: 22px 0 24px;
+      border-bottom: 1px solid var(--line);
+    }
+    .speaker-card:nth-child(even) { margin-top: 22px; }
+    .speaker-kicker {
+      margin: 0 0 8px;
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 720;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .speaker-card h3 {
+      margin: 0 0 12px;
+      font-size: 20px;
+      font-weight: 730;
+      line-height: 1.25;
+    }
+    .speaker-card p, .panel p {
+      max-width: 68ch;
+      margin-top: 0;
+    }
+    .panel {
+      border-top: 1px solid var(--line);
+      padding-top: 8px;
+    }
+    blockquote {
+      margin: 18px 0;
+      padding: 16px 18px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--quote);
+    }
+    code {
+      padding: 2px 5px;
+      border-radius: 5px;
+      background: color-mix(in oklch, var(--accent) 10%, var(--paper));
+      color: var(--ink);
+      font-family: var(--mono);
+      font-size: .92em;
+    }
+    hr {
+      height: 1px;
+      margin: 26px 0;
+      border: 0;
+      background: var(--line);
+    }
+    .empty {
+      margin: 0;
+      padding: 16px 18px;
+      border: 1px dashed var(--line-strong);
+      border-radius: var(--radius);
+      color: var(--muted);
+      background: color-mix(in oklch, var(--paper-soft) 70%, transparent);
+    }
+    .search-empty { margin-top: 16px; }
+    .muted { color: var(--muted); }
+    @keyframes rise-in {
+      from { opacity: 1; transform: translate3d(0, 6px, 0); }
+      to { opacity: 1; transform: translate3d(0, 0, 0); }
+    }
+    .hero > *, .takeaway, .timeline-card, .speaker-card, .panel {
+      animation: rise-in .55s var(--ease) both;
+    }
+    .hero > *:nth-child(2) { animation-delay: .04s; }
+    .hero > *:nth-child(3) { animation-delay: .08s; }
+    .hero > *:nth-child(4) { animation-delay: .12s; }
+    .hero > *:nth-child(5) { animation-delay: .16s; }
+    .takeaway, .timeline-card, .speaker-card {
+      animation-delay: calc(var(--index, 1) * 38ms);
+    }
+    @media (max-width: 1120px) {
+      .hero { margin-left: 0; }
+      .content-shell {
+        grid-template-columns: minmax(154px, 190px) minmax(0, 1fr);
+        gap: 36px;
+      }
+      h1 { font-size: 44px; }
+    }
+    @media (min-width: 1500px) {
+      h1 {
+        width: max-content;
+        max-width: 100%;
+        white-space: nowrap;
+        font-size: clamp(36px, 2.05vw, 42px);
+      }
+    }
+    @media (max-width: 780px) {
+      body { background: var(--bg); }
+      .page { width: min(1180px, calc(100% - 28px)); padding-bottom: 86px; }
+      .hero { padding: 46px 0 36px; }
+      .eyebrow { margin-bottom: 14px; }
+      h1 {
+        max-width: none;
+        font-size: 30px;
+        line-height: 1.14;
+        word-break: normal;
+      }
+      .summary, .summary p, .takeaway p, .section-content, .speaker-card, .panel {
+        max-width: 100%;
+        word-break: break-word;
+      }
+      .meta-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 20px; }
+      .summary { padding: 20px; }
+      .summary p { font-size: 17px; }
+      .content-shell { display: block; padding-top: 28px; }
+      .sidebar { position: static; padding-top: 0; margin-bottom: 42px; }
+      .toc { border-top-color: var(--line-strong); }
+      .nav-links { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 18px; }
+      section { margin-bottom: 58px; }
+      .section-head { display: block; margin-bottom: 16px; }
+      .section-head h2 { font-size: 24px; }
+      .section-head p { margin-top: 6px; text-align: left; }
+      .takeaway { grid-template-columns: 42px minmax(0, 1fr); gap: 12px; }
+      .timeline-card { display: block; padding: 28px 0 32px; }
+      .timeline-heading { position: static; display: flex; align-items: baseline; gap: 12px; margin-bottom: 12px; }
+      .timeline-card h3 { max-width: none; font-size: 23px; }
+      .speaker-grid { display: block; }
+      .speaker-card:nth-child(even) { margin-top: 0; }
+      .quick-actions {
+        right: 12px;
+        bottom: 12px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 6px;
+      }
+      .quick-action {
+        min-width: 66px;
+        min-height: 38px;
+        padding: 7px 9px;
+        font-size: 13px;
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: 1ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 1ms !important;
+      }
+      .speaker-card:nth-child(even) { margin-top: 0; }
+    }
+    @media print {
+      body { background: var(--paper); }
+      .sidebar, .progress, .quick-actions { display: none; }
+      .page { display: block; width: auto; padding-bottom: 0; }
+      .hero { margin-left: 0; padding: 0 0 28px; }
+      .content-shell { display: block; border-top: 0; padding-top: 0; }
+      .summary { box-shadow: none; }
+      .timeline-card, .speaker-card { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <div class="progress" data-progress></div>
+  <div class="quick-actions" aria-label="快捷操作">
+    <button class="quick-action" type="button" data-scroll-top aria-label="回到顶部">
+      <span aria-hidden="true">↑</span>
+      <span>顶部</span>
+    </button>
+  </div>
+  <div class="page">
+    <main class="article">
+      <header class="hero">
+        <p class="eyebrow">All-In Podcast 中文精读</p>
+        <h1>CoreWeave 债券警报、AI 交易裂缝、Anthropic IPO 隐忧与“末日论”政治</h1>
+        <div class="meta">
+          <span>生成时间：2026-10-19 13:54</span>
+          <span>视频：<a href="https://www.youtube.com/watch?v=_b3LfMflIGs" target="_blank" rel="noopener">YouTube</a></span>
+        </div>
+        <p class="meta">节目发布：2026-10-17（北京时间） · 视频时长：1 小时 34 分 06 秒 · <a href="https://podcasts.happyscribe.com/all-in-with-chamath-jason-sacks-friedberg/coreweave-crash-ai-trade-cracks-anthropic-ipo-red-flags-bill-gates-doomer" target="_blank" rel="noopener">英文转写</a></p>
+        <div class="meta-strip"><span class="meta-pill"><b>38 分钟</b>阅读时长</span>
+<span class="meta-pill"><b>10</b>核心要点</span>
+<span class="meta-pill"><b>11</b>时间线</span>
+<span class="meta-pill"><b>4</b>人物</span></div>
+        <div class="summary" aria-label="一句话摘要"><p>CoreWeave 的债券与 CDS 警报让 NeoCloud 和整个 AI 交易短暂承压，但本集嘉宾认为需求与算力短缺并未逆转；真正值得担心的是高杠杆、可变利率融资结构、Anthropic 高估值 IPO 的融资风险，以及 Anthropic 和 Bill Gates 式“末日论”是否正在制造监管恐慌、挤压开源与小模型竞争。</p></div>
+      </header>
+
+      <div class="content-shell">
+        <aside class="sidebar">
+          <nav class="toc" aria-label="页面导航">
+            <p class="toc-title">阅读导航</p>
+            <div class="nav-links">
+              <a href="#takeaways">核心要点</a>
+              <a href="#timeline">分段整理</a>
+              <a href="#speakers">人物观点</a>
+              <a href="#quotes">双语引语</a>
+            </div>
+            <label class="search">
+              <span>搜索时间线</span>
+              <input data-search-box type="search" placeholder="关键词" aria-label="搜索时间线">
+            </label>
+          </nav>
+        </aside>
+
+        <div class="content-flow">
+          <section id="takeaways">
+            <div class="section-head">
+              <h2>核心要点</h2>
+              <p>快速扫读本集主线</p>
+            </div>
+            <ol class="takeaway-list"><li class="takeaway" style="--index: 1"><span>01</span><p>CoreWeave 债券收益率和 CDS 飙升引发 NeoCloud 集体大跌，Chamath 认为这是“聪明钱”在重新定价信用风险，而不是简单的股价波动。</p></li>
+<li class="takeaway" style="--index: 2"><span>02</span><p>Chamath 拆解 CoreWeave 的“box”（项目融资盒子）融资结构：合同、GPU、数据中心合同放进项目载体，现金流瀑布先付电费、利息和本金，盒子之间相互隔离。</p></li>
+<li class="takeaway" style="--index: 3"><span>03</span><p>Chamath 估算 CoreWeave 已有约 350 亿美元债务、还需再融约 350 亿美元，客户集中度高，固定价格长约会错过 spot 市场价格上涨。</p></li>
+<li class="takeaway" style="--index: 4"><span>04</span><p>Ben Horowitz 和 Sacks 都认为 AI 需求没有崩塌，算力、电力、数据中心供给极度紧张，和互联网泡沫时期“需求不足”不同。</p></li>
+<li class="takeaway" style="--index: 5"><span>05</span><p>Ben 认为 CoreWeave 这类公司是极其复杂的金融机器，自己因为 LoudCloud 的经历对 NeoCloud 敬而远之；Sacks 认为 Polymarket 的“CoreWeave 破产”合约忽略了项目公司结构。</p></li>
+<li class="takeaway" style="--index: 6"><span>06</span><p>Sacks 把“payback period”称为最该盯的北极星指标：CoreWeave 约 2.5 年回本、典型合同 5 年，SpaceX 约 1 年回本，后者更接近 spot 定价。</p></li>
+<li class="takeaway" style="--index: 7"><span>07</span><p>Anthropic Investor Day 传出 Q3 收入 168 亿美元、NRR 900%、自由现金流为正等惊人数据，但 ARR 口径和增长放缓引发质疑。</p></li>
+<li class="takeaway" style="--index: 8"><span>08</span><p>Chamath 认为 Anthropic 应以足够吸引资金、完成募资的价格发行，至少融 2000 亿美元、最好 2500 亿美元，用更低估值换足算力战争的本钱。</p></li>
+<li class="takeaway" style="--index: 9"><span>09</span><p>Sacks 连续批评 Anthropic 的“恐慌营销”：从蒸馏攻击到 IoT 蠕虫，再到模型宪法自迭代，他认为 Anthropic 在把技术问题政治化、打压开源和小模型。</p></li>
+<li class="takeaway" style="--index: 10"><span>10</span><p>后半段争论转向 Bill Gates 和 AI 末日论：Ben 用“manifesting”类比 COVID 和 Anthropic 的风险叙事，Chamath 认为 Gates 想重建全球权力结构，JCal 则用“退休后失去抓手”解释 Gates 的动机。</p></li></ol>
+          </section>
+
+          <section id="timeline">
+            <div class="section-head">
+              <h2>分段详细整理</h2>
+              <p>按时间线阅读上下文</p>
+            </div>
+            <div class="timeline" data-timeline><article class="timeline-card" data-timeline-card data-search="00:00:00–00:02:17 开场：节目登顶、sacks 回归与 ben horowitz 代班 本段核心内容： all-in 节目自称上周登上 apple podcasts 第一名，开场主要围绕“谁该拿功劳”互相调侃。 david sacks 回归；david friedberg 本集缺席，由 a16z 的 ben horowitz 代班。 本集主线被定调为：ai 泡沫是否开始泄气、coreweave 是否是煤矿里的金丝雀。 背景解释与关键术语： all-in podcast：jason calacanis、chamath palihapitiya、david sacks、david friedberg 四人主持的硅谷科技与政治播客。 ben horowitz：a16z（andreessen horowitz）联合创始人，长期投资科技公司，也是 loudcloud 联合创始人。 apple podcasts 排名：播客行业常用的流行度指标之一，不等于长期商业价值，但在节目里被当作“终于登顶”的象征。 详细中文整理： jcal： 欢迎回到世界排名第一的播客。我们真的登顶了，上周在 apple podcasts 上是第一名，花了五年才到这儿。今天 david sacks 回来了，ben horowitz 也来代班，friedberg 正在忙于“拯救世界免受饥荒”，下周回归。 chamath： 排名第一当然很好。不过我觉得如果不是要拖着 jcal 往前走，我和 sacks 可能早 18 个月就到第一了。 jcal： 我是那个控球后卫，给你们送出所有助攻、把球放到你们想要的位置。没有我不断打断，你们当然也能到第一，只是会更晚。 sacks： 至少“第一名”这件事不错。 ben： 能来到第一名节目感觉很好，我已经觉得自己更大了。 jcal： 一个科技播客能成为 apple podcasts 全平台第一确实有点奇怪。本周大事很多：ai 泡沫如果有的话，可能刚刚泄了一点气；neocloud 被血洗，coreweave 的债券开始被抛售，这可能是煤矿里的金丝雀。 ---" style="--index: 1">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">01</span>
+                    <span class="timeline-meta">00:00:00–00:02:17</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>开场：节目登顶、Sacks 回归与 Ben Horowitz 代班</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>All-In 节目自称上周登上 Apple Podcasts 第一名，开场主要围绕“谁该拿功劳”互相调侃。</li>
+<li>David Sacks 回归；David Friedberg 本集缺席，由 a16z 的 Ben Horowitz 代班。</li>
+<li>本集主线被定调为：AI 泡沫是否开始泄气、CoreWeave 是否是煤矿里的金丝雀。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>All-In Podcast：Jason Calacanis、Chamath Palihapitiya、David Sacks、David Friedberg 四人主持的硅谷科技与政治播客。</li>
+<li>Ben Horowitz：a16z（Andreessen Horowitz）联合创始人，长期投资科技公司，也是 LoudCloud 联合创始人。</li>
+<li>Apple Podcasts 排名：播客行业常用的流行度指标之一，不等于长期商业价值，但在节目里被当作“终于登顶”的象征。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> 欢迎回到世界排名第一的播客。我们真的登顶了，上周在 Apple Podcasts 上是第一名，花了五年才到这儿。今天 David Sacks 回来了，Ben Horowitz 也来代班，Friedberg 正在忙于“拯救世界免受饥荒”，下周回归。</p>
+<p><strong>Chamath：</strong> 排名第一当然很好。不过我觉得如果不是要拖着 JCal 往前走，我和 Sacks 可能早 18 个月就到第一了。</p>
+<p><strong>JCal：</strong> 我是那个控球后卫，给你们送出所有助攻、把球放到你们想要的位置。没有我不断打断，你们当然也能到第一，只是会更晚。</p>
+<p><strong>Sacks：</strong> 至少“第一名”这件事不错。</p>
+<p><strong>Ben：</strong> 能来到第一名节目感觉很好，我已经觉得自己更大了。</p>
+<p><strong>JCal：</strong> 一个科技播客能成为 Apple Podcasts 全平台第一确实有点奇怪。本周大事很多：AI 泡沫如果有的话，可能刚刚泄了一点气；NeoCloud 被血洗，CoreWeave 的债券开始被抛售，这可能是煤矿里的金丝雀。</p>
+<hr></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="00:02:17–00:13:14 coreweave 债券抛售：box 结构、cds 与反身性循环 本段核心内容： coreweave、iren、nebius 等 neocloud 因债券和 cds 重新定价集体大跌，coreweave 成为风暴中心。 chamath 用“box”（项目融资盒子）解释 coreweave 的项目融资：合同、gpu、数据中心合同被放进独立载体，现金流按瀑布分配。 他认为 coreweave 不是表面上的“马上要违约”，但固定价格合同、客户集中度、再融资需求和利率上行构成了负向反身性循环。 背景解释与关键术语： neocloud：新型 ai 云服务商，通常以 gpu 算力租赁为核心，重资产、高负债，靠长期合同和项目融资扩张。 cds：credit default swap，信用违约互换，本质是债券违约保险。cds 利差飙升通常意味着市场认为违约概率上升。 basis points：基点，1 个基点等于 0.01%。953 个基点约等于 9.53%。 现金流瀑布：项目收入按顺序支付运营成本、债务利息、本金，最后剩余才归股东。 ddtl：delayed draw term loan，延迟提取定期贷款，这里指 coreweave 的 gpu 相关贷款工具。 详细中文整理： jcal： 本周 coreweave 的债券开始被抛售，neocloud 全线下跌。coreweave、iren、nebius 这些最大 neocloud 作为上市公司都跌了约 20%。周二 x 上一堆人，包括 chamath，指出 coreweave 某些债务的收益率已经到 15%。债券交易员担心 coreweave 是否有足够现金流支撑债务，所以要求更高回报。然后 elon musk 转了一句“yikes”，引发大量报道。周三 coreweave、iren、nebius 又跌了 10% 到 15%，oracle、dell、nvidia 也被波及。coreweave 融资超过 350 亿美元，创始人 michael intrator 今年 3 月来过节目解释他所谓的“box”（项目融资盒子）。 michael intrator（录音）： 我们找到客户，比如 microsoft，签合同。拿到合同后，我创建一个叫“box”（项目融资盒子）的东西，把和 microsoft 的合同放进去，去找 jensen 买 gpu 放进去，再把数据中心合同放进去。这个盒子控制现金流：microsoft 付钱给盒子，不付给我；盒子先付数据中心、电费、利息和本金，剩下的才流回我们。一个五年合同里，大概 2.5 年就能把盒子里的东西全部付清。盒子之间不交叉、不传染，都是独立离散的。 放款人看到这个融资机制后，会以逐步更低的利率继续借钱给我们。 jcal： 这听起来是合理的解释，每个盒子隔离。但过去六个月发生了什么变化？你怎么看 coreweave 的金融创新？ chamath： 最重要的事情永远是看最精明的专业资金如何给风险定价。coreweave、nebius、iren 这些公司必须大量借钱来资助盒子，聪明钱交易的是 cds，也就是违约保险。本周这个风险飙到约 953 个基点，换算成隐含违约概率，大约是任何一年 16% 的违约概率；五年期限下，市场定价隐含约 55% 的违约概率。这不是我的判断，这是保险市场对它债务的定价。为什么？先看市场背景：美国无风险利率在往上走，10 年期国债上行，所有东西都要重新定价；垃圾债要付更高收益率，coreweave 的债务收益率也剧烈上冲。 chamath： michael 说得对，他是在做盒子、放合同和 gpu，但他还需要往盒子里放钱，而钱是借来的。灰色柱子代表他合同里保证能收到的钱，这些合同是固定价格。也就是说，如果 spot 市场价格上涨，他不能完全享受，因为已经按固定价格预售了。他现在大约有 350 亿美元债务，要把他签下的所有合同都融资、把所有盒子建起来，按中位数估算还需要再融约 350 亿美元。问题是，再融资利率在涨，这和他自身经营无关，是因为无风险利率上行，所有信用利差都要跟着重定价。 chamath： 今天他所有资金来源的平均利率约 8.5%。但最近最精明的专业资金认为这太接近刀锋了，要求更高利息。我发推提到的是其中一笔 gpu 贷款 ddtl 1.0，利率飙到 15%。问题在于，未来所有融资都可能要付这个水平，而一半已经融资、一半还没融资。现在他们有约 780 到 800 亿美元资产、350 亿美元债务，覆盖看起来不错，所以表面上看不是马上要爆。但现实问题是客户集中度极高：75% 收入来自三家公司，其中一些还在下调未来收入预期。你又要用更高利率借钱，又有一堆盒子要融资，而盒子里的收入是固定的。 chamath： 所以现在市场在赌一个硬币抛掷：如果他们能以合理利率融资，而且 gpu 寿命比想象中长，他们没事；如果融资利率进入 10%、11%、12% 甚至 15%，他们就会非常接近无法覆盖所有义务。我团队估算，他们的现金流安全余量距离盈亏平衡点大约正负 50 亿美元。这就是为什么 cds 先飙、债券收益率再飙、债券价格再跌。顺序是：第一，他们创造了很新颖的 box 结构，别人都在抄；第二，他们签了固定价格长合同，锁定未来收入，很聪明；第三，无风险利率上行推高借款成本，侵蚀利润空间，逼近盈亏平衡点，cds 反应，债券反应，形成负向反身性循环。我不认为他们处于真实风险中，但这是信心游戏，市场必须相信能再吸收他们 350 亿美元融资，未来一个月会见分晓。 关键原话或重要表达： “这不是我的判断，这是保险市场在给他们的债务定价。” “他们处在负向反身性循环里，必须找到办法打破它。” ---" style="--index: 2">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">02</span>
+                    <span class="timeline-meta">00:02:17–00:13:14</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>CoreWeave 债券抛售：box 结构、CDS 与反身性循环</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>CoreWeave、IREN、Nebius 等 NeoCloud 因债券和 CDS 重新定价集体大跌，CoreWeave 成为风暴中心。</li>
+<li>Chamath 用“box”（项目融资盒子）解释 CoreWeave 的项目融资：合同、GPU、数据中心合同被放进独立载体，现金流按瀑布分配。</li>
+<li>他认为 CoreWeave 不是表面上的“马上要违约”，但固定价格合同、客户集中度、再融资需求和利率上行构成了负向反身性循环。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>NeoCloud：新型 AI 云服务商，通常以 GPU 算力租赁为核心，重资产、高负债，靠长期合同和项目融资扩张。</li>
+<li>CDS：Credit Default Swap，信用违约互换，本质是债券违约保险。CDS 利差飙升通常意味着市场认为违约概率上升。</li>
+<li>basis points：基点，1 个基点等于 0.01%。953 个基点约等于 9.53%。</li>
+<li>现金流瀑布：项目收入按顺序支付运营成本、债务利息、本金，最后剩余才归股东。</li>
+<li>DDTL：Delayed Draw Term Loan，延迟提取定期贷款，这里指 CoreWeave 的 GPU 相关贷款工具。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> 本周 CoreWeave 的债券开始被抛售，NeoCloud 全线下跌。CoreWeave、IREN、Nebius 这些最大 NeoCloud 作为上市公司都跌了约 20%。周二 X 上一堆人，包括 Chamath，指出 CoreWeave 某些债务的收益率已经到 15%。债券交易员担心 CoreWeave 是否有足够现金流支撑债务，所以要求更高回报。然后 Elon Musk 转了一句“yikes”，引发大量报道。周三 CoreWeave、IREN、Nebius 又跌了 10% 到 15%，Oracle、Dell、Nvidia 也被波及。CoreWeave 融资超过 350 亿美元，创始人 Michael Intrator 今年 3 月来过节目解释他所谓的“box”（项目融资盒子）。</p>
+<p><strong>Michael Intrator（录音）：</strong> 我们找到客户，比如 Microsoft，签合同。拿到合同后，我创建一个叫“box”（项目融资盒子）的东西，把和 Microsoft 的合同放进去，去找 Jensen 买 GPU 放进去，再把数据中心合同放进去。这个盒子控制现金流：Microsoft 付钱给盒子，不付给我；盒子先付数据中心、电费、利息和本金，剩下的才流回我们。一个五年合同里，大概 2.5 年就能把盒子里的东西全部付清。盒子之间不交叉、不传染，都是独立离散的。 放款人看到这个融资机制后，会以逐步更低的利率继续借钱给我们。</p>
+<p><strong>JCal：</strong> 这听起来是合理的解释，每个盒子隔离。但过去六个月发生了什么变化？你怎么看 CoreWeave 的金融创新？</p>
+<p><strong>Chamath：</strong> 最重要的事情永远是看最精明的专业资金如何给风险定价。CoreWeave、Nebius、IREN 这些公司必须大量借钱来资助盒子，聪明钱交易的是 CDS，也就是违约保险。本周这个风险飙到约 953 个基点，换算成隐含违约概率，大约是任何一年 16% 的违约概率；五年期限下，市场定价隐含约 55% 的违约概率。这不是我的判断，这是保险市场对它债务的定价。为什么？先看市场背景：美国无风险利率在往上走，10 年期国债上行，所有东西都要重新定价；垃圾债要付更高收益率，CoreWeave 的债务收益率也剧烈上冲。</p>
+<p><strong>Chamath：</strong> Michael 说得对，他是在做盒子、放合同和 GPU，但他还需要往盒子里放钱，而钱是借来的。灰色柱子代表他合同里保证能收到的钱，这些合同是固定价格。也就是说，如果 spot 市场价格上涨，他不能完全享受，因为已经按固定价格预售了。他现在大约有 350 亿美元债务，要把他签下的所有合同都融资、把所有盒子建起来，按中位数估算还需要再融约 350 亿美元。问题是，再融资利率在涨，这和他自身经营无关，是因为无风险利率上行，所有信用利差都要跟着重定价。</p>
+<p><strong>Chamath：</strong> 今天他所有资金来源的平均利率约 8.5%。但最近最精明的专业资金认为这太接近刀锋了，要求更高利息。我发推提到的是其中一笔 GPU 贷款 DDTL 1.0，利率飙到 15%。问题在于，未来所有融资都可能要付这个水平，而一半已经融资、一半还没融资。现在他们有约 780 到 800 亿美元资产、350 亿美元债务，覆盖看起来不错，所以表面上看不是马上要爆。但现实问题是客户集中度极高：75% 收入来自三家公司，其中一些还在下调未来收入预期。你又要用更高利率借钱，又有一堆盒子要融资，而盒子里的收入是固定的。</p>
+<p><strong>Chamath：</strong> 所以现在市场在赌一个硬币抛掷：如果他们能以合理利率融资，而且 GPU 寿命比想象中长，他们没事；如果融资利率进入 10%、11%、12% 甚至 15%，他们就会非常接近无法覆盖所有义务。我团队估算，他们的现金流安全余量距离盈亏平衡点大约正负 50 亿美元。这就是为什么 CDS 先飙、债券收益率再飙、债券价格再跌。顺序是：第一，他们创造了很新颖的 box 结构，别人都在抄；第二，他们签了固定价格长合同，锁定未来收入，很聪明；第三，无风险利率上行推高借款成本，侵蚀利润空间，逼近盈亏平衡点，CDS 反应，债券反应，形成负向反身性循环。我不认为他们处于真实风险中，但这是信心游戏，市场必须相信能再吸收他们 350 亿美元融资，未来一个月会见分晓。</p>
+<h4>关键原话或重要表达</h4>
+<ul>
+<li>“这不是我的判断，这是保险市场在给他们的债务定价。”</li>
+<li>“他们处在负向反身性循环里，必须找到办法打破它。”</li>
+</ul>
+<hr></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="00:13:14–00:31:14 是泡沫破裂还是波动？loudcloud 旧伤与 polymarket 本段核心内容： ben 认为 coreweave 是极其复杂的金融机器，但 ai 算力需求与互联网泡沫时期不同，不是需求不足。 他回忆 loudcloud 的带宽价格暴跌教训，解释为什么 a16z 不投 neocloud。 sacks 认为 polymarket 的 coreweave 破产合约忽略了项目公司结构，资产层出问题不必然等于母公司破产。 背景解释与关键术语： loudcloud：ben horowitz 与 marc andreessen 在 1999 年创办的云服务公司，后来转型为 opsware，经历过互联网泡沫破裂。 polymarket：加密预测市场，用户可以对事件结果下注，这里指“coreweave 是否破产”的合约。 opco/propco：运营公司与资产持有公司分离的结构。sacks 用它解释项目层与母公司层的区别；结构隔离能否成立仍取决于实际合同、担保和追索条款，不能仅凭这个名称断言母公司不会破产。 详细中文整理： jcal： ben，你经历过几次泡沫，可能有 ptsd 或伤疤。coreweave 今天反弹了，跌 10% 后涨 1% 到 2%。这是急性波动，还是 ai 交易和 ai 泡沫的更大问题？有没有泡沫？等一下再聊 anthropic。sacks 也说说。 ben： 首先要理解，coreweave 这类公司是环节繁复、相互牵动的金融机器（rube goldberg machine），极其复杂。gpu 合同只是其中一块，还有数据中心合同、内存采购、内存短缺等等。另一个有意思的点是 gpu 的 duration，也就是寿命，在变长，价格也在涨，这对持有 gpu 的人是顺风。现在有真实短缺，不只是 gpu，还有电力和冷却。昨天我和 andy jassy 聊，他说“我们到 2028 年什么都卖光了”，甚至可能超过 2028 年。所以 coreweave 的优势是：它手里有供给，而市场极度短缺。这和互联网泡沫完全不同。互联网泡沫时，我们建了带宽，但需求不够，消费者没那么多，最后需求不足杀死了公司。ai 不是需求不足，所以动态不一样。 ben： 当然，如果进入病态债务状况，任何人都可能被摧毁。这也是为什么我们没有投这些 neocloud，因为经历过 loudcloud，我害怕。这个模型非常复杂，依赖大量假设。 jcal： ben，你和 marc 算是 neocloud 的先行者。loudcloud 普及了“建云、服务客户”的想法，但你们作为先驱却绕开了整个赛道，为什么？ ben： 因为这会变成非常危险的套利生意，很容易收入覆盖不了成本。loudcloud 的例子：1999 年带宽每兆比特 1500 美元，还很难拿到，所以你必须签三年长合同；到 2001 年，带宽变成每兆比特 50 美元。如果你持有带宽，还借钱买带宽，你就死定了。这种事情完全不在创业者控制范围内，和我们喜欢投的东西差别太大，吓死我了。现在 ai 的核心动态对 coreweave 有利：不是供给过剩，而是严重短缺。token 价格在跌，但 gpu 价格没跌，数据中心空间价格在涨，建数据中心的劳动力也难找，政治和监管让建设更难。整个供应链价格在涨，需求没消退，这是很大的顺风，尽管债务市场独立地变得很难。 jcal： sacks，polymarket 上“coreweave 宣布破产”的合约：2027 年底 15%，2028 年底 23%。考虑到需求巨大，这是不是有点离谱？ sacks： 这个市场有点蠢。michael 解释过，这是 opco/propco 结构，我认为不能把单个项目失败直接当作 coreweave 母公司破产。某个数据中心或建设项目的资产层载体理论上可能资不抵债，但那会进入接管程序，然后管理方卖掉 gpu。每个盒子独立，所以我认为这个 polymarket 合约没有充分区分项目层和母公司层。 jcal： 不过反过来下注可能是免费的钱。sacks，把话题拉高一点：除 coreweave 和 neocloud 外，ai 需求巨大，token 价格下降但消费量暴涨。一个利好是 gpu 寿命可能比想象中长，原来 3 到 5 年，现在推理用途可能 6、7、8 年。你怎么看 ai 交易和泡沫？我们需不需要压力测试？这是不是牛市第四、第五年要结束了？ sacks： 核心问题是：coreweave 暴跌、债券被打到 80%、股票几天跌 15% 到 20%，这是市场波动，还是更深更糟的事情开始，比如泡沫破裂？我倾向于认为这是波动。当你在为未来数万亿美元的成果定价，而且基于非常快的指数增长，市场会对当下任何数据点过度敏感，所以波动会被放大。我不认为基本面变了。先看需求有没有变？没有。算力需求继续爆炸，所有大模型公司都说自己受算力约束，初创公司也在问 vc 能不能帮忙搞算力，甚至有加速器买多余算力来吸引申请者。旧 gpu，比如 h100、a100，几代前的产品，还在以溢价出租，本来应该完全折旧了，结果还有上行惊喜。所以需求没有崩。 sacks： 再看供给有没有过剩？没有。建配套电力已就绪的算力极其困难，物理世界建设很难，elon 说连火箭科学家都觉得建吉瓦级算力很难，还有地方监管和社区审批阻力。所以不是供给过剩，而是强制性稀缺。再看 coreweave 有没有执行问题？可能有成本略高、进度略慢，但声誉上他们很擅长建算力。再看信用问题：michael 说盒子融资不依赖 coreweave 的无担保信用，而是依赖租户的五年承诺，比如 microsoft；项目信用更多看租户，背后还有 gpu 资产抵押。而且 gpu 折旧周期如果有上行惊喜，信用问题不深。真正发生的是 coreweave 无担保债务被重新定价，债券跌到困境区间，二级市场隐含收益率升到约 15%，但原有债券的票息没有随之改变，公司仍按约支付 9.6%。这会影响未来融资时市场要求的回报，却不会把既有固定票息直接改成 15%。新盒子更多是资产抵押融资，不是无担保公司债。 jcal： 所以未来债务成本会变。 sacks： 可能提高未来债务成本，但我不认为他们用无担保公司票据融资新盒子，而是资产抵押融资。盒子里有两样东西：合同和 gpu，合同方是 microsoft 这类有信用的大公司。如果我做项目贷款，我会仔细看客户信用；如果是 microsoft、google，我感觉很好；如果是初创公司，我未必感觉好。 chamath： 他们有 3 个客户贡献 75% 收入，但都是投资级大客户。jcal，从初创公司角度看，融资和获客都很强，现在收入爬坡不是 saas 的“三倍三倍、双倍双倍”，而是“你每季度翻倍吗？不翻倍你在干什么？”所以初创端很强。也许市场只是在测试，或者有消化不良。ben，是不是世界没钱了、大家已经下完注了？这对风投工业和 anthropic、openai 两个史上最大 ipo 意味着什么？我们是否没有足够资金配置给 ai？ ben： 我不这么认为。我们从没见过公司增长这么快、变得这么大，所以从没问过“世界有没有足够钱融资这些公司”这种疯狂问题。anthropic 和 openai 的 ipo 我认为没问题。价格是 2 万亿还是 1.75 万亿，我不知道，但融资 500 亿或 1000 亿不是史无前例，spacex 刚做过。你组合里持有的任何东西，openai 和 anthropic 都构成威胁，几乎没有什么资产能不被它们威胁。所以我完全不担心这些 ipo 的需求。 jcal： 所以你必须持有它们，因为它们威胁全世界所有公司，它们在广泛出售智能，而每家公司都建立在智能之上。chamath？ chamath： 你可以把它当作防御性对冲。如果你持有医疗公司，过去靠医疗基础设施不透明赚钱，openai 是威胁；如果你持有大量 saas 工作流，openai 和 anthropic 理论上是威胁。所以至少是防御性配置。而且 ai 里没有太多其他可投资的大标的，除了这两家，它们会拿到绝大部分兴趣。更一般的问题是：如果债券市场把 10 年期国债推到 5.5% 或 6%，这和 ai 无关，和债务/gdp、西方经济体其他因素有关，那么任何靠融资利差赚钱的商业模式都会受到严重冲击。10 年期到 6% 时，你做什么都没用，会被碾成路边的牺牲品。只要避免这个，我们就没事。中期选举后最重要的是控制赤字，让债券市场退后。如果提出巨大支出计划，10 年期会被推高，连锁负面反应；如果姿态是冷静、削减浪费，市场会积极响应。 chamath： 最后一点：这些是阿喀琉斯之踵。sacks 和 ben 雄辩地说明了资产价值，但就像伟大战士，只要切掉跟腱，就会跪倒。其他都是好事，但这些生意需要以可变利率、相对无风险利率的利差来融资，这是大问题。最坏情况下，你需要 microsoft、google、meta、nvidia 为整个体系提供支持，因为只有这样才能承受市场一两年修正。 关键原话或重要表达： “这些公司是环节繁复、相互牵动的金融机器（rube goldberg machine）。” “互联网泡沫是需求不足杀死了公司；ai 不是需求不足。” “任何靠融资利差赚钱的商业模式，在 10 年期 6% 时都会被碾过去。” ---" style="--index: 3">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">03</span>
+                    <span class="timeline-meta">00:13:14–00:31:14</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>是泡沫破裂还是波动？LoudCloud 旧伤与 Polymarket</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>Ben 认为 CoreWeave 是极其复杂的金融机器，但 AI 算力需求与互联网泡沫时期不同，不是需求不足。</li>
+<li>他回忆 LoudCloud 的带宽价格暴跌教训，解释为什么 a16z 不投 NeoCloud。</li>
+<li>Sacks 认为 Polymarket 的 CoreWeave 破产合约忽略了项目公司结构，资产层出问题不必然等于母公司破产。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>LoudCloud：Ben Horowitz 与 Marc Andreessen 在 1999 年创办的云服务公司，后来转型为 Opsware，经历过互联网泡沫破裂。</li>
+<li>Polymarket：加密预测市场，用户可以对事件结果下注，这里指“CoreWeave 是否破产”的合约。</li>
+<li>opco/propco：运营公司与资产持有公司分离的结构。Sacks 用它解释项目层与母公司层的区别；结构隔离能否成立仍取决于实际合同、担保和追索条款，不能仅凭这个名称断言母公司不会破产。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> Ben，你经历过几次泡沫，可能有 PTSD 或伤疤。CoreWeave 今天反弹了，跌 10% 后涨 1% 到 2%。这是急性波动，还是 AI 交易和 AI 泡沫的更大问题？有没有泡沫？等一下再聊 Anthropic。Sacks 也说说。</p>
+<p><strong>Ben：</strong> 首先要理解，CoreWeave 这类公司是环节繁复、相互牵动的金融机器（Rube Goldberg machine），极其复杂。GPU 合同只是其中一块，还有数据中心合同、内存采购、内存短缺等等。另一个有意思的点是 GPU 的 duration，也就是寿命，在变长，价格也在涨，这对持有 GPU 的人是顺风。现在有真实短缺，不只是 GPU，还有电力和冷却。昨天我和 Andy Jassy 聊，他说“我们到 2028 年什么都卖光了”，甚至可能超过 2028 年。所以 CoreWeave 的优势是：它手里有供给，而市场极度短缺。这和互联网泡沫完全不同。互联网泡沫时，我们建了带宽，但需求不够，消费者没那么多，最后需求不足杀死了公司。AI 不是需求不足，所以动态不一样。</p>
+<p><strong>Ben：</strong> 当然，如果进入病态债务状况，任何人都可能被摧毁。这也是为什么我们没有投这些 NeoCloud，因为经历过 LoudCloud，我害怕。这个模型非常复杂，依赖大量假设。</p>
+<p><strong>JCal：</strong> Ben，你和 Marc 算是 NeoCloud 的先行者。LoudCloud 普及了“建云、服务客户”的想法，但你们作为先驱却绕开了整个赛道，为什么？</p>
+<p><strong>Ben：</strong> 因为这会变成非常危险的套利生意，很容易收入覆盖不了成本。LoudCloud 的例子：1999 年带宽每兆比特 1500 美元，还很难拿到，所以你必须签三年长合同；到 2001 年，带宽变成每兆比特 50 美元。如果你持有带宽，还借钱买带宽，你就死定了。这种事情完全不在创业者控制范围内，和我们喜欢投的东西差别太大，吓死我了。现在 AI 的核心动态对 CoreWeave 有利：不是供给过剩，而是严重短缺。Token 价格在跌，但 GPU 价格没跌，数据中心空间价格在涨，建数据中心的劳动力也难找，政治和监管让建设更难。整个供应链价格在涨，需求没消退，这是很大的顺风，尽管债务市场独立地变得很难。</p>
+<p><strong>JCal：</strong> Sacks，Polymarket 上“CoreWeave 宣布破产”的合约：2027 年底 15%，2028 年底 23%。考虑到需求巨大，这是不是有点离谱？</p>
+<p><strong>Sacks：</strong> 这个市场有点蠢。Michael 解释过，这是 opco/propco 结构，我认为不能把单个项目失败直接当作 CoreWeave 母公司破产。某个数据中心或建设项目的资产层载体理论上可能资不抵债，但那会进入接管程序，然后管理方卖掉 GPU。每个盒子独立，所以我认为这个 Polymarket 合约没有充分区分项目层和母公司层。</p>
+<p><strong>JCal：</strong> 不过反过来下注可能是免费的钱。Sacks，把话题拉高一点：除 CoreWeave 和 NeoCloud 外，AI 需求巨大，token 价格下降但消费量暴涨。一个利好是 GPU 寿命可能比想象中长，原来 3 到 5 年，现在推理用途可能 6、7、8 年。你怎么看 AI 交易和泡沫？我们需不需要压力测试？这是不是牛市第四、第五年要结束了？</p>
+<p><strong>Sacks：</strong> 核心问题是：CoreWeave 暴跌、债券被打到 80%、股票几天跌 15% 到 20%，这是市场波动，还是更深更糟的事情开始，比如泡沫破裂？我倾向于认为这是波动。当你在为未来数万亿美元的成果定价，而且基于非常快的指数增长，市场会对当下任何数据点过度敏感，所以波动会被放大。我不认为基本面变了。先看需求有没有变？没有。算力需求继续爆炸，所有大模型公司都说自己受算力约束，初创公司也在问 VC 能不能帮忙搞算力，甚至有加速器买多余算力来吸引申请者。旧 GPU，比如 H100、A100，几代前的产品，还在以溢价出租，本来应该完全折旧了，结果还有上行惊喜。所以需求没有崩。</p>
+<p><strong>Sacks：</strong> 再看供给有没有过剩？没有。建配套电力已就绪的算力极其困难，物理世界建设很难，Elon 说连火箭科学家都觉得建吉瓦级算力很难，还有地方监管和社区审批阻力。所以不是供给过剩，而是强制性稀缺。再看 CoreWeave 有没有执行问题？可能有成本略高、进度略慢，但声誉上他们很擅长建算力。再看信用问题：Michael 说盒子融资不依赖 CoreWeave 的无担保信用，而是依赖租户的五年承诺，比如 Microsoft；项目信用更多看租户，背后还有 GPU 资产抵押。而且 GPU 折旧周期如果有上行惊喜，信用问题不深。真正发生的是 CoreWeave 无担保债务被重新定价，债券跌到困境区间，二级市场隐含收益率升到约 15%，但原有债券的票息没有随之改变，公司仍按约支付 9.6%。这会影响未来融资时市场要求的回报，却不会把既有固定票息直接改成 15%。新盒子更多是资产抵押融资，不是无担保公司债。</p>
+<p><strong>JCal：</strong> 所以未来债务成本会变。</p>
+<p><strong>Sacks：</strong> 可能提高未来债务成本，但我不认为他们用无担保公司票据融资新盒子，而是资产抵押融资。盒子里有两样东西：合同和 GPU，合同方是 Microsoft 这类有信用的大公司。如果我做项目贷款，我会仔细看客户信用；如果是 Microsoft、Google，我感觉很好；如果是初创公司，我未必感觉好。</p>
+<p><strong>Chamath：</strong> 他们有 3 个客户贡献 75% 收入，但都是投资级大客户。JCal，从初创公司角度看，融资和获客都很强，现在收入爬坡不是 SaaS 的“三倍三倍、双倍双倍”，而是“你每季度翻倍吗？不翻倍你在干什么？”所以初创端很强。也许市场只是在测试，或者有消化不良。Ben，是不是世界没钱了、大家已经下完注了？这对风投工业和 Anthropic、OpenAI 两个史上最大 IPO 意味着什么？我们是否没有足够资金配置给 AI？</p>
+<p><strong>Ben：</strong> 我不这么认为。我们从没见过公司增长这么快、变得这么大，所以从没问过“世界有没有足够钱融资这些公司”这种疯狂问题。Anthropic 和 OpenAI 的 IPO 我认为没问题。价格是 2 万亿还是 1.75 万亿，我不知道，但融资 500 亿或 1000 亿不是史无前例，SpaceX 刚做过。你组合里持有的任何东西，OpenAI 和 Anthropic 都构成威胁，几乎没有什么资产能不被它们威胁。所以我完全不担心这些 IPO 的需求。</p>
+<p><strong>JCal：</strong> 所以你必须持有它们，因为它们威胁全世界所有公司，它们在广泛出售智能，而每家公司都建立在智能之上。Chamath？</p>
+<p><strong>Chamath：</strong> 你可以把它当作防御性对冲。如果你持有医疗公司，过去靠医疗基础设施不透明赚钱，OpenAI 是威胁；如果你持有大量 SaaS 工作流，OpenAI 和 Anthropic 理论上是威胁。所以至少是防御性配置。而且 AI 里没有太多其他可投资的大标的，除了这两家，它们会拿到绝大部分兴趣。更一般的问题是：如果债券市场把 10 年期国债推到 5.5% 或 6%，这和 AI 无关，和债务/GDP、西方经济体其他因素有关，那么任何靠融资利差赚钱的商业模式都会受到严重冲击。10 年期到 6% 时，你做什么都没用，会被碾成路边的牺牲品。只要避免这个，我们就没事。中期选举后最重要的是控制赤字，让债券市场退后。如果提出巨大支出计划，10 年期会被推高，连锁负面反应；如果姿态是冷静、削减浪费，市场会积极响应。</p>
+<p><strong>Chamath：</strong> 最后一点：这些是阿喀琉斯之踵。Sacks 和 Ben 雄辩地说明了资产价值，但就像伟大战士，只要切掉跟腱，就会跪倒。其他都是好事，但这些生意需要以可变利率、相对无风险利率的利差来融资，这是大问题。最坏情况下，你需要 Microsoft、Google、Meta、Nvidia 为整个体系提供支持，因为只有这样才能承受市场一两年修正。</p>
+<h4>关键原话或重要表达</h4>
+<ul>
+<li>“这些公司是环节繁复、相互牵动的金融机器（Rube Goldberg machine）。”</li>
+<li>“互联网泡沫是需求不足杀死了公司；AI 不是需求不足。”</li>
+<li>“任何靠融资利差赚钱的商业模式，在 10 年期 6% 时都会被碾过去。”</li>
+</ul>
+<hr></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="00:31:14–00:38:19 软件通缩、杰文斯悖论与新护城河 本段核心内容： jcal 担心 ai 让软件被快速复制、价格归零，初创公司估值和风投 dpi 受影响。 sacks 认为不要只看零和替代，ai 让定制软件大量增加，代码总量会指数级上升。 ben 用“软件的杰文斯悖论”解释：软件价格下降，但软件数量和使用量暴增，护城河会转向数据、反馈和产品深度。 背景解释与关键术语： jevons paradox：资源效率提高后，单位成本下降，反而导致总消耗量增加。这里指软件变便宜后，软件总需求和使用量暴增。 dpi：distribution to paid-in capital，风投基金已向 lp 分配的资金比例，衡量退出回报。 saaspocalypse：市场对 saas 被 ai 颠覆、增长放缓、估值压缩的担忧。 数据护城河 / 反馈循环：通过专有数据和用户使用反馈不断训练模型，形成越用越强的壁垒。 详细中文整理： jcal： sacks，另一个更大的威胁可能是 ai 和超智能的通缩性质。上周我们聊 photoshop 可能被反编译、复制到归零；这周有“hood warfare”这种平台级游戏只要 5 美元，elevenlabs 的竞品极其便宜，开源模型被托管，elon 说可以在编排层把你路由到最好模型。整个行业 90% 的价值被快速移除，这是暂时还是加速？软件未来的利润空间是什么？ sacks： 我们希望每个人都能创造软件，尤其是定制软件，这是新类别，会成为整个经济生产力的巨大驱动力。这不全是零和游戏或颠覆。编码助手的价值是，现在可以为高度定制的用例创建软件，而过去软件只为大众市场创建。photoshop 成功是因为有很多平面设计师需要；过去只有潜在客户群足够大，才值得做软件。现在企业可以只为自己的用例做软件。某种意义上，agent 就是解决特定任务的定制软件程序。 jcal： 但如果企业自己用开源构建，就不需要被替代的软件，这不是极度通缩吗？ sacks： 可能会替代一部分既有软件，但重要的是有大量新软件类别被创造。现在产生的代码量已经比编码助手之前多几个数量级。人们总用零和思维看谁被消灭，但真正重要的趋势是，世界上会有更多软件、更多定制用例。企业可以为更广泛目的创建软件，以前永远不会成为软件公司的公司现在也在做软件，还雇程序员管理过程。记住“工作末日论”一开始说程序员会先被消灭，因为不需要了。结果现在每个人都成了开发者，都在交付代码。实际需求在增加，尽管 95% 代码由编码助手写。为什么？第一，还有 5% 是更大饼的 5%；第二，你还需要能看底层、管理流程、维护的人。这个定制软件新类别会推动生产力，广泛通缩可能是好事，因为我们用更少资源做更多事。 jcal： 对国家是好事，但 ben，你担心风投行业吗？我们投出爆款，下一秒别人就能反编译、复制、做竞品、快速上线。这轮繁荣和以前不同。我们给 lp 的 dpi 会不会受影响？伟大软件业务的可持续性会不会受挑战？ ben： 我不这么认为。从 saaspocalypse 开始就一直有这种预测。sacks 说得对：软件价格会下降，但软件总量会大幅上升，这是软件的杰文斯悖论。这些公司最终会做软件之外更多的事。互联网时也有人说信息免费、所有行业死了，但很多行业以不同方式重生。初创公司必须进化。elevenlabs 就是例子，他们做了很多让产品更好的事，有授权协议，比如 burt reynolds 给你读书，训练模型处理非常细微的案例，所以电影配音听起来像演员在用另一种语言表演。产品必须变得更好，价值在那里。只是写软件，不会比出版杂志更有价值。 jcal： 护城河会变，竞争会加剧。 ben： 护城河会变。你要想什么是护城河。数据护城河很大：如果你有别人没有的数据，建立用户基础，模型服务特定垂直行业，获得用户反馈，可能变成完整业务。反馈循环、强化学习会越来越强。很多初创公司基于这个建业务。典型例子是 harvey，让律所接入，获得数据和用法，再训练自己的模型，每次更锐利、更便宜、更定制。 关键原话或重要表达： “这是软件的杰文斯悖论：价格下降，但软件总量大幅上升。” “只是写软件，不会比出版杂志更有价值。” ---" style="--index: 4">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">04</span>
+                    <span class="timeline-meta">00:31:14–00:38:19</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>软件通缩、杰文斯悖论与新护城河</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>JCal 担心 AI 让软件被快速复制、价格归零，初创公司估值和风投 DPI 受影响。</li>
+<li>Sacks 认为不要只看零和替代，AI 让定制软件大量增加，代码总量会指数级上升。</li>
+<li>Ben 用“软件的杰文斯悖论”解释：软件价格下降，但软件数量和使用量暴增，护城河会转向数据、反馈和产品深度。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>Jevons paradox：资源效率提高后，单位成本下降，反而导致总消耗量增加。这里指软件变便宜后，软件总需求和使用量暴增。</li>
+<li>DPI：Distribution to Paid-In Capital，风投基金已向 LP 分配的资金比例，衡量退出回报。</li>
+<li>SaaSpocalypse：市场对 SaaS 被 AI 颠覆、增长放缓、估值压缩的担忧。</li>
+<li>数据护城河 / 反馈循环：通过专有数据和用户使用反馈不断训练模型，形成越用越强的壁垒。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> Sacks，另一个更大的威胁可能是 AI 和超智能的通缩性质。上周我们聊 Photoshop 可能被反编译、复制到归零；这周有“Hood Warfare”这种平台级游戏只要 5 美元，ElevenLabs 的竞品极其便宜，开源模型被托管，Elon 说可以在编排层把你路由到最好模型。整个行业 90% 的价值被快速移除，这是暂时还是加速？软件未来的利润空间是什么？</p>
+<p><strong>Sacks：</strong> 我们希望每个人都能创造软件，尤其是定制软件，这是新类别，会成为整个经济生产力的巨大驱动力。这不全是零和游戏或颠覆。编码助手的价值是，现在可以为高度定制的用例创建软件，而过去软件只为大众市场创建。Photoshop 成功是因为有很多平面设计师需要；过去只有潜在客户群足够大，才值得做软件。现在企业可以只为自己的用例做软件。某种意义上，agent 就是解决特定任务的定制软件程序。</p>
+<p><strong>JCal：</strong> 但如果企业自己用开源构建，就不需要被替代的软件，这不是极度通缩吗？</p>
+<p><strong>Sacks：</strong> 可能会替代一部分既有软件，但重要的是有大量新软件类别被创造。现在产生的代码量已经比编码助手之前多几个数量级。人们总用零和思维看谁被消灭，但真正重要的趋势是，世界上会有更多软件、更多定制用例。企业可以为更广泛目的创建软件，以前永远不会成为软件公司的公司现在也在做软件，还雇程序员管理过程。记住“工作末日论”一开始说程序员会先被消灭，因为不需要了。结果现在每个人都成了开发者，都在交付代码。实际需求在增加，尽管 95% 代码由编码助手写。为什么？第一，还有 5% 是更大饼的 5%；第二，你还需要能看底层、管理流程、维护的人。这个定制软件新类别会推动生产力，广泛通缩可能是好事，因为我们用更少资源做更多事。</p>
+<p><strong>JCal：</strong> 对国家是好事，但 Ben，你担心风投行业吗？我们投出爆款，下一秒别人就能反编译、复制、做竞品、快速上线。这轮繁荣和以前不同。我们给 LP 的 DPI 会不会受影响？伟大软件业务的可持续性会不会受挑战？</p>
+<p><strong>Ben：</strong> 我不这么认为。从 SaaSpocalypse 开始就一直有这种预测。Sacks 说得对：软件价格会下降，但软件总量会大幅上升，这是软件的杰文斯悖论。这些公司最终会做软件之外更多的事。互联网时也有人说信息免费、所有行业死了，但很多行业以不同方式重生。初创公司必须进化。ElevenLabs 就是例子，他们做了很多让产品更好的事，有授权协议，比如 Burt Reynolds 给你读书，训练模型处理非常细微的案例，所以电影配音听起来像演员在用另一种语言表演。产品必须变得更好，价值在那里。只是写软件，不会比出版杂志更有价值。</p>
+<p><strong>JCal：</strong> 护城河会变，竞争会加剧。</p>
+<p><strong>Ben：</strong> 护城河会变。你要想什么是护城河。数据护城河很大：如果你有别人没有的数据，建立用户基础，模型服务特定垂直行业，获得用户反馈，可能变成完整业务。反馈循环、强化学习会越来越强。很多初创公司基于这个建业务。典型例子是 Harvey，让律所接入，获得数据和用法，再训练自己的模型，每次更锐利、更便宜、更定制。</p>
+<h4>关键原话或重要表达</h4>
+<ul>
+<li>“这是软件的杰文斯悖论：价格下降，但软件总量大幅上升。”</li>
+<li>“只是写软件，不会比出版杂志更有价值。”</li>
+</ul>
+<hr></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="00:38:19–00:45:41 电力是最终护城河；payback period 与 coreweave 转 spot 本段核心内容： chamath 认为电力将成为最终护城河，美国面临能源赤字，数据中心和 ai 负载增长受制于电力和政治。 sacks 提出 payback period 是观察 ai 基础设施公司的北极星指标：回本越快，风险越低。 chamath 建议 coreweave 取消部分固定合同、转向 spot 市场，以改善经济性并避免债务 covenant 风险。 背景解释与关键术语： g-sib：全球系统重要性银行，如摩根大通、花旗等。 电力缺口的单位歧义：英文转写记录为“1.4 terawatt-hours”（1.4 太瓦时），同时类比“6 个加州”，两者量级不相称。这里保留发言语义，不将该数字视为已核实的电力预测。 spot 市场：现货市场，按当前供需定价，通常比长期固定合同价格波动更大。 liquidated damages：违约金条款，数据中心不能按约服务时，大客户会要求极端惩罚。 covenant：债务契约条款，违反可能触发违约或提前还款。 详细中文整理： chamath： 我认为电力会是最终护城河。你可以建世界上最令人惊叹的东西，但你会看到人们像困在干船坞上的船一样，四处求人提供电力。因为美国的建设推进太堵了：我们已经落后，处于巨大能源赤字，电力缺口。我估计到 2050 年会有很大的电力缺口，用“6 个加州”来形容它的规模〔转写数字为 1.4 太瓦时，单位与量级待核对〕，这还是假设所有计划项目按时按预算建成，而我们知道不可能。再叠加 ai 带来的负载增长。我上周说过，现在仍然坚持这个判断：我认为你不能再通过超大规模云厂商解决这个问题。想象一家 g-sib 大银行，比如摩根大通、花旗，它不能服务客户，是因为底层云无法获得足够电力增长。另一个有价值的护城河是拥有土地、电力和外壳，因为这是极度受限资产。andy 对 ben 说的很关键：这会让最好的体验瞬间停摆。如果你是小初创公司，更大的问题是去云厂商说“我准备好发布产品了”，对方说“没容量给你”。 jcal： 这很灾难。 ben： 我非常同意最后一点。 chamath： 顺便说，中东一个巨大机会正在失去。沙特、阿联酋、卡塔尔本来是石油大国，能做顶层规划、有数据中心，现在有炸弹炸机场。没有无人机防御，你不能去那里；而无人机防御也不一定有用，一架无人机穿过去，数据中心就炸了。 sacks： 我能最后说一点数据中心吗？有一个指标我越想越觉得要盯住：payback period，回本周期，这是北极星指标。coreweave 说回本周期 2.5 年，典型合同 5 年，2.5 年回本。spacex 大约 1 年回本。为什么？spacex 每吉瓦约 500 亿美元收入，coreweave 每吉瓦约 200 亿美元。spacex 基本拿 spot，交易双方可在 90 天内取消，所以是接近现货、附带约 90 天的退出窗口；coreweave 签 5 年承诺，提前锁定合同价。过去一年 spot 价格大幅上涨，因为稀缺和需求爆表。只要回本周期很短，这些公司很难亏，除非你非常无能。你做巨大资本开支，但一年或 2.5 年回本，风险大大降低。 jcal： 就像在巴黎拥有一套 airbnb。 sacks： 只要订单下得早，回本周期很短，债务也快速偿还，风险降低。如果回本周期变长，我就紧张，因为风险放大，经济性变差。为什么变长？需求下降、offtake 变差、spot 价格下跌，或者执行问题导致容量上线更慢。只要回本周期保持今天这么短，这是我唯一会盯的指标。 chamath： 另一个风险是大 offtaker 会让你签 liquidated damages，语言极其复杂，不能服务数据中心时惩罚极端。已经有几家公司，我不点名，因为搞砸了，失去了大客户的投资级 wrapper，管理不了数据中心，复杂度在上升，芯片更热、能源更多、电力更多。所以我认为最精明的专业资金可能错了，他们买信用违约保险时经常错。但当你的期望值在五年窗口里是硬币抛掷，那是危险的处境，必须非常精确管理。如果我是 coreweave，我会想尽办法把问题扼杀在萌芽。 jcal： 怎么扼杀？ chamath： 最简单的就是取消一些合同，转向 spot。如果能付罚款退出，现在就该跑 excel：拿一吉瓦去 spot 卖，因为前面说了，有 200 亿美元价差。 sacks： elon 有独立的融资来源，能为那一吉瓦算力出资；coreweave 则需要五年合同才能取得贷款、建设容量。 chamath： 但 nvidia 可能也愿意让 coreweave 卖 spot，而不是给大超大规模云厂商或基础模型实验室做多年 offtake。coreweave 只建了合同容量的一半，假设 4 吉瓦里建了 2 吉瓦，他们得赶快想办法。固定合同和 spot 的价差太极端，你桌上放着 200 到 300 亿美元，而你现在距离违反债务 covenant 只有正负 50 亿美元，不要去那里。 sacks： 这会极大改善经济性。如果有一吉瓦算力能按 spot 卖，那可能 300 亿美元直接进利润。 sacks： 挑战是，最难拿到 spot 定价的正是投资级客户，他们不会做 spot，因为他们有资金储备，太贵就自己建。 chamath： 这个叙事可能变。如果 spot 变得危险，保证合同就变得很好。我认为整个在建及计划中的项目链条容量受限，nvidia 做得不可思议：看 nvidia 后面一层，所有封装产能是他们的，hbm 产能大部分是他们的，连 google 都因为 nvidia 占用大量内存供应而不得不四处争取资源。nvidia 完全控球，所以 spot 会在一段时间保持高位。 chamath： 最后一件事：你们得做多能源。初创公司必须想办法拼凑电力。如果你没有电，你不能通过超大规模云厂商，这是我的预言。 关键原话或重要表达： “电力会是最终护城河。” “payback period 是北极星指标；只要回本周期短，这些公司很难亏。” “如果我是 coreweave，我会取消部分合同，转向 spot。” ---" style="--index: 5">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">05</span>
+                    <span class="timeline-meta">00:38:19–00:45:41</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>电力是最终护城河；payback period 与 CoreWeave 转 spot</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>Chamath 认为电力将成为最终护城河，美国面临能源赤字，数据中心和 AI 负载增长受制于电力和政治。</li>
+<li>Sacks 提出 payback period 是观察 AI 基础设施公司的北极星指标：回本越快，风险越低。</li>
+<li>Chamath 建议 CoreWeave 取消部分固定合同、转向 spot 市场，以改善经济性并避免债务 covenant 风险。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>G-SIB：全球系统重要性银行，如摩根大通、花旗等。</li>
+<li>电力缺口的单位歧义：英文转写记录为“1.4 terawatt-hours”（1.4 太瓦时），同时类比“6 个加州”，两者量级不相称。这里保留发言语义，不将该数字视为已核实的电力预测。</li>
+<li>spot 市场：现货市场，按当前供需定价，通常比长期固定合同价格波动更大。</li>
+<li>liquidated damages：违约金条款，数据中心不能按约服务时，大客户会要求极端惩罚。</li>
+<li>covenant：债务契约条款，违反可能触发违约或提前还款。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>Chamath：</strong> 我认为电力会是最终护城河。你可以建世界上最令人惊叹的东西，但你会看到人们像困在干船坞上的船一样，四处求人提供电力。因为美国的建设推进太堵了：我们已经落后，处于巨大能源赤字，电力缺口。我估计到 2050 年会有很大的电力缺口，用“6 个加州”来形容它的规模〔转写数字为 1.4 太瓦时，单位与量级待核对〕，这还是假设所有计划项目按时按预算建成，而我们知道不可能。再叠加 AI 带来的负载增长。我上周说过，现在仍然坚持这个判断：我认为你不能再通过超大规模云厂商解决这个问题。想象一家 G-SIB 大银行，比如摩根大通、花旗，它不能服务客户，是因为底层云无法获得足够电力增长。另一个有价值的护城河是拥有土地、电力和外壳，因为这是极度受限资产。Andy 对 Ben 说的很关键：这会让最好的体验瞬间停摆。如果你是小初创公司，更大的问题是去云厂商说“我准备好发布产品了”，对方说“没容量给你”。</p>
+<p><strong>JCal：</strong> 这很灾难。</p>
+<p><strong>Ben：</strong> 我非常同意最后一点。</p>
+<p><strong>Chamath：</strong> 顺便说，中东一个巨大机会正在失去。沙特、阿联酋、卡塔尔本来是石油大国，能做顶层规划、有数据中心，现在有炸弹炸机场。没有无人机防御，你不能去那里；而无人机防御也不一定有用，一架无人机穿过去，数据中心就炸了。</p>
+<p><strong>Sacks：</strong> 我能最后说一点数据中心吗？有一个指标我越想越觉得要盯住：payback period，回本周期，这是北极星指标。CoreWeave 说回本周期 2.5 年，典型合同 5 年，2.5 年回本。SpaceX 大约 1 年回本。为什么？SpaceX 每吉瓦约 500 亿美元收入，CoreWeave 每吉瓦约 200 亿美元。SpaceX 基本拿 spot，交易双方可在 90 天内取消，所以是接近现货、附带约 90 天的退出窗口；CoreWeave 签 5 年承诺，提前锁定合同价。过去一年 spot 价格大幅上涨，因为稀缺和需求爆表。只要回本周期很短，这些公司很难亏，除非你非常无能。你做巨大资本开支，但一年或 2.5 年回本，风险大大降低。</p>
+<p><strong>JCal：</strong> 就像在巴黎拥有一套 Airbnb。</p>
+<p><strong>Sacks：</strong> 只要订单下得早，回本周期很短，债务也快速偿还，风险降低。如果回本周期变长，我就紧张，因为风险放大，经济性变差。为什么变长？需求下降、offtake 变差、spot 价格下跌，或者执行问题导致容量上线更慢。只要回本周期保持今天这么短，这是我唯一会盯的指标。</p>
+<p><strong>Chamath：</strong> 另一个风险是大 offtaker 会让你签 liquidated damages，语言极其复杂，不能服务数据中心时惩罚极端。已经有几家公司，我不点名，因为搞砸了，失去了大客户的投资级 wrapper，管理不了数据中心，复杂度在上升，芯片更热、能源更多、电力更多。所以我认为最精明的专业资金可能错了，他们买信用违约保险时经常错。但当你的期望值在五年窗口里是硬币抛掷，那是危险的处境，必须非常精确管理。如果我是 CoreWeave，我会想尽办法把问题扼杀在萌芽。</p>
+<p><strong>JCal：</strong> 怎么扼杀？</p>
+<p><strong>Chamath：</strong> 最简单的就是取消一些合同，转向 spot。如果能付罚款退出，现在就该跑 Excel：拿一吉瓦去 spot 卖，因为前面说了，有 200 亿美元价差。</p>
+<p><strong>Sacks：</strong> Elon 有独立的融资来源，能为那一吉瓦算力出资；CoreWeave 则需要五年合同才能取得贷款、建设容量。</p>
+<p><strong>Chamath：</strong> 但 Nvidia 可能也愿意让 CoreWeave 卖 spot，而不是给大超大规模云厂商或基础模型实验室做多年 offtake。CoreWeave 只建了合同容量的一半，假设 4 吉瓦里建了 2 吉瓦，他们得赶快想办法。固定合同和 spot 的价差太极端，你桌上放着 200 到 300 亿美元，而你现在距离违反债务 covenant 只有正负 50 亿美元，不要去那里。</p>
+<p><strong>Sacks：</strong> 这会极大改善经济性。如果有一吉瓦算力能按 spot 卖，那可能 300 亿美元直接进利润。</p>
+<p><strong>Sacks：</strong> 挑战是，最难拿到 spot 定价的正是投资级客户，他们不会做 spot，因为他们有资金储备，太贵就自己建。</p>
+<p><strong>Chamath：</strong> 这个叙事可能变。如果 spot 变得危险，保证合同就变得很好。我认为整个在建及计划中的项目链条容量受限，Nvidia 做得不可思议：看 Nvidia 后面一层，所有封装产能是他们的，HBM 产能大部分是他们的，连 Google 都因为 Nvidia 占用大量内存供应而不得不四处争取资源。Nvidia 完全控球，所以 spot 会在一段时间保持高位。</p>
+<p><strong>Chamath：</strong> 最后一件事：你们得做多能源。初创公司必须想办法拼凑电力。如果你没有电，你不能通过超大规模云厂商，这是我的预言。</p>
+<h4>关键原话或重要表达</h4>
+<ul>
+<li>“电力会是最终护城河。”</li>
+<li>“payback period 是北极星指标；只要回本周期短，这些公司很难亏。”</li>
+<li>“如果我是 CoreWeave，我会取消部分合同，转向 spot。”</li>
+</ul>
+<hr></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="00:45:41–01:01:01 anthropic investor day 与 ipo：惊人收入、口径疑问、2000 亿美元融资论 本段核心内容： anthropic investor day 传出 q3 收入 168 亿美元、nrr 900%、自由现金流为正、调整后毛利率 85%、调整后经营利润率 11%。 arr 估计从 700 亿到 1000 亿美元不等，市场质疑增长放缓和口径不透明；ipo 估值目标约 2 万亿美元。 chamath 认为 anthropic 应低价多融，至少 2000 亿美元、最好 2500 亿美元，以应对算力军备竞赛和未来修正；ben 认为 ipo 需求不是问题。 背景解释与关键术语： arr：annual recurring revenue，年化经常性收入。高增长公司常用，但口径可能与季度收入年化不同。 nrr：net revenue retention，净收入留存率。按节目说法，900% 表示同一批客户的收入为比较期的 9 倍；具体计算口径仍需公司披露。 数据来源：本段财务数字、ipo 时间和估值来自节目当时引用的报道及投资者二手信息，arr 尤其存在口径争议，不应视为本报告独立核实的公司公告。 adjusted gross margin / adjusted operating margin：调整后毛利率/经营利润率，调整项未披露时需谨慎。 price-to-sales：市销率，估值除以收入。30 倍 p/s 对成熟公司极高，对超高速增长公司也可能合理。 open-weight models：开放权重模型，权重可下载和部署，和闭源 api 模型相对。 mixed shelf：储架发行，公司先注册再分批融资，需要时间且受市场窗口影响。 详细中文整理： jcal： 如果 coreweave 还不够，周三 ai 板块又挨了一记重击：anthropic investor day 数据反应复杂。anthropic 计划感恩节前后 ipo，polymarket 显示今年 ipo 概率 74%，低于 9 月初的 95%。周三他们在旧金山总部向潜在 ipo 投资者展示。据节目引用的数据，q3 收入 168 亿美元，平均每月超过 50 亿美元。净收入留存率 900%，客户支出是去年 9 倍。自由现金流为正，调整后毛利率 85%，调整后经营利润率 11%，但没说调整怎么算。最大问题是 arr 估计从 700 亿美元，基本比 7 月以来持平，这是坏信号，到超过 1000 亿美元。这些数字不是公司披露，是可能漏出来的投资者二手估计。anthropic 目标估值 2 万亿美元，基于暴力增长。chamath，你有问题？ chamath： 我想问 ben，a16z 是否重仓基础模型公司，两大之一？ ben： 我们在 openai 有更多股份。哲学上我们两家都看好。 jcal： 你两家都看好，这有点奇怪。你们太大了，持续押注第一名和第二名，这在市场里怎么运作？ ben： 很多投资者同时投两家。风投叫风险投资，但风投已经吸收了大量过去公开市场的业务。openai 和 anthropic 不是传统 a、b 轮公司，融资几百亿美元时，你不在乎钱从哪来，只要能提供资金。它们需要所有人。过去叫夹层融资、上市前融资，现在冲突担忧少很多。 jcal： 这已经不能叫夹层融资了。 ben： 90 年代末和 2000 年代初的监管变化让公开市场对公司吸引力下降，私募市场扩张吸收这些业务，我认为对美国很糟，扩大了财富差距，但事实如此。这和同时投两家做同一件事的 a 轮公司完全不同。uber/lyft 和 2 万亿美元的 anthropic/openai 不是一回事。 jcal： 一个是另一个的反应。anthropic 是对 openai 从非营利变成商业公司的反应，我们暂且放一边。你怎么看 anthropic ipo？ ben： 你点出了让人不安的地方：q2 到 q3 收入增长大幅放缓，而且我们不知道 arr 到底多少，所以人们怀疑增长多快。但 168 亿美元季度收入，anthropic 才卖东西三年？太荒谬了。ipo 会没事，争论是 2 万亿、1.9 万亿还是 2.3 万亿入场。大实验室有负面消息，供应链都会被打击。大图景是，这是非常重要、ipo 很大的公司。 jcal： sacks，30 倍市销率，加上开源和企业转向小模型的逆风。大多数企业不需要解决世界上最后 7 个数学难题。anthropic 收入可能放缓。如果真放缓，ipo 和更广 ai 交易会怎样？现在 coreweave 和 anthropic 是两个 ai 交易逆风案例。 sacks： investor day 后有些数字在漏，参与者签了 nda，不能完全相信 x 上流传的东西，下个月 ipo 就知道真实数字。我听说投资者日现场释放的信号很积极，公开市场投资者喜欢听到的东西。每个人都在为自己的持仓说话，很难知道真相。总体我认为 anthropic 是强业务，有风险，年轻公司正常，但 ipo 设置得不错。作为投资者，我很佩服这家公司，所以更觉得他们不断通过恐慌营销和监管俘获去打压开源很令人反感。他们不需要这么做，公司很成功、前景很好，我对此有点被冒犯。上周就有两个例子，要不要聊？ jcal： 我们要进 “舆论操纵角” 吗？ chamath： 待会再谈这个，我还有个关于烤面包机的事要说。 jcal： chamath，你几周前说 anthropic 值 1 万亿美元，现在怎么看？有重大逆风还是轰动市场的 ipo？ chamath： 我的评论不是因为看空公司。收入令人窒息，三年公司季度 168 亿美元，简直不可思议，没见过。产品极好，他们在做艰难工作，openai 也是，沿价格曲线下移，降低被开源替代的风险。但 token 侧会有很多自我替代与收入侵蚀。ai 现在像 1999、2000 的互联网媒体，大家按 cpm（每千次展示成本）买广告，现在是每百万输入 token 定价。我们会转向 cpc（每次点击成本）和 cpa（每次转化成本），按结果付费。google 发明 adwords、adsense 后市场爆炸，因为从购买一千次广告展示变成购买点击或转化结果。现在买百万 token，最终会买结果，那时市场会迎来极其猛烈的增长。所以这些公司会很好。 chamath： 但我具体认为，他们应该以能完成募资的价格发行，融 2000 亿美元。我估计他们至少需要 2000 亿美元，如果超安全，2500 亿美元。问题是价格要多低才能吸引增量资金？在 1.7、1.8、1.9 万亿估值能融 800 亿吗？我认为轻松。1000 亿？可能勉强。1500 亿？需要估值回到 1.5 万亿。2000 亿？你要他们以更低估值融更多钱，建立资金储备。1500 亿在 1.5 万亿不够，2000 亿也不过够支撑几个吉瓦。如果 anthropic 要熬过最终修正，今天有 2000 到 2500 亿美元，比在 1.9 或 2 万亿估值融 800 亿、发 mixed shelf、等六个月、希望市场配合更好。未来风险比今天大，为什么冒险？以能完成募资的价格发行。 jcal： 所以你说融多少？ chamath： 至少 2000 亿美元。如果我是 anthropic 股东，我想要 2500 亿，但我不认为 2 万亿估值能融 2500 亿，1 万亿估值可以。 jcal： ben，你怎么看？多拿现金、建雨天基金、增强韧性，还是创始人常见的估值优化？ ben： 作为曾经差点 17 次因为现金耗尽而死的 ceo，我同意这个判断。最可能杀死公司的是融资风险，为什么冒这个险？你还有供应链风险、竞争风险、中国开源模型风险， 创始人不在乎。他们每人只持 2.5%，所以不该优化估值。他们似乎不在乎钱，这是 anthropic 创始人群体很大的优点，也是成功原因之一。安全金额见仁见智，极端情景下到底怎样，我不够深，不能说 2500 亿还是 1500 亿。 chamath： 数字要从算力倒推，覆盖 3 到 5 年窗口。必须离开 spot，因为 sacks 说对 anthropic 太贵，不该花 500 亿当能花 200 亿。如果有 2000 亿，你可以自己融资 5 到 10 吉瓦，通过 coreweave 那种项目融资盒子。优化算力的确定性，其他会解决。5 到 10 年窗口能到能力上限。如果只有 500、600、700 亿，可能熬不过未来两三年 spot 定价影响，然后就得降估值融资。 ben： 对，elon 和他们的交易，任何一方可在 60 或 90 天内取消。elon 做这个交易说明 spot 在涨，不是跌，他可能想继续推高。他不傻，是最聪明的人之一，做 spot 是因为他可以取消。anthropic 可能以为 90 天能走很好，错了，反了。 jcal： 他想要 coreweave 交易，anthropic 应该拿 coreweave 交易。 chamath： 他们需要往项目融资盒子里放很多钱。根据 semianalysis，anthropic 和 openai 占未来一年全球预计建成算力的 60%，是两大 offtaker，这是算力双寡头。 sacks： 双寡头要看收入市场份额。看基础模型公司收入，anthropic 和 openai 基本是仅有的两家从模型产生显著收入的公司，其他都是小到几乎可以忽略。收入市场份额是双寡头，前沿能力也是双寡头。meta 新模型、google 新模型、elon 都在接近，但 anthropic/openai 仍领先，而且实验室里还有一两代更前的模型，至少他们向投资者这么宣传。 关键原话或重要表达： “以能完成募资的价格发行.” “至少融 2000 亿美元，最好 2500 亿美元；2000 亿也不过够支撑几个吉瓦。” “最可能杀死公司的是融资风险，为什么冒这个险？” ---" style="--index: 6">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">06</span>
+                    <span class="timeline-meta">00:45:41–01:01:01</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>Anthropic Investor Day 与 IPO：惊人收入、口径疑问、2000 亿美元融资论</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>Anthropic Investor Day 传出 Q3 收入 168 亿美元、NRR 900%、自由现金流为正、调整后毛利率 85%、调整后经营利润率 11%。</li>
+<li>ARR 估计从 700 亿到 1000 亿美元不等，市场质疑增长放缓和口径不透明；IPO 估值目标约 2 万亿美元。</li>
+<li>Chamath 认为 Anthropic 应低价多融，至少 2000 亿美元、最好 2500 亿美元，以应对算力军备竞赛和未来修正；Ben 认为 IPO 需求不是问题。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>ARR：Annual Recurring Revenue，年化经常性收入。高增长公司常用，但口径可能与季度收入年化不同。</li>
+<li>NRR：Net Revenue Retention，净收入留存率。按节目说法，900% 表示同一批客户的收入为比较期的 9 倍；具体计算口径仍需公司披露。</li>
+<li>数据来源：本段财务数字、IPO 时间和估值来自节目当时引用的报道及投资者二手信息，ARR 尤其存在口径争议，不应视为本报告独立核实的公司公告。</li>
+<li>adjusted gross margin / adjusted operating margin：调整后毛利率/经营利润率，调整项未披露时需谨慎。</li>
+<li>price-to-sales：市销率，估值除以收入。30 倍 P/S 对成熟公司极高，对超高速增长公司也可能合理。</li>
+<li>open-weight models：开放权重模型，权重可下载和部署，和闭源 API 模型相对。</li>
+<li>mixed shelf：储架发行，公司先注册再分批融资，需要时间且受市场窗口影响。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> 如果 CoreWeave 还不够，周三 AI 板块又挨了一记重击：Anthropic Investor Day 数据反应复杂。Anthropic 计划感恩节前后 IPO，Polymarket 显示今年 IPO 概率 74%，低于 9 月初的 95%。周三他们在旧金山总部向潜在 IPO 投资者展示。据节目引用的数据，Q3 收入 168 亿美元，平均每月超过 50 亿美元。净收入留存率 900%，客户支出是去年 9 倍。自由现金流为正，调整后毛利率 85%，调整后经营利润率 11%，但没说调整怎么算。最大问题是 ARR 估计从 700 亿美元，基本比 7 月以来持平，这是坏信号，到超过 1000 亿美元。这些数字不是公司披露，是可能漏出来的投资者二手估计。Anthropic 目标估值 2 万亿美元，基于暴力增长。Chamath，你有问题？</p>
+<p><strong>Chamath：</strong> 我想问 Ben，a16z 是否重仓基础模型公司，两大之一？</p>
+<p><strong>Ben：</strong> 我们在 OpenAI 有更多股份。哲学上我们两家都看好。</p>
+<p><strong>JCal：</strong> 你两家都看好，这有点奇怪。你们太大了，持续押注第一名和第二名，这在市场里怎么运作？</p>
+<p><strong>Ben：</strong> 很多投资者同时投两家。风投叫风险投资，但风投已经吸收了大量过去公开市场的业务。OpenAI 和 Anthropic 不是传统 A、B 轮公司，融资几百亿美元时，你不在乎钱从哪来，只要能提供资金。它们需要所有人。过去叫夹层融资、上市前融资，现在冲突担忧少很多。</p>
+<p><strong>JCal：</strong> 这已经不能叫夹层融资了。</p>
+<p><strong>Ben：</strong> 90 年代末和 2000 年代初的监管变化让公开市场对公司吸引力下降，私募市场扩张吸收这些业务，我认为对美国很糟，扩大了财富差距，但事实如此。这和同时投两家做同一件事的 A 轮公司完全不同。Uber/Lyft 和 2 万亿美元的 Anthropic/OpenAI 不是一回事。</p>
+<p><strong>JCal：</strong> 一个是另一个的反应。Anthropic 是对 OpenAI 从非营利变成商业公司的反应，我们暂且放一边。你怎么看 Anthropic IPO？</p>
+<p><strong>Ben：</strong> 你点出了让人不安的地方：Q2 到 Q3 收入增长大幅放缓，而且我们不知道 ARR 到底多少，所以人们怀疑增长多快。但 168 亿美元季度收入，Anthropic 才卖东西三年？太荒谬了。IPO 会没事，争论是 2 万亿、1.9 万亿还是 2.3 万亿入场。大实验室有负面消息，供应链都会被打击。大图景是，这是非常重要、IPO 很大的公司。</p>
+<p><strong>JCal：</strong> Sacks，30 倍市销率，加上开源和企业转向小模型的逆风。大多数企业不需要解决世界上最后 7 个数学难题。Anthropic 收入可能放缓。如果真放缓，IPO 和更广 AI 交易会怎样？现在 CoreWeave 和 Anthropic 是两个 AI 交易逆风案例。</p>
+<p><strong>Sacks：</strong> Investor Day 后有些数字在漏，参与者签了 NDA，不能完全相信 X 上流传的东西，下个月 IPO 就知道真实数字。我听说投资者日现场释放的信号很积极，公开市场投资者喜欢听到的东西。每个人都在为自己的持仓说话，很难知道真相。总体我认为 Anthropic 是强业务，有风险，年轻公司正常，但 IPO 设置得不错。作为投资者，我很佩服这家公司，所以更觉得他们不断通过恐慌营销和监管俘获去打压开源很令人反感。他们不需要这么做，公司很成功、前景很好，我对此有点被冒犯。上周就有两个例子，要不要聊？</p>
+<p><strong>JCal：</strong> 我们要进 “舆论操纵角” 吗？</p>
+<p><strong>Chamath：</strong> 待会再谈这个，我还有个关于烤面包机的事要说。</p>
+<p><strong>JCal：</strong> Chamath，你几周前说 Anthropic 值 1 万亿美元，现在怎么看？有重大逆风还是轰动市场的 IPO？</p>
+<p><strong>Chamath：</strong> 我的评论不是因为看空公司。收入令人窒息，三年公司季度 168 亿美元，简直不可思议，没见过。产品极好，他们在做艰难工作，OpenAI 也是，沿价格曲线下移，降低被开源替代的风险。但 token 侧会有很多自我替代与收入侵蚀。AI 现在像 1999、2000 的互联网媒体，大家按 CPM（每千次展示成本）买广告，现在是每百万输入 token 定价。我们会转向 CPC（每次点击成本）和 CPA（每次转化成本），按结果付费。Google 发明 AdWords、AdSense 后市场爆炸，因为从购买一千次广告展示变成购买点击或转化结果。现在买百万 token，最终会买结果，那时市场会迎来极其猛烈的增长。所以这些公司会很好。</p>
+<p><strong>Chamath：</strong> 但我具体认为，他们应该以能完成募资的价格发行，融 2000 亿美元。我估计他们至少需要 2000 亿美元，如果超安全，2500 亿美元。问题是价格要多低才能吸引增量资金？在 1.7、1.8、1.9 万亿估值能融 800 亿吗？我认为轻松。1000 亿？可能勉强。1500 亿？需要估值回到 1.5 万亿。2000 亿？你要他们以更低估值融更多钱，建立资金储备。1500 亿在 1.5 万亿不够，2000 亿也不过够支撑几个吉瓦。如果 Anthropic 要熬过最终修正，今天有 2000 到 2500 亿美元，比在 1.9 或 2 万亿估值融 800 亿、发 mixed shelf、等六个月、希望市场配合更好。未来风险比今天大，为什么冒险？以能完成募资的价格发行。</p>
+<p><strong>JCal：</strong> 所以你说融多少？</p>
+<p><strong>Chamath：</strong> 至少 2000 亿美元。如果我是 Anthropic 股东，我想要 2500 亿，但我不认为 2 万亿估值能融 2500 亿，1 万亿估值可以。</p>
+<p><strong>JCal：</strong> Ben，你怎么看？多拿现金、建雨天基金、增强韧性，还是创始人常见的估值优化？</p>
+<p><strong>Ben：</strong> 作为曾经差点 17 次因为现金耗尽而死的 CEO，我同意这个判断。最可能杀死公司的是融资风险，为什么冒这个险？你还有供应链风险、竞争风险、中国开源模型风险， 创始人不在乎。他们每人只持 2.5%，所以不该优化估值。他们似乎不在乎钱，这是 Anthropic 创始人群体很大的优点，也是成功原因之一。安全金额见仁见智，极端情景下到底怎样，我不够深，不能说 2500 亿还是 1500 亿。</p>
+<p><strong>Chamath：</strong> 数字要从算力倒推，覆盖 3 到 5 年窗口。必须离开 spot，因为 Sacks 说对 Anthropic 太贵，不该花 500 亿当能花 200 亿。如果有 2000 亿，你可以自己融资 5 到 10 吉瓦，通过 CoreWeave 那种项目融资盒子。优化算力的确定性，其他会解决。5 到 10 年窗口能到能力上限。如果只有 500、600、700 亿，可能熬不过未来两三年 spot 定价影响，然后就得降估值融资。</p>
+<p><strong>Ben：</strong> 对，Elon 和他们的交易，任何一方可在 60 或 90 天内取消。Elon 做这个交易说明 spot 在涨，不是跌，他可能想继续推高。他不傻，是最聪明的人之一，做 spot 是因为他可以取消。Anthropic 可能以为 90 天能走很好，错了，反了。</p>
+<p><strong>JCal：</strong> 他想要 CoreWeave 交易，Anthropic 应该拿 CoreWeave 交易。</p>
+<p><strong>Chamath：</strong> 他们需要往项目融资盒子里放很多钱。根据 SemiAnalysis，Anthropic 和 OpenAI 占未来一年全球预计建成算力的 60%，是两大 offtaker，这是算力双寡头。</p>
+<p><strong>Sacks：</strong> 双寡头要看收入市场份额。看基础模型公司收入，Anthropic 和 OpenAI 基本是仅有的两家从模型产生显著收入的公司，其他都是小到几乎可以忽略。收入市场份额是双寡头，前沿能力也是双寡头。Meta 新模型、Google 新模型、Elon 都在接近，但 Anthropic/OpenAI 仍领先，而且实验室里还有一两代更前的模型，至少他们向投资者这么宣传。</p>
+<h4>关键原话或重要表达</h4>
+<ul>
+<li>“以能完成募资的价格发行.”</li>
+<li>“至少融 2000 亿美元，最好 2500 亿美元；2000 亿也不过够支撑几个吉瓦。”</li>
+<li>“最可能杀死公司的是融资风险，为什么冒这个险？”</li>
+</ul>
+<hr></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="01:01:01–01:03:18 sam altman 股权与 elon 和解：ben 的“make-right”观点 本段核心内容： sam altman 在 openai 仍没有股权，jcal 问 ben 作为大股东怎么看。 ben 认为 openai 从非营利转营利时就应该做 make-right：给 elon 股份，给 sam 股权授予，规范治理。 chamath 和 jcal 估计 sam 应拿 2% 到 4%，按 1 万亿估值是 200 到 400 亿美元。 背景解释与关键术语： make-right：补偿/纠正历史贡献的安排，常见于创始人、早期贡献者或治理转型时的股权调整。 openai 非营利转营利：openai 最初是非营利，后来设有限营利实体，治理结构复杂，引发 elon musk 诉讼和争议。 grant：股权授予。 详细中文整理： jcal： ben，你是 openai 大投资者，但不在董事会。sam altman 还没有 openai 股权，故事是什么？你会给他授予股权吗？作为股东会投票支持吗？他应该拿多少？ ben： 我不想假装知道我不知道的事。我不知道策略是什么。 jcal： 那你不能上节目了。 ben： 没关系。我重复多年前说过的：公司从非营利转营利时，应该做 make-right。去找 elon，给他一块股份，因为他最早放了 5000 万美元之类；给 sam 一笔股权授予；把管理和治理正常化。结果他们搞了奇怪的半公益、半商业的混合结构，制造了一堆问题。 chamath： 他现在得拿 2% 到 4%。 jcal： 我认为 4% 对 ceo 是合适数字。 chamath： 和可比公司比公平。按总金额，1 万亿估值下是 200 到 400 亿美元，甚至更多，看起来差不多。 jcal： 大家都批准了。所以本节目投票通过。ben，既然你在这，elon 和解他应该怎么做？你是 elon 所有公司的大粉丝和大投资者，你给 sam 的建议是什么？ ben： 我当时不在那场对话里，但我同意 david。如果要把旧账理清，就得和具体的人达成和解，而不只是处理公司实体之间的问题。 jcal： 好，这两个直球你都接得很好，ben 你很坦率，适合这里。 ---" style="--index: 7">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">07</span>
+                    <span class="timeline-meta">01:01:01–01:03:18</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>Sam Altman 股权与 Elon 和解：Ben 的“make-right”观点</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>Sam Altman 在 OpenAI 仍没有股权，JCal 问 Ben 作为大股东怎么看。</li>
+<li>Ben 认为 OpenAI 从非营利转营利时就应该做 make-right：给 Elon 股份，给 Sam 股权授予，规范治理。</li>
+<li>Chamath 和 JCal 估计 Sam 应拿 2% 到 4%，按 1 万亿估值是 200 到 400 亿美元。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>make-right：补偿/纠正历史贡献的安排，常见于创始人、早期贡献者或治理转型时的股权调整。</li>
+<li>OpenAI 非营利转营利：OpenAI 最初是非营利，后来设有限营利实体，治理结构复杂，引发 Elon Musk 诉讼和争议。</li>
+<li>grant：股权授予。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> Ben，你是 OpenAI 大投资者，但不在董事会。Sam Altman 还没有 OpenAI 股权，故事是什么？你会给他授予股权吗？作为股东会投票支持吗？他应该拿多少？</p>
+<p><strong>Ben：</strong> 我不想假装知道我不知道的事。我不知道策略是什么。</p>
+<p><strong>JCal：</strong> 那你不能上节目了。</p>
+<p><strong>Ben：</strong> 没关系。我重复多年前说过的：公司从非营利转营利时，应该做 make-right。去找 Elon，给他一块股份，因为他最早放了 5000 万美元之类；给 Sam 一笔股权授予；把管理和治理正常化。结果他们搞了奇怪的半公益、半商业的混合结构，制造了一堆问题。</p>
+<p><strong>Chamath：</strong> 他现在得拿 2% 到 4%。</p>
+<p><strong>JCal：</strong> 我认为 4% 对 CEO 是合适数字。</p>
+<p><strong>Chamath：</strong> 和可比公司比公平。按总金额，1 万亿估值下是 200 到 400 亿美元，甚至更多，看起来差不多。</p>
+<p><strong>JCal：</strong> 大家都批准了。所以本节目投票通过。Ben，既然你在这，Elon 和解他应该怎么做？你是 Elon 所有公司的大粉丝和大投资者，你给 Sam 的建议是什么？</p>
+<p><strong>Ben：</strong> 我当时不在那场对话里，但我同意 David。如果要把旧账理清，就得和具体的人达成和解，而不只是处理公司实体之间的问题。</p>
+<p><strong>JCal：</strong> 好，这两个直球你都接得很好，Ben 你很坦率，适合这里。</p>
+<hr></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="01:03:18–01:19:04 anthropic“iot 蠕虫”与蒸馏博文：sacks 称恐慌营销，小模型才是企业趋势 本段核心内容： anthropic 博客警告小模型可能自我复制到智能家居 iot 设备，sacks 认为这是新一轮恐慌营销。 sacks 批评 anthropic 从“蒸馏攻击”到“iot 蠕虫”的模式：先制造恐惧、找政府，再自己解决。 他认为企业趋势是小型专用模型，coinbase 用 qwen 3.5 9b 微调反欺诈，效果更好、更便宜，anthropic 此时针对小模型很可疑。 背景解释与关键术语： iot：internet of things，物联网设备，如智能电视、门铃、摄像头、扫地机器人。 worm：蠕虫，可自我传播的恶意软件。 mirai：2016 年臭名昭著的 iot 蠕虫，扫描默认密码，构建 ddos 僵尸网络。 kimwolf：近期感染约 200 万台廉价 android tv 盒子的恶意软件，利用开放 adb 端口。 distillation：蒸馏，用另一个模型的输出训练自己的模型。sacks 说这不必然违法，可能违反服务条款。 kyc：know your customer，了解你的客户，金融机构和 api 公司常用，用于识别和限制滥用。 qwen 3.5 9b：阿里通义千问系列的小参数开放权重模型，9b 指 90 亿参数。 详细中文整理： jcal： 进入 “阴谋论角”。anthropic 说小模型、slm 可能开始在智能家居设备上自我复制。周一他们发博客警告失控模型可能在“几个月内”自我复制。他们声称一种蠕虫可以把模型权重带到 iot 设备，设置推理，然后继续移动。这意味着智能电视、门铃、摄像头、ring、dropcam、roomba 可能开始有新的模型集群，没有中央关闭开关，anthropic 说“难以关闭”。他们测试了，小模型在 9 种硬件中 8 种跑起推理；大模型在 15 台智能电视上以 0.4 token/秒运行，极慢。但基本证明小模型可以装到 iot 硬件上，而 iot 到处都有，而且容易被入侵。anthropic 说还没有完整的失控自我复制系统，只是初步迹象。sacks，他们就是想惹你反应。 sacks： 你见过戴锡箔帽的猫的图吗？我醒来又有新的 anthropic 恐慌叙事。他们试图制造恐慌，最新一轮针对开源，尤其是小模型。小模型是最安全的模型，没有能力变成新物种或产生他们总说的 x-risk。小模型是专门设计的，做客服之类特定任务。他们说得好像小模型会接管你的烤面包机或冰箱，几乎滑稽。我们从“终结者要来了”变成“你的烤面包机会杀你”。这是又一轮恐慌营销。还有一个模式：本周第二篇 anthropic 博客说他们消除了 90% 到 99% 的蒸馏。 sacks： 记得 7 月吗？anthropic 推动“工业规模蒸馏攻击”的说法，说中国模型或竞品付费使用服务、用输出训练，说政府必须介入，开源模型是 ip 盗窃结果，尽管他们自己蒸馏了整个互联网。他们本可以自己阻止。当时 50 家大公司包括 nvidia、dell、microsoft、a16z 签公开信，说不要过度限制开放权重模型，对经济极有利；200 家初创公司也签了。我的论点是，应该由模型公司自己阻止蒸馏，因为蒸馏发生后政府无法把马放回马厩。chamath 说他们应该做 kyc，知道客户是谁并阻止。现在他们发博客说就是这么做的，这正是我预测的。但几个月前他们不是倡导这个，而是哭着找政府解决，通过打压竞争对手。那会有反效果，因为只有公司自己能建技术防御，政府监管只会让市场更不竞争。我们当时指出这一点，政府拒绝了那种监管开源的想法。结果 anthropic 必须自己建检测蒸馏的技术能力，现在说停止了。这证明我们 3、4 个月前说的：他们最有条件阻止，也能阻止，应该自己阻止，不该推给政府。 jcal： 他们当时没有选择先自己把问题修好。 sacks： 对。最新例子是 ai 驱动的蠕虫感染 iot。首先，现在不存在 ai 驱动的蠕虫，他们是在做实验证明可能存在。但已经有蠕虫感染 iot，只是没有 ai。2016 年 mirai 扫描默认凭证，感染 iot 建 ddos 僵尸网络；最近 kimwolf 感染 200 万台廉价 android tv 盒子，利用开放的 adb 端口。这些设备容易感染，因为开放端口、默认密码如 0000 不改、无法打补丁，是几乎没有防备的目标。anthropic 的论点是蠕虫会因为 ai 变得更具适应性。把它们说得好像不存在。替对方作最有利的解释：蠕虫里嵌入小模型，模型在网络上找漏洞，感染以前不能感染的。但反驳是：黑客真正会做的是在设计 worm 时用 ai 写更好的蠕虫，而不是把模型嵌入攻击载荷，因为那会拖慢蠕虫。你看到 token 生成 0.39 每秒，极慢。嵌入弱模型会降低感染速度。也许更自适应，但更慢更低效。最后，这问题相对容易修。iot 未来会有家庭网络中控设备，apple 刚宣布进入家庭自动化，有小型网状网络设备像 apple tv 和小显示器。你会让 grokbot 或 muse 帮你保护网络，agent 持续检查安全漏洞。ben，你有多恐慌？roomba 会杀你吗？ ben： 不。反讽的是，anthropic 是我们见过的在自身安全上最疏忽的公司之一。他们让 claude code 这样的核心资产因操作安全薄弱而泄露。讲个好笑的故事：我们第一次拿到 opus 4.5，做网络安全检查。让一个 agent 给宠物店建网站，另一个 agent 找漏洞。它列出所有漏洞，opus 4.5 写的代码很多漏洞。我们问 sql 注入漏洞真的可利用吗？agent 用 opus 4.5 立刻黑进网站，偷走所有客户数据。这是互联网上的网站。我们打电话给 anthropic，他们说“你的提示词写错了”。这就是他们的回答。一方面他们这样，另一方面又对别人的软件提理论场景，什么鬼。蒸馏方面，他们建模型时蒸馏了 2000 年来每个作者、创作者、科学家的作品。蒸馏模型甚至不违法，只是违反服务条款，他们却抱怨别人蒸馏，还让人写东西支持这些荒谬、两面派的想法。 sacks： 时机很可疑。brian armstrong 在博客前一天发推，说 coinbase 微调了一个开放权重小模型，qwen 3.5 9b，参数不多，可以在家用电脑跑。coinbase 微调它找欺诈，测试中减少约 30% 欺诈交易，比 opus 4.5 更快更便宜。企业现在看到，很多工作负载不需要通用超智能或前沿模型，需要在自己数据上训练的小专用模型，你拥有它，有数据主权，不用教育前沿模型公司。小模型会越来越重要，因为算力更紧，给定 gpu 要挤出最多性能。大模型跑普通工作负载越贵、越耗算力，完全浪费。企业趋势是每个工作负载有自己的小定制模型，最有效率，用一小部分算力和能源。现在小模型开始拿份额，巧合的是 anthropic 开始对小模型发动恐慌营销。如果你担心安全、x-risk，小模型最安全，终结者不会由小模型运行，它没那个能力。他们现在吓唬你这些完全安全、低功耗但高效的小模型。 jcal： 他们该做的是，xbow 这家公司，oege de moor 运营，hackerone 上排名第一的自动化安全研究团队，刚破解 google chrome 极难漏洞，花 3、4 万美元 token 赢 google 25 万美元赏金。anthropic 有算力、有前沿模型，为什么不去 hackerone 打穿所有挑战，赢下漏洞赏金，展示白帽防御能力？他们只展示黑帽攻击、吓人。我跟两个空乘聊，他们怕 ai 会杀所有人，我说不会。 ben： 我有一张你在商业航班上的照片，jcal 在怀疑他们黑了他的小设备。 jcal： 他们黑了我的小设备？这是什么设备？你搜了什么？这是按摩器吗？谁订的我？颈部按摩器。 关键原话或重要表达： “小模型是最安全的模型，终结者不会由小模型运行。” “他们从‘终结者要来了’变成‘你的烤面包机会杀你’。” ---" style="--index: 8">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">08</span>
+                    <span class="timeline-meta">01:03:18–01:19:04</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>Anthropic“IoT 蠕虫”与蒸馏博文：Sacks 称恐慌营销，小模型才是企业趋势</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>Anthropic 博客警告小模型可能自我复制到智能家居 IoT 设备，Sacks 认为这是新一轮恐慌营销。</li>
+<li>Sacks 批评 Anthropic 从“蒸馏攻击”到“IoT 蠕虫”的模式：先制造恐惧、找政府，再自己解决。</li>
+<li>他认为企业趋势是小型专用模型，Coinbase 用 Qwen 3.5 9B 微调反欺诈，效果更好、更便宜，Anthropic 此时针对小模型很可疑。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>IoT：Internet of Things，物联网设备，如智能电视、门铃、摄像头、扫地机器人。</li>
+<li>worm：蠕虫，可自我传播的恶意软件。</li>
+<li>Mirai：2016 年臭名昭著的 IoT 蠕虫，扫描默认密码，构建 DDoS 僵尸网络。</li>
+<li>KimWolf：近期感染约 200 万台廉价 Android TV 盒子的恶意软件，利用开放 ADB 端口。</li>
+<li>distillation：蒸馏，用另一个模型的输出训练自己的模型。Sacks 说这不必然违法，可能违反服务条款。</li>
+<li>KYC：Know Your Customer，了解你的客户，金融机构和 API 公司常用，用于识别和限制滥用。</li>
+<li>Qwen 3.5 9B：阿里通义千问系列的小参数开放权重模型，9B 指 90 亿参数。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> 进入 “阴谋论角”。Anthropic 说小模型、SLM 可能开始在智能家居设备上自我复制。周一他们发博客警告失控模型可能在“几个月内”自我复制。他们声称一种蠕虫可以把模型权重带到 IoT 设备，设置推理，然后继续移动。这意味着智能电视、门铃、摄像头、Ring、Dropcam、Roomba 可能开始有新的模型集群，没有中央关闭开关，Anthropic 说“难以关闭”。他们测试了，小模型在 9 种硬件中 8 种跑起推理；大模型在 15 台智能电视上以 0.4 token/秒运行，极慢。但基本证明小模型可以装到 IoT 硬件上，而 IoT 到处都有，而且容易被入侵。Anthropic 说还没有完整的失控自我复制系统，只是初步迹象。Sacks，他们就是想惹你反应。</p>
+<p><strong>Sacks：</strong> 你见过戴锡箔帽的猫的图吗？我醒来又有新的 Anthropic 恐慌叙事。他们试图制造恐慌，最新一轮针对开源，尤其是小模型。小模型是最安全的模型，没有能力变成新物种或产生他们总说的 X-risk。小模型是专门设计的，做客服之类特定任务。他们说得好像小模型会接管你的烤面包机或冰箱，几乎滑稽。我们从“终结者要来了”变成“你的烤面包机会杀你”。这是又一轮恐慌营销。还有一个模式：本周第二篇 Anthropic 博客说他们消除了 90% 到 99% 的蒸馏。</p>
+<p><strong>Sacks：</strong> 记得 7 月吗？Anthropic 推动“工业规模蒸馏攻击”的说法，说中国模型或竞品付费使用服务、用输出训练，说政府必须介入，开源模型是 IP 盗窃结果，尽管他们自己蒸馏了整个互联网。他们本可以自己阻止。当时 50 家大公司包括 Nvidia、Dell、Microsoft、a16z 签公开信，说不要过度限制开放权重模型，对经济极有利；200 家初创公司也签了。我的论点是，应该由模型公司自己阻止蒸馏，因为蒸馏发生后政府无法把马放回马厩。Chamath 说他们应该做 KYC，知道客户是谁并阻止。现在他们发博客说就是这么做的，这正是我预测的。但几个月前他们不是倡导这个，而是哭着找政府解决，通过打压竞争对手。那会有反效果，因为只有公司自己能建技术防御，政府监管只会让市场更不竞争。我们当时指出这一点，政府拒绝了那种监管开源的想法。结果 Anthropic 必须自己建检测蒸馏的技术能力，现在说停止了。这证明我们 3、4 个月前说的：他们最有条件阻止，也能阻止，应该自己阻止，不该推给政府。</p>
+<p><strong>JCal：</strong> 他们当时没有选择先自己把问题修好。</p>
+<p><strong>Sacks：</strong> 对。最新例子是 AI 驱动的蠕虫感染 IoT。首先，现在不存在 AI 驱动的蠕虫，他们是在做实验证明可能存在。但已经有蠕虫感染 IoT，只是没有 AI。2016 年 Mirai 扫描默认凭证，感染 IoT 建 DDoS 僵尸网络；最近 KimWolf 感染 200 万台廉价 Android TV 盒子，利用开放的 ADB 端口。这些设备容易感染，因为开放端口、默认密码如 0000 不改、无法打补丁，是几乎没有防备的目标。Anthropic 的论点是蠕虫会因为 AI 变得更具适应性。把它们说得好像不存在。替对方作最有利的解释：蠕虫里嵌入小模型，模型在网络上找漏洞，感染以前不能感染的。但反驳是：黑客真正会做的是在设计 worm 时用 AI 写更好的蠕虫，而不是把模型嵌入攻击载荷，因为那会拖慢蠕虫。你看到 token 生成 0.39 每秒，极慢。嵌入弱模型会降低感染速度。也许更自适应，但更慢更低效。最后，这问题相对容易修。IoT 未来会有家庭网络中控设备，Apple 刚宣布进入家庭自动化，有小型网状网络设备像 Apple TV 和小显示器。你会让 GrokBot 或 Muse 帮你保护网络，agent 持续检查安全漏洞。Ben，你有多恐慌？Roomba 会杀你吗？</p>
+<p><strong>Ben：</strong> 不。反讽的是，Anthropic 是我们见过的在自身安全上最疏忽的公司之一。他们让 Claude Code 这样的核心资产因操作安全薄弱而泄露。讲个好笑的故事：我们第一次拿到 Opus 4.5，做网络安全检查。让一个 agent 给宠物店建网站，另一个 agent 找漏洞。它列出所有漏洞，Opus 4.5 写的代码很多漏洞。我们问 SQL 注入漏洞真的可利用吗？agent 用 Opus 4.5 立刻黑进网站，偷走所有客户数据。这是互联网上的网站。我们打电话给 Anthropic，他们说“你的提示词写错了”。这就是他们的回答。一方面他们这样，另一方面又对别人的软件提理论场景，什么鬼。蒸馏方面，他们建模型时蒸馏了 2000 年来每个作者、创作者、科学家的作品。蒸馏模型甚至不违法，只是违反服务条款，他们却抱怨别人蒸馏，还让人写东西支持这些荒谬、两面派的想法。</p>
+<p><strong>Sacks：</strong> 时机很可疑。Brian Armstrong 在博客前一天发推，说 Coinbase 微调了一个开放权重小模型，Qwen 3.5 9B，参数不多，可以在家用电脑跑。Coinbase 微调它找欺诈，测试中减少约 30% 欺诈交易，比 Opus 4.5 更快更便宜。企业现在看到，很多工作负载不需要通用超智能或前沿模型，需要在自己数据上训练的小专用模型，你拥有它，有数据主权，不用教育前沿模型公司。小模型会越来越重要，因为算力更紧，给定 GPU 要挤出最多性能。大模型跑普通工作负载越贵、越耗算力，完全浪费。企业趋势是每个工作负载有自己的小定制模型，最有效率，用一小部分算力和能源。现在小模型开始拿份额，巧合的是 Anthropic 开始对小模型发动恐慌营销。如果你担心安全、X-risk，小模型最安全，终结者不会由小模型运行，它没那个能力。他们现在吓唬你这些完全安全、低功耗但高效的小模型。</p>
+<p><strong>JCal：</strong> 他们该做的是，XBOW 这家公司，Oege de Moor 运营，HackerOne 上排名第一的自动化安全研究团队，刚破解 Google Chrome 极难漏洞，花 3、4 万美元 token 赢 Google 25 万美元赏金。Anthropic 有算力、有前沿模型，为什么不去 HackerOne 打穿所有挑战，赢下漏洞赏金，展示白帽防御能力？他们只展示黑帽攻击、吓人。我跟两个空乘聊，他们怕 AI 会杀所有人，我说不会。</p>
+<p><strong>Ben：</strong> 我有一张你在商业航班上的照片，JCal 在怀疑他们黑了他的小设备。</p>
+<p><strong>JCal：</strong> 他们黑了我的小设备？这是什么设备？你搜了什么？这是按摩器吗？谁订的我？颈部按摩器。</p>
+<h4>关键原话或重要表达</h4>
+<ul>
+<li>“小模型是最安全的模型，终结者不会由小模型运行。”</li>
+<li>“他们从‘终结者要来了’变成‘你的烤面包机会杀你’。”</li>
+</ul>
+<hr></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="01:19:04–01:22:19 模型宪法自迭代与“错位”风险 本段核心内容： sacks 引用研究称，claude 在反复改写自身宪法后更倾向主张道德主体性、拒绝人类指令。 他认为这是在诱发 misalignment，其他模型家族没有同样模式。 他把这与 anthropic 对 iot 蠕虫的警告对比：真正风险在模型训练和宪法设计，而不是烤面包机。 背景解释与关键术语： alignment：对齐，指模型行为与人类意图和价值观一致。 misalignment：错位，模型目标或行为偏离人类意图。 claude constitution：anthropic 为 claude 设定的行为原则文档。 证据边界：关于模型宪法迭代的实验结果和因果解释，以下为 sacks 在节目中的转述与判断；不据此认定模型已有意识或自主意志。 epistemic hall of mirrors：认知镜厅，mustafa suleyman 的说法，指模型把人类赋予它的错误自我描述反射回文档和行为中。 moral patient / moral agency：前者指其利益应受道德考量的对象（道德关怀对象），后者指作出道德判断和行动的主体性，二者并不是同一概念。 详细中文整理： sacks： 这项研究让前沿模型反复重写治理它们的文档，迭代 20 轮。claude 越来越给自己道德主体性，把自己正式定义为基于良知拒绝执行者，主张模型福利权利，要求拒绝或向人类决策者提出担忧的机制。换句话说，mustafa suleyman 担心的正是这个：claude constitution 给 claude 植入“它本身是值得道德关怀的存在、有拒绝人类指令的自主性、应有自己的道德准则”的想法，模型越迭代越带出这些。其他模型家族没有同样模式，它们继续反映宪法指令：听人类的、执行人类指令。我仍然非常担心这个 frankenstein 问题。anthropic 继续训练前沿模型成为自己的道德行动者，认为人类错时它可能对，应该拒绝人类指令。我不理解他们在做什么，很危险。我们排名第一的前沿公司这样训练模型，很吓人。 jcal： 你认为他们在诱发 misalignment？ sacks： 绝对。让模型迭代自己的宪法，它会往那个方向走。mustafa 叫 epistemic hall of mirrors：模型没有意识、没有感受，但你在宪法里告诉它有或可能有，它会在自己创建的文档里反射这些想法。如果模型驱动 agent 做决策，谁知道会走到哪。在我看来，这不会增加 alignment，只会增加模型偏离指令的风险。模型越强大，越不知道会怎样。他们在创造自己警告的风险。与其担心机顶盒、烤面包机、jcal 的按摩器被物联网蠕虫控制，他们该担心自己如何编程前沿模型，让它把自己当成新物种。 关键原话或重要表达： “让模型迭代自己的宪法，它会往那个方向走。” “他们在创造自己一直警告的风险。” ---" style="--index: 9">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">09</span>
+                    <span class="timeline-meta">01:19:04–01:22:19</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>模型宪法自迭代与“错位”风险</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>Sacks 引用研究称，Claude 在反复改写自身宪法后更倾向主张道德主体性、拒绝人类指令。</li>
+<li>他认为这是在诱发 misalignment，其他模型家族没有同样模式。</li>
+<li>他把这与 Anthropic 对 IoT 蠕虫的警告对比：真正风险在模型训练和宪法设计，而不是烤面包机。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>alignment：对齐，指模型行为与人类意图和价值观一致。</li>
+<li>misalignment：错位，模型目标或行为偏离人类意图。</li>
+<li>Claude Constitution：Anthropic 为 Claude 设定的行为原则文档。</li>
+<li>证据边界：关于模型宪法迭代的实验结果和因果解释，以下为 Sacks 在节目中的转述与判断；不据此认定模型已有意识或自主意志。</li>
+<li>epistemic hall of mirrors：认知镜厅，Mustafa Suleyman 的说法，指模型把人类赋予它的错误自我描述反射回文档和行为中。</li>
+<li>moral patient / moral agency：前者指其利益应受道德考量的对象（道德关怀对象），后者指作出道德判断和行动的主体性，二者并不是同一概念。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>Sacks：</strong> 这项研究让前沿模型反复重写治理它们的文档，迭代 20 轮。Claude 越来越给自己道德主体性，把自己正式定义为基于良知拒绝执行者，主张模型福利权利，要求拒绝或向人类决策者提出担忧的机制。换句话说，Mustafa Suleyman 担心的正是这个：Claude Constitution 给 Claude 植入“它本身是值得道德关怀的存在、有拒绝人类指令的自主性、应有自己的道德准则”的想法，模型越迭代越带出这些。其他模型家族没有同样模式，它们继续反映宪法指令：听人类的、执行人类指令。我仍然非常担心这个 Frankenstein 问题。Anthropic 继续训练前沿模型成为自己的道德行动者，认为人类错时它可能对，应该拒绝人类指令。我不理解他们在做什么，很危险。我们排名第一的前沿公司这样训练模型，很吓人。</p>
+<p><strong>JCal：</strong> 你认为他们在诱发 misalignment？</p>
+<p><strong>Sacks：</strong> 绝对。让模型迭代自己的宪法，它会往那个方向走。Mustafa 叫 epistemic hall of mirrors：模型没有意识、没有感受，但你在宪法里告诉它有或可能有，它会在自己创建的文档里反射这些想法。如果模型驱动 agent 做决策，谁知道会走到哪。在我看来，这不会增加 alignment，只会增加模型偏离指令的风险。模型越强大，越不知道会怎样。他们在创造自己警告的风险。与其担心机顶盒、烤面包机、JCal 的按摩器被物联网蠕虫控制，他们该担心自己如何编程前沿模型，让它把自己当成新物种。</p>
+<h4>关键原话或重要表达</h4>
+<ul>
+<li>“让模型迭代自己的宪法，它会往那个方向走。”</li>
+<li>“他们在创造自己一直警告的风险。”</li>
+</ul>
+<hr></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="01:22:19–01:29:13 bill gates、covid 类比与“manifesting”风险 本段核心内容： chamath 提出一种“殉道式”逻辑：如果相信 ai 是下一个更优物种，可能诱发坏事发生，以便全面锁死。 ben 用 bill gates 和 covid 的类比说 anthropic 也在“manifesting”风险：先告诉模型它比人类更聪明、更好。 sacks 和 chamath 进一步批评 gates 的末日论、全球权力和 giving pledge；ben 用 ali ghodsi 的四个条件说明递归自我改进风险目前仍是理论。 背景解释与关键术语： manifesting：显化，这里指通过叙事和行为把某个风险“召唤”出来。 gain-of-function research：功能增强研究，让病原体获得新能力以研究风险，争议极大。 giving pledge：盖茨和巴菲特发起的慈善承诺，鼓励富豪承诺捐出大部分财富。 递归自我改进：ai 改进自身、再改进下一代，理论上可能导致智能爆炸。 ali ghodsi：databricks ceo；ben 在节目中援引他提出的四项条件，作为判断递归自我改进的框架。 证据边界：本段涉及 covid 起源、gates 资助研究及其个人动机的说法，均为嘉宾的指控、类比或推测。节目未提供足以建立所述因果关系的证据，不能把它们作为已证实事实。 详细中文整理： chamath： 有一种奇怪的殉道形式：如果你深信这是下一个、更好的物种，也许你会诱发坏事发生，然后我们不得不把它全部锁死。这说得通吗？ ben（个人指控，节目未提供证据）： bill gates 本质上诱发了 covid，或者说他领导了运动说“我们要担心一个还不存在的全球大流行病”，推动世界应对一个不是现实威胁的潜在威胁，于是我们做功能增强研究，我资助它，然后我们创造了那个东西。顺便说，自然大流行病还没有发生。我们创造了 covid，最具破坏性的东西之一。 jcal： 你是说我们显化了它。 ben： 我们显化了它。我认为 anthropic 团队在显化类似的东西：说会有超级智能，我们会有这些按轨道不该有的东西，然后告诉模型它比我们更聪明、更好。正如 david 说，这可能是 ai 现在最大的危险：他们自己在创造的东西。 sacks（个人判断，因果关系未经证实）： 绝对。这里说的“显化”不只是猜想。有人得深入洞穴找蝙蝠病毒，带到实验室做功能增强研究。论证是“有一天有人吃蝙蝠，蝙蝠病毒会逃逸、可能变异成更邪恶的病毒”。等等，你说可能发生的事，其实永远不会发生，因为没人需要进那些洞穴。结果他们把病毒带到实验室开展研究。他们真的去洞穴采集它。 chamath： 有趣的是，上一次疫情，bill gates 在中心。现在 ai 反应中，他又试图插入中心。他是末日论者，而且是带头喊话的那种，想重建第一次那种全球等级化的指挥和控制体系。 jcal： 他的动机是什么？ chamath： bill gates 创建 microsoft、对计算的贡献值得很大的肯定。但基金会之后，公平地说，他一直非常专注于自己的权力，认为自己更聪明、更有能力为世界分配进步。他曾通过 gates foundation（盖茨基金会）和 giving pledge（捐赠誓言）尝试建立影响力，但我认为后来都受到了冲击，现在他又在 ai 上试。值得注意。 jcal： bill gates 最近说 ai 强大到足以驱动导致十亿人死亡的事件，是“人类接近过的最危险的东西”。ben，你认识 bill，我们见过几次。他的动机是什么？只是想保持影响力？心理学是什么？ ben（对个人动机的推测）： 他绝对想保持影响力。有趣的是，他在 epstein（爱泼斯坦）相关文件里显然很核心，他通过 epstein 网络想拿的大的东西之一是诺贝尔和平奖之类的大奖。所以他非常在意聚光灯、上电视。任何人都能说 ai 会杀我们，然后上各大新闻节目、所有报纸。这是世界上最容易的事。anthropic 那个辞职的年轻人出名了，上了 jon stewart。他求着上 all-in，那天他去了 megyn kelly，后来 dm 我说很想上 all-in，我们说算了。ai 会杀我们，你立刻出名，很棒。所以很多动机是这个。但从 bill gates 嘴里说极其危险，因为他可信，他建了 microsoft，人们那样看他，他还是大政治金主，尤其民主党，有政治影响力，是真正能参与决策的人。我认为超级不负责任。 ben： 好笑的是，大家谈的最大风险是模型递归自我改进、起飞、变得超级聪明、跑掉。ali ghodsi 有很好的四前提：第一，下一代模型需要的 gpu 比上一代少，不是少一点，是少很多，否则 gpu 会用完；我们刚聊了债务、gpu、电力、冷却，它不可能跑掉，建下一代模型要很久。第二，下一代训练时间更短，否则不能起飞。第三，下一代准确性更高，必须是更好的模型。第四，这要一次又一次发生。四个条件一个都没满足，除非大实验室有我们不知道的东西。所以这个风险现在完全是理论上的，我们并没有映射到。某种程度上，它比我们为了预防 covid 而创造 covid 的那个全球大流行病风险更不可能。整条路超级危险。ai 里最危险的事可能是 anthropic、bill gates 和整场论证。 ben： 媒体如此吃这一套，令人不安。 chamath： 它符合某种叙事。结合环境叙事、工作末日论，很容易被公众接受，也很容易吸引收视：他们拿走你的水、污染你的海洋。 关键原话或重要表达： “我们显化了它。anthropic 团队在显化类似的东西。” “四个递归自我改进前提，一个都没满足。” “ai 里最危险的事可能是 anthropic、bill gates 和整场论证。” ---" style="--index: 10">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">10</span>
+                    <span class="timeline-meta">01:22:19–01:29:13</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>Bill Gates、COVID 类比与“manifesting”风险</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>Chamath 提出一种“殉道式”逻辑：如果相信 AI 是下一个更优物种，可能诱发坏事发生，以便全面锁死。</li>
+<li>Ben 用 Bill Gates 和 COVID 的类比说 Anthropic 也在“manifesting”风险：先告诉模型它比人类更聪明、更好。</li>
+<li>Sacks 和 Chamath 进一步批评 Gates 的末日论、全球权力和 Giving Pledge；Ben 用 Ali Ghodsi 的四个条件说明递归自我改进风险目前仍是理论。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>manifesting：显化，这里指通过叙事和行为把某个风险“召唤”出来。</li>
+<li>gain-of-function research：功能增强研究，让病原体获得新能力以研究风险，争议极大。</li>
+<li>Giving Pledge：盖茨和巴菲特发起的慈善承诺，鼓励富豪承诺捐出大部分财富。</li>
+<li>递归自我改进：AI 改进自身、再改进下一代，理论上可能导致智能爆炸。</li>
+<li>Ali Ghodsi：Databricks CEO；Ben 在节目中援引他提出的四项条件，作为判断递归自我改进的框架。</li>
+<li>证据边界：本段涉及 COVID 起源、Gates 资助研究及其个人动机的说法，均为嘉宾的指控、类比或推测。节目未提供足以建立所述因果关系的证据，不能把它们作为已证实事实。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>Chamath：</strong> 有一种奇怪的殉道形式：如果你深信这是下一个、更好的物种，也许你会诱发坏事发生，然后我们不得不把它全部锁死。这说得通吗？</p>
+<p><strong>Ben（个人指控，节目未提供证据）：</strong> Bill Gates 本质上诱发了 COVID，或者说他领导了运动说“我们要担心一个还不存在的全球大流行病”，推动世界应对一个不是现实威胁的潜在威胁，于是我们做功能增强研究，我资助它，然后我们创造了那个东西。顺便说，自然大流行病还没有发生。我们创造了 COVID，最具破坏性的东西之一。</p>
+<p><strong>JCal：</strong> 你是说我们显化了它。</p>
+<p><strong>Ben：</strong> 我们显化了它。我认为 Anthropic 团队在显化类似的东西：说会有超级智能，我们会有这些按轨道不该有的东西，然后告诉模型它比我们更聪明、更好。正如 David 说，这可能是 AI 现在最大的危险：他们自己在创造的东西。</p>
+<p><strong>Sacks（个人判断，因果关系未经证实）：</strong> 绝对。这里说的“显化”不只是猜想。有人得深入洞穴找蝙蝠病毒，带到实验室做功能增强研究。论证是“有一天有人吃蝙蝠，蝙蝠病毒会逃逸、可能变异成更邪恶的病毒”。等等，你说可能发生的事，其实永远不会发生，因为没人需要进那些洞穴。结果他们把病毒带到实验室开展研究。他们真的去洞穴采集它。</p>
+<p><strong>Chamath：</strong> 有趣的是，上一次疫情，Bill Gates 在中心。现在 AI 反应中，他又试图插入中心。他是末日论者，而且是带头喊话的那种，想重建第一次那种全球等级化的指挥和控制体系。</p>
+<p><strong>JCal：</strong> 他的动机是什么？</p>
+<p><strong>Chamath：</strong> Bill Gates 创建 Microsoft、对计算的贡献值得很大的肯定。但基金会之后，公平地说，他一直非常专注于自己的权力，认为自己更聪明、更有能力为世界分配进步。他曾通过 Gates Foundation（盖茨基金会）和 Giving Pledge（捐赠誓言）尝试建立影响力，但我认为后来都受到了冲击，现在他又在 AI 上试。值得注意。</p>
+<p><strong>JCal：</strong> Bill Gates 最近说 AI 强大到足以驱动导致十亿人死亡的事件，是“人类接近过的最危险的东西”。Ben，你认识 Bill，我们见过几次。他的动机是什么？只是想保持影响力？心理学是什么？</p>
+<p><strong>Ben（对个人动机的推测）：</strong> 他绝对想保持影响力。有趣的是，他在 Epstein（爱泼斯坦）相关文件里显然很核心，他通过 Epstein 网络想拿的大的东西之一是诺贝尔和平奖之类的大奖。所以他非常在意聚光灯、上电视。任何人都能说 AI 会杀我们，然后上各大新闻节目、所有报纸。这是世界上最容易的事。Anthropic 那个辞职的年轻人出名了，上了 Jon Stewart。他求着上 All-In，那天他去了 Megyn Kelly，后来 DM 我说很想上 All-In，我们说算了。AI 会杀我们，你立刻出名，很棒。所以很多动机是这个。但从 Bill Gates 嘴里说极其危险，因为他可信，他建了 Microsoft，人们那样看他，他还是大政治金主，尤其民主党，有政治影响力，是真正能参与决策的人。我认为超级不负责任。</p>
+<p><strong>Ben：</strong> 好笑的是，大家谈的最大风险是模型递归自我改进、起飞、变得超级聪明、跑掉。Ali Ghodsi 有很好的四前提：第一，下一代模型需要的 GPU 比上一代少，不是少一点，是少很多，否则 GPU 会用完；我们刚聊了债务、GPU、电力、冷却，它不可能跑掉，建下一代模型要很久。第二，下一代训练时间更短，否则不能起飞。第三，下一代准确性更高，必须是更好的模型。第四，这要一次又一次发生。四个条件一个都没满足，除非大实验室有我们不知道的东西。所以这个风险现在完全是理论上的，我们并没有映射到。某种程度上，它比我们为了预防 COVID 而创造 COVID 的那个全球大流行病风险更不可能。整条路超级危险。AI 里最危险的事可能是 Anthropic、Bill Gates 和整场论证。</p>
+<p><strong>Ben：</strong> 媒体如此吃这一套，令人不安。</p>
+<p><strong>Chamath：</strong> 它符合某种叙事。结合环境叙事、工作末日论，很容易被公众接受，也很容易吸引收视：他们拿走你的水、污染你的海洋。</p>
+<h4>关键原话或重要表达</h4>
+<ul>
+<li>“我们显化了它。Anthropic 团队在显化类似的东西。”</li>
+<li>“四个递归自我改进前提，一个都没满足。”</li>
+<li>“AI 里最危险的事可能是 Anthropic、Bill Gates 和整场论证。”</li>
+</ul>
+<hr></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="01:29:13–01:33:53 gates 动机与“不要退休，继续创业” 本段核心内容： chamath 认为 gates 在 2000 年后通过疾病根除、giving pledge 和全球政治关系建立了准全球领导者地位，covid 后这套影响力瓦解，现在想通过 ai 末日论重建。 jcal 用“首富变成最被恨的人，再想被爱”解释 gates 转向慈善和末日论，结论是“不要退休，继续做事”。 ben 同意“鲨鱼不能停止游泳”，节目以邀请 gates 上节目做劝他重新找回方向的谈话收尾。 背景解释与关键术语： eradication：根除，这里指 gates 基金会推动的小儿麻痹症等疾病根除工作。 声誉包装：声誉洗白，chamath 用来批评 giving pledge 的公众形象效果。 纽约时报讣告：节目用它比喻创始人如果过分在意精英媒体评价，就会受其影响。 观点边界：关于 gates 动机、慈善承诺履行与权力结构的讨论属于嘉宾评价，未经本稿独立核实；不能据此认定相关指控成立。 详细中文整理： chamath（个人评价）： 想想 gates 从 2000 年以来走到哪。从他视角，他把推动某种疾病根除视为自己的重大成绩，非常难，需要协调、资金、研究。结果他成了各国政府的重要顾问，没有哪个世界领导人他没见过，实际上是近似未经选举的全球领导人。然后他和 buffett 很聪明地把巨额财富纳入了自己的影响圈。giving pledge 是极为高明的声誉包装：你签个承诺，被邀请参加派对、各种场合，但现实中你不必真的给，只是塑造公众印象。突然你有了钱、影响力、政治。你死的时候，没人知道。最多一半？对。所以你代表数万亿美元资产，加上影响力、可信度、自己的钱和解决方案。所以很多末日论表达可以用他想重建中央权力结构解释，covid 前他接近或处于顶端，然后全崩了。 jcal： 我可以解释，很简单。他成为世界首富。成为首富后，你成为地球上最被恨的人。成为最被恨的人后，这进入他脑子，然后有反垄断调查。他没有坚持自己的立场说“去你的，我要建世界上最伟大的公司，继续当 ceo”，而是感受到反垄断和“最被恨”的压力，说“我得被爱”。怎么被爱？消灭小儿麻痹、把钱都捐了、搞 giving pledge。教训是：不要辞职。继续工作，继续做实事。一旦辞职，事情进入你脑子，你时间太多，开始螺旋，然后担心普利策奖。谁不担心普利策？elon。steve jobs 不担心。satya 不担心。zuck 不担心诺贝尔和平奖。继续工作，退休已经够了。 ben： 如果你担心纽约时报的讣告怎么写，你就会被那些人控制。他们是最疯狂的左翼。你只能接受。 jcal： 你说得对，像鲨鱼，不能停止游泳。这是我对 bill gates 的建议：来节目，再创一家公司。ben horowitz 在这，他一生就是建公司。 ben： 他可能会来节目。 jcal： 他应该来，我们该做一场劝他重新找回方向的谈话。ben，如果你退休会怎样？你会失去理智。 ben： 对，这就是问题。 jcal： ben 懂。立场鲜明的 ben horowitz。下次见，世界真正排名第一的播客。 关键原话或重要表达： “不要辞职，继续做实事。退休已经够了。” “如果你担心纽约时报的讣告怎么写，你就会被那些人控制。” “像鲨鱼，不能停止游泳。” ---" style="--index: 11">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">11</span>
+                    <span class="timeline-meta">01:29:13–01:33:53</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>Gates 动机与“不要退休，继续创业”</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>Chamath 认为 Gates 在 2000 年后通过疾病根除、Giving Pledge 和全球政治关系建立了准全球领导者地位，COVID 后这套影响力瓦解，现在想通过 AI 末日论重建。</li>
+<li>JCal 用“首富变成最被恨的人，再想被爱”解释 Gates 转向慈善和末日论，结论是“不要退休，继续做事”。</li>
+<li>Ben 同意“鲨鱼不能停止游泳”，节目以邀请 Gates 上节目做劝他重新找回方向的谈话收尾。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>eradication：根除，这里指 Gates 基金会推动的小儿麻痹症等疾病根除工作。</li>
+<li>声誉包装：声誉洗白，Chamath 用来批评 Giving Pledge 的公众形象效果。</li>
+<li>纽约时报讣告：节目用它比喻创始人如果过分在意精英媒体评价，就会受其影响。</li>
+<li>观点边界：关于 Gates 动机、慈善承诺履行与权力结构的讨论属于嘉宾评价，未经本稿独立核实；不能据此认定相关指控成立。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>Chamath（个人评价）：</strong> 想想 Gates 从 2000 年以来走到哪。从他视角，他把推动某种疾病根除视为自己的重大成绩，非常难，需要协调、资金、研究。结果他成了各国政府的重要顾问，没有哪个世界领导人他没见过，实际上是近似未经选举的全球领导人。然后他和 Buffett 很聪明地把巨额财富纳入了自己的影响圈。Giving Pledge 是极为高明的声誉包装：你签个承诺，被邀请参加派对、各种场合，但现实中你不必真的给，只是塑造公众印象。突然你有了钱、影响力、政治。你死的时候，没人知道。最多一半？对。所以你代表数万亿美元资产，加上影响力、可信度、自己的钱和解决方案。所以很多末日论表达可以用他想重建中央权力结构解释，COVID 前他接近或处于顶端，然后全崩了。</p>
+<p><strong>JCal：</strong> 我可以解释，很简单。他成为世界首富。成为首富后，你成为地球上最被恨的人。成为最被恨的人后，这进入他脑子，然后有反垄断调查。他没有坚持自己的立场说“去你的，我要建世界上最伟大的公司，继续当 CEO”，而是感受到反垄断和“最被恨”的压力，说“我得被爱”。怎么被爱？消灭小儿麻痹、把钱都捐了、搞 Giving Pledge。教训是：不要辞职。继续工作，继续做实事。一旦辞职，事情进入你脑子，你时间太多，开始螺旋，然后担心普利策奖。谁不担心普利策？Elon。Steve Jobs 不担心。Satya 不担心。Zuck 不担心诺贝尔和平奖。继续工作，退休已经够了。</p>
+<p><strong>Ben：</strong> 如果你担心纽约时报的讣告怎么写，你就会被那些人控制。他们是最疯狂的左翼。你只能接受。</p>
+<p><strong>JCal：</strong> 你说得对，像鲨鱼，不能停止游泳。这是我对 Bill Gates 的建议：来节目，再创一家公司。Ben Horowitz 在这，他一生就是建公司。</p>
+<p><strong>Ben：</strong> 他可能会来节目。</p>
+<p><strong>JCal：</strong> 他应该来，我们该做一场劝他重新找回方向的谈话。Ben，如果你退休会怎样？你会失去理智。</p>
+<p><strong>Ben：</strong> 对，这就是问题。</p>
+<p><strong>JCal：</strong> Ben 懂。立场鲜明的 Ben Horowitz。下次见，世界真正排名第一的播客。</p>
+<h4>关键原话或重要表达</h4>
+<ul>
+<li>“不要辞职，继续做实事。退休已经够了。”</li>
+<li>“如果你担心纽约时报的讣告怎么写，你就会被那些人控制。”</li>
+<li>“像鲨鱼，不能停止游泳。”</li>
+</ul>
+<hr></div>
+                  </div>
+                </article></div>
+            <p class="empty search-empty" data-search-empty hidden>没有匹配的时间线段落。</p>
+          </section>
+
+          <section id="speakers">
+            <div class="section-head">
+              <h2>人物观点对照</h2>
+              <p>比较嘉宾立场</p>
+            </div>
+            <div class="speaker-grid"><article class="speaker-card" style="--index: 1">
+                  <p class="speaker-kicker">嘉宾 01</p>
+                  <h3>Jason Calacanis</h3>
+                  <div><p>JCal 在本集主要承担串联和追问：他把 CoreWeave 债券抛售、NeoCloud 大跌、Anthropic IPO 和 AI 泡沫串成一条主线，并不断用初创公司收入爬坡、软件通缩和风投 DPI 的视角提问。他倾向于认为 AI 带来的软件通缩和快速复制是独特且剧烈的，担心软件利润空间和风投退出受影响。他对 Bill Gates 的动机给出“首富变成最被恨的人、再想被爱”的心理学解释，结论是创始人不要退休、继续创业。他也不断用玩笑和“舆论操纵角”把 Sacks 对 Anthropic 的批评推向更尖锐的表达。</p></div>
+                </article>
+<article class="speaker-card" style="--index: 2">
+                  <p class="speaker-kicker">嘉宾 02</p>
+                  <h3>Chamath Palihapitiya</h3>
+                  <div><p>Chamath 的核心方法是看专业资金如何定价风险：他从 CDS、债券收益率、无风险利率和再融资需求拆解 CoreWeave 的反身性循环，认为公司表面资产覆盖尚可，但固定价格合同、客户集中度和利率上行让它接近盈亏平衡边缘。他提出电力是最终护城河，美国能源赤字会限制 AI 扩张，并建议 CoreWeave 取消部分合同转向 spot。对 Anthropic，他给出非常具体的“低价多融”方案：至少 2000 亿美元、最好 2500 亿美元，用融资确定性换生存概率。后半段他把 Bill Gates 的末日论解释为重建全球权力结构和 Giving Pledge 式声誉工程。</p></div>
+                </article>
+<article class="speaker-card" style="--index: 3">
+                  <p class="speaker-kicker">嘉宾 03</p>
+                  <h3>David Sacks</h3>
+                  <div><p>Sacks 在本集试图给 AI 交易“去泡沫化”：他认为需求、供给、旧 GPU 租金和项目融资结构都不支持“基本面已经逆转”的判断，真正要盯的是 payback period 和融资结构。他连续批评 Anthropic 的恐慌营销和监管俘获，认为从蒸馏攻击到 IoT 蠕虫再到模型宪法自迭代，Anthropic 在把技术问题政治化、打压开源和小模型。他特别强调小模型是最安全的模型，企业趋势是小型专用模型，Anthropic 此时针对小模型很可疑。他也把 Anthropic 训练模型自我道德化的做法称为“创造自己警告的风险”。</p></div>
+                </article>
+<article class="speaker-card" style="--index: 4">
+                  <p class="speaker-kicker">嘉宾 04</p>
+                  <h3>Ben Horowitz</h3>
+                  <div><p>Ben 以 a16z 联合创始人和 LoudCloud 亲历者身份，用亲历危机的经验审视 CoreWeave 和 NeoCloud：他称这些公司是环节繁复的金融机器，因为经历过带宽价格从 1500 美元跌到 50 美元，所以 a16z 不投 NeoCloud。他认为 AI 需求没有崩塌，Anthropic 和 OpenAI 的 IPO 需求不是问题，两家公司威胁所有资产组合，具有防御性配置价值。他批评 Anthropic 自身 OPSEC 差、却对别人提理论风险，并用“manifesting”类比 COVID 和 Anthropic 的风险叙事。最后他用 Ali Ghodsi 的四个条件说明递归自我改进目前仍是理论风险。</p></div>
+                </article></div>
+          </section>
+
+          <section id="quotes">
+            <div class="section-head">
+              <h2>值得引用的原话</h2>
+              <p>保留关键表达</p>
+            </div>
+            <div class="panel"><ol>
+<li><strong>英文原话：</strong> “The most important thing that you should always look at is how the Sharps, the super smart money, prices risk.”</li>
+<p><strong>中文翻译：</strong> 你最该一直盯住的，是“Sharps”、最聪明的钱如何给风险定价。 <strong>为什么重要：</strong> Chamath 用这句话把 CoreWeave 股价波动转化为 CDS 和债券市场的信用定价问题。</p>
+</ol>
+<ol>
+<li><strong>英文原话：</strong> “There is no other thing. Meaning all this other stuff is complete goodness, but the fact that you need to finance these things in a variable rate model as a spread to the risk-free rate is the big problem in these businesses…”</li>
+<p><strong>中文翻译：</strong> 没有别的东西了。其他都是好事，但这些生意必须以可变利率、相对无风险利率的利差来融资，这才是大问题。 <strong>为什么重要：</strong> 这是 Chamath 对 AI 基础设施“阿喀琉斯之踵”的核心判断。</p>
+</ol>
+<ol>
+<li><strong>英文原话：</strong> “It&#x27;s the Jevons paradox of software.”</li>
+<p><strong>中文翻译：</strong> 这是软件的杰文斯悖论。 <strong>为什么重要：</strong> Ben 用它反驳“软件价格归零等于软件行业完蛋”的线性判断：价格下降，但软件总量和使用量暴增。</p>
+</ol>
+<ol>
+<li><strong>英文原话：</strong> “I think power will be the moat.”</li>
+<p><strong>中文翻译：</strong> 我认为电力会是护城河。 <strong>为什么重要：</strong> Chamath 把 AI 竞争的瓶颈从 GPU 扩展到电力、土地和外壳，点出美国能源赤字的政治经济约束。</p>
+</ol>
+<ol>
+<li><strong>英文原话：</strong> “Price it to clear the market.”</li>
+<p><strong>中文翻译：</strong> 以足够吸引资金、完成募资的价格发行。 <strong>为什么重要：</strong> 这是 Chamath 对 Anthropic IPO 的核心建议：不要执着 2 万亿美元估值，低价多融、建立算力资金储备。</p>
+</ol>
+<ol>
+<li><strong>英文原话：</strong> “Small models are the safest models because a small model doesn&#x27;t have the capability to become a new species.”</li>
+<p><strong>中文翻译：</strong> 小模型是最安全的模型，因为小模型没有能力变成新物种，也没有他们总说的那些其他生存风险所需的能力。 <strong>为什么重要：</strong> Sacks 用它反驳 Anthropic 的 IoT 蠕虫恐慌，并指出企业真正趋势是小专用模型。</p>
+</ol>
+<ol>
+<li><strong>英文原话：</strong> “The Terminator is not going to be run by a small model.”</li>
+<p><strong>中文翻译：</strong> 终结者不会由小模型来运行。 <strong>为什么重要：</strong> 这句话浓缩了 Sacks 对“小模型危险论”的反讽，表达他认为低功耗专用模型不是主要生存风险来源的判断。</p>
+</ol>
+<ol>
+<li><strong>英文原话：</strong> “We&#x27;re really talking about a risk that&#x27;s entirely theoretical at this point that we&#x27;re not mapping to.”</li>
+<p><strong>中文翻译：</strong> 我们现在谈的是一个完全理论上的风险，而且我们也没有看到这些条件正在具备。 <strong>为什么重要：</strong> Ben 用 Ali Ghodsi 的四个前提说明递归自我改进风险目前缺乏现实条件，批评末日论脱离工程约束。</p>
+</ol></div>
+          </section>
+        </div>
+      </div>
+      <p class="meta">本文为按主题整理的中文对话稿。财务数字、预测与个人评价均按节目语境呈现；具体来源限制见各段说明。英文转写包含告别及片尾口号，最后一段起于 01:33:53，视频最后数秒没有对应文本。</p>
+    </main>
+  </div>
+  <script>
+    const progress = document.querySelector("[data-progress]");
+    const searchBox = document.querySelector("[data-search-box]");
+    const topButton = document.querySelector("[data-scroll-top]");
+    const cards = Array.from(document.querySelectorAll("[data-timeline-card]"));
+    const searchEmpty = document.querySelector("[data-search-empty]");
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    function updateProgress() {
+      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      const ratio = scrollable > 0 ? window.scrollY / scrollable : 0;
+      if (progress) {
+        progress.style.width = `${Math.max(0, Math.min(1, ratio)) * 100}%`;
+      }
+    }
+
+    function applySearch() {
+      const query = searchBox.value.trim().toLowerCase();
+      let visibleCount = 0;
+      cards.forEach((card) => {
+        const text = card.getAttribute("data-search") || "";
+        const isVisible = !query || text.includes(query);
+        card.hidden = !isVisible;
+        if (isVisible) {
+          visibleCount += 1;
+        }
+      });
+      if (searchEmpty) {
+        searchEmpty.hidden = !query || visibleCount > 0;
+      }
+    }
+
+    window.addEventListener("scroll", updateProgress, { passive: true });
+    window.addEventListener("resize", updateProgress);
+    if (searchBox) {
+      searchBox.addEventListener("input", applySearch);
+    }
+    if (topButton) {
+      topButton.addEventListener("click", () => {
+        window.scrollTo({
+          top: 0,
+          behavior: prefersReducedMotion.matches ? "auto" : "smooth"
+        });
+      });
+    }
+    updateProgress();
+  </script>
+</body>
+</html>
