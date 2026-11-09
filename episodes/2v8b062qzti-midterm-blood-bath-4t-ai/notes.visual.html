@@ -1,0 +1,1053 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>中期选举血洗、4万亿美元AI抛售、数据中心冻结：特朗普下一步怎么走 - 中文播客可视化笔记</title>
+  <style>
+    :root {
+      --bg: oklch(0.974 0.006 238);
+      --paper: oklch(0.991 0.003 238);
+      --paper-soft: oklch(0.955 0.007 238);
+      --ink: oklch(0.205 0.018 246);
+      --muted: oklch(0.49 0.018 246);
+      --faint: oklch(0.63 0.014 246);
+      --line: oklch(0.875 0.009 238);
+      --line-strong: oklch(0.74 0.014 238);
+      --accent: oklch(0.43 0.064 164);
+      --accent-soft: oklch(0.94 0.024 164);
+      --accent-wash: oklch(0.973 0.012 164);
+      --quote: oklch(0.965 0.010 92);
+      --shadow: 0 24px 54px color-mix(in oklch, var(--ink) 8%, transparent);
+      --radius: 8px;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-width: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(90deg, color-mix(in oklch, var(--line) 28%, transparent) 1px, transparent 1px) 0 0 / 92px 92px,
+        var(--bg);
+      font-family: "Geist", "Satoshi", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      line-height: 1.78;
+      text-rendering: optimizeLegibility;
+    }
+    ::selection { background: var(--accent-soft); color: var(--ink); }
+    a {
+      color: var(--accent);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+      transition: color .22s var(--ease), background-color .22s var(--ease), border-color .22s var(--ease), transform .22s var(--ease);
+    }
+    [hidden] { display: none !important; }
+    .progress {
+      position: fixed;
+      z-index: 4;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: var(--accent);
+    }
+    .quick-actions {
+      position: fixed;
+      right: max(18px, calc((100vw - 1200px) / 2));
+      bottom: 24px;
+      z-index: 3;
+      display: grid;
+      gap: 7px;
+    }
+    .quick-action {
+      display: inline-grid;
+      grid-template-columns: 16px auto;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      min-width: 74px;
+      min-height: 40px;
+      padding: 8px 12px;
+      border: 1px solid var(--line-strong);
+      border-radius: var(--radius);
+      background: color-mix(in oklch, var(--paper) 92%, transparent);
+      box-shadow: 0 12px 28px color-mix(in oklch, var(--ink) 7%, transparent);
+      color: var(--ink);
+      font: inherit;
+      font-size: 13px;
+      font-weight: 720;
+      line-height: 1.2;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .quick-action:hover, .quick-action:focus-visible {
+      outline: none;
+      border-color: var(--accent);
+      background: var(--accent-wash);
+      color: var(--accent);
+      transform: translate3d(0, -1px, 0);
+    }
+    .quick-action:active { transform: translate3d(0, 1px, 0) scale(.99); }
+    .page {
+      width: min(1760px, calc(100% - 56px));
+      margin: 0 auto;
+      padding: 0 0 104px;
+    }
+    .article { min-width: 0; }
+    .hero {
+      max-width: none;
+      margin-left: min(7vw, 140px);
+      padding: 72px 0 58px;
+    }
+    .eyebrow {
+      margin: 0 0 18px;
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    h1 {
+      max-width: none;
+      margin: 0 0 28px;
+      font-size: clamp(38px, 3vw, 52px);
+      font-weight: 760;
+      line-height: 1.08;
+      letter-spacing: 0;
+      text-wrap: balance;
+    }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 18px;
+      max-width: 72ch;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .meta a { font-weight: 650; }
+    .meta-strip {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+      max-width: 720px;
+      margin: 34px 0 28px;
+      border-top: 1px solid var(--line-strong);
+      padding-top: 16px;
+    }
+    .meta-pill {
+      display: grid;
+      gap: 2px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.35;
+    }
+    .meta-pill b {
+      color: var(--ink);
+      font-family: var(--mono);
+      font-size: 18px;
+      font-weight: 680;
+      line-height: 1;
+    }
+    .summary {
+      width: 100%;
+      max-width: 760px;
+      padding: 24px 26px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: color-mix(in oklch, var(--paper) 88%, var(--accent-soft));
+      box-shadow: var(--shadow);
+    }
+    .summary p {
+      margin: 0;
+      font-size: 19px;
+      line-height: 1.72;
+    }
+    h1, .summary, .takeaway p, .timeline-card h3, .section-content, .speaker-card, .panel {
+      overflow-wrap: anywhere;
+    }
+    .content-shell {
+      display: grid;
+      grid-template-columns: minmax(170px, 212px) minmax(0, 820px);
+      gap: clamp(36px, 7vw, 88px);
+      align-items: start;
+      border-top: 1px solid var(--line);
+      padding-top: 40px;
+    }
+    .sidebar {
+      position: sticky;
+      top: 28px;
+      align-self: start;
+      padding-top: 4px;
+    }
+    .toc {
+      border-top: 1px solid var(--ink);
+      padding-top: 16px;
+    }
+    .toc-title {
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .nav-links { display: grid; gap: 2px; }
+    .nav-links a {
+      display: block;
+      padding: 8px 0;
+      border-bottom: 1px solid color-mix(in oklch, var(--line) 72%, transparent);
+      color: var(--ink);
+      font-size: 14px;
+      line-height: 1.35;
+      text-decoration: none;
+    }
+    .nav-links a:hover, .nav-links a:focus-visible {
+      outline: none;
+      color: var(--accent);
+      transform: translate3d(2px, 0, 0);
+    }
+    .search {
+      display: grid;
+      gap: 8px;
+      margin-top: 22px;
+    }
+    .search span {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 720;
+    }
+    .search input {
+      width: 100%;
+      min-height: 40px;
+      padding: 8px 10px;
+      border: 1px solid var(--line-strong);
+      border-radius: var(--radius);
+      background: var(--paper);
+      color: var(--ink);
+      font: inherit;
+      font-size: 14px;
+      outline: none;
+      transition: border-color .22s var(--ease), box-shadow .22s var(--ease), transform .22s var(--ease);
+    }
+    .search input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px color-mix(in oklch, var(--accent) 14%, transparent);
+    }
+    .content-flow { min-width: 0; }
+    section { margin: 0 0 78px; }
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 18px;
+      align-items: end;
+      margin-bottom: 22px;
+      border-top: 1px solid var(--ink);
+      padding-top: 18px;
+    }
+    .section-head h2 {
+      margin: 0;
+      font-size: 28px;
+      font-weight: 740;
+      line-height: 1.16;
+      letter-spacing: 0;
+    }
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.4;
+      text-align: right;
+    }
+    .takeaway-list {
+      display: grid;
+      gap: 0;
+      margin: 0;
+      padding: 0;
+      border-top: 1px solid var(--line);
+      list-style: none;
+    }
+    .takeaway {
+      display: grid;
+      grid-template-columns: 52px minmax(0, 1fr);
+      gap: 18px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .takeaway span {
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 15px;
+      font-weight: 720;
+      line-height: 1.65;
+    }
+    .takeaway p {
+      margin: 0;
+      max-width: 70ch;
+      font-size: 16px;
+      line-height: 1.72;
+    }
+    .timeline {
+      display: grid;
+      gap: 0;
+      border-top: 1px solid var(--line-strong);
+    }
+    .timeline-card {
+      display: grid;
+      grid-template-columns: 132px minmax(0, 1fr);
+      gap: 32px;
+      padding: 34px 0 40px;
+      border-bottom: 1px solid var(--line);
+    }
+    .timeline-heading {
+      position: sticky;
+      top: 30px;
+      align-self: start;
+      display: grid;
+      gap: 10px;
+      padding-top: 2px;
+    }
+    .timeline-index {
+      color: var(--faint);
+      font-family: var(--mono);
+      font-size: 13px;
+      font-weight: 720;
+      line-height: 1;
+    }
+    .timeline-meta {
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 720;
+      line-height: 1.45;
+    }
+    .timeline-card h3 {
+      max-width: 24ch;
+      margin: 0 0 18px;
+      font-size: 27px;
+      font-weight: 730;
+      line-height: 1.22;
+      letter-spacing: 0;
+    }
+    .section-content {
+      color: color-mix(in oklch, var(--ink) 88%, var(--muted));
+      font-size: 16px;
+    }
+    .section-content p {
+      max-width: 72ch;
+      margin: 0 0 1.05em;
+    }
+    .section-content p strong:first-child {
+      color: var(--ink);
+      font-weight: 760;
+    }
+    .section-content h4 {
+      margin: 26px 0 10px;
+      color: var(--accent);
+      font-size: 14px;
+      font-weight: 760;
+      line-height: 1.35;
+    }
+    .section-content ul, .section-content ol, .panel ul, .panel ol, .speaker-card ul, .speaker-card ol {
+      margin: .75em 0 1em;
+      padding-left: 1.25em;
+    }
+    .section-content li, .panel li, .speaker-card li { margin: 6px 0; }
+    .speaker-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, .88fr);
+      gap: 26px 42px;
+      border-top: 1px solid var(--line);
+    }
+    .speaker-card {
+      padding: 22px 0 24px;
+      border-bottom: 1px solid var(--line);
+    }
+    .speaker-card:nth-child(even) { margin-top: 22px; }
+    .speaker-kicker {
+      margin: 0 0 8px;
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 720;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .speaker-card h3 {
+      margin: 0 0 12px;
+      font-size: 20px;
+      font-weight: 730;
+      line-height: 1.25;
+    }
+    .speaker-card p, .panel p {
+      max-width: 68ch;
+      margin-top: 0;
+    }
+    .panel {
+      border-top: 1px solid var(--line);
+      padding-top: 8px;
+    }
+    blockquote {
+      margin: 18px 0;
+      padding: 16px 18px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--quote);
+    }
+    code {
+      padding: 2px 5px;
+      border-radius: 5px;
+      background: color-mix(in oklch, var(--accent) 10%, var(--paper));
+      color: var(--ink);
+      font-family: var(--mono);
+      font-size: .92em;
+    }
+    hr {
+      height: 1px;
+      margin: 26px 0;
+      border: 0;
+      background: var(--line);
+    }
+    .empty {
+      margin: 0;
+      padding: 16px 18px;
+      border: 1px dashed var(--line-strong);
+      border-radius: var(--radius);
+      color: var(--muted);
+      background: color-mix(in oklch, var(--paper-soft) 70%, transparent);
+    }
+    .search-empty { margin-top: 16px; }
+    .muted { color: var(--muted); }
+    @keyframes rise-in {
+      from { opacity: 1; transform: translate3d(0, 6px, 0); }
+      to { opacity: 1; transform: translate3d(0, 0, 0); }
+    }
+    .hero > *, .takeaway, .timeline-card, .speaker-card, .panel {
+      animation: rise-in .55s var(--ease) both;
+    }
+    .hero > *:nth-child(2) { animation-delay: .04s; }
+    .hero > *:nth-child(3) { animation-delay: .08s; }
+    .hero > *:nth-child(4) { animation-delay: .12s; }
+    .hero > *:nth-child(5) { animation-delay: .16s; }
+    .takeaway, .timeline-card, .speaker-card {
+      animation-delay: calc(var(--index, 1) * 38ms);
+    }
+    @media (max-width: 1120px) {
+      .hero { margin-left: 0; }
+      .content-shell {
+        grid-template-columns: minmax(154px, 190px) minmax(0, 1fr);
+        gap: 36px;
+      }
+      h1 { font-size: 44px; }
+    }
+    @media (min-width: 1500px) {
+      h1 {
+        width: max-content;
+        max-width: 100%;
+        white-space: nowrap;
+        font-size: clamp(36px, 2.05vw, 42px);
+      }
+    }
+    @media (max-width: 780px) {
+      body { background: var(--bg); }
+      .page { width: min(1180px, calc(100% - 28px)); padding-bottom: 86px; }
+      .hero { padding: 46px 0 36px; }
+      .eyebrow { margin-bottom: 14px; }
+      h1 {
+        max-width: none;
+        font-size: 30px;
+        line-height: 1.14;
+        word-break: normal;
+      }
+      .summary, .summary p, .takeaway p, .section-content, .speaker-card, .panel {
+        max-width: 100%;
+        word-break: break-word;
+      }
+      .meta-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 20px; }
+      .summary { padding: 20px; }
+      .summary p { font-size: 17px; }
+      .content-shell { display: block; padding-top: 28px; }
+      .sidebar { position: static; padding-top: 0; margin-bottom: 42px; }
+      .toc { border-top-color: var(--line-strong); }
+      .nav-links { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 18px; }
+      section { margin-bottom: 58px; }
+      .section-head { display: block; margin-bottom: 16px; }
+      .section-head h2 { font-size: 24px; }
+      .section-head p { margin-top: 6px; text-align: left; }
+      .takeaway { grid-template-columns: 42px minmax(0, 1fr); gap: 12px; }
+      .timeline-card { display: block; padding: 28px 0 32px; }
+      .timeline-heading { position: static; display: flex; align-items: baseline; gap: 12px; margin-bottom: 12px; }
+      .timeline-card h3 { max-width: none; font-size: 23px; }
+      .speaker-grid { display: block; }
+      .speaker-card:nth-child(even) { margin-top: 0; }
+      .quick-actions {
+        right: 12px;
+        bottom: 12px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 6px;
+      }
+      .quick-action {
+        min-width: 66px;
+        min-height: 38px;
+        padding: 7px 9px;
+        font-size: 13px;
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: 1ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 1ms !important;
+      }
+      .speaker-card:nth-child(even) { margin-top: 0; }
+    }
+    @media print {
+      body { background: var(--paper); }
+      .sidebar, .progress, .quick-actions { display: none; }
+      .page { display: block; width: auto; padding-bottom: 0; }
+      .hero { margin-left: 0; padding: 0 0 28px; }
+      .content-shell { display: block; border-top: 0; padding-top: 0; }
+      .summary { box-shadow: none; }
+      .timeline-card, .speaker-card { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <div class="progress" data-progress></div>
+  <div class="quick-actions" aria-label="快捷操作">
+    <button class="quick-action" type="button" data-scroll-top aria-label="回到顶部">
+      <span aria-hidden="true">↑</span>
+      <span>顶部</span>
+    </button>
+  </div>
+  <div class="page">
+    <main class="article">
+      <header class="hero">
+        <p class="eyebrow">All-In Podcast 中文精读</p>
+        <h1>中期选举血洗、4万亿美元AI抛售、数据中心冻结：特朗普下一步怎么走</h1>
+        <div class="meta">
+          <span>生成时间：2026-11-09 14:19</span>
+          <span>来源：<a href="https://www.youtube.com/watch?v=2v8b062QzTI" target="_blank" rel="noopener">YouTube</a></span>
+        </div>
+        <div class="meta-strip"><span class="meta-pill"><b>44 分钟</b>阅读时长</span>
+<span class="meta-pill"><b>10</b>核心要点</span>
+<span class="meta-pill"><b>7</b>时间线</span>
+<span class="meta-pill"><b>4</b>人物</span></div>
+        <div class="summary" aria-label="一句话摘要"><p>All-In 四人组在中期选举后复盘共和党惨败：Sacks 认为伊朗战争及其带来的油价和通胀是主因，Chamath 则承认自己完全误判，认为更深层的问题是经济结构性破裂、工资阶层没有分享到增长；后半场讨论 AI 交易暴跌、数据中心被地方政府冻结的风险，以及 OpenAI 据称推翻“指数时间假说”的论文。</p>
+<blockquote>阅读说明：本文依据第三方自动转写整理。说话人标签存在错配，已根据相邻称呼核对部分发言；仍无法确认的归属保留不确定性。选举、市场、合同和政策数字及预测主要为节目中的说法，并非本稿逐项独立核实的事实。</blockquote></div>
+      </header>
+
+      <div class="content-shell">
+        <aside class="sidebar">
+          <nav class="toc" aria-label="页面导航">
+            <p class="toc-title">阅读导航</p>
+            <div class="nav-links">
+              <a href="#takeaways">核心要点</a>
+              <a href="#timeline">分段整理</a>
+              <a href="#speakers">人物观点</a>
+              <a href="#quotes">双语引语</a>
+            </div>
+            <label class="search">
+              <span>搜索时间线</span>
+              <input data-search-box type="search" placeholder="关键词" aria-label="搜索时间线">
+            </label>
+          </nav>
+        </aside>
+
+        <div class="content-flow">
+          <section id="takeaways">
+            <div class="section-head">
+              <h2>核心要点</h2>
+              <p>快速扫读本集主线</p>
+            </div>
+            <ol class="takeaway-list"><li class="takeaway" style="--index: 1"><span>01</span><p>JCal 描述中期选举为民主党大胜：拿下两院、至少 29 个州长席位，德州、堪萨斯、爱荷华、南卡罗来纳等深红州翻蓝，共和党在包括白人男性在内的所有选民群体中都有失血。</p></li>
+<li class="takeaway" style="--index: 2"><span>02</span><p>Sacks 认为核心原因是伊朗战争：战前通胀已降到 2.4%，战争推高汽油、柴油、化肥和运输成本，通胀回到 3.7%，降息变成加息，房贷利率约 7.5%，“可负担性”叙事击穿共和党。</p></li>
+<li class="takeaway" style="--index: 3"><span>03</span><p>Sacks 还认为共和党失去了播客圈和年轻男性选民：年轻男性相对 2024 年翻转了 36 个百分点，而播客和另类媒体是共和党唯一能依靠的友好媒体。</p></li>
+<li class="takeaway" style="--index: 4"><span>04</span><p>Chamath 承认自己“完全错了”：他原以为资产所有者受益会涓滴到所有人，现在认为美国经济已经结构性破裂，工资阶层在每一个利率、关税、补贴环境下都落后于资产所有者。</p></li>
+<li class="takeaway" style="--index: 5"><span>05</span><p>Chamath 用三张图论证“意识形态不重要、经济才是核心”：政治献金押注的候选人大量失败，共和党重划的 15 个席位中民主党赢了 11 个，胜选者是聚焦可负担性的中间派。</p></li>
+<li class="takeaway" style="--index: 6"><span>06</span><p>Friedberg 认为 DOGE 在 2025 年 6 月 5 日结束后，控制政府支出、压低生活成本的努力就结束了，他当天发推“中国刚刚赢了”；此后 $7 万亿预算、$2 万亿赤字的结构没有改变。</p></li>
+<li class="takeaway" style="--index: 7"><span>07</span><p>JCal 与 Sacks 就“战争 vs 更广泛的经济问题”发生争论：JCal 认为 Liberation Day 关税、ICE 执法、Epstein 文件、战争共同造成支持率从 +5% 跌到 -28%；Sacks 用图表反驳，称 2026 年 3 月前参议院预测市场几乎没动，战争开始后一切才改变。</p></li>
+<li class="takeaway" style="--index: 8"><span>08</span><p>Friedberg 认为 AI 数据中心恐慌和反战情绪都源于“你没先解决我的经济问题”；他担心 2027 年预算僵局和 $2 万亿赤字会让物价继续上涨，并称 AI 是“索伦之戒”，政府最终可能通过监管算力来控制 AI。</p></li>
+<li class="takeaway" style="--index: 9"><span>09</span><p>关于 AI 交易：JCal 称本周约 4 万亿美元市值蒸发，是史上最大单日美元损失；Sacks 分析数据中心投资需要高度确定性，预计 2027 年已获批项目可能完成，2028 年新项目管道可能收缩；Chamath 认为大型云平台会成为造王者，并把 SpaceX 与 Anthropic 据称拥有的 90 天互解约条款视为关键博弈点。</p></li>
+<li class="takeaway" style="--index: 10"><span>10</span><p>Friedberg 介绍 OpenAI 关于“指数时间假说”的论文主张，并在节目中称论文为 175 页。他认为这展示了 AI 科学研究的潜力；论文仍在接受外部检验，ETH 与 P、NP 的关系需参看下文编者注。</p></li></ol>
+          </section>
+
+          <section id="timeline">
+            <div class="section-head">
+              <h2>分段详细整理</h2>
+              <p>按时间线阅读上下文</p>
+            </div>
+            <div class="timeline" data-timeline><article class="timeline-card" data-timeline-card data-search="00:00–00:10 开场与中期选举后验：sacks 的“战争+通胀”诊断 本段核心内容： 节目以寒暄和选举夜直播数据开场，随后进入中期选举复盘。 jcal 描述民主党大胜的幅度，称这是水门事件以来最严重的共和党中期失利。 sacks 认为主因是伊朗战争推高油价、柴油、化肥和运输成本，导致通胀反弹、降息变加息、房贷利率升至约 7.5%，“可负担性”成为选举核心。 sacks 承认自己此前判断错误，原以为只是“红色喷雾”，并认为共和党还失去了播客圈和年轻男性选民。 背景解释与关键术语： 中期选举：美国总统任期第二年的国会选举，通常对执政党不利。本期讨论 2026 年中期选举；节目称民主党拿下参众两院。 伊朗战争：节目中讨论的地缘政治事件；sacks 称战争于 2026 年 2 月 28 日开始。 liberation day：节目中指特朗普政府 2025 年 4 月宣布的大规模关税计划。 实际税后家庭收入：扣除税收和通胀后的家庭购买力，是衡量选民生活水平的关键指标。 预测市场：如 polymarket，用真金白银交易事件概率，节目中多次引用其数据。 详细中文整理： jcal： 欢迎回到全世界排名第一的播客 all-in podcast。首先声明，我们所在奥斯汀是 cado、comanche、kickapoo 和 tonkawa 原住民的圣地，感谢他们的牺牲。我刚和 hr 部门聊过，我们正在评估第五位 bestie：brad，两个白人，两个男性。所以会有一些大变化——我们在寻找替代性的 dei 第五位 bestie 加入圆桌。 某位嘉宾： 哇。你是说 dei 回来了。 jcal： dei 回来了。sax，你这周有什么要说的吗？ 某位嘉宾： 我有个宣布。我在转型。 jcal： 从一个人渣变成混蛋。 某位嘉宾： 让你的赢家继续赢。 jcal： 说正经的，这周有选举。我们的直播已经超过 100 万次观看，40 万人实时收看，我相信我们是选举夜排名第一的直播。 chamath： 不对，是 50 万。对比一下，极右翼主播大约 8.7 万，极左翼主播 25 万，我们 50 万。比大多数有线电视网都大。 friedberg： 显然美国想听科技兄弟的热辣观点，谁知道呢。 jcal： 而且我们只上了三个全明星，sax 周二晚上有个董事会，来不了。 friedberg： 对，我那晚很忙，我好像在酒吧里睡着了。 jcal： sax 是唯一一个自带龙舌兰去酒吧的人，他会说“把这瓶放在吧台后面，50 美元一杯卖给我”。特别感谢 ted cruz、rahm emanuel、polymarket 的 shane copeland，polymarket 这个夜晚太棒了，99% 的预测市场都完美命中。还有 tim dillon、taylor lorenz、brad gerstner、ben shapiro，非常棒的 panel。今天我们系统性地复盘：先做中期选举后验，再谈特朗普剩余两年，数据中心肯定会涉及，然后深入 ai 交易可能出现的裂痕。 jcal： 先说中期选举。民主党横扫两院，至少赢得 29 个州长席位，参议院最终会有 54、55 或 56 席，取决于阿拉斯加和密西西比。众议院还有很多票在统计，民主党至少 250 席，甚至可能 260 席。更大的故事是共和党在深红州失守，包括伟大的德克萨斯州。别怪我，我才搬来三年，而且你可能想不到我投了谁。堪萨斯、爱荷华、南卡罗来纳，几十年来第一次翻蓝，而特朗普两年前在这些州都以两位数优势获胜。和 2024 年相比，共和党在每一个选民群体中都失血，包括白人男性。sax，大家最想听你的，到底哪里出了问题？共和党能学到什么？民主党过去 18 个月做对了什么？ sacks： 这是一场血洗，一场大败。我认为这是水门事件中期选举以来最大的中期失利。没有糖衣可包。原因是什么？我认为副总统 jd vance 解释得很好：这场战争。我唯一要补充的是，是这场战争以及战争带来的经济后果。战前汽油大约 3 美元，后来超过 4 美元甚至更高，柴油更贵，这又影响到食品和所有需要运输的商品，化肥成本也涨了。今年 1 月战前通胀已经降到 2.4%，我们几乎解决了这个问题——别忘了拜登时期是 9%，特朗普第一年把它压到 2.4%。市场原本预期今年多次降息，我们预测 5% 的 gdp 增长，基于当时的数据和降息预期，这并不算过度乐观。 jcal： 大胆，但并非不可信。 某位嘉宾： 不现实。 jcal： 不是不现实，对。 sacks： 1 月的预测市场显示共和党有 70% 概率保住参议院，众议院被认为是五五开。如果选举在 1 月举行，对共和党来说会是相当成功的结果。但之后发生了什么？通胀从 2.4% 升到 3.7%，主要是汽油、柴油和其他运输成本驱动的。然后没有任何降息，反而加息，房贷利率到大约 7.5%。这整体喂大了“可负担性”叙事。所以是战争加上人们对缺乏可负担性的感知，制造了这场海啸。我得承认，我原以为不会这么糟，我以为最多是“红色喷雾”，我错了。 jcal： 你当时说会是喷雾。 sacks： 我原以为可能是喷雾，基于两点。第一，过去几次选举民调都错了，特朗普总能逆势翻盘，我以为这次民调也会重复这个模式。第二，经济并不差，事实上相当好。今天刚出的就业报告非常强劲，新增就业被上修，失业率降到接近历史低点的 4.1%，gdp 增长上半年大约 2.1% 到 2.5%，第三季度 gdpnow 追踪是 3.7%。所以我认为，就业好、增长稳，通胀虽然高但不会造成这种海啸，应该更像拜登中期选举——通胀极高但经济本身还不错。结果它更像“红色喷雾”而不是“红色浪潮”。我的模式识别错了。原因之一是公众情绪很暴躁，他们非常担心可负担性。经济实际好不好不重要，重要的是人们感知到对自己好不好。特朗普第一年我们在实际税后家庭收入上取得了巨大进展，增长了 3.1%，但过去六个月的通胀开始侵蚀它。只要通胀涨得比工资快，你的实际购买力就在下降，选民对此越来越愤怒。还有一点，这场战争撕裂了共和党联盟和基本盘。jcal，你指出过，我们失去了所有播客兄弟——tucker carlson、joe rogan、theo von、tim dillon、megan kelly。一个分裂的房子是站不住的。我们失去了基本盘的一大部分。共和党尤其依赖播客圈、另类媒体，因为主流媒体恨我们，传统媒体恨我们，永远不会给我们公平对待。 jcal： 而且他们 90% 是左派，就这样。 sacks： 当然。特朗普 2024 年大胜的原因之一就是他吸引了整个播客圈。坦白说，我们应该做得更好，给他们白宫新闻发布厅的前排座位，我们应该和他们保持连接，因为他们是我们的媒体。当然，他们不为我们工作，他们有自己的观点，随时可能倒戈。但我们必须关注他们，因为没有他们，我们就没有任何支持我们的媒体。失去他们是大事，助长了那种情绪。很多人出来投了抗议票，想传递“我们要结束这场战争”的信号。 jcal： friedberg，先给你几句引语反应一下。ted cruz 称之为“水门级别的否定”。chamath，desantis 说“接近当前共和党的灭绝级事件”。jd vance 发了一篇很长的 x 帖子，让所有人惊讶，有报道说经过批准，也可能没有，我们后面再说。但重要的是他说了什么。他和你的判断一致，sax：伊朗战争是失败的主要驱动力，共和党必须在四个轴上重建信任：结束战争、聚焦生活成本、美国优先，以及可能有点争议的——改变和以色列的关系。你怎么看 jd 的帖子和这些反应？为什么这是一场海啸？" style="--index: 1">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">01</span>
+                    <span class="timeline-meta">00:00–00:10</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>开场与中期选举后验：Sacks 的“战争+通胀”诊断</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>节目以寒暄和选举夜直播数据开场，随后进入中期选举复盘。</li>
+<li>JCal 描述民主党大胜的幅度，称这是水门事件以来最严重的共和党中期失利。</li>
+<li>Sacks 认为主因是伊朗战争推高油价、柴油、化肥和运输成本，导致通胀反弹、降息变加息、房贷利率升至约 7.5%，“可负担性”成为选举核心。</li>
+<li>Sacks 承认自己此前判断错误，原以为只是“红色喷雾”，并认为共和党还失去了播客圈和年轻男性选民。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>中期选举：美国总统任期第二年的国会选举，通常对执政党不利。本期讨论 2026 年中期选举；节目称民主党拿下参众两院。</li>
+<li>伊朗战争：节目中讨论的地缘政治事件；Sacks 称战争于 2026 年 2 月 28 日开始。</li>
+<li>Liberation Day：节目中指特朗普政府 2025 年 4 月宣布的大规模关税计划。</li>
+<li>实际税后家庭收入：扣除税收和通胀后的家庭购买力，是衡量选民生活水平的关键指标。</li>
+<li>预测市场：如 Polymarket，用真金白银交易事件概率，节目中多次引用其数据。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> 欢迎回到全世界排名第一的播客 All-In Podcast。首先声明，我们所在奥斯汀是 Cado、Comanche、Kickapoo 和 Tonkawa 原住民的圣地，感谢他们的牺牲。我刚和 HR 部门聊过，我们正在评估第五位 bestie：Brad，两个白人，两个男性。所以会有一些大变化——我们在寻找替代性的 DEI 第五位 bestie 加入圆桌。</p>
+<p><strong>某位嘉宾：</strong> 哇。你是说 DEI 回来了。</p>
+<p><strong>JCal：</strong> DEI 回来了。Sax，你这周有什么要说的吗？</p>
+<p><strong>某位嘉宾：</strong> 我有个宣布。我在转型。</p>
+<p><strong>JCal：</strong> 从一个人渣变成混蛋。</p>
+<p><strong>某位嘉宾：</strong> 让你的赢家继续赢。</p>
+<p><strong>JCal：</strong> 说正经的，这周有选举。我们的直播已经超过 100 万次观看，40 万人实时收看，我相信我们是选举夜排名第一的直播。</p>
+<p><strong>Chamath：</strong> 不对，是 50 万。对比一下，极右翼主播大约 8.7 万，极左翼主播 25 万，我们 50 万。比大多数有线电视网都大。</p>
+<p><strong>Friedberg：</strong> 显然美国想听科技兄弟的热辣观点，谁知道呢。</p>
+<p><strong>JCal：</strong> 而且我们只上了三个全明星，Sax 周二晚上有个董事会，来不了。</p>
+<p><strong>Friedberg：</strong> 对，我那晚很忙，我好像在酒吧里睡着了。</p>
+<p><strong>JCal：</strong> Sax 是唯一一个自带龙舌兰去酒吧的人，他会说“把这瓶放在吧台后面，50 美元一杯卖给我”。特别感谢 Ted Cruz、Rahm Emanuel、Polymarket 的 Shane Copeland，Polymarket 这个夜晚太棒了，99% 的预测市场都完美命中。还有 Tim Dillon、Taylor Lorenz、Brad Gerstner、Ben Shapiro，非常棒的 panel。今天我们系统性地复盘：先做中期选举后验，再谈特朗普剩余两年，数据中心肯定会涉及，然后深入 AI 交易可能出现的裂痕。</p>
+<p><strong>JCal：</strong> 先说中期选举。民主党横扫两院，至少赢得 29 个州长席位，参议院最终会有 54、55 或 56 席，取决于阿拉斯加和密西西比。众议院还有很多票在统计，民主党至少 250 席，甚至可能 260 席。更大的故事是共和党在深红州失守，包括伟大的德克萨斯州。别怪我，我才搬来三年，而且你可能想不到我投了谁。堪萨斯、爱荷华、南卡罗来纳，几十年来第一次翻蓝，而特朗普两年前在这些州都以两位数优势获胜。和 2024 年相比，共和党在每一个选民群体中都失血，包括白人男性。Sax，大家最想听你的，到底哪里出了问题？共和党能学到什么？民主党过去 18 个月做对了什么？</p>
+<p><strong>Sacks：</strong> 这是一场血洗，一场大败。我认为这是水门事件中期选举以来最大的中期失利。没有糖衣可包。原因是什么？我认为副总统 JD Vance 解释得很好：这场战争。我唯一要补充的是，是这场战争以及战争带来的经济后果。战前汽油大约 3 美元，后来超过 4 美元甚至更高，柴油更贵，这又影响到食品和所有需要运输的商品，化肥成本也涨了。今年 1 月战前通胀已经降到 2.4%，我们几乎解决了这个问题——别忘了拜登时期是 9%，特朗普第一年把它压到 2.4%。市场原本预期今年多次降息，我们预测 5% 的 GDP 增长，基于当时的数据和降息预期，这并不算过度乐观。</p>
+<p><strong>JCal：</strong> 大胆，但并非不可信。</p>
+<p><strong>某位嘉宾：</strong> 不现实。</p>
+<p><strong>JCal：</strong> 不是不现实，对。</p>
+<p><strong>Sacks：</strong> 1 月的预测市场显示共和党有 70% 概率保住参议院，众议院被认为是五五开。如果选举在 1 月举行，对共和党来说会是相当成功的结果。但之后发生了什么？通胀从 2.4% 升到 3.7%，主要是汽油、柴油和其他运输成本驱动的。然后没有任何降息，反而加息，房贷利率到大约 7.5%。这整体喂大了“可负担性”叙事。所以是战争加上人们对缺乏可负担性的感知，制造了这场海啸。我得承认，我原以为不会这么糟，我以为最多是“红色喷雾”，我错了。</p>
+<p><strong>JCal：</strong> 你当时说会是喷雾。</p>
+<p><strong>Sacks：</strong> 我原以为可能是喷雾，基于两点。第一，过去几次选举民调都错了，特朗普总能逆势翻盘，我以为这次民调也会重复这个模式。第二，经济并不差，事实上相当好。今天刚出的就业报告非常强劲，新增就业被上修，失业率降到接近历史低点的 4.1%，GDP 增长上半年大约 2.1% 到 2.5%，第三季度 GDPNow 追踪是 3.7%。所以我认为，就业好、增长稳，通胀虽然高但不会造成这种海啸，应该更像拜登中期选举——通胀极高但经济本身还不错。结果它更像“红色喷雾”而不是“红色浪潮”。我的模式识别错了。原因之一是公众情绪很暴躁，他们非常担心可负担性。经济实际好不好不重要，重要的是人们感知到对自己好不好。特朗普第一年我们在实际税后家庭收入上取得了巨大进展，增长了 3.1%，但过去六个月的通胀开始侵蚀它。只要通胀涨得比工资快，你的实际购买力就在下降，选民对此越来越愤怒。还有一点，这场战争撕裂了共和党联盟和基本盘。JCal，你指出过，我们失去了所有播客兄弟——Tucker Carlson、Joe Rogan、Theo Von、Tim Dillon、Megan Kelly。一个分裂的房子是站不住的。我们失去了基本盘的一大部分。共和党尤其依赖播客圈、另类媒体，因为主流媒体恨我们，传统媒体恨我们，永远不会给我们公平对待。</p>
+<p><strong>JCal：</strong> 而且他们 90% 是左派，就这样。</p>
+<p><strong>Sacks：</strong> 当然。特朗普 2024 年大胜的原因之一就是他吸引了整个播客圈。坦白说，我们应该做得更好，给他们白宫新闻发布厅的前排座位，我们应该和他们保持连接，因为他们是我们的媒体。当然，他们不为我们工作，他们有自己的观点，随时可能倒戈。但我们必须关注他们，因为没有他们，我们就没有任何支持我们的媒体。失去他们是大事，助长了那种情绪。很多人出来投了抗议票，想传递“我们要结束这场战争”的信号。</p>
+<p><strong>JCal：</strong> Friedberg，先给你几句引语反应一下。Ted Cruz 称之为“水门级别的否定”。Chamath，DeSantis 说“接近当前共和党的灭绝级事件”。JD Vance 发了一篇很长的 X 帖子，让所有人惊讶，有报道说经过批准，也可能没有，我们后面再说。但重要的是他说了什么。他和你的判断一致，Sax：伊朗战争是失败的主要驱动力，共和党必须在四个轴上重建信任：结束战争、聚焦生活成本、美国优先，以及可能有点争议的——改变和以色列的关系。你怎么看 JD 的帖子和这些反应？为什么这是一场海啸？</p></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="00:10–00:25 friedberg 复盘支出，chamath 反思经济结构 本段核心内容： friedberg 认为这更像根本性的经济问题，而不只是定位或营销问题。 friedberg 回顾 doge：2025 年 3 月访问华盛顿，发现国会议员根本不关心政府支出效率；6 月 5 日 elon 离开，doge 结束，他当天发推“中国刚刚赢了”。 friedberg 引用 gallup 调查：中国 93% 的人对 ai 乐观，美国只有 36%，倒数第四，比阿富汗还差。 chamath 承认自己完全错了：他原以为资产所有者受益会涓滴到所有人，现在认为美国经济结构性破裂，工资阶层没有分享到增长。 chamath 的新框架是经济民粹主义：堵住漏洞、取消联邦贷款担保、15 万美元以下免联邦税，让工资阶层有更多所有权。 背景解释与关键术语： doge：department of government efficiency，政府效率部，节目中指 elon musk 参与推动的削减政府支出计划。 一揽子美丽法案：节目中指 2025 年 7 月通过的法案，friedberg 称其有一些福利成本削减，但没有减少政府根本支出。 k 型经济：资产所有者财富上升，工资阶层停滞或下降的分化格局。 gallup 调查：节目中 friedberg 引用的全球 ai 态度调查，称中国最乐观、美国倒数第四。 详细中文整理： friedberg： 我不确定这更多是定位和营销问题，还是根本性问题。我回到特朗普当选后那期预测节目里的片段。 jcal： 好。 friedberg： nick，能放一下吗？ friedberg（节目回放片段）： 我认为党的路线是社会主义在这一轮选举中被击败了，美国民众发出了反对社会主义的响亮声音。但我的逆向观点是，2025 年美国会看到社会主义运动戏剧性上升。我们会看到加速的进步，放松监管和 ai 会释放经济增长，但一些行业和公司会成为大赢家，一些会成为大输家。经济的一些部分会是大赢家，一些部分会是大输家。 jcal： friedberg，你当时说得很准，对总统第一年非常准确。 friedberg： 把镜头拉远一点。宏观条件是，选举后有一刻存在 doge 的理念，政府支出会被削减，我认为这从根本上会影响生活成本。我们可以争论，人们不同意，但那个点被冲走了。我确实认为政府支出是生活成本的根本驱动力：政府花得越多，东西就越贵。法国就是例子，政府支出占 gdp 的比重是一个指标，有多少人就业或依赖政府支票是另一个指标。政府在经济中参与越多，东西就越贵。所以当 doge 出现时，政府效率、确保政府每一美元支出对人民有正 roi，是个好理念。我们在 2025 年 3 月访问华盛顿，见了 elon，聊了 doge，他在挣扎。很明显他在挣扎，不仅是内部，还有国会和公众认知。我那次访问还见了多位国会议员，共和党和民主党都有，他们根本不在乎提高政府支出效率，不在乎政府支出占 gdp 的比重，那不是优先事项。2025 年 6 月 5 日，elon 离开，doge 结束了。doge 会继续的想法结束了。我说“中国刚刚赢了”，因为对我来说，那一刻，这届政府结束那项努力的那一天，就清楚地表明我们将面临失控的生活成本，大多数美国人的进步会受到挑战。最终结果就是选出更多社会主义原则、社会主义政策、社会主义政客。所以我 6 月 5 日的推文“中国刚刚赢了”，就是宣布 doge 基本结束的那天。然后 2025 年 7 月一揽子美丽法案通过，有一些福利成本削减，但政府所有根本支出都没有减少。我们仍然运行着每年 7 万亿美元的政府预算，每年 2 万亿美元的赤字。我不认为国会曾经支持过。这是一个结构性的根本问题，没有人支持。我认为这是这里发生的事的关键。对大多数美国人来说，他们不觉得自己在前进，不觉得自己买得起东西，不觉得医疗是可及的，他们在挣扎。这个问题没有被解决。我的观点是，它没有以应该的方式被解决。我们可以在政策上不同意，但这是我的看法。结果人们仍然有那种感受，这驱动了投票。但我也认为在 ai 上，是这种寡头叙事：如果我没有前进，那一定是别人在前进，因为“经济在增长”、“股市在增长”。谁拿到了所有增长？因为我没有。ai 的人、科技寡头拿到了。所以 ai 本来很容易被攻击。但我确实认为 ai 上还有一些外部影响。我拉一张图，昨天在群里分享过，是 gallup 一项不可思议的研究，显示各国对 ai 的乐观和悲观。最乐观的国家是中国，93% 的中国公民认为 ai 会主要帮助本国人民，93% 的人认为 ai 会让日常生活更好。我们可以信或不信 gallup 在中国怎么做调查。美国是倒数第四，比阿富汗还差，只比马拉维和孟加拉略好。36% 的美国人相信 ai 会帮助人们，我们排倒数第四。所以，除了“如果我没前进，一定是别人前进了”这种 priming，再加上 ai 的人——因为我们在美国创造 ai——在前进，这就让寡头叙事非常容易攻击：有一群人受益赚了很多钱，而很大比例的人没有。所以这个向量非常有效。它是否会持续待定。我们后面应该谈谈下一步，因为我认为 ai 会在未来一年的政治中扮演重要角色。 jcal： chamath，这是两个非常简洁 candid 的复盘。顺便说一句，你在 rick rubin 播客上表现很棒。chamath，你是光脚坐在他后院吗？ chamath： 是的。 jcal： 你去 rick rubin 的录音室，他带你转，说“这是 bob dylan 以前的巡演车，我们在那里录了 adele 的专辑”，“这是 kanye 和我做这张专辑的地方”，“这是 jay-z 和我……”。那地方太疯狂了，但会让你进入完全中心的状态。我们光脚坐在他的录音室里，面对面聊天，然后他们把它作为对话发布。 chamath： 你告诉人们这是我介绍 chamath 的地方。 jcal： 所以，我们有生以来最高的股市、最低的失业率，却仍然发生海啸。chamath，你回头看，到底发生了什么？你在直播中非常坦诚自省，你说“我有一个盲点”。 chamath： 我完全、完全、完全错了。我完全错了。 jcal： 好，展开。 chamath： 我会讲我错的所有方式，但先承认我的盲点是什么。像大多数人的盲点一样，我只能为自己说话，就是通过自己生活经验的 lens，非常狭隘地看什么对我最有利。我们经历的是远离文化战争，这非常符合我的利益。但我认为它也符合所有人的利益。我不认为那在选票上。但我没有足够清楚理解的是，这次选举极其清楚地表明，自 covid 以来，我们已经超越了政治意识形态。我要再说一遍：我不认为民主党或共和党重要。这是我这次选举后的真正收获。有一个中心块的人，投票给时代的前瞻性问题。拜登大胜，然后特朗普大胜，然后民主党在这次中期选举大胜。这些人在投什么？我认为他们现在喊的，他们之前试图信号、现在在喊的，是一种广泛信念：经济已经完全和现实脱钩，已经破裂。美国的经济现实是破裂的。有一小部分人，我们这个播客的四个人和所有朋友，是美国资产所有者。我们在每种天气条件下都受益。利率为零时，我们受益，因为能用非常便宜的资金建立业务；利率高时，我们受益，因为有定价权；中间每种条件，无论有没有关税、有没有补贴，我们都继续积累和增长资产。但我们少之又少。然后其他人是工资赚取者，美国经济支持和增长工资赚取者的结构性能力已经破裂。很清楚。为什么我这么说？我不认为——我和 friedberg 不同——我不认为这和社会主义有任何关系。我不认为极左比预期赢得多，也不认为极右比预期赢得多。这是对经济状况的完全、彻底否定。经济是破裂的。我有几张图支持我的观点。第一，如果这是意识形态的，如果意识形态重要，政治资金应该对选举有更直接影响。但看花了多少钱，所有钱都浪费了。所有投到税收的钱都浪费了，所有投到俄亥俄参议院竞选的钱都浪费了。更好的赌注是看谁在被花钱支持。如果你选那个没钱的 opposite candidate，你会压倒性地更正确。所以钱跟随意识形态，但钱在这次选举没起作用。因此，在我看来，意识形态没那么重要。下一张图。重划选区和 gerrymandering 也跟随意识形态，你试图设置地理边界以获得更多席位。看发生了什么：共和党重划了 15 个席位想全部拿下，民主党赢了 11 个，共和党只赢了一个。所以意识形态 gerrymandering 也完全失败了。所以，政治中的意识形态支出，失败；意识形态 gerrymandering，失败。下一张图。你看到的是中间派、正常人。这些人不是到处谈共产主义的，他们非常狭窄地聚焦一件事：可负担性和美国经济的运转。他们对一大块人说话，这些人既是民主党也是共和党，最初支持拜登，然后压倒性支持特朗普，然后压倒性转向民主党，主要是投票表达对经济的不满。就这样。我不相信伊朗真的有多大关系，不相信以色列有多大关系，不相信 ai 有多大关系。这是美国社会要求重置我们运行的经济原则。我认为对左翼或右翼有雄心的候选人来说，显而易见的做法是把这三张图放在一起，得出一个非常精确的结论：经济民粹主义平台是你在 2028 年可以带进总统大选的平台。路径很直接。如果你看哈里斯发生了什么，然后看所有这些州如何积极转向我认为的经济中间主义，对任何一方来说，不要担心你是民主党还是共和党，如果你拥抱合理的经济公平标准，你就会赢。所以我错了。我以为自上而下的经济学仍然有效。我以为资产所有者建立资产、投资经济，这些东西会涓滴到其他人。显然没有发生，不是真的。我必须更新我的先验。我的新框架是：我们需要弄清楚如何堵住所有漏洞，做我们之前谈过的一些事，停止联邦贷款担保，结合取消学生债务，把一定收入带以下的联邦税降到零，大概 15 万美元以下。现在可以做各种事，让工资赚取阶级感觉对美国经济有更多所有权。在这一切发生之前，我的预测不是民主党或共和党赢，而是他们会猛烈地来回摇摆，远离现状。因为如果你在台上什么都不做，他们就会投反对票。现在民主党有一个非常有趣的挑战：你在两院都占多数，你会做什么？你真的会尝试立法经济公平，还是把时间花在弹劾特朗普上？因为如果你分心，而共和党候选人拥抱经济民粹主义平台，你就会像共和党在中期选举中那样失败。 jcal： 好，chamath 解释得非常好，我同意。现在不是庆祝的时候，是解剖的时候。谁能想到会这样？nick，放带子。这就是为什么他们会输掉中期选举。民主党会在中期选举中狠狠揍共和党。特朗普卖给大家价格会下降，现在我们回到 3% 通胀，不仅没降，还在升。特朗普辜负了中产阶级，这是底线。这基本上会导致民主党在中期选举中横扫。特朗普承诺不发动战争，他做了；承诺解决通胀，他没做。就这样。" style="--index: 2">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">02</span>
+                    <span class="timeline-meta">00:10–00:25</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>Friedberg 复盘支出，Chamath 反思经济结构</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>Friedberg 认为这更像根本性的经济问题，而不只是定位或营销问题。</li>
+<li>Friedberg 回顾 Doge：2025 年 3 月访问华盛顿，发现国会议员根本不关心政府支出效率；6 月 5 日 Elon 离开，Doge 结束，他当天发推“中国刚刚赢了”。</li>
+<li>Friedberg 引用 Gallup 调查：中国 93% 的人对 AI 乐观，美国只有 36%，倒数第四，比阿富汗还差。</li>
+<li>Chamath 承认自己完全错了：他原以为资产所有者受益会涓滴到所有人，现在认为美国经济结构性破裂，工资阶层没有分享到增长。</li>
+<li>Chamath 的新框架是经济民粹主义：堵住漏洞、取消联邦贷款担保、15 万美元以下免联邦税，让工资阶层有更多所有权。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>DOGE：Department of Government Efficiency，政府效率部，节目中指 Elon Musk 参与推动的削减政府支出计划。</li>
+<li>一揽子美丽法案：节目中指 2025 年 7 月通过的法案，Friedberg 称其有一些福利成本削减，但没有减少政府根本支出。</li>
+<li>K 型经济：资产所有者财富上升，工资阶层停滞或下降的分化格局。</li>
+<li>Gallup 调查：节目中 Friedberg 引用的全球 AI 态度调查，称中国最乐观、美国倒数第四。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>Friedberg：</strong> 我不确定这更多是定位和营销问题，还是根本性问题。我回到特朗普当选后那期预测节目里的片段。</p>
+<p><strong>JCal：</strong> 好。</p>
+<p><strong>Friedberg：</strong> Nick，能放一下吗？</p>
+<p><strong>Friedberg（节目回放片段）：</strong> 我认为党的路线是社会主义在这一轮选举中被击败了，美国民众发出了反对社会主义的响亮声音。但我的逆向观点是，2025 年美国会看到社会主义运动戏剧性上升。我们会看到加速的进步，放松监管和 AI 会释放经济增长，但一些行业和公司会成为大赢家，一些会成为大输家。经济的一些部分会是大赢家，一些部分会是大输家。</p>
+<p><strong>JCal：</strong> Friedberg，你当时说得很准，对总统第一年非常准确。</p>
+<p><strong>Friedberg：</strong> 把镜头拉远一点。宏观条件是，选举后有一刻存在 Doge 的理念，政府支出会被削减，我认为这从根本上会影响生活成本。我们可以争论，人们不同意，但那个点被冲走了。我确实认为政府支出是生活成本的根本驱动力：政府花得越多，东西就越贵。法国就是例子，政府支出占 GDP 的比重是一个指标，有多少人就业或依赖政府支票是另一个指标。政府在经济中参与越多，东西就越贵。所以当 Doge 出现时，政府效率、确保政府每一美元支出对人民有正 ROI，是个好理念。我们在 2025 年 3 月访问华盛顿，见了 Elon，聊了 Doge，他在挣扎。很明显他在挣扎，不仅是内部，还有国会和公众认知。我那次访问还见了多位国会议员，共和党和民主党都有，他们根本不在乎提高政府支出效率，不在乎政府支出占 GDP 的比重，那不是优先事项。2025 年 6 月 5 日，Elon 离开，Doge 结束了。Doge 会继续的想法结束了。我说“中国刚刚赢了”，因为对我来说，那一刻，这届政府结束那项努力的那一天，就清楚地表明我们将面临失控的生活成本，大多数美国人的进步会受到挑战。最终结果就是选出更多社会主义原则、社会主义政策、社会主义政客。所以我 6 月 5 日的推文“中国刚刚赢了”，就是宣布 Doge 基本结束的那天。然后 2025 年 7 月一揽子美丽法案通过，有一些福利成本削减，但政府所有根本支出都没有减少。我们仍然运行着每年 7 万亿美元的政府预算，每年 2 万亿美元的赤字。我不认为国会曾经支持过。这是一个结构性的根本问题，没有人支持。我认为这是这里发生的事的关键。对大多数美国人来说，他们不觉得自己在前进，不觉得自己买得起东西，不觉得医疗是可及的，他们在挣扎。这个问题没有被解决。我的观点是，它没有以应该的方式被解决。我们可以在政策上不同意，但这是我的看法。结果人们仍然有那种感受，这驱动了投票。但我也认为在 AI 上，是这种寡头叙事：如果我没有前进，那一定是别人在前进，因为“经济在增长”、“股市在增长”。谁拿到了所有增长？因为我没有。AI 的人、科技寡头拿到了。所以 AI 本来很容易被攻击。但我确实认为 AI 上还有一些外部影响。我拉一张图，昨天在群里分享过，是 Gallup 一项不可思议的研究，显示各国对 AI 的乐观和悲观。最乐观的国家是中国，93% 的中国公民认为 AI 会主要帮助本国人民，93% 的人认为 AI 会让日常生活更好。我们可以信或不信 Gallup 在中国怎么做调查。美国是倒数第四，比阿富汗还差，只比马拉维和孟加拉略好。36% 的美国人相信 AI 会帮助人们，我们排倒数第四。所以，除了“如果我没前进，一定是别人前进了”这种 priming，再加上 AI 的人——因为我们在美国创造 AI——在前进，这就让寡头叙事非常容易攻击：有一群人受益赚了很多钱，而很大比例的人没有。所以这个向量非常有效。它是否会持续待定。我们后面应该谈谈下一步，因为我认为 AI 会在未来一年的政治中扮演重要角色。</p>
+<p><strong>JCal：</strong> Chamath，这是两个非常简洁 candid 的复盘。顺便说一句，你在 Rick Rubin 播客上表现很棒。Chamath，你是光脚坐在他后院吗？</p>
+<p><strong>Chamath：</strong> 是的。</p>
+<p><strong>JCal：</strong> 你去 Rick Rubin 的录音室，他带你转，说“这是 Bob Dylan 以前的巡演车，我们在那里录了 Adele 的专辑”，“这是 Kanye 和我做这张专辑的地方”，“这是 Jay-Z 和我……”。那地方太疯狂了，但会让你进入完全中心的状态。我们光脚坐在他的录音室里，面对面聊天，然后他们把它作为对话发布。</p>
+<p><strong>Chamath：</strong> 你告诉人们这是我介绍 Chamath 的地方。</p>
+<p><strong>JCal：</strong> 所以，我们有生以来最高的股市、最低的失业率，却仍然发生海啸。Chamath，你回头看，到底发生了什么？你在直播中非常坦诚自省，你说“我有一个盲点”。</p>
+<p><strong>Chamath：</strong> 我完全、完全、完全错了。我完全错了。</p>
+<p><strong>JCal：</strong> 好，展开。</p>
+<p><strong>Chamath：</strong> 我会讲我错的所有方式，但先承认我的盲点是什么。像大多数人的盲点一样，我只能为自己说话，就是通过自己生活经验的 lens，非常狭隘地看什么对我最有利。我们经历的是远离文化战争，这非常符合我的利益。但我认为它也符合所有人的利益。我不认为那在选票上。但我没有足够清楚理解的是，这次选举极其清楚地表明，自 COVID 以来，我们已经超越了政治意识形态。我要再说一遍：我不认为民主党或共和党重要。这是我这次选举后的真正收获。有一个中心块的人，投票给时代的前瞻性问题。拜登大胜，然后特朗普大胜，然后民主党在这次中期选举大胜。这些人在投什么？我认为他们现在喊的，他们之前试图信号、现在在喊的，是一种广泛信念：经济已经完全和现实脱钩，已经破裂。美国的经济现实是破裂的。有一小部分人，我们这个播客的四个人和所有朋友，是美国资产所有者。我们在每种天气条件下都受益。利率为零时，我们受益，因为能用非常便宜的资金建立业务；利率高时，我们受益，因为有定价权；中间每种条件，无论有没有关税、有没有补贴，我们都继续积累和增长资产。但我们少之又少。然后其他人是工资赚取者，美国经济支持和增长工资赚取者的结构性能力已经破裂。很清楚。为什么我这么说？我不认为——我和 Friedberg 不同——我不认为这和社会主义有任何关系。我不认为极左比预期赢得多，也不认为极右比预期赢得多。这是对经济状况的完全、彻底否定。经济是破裂的。我有几张图支持我的观点。第一，如果这是意识形态的，如果意识形态重要，政治资金应该对选举有更直接影响。但看花了多少钱，所有钱都浪费了。所有投到税收的钱都浪费了，所有投到俄亥俄参议院竞选的钱都浪费了。更好的赌注是看谁在被花钱支持。如果你选那个没钱的 opposite candidate，你会压倒性地更正确。所以钱跟随意识形态，但钱在这次选举没起作用。因此，在我看来，意识形态没那么重要。下一张图。重划选区和 gerrymandering 也跟随意识形态，你试图设置地理边界以获得更多席位。看发生了什么：共和党重划了 15 个席位想全部拿下，民主党赢了 11 个，共和党只赢了一个。所以意识形态 gerrymandering 也完全失败了。所以，政治中的意识形态支出，失败；意识形态 gerrymandering，失败。下一张图。你看到的是中间派、正常人。这些人不是到处谈共产主义的，他们非常狭窄地聚焦一件事：可负担性和美国经济的运转。他们对一大块人说话，这些人既是民主党也是共和党，最初支持拜登，然后压倒性支持特朗普，然后压倒性转向民主党，主要是投票表达对经济的不满。就这样。我不相信伊朗真的有多大关系，不相信以色列有多大关系，不相信 AI 有多大关系。这是美国社会要求重置我们运行的经济原则。我认为对左翼或右翼有雄心的候选人来说，显而易见的做法是把这三张图放在一起，得出一个非常精确的结论：经济民粹主义平台是你在 2028 年可以带进总统大选的平台。路径很直接。如果你看哈里斯发生了什么，然后看所有这些州如何积极转向我认为的经济中间主义，对任何一方来说，不要担心你是民主党还是共和党，如果你拥抱合理的经济公平标准，你就会赢。所以我错了。我以为自上而下的经济学仍然有效。我以为资产所有者建立资产、投资经济，这些东西会涓滴到其他人。显然没有发生，不是真的。我必须更新我的先验。我的新框架是：我们需要弄清楚如何堵住所有漏洞，做我们之前谈过的一些事，停止联邦贷款担保，结合取消学生债务，把一定收入带以下的联邦税降到零，大概 15 万美元以下。现在可以做各种事，让工资赚取阶级感觉对美国经济有更多所有权。在这一切发生之前，我的预测不是民主党或共和党赢，而是他们会猛烈地来回摇摆，远离现状。因为如果你在台上什么都不做，他们就会投反对票。现在民主党有一个非常有趣的挑战：你在两院都占多数，你会做什么？你真的会尝试立法经济公平，还是把时间花在弹劾特朗普上？因为如果你分心，而共和党候选人拥抱经济民粹主义平台，你就会像共和党在中期选举中那样失败。</p>
+<p><strong>JCal：</strong> 好，Chamath 解释得非常好，我同意。现在不是庆祝的时候，是解剖的时候。谁能想到会这样？Nick，放带子。这就是为什么他们会输掉中期选举。民主党会在中期选举中狠狠揍共和党。特朗普卖给大家价格会下降，现在我们回到 3% 通胀，不仅没降，还在升。特朗普辜负了中产阶级，这是底线。这基本上会导致民主党在中期选举中横扫。特朗普承诺不发动战争，他做了；承诺解决通胀，他没做。就这样。</p></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="00:25–00:41 jcal 的时间线 vs sacks 的反驳：战争、关税、ice、epstein 本段核心内容： sacks 回应 jcal 的旧片段：jcal 在战争前并不对，是战争和通胀让他被证明正确；特朗普第一年实际家庭收入增长 3.1%，战争后购买力逆转。 sacks 强调年轻男性相对 2024 年翻转 36 个百分点，播客圈是关键。 jcal 认为不只是战争：liberation day 关税、ice 执法、epstein 文件、战争共同导致支持率从 +5% 跌到 -28%。 jcal 自称独立选民，投票 55% 民主党、45% 共和党，比播客开始时更靠右，但认为特朗普 2.0 议程被混乱执行拖累。 sacks 用图表反驳：特朗普净支持率与油价完美对应；2026 年参议院预测市场直到 3 月战争开始才变化；74% 选民认为战争是关键或主要因素。 两人争论“战争本身”还是“更广泛的经济问题”；sacks 认为可负担性是核心，结束战争就能让油价、通胀、房贷利率回落。 背景解释与关键术语： liberation day：2025 年 4 月特朗普政府宣布的大规模关税计划，jcal 称其“过于混乱”，并导致通胀上升。 ice 执法：节目中 jcal 提到 2025 年夏天移民和海关执法局的行动引发争议。 epstein 文件：节目中 jcal 称特朗普政府没有按承诺公布爱泼斯坦相关文件，导致播客圈不满。 净支持率：支持率减去不支持率，节目中 sacks 展示其与汽油价格高度相关。 参议院预测市场：节目中用 polymarket 等市场数据说明战争前后选情变化。 详细中文整理： sacks： 停摆的钟一天也对两次，jcal。 jcal： 绝对。看，我确实……但让我—— sacks： 我的看法是，在战争开始前你并不对。你最后那段片段，你被证明正确了，因为战争和通胀。具体来说，是通胀带来的可负担性问题。汽油价格，每个人每一两周去加油站，普通家庭每月多花 200 美元油钱。然后去超市，所有东西都贵得多，因为农产品成本大幅上升，一路往下传。归根结底，对人们重要的是钱包：实际税后、通胀后的购买力有没有增加？这就是衡量你日子有没有变好的方式。特朗普第一年做到了，实际家庭收入增长 3.1%。拜登时期是负的，特朗普第一任期是正的。然后发生了什么？战争开始，汽油、柴油等价格上涨，购买力开始逆转。然后你还失去了年轻男性，他们是所有这些播客的粉丝，他们从播客获取新闻。年轻男性这次中期选举相对 2024 年翻转了 36 个百分点。所以在我看来很简单：回到战争及其经济后果。好消息是，如果我们结束战争，我们可以迅速取得进展。所有其他经济数字仍然不错：就业增长、今天的就业报告很好、经济增长仍然不错，有很多非常正面的经济数字。问题根本上是石油价格、汽油价格、柴油价格，以及它们如何流过经济。如果战争迅速结束，这些价格会迅速下降，通胀会回落，美联储就有空间降息，房贷成本回落，我们就能回到正轨。 jcal： sax，你说得对，无休止的战争、无休止的通胀是压垮骆驼的最后一根稻草。但我认为你在之前发生了什么上完全错了。所有民调都是对的，右翼所有人都说民调错了；所有预测市场都是对的，右翼所有人都说那些被操纵了。在这个播客上一年多的，我想逐刻解剖这个时刻，我指出过这张图。这是 silver bulletin，这个周期完全命中，nate silver 非常厉害。看这张图，值得看。不只是战争。liberation day，人们忘了关税。特朗普任期开始时净支持率 +5%，结束时 -28%，这是超过 30 个百分点的摆动。liberation day，我当时就指出，太混乱了。我和 cuts clothing 的 ceo 聊过，记得我们在这个播客讨论过。他是特朗普忠诚者。当时人们争论，这些关税会很棒，不会加价，美国公众不用付，这会平衡预算。它不仅没有平衡预算，还推高了通胀。特朗普总统本应该和国会合作，记得他不得不去最高法院，他输了。这是特朗普游戏中的漏洞。然后夏天，我们在这里就 ice 执法有过一些激烈讨论。我说，听着，没有美国人——包括我认识的执法人员、我认识的那些雇用了在这里 20 年的人的人，是的，技术上是非法移民——没有人想看到这个。没有人想看到没有随身摄像头、不戴徽章的蒙面探员打人。那是巨大的错误。他大幅下降，然后净支持率到 -20%。这都在伊朗战争开始之前。如果你看 2025 年夏天那些 ice 行动，还有 epstein 文件。那就是你失去所有播客兄弟的地方。他们不想特朗普食言，不公布 epstein 文件。当然，然后到战争，无休止的贪污指控和无休止的通胀，把他从 -20 跌到 -23。这就是发生的一系列事件。我要记录在案：我是独立选民，我人生投票 55% 民主党、45% 共和党。我们开始这个播客时大概是 70-30。因为左派的疯狂，我显著向右移动。但这里发生的是，特朗普 2.0 议程被放弃了，有大量分心。特朗普总统有正确的想法，但执行经常极其不稳定，这是非常慷慨的说法，说它混乱。如果你有那种混乱时刻，然后一切关于数据中心、关于我们的行业、关于帮助我们，而人们嘲笑提高最低工资的想法。chamath，你刚才讲话中提到的 k 型经济，这就是你在说的。对人们来说感觉不公平。我认为你说得很准：人们只是在摇摆，希望有人关心下半部分没有股权的人。就是这样。特朗普没有让人们感觉他在为他们工作，这就是为什么他们抛弃了他。贪污指控，无论真假，都会水落石出，但那是我们需要谈的。这引向我们的第二个话题：接下来 24 个月会怎样。sax，你想谈这个。未来 18 到 24 个月，特朗普总统有救赎之路吗？有没有办法扭转这个总统任期，也许挽救他的遗产？ sacks： 首先，我放几张图。既然你们玩图表游戏，我不知道今天要玩图表游戏。 jcal： 今天。 sacks： nick，能放这些图吗？好。jcal，人们会指出各种问题，我知道你有你的。我不是说每个问题都执行得完美。我确实认为特朗普总统应该得到巨大 credit，他完全封住了边境，解决了移民问题。 jcal： 同意。 sacks： 举个例子。但问题是，为什么这不是正常的中期选举结果？看特朗普支持率和汽油价格，完美对应。特朗普净支持率和汽油价格对应。下一张图。这是哪个党会赢得 2026 年参议院的预测市场。你可以看到，在特朗普总统整个第一年，共和党预期以很大优势获胜，贯穿你谈的所有事情，jcal。所以关税推出完全没有影响，4 月 liberation day 连 blip 都没有。 jcal： 澄清一下，参议院平衡没有 blip。 sacks： 是的，但我用这个作为代理。我明白，但我用这个作为刚才发生的事的代理，我们丢了八九个参议院席位。它从哪里开始变？3 月。2026 年 3 月。发生了什么？战争什么时候开始？2026 年 2 月 28 日。非常清楚，一切从那里开始变，参议院开始丢。下一张图。问选民，你为什么投票？考虑你对国会的投票，伊朗战争有多重要？关键 34%，主要因素 40%。所以基本上 74% 的选民说它是关键或主要因素。然后这些人大量投蓝。这不只包括民主党，显然包括很多独立选民，甚至包括更年轻的共和党选民。党内有很大分歧：福克斯新闻群体，50 岁以上甚至 60 岁以上，我认为仍然支持战争；但年轻选民、年轻男性高度反对，又回到播客兄弟。所以有大量数据支持我说的。你的问题是，特朗普能修复吗？我认为绝对可以，因为问题的根源—— jcal： 他能做的前三件事是什么？ sacks： 就是结束战争。这是我的第一、第二、第三。因为会发生什么？布伦特原油价格会暴跌。选举日当天布伦特原油跌了 10%。是因为霍尔木兹海峡发生了什么变化吗？不是，是因为市场开始定价战争可能更早结束。仅仅这个可能性，布伦特原油就跌了 10%。它从最高 117，如果战争结束，会从 110 降到 70。汽油价格会降，柴油会降，食品价格会降。然后潜在强劲的经济增长、gdp 增长、就业图景仍然稳健，会重新成为焦点。我认为特朗普的支持率会反弹，回到 40 多。 jcal： 好。 sacks： 所以这是我们需要做的。如果不做，看，如果战争继续—— jcal： 但 sax，你能—— sacks： 等等，让我说完这一点。如果战争继续，共和党会继续失血。 jcal： 我不认为这是伊朗战争本身，而是它加剧了破裂的经济。自 covid 以来，经济结构性破裂。我认为有一个巨大的投票块来回摇摆，要求两边解决问题，给人们授权。所以我认为需要有人理解经济民粹主义。你买这个论点，还是认为更狭窄，只是伊朗战争？ sacks： 我不想把它弄得过于抽象。对我来说，问题是可负担性。我认为选民真的在乎这个，这是核心的钱包问题。 jcal： 同意。 sacks： 我认为经济数据和预测市场都显示，2026 年 1 月我们在这个问题上状况相当好。自那以后我们倒退了。我相信我们可以重回好状况，而不必转向社会主义或完全重组经济。 jcal： 记得 24 年选举吗？我同意可负担性可以是个抽象词，但我认为投票选民足够聪明，会把一个信息当作容器。我记得 24 年，那个容器——我没听够——但回头看，也许我在强加叙事偏见，是关于鸡蛋价格的争议，特朗普反复攻击拜登和哈里斯在鸡蛋价格上。 sacks： 是的，反复。 jcal： 不只是鸡蛋价格，它是一个更广泛问题和理念的窗口。我认为汽油是一个问题，但也是更广泛一类问题的窗口。人们把精力聚焦在一个东西上，因为围绕一个东西反复传递信息更容易。 sacks： 但更广泛的问题篮子。这就是我说数据中心的意思。我在听 gina hinojosa，德州新当选州长。坦白说，这场比赛我根本没关注，因为我觉得没人—— jcal： 我们以为 abbott 会赢。 sacks： 是啊，会赢。非常成功的三届德州州长，主持了经济繁荣，这就是我们搬来这个州的原因。我们以为——老实说，我认为这是整晚最大的震惊。总之，我开始看她的采访补课。我看了一个她接受《纽约时报》的采访，采访者一直试图引她谈社会问题、觉醒议题、身份政治。她说，听着，我不参与你们的文化战争。然后她阐述了她的经济民粹主义，然后把它连接到数据中心：数据中心不好的原因是它们让你的电费上涨，你付更多电费，数据中心用掉你的水。我认为这就是数据中心议题有共鸣的原因。有对 ai 和潜在失业的焦虑，但我认为人们恨数据中心的主要原因是他们感知到它推高自己的电费，寡头从数据中心致富，而他们付更多。 jcal： 是的，这就回到—— sacks： 寡头获得税收减免，你获得更高电费。 jcal： 这就回到 chamath 的观点：人们觉得不被倾听，他们会采取唯一能采取的行动，去投票站。friedberg，你听了我的分析、chamath 的分析，还有 sax 的反驳。做个替代历史：如果战争没开始，中期选举会是什么样？然后你认为特朗普接下来 18 个月会怎样？有办法扭转他的遗产吗？如果有，你会给这届政府哪两三条建议，在剩余 18 到 24 个月聚焦？" style="--index: 3">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">03</span>
+                    <span class="timeline-meta">00:25–00:41</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>JCal 的时间线 vs Sacks 的反驳：战争、关税、ICE、Epstein</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>Sacks 回应 JCal 的旧片段：JCal 在战争前并不对，是战争和通胀让他被证明正确；特朗普第一年实际家庭收入增长 3.1%，战争后购买力逆转。</li>
+<li>Sacks 强调年轻男性相对 2024 年翻转 36 个百分点，播客圈是关键。</li>
+<li>JCal 认为不只是战争：Liberation Day 关税、ICE 执法、Epstein 文件、战争共同导致支持率从 +5% 跌到 -28%。</li>
+<li>JCal 自称独立选民，投票 55% 民主党、45% 共和党，比播客开始时更靠右，但认为特朗普 2.0 议程被混乱执行拖累。</li>
+<li>Sacks 用图表反驳：特朗普净支持率与油价完美对应；2026 年参议院预测市场直到 3 月战争开始才变化；74% 选民认为战争是关键或主要因素。</li>
+<li>两人争论“战争本身”还是“更广泛的经济问题”；Sacks 认为可负担性是核心，结束战争就能让油价、通胀、房贷利率回落。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>Liberation Day：2025 年 4 月特朗普政府宣布的大规模关税计划，JCal 称其“过于混乱”，并导致通胀上升。</li>
+<li>ICE 执法：节目中 JCal 提到 2025 年夏天移民和海关执法局的行动引发争议。</li>
+<li>Epstein 文件：节目中 JCal 称特朗普政府没有按承诺公布爱泼斯坦相关文件，导致播客圈不满。</li>
+<li>净支持率：支持率减去不支持率，节目中 Sacks 展示其与汽油价格高度相关。</li>
+<li>参议院预测市场：节目中用 Polymarket 等市场数据说明战争前后选情变化。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>Sacks：</strong> 停摆的钟一天也对两次，JCal。</p>
+<p><strong>JCal：</strong> 绝对。看，我确实……但让我——</p>
+<p><strong>Sacks：</strong> 我的看法是，在战争开始前你并不对。你最后那段片段，你被证明正确了，因为战争和通胀。具体来说，是通胀带来的可负担性问题。汽油价格，每个人每一两周去加油站，普通家庭每月多花 200 美元油钱。然后去超市，所有东西都贵得多，因为农产品成本大幅上升，一路往下传。归根结底，对人们重要的是钱包：实际税后、通胀后的购买力有没有增加？这就是衡量你日子有没有变好的方式。特朗普第一年做到了，实际家庭收入增长 3.1%。拜登时期是负的，特朗普第一任期是正的。然后发生了什么？战争开始，汽油、柴油等价格上涨，购买力开始逆转。然后你还失去了年轻男性，他们是所有这些播客的粉丝，他们从播客获取新闻。年轻男性这次中期选举相对 2024 年翻转了 36 个百分点。所以在我看来很简单：回到战争及其经济后果。好消息是，如果我们结束战争，我们可以迅速取得进展。所有其他经济数字仍然不错：就业增长、今天的就业报告很好、经济增长仍然不错，有很多非常正面的经济数字。问题根本上是石油价格、汽油价格、柴油价格，以及它们如何流过经济。如果战争迅速结束，这些价格会迅速下降，通胀会回落，美联储就有空间降息，房贷成本回落，我们就能回到正轨。</p>
+<p><strong>JCal：</strong> Sax，你说得对，无休止的战争、无休止的通胀是压垮骆驼的最后一根稻草。但我认为你在之前发生了什么上完全错了。所有民调都是对的，右翼所有人都说民调错了；所有预测市场都是对的，右翼所有人都说那些被操纵了。在这个播客上一年多的，我想逐刻解剖这个时刻，我指出过这张图。这是 Silver Bulletin，这个周期完全命中，Nate Silver 非常厉害。看这张图，值得看。不只是战争。Liberation Day，人们忘了关税。特朗普任期开始时净支持率 +5%，结束时 -28%，这是超过 30 个百分点的摆动。Liberation Day，我当时就指出，太混乱了。我和 Cuts Clothing 的 CEO 聊过，记得我们在这个播客讨论过。他是特朗普忠诚者。当时人们争论，这些关税会很棒，不会加价，美国公众不用付，这会平衡预算。它不仅没有平衡预算，还推高了通胀。特朗普总统本应该和国会合作，记得他不得不去最高法院，他输了。这是特朗普游戏中的漏洞。然后夏天，我们在这里就 ICE 执法有过一些激烈讨论。我说，听着，没有美国人——包括我认识的执法人员、我认识的那些雇用了在这里 20 年的人的人，是的，技术上是非法移民——没有人想看到这个。没有人想看到没有随身摄像头、不戴徽章的蒙面探员打人。那是巨大的错误。他大幅下降，然后净支持率到 -20%。这都在伊朗战争开始之前。如果你看 2025 年夏天那些 ICE 行动，还有 Epstein 文件。那就是你失去所有播客兄弟的地方。他们不想特朗普食言，不公布 Epstein 文件。当然，然后到战争，无休止的贪污指控和无休止的通胀，把他从 -20 跌到 -23。这就是发生的一系列事件。我要记录在案：我是独立选民，我人生投票 55% 民主党、45% 共和党。我们开始这个播客时大概是 70-30。因为左派的疯狂，我显著向右移动。但这里发生的是，特朗普 2.0 议程被放弃了，有大量分心。特朗普总统有正确的想法，但执行经常极其不稳定，这是非常慷慨的说法，说它混乱。如果你有那种混乱时刻，然后一切关于数据中心、关于我们的行业、关于帮助我们，而人们嘲笑提高最低工资的想法。Chamath，你刚才讲话中提到的 K 型经济，这就是你在说的。对人们来说感觉不公平。我认为你说得很准：人们只是在摇摆，希望有人关心下半部分没有股权的人。就是这样。特朗普没有让人们感觉他在为他们工作，这就是为什么他们抛弃了他。贪污指控，无论真假，都会水落石出，但那是我们需要谈的。这引向我们的第二个话题：接下来 24 个月会怎样。Sax，你想谈这个。未来 18 到 24 个月，特朗普总统有救赎之路吗？有没有办法扭转这个总统任期，也许挽救他的遗产？</p>
+<p><strong>Sacks：</strong> 首先，我放几张图。既然你们玩图表游戏，我不知道今天要玩图表游戏。</p>
+<p><strong>JCal：</strong> 今天。</p>
+<p><strong>Sacks：</strong> Nick，能放这些图吗？好。JCal，人们会指出各种问题，我知道你有你的。我不是说每个问题都执行得完美。我确实认为特朗普总统应该得到巨大 credit，他完全封住了边境，解决了移民问题。</p>
+<p><strong>JCal：</strong> 同意。</p>
+<p><strong>Sacks：</strong> 举个例子。但问题是，为什么这不是正常的中期选举结果？看特朗普支持率和汽油价格，完美对应。特朗普净支持率和汽油价格对应。下一张图。这是哪个党会赢得 2026 年参议院的预测市场。你可以看到，在特朗普总统整个第一年，共和党预期以很大优势获胜，贯穿你谈的所有事情，JCal。所以关税推出完全没有影响，4 月 Liberation Day 连 blip 都没有。</p>
+<p><strong>JCal：</strong> 澄清一下，参议院平衡没有 blip。</p>
+<p><strong>Sacks：</strong> 是的，但我用这个作为代理。我明白，但我用这个作为刚才发生的事的代理，我们丢了八九个参议院席位。它从哪里开始变？3 月。2026 年 3 月。发生了什么？战争什么时候开始？2026 年 2 月 28 日。非常清楚，一切从那里开始变，参议院开始丢。下一张图。问选民，你为什么投票？考虑你对国会的投票，伊朗战争有多重要？关键 34%，主要因素 40%。所以基本上 74% 的选民说它是关键或主要因素。然后这些人大量投蓝。这不只包括民主党，显然包括很多独立选民，甚至包括更年轻的共和党选民。党内有很大分歧：福克斯新闻群体，50 岁以上甚至 60 岁以上，我认为仍然支持战争；但年轻选民、年轻男性高度反对，又回到播客兄弟。所以有大量数据支持我说的。你的问题是，特朗普能修复吗？我认为绝对可以，因为问题的根源——</p>
+<p><strong>JCal：</strong> 他能做的前三件事是什么？</p>
+<p><strong>Sacks：</strong> 就是结束战争。这是我的第一、第二、第三。因为会发生什么？布伦特原油价格会暴跌。选举日当天布伦特原油跌了 10%。是因为霍尔木兹海峡发生了什么变化吗？不是，是因为市场开始定价战争可能更早结束。仅仅这个可能性，布伦特原油就跌了 10%。它从最高 117，如果战争结束，会从 110 降到 70。汽油价格会降，柴油会降，食品价格会降。然后潜在强劲的经济增长、GDP 增长、就业图景仍然稳健，会重新成为焦点。我认为特朗普的支持率会反弹，回到 40 多。</p>
+<p><strong>JCal：</strong> 好。</p>
+<p><strong>Sacks：</strong> 所以这是我们需要做的。如果不做，看，如果战争继续——</p>
+<p><strong>JCal：</strong> 但 Sax，你能——</p>
+<p><strong>Sacks：</strong> 等等，让我说完这一点。如果战争继续，共和党会继续失血。</p>
+<p><strong>JCal：</strong> 我不认为这是伊朗战争本身，而是它加剧了破裂的经济。自 COVID 以来，经济结构性破裂。我认为有一个巨大的投票块来回摇摆，要求两边解决问题，给人们授权。所以我认为需要有人理解经济民粹主义。你买这个论点，还是认为更狭窄，只是伊朗战争？</p>
+<p><strong>Sacks：</strong> 我不想把它弄得过于抽象。对我来说，问题是可负担性。我认为选民真的在乎这个，这是核心的钱包问题。</p>
+<p><strong>JCal：</strong> 同意。</p>
+<p><strong>Sacks：</strong> 我认为经济数据和预测市场都显示，2026 年 1 月我们在这个问题上状况相当好。自那以后我们倒退了。我相信我们可以重回好状况，而不必转向社会主义或完全重组经济。</p>
+<p><strong>JCal：</strong> 记得 24 年选举吗？我同意可负担性可以是个抽象词，但我认为投票选民足够聪明，会把一个信息当作容器。我记得 24 年，那个容器——我没听够——但回头看，也许我在强加叙事偏见，是关于鸡蛋价格的争议，特朗普反复攻击拜登和哈里斯在鸡蛋价格上。</p>
+<p><strong>Sacks：</strong> 是的，反复。</p>
+<p><strong>JCal：</strong> 不只是鸡蛋价格，它是一个更广泛问题和理念的窗口。我认为汽油是一个问题，但也是更广泛一类问题的窗口。人们把精力聚焦在一个东西上，因为围绕一个东西反复传递信息更容易。</p>
+<p><strong>Sacks：</strong> 但更广泛的问题篮子。这就是我说数据中心的意思。我在听 Gina Hinojosa，德州新当选州长。坦白说，这场比赛我根本没关注，因为我觉得没人——</p>
+<p><strong>JCal：</strong> 我们以为 Abbott 会赢。</p>
+<p><strong>Sacks：</strong> 是啊，会赢。非常成功的三届德州州长，主持了经济繁荣，这就是我们搬来这个州的原因。我们以为——老实说，我认为这是整晚最大的震惊。总之，我开始看她的采访补课。我看了一个她接受《纽约时报》的采访，采访者一直试图引她谈社会问题、觉醒议题、身份政治。她说，听着，我不参与你们的文化战争。然后她阐述了她的经济民粹主义，然后把它连接到数据中心：数据中心不好的原因是它们让你的电费上涨，你付更多电费，数据中心用掉你的水。我认为这就是数据中心议题有共鸣的原因。有对 AI 和潜在失业的焦虑，但我认为人们恨数据中心的主要原因是他们感知到它推高自己的电费，寡头从数据中心致富，而他们付更多。</p>
+<p><strong>JCal：</strong> 是的，这就回到——</p>
+<p><strong>Sacks：</strong> 寡头获得税收减免，你获得更高电费。</p>
+<p><strong>JCal：</strong> 这就回到 Chamath 的观点：人们觉得不被倾听，他们会采取唯一能采取的行动，去投票站。Friedberg，你听了我的分析、Chamath 的分析，还有 Sax 的反驳。做个替代历史：如果战争没开始，中期选举会是什么样？然后你认为特朗普接下来 18 个月会怎样？有办法扭转他的遗产吗？如果有，你会给这届政府哪两三条建议，在剩余 18 到 24 个月聚焦？</p></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="00:41–00:53 friedberg 的视角：预算、债券市场与 ai 的“索伦之戒” 本段核心内容： friedberg 认为 ai 数据中心恐慌和反战情绪都源于“你没先解决我的经济问题”，它们是结果不是主因。 他担心 2027 年预算僵局，$2 万亿赤字会让物价继续上涨；债券市场会告诉人们方向。 他反驳 chamath：人们不是选择社会主义意识形态，而是认为政府更多干预能解决成本问题，结果产生社会主义式结果。 他把 ai 比作“索伦之戒”：政府想控制 ai，最终可能通过监管算力来实现；数据中心未来可能被当作公用事业监管。 jcal 提出特朗普应该考虑赦免、资本利得税改革、最低工资、禁止议员炒股和住房计划；chamath 认为应该用边境等持久议程做交易，而不是全盘放弃。 背景解释与关键术语： 债券市场：friedberg 认为债券市场会反映市场对财政赤字和通胀的预期。 索伦之戒：《指环王》中的至尊魔戒，象征绝对权力；friedberg 用它比喻 ai 对国家的诱惑。 公用事业监管：指政府像监管电力、水务一样监管数据中心和算力访问。 资本利得税改革：jcal 提议对超过 1000 万美元的保证金贷款按资本利得税率 50% 征税，还贷时抵扣，卖股时补缴。 禁止议员炒股：jcal 提到 rahm emanuel 和右翼都有类似提案。 详细中文整理： friedberg： 我有点同意这个说法：ai 数据中心歇斯底里和对伊朗战争的仇恨，都根植于“你没有先解决我的经济问题”。所以我不认为它们是主因，我认为它们是没有先聚焦我的问题、我的经济成本问题的后果反映。所以那仍然是最重要的问题。我认为 2027 年会发生两件事。第一，我认为这届国会和现任总统很难就干净的预算达成决议，结果事情会继续如常。我担心物价继续攀升。顺便回应 chamath 的观点：covid 是这种不可负担问题的加速时刻，对没有资产的人。原因是政府支出翻倍，就是这样。政府支出翻倍，一切膨胀，包括资产，所以资产所有者受益，靠劳动赚取收入的人受损，因为所有东西成本上升。如果你每周靠工资，你付不起医疗、教育、住房、食品、汽油。我确实认为伊朗战争是严重偏离目标，因为一开始宣布不搞新战争，然后开始了一场大战争，所以它是个容易的目标。预算问题是大问题，2027、2028 年支出会怎样？几周前我们谈过，债券市场会告诉你他们认为方向在哪。因为如果我们继续每年 2 万亿美元赤字支出，东西会继续贵，会变得更糟。这不是人们选择社会主义意识形态，回应 chamath 之前的话。我不是说人们把社会主义当作意识形态或原则来选择。社会主义结果来自人们认为能解决成本问题的政策。人们认为解决成本的最好方式是让政府做更多，然后你就有更多社会主义政策。不是人们说“我想当社会主义者”。这就是你陷入的滑坡螺旋问题。我担心我们如何在 2027、2028 年解决预算。我确实认为 ai 会继续是巨大的政治热点。ai 几乎像索伦之戒，两边都想要至尊魔戒。它是终极工具、终极权力。它对国家是风险。它从根本上把权力从政府手中拿走并分散。假设没有一家公司制造 ai，没有一家公司拥有所有数据中心，假设有一百万个数据中心和一百万种开源 ai 变体。在那样一个世界里，没有寡头从 ai 赚钱。假设我们能到达那个终态。在那个终态，ai 工具从政府、国家手中夺走大量权力和影响力。当这发生时，我认为那些希望国家成为中心、中央指挥、中央计划、中央权威、最终中央权力结构的行动者会猛烈反击。他们会想要 ai。所以我实际上认为，停止 ai 开发的呼吁，实际上是要求他们绝对控制 ai，因为 ai 太强大，他们不能没有控制。他们想要 ai。我认为我们最终会看到的很多政策——如果你把博弈论推演下去，我可能错，但我仍然认为我们最终会到政府说我们要监管算力的地方。他们不会监管芯片或模型，因为那些太难追赶，你也永远无法监管软件的开发，监管软件部署也很难。但软件的使用从根本上受限于你获得多少算力。我认为数据中心未来会被当作公用事业对待。我确实认为政府会尝试走这条路，他们会意识到这是实现我刚才描述的最好路径：控制和管理的谁获得这项技术。 jcal： 是的。至少他们会得到很好的税基。我认为很多数据中心的事是表演性的，他们只是想得到更好的交易。看德州 gina 怎么看数据中心，她从社区优先角度。看特朗普总统怎么看，他从公司和经济、gdp 角度优先。但两者最终到同一个地方：不要打扰邻居，不要污染，做个好公民，也许稍微撒点钱。 sacks： 顺便说，jason。 jcal： 所以特朗普能做什么，我有看法。有些人可能觉得有点震惊，chamath。我不是滥用赦免权的粉丝，但赦免是法律制度的一部分，两党都大量使用，每届政府都更激进。所以直到我们改变，我认为特朗普现在应该赦免所有人。现在，这周，赦免他的家人，赦免他自己，赦免政府每一个人，因为他反正会做。然后这就把民主党无休止调查的可能性拿掉，或者至少削弱。然后他应该对他们说，我们合作，做交易。他应该做的交易：第一，资本利得税改革。我们所有人的钱都来自资本利得，我们圈子里大多数人用保证金贷款，用股权质押贷款。我们应该说，超过 1000 万美元的，按资本利得税率的 50% 征税。如果你还清贷款，你得到抵扣；如果你卖股票，你付剩余资本利得。把它拿出来，平滑掉。这是一个收入流，让感觉是“嘿，富人拿这些贷款时，至少有些税收进来”，消除 bernie sanders 那套“这些人没交税，今年交了零”。然后医疗，我留给更有经验的人说应该怎么做。但特朗普应该说，我们来做医疗。我会继续强调最低工资。有两种方式，你可以说一定收入以下免税，就像你之前提的，chamath。但就说两年一年，四年内让所有人到 15 美元一小时。我知道有人会叫我 libtard，虽然我是温和独立派。我认为这对团队精神有好处，会反驳我们不在乎社会下半部分的叙事。实际上只有 1000 万、1500 万人受低于 15 美元影响，所以是容易做的事。第四，禁止在任交易股票和与外国做生意。rahm emanuel 有这个提案，右翼也有，我们应该就此达成共识。最后，特朗普应该对他们说，我们知道住房是让人们非常沮丧的事，我们出一个激励建新房的计划。他应该直接进入交易模式，进入民粹特朗普模式，大家都喜欢。如果他解决五件中的两三件，我认为会救赎他的总统任期。当然，sax 你说得对，他必须结束战争，必须结束战争。但有可能，我认为民主党可能迫使他，然后他可以说“民主党迫使我做”，给他一座金桥。 chamath： 看，在把婴儿和洗澡水一起倒掉之前，我认为重要的是意识到，如果你看里根总统任期，里根的总统任期随着时间只会地位更高，因为他做的结构性改变，你离得越远越明显。我认为现实是，即使民主党可能不想承认，经济民粹主义者必须理解，保持边境关闭是极其重要的，因为你需要投票给你的基本盘想要更多饼。把更多饼分给越境的人，数学上是坏决定。所以你有这个。然后关税，如果你把它和人们承诺的钱配对，如果钱到位，真的复兴国内制造业，你离得越远，允许它复合，看起来会正面。所以我认为说他们输了中期选举不公平，但这不意味着历史会认为他的总统任期失败。现在人们会说，这些政策有些显然好，关闭边境；有些是问号；有些，你必须从中脱身，像一场奔跑，你离得越远越清楚。所以他应该做什么，jason，按你的说法，我认为他应该想办法支持他议程中会持久的部分。所以按你的说法，什么是最好的权衡？保持边境关闭，换取一些经济变化。也许民主党想要更高最低工资，好吧。也许他们应该做，我认为更简单的是 12.5 万美元以下，直接取消联邦税。这是 nothing burger，对收入影响不大，但能改变民调。但用它交换他核心战略的部分，因为那会持久。人们会知道总统有勇气关闭边境，而没人愿意或拜登让边境流入。然后 2028 年坐在这些决定之上的民粹经济总统，无论民主党还是共和党，都会感谢特朗普，因为选票会这样来。人们会感觉经济萎靡正在被修复。 jcal： 好，sax，最后想法。除了结束战争，我们都同意那是第一。特朗普总统最后 18 个月还能做什么，对国家和他遗产有建设性？ sacks： 好，让我给你三个以前中期选举的例子。1994 年，比尔·克林顿丢了众议院，巨大失败，纽特·金里奇成为议长。克林顿仍然在 1996 年连任，他做了路线修正。奥巴马 2010 年丢了 7 个参议院席位、63 个众议院席位，那是血洗。他做了调整，2012 年仍然连任。所以总统绝对可以从中期失败中回来，很明显，你只需要修正。哪个不那么好？2006 年，乔治·w·布什因为伊拉克战争输了很惨的中期，人们非常不满，那是伊拉克战争开始三年后。然后他不再竞选，但共和党 2008 年又输了。为什么？布什中期后做了什么？增兵。他本可以调整路线，反而加倍下注。所以我认为这真的取决于此。有很多人，新保守派，鼓励总统做某种增兵、某种加倍下注、某种打击，pickaxe mountain、cargill island 等等。我认为如果你这样做，基本上会重演 2006、2008 剧本。如果你修正路线，现在撤出，我认为接下来两年会非常成功。就这样。" style="--index: 4">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">04</span>
+                    <span class="timeline-meta">00:41–00:53</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>Friedberg 的视角：预算、债券市场与 AI 的“索伦之戒”</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>Friedberg 认为 AI 数据中心恐慌和反战情绪都源于“你没先解决我的经济问题”，它们是结果不是主因。</li>
+<li>他担心 2027 年预算僵局，$2 万亿赤字会让物价继续上涨；债券市场会告诉人们方向。</li>
+<li>他反驳 Chamath：人们不是选择社会主义意识形态，而是认为政府更多干预能解决成本问题，结果产生社会主义式结果。</li>
+<li>他把 AI 比作“索伦之戒”：政府想控制 AI，最终可能通过监管算力来实现；数据中心未来可能被当作公用事业监管。</li>
+<li>JCal 提出特朗普应该考虑赦免、资本利得税改革、最低工资、禁止议员炒股和住房计划；Chamath 认为应该用边境等持久议程做交易，而不是全盘放弃。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>债券市场：Friedberg 认为债券市场会反映市场对财政赤字和通胀的预期。</li>
+<li>索伦之戒：《指环王》中的至尊魔戒，象征绝对权力；Friedberg 用它比喻 AI 对国家的诱惑。</li>
+<li>公用事业监管：指政府像监管电力、水务一样监管数据中心和算力访问。</li>
+<li>资本利得税改革：JCal 提议对超过 1000 万美元的保证金贷款按资本利得税率 50% 征税，还贷时抵扣，卖股时补缴。</li>
+<li>禁止议员炒股：JCal 提到 Rahm Emanuel 和右翼都有类似提案。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>Friedberg：</strong> 我有点同意这个说法：AI 数据中心歇斯底里和对伊朗战争的仇恨，都根植于“你没有先解决我的经济问题”。所以我不认为它们是主因，我认为它们是没有先聚焦我的问题、我的经济成本问题的后果反映。所以那仍然是最重要的问题。我认为 2027 年会发生两件事。第一，我认为这届国会和现任总统很难就干净的预算达成决议，结果事情会继续如常。我担心物价继续攀升。顺便回应 Chamath 的观点：COVID 是这种不可负担问题的加速时刻，对没有资产的人。原因是政府支出翻倍，就是这样。政府支出翻倍，一切膨胀，包括资产，所以资产所有者受益，靠劳动赚取收入的人受损，因为所有东西成本上升。如果你每周靠工资，你付不起医疗、教育、住房、食品、汽油。我确实认为伊朗战争是严重偏离目标，因为一开始宣布不搞新战争，然后开始了一场大战争，所以它是个容易的目标。预算问题是大问题，2027、2028 年支出会怎样？几周前我们谈过，债券市场会告诉你他们认为方向在哪。因为如果我们继续每年 2 万亿美元赤字支出，东西会继续贵，会变得更糟。这不是人们选择社会主义意识形态，回应 Chamath 之前的话。我不是说人们把社会主义当作意识形态或原则来选择。社会主义结果来自人们认为能解决成本问题的政策。人们认为解决成本的最好方式是让政府做更多，然后你就有更多社会主义政策。不是人们说“我想当社会主义者”。这就是你陷入的滑坡螺旋问题。我担心我们如何在 2027、2028 年解决预算。我确实认为 AI 会继续是巨大的政治热点。AI 几乎像索伦之戒，两边都想要至尊魔戒。它是终极工具、终极权力。它对国家是风险。它从根本上把权力从政府手中拿走并分散。假设没有一家公司制造 AI，没有一家公司拥有所有数据中心，假设有一百万个数据中心和一百万种开源 AI 变体。在那样一个世界里，没有寡头从 AI 赚钱。假设我们能到达那个终态。在那个终态，AI 工具从政府、国家手中夺走大量权力和影响力。当这发生时，我认为那些希望国家成为中心、中央指挥、中央计划、中央权威、最终中央权力结构的行动者会猛烈反击。他们会想要 AI。所以我实际上认为，停止 AI 开发的呼吁，实际上是要求他们绝对控制 AI，因为 AI 太强大，他们不能没有控制。他们想要 AI。我认为我们最终会看到的很多政策——如果你把博弈论推演下去，我可能错，但我仍然认为我们最终会到政府说我们要监管算力的地方。他们不会监管芯片或模型，因为那些太难追赶，你也永远无法监管软件的开发，监管软件部署也很难。但软件的使用从根本上受限于你获得多少算力。我认为数据中心未来会被当作公用事业对待。我确实认为政府会尝试走这条路，他们会意识到这是实现我刚才描述的最好路径：控制和管理的谁获得这项技术。</p>
+<p><strong>JCal：</strong> 是的。至少他们会得到很好的税基。我认为很多数据中心的事是表演性的，他们只是想得到更好的交易。看德州 Gina 怎么看数据中心，她从社区优先角度。看特朗普总统怎么看，他从公司和经济、GDP 角度优先。但两者最终到同一个地方：不要打扰邻居，不要污染，做个好公民，也许稍微撒点钱。</p>
+<p><strong>Sacks：</strong> 顺便说，Jason。</p>
+<p><strong>JCal：</strong> 所以特朗普能做什么，我有看法。有些人可能觉得有点震惊，Chamath。我不是滥用赦免权的粉丝，但赦免是法律制度的一部分，两党都大量使用，每届政府都更激进。所以直到我们改变，我认为特朗普现在应该赦免所有人。现在，这周，赦免他的家人，赦免他自己，赦免政府每一个人，因为他反正会做。然后这就把民主党无休止调查的可能性拿掉，或者至少削弱。然后他应该对他们说，我们合作，做交易。他应该做的交易：第一，资本利得税改革。我们所有人的钱都来自资本利得，我们圈子里大多数人用保证金贷款，用股权质押贷款。我们应该说，超过 1000 万美元的，按资本利得税率的 50% 征税。如果你还清贷款，你得到抵扣；如果你卖股票，你付剩余资本利得。把它拿出来，平滑掉。这是一个收入流，让感觉是“嘿，富人拿这些贷款时，至少有些税收进来”，消除 Bernie Sanders 那套“这些人没交税，今年交了零”。然后医疗，我留给更有经验的人说应该怎么做。但特朗普应该说，我们来做医疗。我会继续强调最低工资。有两种方式，你可以说一定收入以下免税，就像你之前提的，Chamath。但就说两年一年，四年内让所有人到 15 美元一小时。我知道有人会叫我 libtard，虽然我是温和独立派。我认为这对团队精神有好处，会反驳我们不在乎社会下半部分的叙事。实际上只有 1000 万、1500 万人受低于 15 美元影响，所以是容易做的事。第四，禁止在任交易股票和与外国做生意。Rahm Emanuel 有这个提案，右翼也有，我们应该就此达成共识。最后，特朗普应该对他们说，我们知道住房是让人们非常沮丧的事，我们出一个激励建新房的计划。他应该直接进入交易模式，进入民粹特朗普模式，大家都喜欢。如果他解决五件中的两三件，我认为会救赎他的总统任期。当然，Sax 你说得对，他必须结束战争，必须结束战争。但有可能，我认为民主党可能迫使他，然后他可以说“民主党迫使我做”，给他一座金桥。</p>
+<p><strong>Chamath：</strong> 看，在把婴儿和洗澡水一起倒掉之前，我认为重要的是意识到，如果你看里根总统任期，里根的总统任期随着时间只会地位更高，因为他做的结构性改变，你离得越远越明显。我认为现实是，即使民主党可能不想承认，经济民粹主义者必须理解，保持边境关闭是极其重要的，因为你需要投票给你的基本盘想要更多饼。把更多饼分给越境的人，数学上是坏决定。所以你有这个。然后关税，如果你把它和人们承诺的钱配对，如果钱到位，真的复兴国内制造业，你离得越远，允许它复合，看起来会正面。所以我认为说他们输了中期选举不公平，但这不意味着历史会认为他的总统任期失败。现在人们会说，这些政策有些显然好，关闭边境；有些是问号；有些，你必须从中脱身，像一场奔跑，你离得越远越清楚。所以他应该做什么，Jason，按你的说法，我认为他应该想办法支持他议程中会持久的部分。所以按你的说法，什么是最好的权衡？保持边境关闭，换取一些经济变化。也许民主党想要更高最低工资，好吧。也许他们应该做，我认为更简单的是 12.5 万美元以下，直接取消联邦税。这是 nothing burger，对收入影响不大，但能改变民调。但用它交换他核心战略的部分，因为那会持久。人们会知道总统有勇气关闭边境，而没人愿意或拜登让边境流入。然后 2028 年坐在这些决定之上的民粹经济总统，无论民主党还是共和党，都会感谢特朗普，因为选票会这样来。人们会感觉经济萎靡正在被修复。</p>
+<p><strong>JCal：</strong> 好，Sax，最后想法。除了结束战争，我们都同意那是第一。特朗普总统最后 18 个月还能做什么，对国家和他遗产有建设性？</p>
+<p><strong>Sacks：</strong> 好，让我给你三个以前中期选举的例子。1994 年，比尔·克林顿丢了众议院，巨大失败，纽特·金里奇成为议长。克林顿仍然在 1996 年连任，他做了路线修正。奥巴马 2010 年丢了 7 个参议院席位、63 个众议院席位，那是血洗。他做了调整，2012 年仍然连任。所以总统绝对可以从中期失败中回来，很明显，你只需要修正。哪个不那么好？2006 年，乔治·W·布什因为伊拉克战争输了很惨的中期，人们非常不满，那是伊拉克战争开始三年后。然后他不再竞选，但共和党 2008 年又输了。为什么？布什中期后做了什么？增兵。他本可以调整路线，反而加倍下注。所以我认为这真的取决于此。有很多人，新保守派，鼓励总统做某种增兵、某种加倍下注、某种打击，Pickaxe Mountain、Cargill Island 等等。我认为如果你这样做，基本上会重演 2006、2008 剧本。如果你修正路线，现在撤出，我认为接下来两年会非常成功。就这样。</p></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="00:53–01:24 ai 交易、数据中心与监管博弈 本段核心内容： jcal 描述本周 ai 股暴跌：近 4 万亿美元市值蒸发，是史上最大单日美元损失；polymarket 显示 anthropic 年内上市概率从 95% 降到 71%。 chamath 分析 spacex 在亚利桑那 cochise county 的数据中心说明会视频：团队提出降电费 40%、不用水、降房产税 20%，但观众愤怒；他认为这是情绪问题，不绑事实，也反映交易“有点白送”。 chamath 分析超级 scaler、neocloud、基础模型公司的博弈：供应受限时，超级 scaler 成为造王者；spacex 与 anthropic 的 90 天互解约条款是关键，如果 spacex 终止，可以按现货价重新定价，收入可能翻倍或三倍。 jcal 认为数据中心可能转移到加拿大、墨西哥、中东、马来西亚、新加坡，美国可能成为 token 净进口国。 friedberg 认为左翼可能推动禁止 ai 开发、部署、使用；他把 ai 比作第二修正案问题：谁拥有技术，谁拥有权力。 sacks 预测民主党会推动联邦 ai 立法，担心由此产生审查和监控；chamath 认为全面国有化不是重点，但供应受约束可能让大型云平台得利。 sacks 分析德州州长当选人 gina hinojosa 的立场：她只说在新立法通过前不发新许可，但已建成项目可能还需要空气污染等许可，可能导致半成品项目 stranded；他预测 2027 年已获批项目完成，2028 年管道关闭。 jcal 谈 launch vc 使用 grok、claude 等 agents，每年花 4-5 万美元订阅，估计获得 200 万美元价值、100 万美元增量收入；预测离岸数据中心和本地模型是未来两年趋势。 sacks 区分联邦 ai 安全监管和州级基础设施监管；他认为大型数据中心投资需要政策确定性。 chamath 认为，据节目所说的 spacex 与 anthropic 合同终止条款可能影响双方议价；他推测若现货价格大涨，供应方可能重新定价。 背景解释与关键术语： 超级 scaler：指 amazon、meta、microsoft、google、spacex 等拥有大规模云和数据中心基础设施的公司。 neocloud：指专门出租 gpu 算力的新兴云服务商，如 crusoe、coreweave 等，节目中 chamath 称它们是“租客”。 基础模型公司：指 openai、anthropic 等开发前沿大模型的公司。 90 天互解约条款：节目中 chamath 称 spacex 与 anthropic 的算力合同有双向 90 天终止权。 现货价：算力现货市场价格，节目中称可能达到合同价的两到三倍。 公用事业监管：friedberg 预测数据中心未来可能像电力、水务一样被监管。 “ai 部”：sacks 预测民主党可能推动设立的联邦 ai 监管机构。 算力监管：friedberg 和 chamath 讨论的通过控制算力访问来监管 ai 的路径。 详细中文整理： jcal： 好，我们碰了数据中心，现在双击深入。本周股市被血洗，nvidia、spacex、tesla、amd、micron，所有都大幅回调。近 4 万亿美元市值蒸发。特朗普过去两年见证了市场顶部，所以整体市场在第二任期仍然上涨。但这是股市历史上按总美元计最糟糕的单日，不是按百分比。这对 anthropic 的 ipo 投下阴影。之后 openai——我们的合作伙伴 polymarket，感谢 shane 周二来——说 anthropic 年内上市概率 71%，中期选举前是 95%。《华尔街日报》今天报道，估值折扣可能已经 baked in。不再是 1.5 到 2 万亿美元然后到 3 或 4 万亿，就像 gavin baker 在这个播客说的，我们可能看到 1 万亿、1 点几万亿。今天市场有所反弹。这一切都基于 chamath，这些数据中心会不会继续？会不会被阻止？州长们具体在干什么？sax 提到德州 abbott 输给 gina hinojosa，她昨晚抽时间开了发布会，上了所有顶级节目，说得很清楚：她想要好交易，看起来不反对数据中心。她会让人建到 2028 年，但之后不清楚。chamath，你显然和 ai 领域很多主要玩家有联系。数据中心会怎样？民主党能承受戳破 ai 泡沫、泼冷水、放缓数据中心吗？因为那会拖垮经济，我们都明白。那符合他们的利益吗？这是不是姿态，为了给本地社区争取更好交易，就像他们的工作？ chamath： 有一个不可思议的视频，spacex 团队去亚利桑那 cochise county 介绍他们 6 吉瓦数据中心的计划。如果让我描述那个视频——在 x 上能找到——两个非常聪明、诚恳的 spacex 人试图解释他们如何把电费降低 40%，不用水，房产税降低 20%，能为县里产生足够收入偿还债券。一长串好处。与此同时，观众在尖叫。两个人非常镇定，riley 和 katie，好员工，应该为他们的表现骄傲。但如果你看视频，他们被淹没。我的收获是，jason，这是一个情绪问题，不绑事实，就像 friedberg 说的。它代表寡头和经济裂缝的图腾。但它也代表已经发生的交易有点白送。意思是，最强大的七八家公司真的需要税收减免来投资 300、500、800 亿美元，然后产生 3000、4000、5000 亿美元吗？大概不需要。它们在做好交易，因为合理。但我认为新州长们会说，这些免谈，我们要先看到直接可衡量的经济影响，才考虑。我认为这意味着我们会看到放缓。我认为这有利于超级 scaler，因为它们有现有容量。对 neocloud 非常不利，因为它们是租客。对基础模型公司也相当不利，因为它们太缺容量，需要增长。所以，如果前沿模型比别人的产品好那么多，它们最需要这些容量。这让超级 scaler 成为造王者。它们现在有有趣的博弈论。 jcal： 你能说一下超级 scaler 是谁，让大家理解区别吗？ chamath： 亚马逊、meta、微软、谷歌、spacex。它们能做什么？做决定。路径一，继续像今天这样出租，租给大企业、neocloud、基础模型公司，所有人都这么做。但还有一条少有人走的路，突然变得很有趣：你可以决定把所有增量算力用于优势自己的产品。谷歌有大量容量上线，它可以说，我给 gemini。这会怎样？让 gemini 在质量上追赶基础模型。为什么？如果你限制能产生算力的资产数量，只有更小表面可用给领先公司，那些领先公司就得付更多，用户体验会下降，然后其他产品有时间追赶。这很重要，因为 anthropic 和 openai 在非常快的递归循环中，60 到 90 天改进模型。所以突然，没有无限供应上线，你可以让这些人慢下来。这是少有人走的路。然后还有疯狂的路。 jcal： 疯狂的路。 chamath： 你应该看这个非常窄的事。我们之前在播客谈过，spacex 和 anthropic 的算力合同有双向 90 天退出。anthropic 可以 90 天终止，spacex 可以 90 天终止。如果 spacex 说，我 90 天后终止这个算力，那就是造王之举。为什么？这是 anthropic 需要的算力的不成比例的大块。它让 spacex 能按现货价重新定价，大概翻倍。 jcal： 市场价，对吧？ chamath： 市场价。可能不只是翻倍，可能三倍。所以 spacex 资产负债表上来自 anthropic 的收入可能 2 到 3 倍。anthropic 别无选择，只能立即投降，接受更高价格。这也会向所有其他超级 scaler 表明，它们离经济收益优化还很远。然后迫使它们考虑，我应该给自己还是卖给别人？然后迫使 neocloud 拿所有筹集的钱——债务或股权——说，我有两个选择：今天尽可能多买算力，不管价格，因为另一条路是 assured destruction 和破产，因为我出局了。所以它们会最后一搏。所以我认为所有博弈论，jason，真的归结为这一笔交易，elon 是否决定撕毁。如果他撕，小心。 jcal： 是的。另外两个因素，friedberg，一些预测。现在美国有 token。如果州长们决定对大科技、超级 scaler、neocloud 收紧螺丝，想放缓，他们需要明白这些数据中心可以放在加拿大、墨西哥、新加坡、马来西亚和很多其他地方。中东因为战争暂时出局。战争结束，你开始把数据中心放中东。那么下一个大模型的工作不会在美国土地上发生，friedberg，可能在沙特、阿联酋、卡塔尔、马来西亚、新加坡。我们会成为 token 净进口国。这会是最大的手机，所有那些 30 万、40 万美元建数据中心的工作会消失。所有税收会在当地征收，在马来西亚，谷歌在那里放巨大数据中心。数据可以很快绕世界，不需要在美国，这些州长会学到全球化艰难一课。你怎么看数据中心被禁，还是只是姿态？然后 friedberg，美国会变成 token 净进口国而不是净出口国吗？ friedberg： 嗯，他们可能也禁 ai 使用。 jcal： 好，那太远了。非常远的预测。 friedberg： 那正在被提出，现在就在讨论。 jcal： 好，展开。谁在讨论？具体提案是什么？因为我觉得有点远。 friedberg： 越往左，政客在这个点上越大声，就是没人看到 ai 的所谓好处，他们不想看到 ai 被开发、部署或使用。这是正在做的一般性声明。他们想禁止开发、部署，想禁数据中心，想禁科技公司做模型，想禁公司用模型。我认为这种修辞会导致比今天更受限的地方。 jcal： 这种疯狂事发生的概率？给我们 handicap，10%？ friedberg： 加州通过了立法，gavin newsom 否决了。我认为远高于 10%。我们看到州级立法。sax 花了很多时间，全国有数百条法律拼凑，试图监管模型开发、部署、使用，允许做什么，州政府是否审计和检查模型如何运作、人们如何使用、输出什么。 jcal： sax，你怎么说？回答他。 friedberg： 从根本上，记住，模型只是一堆软件，是代码。这是言论自由问题。我能在电脑上运行代码吗？这基本上像某人读一本书，因为最终你输入输出数字，0 和 1。 jcal： 真正的主权。是的。 friedberg： 记住，我们有法律和监管规定这些 0 和 1 做什么。如果这些 0 和 1 从你银行账户拿钱放我账户，我违法，我是重罪犯，会被定罪。如果用于制造非法武器，我违法，重罪。你可以列一长串人们应该担心的事。所以你要问自己，如果我们已经有法律保护我们免受人们使用这种言论、这种软件的后果，我们到底在做什么？我确实认为，再一次，原始的无意识政治状态是，有东西威胁国家、威胁政府本身。我认为这是这里动机的一大部分。我早就说过这是权力游戏。问题是——我哲学一下——像 anthropic 或谁，最终会不会到监管上与国家对齐的位置，国家对模型能力和开发部署有无限制访问，而个人公民和公司没有？这几乎像第二修正案问题，不再是关于谁有子弹和枪，而是谁有这项技术。如果国家有技术，公民和企业没有，国家就有至高权力。记住，没有国家没有中央计划和指挥，这意味着你给一小群人极大权力。美国的全部意义、第二修正案的全部意义，一直是制衡那种权力。所以如果国家拿到所有 ai，其他人没有，你就不再对权力有制衡。 jcal： 我认为你进入 doctor doom 场景。我认为你完全错了。我认为这种疯狂事发生概率 1%。但我喜欢你在世界上，friedberg，因为你是这种 lunacy 的 backstop。 chances you。 friedberg： 我指出，jcal，你叫我 doctor doom 随便，但这是关于这个国家意图的根本问题。国家意图是个人自由。 jcal： 是的，当然。 friedberg： 公民权利、个人权利。不是国家权力，不是我们。我们有很多法律保护公民彼此。我们现在做的是创建一个不同系统，远超美国建国原则，给一小群行动者极大权力，他们中央指挥控制。 jcal： 好。 friedberg： 我认为这是我们需要关注的。我不是说这正在发生，世界要完了，等等。 jcal： 好，这就是为什么我试图要百分比。 friedberg： 不是二元的。随着政策发展，我们必须记住我们在做什么。 jcal： 你是说滑坡。你是说滑坡。 friedberg： 是的，当然，非常是。 jcal： 滑坡。好，sax。但我也认为，就像 p doom 人们说 10% 人会死，我喜欢给百分比。这发生概率，chamath 或 sax？你最接近，当过沙皇。你认为 friedberg 描述的在可能范围内吗？如果是，给个概率。然后你对数据中心和 token 净出口/净进口潜力的看法？ sacks： 好，民主党下一届国会 100% 会大力推动 ai 立法。问题是什么样子。我不认为需要太多推测就知道方向。我相信民主党想创建一个由超级智能 turbocharged 的监控和审查国家。最终状态就是这样。怎么到那里？创建一个部门，联邦 ai 部。要求所有所谓前沿模型必须经它审查批准。监管者给意见，你不解决他们关切就不能发布模型。他们的危害包括政府告诉我们社交媒体公司应该担心的所有事：虚假信息、错误信息、异见思想，所有政府在 covid 期间施压社交媒体公司打压和审查的事。我们忘得多快，他们基本上会用 ai 重演整个 regime。而且会无限强大，因为我们谈的是超级智能。所以我确实相信我们正走向那个 regime。可能不是 friedberg 说的版本，他说只有政府能用工具。我不认为会那样。 friedberg： 不是那么二元，sax。抱歉，我意思是，显然他们会获得公众没有的模型和能力。最终，中央国家行动者获得的和公众获得的任何区别，就是权力区分产生的地方。这才是让建国原则难以持续的原因。 jcal： 这会是技术的准事实国有化，chamath。你怎么看？我要逼每个人 pin down。你认为技术国有化，政府有最好版本，美国其他人、公司、个人有 60%、70%、80% 版本，这可能吗？ chamath： 不，我不认为这是优先事项。人们会对这个问题激动，但我不认为这重要。我认为，人们立法寡头垄断，会进一步巩固经济权力，这与这些人想要的相反。所以当他们连线，我不认为会立法。我不认为他们有精力。最终—— sacks： 会立法的是 quid pro quo。政府得到更多权力，封闭模型公司的双头垄断得到更多监管俘获或护城河。这就是 quid pro quo。政府进来，民主党国会说，我们必须监管，不安全。你认为那些公司会怎么做？说“不，你不能”？它们会说，“好，我们一起合作”。政府最终有更多权力，公司有监管保护。 jcal： chamath，继续。我不这么认为。 chamath： 是的，我认为如果任何人立法 ai，会是广泛基础，包括大量数据中心和 ai 工厂覆盖。如果发生，也许一端有监管俘获，但另一端你会严重约束供应，真正控制的是 meta、亚马逊、谷歌、微软、spacex。所以记住，基础模型公司不是 free home。home free 意味着堡垒资产负债表、盈利商业模式、准无限算力用于自己野心。现在它们是租客。数据中心租客阶级截至周二非常危险。所以如果有，我认为所有租客阶级会被 co-opt。比如，我不知道你们看没看今天，谷歌刚接管了一个 crusoe 数据中心。 jcal： 他们做了？ chamath： 是的。为什么？因为他们有所有核心关键成分，特别是电力。所以我认为即使监管俘获运动，也只能在政府违反所有其他规则时说，这里有免费电力，随便建，我们不在乎能源，因为没钱付，没政治意愿。所以实际现实是 mag 7 或 mag 8 有更多权力。当它们看那个计算，我不认为政客想要，两边都不。 jcal： 你知道，我这周算了一下，看 agents 在我们风投公司 launch 内部的惊人影响。我们每年花 4 万、5 万美元在这些订阅上，grok、claude 是主要的。我估计我们得到 200 万美元价值，估计获得约 100 万美元增量收入，估计每花一美元得到 15 到 21 美元增量收入。换句话说，投资速度在上升，因为我们自动化了一切。创建新媒体的速度在上升，因为自动化了一切。我们在建系统。美国企业只有 10% 到 20% 的人每天定期使用这项技术。换句话说，还有 5 到 10 倍的人要开始每天用。我相信当他们转向 agentic，他们会开始用，因为对普通人太可及。一切被抽象，你不需要学代码或设置 rig，你告诉它你要什么，它用 50 倍。所以我认为需求是 500 到 1000 倍。当那发生，算力会去需要的地方。我可以告诉你，我们只用了前沿模型能力的 70%、80%。我们不是解 navier-stokes。所以我们濒临给每人订一台 2 万美元的 mac studio 512k，意味着每人桌面 40 万美元算力，先跑本地模型，再回退到它们，因为我们不想被 throttle。我们想要未计量的智能。所以离岸数据中心是未来两年趋势，本地模型桌面使用。我在这里预测。 sacks： 是的，我能回应吗？ jcal： 还有开源。开源显然是那个力量。 sacks： 我认为你抓到点什么，jcal。看，我们谈未来两年 ai 监管，需要分开。有两个不同东西：联邦和州。联邦会处理 ai 安全和创建联邦 ai 部，所有 orwellian 风险，可能变成审查、监控、控制。那是一桶问题。另一桶是基础设施，州和地方处理。两者都会发生。现在州和地方，我认为人们对这次选举意义太乐观。我看到 gavin baker 说，别担心，hinojosa 看起来很合理，不威胁任何项目。我看她的采访，我没看到 gavin 看到的东西。 chamath： 我同意你，我同意你。 sacks： 她没说现有项目受保护。她只说在新立法通过、处理她谈的问题之前，不发新许可。 chamath： 你对。 sacks： 处理她谈的问题。 chamath： 你对。她谈的问题是什么？明确点。 sacks： 我会解释。但我看到 semianalysis 的分析师出来说，你知道现在在建的项目不一定有开业所需的所有许可。换句话说，数据中心建好后，你可能还需要空气污染许可。各种许可有时到最后才拿到。所以如果你认真字面理解她说的，新监管 regime 生效前不发新许可，我们可能有一堆 stranded、半成品项目。我不是说一定发生。我不是批评她，因为我不知道她会怎么做。她还没上任。我只是指出这可能走很多方向。他们可以合理或不合理。所以你可能有半成品项目。我的基准是，完全获批的项目 2027 年会完成，但我不认为新 regime 下会有重大新项目，很长时间，简单原因：没有政治激励给新许可或新项目。激励是什么？想想，上次选举，民主党和共和党都跑攻击广告，攻击任何批准数据中心的政客。所以如果你是政客或想升迁的公务员，批准任何东西的激励是什么？我看不到。我看不到任何有政治野心的人想在未来四年伸脖子批准任何东西。所以看，已经批准完全许可的，可能完成。没批准的，祝好运，会很难。所以 2027 年能过，仍有有意义 capex。我真的很担心 2028 年。民主党某种程度上有一个反常激励，因为如果 capex 2028 年崩，他们会怪特朗普。 jcal： 是的，但他们已经铺好桌子。他们现在有惊人足迹，已经在 pole position。拖垮经济，我认为给他们攻击向量。我认为他们更好说，这是我们想要的，从中提取价值。只是提取价值。我们要免费电力，要学校，要这个。狠狠谈判。如果他们不—— sacks： 那会，是的。 jcal： 是的。如果数据中心和这些州长——他们的工作是为人民争取最好交易，就像公司工作是为股东争取最好位置、最好交易——如果不能达成安排，这些东西可以放加拿大、墨西哥、任何地方。我们有 starlink 和光纤。极其容易。全世界铺光纤很常见。我们这里系统速度极高效。不像 20 年前在日本加载 gmail 极难。很容易，很清晰。我们有 cdn 技术。会是 no-brainer，更别说 spacex，股票被严重低估，spacex、tesla，我在整个疯狂中一直买。他们要去太空放上去。现在看起来很聪明，对吧，chamath？如果他们要阻止，elon 又一次看到角落，不是吗？ chamath： 嗯，你记得我们谈过，我们说他和 anthropic 的 90 天退出，可能是因为他谈判时看到角落，不是反过来。人们过去认为，天哪，spacex 能拉绳太糟了。不会发生。现在问题是，会不会反过来？ jcal： 很有趣。我认为 elon 和 anthropic 团队工作关系相当正面。 chamath： 哦，这和那个无关。等等，我要澄清。这和他们的工作关系、anthropic 是好是坏、spacex 是好是坏无关。这是电子表格。电子表格决定答案。问题是，如果现货价飙升，超过某个阈值，经济上被迫这样做。 jcal： 好。我稍微站另一边。openai、sam altman 和 elon 之间仍有大量 acrimony。elon 和 anthropic 团队深度对齐，工作关系不可思议。我不认为他即使短期中期经济模型最优，也会直接扔到现货价。让我说完。 chamath： 我不是那个意思。你没听我说。 jcal： 好，让我说完，你可以反驳。你们可以让我说完句子，我知道很难相信。 chamath： 如果你曲解我说的，就不行。 jcal： 你完全可以回应，稍等。转到现货价可能是正确冷酷经济决定。我认为 elon 的决定部分会受他和 sam altman 关系或缺乏关系影响，也受 anthropic 忠诚和成功影响，让他们成为伟大长期伙伴，特别是太空数据中心业务。所以我可以想象，他不是扔到现货价，而是说，我们中间见。我认为这是更长—— chamath： 我不是说扔到现货价。我说的是，当现货价移动足够多，即使长期 off take 也移动很多，现有合同变成负 ev。你只需要把现有合同移到正 ev 区域。如果你能 90 天退出，重新定价到正 ev，你应该。所以我的点更多是，超过某点，如果一堆数据中心放缓，一堆约束发生，容量会比人们想的少很多。每兆瓦每月美元成本会冲天，gpu 每小时美元成本会冲天。愿意付溢价的是巨大资产负债表的巨型公司。所以你可以卖给谷歌或 meta，不必卖给 openai。 jcal： 好，saas。这一切真正有趣的部分，进入 science corner，是基础设施做两件事：推理，人们每天用产品；然后建下一个模型。如果你想下一个模型跑赢，任何价格 cornering 算力是巨大优势。所以对谷歌，一直落后，如果用所有算力做自己的模型；或者微软、nvidia 决定加速内部模型，它们有，这可能决定谁有最好前沿模型。交给你，saas，最后一句。 sacks： 我很快说。当你谈这种规模的基础设施，这些吉瓦级数据中心，成本约 500 亿美元。没人能在不确定条件下做那种投资。你最不想做的是破土动工，然后半途被禁止，被工人罢工或社区团体阻止。你真的需要确定条件才做那种投资。我认为我们正走向高度不确定。我们最大的数据中心州基本 regime change，所有州长基本表示支持 moratorium，直到 xyz 发生。他们具体可以不同。所以我的感觉是，可能不是阴谋伤害特朗普经济，可能只是现实。但我预期 2027 年仍有有意义 capex，作为基准，完全获批项目能前进或完成。但 2028 年，我预期管道要么关闭要么大幅减少，会有大经济影响。我确实认为民主党会试图怪总统，即使他们完全负责。" style="--index: 5">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">05</span>
+                    <span class="timeline-meta">00:53–01:24</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>AI 交易、数据中心与监管博弈</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>JCal 描述本周 AI 股暴跌：近 4 万亿美元市值蒸发，是史上最大单日美元损失；Polymarket 显示 Anthropic 年内上市概率从 95% 降到 71%。</li>
+<li>Chamath 分析 SpaceX 在亚利桑那 Cochise County 的数据中心说明会视频：团队提出降电费 40%、不用水、降房产税 20%，但观众愤怒；他认为这是情绪问题，不绑事实，也反映交易“有点白送”。</li>
+<li>Chamath 分析超级 scaler、neocloud、基础模型公司的博弈：供应受限时，超级 scaler 成为造王者；SpaceX 与 Anthropic 的 90 天互解约条款是关键，如果 SpaceX 终止，可以按现货价重新定价，收入可能翻倍或三倍。</li>
+<li>JCal 认为数据中心可能转移到加拿大、墨西哥、中东、马来西亚、新加坡，美国可能成为 token 净进口国。</li>
+<li>Friedberg 认为左翼可能推动禁止 AI 开发、部署、使用；他把 AI 比作第二修正案问题：谁拥有技术，谁拥有权力。</li>
+<li>Sacks 预测民主党会推动联邦 AI 立法，担心由此产生审查和监控；Chamath 认为全面国有化不是重点，但供应受约束可能让大型云平台得利。</li>
+<li>Sacks 分析德州州长当选人 Gina Hinojosa 的立场：她只说在新立法通过前不发新许可，但已建成项目可能还需要空气污染等许可，可能导致半成品项目 stranded；他预测 2027 年已获批项目完成，2028 年管道关闭。</li>
+<li>JCal 谈 Launch VC 使用 Grok、Claude 等 agents，每年花 4-5 万美元订阅，估计获得 200 万美元价值、100 万美元增量收入；预测离岸数据中心和本地模型是未来两年趋势。</li>
+<li>Sacks 区分联邦 AI 安全监管和州级基础设施监管；他认为大型数据中心投资需要政策确定性。</li>
+<li>Chamath 认为，据节目所说的 SpaceX 与 Anthropic 合同终止条款可能影响双方议价；他推测若现货价格大涨，供应方可能重新定价。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>超级 scaler：指 Amazon、Meta、Microsoft、Google、SpaceX 等拥有大规模云和数据中心基础设施的公司。</li>
+<li>neocloud：指专门出租 GPU 算力的新兴云服务商，如 Crusoe、CoreWeave 等，节目中 Chamath 称它们是“租客”。</li>
+<li>基础模型公司：指 OpenAI、Anthropic 等开发前沿大模型的公司。</li>
+<li>90 天互解约条款：节目中 Chamath 称 SpaceX 与 Anthropic 的算力合同有双向 90 天终止权。</li>
+<li>现货价：算力现货市场价格，节目中称可能达到合同价的两到三倍。</li>
+<li>公用事业监管：Friedberg 预测数据中心未来可能像电力、水务一样被监管。</li>
+<li>“AI 部”：Sacks 预测民主党可能推动设立的联邦 AI 监管机构。</li>
+<li>算力监管：Friedberg 和 Chamath 讨论的通过控制算力访问来监管 AI 的路径。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> 好，我们碰了数据中心，现在双击深入。本周股市被血洗，NVIDIA、SpaceX、Tesla、AMD、Micron，所有都大幅回调。近 4 万亿美元市值蒸发。特朗普过去两年见证了市场顶部，所以整体市场在第二任期仍然上涨。但这是股市历史上按总美元计最糟糕的单日，不是按百分比。这对 Anthropic 的 IPO 投下阴影。之后 OpenAI——我们的合作伙伴 Polymarket，感谢 Shane 周二来——说 Anthropic 年内上市概率 71%，中期选举前是 95%。《华尔街日报》今天报道，估值折扣可能已经 baked in。不再是 1.5 到 2 万亿美元然后到 3 或 4 万亿，就像 Gavin Baker 在这个播客说的，我们可能看到 1 万亿、1 点几万亿。今天市场有所反弹。这一切都基于 Chamath，这些数据中心会不会继续？会不会被阻止？州长们具体在干什么？Sax 提到德州 Abbott 输给 Gina Hinojosa，她昨晚抽时间开了发布会，上了所有顶级节目，说得很清楚：她想要好交易，看起来不反对数据中心。她会让人建到 2028 年，但之后不清楚。Chamath，你显然和 AI 领域很多主要玩家有联系。数据中心会怎样？民主党能承受戳破 AI 泡沫、泼冷水、放缓数据中心吗？因为那会拖垮经济，我们都明白。那符合他们的利益吗？这是不是姿态，为了给本地社区争取更好交易，就像他们的工作？</p>
+<p><strong>Chamath：</strong> 有一个不可思议的视频，SpaceX 团队去亚利桑那 Cochise County 介绍他们 6 吉瓦数据中心的计划。如果让我描述那个视频——在 X 上能找到——两个非常聪明、诚恳的 SpaceX 人试图解释他们如何把电费降低 40%，不用水，房产税降低 20%，能为县里产生足够收入偿还债券。一长串好处。与此同时，观众在尖叫。两个人非常镇定，Riley 和 Katie，好员工，应该为他们的表现骄傲。但如果你看视频，他们被淹没。我的收获是，Jason，这是一个情绪问题，不绑事实，就像 Friedberg 说的。它代表寡头和经济裂缝的图腾。但它也代表已经发生的交易有点白送。意思是，最强大的七八家公司真的需要税收减免来投资 300、500、800 亿美元，然后产生 3000、4000、5000 亿美元吗？大概不需要。它们在做好交易，因为合理。但我认为新州长们会说，这些免谈，我们要先看到直接可衡量的经济影响，才考虑。我认为这意味着我们会看到放缓。我认为这有利于超级 scaler，因为它们有现有容量。对 neocloud 非常不利，因为它们是租客。对基础模型公司也相当不利，因为它们太缺容量，需要增长。所以，如果前沿模型比别人的产品好那么多，它们最需要这些容量。这让超级 scaler 成为造王者。它们现在有有趣的博弈论。</p>
+<p><strong>JCal：</strong> 你能说一下超级 scaler 是谁，让大家理解区别吗？</p>
+<p><strong>Chamath：</strong> 亚马逊、Meta、微软、谷歌、SpaceX。它们能做什么？做决定。路径一，继续像今天这样出租，租给大企业、neocloud、基础模型公司，所有人都这么做。但还有一条少有人走的路，突然变得很有趣：你可以决定把所有增量算力用于优势自己的产品。谷歌有大量容量上线，它可以说，我给 Gemini。这会怎样？让 Gemini 在质量上追赶基础模型。为什么？如果你限制能产生算力的资产数量，只有更小表面可用给领先公司，那些领先公司就得付更多，用户体验会下降，然后其他产品有时间追赶。这很重要，因为 Anthropic 和 OpenAI 在非常快的递归循环中，60 到 90 天改进模型。所以突然，没有无限供应上线，你可以让这些人慢下来。这是少有人走的路。然后还有疯狂的路。</p>
+<p><strong>JCal：</strong> 疯狂的路。</p>
+<p><strong>Chamath：</strong> 你应该看这个非常窄的事。我们之前在播客谈过，SpaceX 和 Anthropic 的算力合同有双向 90 天退出。Anthropic 可以 90 天终止，SpaceX 可以 90 天终止。如果 SpaceX 说，我 90 天后终止这个算力，那就是造王之举。为什么？这是 Anthropic 需要的算力的不成比例的大块。它让 SpaceX 能按现货价重新定价，大概翻倍。</p>
+<p><strong>JCal：</strong> 市场价，对吧？</p>
+<p><strong>Chamath：</strong> 市场价。可能不只是翻倍，可能三倍。所以 SpaceX 资产负债表上来自 Anthropic 的收入可能 2 到 3 倍。Anthropic 别无选择，只能立即投降，接受更高价格。这也会向所有其他超级 scaler 表明，它们离经济收益优化还很远。然后迫使它们考虑，我应该给自己还是卖给别人？然后迫使 neocloud 拿所有筹集的钱——债务或股权——说，我有两个选择：今天尽可能多买算力，不管价格，因为另一条路是 assured destruction 和破产，因为我出局了。所以它们会最后一搏。所以我认为所有博弈论，Jason，真的归结为这一笔交易，Elon 是否决定撕毁。如果他撕，小心。</p>
+<p><strong>JCal：</strong> 是的。另外两个因素，Friedberg，一些预测。现在美国有 token。如果州长们决定对大科技、超级 scaler、neocloud 收紧螺丝，想放缓，他们需要明白这些数据中心可以放在加拿大、墨西哥、新加坡、马来西亚和很多其他地方。中东因为战争暂时出局。战争结束，你开始把数据中心放中东。那么下一个大模型的工作不会在美国土地上发生，Friedberg，可能在沙特、阿联酋、卡塔尔、马来西亚、新加坡。我们会成为 token 净进口国。这会是最大的手机，所有那些 30 万、40 万美元建数据中心的工作会消失。所有税收会在当地征收，在马来西亚，谷歌在那里放巨大数据中心。数据可以很快绕世界，不需要在美国，这些州长会学到全球化艰难一课。你怎么看数据中心被禁，还是只是姿态？然后 Friedberg，美国会变成 token 净进口国而不是净出口国吗？</p>
+<p><strong>Friedberg：</strong> 嗯，他们可能也禁 AI 使用。</p>
+<p><strong>JCal：</strong> 好，那太远了。非常远的预测。</p>
+<p><strong>Friedberg：</strong> 那正在被提出，现在就在讨论。</p>
+<p><strong>JCal：</strong> 好，展开。谁在讨论？具体提案是什么？因为我觉得有点远。</p>
+<p><strong>Friedberg：</strong> 越往左，政客在这个点上越大声，就是没人看到 AI 的所谓好处，他们不想看到 AI 被开发、部署或使用。这是正在做的一般性声明。他们想禁止开发、部署，想禁数据中心，想禁科技公司做模型，想禁公司用模型。我认为这种修辞会导致比今天更受限的地方。</p>
+<p><strong>JCal：</strong> 这种疯狂事发生的概率？给我们 handicap，10%？</p>
+<p><strong>Friedberg：</strong> 加州通过了立法，Gavin Newsom 否决了。我认为远高于 10%。我们看到州级立法。Sax 花了很多时间，全国有数百条法律拼凑，试图监管模型开发、部署、使用，允许做什么，州政府是否审计和检查模型如何运作、人们如何使用、输出什么。</p>
+<p><strong>JCal：</strong> Sax，你怎么说？回答他。</p>
+<p><strong>Friedberg：</strong> 从根本上，记住，模型只是一堆软件，是代码。这是言论自由问题。我能在电脑上运行代码吗？这基本上像某人读一本书，因为最终你输入输出数字，0 和 1。</p>
+<p><strong>JCal：</strong> 真正的主权。是的。</p>
+<p><strong>Friedberg：</strong> 记住，我们有法律和监管规定这些 0 和 1 做什么。如果这些 0 和 1 从你银行账户拿钱放我账户，我违法，我是重罪犯，会被定罪。如果用于制造非法武器，我违法，重罪。你可以列一长串人们应该担心的事。所以你要问自己，如果我们已经有法律保护我们免受人们使用这种言论、这种软件的后果，我们到底在做什么？我确实认为，再一次，原始的无意识政治状态是，有东西威胁国家、威胁政府本身。我认为这是这里动机的一大部分。我早就说过这是权力游戏。问题是——我哲学一下——像 Anthropic 或谁，最终会不会到监管上与国家对齐的位置，国家对模型能力和开发部署有无限制访问，而个人公民和公司没有？这几乎像第二修正案问题，不再是关于谁有子弹和枪，而是谁有这项技术。如果国家有技术，公民和企业没有，国家就有至高权力。记住，没有国家没有中央计划和指挥，这意味着你给一小群人极大权力。美国的全部意义、第二修正案的全部意义，一直是制衡那种权力。所以如果国家拿到所有 AI，其他人没有，你就不再对权力有制衡。</p>
+<p><strong>JCal：</strong> 我认为你进入 Doctor Doom 场景。我认为你完全错了。我认为这种疯狂事发生概率 1%。但我喜欢你在世界上，Friedberg，因为你是这种 lunacy 的 backstop。 chances you。</p>
+<p><strong>Friedberg：</strong> 我指出，JCal，你叫我 Doctor Doom 随便，但这是关于这个国家意图的根本问题。国家意图是个人自由。</p>
+<p><strong>JCal：</strong> 是的，当然。</p>
+<p><strong>Friedberg：</strong> 公民权利、个人权利。不是国家权力，不是我们。我们有很多法律保护公民彼此。我们现在做的是创建一个不同系统，远超美国建国原则，给一小群行动者极大权力，他们中央指挥控制。</p>
+<p><strong>JCal：</strong> 好。</p>
+<p><strong>Friedberg：</strong> 我认为这是我们需要关注的。我不是说这正在发生，世界要完了，等等。</p>
+<p><strong>JCal：</strong> 好，这就是为什么我试图要百分比。</p>
+<p><strong>Friedberg：</strong> 不是二元的。随着政策发展，我们必须记住我们在做什么。</p>
+<p><strong>JCal：</strong> 你是说滑坡。你是说滑坡。</p>
+<p><strong>Friedberg：</strong> 是的，当然，非常是。</p>
+<p><strong>JCal：</strong> 滑坡。好，Sax。但我也认为，就像 P Doom 人们说 10% 人会死，我喜欢给百分比。这发生概率，Chamath 或 Sax？你最接近，当过沙皇。你认为 Friedberg 描述的在可能范围内吗？如果是，给个概率。然后你对数据中心和 token 净出口/净进口潜力的看法？</p>
+<p><strong>Sacks：</strong> 好，民主党下一届国会 100% 会大力推动 AI 立法。问题是什么样子。我不认为需要太多推测就知道方向。我相信民主党想创建一个由超级智能 turbocharged 的监控和审查国家。最终状态就是这样。怎么到那里？创建一个部门，联邦 AI 部。要求所有所谓前沿模型必须经它审查批准。监管者给意见，你不解决他们关切就不能发布模型。他们的危害包括政府告诉我们社交媒体公司应该担心的所有事：虚假信息、错误信息、异见思想，所有政府在 COVID 期间施压社交媒体公司打压和审查的事。我们忘得多快，他们基本上会用 AI 重演整个 regime。而且会无限强大，因为我们谈的是超级智能。所以我确实相信我们正走向那个 regime。可能不是 Friedberg 说的版本，他说只有政府能用工具。我不认为会那样。</p>
+<p><strong>Friedberg：</strong> 不是那么二元，Sax。抱歉，我意思是，显然他们会获得公众没有的模型和能力。最终，中央国家行动者获得的和公众获得的任何区别，就是权力区分产生的地方。这才是让建国原则难以持续的原因。</p>
+<p><strong>JCal：</strong> 这会是技术的准事实国有化，Chamath。你怎么看？我要逼每个人 pin down。你认为技术国有化，政府有最好版本，美国其他人、公司、个人有 60%、70%、80% 版本，这可能吗？</p>
+<p><strong>Chamath：</strong> 不，我不认为这是优先事项。人们会对这个问题激动，但我不认为这重要。我认为，人们立法寡头垄断，会进一步巩固经济权力，这与这些人想要的相反。所以当他们连线，我不认为会立法。我不认为他们有精力。最终——</p>
+<p><strong>Sacks：</strong> 会立法的是 quid pro quo。政府得到更多权力，封闭模型公司的双头垄断得到更多监管俘获或护城河。这就是 quid pro quo。政府进来，民主党国会说，我们必须监管，不安全。你认为那些公司会怎么做？说“不，你不能”？它们会说，“好，我们一起合作”。政府最终有更多权力，公司有监管保护。</p>
+<p><strong>JCal：</strong> Chamath，继续。我不这么认为。</p>
+<p><strong>Chamath：</strong> 是的，我认为如果任何人立法 AI，会是广泛基础，包括大量数据中心和 AI 工厂覆盖。如果发生，也许一端有监管俘获，但另一端你会严重约束供应，真正控制的是 Meta、亚马逊、谷歌、微软、SpaceX。所以记住，基础模型公司不是 free home。Home free 意味着堡垒资产负债表、盈利商业模式、准无限算力用于自己野心。现在它们是租客。数据中心租客阶级截至周二非常危险。所以如果有，我认为所有租客阶级会被 co-opt。比如，我不知道你们看没看今天，谷歌刚接管了一个 Crusoe 数据中心。</p>
+<p><strong>JCal：</strong> 他们做了？</p>
+<p><strong>Chamath：</strong> 是的。为什么？因为他们有所有核心关键成分，特别是电力。所以我认为即使监管俘获运动，也只能在政府违反所有其他规则时说，这里有免费电力，随便建，我们不在乎能源，因为没钱付，没政治意愿。所以实际现实是 Mag 7 或 Mag 8 有更多权力。当它们看那个计算，我不认为政客想要，两边都不。</p>
+<p><strong>JCal：</strong> 你知道，我这周算了一下，看 agents 在我们风投公司 Launch 内部的惊人影响。我们每年花 4 万、5 万美元在这些订阅上，Grok、Claude 是主要的。我估计我们得到 200 万美元价值，估计获得约 100 万美元增量收入，估计每花一美元得到 15 到 21 美元增量收入。换句话说，投资速度在上升，因为我们自动化了一切。创建新媒体的速度在上升，因为自动化了一切。我们在建系统。美国企业只有 10% 到 20% 的人每天定期使用这项技术。换句话说，还有 5 到 10 倍的人要开始每天用。我相信当他们转向 agentic，他们会开始用，因为对普通人太可及。一切被抽象，你不需要学代码或设置 rig，你告诉它你要什么，它用 50 倍。所以我认为需求是 500 到 1000 倍。当那发生，算力会去需要的地方。我可以告诉你，我们只用了前沿模型能力的 70%、80%。我们不是解 Navier-Stokes。所以我们濒临给每人订一台 2 万美元的 Mac Studio 512K，意味着每人桌面 40 万美元算力，先跑本地模型，再回退到它们，因为我们不想被 throttle。我们想要未计量的智能。所以离岸数据中心是未来两年趋势，本地模型桌面使用。我在这里预测。</p>
+<p><strong>Sacks：</strong> 是的，我能回应吗？</p>
+<p><strong>JCal：</strong> 还有开源。开源显然是那个力量。</p>
+<p><strong>Sacks：</strong> 我认为你抓到点什么，JCal。看，我们谈未来两年 AI 监管，需要分开。有两个不同东西：联邦和州。联邦会处理 AI 安全和创建联邦 AI 部，所有 Orwellian 风险，可能变成审查、监控、控制。那是一桶问题。另一桶是基础设施，州和地方处理。两者都会发生。现在州和地方，我认为人们对这次选举意义太乐观。我看到 Gavin Baker 说，别担心，Hinojosa 看起来很合理，不威胁任何项目。我看她的采访，我没看到 Gavin 看到的东西。</p>
+<p><strong>Chamath：</strong> 我同意你，我同意你。</p>
+<p><strong>Sacks：</strong> 她没说现有项目受保护。她只说在新立法通过、处理她谈的问题之前，不发新许可。</p>
+<p><strong>Chamath：</strong> 你对。</p>
+<p><strong>Sacks：</strong> 处理她谈的问题。</p>
+<p><strong>Chamath：</strong> 你对。她谈的问题是什么？明确点。</p>
+<p><strong>Sacks：</strong> 我会解释。但我看到 SemiAnalysis 的分析师出来说，你知道现在在建的项目不一定有开业所需的所有许可。换句话说，数据中心建好后，你可能还需要空气污染许可。各种许可有时到最后才拿到。所以如果你认真字面理解她说的，新监管 regime 生效前不发新许可，我们可能有一堆 stranded、半成品项目。我不是说一定发生。我不是批评她，因为我不知道她会怎么做。她还没上任。我只是指出这可能走很多方向。他们可以合理或不合理。所以你可能有半成品项目。我的基准是，完全获批的项目 2027 年会完成，但我不认为新 regime 下会有重大新项目，很长时间，简单原因：没有政治激励给新许可或新项目。激励是什么？想想，上次选举，民主党和共和党都跑攻击广告，攻击任何批准数据中心的政客。所以如果你是政客或想升迁的公务员，批准任何东西的激励是什么？我看不到。我看不到任何有政治野心的人想在未来四年伸脖子批准任何东西。所以看，已经批准完全许可的，可能完成。没批准的，祝好运，会很难。所以 2027 年能过，仍有有意义 capex。我真的很担心 2028 年。民主党某种程度上有一个反常激励，因为如果 capex 2028 年崩，他们会怪特朗普。</p>
+<p><strong>JCal：</strong> 是的，但他们已经铺好桌子。他们现在有惊人足迹，已经在 pole position。拖垮经济，我认为给他们攻击向量。我认为他们更好说，这是我们想要的，从中提取价值。只是提取价值。我们要免费电力，要学校，要这个。狠狠谈判。如果他们不——</p>
+<p><strong>Sacks：</strong> 那会，是的。</p>
+<p><strong>JCal：</strong> 是的。如果数据中心和这些州长——他们的工作是为人民争取最好交易，就像公司工作是为股东争取最好位置、最好交易——如果不能达成安排，这些东西可以放加拿大、墨西哥、任何地方。我们有 Starlink 和光纤。极其容易。全世界铺光纤很常见。我们这里系统速度极高效。不像 20 年前在日本加载 Gmail 极难。很容易，很清晰。我们有 CDN 技术。会是 no-brainer，更别说 SpaceX，股票被严重低估，SpaceX、Tesla，我在整个疯狂中一直买。他们要去太空放上去。现在看起来很聪明，对吧，Chamath？如果他们要阻止，Elon 又一次看到角落，不是吗？</p>
+<p><strong>Chamath：</strong> 嗯，你记得我们谈过，我们说他和 Anthropic 的 90 天退出，可能是因为他谈判时看到角落，不是反过来。人们过去认为，天哪，SpaceX 能拉绳太糟了。不会发生。现在问题是，会不会反过来？</p>
+<p><strong>JCal：</strong> 很有趣。我认为 Elon 和 Anthropic 团队工作关系相当正面。</p>
+<p><strong>Chamath：</strong> 哦，这和那个无关。等等，我要澄清。这和他们的工作关系、Anthropic 是好是坏、SpaceX 是好是坏无关。这是电子表格。电子表格决定答案。问题是，如果现货价飙升，超过某个阈值，经济上被迫这样做。</p>
+<p><strong>JCal：</strong> 好。我稍微站另一边。OpenAI、Sam Altman 和 Elon 之间仍有大量 acrimony。Elon 和 Anthropic 团队深度对齐，工作关系不可思议。我不认为他即使短期中期经济模型最优，也会直接扔到现货价。让我说完。</p>
+<p><strong>Chamath：</strong> 我不是那个意思。你没听我说。</p>
+<p><strong>JCal：</strong> 好，让我说完，你可以反驳。你们可以让我说完句子，我知道很难相信。</p>
+<p><strong>Chamath：</strong> 如果你曲解我说的，就不行。</p>
+<p><strong>JCal：</strong> 你完全可以回应，稍等。转到现货价可能是正确冷酷经济决定。我认为 Elon 的决定部分会受他和 Sam Altman 关系或缺乏关系影响，也受 Anthropic 忠诚和成功影响，让他们成为伟大长期伙伴，特别是太空数据中心业务。所以我可以想象，他不是扔到现货价，而是说，我们中间见。我认为这是更长——</p>
+<p><strong>Chamath：</strong> 我不是说扔到现货价。我说的是，当现货价移动足够多，即使长期 off take 也移动很多，现有合同变成负 EV。你只需要把现有合同移到正 EV 区域。如果你能 90 天退出，重新定价到正 EV，你应该。所以我的点更多是，超过某点，如果一堆数据中心放缓，一堆约束发生，容量会比人们想的少很多。每兆瓦每月美元成本会冲天，GPU 每小时美元成本会冲天。愿意付溢价的是巨大资产负债表的巨型公司。所以你可以卖给谷歌或 Meta，不必卖给 OpenAI。</p>
+<p><strong>JCal：</strong> 好，SaaS。这一切真正有趣的部分，进入 Science Corner，是基础设施做两件事：推理，人们每天用产品；然后建下一个模型。如果你想下一个模型跑赢，任何价格 cornering 算力是巨大优势。所以对谷歌，一直落后，如果用所有算力做自己的模型；或者微软、Nvidia 决定加速内部模型，它们有，这可能决定谁有最好前沿模型。交给你，SaaS，最后一句。</p>
+<p><strong>Sacks：</strong> 我很快说。当你谈这种规模的基础设施，这些吉瓦级数据中心，成本约 500 亿美元。没人能在不确定条件下做那种投资。你最不想做的是破土动工，然后半途被禁止，被工人罢工或社区团体阻止。你真的需要确定条件才做那种投资。我认为我们正走向高度不确定。我们最大的数据中心州基本 regime change，所有州长基本表示支持 moratorium，直到 XYZ 发生。他们具体可以不同。所以我的感觉是，可能不是阴谋伤害特朗普经济，可能只是现实。但我预期 2027 年仍有有意义 capex，作为基准，完全获批项目能前进或完成。但 2028 年，我预期管道要么关闭要么大幅减少，会有大经济影响。我确实认为民主党会试图怪总统，即使他们完全负责。</p></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="01:24–01:30 science corner：openai 据称推翻“指数时间假说” 本段核心内容： friedberg 介绍 openai 一篇 175 页论文，称其推翻了 1999 年提出的“指数时间假说”。 指数时间假说认为存在一类问题（3-sat）无法在次指数时间内解决，因此 p 不等于 np。 friedberg 转述论文对 3-sat 次指数时间算法的主张，并讨论 p 与 np；他把其意义扩展到“宇宙中每个问题”的说法并不严谨，见下方编者注。 该论文尚未被第三方完全验证，但 friedberg 称 openai 在不到 10 天、甚至几小时内完成，令计算机科学界震惊。 sacks 认为 ai 会带来很多好处，如果美国不建数据中心，其他国家会受益；节目中也讨论了美国可能从海外获取算力和 token 的情景。 背景解释与关键术语： &gt; 编者注：openai 于 2026 年 10 月公开论文与 lean 形式化材料，并邀请外部专家组织检验。论文本身属于研究主张，专家组织独立审查并不等于结果已获得学界认证；下文 175 页、完成时长及相关结论均为节目中的说法。即便 eth 被推翻，也不直接证明 p=np；p=np 亦不意味着“宇宙中所有问题都可计算”。来源：https://openai.com/index/building-scientific-understanding-with-academic-communities/ 和 https://ethdiscussion.blog/ 。 p 问题：可以在多项式时间内解决的判定问题，随问题规模增长，时间有多项式上界。 np 问题：对“是”的实例，可以在多项式时间内验证其证据的判定问题；找到证据未必同样容易。 p vs np：计算机科学的重要未解问题，讨论可快速验证证据的判定问题是否都能在多项式时间内解决。 指数时间假说：关于 3-sat 最坏情况复杂度的假说；若成立，它将蕴含 p≠np，但其不成立并不意味着 p=np。 3-sat：一类布尔可满足性问题，friedberg 称是指数时间假说的核心。 次指数时间：在此指运行时间为 2 的 o(n) 次方；friedberg 转述了 openai 关于 3-sat 算法的相关主张。 第三方验证：friedberg 明确说论文尚未被完全验证，仍在评估中。 详细中文整理： jcal： 好，大家一直要求，friedberg，我们做一期 science corner 讲指数时间假说。外行解释是，计算机不能快速解决重要问题，但似乎有科学和近期创新说这个假说可能不再成立。请告诉观众。 friedberg： 做这期 science corner 讲 openai 这篇论文的原因，是突出 ai 带来的一些好处和价值。这些是相当实质的突破。他们发表的数学假说，这个叫指数时间假说。它从计算机科学最根本问题开始：一个问题能否用计算机解决？如果能，需要多长时间？这告诉你它是否实际可计算。这是计算机科学的关键点。我们想创造能解决问题的机器。有一类问题叫 p 问题，可以在所谓多项式时间解决。问题规模越大，时间越长。多项式时间就是规模立方或平方，告诉你在一台特定计算机上解决需要多少秒、分钟、小时。问题越大，时间越多。然后有 np 问题，你可以很快验证答案是否正确。比如大数独可能解很久，但几秒就能检查对不对。这是 np 问题。计算机科学的关键问题是，p 是否等于 np？意思是，你能解决任何能快速验证的问题吗？如果能，一切可计算，整个宇宙可计算。这是计算机科学的大问题。指数时间假说，1999 年由几个人提出。他们说对一类叫 3-sat 的问题——我们不需要深入——所需时间随问题规模指数增长。问题越大，是某个数的 n 次方。所以计算机解决时间指数缩放，意味着他们证明有一类问题永远不能在短时间内解决。因此，整类问题意味着 p 不等于 np。这是 1999 年以来的假说。openai 做了什么？他们推翻了。用 175 页论文推翻。归结为一个小公式，nick 可以放屏幕上，我们不需要花很多时间分析。但这个小公式是 openai 论文展示结果，证明 3-sat 这类计算机科学问题可以在次指数时间解决，意味着不会花指数时间。所以他们推翻了大家以为真的指数时间假说。这意味着 p 仍可能等于 np，理论上宇宙每个问题都可用计算机解决。解决方案正在评估，还没被第三方完全验证。人们还在试图理解。175 页，用了非常新颖的方法。他们从头到尾不到 10 天完成。有些报道说几小时。这是计算机科学 27 年来极难的问题：指数时间假说真不真？他们证明不是，几小时完成。对大多数听众可能深奥，但它做几件事。第一，保持一切宇宙可分析、每个问题理论上可用计算机解决的可能性。第二，openai 几小时完成，数学家计算机科学家挣扎 27 年，这很惊人。这个证明目前站得住。所以计算机科学界都震惊。 sacks： 绝对，是的。 friedberg： 我震惊于呈现方式、解决方法。非常新颖。这是数学家、计算机科学谦卑时刻，天哪，我永远想不到。 jcal： sax，你过去三周在群里对指数时间假说非常激动。听 friedberg 这么清晰 tee up，这如何影响你对 2028 选举和人类未来的看法？ sacks： 看，我认为 ai、超级智能，不管叫什么，会创造很多好东西。恐惧，也许有些合理，因为任何看起来强大的东西都让人害怕。未来未知，不能证明确切发生什么。但我倾向于认为这项技术会有很多好处。坦白说，如果我们不做，中国会做，他们会受益。jcal，你说得对，如果美国不建数据中心，它们会在其他国家建。我们会付钱进口 token，非常危险。 jcal： 我要去加拿大。 某位嘉宾： 非常危险的情况。 jcal： 太蠢了。 某位嘉宾： 是的。 jcal： 疯了。chamath，我看到你在点头。你有计算机科学背景。 chamath： 我正规教育是电气工程，但我和软件工程师工作很久了。这是非常有趣的洞察。" style="--index: 6">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">06</span>
+                    <span class="timeline-meta">01:24–01:30</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>Science Corner：OpenAI 据称推翻“指数时间假说”</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>Friedberg 介绍 OpenAI 一篇 175 页论文，称其推翻了 1999 年提出的“指数时间假说”。</li>
+<li>指数时间假说认为存在一类问题（3-SAT）无法在次指数时间内解决，因此 P 不等于 NP。</li>
+<li>Friedberg 转述论文对 3-SAT 次指数时间算法的主张，并讨论 P 与 NP；他把其意义扩展到“宇宙中每个问题”的说法并不严谨，见下方编者注。</li>
+<li>该论文尚未被第三方完全验证，但 Friedberg 称 OpenAI 在不到 10 天、甚至几小时内完成，令计算机科学界震惊。</li>
+<li>Sacks 认为 AI 会带来很多好处，如果美国不建数据中心，其他国家会受益；节目中也讨论了美国可能从海外获取算力和 token 的情景。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<blockquote>编者注：OpenAI 于 2026 年 10 月公开论文与 Lean 形式化材料，并邀请外部专家组织检验。论文本身属于研究主张，专家组织独立审查并不等于结果已获得学界认证；下文 175 页、完成时长及相关结论均为节目中的说法。即便 ETH 被推翻，也不直接证明 P=NP；P=NP 亦不意味着“宇宙中所有问题都可计算”。来源：<a href="https://openai.com/index/building-scientific-understanding-with-academic-communities/">https://openai.com/index/building-scientific-understanding-with-academic-communities/</a> 和 <a href="https://ethdiscussion.blog/">https://ethdiscussion.blog/</a> 。</blockquote>
+<ul>
+<li>P 问题：可以在多项式时间内解决的判定问题，随问题规模增长，时间有多项式上界。</li>
+<li>NP 问题：对“是”的实例，可以在多项式时间内验证其证据的判定问题；找到证据未必同样容易。</li>
+<li>P vs NP：计算机科学的重要未解问题，讨论可快速验证证据的判定问题是否都能在多项式时间内解决。</li>
+<li>指数时间假说：关于 3-SAT 最坏情况复杂度的假说；若成立，它将蕴含 P≠NP，但其不成立并不意味着 P=NP。</li>
+<li>3-SAT：一类布尔可满足性问题，Friedberg 称是指数时间假说的核心。</li>
+<li>次指数时间：在此指运行时间为 2 的 o(n) 次方；Friedberg 转述了 OpenAI 关于 3-SAT 算法的相关主张。</li>
+<li>第三方验证：Friedberg 明确说论文尚未被完全验证，仍在评估中。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> 好，大家一直要求，Friedberg，我们做一期 Science Corner 讲指数时间假说。外行解释是，计算机不能快速解决重要问题，但似乎有科学和近期创新说这个假说可能不再成立。请告诉观众。</p>
+<p><strong>Friedberg：</strong> 做这期 Science Corner 讲 OpenAI 这篇论文的原因，是突出 AI 带来的一些好处和价值。这些是相当实质的突破。他们发表的数学假说，这个叫指数时间假说。它从计算机科学最根本问题开始：一个问题能否用计算机解决？如果能，需要多长时间？这告诉你它是否实际可计算。这是计算机科学的关键点。我们想创造能解决问题的机器。有一类问题叫 P 问题，可以在所谓多项式时间解决。问题规模越大，时间越长。多项式时间就是规模立方或平方，告诉你在一台特定计算机上解决需要多少秒、分钟、小时。问题越大，时间越多。然后有 NP 问题，你可以很快验证答案是否正确。比如大数独可能解很久，但几秒就能检查对不对。这是 NP 问题。计算机科学的关键问题是，P 是否等于 NP？意思是，你能解决任何能快速验证的问题吗？如果能，一切可计算，整个宇宙可计算。这是计算机科学的大问题。指数时间假说，1999 年由几个人提出。他们说对一类叫 3-SAT 的问题——我们不需要深入——所需时间随问题规模指数增长。问题越大，是某个数的 n 次方。所以计算机解决时间指数缩放，意味着他们证明有一类问题永远不能在短时间内解决。因此，整类问题意味着 P 不等于 NP。这是 1999 年以来的假说。OpenAI 做了什么？他们推翻了。用 175 页论文推翻。归结为一个小公式，Nick 可以放屏幕上，我们不需要花很多时间分析。但这个小公式是 OpenAI 论文展示结果，证明 3-SAT 这类计算机科学问题可以在次指数时间解决，意味着不会花指数时间。所以他们推翻了大家以为真的指数时间假说。这意味着 P 仍可能等于 NP，理论上宇宙每个问题都可用计算机解决。解决方案正在评估，还没被第三方完全验证。人们还在试图理解。175 页，用了非常新颖的方法。他们从头到尾不到 10 天完成。有些报道说几小时。这是计算机科学 27 年来极难的问题：指数时间假说真不真？他们证明不是，几小时完成。对大多数听众可能深奥，但它做几件事。第一，保持一切宇宙可分析、每个问题理论上可用计算机解决的可能性。第二，OpenAI 几小时完成，数学家计算机科学家挣扎 27 年，这很惊人。这个证明目前站得住。所以计算机科学界都震惊。</p>
+<p><strong>Sacks：</strong> 绝对，是的。</p>
+<p><strong>Friedberg：</strong> 我震惊于呈现方式、解决方法。非常新颖。这是数学家、计算机科学谦卑时刻，天哪，我永远想不到。</p>
+<p><strong>JCal：</strong> Sax，你过去三周在群里对指数时间假说非常激动。听 Friedberg 这么清晰 tee up，这如何影响你对 2028 选举和人类未来的看法？</p>
+<p><strong>Sacks：</strong> 看，我认为 AI、超级智能，不管叫什么，会创造很多好东西。恐惧，也许有些合理，因为任何看起来强大的东西都让人害怕。未来未知，不能证明确切发生什么。但我倾向于认为这项技术会有很多好处。坦白说，如果我们不做，中国会做，他们会受益。JCal，你说得对，如果美国不建数据中心，它们会在其他国家建。我们会付钱进口 token，非常危险。</p>
+<p><strong>JCal：</strong> 我要去加拿大。</p>
+<p><strong>某位嘉宾：</strong> 非常危险的情况。</p>
+<p><strong>JCal：</strong> 太蠢了。</p>
+<p><strong>某位嘉宾：</strong> 是的。</p>
+<p><strong>JCal：</strong> 疯了。Chamath，我看到你在点头。你有计算机科学背景。</p>
+<p><strong>Chamath：</strong> 我正规教育是电气工程，但我和软件工程师工作很久了。这是非常有趣的洞察。</p></div>
+                  </div>
+                </article>
+<article class="timeline-card" data-timeline-card data-search="01:30–01:32 结尾 本段核心内容： jcal 感谢观众，称节目连续四周排名第一，选举夜直播排名第一。 jcal 提到 chamath 在 rick rubin 播客上的对话，rick rubin 追问节目魔力在哪。 chamath 说节目像家庭，每周聚在一起聊天，很少能看到家庭争吵的窗口。 jcal 引用电影《城中大盗》台词形容 chamath 对他的 compliment，节目在兄弟情中结束。 背景解释与关键术语： rick rubin：传奇音乐制作人，chamath 参加了他的播客。 《城中大盗》：ben affleck 导演电影，jcal 引用其中 jeremy renner 的台词“whose car are we taking? yours or mine?”。 详细中文整理： jcal： 好，又一场精彩的 all-in podcast，世界排名第一、第二、第三的播客。多么疯狂的一周。直播排名第一，连续四周排名第一。感谢观众，感谢你们和我们一起走这段旅程。你们永远可以期待世界上最 candid 的讨论。chamath，你和 rick rubin 的对话非常有趣，他对播客非常着迷。他理解艺术和世界上独特时刻。我觉得很有趣，他一直追问你魔力在哪，因为他在很多方面是魔力的 sherpa。我认为这里的魔力是我们 candid，我们互相调侃，我们试图用候选人推动球前进。chamath，你对我们都说了很好的话，我只想说谢谢。你是我兄弟，我爱你。 chamath： 谢谢，我也爱你。我对他说的是，我们是一家人，每周聚在一起聊天。很少能看到家庭争吵的窗口。 jcal： 是的。 chamath： 我认为这就是为什么有效，有点独特。也许这就是卡戴珊一家有效的原因。 jcal： 也许。你对我说了这么恭维的话，我觉得是我一生中最大的赞美。你说，jcal 是什么？你知道《城中大盗》那场戏，ben affleck 去找 jeremy renner，说“我需要你跟我来，我们要搞一些人，你不能问问题”。jeremy renner 抬头说，“我们开谁的车？你的还是我的？” chamath： 那就是 jcal，我一直这么觉得。 jcal： 非常恭维。好，下次见。 chamath： 爱你，兄弟。 jcal： 爱你们，besties。 chamath： 拜拜。" style="--index: 7">
+                  <header class="timeline-heading">
+                    <span class="timeline-index">07</span>
+                    <span class="timeline-meta">01:30–01:32</span>
+                  </header>
+                  <div class="timeline-body">
+                    <h3>结尾</h3>
+                    <div class="section-content"><h4>本段核心内容</h4>
+<ul>
+<li>JCal 感谢观众，称节目连续四周排名第一，选举夜直播排名第一。</li>
+<li>JCal 提到 Chamath 在 Rick Rubin 播客上的对话，Rick Rubin 追问节目魔力在哪。</li>
+<li>Chamath 说节目像家庭，每周聚在一起聊天，很少能看到家庭争吵的窗口。</li>
+<li>JCal 引用电影《城中大盗》台词形容 Chamath 对他的 compliment，节目在兄弟情中结束。</li>
+</ul>
+<h4>背景解释与关键术语</h4>
+<ul>
+<li>Rick Rubin：传奇音乐制作人，Chamath 参加了他的播客。</li>
+<li>《城中大盗》：Ben Affleck 导演电影，JCal 引用其中 Jeremy Renner 的台词“whose car are we taking? Yours or mine?”。</li>
+</ul>
+<h4>详细中文整理</h4>
+<p><strong>JCal：</strong> 好，又一场精彩的 All-In Podcast，世界排名第一、第二、第三的播客。多么疯狂的一周。直播排名第一，连续四周排名第一。感谢观众，感谢你们和我们一起走这段旅程。你们永远可以期待世界上最 candid 的讨论。Chamath，你和 Rick Rubin 的对话非常有趣，他对播客非常着迷。他理解艺术和世界上独特时刻。我觉得很有趣，他一直追问你魔力在哪，因为他在很多方面是魔力的 Sherpa。我认为这里的魔力是我们 candid，我们互相调侃，我们试图用候选人推动球前进。Chamath，你对我们都说了很好的话，我只想说谢谢。你是我兄弟，我爱你。</p>
+<p><strong>Chamath：</strong> 谢谢，我也爱你。我对他说的是，我们是一家人，每周聚在一起聊天。很少能看到家庭争吵的窗口。</p>
+<p><strong>JCal：</strong> 是的。</p>
+<p><strong>Chamath：</strong> 我认为这就是为什么有效，有点独特。也许这就是卡戴珊一家有效的原因。</p>
+<p><strong>JCal：</strong> 也许。你对我说了这么恭维的话，我觉得是我一生中最大的赞美。你说，JCal 是什么？你知道《城中大盗》那场戏，Ben Affleck 去找 Jeremy Renner，说“我需要你跟我来，我们要搞一些人，你不能问问题”。Jeremy Renner 抬头说，“我们开谁的车？你的还是我的？”</p>
+<p><strong>Chamath：</strong> 那就是 JCal，我一直这么觉得。</p>
+<p><strong>JCal：</strong> 非常恭维。好，下次见。</p>
+<p><strong>Chamath：</strong> 爱你，兄弟。</p>
+<p><strong>JCal：</strong> 爱你们，besties。</p>
+<p><strong>Chamath：</strong> 拜拜。</p></div>
+                  </div>
+                </article></div>
+            <p class="empty search-empty" data-search-empty hidden>没有匹配的时间线段落。</p>
+          </section>
+
+          <section id="speakers">
+            <div class="section-head">
+              <h2>人物观点对照</h2>
+              <p>比较嘉宾立场</p>
+            </div>
+            <div class="speaker-grid"><article class="speaker-card" style="--index: 1">
+                  <p class="speaker-kicker">嘉宾 01</p>
+                  <h3>Jason Calacanis</h3>
+                  <div><p>Jason 认为关税执行、移民执法、Epstein 文件争议及战争共同影响了特朗普的支持率。他强调选民的生活成本和经济民粹主义，并提出税收、最低工资和住房方面的政策建议。关于数据中心，他担心建设放缓可能让算力投资转向海外。</p></div>
+                </article>
+<article class="speaker-card" style="--index: 2">
+                  <p class="speaker-kicker">嘉宾 02</p>
+                  <h3>Chamath Palihapitiya</h3>
+                  <div><p>Chamath 承认低估了资产所有者与工资阶层之间的经济分化，认为选民的核心诉求是改善可负担性。他分析算力供给收紧后大型云平台与模型公司的议价关系，并对节目所称 SpaceX 与 Anthropic 的合同条款作出重新定价的推测；合同细节和市场预测均未在本稿独立核实。</p></div>
+                </article>
+<article class="speaker-card" style="--index: 3">
+                  <p class="speaker-kicker">嘉宾 03</p>
+                  <h3>David Sacks</h3>
+                  <div><p>Sacks 将共和党失利主要归因于伊朗战争及其经济后果，并认为结束战争可能降低能源价格和通胀。他预测下一届国会将推动 AI 监管，对审查和监控表示担忧；他也认为项目审批的不确定性可能影响未来数据中心投资。这些均为他的判断和预测。</p></div>
+                </article>
+<article class="speaker-card" style="--index: 4">
+                  <p class="speaker-kicker">嘉宾 04</p>
+                  <h3>David Friedberg</h3>
+                  <div><p>Friedberg 关注政府支出、预算赤字和生活成本，并认为数据中心争议与选民的经济处境有关。他担忧政府通过算力监管集中 AI 的控制权；在 Science Corner，他介绍了 OpenAI 关于指数时间假说的论文主张，同时承认结果仍在接受外部检验。</p></div>
+                </article></div>
+          </section>
+
+          <section id="quotes">
+            <div class="section-head">
+              <h2>值得引用的原话</h2>
+              <p>保留关键表达</p>
+            </div>
+            <div class="panel"><ul>
+<li><strong>英文原话：</strong> “I got it totally, totally, totally wrong. I got it totally wrong.”</li>
+<p><strong>中文翻译：</strong> “我完全、完全、完全错了。我完全错了。” <strong>说明：</strong> Chamath 在节目中公开承认自己误判选举，这是他本集最重要的自我修正，也引出他“经济结构性破裂”的新框架。</p>
+</ul>
+<ul>
+<li><strong>英文原话：</strong> “The economic reality in America is broken. There is a small percentage of people, the four of us on this pod and all of our friends, who are the asset owners of America.”</li>
+<p><strong>中文翻译：</strong> “美国的经济现实是破裂的。有一小部分人，我们这个播客的四个人和所有朋友，是美国资产所有者。” <strong>说明：</strong> Chamath 用这句话概括他对 K 型经济和资产所有者 vs 工资阶层的核心判断。</p>
+</ul>
+<ul>
+<li><strong>英文原话：</strong> “It comes back to the war and its economic consequences.”</li>
+<p><strong>中文翻译：</strong> “归根结底是战争及其经济后果。” <strong>说明：</strong> Sacks 对中期选举失败原因的总结，也是他与 JCal、Chamath 争论的支点。</p>
+</ul>
+<ul>
+<li><strong>英文原话：</strong> “That&#x27;s my number one, my number two, and my number three.”</li>
+<p><strong>中文翻译：</strong> “这是我的第一、第二、第三。” <strong>说明：</strong> Sacks 对特朗普如何挽回局面的回答，简洁反映他认为战争是核心变量。</p>
+</ul>
+<ul>
+<li><strong>英文原话：</strong> “AI is almost like the Ring of Sauron.”</li>
+<p><strong>中文翻译：</strong> “AI 几乎像索伦之戒。” <strong>说明：</strong> Friedberg 用《指环王》比喻描述 AI 对政府的诱惑，以及他担心的权力集中。</p>
+</ul>
+<ul>
+<li><strong>英文原话：</strong> “If the state ends up getting all of the AI and no one else gets the AI, then you no longer have a check on the power.”</li>
+<p><strong>中文翻译：</strong> “如果国家拿到所有 AI，其他人没有，你就不再对权力有制衡。” <strong>说明：</strong> Friedberg 把 AI 监管比作第二修正案问题，强调技术分布对自由的重要性。</p>
+</ul>
+<ul>
+<li><strong>英文原话：</strong> “Whatever revenue you see on SpaceX&#x27;s balance sheet from Ant could 2 to 3X.”</li>
+<p><strong>中文翻译：</strong> “SpaceX 资产负债表上来自 Anthropic 的收入可能翻两到三倍。” <strong>说明：</strong> Chamath 根据他所说的 90 天条款推测算力重新定价的可能性；合同细节及预期涨幅未独立核实。</p>
+</ul>
+<ul>
+<li><strong>英文原话：</strong> “They did the whole thing end to end in less than 10 days. Some reports have argued they did it in a few hours.”</li>
+<p><strong>中文翻译：</strong> “他们从头到尾不到 10 天完成。有些报道说几小时。” <strong>说明：</strong> Friedberg 介绍 OpenAI 指数时间假说论文时的说法，强调 AI 产出科学突破的速度，但该论文尚未被第三方完全验证。</p>
+</ul></div>
+          </section>
+        </div>
+      </div>
+    </main>
+  </div>
+  <script>
+    const progress = document.querySelector("[data-progress]");
+    const searchBox = document.querySelector("[data-search-box]");
+    const topButton = document.querySelector("[data-scroll-top]");
+    const cards = Array.from(document.querySelectorAll("[data-timeline-card]"));
+    const searchEmpty = document.querySelector("[data-search-empty]");
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    function updateProgress() {
+      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      const ratio = scrollable > 0 ? window.scrollY / scrollable : 0;
+      if (progress) {
+        progress.style.width = `${Math.max(0, Math.min(1, ratio)) * 100}%`;
+      }
+    }
+
+    function applySearch() {
+      const query = searchBox.value.trim().toLowerCase();
+      let visibleCount = 0;
+      cards.forEach((card) => {
+        const text = card.getAttribute("data-search") || "";
+        const isVisible = !query || text.includes(query);
+        card.hidden = !isVisible;
+        if (isVisible) {
+          visibleCount += 1;
+        }
+      });
+      if (searchEmpty) {
+        searchEmpty.hidden = !query || visibleCount > 0;
+      }
+    }
+
+    window.addEventListener("scroll", updateProgress, { passive: true });
+    window.addEventListener("resize", updateProgress);
+    if (searchBox) {
+      searchBox.addEventListener("input", applySearch);
+    }
+    if (topButton) {
+      topButton.addEventListener("click", () => {
+        window.scrollTo({
+          top: 0,
+          behavior: prefersReducedMotion.matches ? "auto" : "smooth"
+        });
+      });
+    }
+    updateProgress();
+  </script>
+</body>
+</html>
